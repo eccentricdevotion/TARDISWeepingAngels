@@ -10,6 +10,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
 
     public String pluginName;
     private Random random;
+    private boolean steal;
 
     @Override
     public void onDisable() {
@@ -29,10 +30,15 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getCommand("tardisangel").setExecutor(new TARDISWeepingAngelsCommand(this));
         long delay = getConfig().getLong("spawn_rate.how_often");
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISWeepingAngelsRunnable(this), delay, delay);
+        steal = (getConfig().getBoolean("angels_can_steal") && pm.isPluginEnabled("TARDIS"));
     }
 
     public Random getRandom() {
         return random;
+    }
+
+    public boolean angelsCanSteal() {
+        return steal;
     }
 
     /**

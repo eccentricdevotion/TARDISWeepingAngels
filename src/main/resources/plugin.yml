@@ -7,6 +7,7 @@ version: '1.0'
 website: http://dev.bukkit.org/bukkit-plugins/tardis
 dev-url: http://dev.bukkit.org/bukkit-plugins/tardis
 url: http://dev.bukkit.org/bukkit-plugins/tardis
+softdepend: [TARDIS]
 permissions:
     tardisweepingangels.spawn:
         description: Allows players to spawn Weeping Angels.

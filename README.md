@@ -4,19 +4,22 @@ Inspired by: [TARDIS Ticket #530 - Weeping Angels](http://dev.bukkit.org/bukkit-
 
 This plugin tranforms skeletons into terrifying Weeping Angels (as seen on  [Doctor Who](http://www.bbc.co.uk/programmes/p00wqr12/profiles/weeping-angels)).
 
+JAR available (use at your own risk) here: [http://www.thenosefairy.co.nz/jenkins/TARDISWeepingAngels.jar](http://www.thenosefairy.co.nz/jenkins/TARDISWeepingAngels.jar)
+
 ##Features
 * Configurable spawn rate
 * Configurable drop on death
 * Configurable killing item
 * Only spawn them in the worlds you want
-* Can be frozen in place for a configuarble time
+* Can be frozen in place for a configurable time
+* Configurable TARDIS KEy stealing
 
 ##Information
 Weeping Angels only spawn at night in loaded chunks. They spawn with grey leather armour and a water lily helmet (their wings).
 
 Weeping Angels can only be killed with the configured weapon - by default a DIAMOND_PICKAXE - hitting them with anything else has no effect. When they die they drop a random (1-3) amount of STONE.
 
-The angels move pretty fast, but you can freeze them in place by looking at them and quickly pressing the sneak key. Better arm yourself or flee quickly though, as they'll be after you again in a snap.
+The angels move pretty fast, but you can freeze them in place by looking at them and quickly pressing the sneak key. Better arm yourself or flee quickly though, as they'll be after you again in a snap - and if they touch you, you'll be teleported away to a random location. If the TARDIS plugin is also installed (if it isn't WHY NOT?), your TARDIS Key will be stolen.
 
 ##Configuration
 The default config is shown below:
@@ -31,6 +34,7 @@ worlds:
 freeze_time: 100
 weapon: DIAMOND_PICKAXE
 drop: STONE
+angels_can_steal: true
 ```
 The `spawn_rate` section sets Angel spawning options
 
@@ -45,3 +49,8 @@ The `worlds` section allows you to list the worlds you want the angels to spawn 
 `weapon` sets the item that will kill a Weeping Angel.
 
 `drop` sets the item that drops when the Angel is killed
+
+`angels_can_steal` sets whether the Angels can steal your TARDIS Key - requires the TARDIS plugin to be installed.
+
+##TODO
+* Make a new water lily texture and skeleton skin
