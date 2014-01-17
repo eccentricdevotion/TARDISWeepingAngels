@@ -32,7 +32,7 @@ public class TARDISWeepingAngelsDeath implements Listener {
             EntityEquipment ee = event.getEntity().getEquipment();
             if (ee.getHelmet().getType().equals(Material.WATER_LILY)) {
                 event.getDrops().clear();
-                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), new ItemStack(mat, plugin.getRandom().nextInt(3)));
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), new ItemStack(mat, plugin.getRandom().nextInt(3) + 1));
             }
         }
     }
