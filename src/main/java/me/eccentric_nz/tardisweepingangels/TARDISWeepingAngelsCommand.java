@@ -29,7 +29,9 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
                 return true;
             }
             final Location eyeLocation = player.getTargetBlock(null, 50).getLocation();
+            eyeLocation.setX(eyeLocation.getX() + 0.5F);
             eyeLocation.setY(eyeLocation.getY() + 1);
+            eyeLocation.setZ(eyeLocation.getZ() + 0.5F);
             World world = eyeLocation.getWorld();
             TARDISWeepingAngelEquipment equip = new TARDISWeepingAngelEquipment();
             LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
