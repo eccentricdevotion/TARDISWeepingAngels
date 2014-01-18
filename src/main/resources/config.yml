@@ -7,5 +7,7 @@ worlds:
     - world
 freeze_time: 100
 weapon: DIAMOND_PICKAXE
-drop: STONE
+drops:
+    - STONE
+    - COBBLESTONE
 angels_can_steal: true

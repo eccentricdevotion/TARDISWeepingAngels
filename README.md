@@ -33,7 +33,9 @@ worlds:
     - world
 freeze_time: 100
 weapon: DIAMOND_PICKAXE
-drop: STONE
+drops:
+    - STONE
+    - COBBLESTONE
 angels_can_steal: true
 ```
 The `spawn_rate` section sets Angel spawning options
@@ -48,9 +50,10 @@ The `worlds` section allows you to list the worlds you want the angels to spawn 
 
 `weapon` sets the item that will kill a Weeping Angel.
 
-`drop` sets the item that drops when the Angel is killed
+`drops` sets a list of items that drop when the Angel is killed
 
 `angels_can_steal` sets whether the Angels can steal your TARDIS Key - requires the TARDIS plugin to be installed.
 
 ##TODO
+* When the Angel steals the key, set it in their hand and drop it if they're killed
 * Make a new water lily texture and skeleton skin

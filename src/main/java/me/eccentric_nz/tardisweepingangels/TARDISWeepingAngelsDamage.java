@@ -95,7 +95,6 @@ public class TARDISWeepingAngelsDamage implements Listener {
                         if (amount > 1) {
                             stack.setAmount(amount - 1);
                         } else {
-                            plugin.debug("poop!");
                             int slot = inv.first(stack);
                             inv.setItem(slot, new ItemStack(Material.AIR));
                         }
