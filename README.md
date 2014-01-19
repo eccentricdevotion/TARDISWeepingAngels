@@ -12,7 +12,7 @@ JAR available (use at your own risk) here: [http://www.thenosefairy.co.nz/jenkin
 * Configurable killing item
 * Only spawn them in the worlds you want
 * Can be frozen in place for a configurable time
-* Configurable TARDIS KEy stealing
+* Configurable TARDIS Key stealing
 
 ##Information
 Weeping Angels only spawn at night in loaded chunks. They spawn with grey leather armour and a water lily helmet (their wings).
@@ -38,7 +38,7 @@ drops:
     - COBBLESTONE
 angels_can_steal: true
 ```
-The `spawn_rate` section sets Angel spawning options
+The `spawn_rate` section sets Angel spawning options.
 
 * `how_many` sets how many Angels to spawn each time.
 * `how_often` is the time period (in server ticks - _20 ticks = 1 second_) between spawn attempts.
@@ -50,7 +50,7 @@ The `worlds` section allows you to list the worlds you want the angels to spawn 
 
 `weapon` sets the item that will kill a Weeping Angel.
 
-`drops` sets a list of items that drop when the Angel is killed
+`drops` sets a list of items that drop when the Angel is killed.
 
 `angels_can_steal` sets whether the Angels can steal your TARDIS Key - requires the TARDIS plugin to be installed.
 
