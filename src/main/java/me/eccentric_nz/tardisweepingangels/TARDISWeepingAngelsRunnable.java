@@ -64,12 +64,14 @@ public class TARDISWeepingAngelsRunnable implements Runnable {
 
     private void spawnAngel(World w) {
         Chunk[] chunks = w.getLoadedChunks();
-        Chunk c = chunks[plugin.getRandom().nextInt(chunks.length)];
-        int x = c.getX() * 16 + plugin.getRandom().nextInt(16);
-        int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
-        int y = w.getHighestBlockYAt(x, z);
-        Location l = new Location(w, x, y + 1, z);
-        LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.SKELETON);
-        equipper.setEquipment(e);
+        if (chunks.length > 0) {
+            Chunk c = chunks[plugin.getRandom().nextInt(chunks.length)];
+            int x = c.getX() * 16 + plugin.getRandom().nextInt(16);
+            int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
+            int y = w.getHighestBlockYAt(x, z);
+            Location l = new Location(w, x, y + 1, z);
+            LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.SKELETON);
+            equipper.setEquipment(e);
+        }
     }
 }

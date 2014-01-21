@@ -6,7 +6,7 @@ This plugin tranforms skeletons into terrifying Weeping Angels (as seen on  [Doc
 
 ![Weeping Angel](https://dl.dropboxusercontent.com/u/53758864/weepingangel1.jpg)
 
-JAR available (use at your own risk) here: [http://www.thenosefairy.co.nz/jenkins/TARDISWeepingAngels.jar](http://www.thenosefairy.co.nz/jenkins/TARDISWeepingAngels.jar)
+JAR available here: [http://dev.bukkit.org/bukkit-plugins/tardisweepingangels/files/](http://dev.bukkit.org/bukkit-plugins/tardisweepingangels/files/)
 
 ##Features
 * Configurable spawn rate
@@ -55,6 +55,3 @@ The `worlds` section allows you to list the worlds you want the angels to spawn 
 `drops` sets a list of items that drop when the Angel is killed.
 
 `angels_can_steal` sets whether the Angels can steal your TARDIS Key - requires the TARDIS plugin to be installed.
-
-##TODO
-* When the Angel steals the key, set it in their hand and drop it if they're killed
