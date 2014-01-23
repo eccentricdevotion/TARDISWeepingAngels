@@ -71,7 +71,7 @@ public class TARDISWeepingAngelsRunnable implements Runnable {
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
             LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.SKELETON);
-            equipper.setEquipment(e);
+            equipper.setEquipment(e, false);
         }
     }
 }

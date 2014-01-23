@@ -3,19 +3,28 @@ description: Weeping Angel add-on for the TARDIS plugin
 main: me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels
 name: TARDISWeepingAngels
 startup: postworld
-version: '1.0'
+version: '1.1'
 website: http://dev.bukkit.org/bukkit-plugins/tardis
 dev-url: http://dev.bukkit.org/bukkit-plugins/tardis
 url: http://dev.bukkit.org/bukkit-plugins/tardis
 softdepend: [TARDIS]
 permissions:
     tardisweepingangels.spawn:
-        description: Allows players to spawn Weeping Angels.
+        description: Allow players to spawn Weeping Angels.
+        default: op
+    tardisweepingangels.disguise:
+        description: Allow players to disguise themselves as Weeping Angels.
         default: op
 commands:
-    tardisangel:
-        aliases: [tangel,angel]
+    angel:
+        aliases: [tangel,tardisangel]
         description: Spawns a Weeping Angel on the block you are targeting.
         usage: /<command>
         permission: tardisweepingangels.spawn
+        permission-message: You don't have the permission <permission> to use this command
+    angeldisguise:
+        aliases: [tardisangeldisguise,angeld]
+        description: Sets a player's armour so that they are disguised as a Weeping Angel.
+        usage: /<command> [on|off]
+        permission: tardisweepingangels.disguise
         permission-message: You don't have the permission <permission> to use this command

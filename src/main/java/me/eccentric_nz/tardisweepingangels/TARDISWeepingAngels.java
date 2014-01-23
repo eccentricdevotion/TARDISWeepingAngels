@@ -27,7 +27,10 @@ public class TARDISWeepingAngels extends JavaPlugin {
         pm.registerEvents(new TARDISWeepingAngelsBlink(this), this);
         pm.registerEvents(new TARDISWeepingAngelsDamage(this), this);
         pm.registerEvents(new TARDISWeepingAngelsDeath(this), this);
-        getCommand("tardisangel").setExecutor(new TARDISWeepingAngelsCommand(this));
+        pm.registerEvents(new TARDISWeepingAngelsUndisguise(this), this);
+        TARDISWeepingAngelsCommand command = new TARDISWeepingAngelsCommand(this);
+        getCommand("angel").setExecutor(command);
+        getCommand("angeldisguise").setExecutor(command);
         long delay = getConfig().getLong("spawn_rate.how_often");
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISWeepingAngelsRunnable(this), delay, delay);
         steal = (getConfig().getBoolean("angels_can_steal") && pm.isPluginEnabled("TARDIS"));

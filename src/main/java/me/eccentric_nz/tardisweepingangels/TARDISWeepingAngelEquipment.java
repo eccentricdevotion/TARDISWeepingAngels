@@ -6,8 +6,11 @@ package me.eccentric_nz.tardisweepingangels;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 /**
@@ -16,42 +19,55 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
  */
 public class TARDISWeepingAngelEquipment {
 
-    private final ItemStack helmet;
-    private final ItemStack chestplate;
-    private final ItemStack leggings;
-    private final ItemStack boots;
-    private final ItemStack weapon;
-
     public TARDISWeepingAngelEquipment() {
-        this.helmet = new ItemStack(Material.WATER_LILY, 1);
-        ItemStack c = new ItemStack(Material.LEATHER_CHESTPLATE, 1);
-        LeatherArmorMeta cmeta = (LeatherArmorMeta) c.getItemMeta();
-        cmeta.setColor(Color.fromRGB(143, 143, 143));
-        c.setItemMeta(cmeta);
-        this.chestplate = c;
-        ItemStack l = new ItemStack(Material.LEATHER_LEGGINGS, 1);
-        LeatherArmorMeta lmeta = (LeatherArmorMeta) l.getItemMeta();
-        lmeta.setColor(Color.fromRGB(143, 143, 143));
-        l.setItemMeta(cmeta);
-        this.leggings = l;
-        ItemStack b = new ItemStack(Material.LEATHER_BOOTS, 1);
-        LeatherArmorMeta bmeta = (LeatherArmorMeta) b.getItemMeta();
-        bmeta.setColor(Color.fromRGB(143, 143, 143));
-        b.setItemMeta(cmeta);
-        this.boots = b;
-        this.weapon = new ItemStack(Material.AIR, 1);
     }
 
-    public void setEquipment(LivingEntity le) {
+    public void setEquipment(LivingEntity le, boolean disguise) {
+        ItemStack helmet = new ItemStack(Material.WATER_LILY, 1);
+        ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE, 1);
+        LeatherArmorMeta cmeta = (LeatherArmorMeta) chestplate.getItemMeta();
+        cmeta.setColor(Color.fromRGB(143, 143, 143));
+        ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS, 1);
+        LeatherArmorMeta lmeta = (LeatherArmorMeta) leggings.getItemMeta();
+        lmeta.setColor(Color.fromRGB(143, 143, 143));
+        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS, 1);
+        LeatherArmorMeta bmeta = (LeatherArmorMeta) boots.getItemMeta();
+        bmeta.setColor(Color.fromRGB(143, 143, 143));
+        ItemStack weapon = new ItemStack(Material.AIR, 1);
+        if (disguise) {
+            ItemMeta him = helmet.getItemMeta();
+            him.setDisplayName("Weeping Angel Wing");
+            helmet.setItemMeta(him);
+            cmeta.setDisplayName("Weeping Angel Chest");
+            lmeta.setDisplayName("Weeping Angel Legs");
+            bmeta.setDisplayName("Weeping Angel Feet");
+            chestplate.setDurability((short) 75);
+            leggings.setDurability((short) 70);
+            boots.setDurability((short) 60);
+        }
+        chestplate.setItemMeta(cmeta);
+        leggings.setItemMeta(cmeta);
+        boots.setItemMeta(cmeta);
+
         EntityEquipment ee = le.getEquipment();
         ee.setHelmet(helmet);
         ee.setChestplate(chestplate);
         ee.setLeggings(leggings);
         ee.setBoots(boots);
-        ee.setItemInHand(weapon);
-        ee.setHelmetDropChance(0F);
-        ee.setChestplateDropChance(0F);
-        ee.setLeggingsDropChance(0F);
-        ee.setBootsDropChance(0F);
+        if (!disguise) {
+            ee.setItemInHand(weapon);
+            ee.setHelmetDropChance(0F);
+            ee.setChestplateDropChance(0F);
+            ee.setLeggingsDropChance(0F);
+            ee.setBootsDropChance(0F);
+        }
+    }
+
+    public void removeEquipment(Player p) {
+        PlayerInventory inv = p.getInventory();
+        inv.setHelmet(null);
+        inv.setChestplate(null);
+        inv.setLeggings(null);
+        inv.setBoots(null);
     }
 }
