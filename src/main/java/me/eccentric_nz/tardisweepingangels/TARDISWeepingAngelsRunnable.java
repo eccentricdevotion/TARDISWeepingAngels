@@ -28,8 +28,8 @@ public class TARDISWeepingAngelsRunnable implements Runnable {
 
     public TARDISWeepingAngelsRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
-        this.maximum = plugin.getConfig().getInt("spawn_rate.max_per_world");
+        this.spawn_rate = plugin.getConfig().getInt("angels.spawn_rate.how_many");
+        this.maximum = plugin.getConfig().getInt("angels.spawn_rate.max_per_world");
         this.equipper = new TARDISWeepingAngelEquipment();
     }
 
@@ -37,10 +37,10 @@ public class TARDISWeepingAngelsRunnable implements Runnable {
     public void run() {
         for (World w : plugin.getServer().getWorlds()) {
             // only configured worlds
-            if (plugin.getConfig().getStringList("worlds").contains(w.getName())) {
+            if (plugin.getConfig().getStringList("angels.worlds").contains(w.getName())) {
                 long time = w.getTime();
                 // only spawn at night - times according to http://minecraft.gamepedia.com/Day-night_cycle
-                if (time > 9625 && time < 22812) {
+                if (time > 13187 && time < 22812) {
                     // get the current angels
                     List<Skeleton> angels = new ArrayList<Skeleton>();
                     Collection<Skeleton> skellies = w.getEntitiesByClass(Skeleton.class);
@@ -71,7 +71,7 @@ public class TARDISWeepingAngelsRunnable implements Runnable {
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
             LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.SKELETON);
-            equipper.setEquipment(e, false);
+            equipper.setAngelEquipment(e, false);
         }
     }
 }
