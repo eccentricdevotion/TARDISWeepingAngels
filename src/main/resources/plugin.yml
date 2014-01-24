@@ -22,9 +22,21 @@ commands:
         usage: /<command>
         permission: tardisweepingangels.spawn
         permission-message: You don't have the permission <permission> to use this command
+    warrior:
+        aliases: [twarrior,tardiswarrior,ice]
+        description: Spawns an Ice Warrior on the block you are targeting.
+        usage: /<command>
+        permission: tardisweepingangels.spawn
+        permission-message: You don't have the permission <permission> to use this command
     angeldisguise:
         aliases: [tardisangeldisguise,angeld]
         description: Sets a player's armour so that they are disguised as a Weeping Angel.
+        usage: /<command> [on|off]
+        permission: tardisweepingangels.disguise
+        permission-message: You don't have the permission <permission> to use this command
+    icedisguise:
+        aliases: [warriordisguise,iced]
+        description: Sets a player's armour so that they are disguised as an Ice Warrior.
         usage: /<command> [on|off]
         permission: tardisweepingangels.disguise
         permission-message: You don't have the permission <permission> to use this command

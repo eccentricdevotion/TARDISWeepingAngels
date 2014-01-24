@@ -24,16 +24,21 @@ public class TARDISWeepingAngels extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
         PluginDescriptionFile pdfFile = getDescription();
         pluginName = ChatColor.GOLD + "[" + pdfFile.getName() + "]" + ChatColor.RESET + " ";
+        new TARDISWeepingAngelsConfig(this).updateConfig();
         pm.registerEvents(new TARDISWeepingAngelsBlink(this), this);
         pm.registerEvents(new TARDISWeepingAngelsDamage(this), this);
         pm.registerEvents(new TARDISWeepingAngelsDeath(this), this);
         pm.registerEvents(new TARDISWeepingAngelsUndisguise(this), this);
         TARDISWeepingAngelsCommand command = new TARDISWeepingAngelsCommand(this);
         getCommand("angel").setExecutor(command);
+        getCommand("warrior").setExecutor(command);
         getCommand("angeldisguise").setExecutor(command);
-        long delay = getConfig().getLong("spawn_rate.how_often");
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISWeepingAngelsRunnable(this), delay, delay);
-        steal = (getConfig().getBoolean("angels_can_steal") && pm.isPluginEnabled("TARDIS"));
+        getCommand("icedisguise").setExecutor(command);
+        long angeldelay = getConfig().getLong("angels.spawn_rate.how_often");
+        long icedelay = getConfig().getLong("angels.spawn_rate.how_often");
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISWeepingAngelsRunnable(this), angeldelay, angeldelay);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISIceWarriorRunnable(this), icedelay, icedelay);
+        steal = (getConfig().getBoolean("angels.angels_can_steal") && pm.isPluginEnabled("TARDIS"));
     }
 
     public Random getRandom() {

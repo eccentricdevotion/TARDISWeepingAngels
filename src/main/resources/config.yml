@@ -1,13 +1,25 @@
 ## spawn rate is how many angels to spawn every x ticks up to a maximum per world
-spawn_rate:
-    how_many: 5
-    how_often: 400
-    max_per_world: 50
-worlds:
-    - world
-freeze_time: 100
-weapon: DIAMOND_PICKAXE
-drops:
-    - STONE
-    - COBBLESTONE
-angels_can_steal: true
+angels:
+    spawn_rate:
+        how_many: 5
+        how_often: 400
+        max_per_world: 50
+    worlds:
+        - world
+    freeze_time: 100
+    weapon: DIAMOND_PICKAXE
+    drops:
+        - COBBLESTONE
+        - STONE
+    angels_can_steal: true
+ice_warriors:
+    spawn_rate:
+        how_many: 3
+        how_often: 400
+        max_per_world: 25
+    worlds:
+        - world
+    drops:
+        - ICE
+        - PACKED_ICE
+        - SNOW_BLOCK

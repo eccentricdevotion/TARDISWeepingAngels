@@ -22,7 +22,7 @@ public class TARDISWeepingAngelEquipment {
     public TARDISWeepingAngelEquipment() {
     }
 
-    public void setEquipment(LivingEntity le, boolean disguise) {
+    public void setAngelEquipment(LivingEntity le, boolean disguise) {
         ItemStack helmet = new ItemStack(Material.WATER_LILY, 1);
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE, 1);
         LeatherArmorMeta cmeta = (LeatherArmorMeta) chestplate.getItemMeta();
@@ -60,6 +60,38 @@ public class TARDISWeepingAngelEquipment {
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
             ee.setBootsDropChance(0F);
+        }
+    }
+
+    public void setWarriorEquipment(LivingEntity le, boolean disguise) {
+        ItemStack helmet = new ItemStack(Material.CHAINMAIL_HELMET, 1);
+        ItemStack chestplate = new ItemStack(Material.CHAINMAIL_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.CHAINMAIL_LEGGINGS, 1);
+        ItemStack weapon = new ItemStack(Material.FIREWORK_CHARGE, 1);
+        if (disguise) {
+            ItemMeta him = helmet.getItemMeta();
+            him.setDisplayName("Ice Warrior Head");
+            helmet.setItemMeta(him);
+            helmet.setDurability((short) 160);
+            ItemMeta cmeta = helmet.getItemMeta();
+            cmeta.setDisplayName("Ice Warrior Chest");
+            chestplate.setItemMeta(cmeta);
+            chestplate.setDurability((short) 235);
+            ItemMeta lmeta = helmet.getItemMeta();
+            lmeta.setDisplayName("Ice Warrior Legs");
+            leggings.setItemMeta(cmeta);
+            leggings.setDurability((short) 220);
+        }
+        EntityEquipment ee = le.getEquipment();
+        ee.setHelmet(helmet);
+        ee.setChestplate(chestplate);
+        ee.setLeggings(leggings);
+        if (!disguise) {
+            ee.setItemInHand(weapon);
+            ee.setItemInHandDropChance(0F);
+            ee.setHelmetDropChance(0F);
+            ee.setChestplateDropChance(0F);
+            ee.setLeggingsDropChance(0F);
         }
     }
 

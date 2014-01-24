@@ -35,7 +35,7 @@ public class TARDISWeepingAngelsDamage implements Listener {
 
     public TARDISWeepingAngelsDamage(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.mat = Material.valueOf(plugin.getConfig().getString("weapon"));
+        this.mat = Material.valueOf(plugin.getConfig().getString("angels.weapon"));
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -56,6 +56,20 @@ public class TARDISWeepingAngelsDamage implements Listener {
                 }
             }
         }
+//        if (et.equals(EntityType.PIG_ZOMBIE)) {
+//            Entity ent = event.getEntity();
+//            EntityEquipment ee = ((LivingEntity) ent).getEquipment();
+//            if (ee.getHelmet().getType().equals(Material.CHAINMAIL_HELMET)) {
+//                Entity e = event.getDamager();
+//                if (e instanceof Arrow) {
+//                    event.setCancelled(true);
+//                }
+//                if (e instanceof Player) {
+//                    Player p = (Player) e;
+//                    PigZombie pigman = (PigZombie) ent;
+//                }
+//            }
+//        }
         if (et.equals(EntityType.PLAYER)) {
             Entity e = event.getDamager();
             if (e instanceof Skeleton) {
