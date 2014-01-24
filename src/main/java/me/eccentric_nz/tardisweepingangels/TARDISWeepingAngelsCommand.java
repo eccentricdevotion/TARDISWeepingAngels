@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -20,7 +21,7 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(final CommandSender sender, Command cmd, String label, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("angel")) {
+        if (cmd.getName().equalsIgnoreCase("angel") || cmd.getName().equalsIgnoreCase("warrior")) {
             Player player = null;
             if (sender instanceof Player) {
                 player = (Player) sender;
@@ -35,11 +36,19 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
             eyeLocation.setZ(eyeLocation.getZ() + 0.5F);
             World world = eyeLocation.getWorld();
             TARDISWeepingAngelEquipment equip = new TARDISWeepingAngelEquipment();
-            LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
-            equip.setEquipment(e, false);
+            if (cmd.getName().equalsIgnoreCase("angel")) {
+                LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
+                equip.setAngelEquipment(e, false);
+            } else {
+                LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
+                equip.setWarriorEquipment(e, false);
+                PigZombie pigman = (PigZombie) e;
+                pigman.setAngry(true);
+                pigman.setAnger(Integer.MAX_VALUE);
+            }
             return true;
         }
-        if (cmd.getName().equalsIgnoreCase("angeldisguise")) {
+        if (cmd.getName().equalsIgnoreCase("angeldisguise") || cmd.getName().equalsIgnoreCase("icedisguise")) {
             if (args.length < 1) {
                 return false;
             }
@@ -62,7 +71,11 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
             }
             TARDISWeepingAngelEquipment equip = new TARDISWeepingAngelEquipment();
             if (args[0].equalsIgnoreCase("on")) {
-                equip.setEquipment(player, true);
+                if (cmd.getName().equalsIgnoreCase("angeldisguise")) {
+                    equip.setAngelEquipment(player, true);
+                } else {
+                    equip.setWarriorEquipment(player, true);
+                }
             } else {
                 equip.removeEquipment(player);
             }
