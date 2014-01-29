@@ -21,7 +21,7 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(final CommandSender sender, Command cmd, String label, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("angel") || cmd.getName().equalsIgnoreCase("warrior")) {
+        if (cmd.getName().equalsIgnoreCase("angel") || cmd.getName().equalsIgnoreCase("warrior") || cmd.getName().equalsIgnoreCase("cyberman")) {
             Player player = null;
             if (sender instanceof Player) {
                 player = (Player) sender;
@@ -39,6 +39,9 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
             if (cmd.getName().equalsIgnoreCase("angel")) {
                 LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                 equip.setAngelEquipment(e, false);
+            } else if (cmd.getName().equalsIgnoreCase("cyberman")) {
+                LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
+                equip.setCyberEquipment(e, false);
             } else {
                 LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
                 equip.setWarriorEquipment(e, false);
@@ -48,7 +51,7 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
             }
             return true;
         }
-        if (cmd.getName().equalsIgnoreCase("angeldisguise") || cmd.getName().equalsIgnoreCase("icedisguise")) {
+        if (cmd.getName().equalsIgnoreCase("angeldisguise") || cmd.getName().equalsIgnoreCase("icedisguise") || cmd.getName().equalsIgnoreCase("cyberdisguise")) {
             if (args.length < 1) {
                 return false;
             }
@@ -73,6 +76,8 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
             if (args[0].equalsIgnoreCase("on")) {
                 if (cmd.getName().equalsIgnoreCase("angeldisguise")) {
                     equip.setAngelEquipment(player, true);
+                } else if (cmd.getName().equalsIgnoreCase("cyberdisguise")) {
+                    equip.setCyberEquipment(player, true);
                 } else {
                     equip.setWarriorEquipment(player, true);
                 }

@@ -29,7 +29,7 @@ public class TARDISWeepingAngelsUndisguise implements Listener {
                 if (is != null) {
                     if (is.hasItemMeta()) {
                         ItemMeta im = is.getItemMeta();
-                        if (im.hasDisplayName() && im.getDisplayName().startsWith("Weeping Angel")) {
+                        if (im.hasDisplayName() && (im.getDisplayName().startsWith("Weeping Angel") || im.getDisplayName().startsWith("Ice Warrior") || im.getDisplayName().startsWith("Cyberman"))) {
                             event.setCancelled(true);
                             ((Player) event.getWhoClicked()).sendMessage(plugin.pluginName + "You must use the " + ChatColor.GREEN + "/angeldisguise off" + ChatColor.RESET + " command to remove this armour!");
                         }

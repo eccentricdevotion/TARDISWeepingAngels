@@ -95,6 +95,36 @@ public class TARDISWeepingAngelEquipment {
         }
     }
 
+    public void setCyberEquipment(LivingEntity le, boolean disguise) {
+        ItemStack helmet = new ItemStack(Material.IRON_HELMET, 1);
+        ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
+        ItemMeta him = helmet.getItemMeta();
+        him.setDisplayName("Cyberman Head");
+        if (disguise) {
+            helmet.setDurability((short) 160);
+            ItemMeta cmeta = helmet.getItemMeta();
+            cmeta.setDisplayName("Cyberman Chest");
+            chestplate.setItemMeta(cmeta);
+            chestplate.setDurability((short) 235);
+            ItemMeta lmeta = helmet.getItemMeta();
+            lmeta.setDisplayName("Cyberman Legs");
+            leggings.setItemMeta(cmeta);
+            leggings.setDurability((short) 220);
+        }
+        helmet.setItemMeta(him);
+        EntityEquipment ee = le.getEquipment();
+        ee.setHelmet(helmet);
+        ee.setChestplate(chestplate);
+        ee.setLeggings(leggings);
+        if (!disguise) {
+            ee.setItemInHandDropChance(0F);
+            ee.setHelmetDropChance(0F);
+            ee.setChestplateDropChance(0F);
+            ee.setLeggingsDropChance(0F);
+        }
+    }
+
     public void removeEquipment(Player p) {
         PlayerInventory inv = p.getInventory();
         inv.setHelmet(null);

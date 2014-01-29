@@ -32,13 +32,17 @@ public class TARDISWeepingAngels extends JavaPlugin {
         TARDISWeepingAngelsCommand command = new TARDISWeepingAngelsCommand(this);
         getCommand("angel").setExecutor(command);
         getCommand("warrior").setExecutor(command);
+        getCommand("cyberman").setExecutor(command);
         getCommand("angeldisguise").setExecutor(command);
         getCommand("icedisguise").setExecutor(command);
+        getCommand("cyberdisguise").setExecutor(command);
         long angeldelay = getConfig().getLong("angels.spawn_rate.how_often");
         long icedelay = getConfig().getLong("angels.spawn_rate.how_often");
+        long cyberdelay = getConfig().getLong("cybermen.spawn_rate.how_often");
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISWeepingAngelsRunnable(this), angeldelay, angeldelay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISIceWarriorRunnable(this), icedelay, icedelay);
-        steal = (getConfig().getBoolean("angels.angels_can_steal") && pm.isPluginEnabled("TARDIS"));
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISCybermanRunnable(this), cyberdelay, cyberdelay);
+        steal = (getConfig().getBoolean("angels.can_steal") && pm.isPluginEnabled("TARDIS"));
     }
 
     public Random getRandom() {

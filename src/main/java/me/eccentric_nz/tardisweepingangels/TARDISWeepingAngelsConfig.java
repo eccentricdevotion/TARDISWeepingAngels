@@ -35,13 +35,18 @@ public class TARDISWeepingAngelsConfig {
         intOptions.put("ice_warriors.spawn_rate.how_many", 3);
         intOptions.put("ice_warriors.spawn_rate.how_often", 400);
         intOptions.put("ice_warriors.spawn_rate.max_per_world", 25);
+        intOptions.put("cybermen.spawn_rate.how_many", 3);
+        intOptions.put("cybermen.spawn_rate.how_often", 400);
+        intOptions.put("cybermen.spawn_rate.max_per_world", 30);
         // string
         //strOptions.put("angels.weapon", "DIAMOND_PICKAXE");
         // list
         listOptions.put("ice_warriors.worlds", Arrays.asList(new String[]{"world"}));
         listOptions.put("ice_warriors.drops", Arrays.asList(new String[]{"ICE", "PACKED_ICE", "SNOW_BLOCK"}));
+        listOptions.put("cybermen.worlds", Arrays.asList(new String[]{"world"}));
+        listOptions.put("cybermen.drops", Arrays.asList(new String[]{"REDSTONE", "STONE_BUTTON"}));
         // boolean
-        //boolOptions.put("angels.angels_can_steal", true);
+        boolOptions.put("cybermen.can_upgrade", true);
     }
 
     public void updateConfig() {
@@ -54,7 +59,7 @@ public class TARDISWeepingAngelsConfig {
             plugin.getConfig().set("angels.drops", plugin.getConfig().getStringList("drops"));
             plugin.getConfig().set("angels.weapon", plugin.getConfig().getString("weapon"));
             plugin.getConfig().set("angels.freeze_time", plugin.getConfig().getInt("freeze_time"));
-            plugin.getConfig().set("angels.angels_can_steal", plugin.getConfig().getBoolean("angels_can_steal"));
+            plugin.getConfig().set("angels.can_steal", plugin.getConfig().getBoolean("angels_can_steal"));
             // remove old values
             plugin.getConfig().set("spawn_rate.how_many", null);
             plugin.getConfig().set("spawn_rate.how_often", null);

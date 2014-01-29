@@ -23,3 +23,14 @@ ice_warriors:
         - ICE
         - PACKED_ICE
         - SNOW_BLOCK
+cybermen:
+    spawn_rate:
+        how_many: 3
+        how_often: 400
+        max_per_world: 30
+    worlds:
+        - world
+    drops:
+        - REDSTONE
+        - STONE_BUTTON
+    can_upgrade: true
