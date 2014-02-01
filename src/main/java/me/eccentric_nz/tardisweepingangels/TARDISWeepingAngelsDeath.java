@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -100,6 +101,11 @@ public class TARDISWeepingAngelsDeath implements Listener {
                         Location l = event.getEntity().getLocation();
                         LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
                         new TARDISWeepingAngelEquipment().setCyberEquipment(e, false);
+                        if (event.getEntity() instanceof Player) {
+                            String name = ((Player) event.getEntity()).getName();
+                            e.setCustomName(name);
+                            e.setCustomNameVisible(true);
+                        }
                     }
                 }
             }
