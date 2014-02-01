@@ -36,6 +36,8 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getCommand("angeldisguise").setExecutor(command);
         getCommand("icedisguise").setExecutor(command);
         getCommand("cyberdisguise").setExecutor(command);
+        getCommand("angelcount").setExecutor(command);
+        getCommand("twa").setExecutor(command);
         long angeldelay = getConfig().getLong("angels.spawn_rate.how_often");
         long icedelay = getConfig().getLong("angels.spawn_rate.how_often");
         long cyberdelay = getConfig().getLong("cybermen.spawn_rate.how_often");

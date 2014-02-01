@@ -4,16 +4,22 @@ main: me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels
 name: TARDISWeepingAngels
 startup: postworld
 version: '1.1'
-website: http://dev.bukkit.org/bukkit-plugins/tardis
-dev-url: http://dev.bukkit.org/bukkit-plugins/tardis
-url: http://dev.bukkit.org/bukkit-plugins/tardis
+website: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
+dev-url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
+url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 softdepend: [TARDIS]
 permissions:
     tardisweepingangels.spawn:
-        description: Allow players to spawn Weeping Angels.
+        description: Allow players to spawn Weeping Angels, Cybermen or Ice Warriors.
         default: op
     tardisweepingangels.disguise:
-        description: Allow players to disguise themselves as Weeping Angels.
+        description: Allow players to disguise themselves as Weeping Angels, Cybermen or Ice Warriors.
+        default: op
+    tardisweepingangels.count:
+        description: Allow players to use the count command.
+        default: op
+    tardisweepingangels.admin:
+        description: Allow players to alter plugin settings.
         default: op
 commands:
     angel:
@@ -51,4 +57,16 @@ commands:
         description: Sets a player's armour so that they are disguised as a Cyberman.
         usage: /<command> [on|off]
         permission: tardisweepingangels.disguise
+        permission-message: You don't have the permission <permission> to use this command
+    angelcount:
+        aliases: [cybercount,icecount,acount,ccount,icount]
+        description: Reports the current number of the specifed monster in the specified world.
+        usage: /<command> [a|c|i] [world]
+        permission: tardisweepingangels.count
+        permission-message: You don't have the permission <permission> to use this command
+    twa:
+        aliases: [aadmin,angeladmin,tardisweepingangels]
+        description: Set plugin configuration options.
+        usage: /<command> [a|c|i] [add|remove] [world]
+        permission: tardisweepingangels.count
         permission-message: You don't have the permission <permission> to use this command
