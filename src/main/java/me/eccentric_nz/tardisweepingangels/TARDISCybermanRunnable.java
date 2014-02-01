@@ -14,6 +14,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.ItemStack;
 
 /**
  *
@@ -43,8 +44,11 @@ public class TARDISCybermanRunnable implements Runnable {
                 Collection<Zombie> zombies = w.getEntitiesByClass(Zombie.class);
                 for (Zombie s : zombies) {
                     EntityEquipment ee = s.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.WATER_LILY)) {
-                        cyberarmy.add(s);
+                    if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
+                        ItemStack is = ee.getHelmet();
+                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
+                            cyberarmy.add(s);
+                        }
                     }
                 }
                 // count the current cybermen

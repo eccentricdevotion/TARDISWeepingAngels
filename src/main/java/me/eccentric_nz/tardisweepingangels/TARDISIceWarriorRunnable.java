@@ -15,6 +15,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.ItemStack;
 
 /**
  *
@@ -57,8 +58,11 @@ public class TARDISIceWarriorRunnable implements Runnable {
                     Collection<PigZombie> skellies = w.getEntitiesByClass(PigZombie.class);
                     for (PigZombie s : skellies) {
                         EntityEquipment ee = s.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.WATER_LILY)) {
-                            warriors.add(s);
+                        if (ee.getHelmet().getType().equals(Material.CHAINMAIL_HELMET)) {
+                            ItemStack is = ee.getHelmet();
+                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Ice Warrior")) {
+                                warriors.add(s);
+                            }
                         }
                     }
                     // count the current warriors
