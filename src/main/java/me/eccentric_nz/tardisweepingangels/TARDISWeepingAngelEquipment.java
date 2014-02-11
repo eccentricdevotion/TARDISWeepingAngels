@@ -19,9 +19,6 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
  */
 public class TARDISWeepingAngelEquipment {
 
-    public TARDISWeepingAngelEquipment() {
-    }
-
     public void setAngelEquipment(LivingEntity le, boolean disguise) {
         ItemStack helmet = new ItemStack(Material.WATER_LILY, 1);
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE, 1);
@@ -68,10 +65,10 @@ public class TARDISWeepingAngelEquipment {
         ItemStack chestplate = new ItemStack(Material.CHAINMAIL_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.CHAINMAIL_LEGGINGS, 1);
         ItemStack weapon = new ItemStack(Material.FIREWORK_CHARGE, 1);
+        ItemMeta him = helmet.getItemMeta();
+        him.setDisplayName("Ice Warrior Head");
+        helmet.setItemMeta(him);
         if (disguise) {
-            ItemMeta him = helmet.getItemMeta();
-            him.setDisplayName("Ice Warrior Head");
-            helmet.setItemMeta(him);
             helmet.setDurability((short) 160);
             ItemMeta cmeta = helmet.getItemMeta();
             cmeta.setDisplayName("Ice Warrior Chest");
@@ -86,6 +83,49 @@ public class TARDISWeepingAngelEquipment {
         ee.setHelmet(helmet);
         ee.setChestplate(chestplate);
         ee.setLeggings(leggings);
+        if (!disguise) {
+            ee.setItemInHand(weapon);
+            ee.setItemInHandDropChance(0F);
+            ee.setHelmetDropChance(0F);
+            ee.setChestplateDropChance(0F);
+            ee.setLeggingsDropChance(0F);
+        }
+    }
+
+    public void setWarriorLeatherEquipment(LivingEntity le, boolean disguise) {
+        ItemStack helmet = new ItemStack(Material.LEATHER_HELMET, 1);
+        LeatherArmorMeta hmeta = (LeatherArmorMeta) helmet.getItemMeta();
+        hmeta.setColor(Color.fromRGB(51, 102, 51));
+        hmeta.setDisplayName("Ice Warrior Head");
+        ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE, 1);
+        LeatherArmorMeta cmeta = (LeatherArmorMeta) chestplate.getItemMeta();
+        cmeta.setColor(Color.fromRGB(51, 102, 51));
+        ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS, 1);
+        LeatherArmorMeta lmeta = (LeatherArmorMeta) leggings.getItemMeta();
+        lmeta.setColor(Color.fromRGB(51, 102, 51));
+        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS, 1);
+        LeatherArmorMeta bmeta = (LeatherArmorMeta) boots.getItemMeta();
+        bmeta.setColor(Color.fromRGB(51, 102, 51));
+        ItemStack weapon = new ItemStack(Material.AIR, 1);
+        if (disguise) {
+            helmet.setDurability((short) 50);
+            cmeta.setDisplayName("Ice Warrior Chest");
+            chestplate.setDurability((short) 75);
+            lmeta.setDisplayName("Ice Warrior Legs");
+            leggings.setDurability((short) 70);
+            bmeta.setDisplayName("Ice Warrior Feet");
+            boots.setDurability((short) 60);
+        }
+        helmet.setItemMeta(hmeta);
+        chestplate.setItemMeta(cmeta);
+        leggings.setItemMeta(cmeta);
+        boots.setItemMeta(bmeta);
+
+        EntityEquipment ee = le.getEquipment();
+        ee.setHelmet(helmet);
+        ee.setChestplate(chestplate);
+        ee.setLeggings(leggings);
+        ee.setBoots(boots);
         if (!disguise) {
             ee.setItemInHand(weapon);
             ee.setItemInHandDropChance(0F);
@@ -117,6 +157,47 @@ public class TARDISWeepingAngelEquipment {
         ee.setHelmet(helmet);
         ee.setChestplate(chestplate);
         ee.setLeggings(leggings);
+        if (!disguise) {
+            ee.setItemInHandDropChance(0F);
+            ee.setHelmetDropChance(0F);
+            ee.setChestplateDropChance(0F);
+            ee.setLeggingsDropChance(0F);
+        }
+    }
+
+    public void setCyberLeatherEquipment(LivingEntity le, boolean disguise) {
+        ItemStack helmet = new ItemStack(Material.LEATHER_HELMET, 1);
+        LeatherArmorMeta hmeta = (LeatherArmorMeta) helmet.getItemMeta();
+        hmeta.setColor(Color.fromRGB(255, 255, 255));
+        ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE, 1);
+        LeatherArmorMeta cmeta = (LeatherArmorMeta) chestplate.getItemMeta();
+        cmeta.setColor(Color.fromRGB(255, 255, 255));
+        ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS, 1);
+        LeatherArmorMeta lmeta = (LeatherArmorMeta) leggings.getItemMeta();
+        lmeta.setColor(Color.fromRGB(255, 255, 255));
+        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS, 1);
+        LeatherArmorMeta bmeta = (LeatherArmorMeta) boots.getItemMeta();
+        bmeta.setColor(Color.fromRGB(255, 255, 255));
+        hmeta.setDisplayName("Cyberman Head");
+        if (disguise) {
+            helmet.setDurability((short) 50);
+            cmeta.setDisplayName("Cyberman Chest");
+            chestplate.setDurability((short) 75);
+            lmeta.setDisplayName("Cyberman Legs");
+            leggings.setDurability((short) 70);
+            bmeta.setDisplayName("Cyberman Feet");
+            boots.setDurability((short) 60);
+        }
+        helmet.setItemMeta(hmeta);
+        chestplate.setItemMeta(cmeta);
+        leggings.setItemMeta(cmeta);
+        boots.setItemMeta(bmeta);
+
+        EntityEquipment ee = le.getEquipment();
+        ee.setHelmet(helmet);
+        ee.setChestplate(chestplate);
+        ee.setLeggings(leggings);
+        ee.setBoots(boots);
         if (!disguise) {
             ee.setItemInHandDropChance(0F);
             ee.setHelmetDropChance(0F);

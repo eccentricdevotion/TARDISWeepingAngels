@@ -58,10 +58,18 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
                 equip.setAngelEquipment(e, false);
             } else if (cmd.getName().equalsIgnoreCase("cyberman")) {
                 LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
-                equip.setCyberEquipment(e, false);
+                if (plugin.getConfig().getBoolean("always_use_leather")) {
+                    equip.setCyberLeatherEquipment(e, false);
+                } else {
+                    equip.setCyberEquipment(e, false);
+                }
             } else {
                 LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
-                equip.setWarriorEquipment(e, false);
+                if (plugin.getConfig().getBoolean("always_use_leather")) {
+                    equip.setWarriorLeatherEquipment(e, false);
+                } else {
+                    equip.setWarriorEquipment(e, false);
+                }
                 PigZombie pigman = (PigZombie) e;
                 pigman.setAngry(true);
                 pigman.setAnger(Integer.MAX_VALUE);
@@ -98,9 +106,17 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
                 if (cmd.getName().equalsIgnoreCase("angeldisguise")) {
                     equip.setAngelEquipment(player, true);
                 } else if (cmd.getName().equalsIgnoreCase("cyberdisguise")) {
-                    equip.setCyberEquipment(player, true);
+                    if (plugin.getConfig().getBoolean("always_use_leather")) {
+                        equip.setCyberLeatherEquipment(player, true);
+                    } else {
+                        equip.setCyberEquipment(player, true);
+                    }
                 } else {
-                    equip.setWarriorEquipment(player, true);
+                    if (plugin.getConfig().getBoolean("always_use_leather")) {
+                        equip.setWarriorLeatherEquipment(player, true);
+                    } else {
+                        equip.setWarriorEquipment(player, true);
+                    }
                 }
             } else {
                 equip.removeEquipment(player);

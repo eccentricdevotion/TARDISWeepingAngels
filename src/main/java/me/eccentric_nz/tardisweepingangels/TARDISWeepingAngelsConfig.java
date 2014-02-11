@@ -47,6 +47,7 @@ public class TARDISWeepingAngelsConfig {
         listOptions.put("cybermen.drops", Arrays.asList(new String[]{"REDSTONE", "STONE_BUTTON"}));
         // boolean
         boolOptions.put("cybermen.can_upgrade", true);
+        boolOptions.put("always_use_leather", false);
     }
 
     public void updateConfig() {

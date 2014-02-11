@@ -34,3 +34,4 @@ cybermen:
         - REDSTONE
         - STONE_BUTTON
     can_upgrade: true
+always_use_leather: false
