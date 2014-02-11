@@ -55,13 +55,13 @@ public class TARDISIceWarriorRunnable implements Runnable {
                 if ((time > 0 && time < 13187) || time > 22812) {
                     // get the current warriors
                     List<PigZombie> warriors = new ArrayList<PigZombie>();
-                    Collection<PigZombie> skellies = w.getEntitiesByClass(PigZombie.class);
-                    for (PigZombie s : skellies) {
-                        EntityEquipment ee = s.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.CHAINMAIL_HELMET)) {
+                    Collection<PigZombie> piggies = w.getEntitiesByClass(PigZombie.class);
+                    for (PigZombie pz : piggies) {
+                        EntityEquipment ee = pz.getEquipment();
+                        if (ee.getHelmet().getType().equals(Material.CHAINMAIL_HELMET) || (ee.getHelmet().getType().equals(Material.LEATHER_HELMET) && plugin.getConfig().getBoolean("always_use_leather"))) {
                             ItemStack is = ee.getHelmet();
                             if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Ice Warrior")) {
-                                warriors.add(s);
+                                warriors.add(pz);
                             }
                         }
                     }
@@ -90,7 +90,11 @@ public class TARDISIceWarriorRunnable implements Runnable {
                 PigZombie pigman = (PigZombie) e;
                 pigman.setAngry(true);
                 pigman.setAnger(Integer.MAX_VALUE);
-                equipper.setWarriorEquipment(e, false);
+                if (plugin.getConfig().getBoolean("always_use_leather")) {
+                    equipper.setWarriorLeatherEquipment(e, false);
+                } else {
+                    equipper.setWarriorEquipment(e, false);
+                }
             }
         }
     }

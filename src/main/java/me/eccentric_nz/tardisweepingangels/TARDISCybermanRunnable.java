@@ -42,12 +42,12 @@ public class TARDISCybermanRunnable implements Runnable {
                 // get the current warriors
                 List<Zombie> cyberarmy = new ArrayList<Zombie>();
                 Collection<Zombie> zombies = w.getEntitiesByClass(Zombie.class);
-                for (Zombie s : zombies) {
-                    EntityEquipment ee = s.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
+                for (Zombie z : zombies) {
+                    EntityEquipment ee = z.getEquipment();
+                    if (ee.getHelmet().getType().equals(Material.IRON_HELMET) || (ee.getHelmet().getType().equals(Material.LEATHER_HELMET) && plugin.getConfig().getBoolean("always_use_leather"))) {
                         ItemStack is = ee.getHelmet();
                         if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
-                            cyberarmy.add(s);
+                            cyberarmy.add(z);
                         }
                     }
                 }
@@ -71,7 +71,11 @@ public class TARDISCybermanRunnable implements Runnable {
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
             LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
-            equipper.setCyberEquipment(e, false);
+            if (plugin.getConfig().getBoolean("always_use_leather")) {
+                equipper.setCyberLeatherEquipment(e, false);
+            } else {
+                equipper.setCyberEquipment(e, false);
+            }
         }
     }
 }
