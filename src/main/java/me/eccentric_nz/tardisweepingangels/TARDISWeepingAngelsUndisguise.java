@@ -1,6 +1,5 @@
 package me.eccentric_nz.tardisweepingangels;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -31,7 +30,7 @@ public class TARDISWeepingAngelsUndisguise implements Listener {
                         ItemMeta im = is.getItemMeta();
                         if (im.hasDisplayName() && (im.getDisplayName().startsWith("Weeping Angel") || im.getDisplayName().startsWith("Ice Warrior") || im.getDisplayName().startsWith("Cyberman"))) {
                             event.setCancelled(true);
-                            ((Player) event.getWhoClicked()).sendMessage(plugin.pluginName + "You must use the " + ChatColor.GREEN + "/angeldisguise off" + ChatColor.RESET + " command to remove this armour!");
+                            ((Player) event.getWhoClicked()).sendMessage(plugin.pluginName + "You must use the appropriate 'disguise off' command to remove this armour!");
                         }
                     }
                 }
