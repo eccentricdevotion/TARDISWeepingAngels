@@ -90,8 +90,7 @@ public class TARDISWeepingAngelsDeath implements Listener {
                 return;
             }
             EntityDamageEvent damage = event.getEntity().getLastDamageCause();
-            DamageCause dc = damage.getCause();
-            if (dc.equals(DamageCause.ENTITY_ATTACK)) {
+            if (damage != null && damage.getCause().equals(DamageCause.ENTITY_ATTACK)) {
                 Entity attacker = (((EntityDamageByEntityEvent) damage).getDamager());
                 if (attacker instanceof Zombie) {
                     EntityEquipment ee = ((LivingEntity) attacker).getEquipment();
