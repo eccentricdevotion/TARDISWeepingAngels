@@ -70,12 +70,18 @@ public class TARDISCybermanRunnable implements Runnable {
             int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
-            LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
-            if (plugin.getConfig().getBoolean("always_use_leather")) {
-                equipper.setCyberLeatherEquipment(e, false);
-            } else {
-                equipper.setCyberEquipment(e, false);
-            }
+            final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
+            ((Zombie) e).setVillager(false);
+            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                @Override
+                public void run() {
+                    if (plugin.getConfig().getBoolean("always_use_leather")) {
+                        equipper.setCyberLeatherEquipment(e, false);
+                    } else {
+                        equipper.setCyberEquipment(e, false);
+                    }
+                }
+            }, 5L);
         }
     }
 }

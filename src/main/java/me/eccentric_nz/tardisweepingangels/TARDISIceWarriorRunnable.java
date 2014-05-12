@@ -86,15 +86,20 @@ public class TARDISIceWarriorRunnable implements Runnable {
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
             if (biomes.contains(l.getBlock().getBiome())) {
-                LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.PIG_ZOMBIE);
+                final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.PIG_ZOMBIE);
                 PigZombie pigman = (PigZombie) e;
                 pigman.setAngry(true);
                 pigman.setAnger(Integer.MAX_VALUE);
-                if (plugin.getConfig().getBoolean("always_use_leather")) {
-                    equipper.setWarriorLeatherEquipment(e, false);
-                } else {
-                    equipper.setWarriorEquipment(e, false);
-                }
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                    @Override
+                    public void run() {
+                        if (plugin.getConfig().getBoolean("always_use_leather")) {
+                            equipper.setWarriorLeatherEquipment(e, false);
+                        } else {
+                            equipper.setWarriorEquipment(e, false);
+                        }
+                    }
+                }, 5L);
             }
         }
     }

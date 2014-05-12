@@ -43,10 +43,6 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
                 sender.sendMessage(plugin.pluginName + "Command can only be used by a player!");
                 return true;
             }
-//            if (player.hasPermission("tardisweepingangels.spawn")) {
-//                player.sendMessage(plugin.pluginName + "You do not have permission to use this command!");
-//                return true;
-//            }
             final Location eyeLocation = player.getTargetBlock(null, 50).getLocation();
             eyeLocation.setX(eyeLocation.getX() + 0.5F);
             eyeLocation.setY(eyeLocation.getY() + 1);
@@ -88,10 +84,6 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
                 sender.sendMessage(plugin.pluginName + "Command can only be used by a player!");
                 return true;
             }
-//            if (player.hasPermission("tardisweepingangels.disguise")) {
-//                player.sendMessage(plugin.pluginName + "You do not have permission to use this command!");
-//                return true;
-//            }
             if (!args[0].equalsIgnoreCase("on") && !args[0].equalsIgnoreCase("off")) {
                 player.sendMessage(plugin.pluginName + "You need to specify if the disguise should be on or off!");
                 return true;
@@ -124,10 +116,6 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
             return true;
         }
         if (cmd.getName().equalsIgnoreCase("angelcount")) {
-//            if (sender.hasPermission("tardisweepingangels.count")) {
-//                sender.sendMessage(plugin.pluginName + "You do not have permission to use this command!");
-//                return true;
-//            }
             if (args.length < 2) {
                 return false;
             }

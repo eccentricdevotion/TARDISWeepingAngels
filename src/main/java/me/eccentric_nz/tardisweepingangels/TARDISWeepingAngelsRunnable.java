@@ -70,8 +70,13 @@ public class TARDISWeepingAngelsRunnable implements Runnable {
             int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
-            LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.SKELETON);
-            equipper.setAngelEquipment(e, false);
+            final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.SKELETON);
+            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                @Override
+                public void run() {
+                    equipper.setAngelEquipment(e, false);
+                }
+            }, 5L);
         }
     }
 }
