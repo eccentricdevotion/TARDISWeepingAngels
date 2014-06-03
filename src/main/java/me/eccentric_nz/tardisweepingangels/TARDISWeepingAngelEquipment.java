@@ -21,38 +21,33 @@ public class TARDISWeepingAngelEquipment {
 
     public void setAngelEquipment(LivingEntity le, boolean disguise) {
         ItemStack helmet = new ItemStack(Material.WATER_LILY, 1);
-        ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE, 1);
-        LeatherArmorMeta cmeta = (LeatherArmorMeta) chestplate.getItemMeta();
-        cmeta.setColor(Color.fromRGB(143, 143, 143));
-        ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS, 1);
-        LeatherArmorMeta lmeta = (LeatherArmorMeta) leggings.getItemMeta();
-        lmeta.setColor(Color.fromRGB(143, 143, 143));
-        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS, 1);
-        LeatherArmorMeta bmeta = (LeatherArmorMeta) boots.getItemMeta();
-        bmeta.setColor(Color.fromRGB(143, 143, 143));
-        ItemStack weapon = new ItemStack(Material.AIR, 1);
+        ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
+        ItemStack boots = new ItemStack(Material.IRON_BOOTS, 1);
         if (disguise) {
-            ItemMeta him = helmet.getItemMeta();
-            him.setDisplayName("Weeping Angel Wing");
-            helmet.setItemMeta(him);
-            cmeta.setDisplayName("Weeping Angel Chest");
-            lmeta.setDisplayName("Weeping Angel Legs");
-            bmeta.setDisplayName("Weeping Angel Feet");
             chestplate.setDurability((short) 75);
             leggings.setDurability((short) 70);
             boots.setDurability((short) 60);
         }
+        ItemMeta hmeta = helmet.getItemMeta();
+        hmeta.setDisplayName("Weeping Angel Wing");
+        helmet.setItemMeta(hmeta);
+        ItemMeta cmeta = chestplate.getItemMeta();
+        cmeta.setDisplayName("Weeping Angel Chest");
         chestplate.setItemMeta(cmeta);
+        ItemMeta lmeta = leggings.getItemMeta();
+        lmeta.setDisplayName("Weeping Angel Legs");
         leggings.setItemMeta(lmeta);
-        boots.setItemMeta(cmeta);
-
+        ItemMeta bmeta = boots.getItemMeta();
+        bmeta.setDisplayName("Weeping Angel Feet");
+        boots.setItemMeta(bmeta);
         EntityEquipment ee = le.getEquipment();
         ee.setHelmet(helmet);
         ee.setChestplate(chestplate);
         ee.setLeggings(leggings);
         ee.setBoots(boots);
         if (!disguise) {
-            ee.setItemInHand(weapon);
+            ee.setItemInHand(null);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
@@ -61,29 +56,34 @@ public class TARDISWeepingAngelEquipment {
     }
 
     public void setWarriorEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.CHAINMAIL_HELMET, 1);
-        ItemStack chestplate = new ItemStack(Material.CHAINMAIL_CHESTPLATE, 1);
-        ItemStack leggings = new ItemStack(Material.CHAINMAIL_LEGGINGS, 1);
-        ItemStack weapon = new ItemStack(Material.FIREWORK_CHARGE, 1);
-        ItemMeta him = helmet.getItemMeta();
-        him.setDisplayName("Ice Warrior Head");
-        helmet.setItemMeta(him);
+        ItemStack helmet = new ItemStack(Material.IRON_HELMET, 1);
+        ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
+        ItemStack weapon = new ItemStack(Material.IRON_SWORD, 1);
         if (disguise) {
             helmet.setDurability((short) 160);
-            ItemMeta cmeta = helmet.getItemMeta();
-            cmeta.setDisplayName("Ice Warrior Chest");
-            chestplate.setItemMeta(cmeta);
             chestplate.setDurability((short) 235);
-            ItemMeta lmeta = helmet.getItemMeta();
-            lmeta.setDisplayName("Ice Warrior Legs");
-            leggings.setItemMeta(lmeta);
             leggings.setDurability((short) 220);
         }
+        ItemMeta hmeta = helmet.getItemMeta();
+        hmeta.setDisplayName("Ice Warrior Head");
+        helmet.setItemMeta(hmeta);
+        ItemMeta cmeta = chestplate.getItemMeta();
+        cmeta.setDisplayName("Ice Warrior Chest");
+        chestplate.setItemMeta(cmeta);
+        ItemMeta lmeta = leggings.getItemMeta();
+        lmeta.setDisplayName("Ice Warrior Legs");
+        leggings.setItemMeta(lmeta);
+
         EntityEquipment ee = le.getEquipment();
         ee.setHelmet(helmet);
         ee.setChestplate(chestplate);
         ee.setLeggings(leggings);
+        ee.setBoots(null);
         if (!disguise) {
+            ItemMeta sword = weapon.getItemMeta();
+            sword.setDisplayName("Ice Warrior Dagger");
+            weapon.setItemMeta(sword);
             ee.setItemInHand(weapon);
             ee.setItemInHandDropChance(0F);
             ee.setHelmetDropChance(0F);
@@ -139,24 +139,25 @@ public class TARDISWeepingAngelEquipment {
         ItemStack helmet = new ItemStack(Material.IRON_HELMET, 1);
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
-        ItemMeta him = helmet.getItemMeta();
-        him.setDisplayName("Cyberman Head");
         if (disguise) {
             helmet.setDurability((short) 160);
-            ItemMeta cmeta = helmet.getItemMeta();
-            cmeta.setDisplayName("Cyberman Chest");
-            chestplate.setItemMeta(cmeta);
             chestplate.setDurability((short) 235);
-            ItemMeta lmeta = helmet.getItemMeta();
-            lmeta.setDisplayName("Cyberman Legs");
-            leggings.setItemMeta(lmeta);
             leggings.setDurability((short) 220);
         }
-        helmet.setItemMeta(him);
+        ItemMeta hmeta = helmet.getItemMeta();
+        hmeta.setDisplayName("Cyberman Head");
+        helmet.setItemMeta(hmeta);
+        ItemMeta cmeta = chestplate.getItemMeta();
+        cmeta.setDisplayName("Cyberman Chest");
+        chestplate.setItemMeta(cmeta);
+        ItemMeta lmeta = leggings.getItemMeta();
+        lmeta.setDisplayName("Cyberman Legs");
+        leggings.setItemMeta(lmeta);
         EntityEquipment ee = le.getEquipment();
         ee.setHelmet(helmet);
         ee.setChestplate(chestplate);
         ee.setLeggings(leggings);
+        ee.setBoots(null);
         if (!disguise) {
             ee.setItemInHandDropChance(0F);
             ee.setHelmetDropChance(0F);

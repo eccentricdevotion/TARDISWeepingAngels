@@ -63,10 +63,13 @@ public class TARDISWeepingAngelsDeath implements Listener {
         }
         if (event.getEntityType().equals(EntityType.PIG_ZOMBIE)) {
             EntityEquipment ee = event.getEntity().getEquipment();
-            if (ee.getHelmet().getType().equals(Material.CHAINMAIL_HELMET) || (ee.getHelmet().getType().equals(Material.LEATHER_HELMET) && plugin.getConfig().getBoolean("always_use_leather"))) {
-                event.getDrops().clear();
-                ItemStack stack = new ItemStack(ice_drops.get(plugin.getRandom().nextInt(ice_drops.size())), plugin.getRandom().nextInt(3) + 1);
-                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+            if (ee.getHelmet().getType().equals(Material.IRON_HELMET) || (ee.getHelmet().getType().equals(Material.LEATHER_HELMET) && plugin.getConfig().getBoolean("always_use_leather"))) {
+                ItemStack is = ee.getHelmet();
+                if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Ice")) {
+                    event.getDrops().clear();
+                    ItemStack stack = new ItemStack(ice_drops.get(plugin.getRandom().nextInt(ice_drops.size())), plugin.getRandom().nextInt(3) + 1);
+                    event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                }
             }
         }
         if (event.getEntityType().equals(EntityType.ZOMBIE)) {
