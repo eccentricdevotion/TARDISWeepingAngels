@@ -3,7 +3,7 @@ description: Weeping Angel add-on for the TARDIS plugin
 main: me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels
 name: TARDISWeepingAngels
 load: POSTWORLD
-version: '1.2.2'
+version: '1.2.3'
 website: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 dev-url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels

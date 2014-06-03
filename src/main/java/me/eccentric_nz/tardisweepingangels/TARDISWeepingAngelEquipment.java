@@ -43,7 +43,7 @@ public class TARDISWeepingAngelEquipment {
             boots.setDurability((short) 60);
         }
         chestplate.setItemMeta(cmeta);
-        leggings.setItemMeta(cmeta);
+        leggings.setItemMeta(lmeta);
         boots.setItemMeta(cmeta);
 
         EntityEquipment ee = le.getEquipment();
@@ -76,7 +76,7 @@ public class TARDISWeepingAngelEquipment {
             chestplate.setDurability((short) 235);
             ItemMeta lmeta = helmet.getItemMeta();
             lmeta.setDisplayName("Ice Warrior Legs");
-            leggings.setItemMeta(cmeta);
+            leggings.setItemMeta(lmeta);
             leggings.setDurability((short) 220);
         }
         EntityEquipment ee = le.getEquipment();
@@ -118,7 +118,7 @@ public class TARDISWeepingAngelEquipment {
         }
         helmet.setItemMeta(hmeta);
         chestplate.setItemMeta(cmeta);
-        leggings.setItemMeta(cmeta);
+        leggings.setItemMeta(lmeta);
         boots.setItemMeta(bmeta);
 
         EntityEquipment ee = le.getEquipment();
@@ -149,7 +149,7 @@ public class TARDISWeepingAngelEquipment {
             chestplate.setDurability((short) 235);
             ItemMeta lmeta = helmet.getItemMeta();
             lmeta.setDisplayName("Cyberman Legs");
-            leggings.setItemMeta(cmeta);
+            leggings.setItemMeta(lmeta);
             leggings.setDurability((short) 220);
         }
         helmet.setItemMeta(him);
@@ -190,7 +190,7 @@ public class TARDISWeepingAngelEquipment {
         }
         helmet.setItemMeta(hmeta);
         chestplate.setItemMeta(cmeta);
-        leggings.setItemMeta(cmeta);
+        leggings.setItemMeta(lmeta);
         boots.setItemMeta(bmeta);
 
         EntityEquipment ee = le.getEquipment();
