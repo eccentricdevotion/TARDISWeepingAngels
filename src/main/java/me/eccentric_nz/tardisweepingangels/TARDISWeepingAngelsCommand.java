@@ -43,29 +43,45 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
                 sender.sendMessage(plugin.pluginName + "Command can only be used by a player!");
                 return true;
             }
+            @SuppressWarnings("deprecation")
             final Location eyeLocation = player.getTargetBlock(null, 50).getLocation();
             eyeLocation.setX(eyeLocation.getX() + 0.5F);
             eyeLocation.setY(eyeLocation.getY() + 1);
             eyeLocation.setZ(eyeLocation.getZ() + 0.5F);
             World world = eyeLocation.getWorld();
-            TARDISWeepingAngelEquipment equip = new TARDISWeepingAngelEquipment();
+            final TARDISWeepingAngelEquipment equip = new TARDISWeepingAngelEquipment();
             if (cmd.getName().equalsIgnoreCase("angel")) {
-                LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
-                equip.setAngelEquipment(e, false);
+                final LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                    @Override
+                    public void run() {
+                        equip.setAngelEquipment(e, false);
+                    }
+                }, 5L);
             } else if (cmd.getName().equalsIgnoreCase("cyberman")) {
-                LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
-                if (plugin.getConfig().getBoolean("always_use_leather")) {
-                    equip.setCyberLeatherEquipment(e, false);
-                } else {
-                    equip.setCyberEquipment(e, false);
-                }
+                final LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                    @Override
+                    public void run() {
+                        if (plugin.getConfig().getBoolean("always_use_leather")) {
+                            equip.setCyberLeatherEquipment(e, false);
+                        } else {
+                            equip.setCyberEquipment(e, false);
+                        }
+                    }
+                }, 5L);
             } else {
-                LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
-                if (plugin.getConfig().getBoolean("always_use_leather")) {
-                    equip.setWarriorLeatherEquipment(e, false);
-                } else {
-                    equip.setWarriorEquipment(e, false);
-                }
+                final LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                    @Override
+                    public void run() {
+                        if (plugin.getConfig().getBoolean("always_use_leather")) {
+                            equip.setWarriorLeatherEquipment(e, false);
+                        } else {
+                            equip.setWarriorEquipment(e, false);
+                        }
+                    }
+                }, 5L);
                 PigZombie pigman = (PigZombie) e;
                 pigman.setAngry(true);
                 pigman.setAnger(Integer.MAX_VALUE);
