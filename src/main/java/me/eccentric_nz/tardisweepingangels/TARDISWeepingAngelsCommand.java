@@ -30,11 +30,12 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
         this.types.put("a", "angels");
         this.types.put("c", "cybermen");
         this.types.put("i", "ice_warriors");
+        this.types.put("e", "empty_child");
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("angel") || cmd.getName().equalsIgnoreCase("warrior") || cmd.getName().equalsIgnoreCase("cyberman")) {
+        if (cmd.getName().equalsIgnoreCase("angel") || cmd.getName().equalsIgnoreCase("warrior") || cmd.getName().equalsIgnoreCase("cyberman") || cmd.getName().equalsIgnoreCase("empty")) {
             Player player = null;
             if (sender instanceof Player) {
                 player = (Player) sender;
@@ -70,7 +71,7 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
                         }
                     }
                 }, 5L);
-            } else {
+            } else if (cmd.getName().equalsIgnoreCase("warrior")) {
                 final LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                     @Override
@@ -85,10 +86,21 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
                 PigZombie pigman = (PigZombie) e;
                 pigman.setAngry(true);
                 pigman.setAnger(Integer.MAX_VALUE);
+            } else if (cmd.getName().equalsIgnoreCase("empty")) {
+                final LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
+                Zombie child = (Zombie) e;
+                child.setVillager(false);
+                child.setBaby(true);
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                    @Override
+                    public void run() {
+                        equip.setEmptyChildEquipment(e, false);
+                    }
+                }, 5L);
             }
             return true;
         }
-        if (cmd.getName().equalsIgnoreCase("angeldisguise") || cmd.getName().equalsIgnoreCase("icedisguise") || cmd.getName().equalsIgnoreCase("cyberdisguise")) {
+        if (cmd.getName().equalsIgnoreCase("angeldisguise") || cmd.getName().equalsIgnoreCase("icedisguise") || cmd.getName().equalsIgnoreCase("cyberdisguise") || cmd.getName().equalsIgnoreCase("emptydisguise")) {
             if (args.length < 1) {
                 return false;
             }
@@ -119,12 +131,14 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
                     } else {
                         equip.setCyberEquipment(player, true);
                     }
-                } else {
+                } else if (cmd.getName().equalsIgnoreCase("icedisguise")) {
                     if (plugin.getConfig().getBoolean("always_use_leather")) {
                         equip.setWarriorLeatherEquipment(player, true);
                     } else {
                         equip.setWarriorEquipment(player, true);
                     }
+                } else if (cmd.getName().equalsIgnoreCase("emptydisguise")) {
+                    equip.setEmptyChildEquipment(player, true);
                 }
             } else {
                 equip.removeEquipment(player);
@@ -166,7 +180,7 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
                         }
                     }
                 }
-            } else {
+            } else if (which.equals("i")) {
                 what = "Ice Warriors";
                 Collection<PigZombie> skellies = w.getEntitiesByClass(PigZombie.class);
                 for (PigZombie s : skellies) {
@@ -174,6 +188,18 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
                     if (ee.getHelmet().getType().equals(Material.CHAINMAIL_HELMET)) {
                         ItemStack is = ee.getHelmet();
                         if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
+                            count++;
+                        }
+                    }
+                }
+            } else {
+                what = "Empty Children";
+                Collection<Zombie> zombies = w.getEntitiesByClass(Zombie.class);
+                for (Zombie s : zombies) {
+                    EntityEquipment ee = s.getEquipment();
+                    if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
+                        ItemStack is = ee.getHelmet();
+                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Empty Child")) {
                             count++;
                         }
                     }

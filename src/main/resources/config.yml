@@ -25,13 +25,23 @@ ice_warriors:
         - SNOW_BLOCK
 cybermen:
     spawn_rate:
-        how_many: 3
+        how_many: 2
         how_often: 400
-        max_per_world: 30
+        max_per_world: 15
     worlds:
         - world
     drops:
         - REDSTONE
         - STONE_BUTTON
     can_upgrade: true
+empty_child:
+    spawn_rate:
+        how_many: 2
+        how_often: 400
+        max_per_world: 15
+    worlds:
+        - world
+    drops:
+        - COOKED_BEEF
+        - SUGAR
 always_use_leather: false

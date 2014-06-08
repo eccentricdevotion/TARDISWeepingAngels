@@ -12,6 +12,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 /**
  *
@@ -200,6 +202,41 @@ public class TARDISWeepingAngelEquipment {
         ee.setLeggings(leggings);
         ee.setBoots(boots);
         if (!disguise) {
+            ee.setItemInHandDropChance(0F);
+            ee.setHelmetDropChance(0F);
+            ee.setChestplateDropChance(0F);
+            ee.setLeggingsDropChance(0F);
+        }
+    }
+
+    public void setEmptyChildEquipment(LivingEntity le, boolean disguise) {
+        ItemStack helmet = new ItemStack(Material.IRON_HELMET, 1);
+        ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
+        if (disguise) {
+            helmet.setDurability((short) 160);
+            chestplate.setDurability((short) 235);
+            leggings.setDurability((short) 220);
+        }
+        ItemMeta hmeta = helmet.getItemMeta();
+        hmeta.setDisplayName("Empty Child Head");
+        helmet.setItemMeta(hmeta);
+        ItemMeta cmeta = chestplate.getItemMeta();
+        cmeta.setDisplayName("Empty Child Chest");
+        chestplate.setItemMeta(cmeta);
+        ItemMeta lmeta = leggings.getItemMeta();
+        lmeta.setDisplayName("Empty Child Legs");
+        leggings.setItemMeta(lmeta);
+
+        EntityEquipment ee = le.getEquipment();
+        ee.setHelmet(helmet);
+        ee.setChestplate(chestplate);
+        ee.setLeggings(leggings);
+        ee.setBoots(null);
+        if (!disguise) {
+            PotionEffect p = new PotionEffect(PotionEffectType.SLOW, 36000, 1);
+            le.removePotionEffect(PotionEffectType.SPEED);
+            le.addPotionEffect(p);
             ee.setItemInHandDropChance(0F);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);

@@ -38,10 +38,17 @@ public class TARDISWeepingAngelsPlayerDeath implements Listener {
             if (attacker instanceof Zombie) {
                 EntityEquipment ee = ((LivingEntity) attacker).getEquipment();
                 ItemStack is = ee.getHelmet();
-                if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
-                    String what_happened = (plugin.getConfig().getBoolean("cybermen.can_upgrade")) ? "upgraded" : "slain";
-                    String name = event.getEntity().getName();
-                    event.setDeathMessage(name + " was " + what_happened + " by a Cyberman");
+                if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
+                    String dn = is.getItemMeta().getDisplayName();
+                    if (dn.startsWith("Cyberman")) {
+                        String what_happened = (plugin.getConfig().getBoolean("cybermen.can_upgrade")) ? "upgraded" : "slain";
+                        String name = event.getEntity().getName();
+                        event.setDeathMessage(name + " was " + what_happened + " by a Cyberman");
+                    }
+                    if (dn.startsWith("Empty Child")) {
+                        String name = event.getEntity().getName();
+                        event.setDeathMessage(name + " was slain by an Empty Child");
+                    }
                 }
             }
             if (attacker instanceof Skeleton) {
@@ -53,7 +60,7 @@ public class TARDISWeepingAngelsPlayerDeath implements Listener {
             }
             if (attacker instanceof PigZombie) {
                 EntityEquipment ee = ((LivingEntity) attacker).getEquipment();
-                if (ee.getHelmet().getType().equals(Material.CHAINMAIL_HELMET) || (ee.getHelmet().getType().equals(Material.LEATHER_HELMET) && plugin.getConfig().getBoolean("always_use_leather"))) {
+                if (ee.getHelmet().getType().equals(Material.IRON_HELMET) || (ee.getHelmet().getType().equals(Material.LEATHER_HELMET) && plugin.getConfig().getBoolean("always_use_leather"))) {
                     String name = event.getEntity().getName();
                     event.setDeathMessage(name + " was slain by an Ice Warrior");
                 }

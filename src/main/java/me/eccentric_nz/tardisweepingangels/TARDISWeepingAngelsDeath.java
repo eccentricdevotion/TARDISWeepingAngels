@@ -32,6 +32,7 @@ public class TARDISWeepingAngelsDeath implements Listener {
     private final List<Material> angel_drops = new ArrayList<Material>();
     private final List<Material> ice_drops = new ArrayList<Material>();
     private final List<Material> cyber_drops = new ArrayList<Material>();
+    private final List<Material> empty_drops = new ArrayList<Material>();
 
     public TARDISWeepingAngelsDeath(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
@@ -44,10 +45,13 @@ public class TARDISWeepingAngelsDeath implements Listener {
         for (String c : plugin.getConfig().getStringList("cybermen.drops")) {
             this.cyber_drops.add(Material.valueOf(c));
         }
+        for (String e : plugin.getConfig().getStringList("empty_child.drops")) {
+            this.empty_drops.add(Material.valueOf(e));
+        }
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
-    public void onAngelDeath(EntityDeathEvent event) {
+    public void onEntityDeath(EntityDeathEvent event) {
         if (event.getEntityType().equals(EntityType.SKELETON)) {
             EntityEquipment ee = event.getEntity().getEquipment();
             if (ee.getHelmet().getType().equals(Material.WATER_LILY)) {
@@ -76,15 +80,27 @@ public class TARDISWeepingAngelsDeath implements Listener {
             EntityEquipment ee = event.getEntity().getEquipment();
             if (ee.getHelmet().getType().equals(Material.IRON_HELMET) || (ee.getHelmet().getType().equals(Material.LEATHER_HELMET) && plugin.getConfig().getBoolean("always_use_leather"))) {
                 ItemStack is = ee.getHelmet();
-                if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
-                    event.getDrops().clear();
-                    ItemStack stack;
-                    if (plugin.getRandom().nextInt(100) < 3) {
-                        stack = new ItemStack(Material.IRON_INGOT, 1);
-                    } else {
-                        stack = new ItemStack(cyber_drops.get(plugin.getRandom().nextInt(cyber_drops.size())), 1);
+                if (is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
+                    if (is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
+                        event.getDrops().clear();
+                        ItemStack stack;
+                        if (plugin.getRandom().nextInt(100) < 3) {
+                            stack = new ItemStack(Material.IRON_INGOT, 1);
+                        } else {
+                            stack = new ItemStack(cyber_drops.get(plugin.getRandom().nextInt(cyber_drops.size())), 1);
+                        }
+                        event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                     }
-                    event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                    if (is.getItemMeta().getDisplayName().startsWith("Empty Child")) {
+                        event.getDrops().clear();
+                        ItemStack stack;
+                        if (plugin.getRandom().nextInt(100) < 3) {
+                            stack = new ItemStack(Material.POTION, 1, (short) 8197);
+                        } else {
+                            stack = new ItemStack(empty_drops.get(plugin.getRandom().nextInt(empty_drops.size())), plugin.getRandom().nextInt(2) + 1);
+                        }
+                        event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                    }
                 }
             }
         }
@@ -98,15 +114,24 @@ public class TARDISWeepingAngelsDeath implements Listener {
                 if (attacker instanceof Zombie) {
                     EntityEquipment ee = ((LivingEntity) attacker).getEquipment();
                     ItemStack is = ee.getHelmet();
-                    if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
-                        plugin.debug("A cyberman upgraded a " + event.getEntityType().toString() + "!");
-                        Location l = event.getEntity().getLocation();
-                        LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
-                        new TARDISWeepingAngelEquipment().setCyberEquipment(e, false);
-                        if (event.getEntity() instanceof Player) {
-                            String name = ((Player) event.getEntity()).getName();
-                            e.setCustomName(name);
-                            e.setCustomNameVisible(true);
+                    if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
+                        String dn = is.getItemMeta().getDisplayName();
+                        if (dn.startsWith("Cyberman")) {
+                            plugin.debug("A cyberman upgraded a " + event.getEntityType().toString() + "!");
+                            Location l = event.getEntity().getLocation();
+                            LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
+                            new TARDISWeepingAngelEquipment().setCyberEquipment(e, false);
+                            if (event.getEntity() instanceof Player) {
+                                String name = ((Player) event.getEntity()).getName();
+                                e.setCustomName(name);
+                                e.setCustomNameVisible(true);
+                            }
+                        }
+                        if (dn.startsWith("Empty Child")) {
+                            if (event.getEntity() instanceof Player) {
+                                Player p = (Player) event.getEntity();
+                                plugin.getEmpty().add(p.getUniqueId());
+                            }
                         }
                     }
                 }
