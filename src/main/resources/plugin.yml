@@ -3,17 +3,17 @@ description: Weeping Angel add-on for the TARDIS plugin
 main: me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels
 name: TARDISWeepingAngels
 load: POSTWORLD
-version: '1.2.3'
+version: '1.3'
 website: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 dev-url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 softdepend: [TARDIS]
 permissions:
     tardisweepingangels.spawn:
-        description: Allow players to spawn Weeping Angels, Cybermen or Ice Warriors.
+        description: Allow players to spawn Weeping Angels, Cybermen, Empty Child or Ice Warriors.
         default: op
     tardisweepingangels.disguise:
-        description: Allow players to disguise themselves as Weeping Angels, Cybermen or Ice Warriors.
+        description: Allow players to disguise themselves as Weeping Angels, Cybermen, Empty Children or Ice Warriors.
         default: op
     tardisweepingangels.count:
         description: Allow players to use the count command.
@@ -40,6 +40,12 @@ commands:
         usage: /<command>
         permission: tardisweepingangels.spawn
         permission-message: You don't have the permission <permission> to use this command
+    empty:
+        aliases: [child,emptychild]
+        description: Spawns an Empty Child on the block you are targeting.
+        usage: /<command>
+        permission: tardisweepingangels.spawn
+        permission-message: You don't have the permission <permission> to use this command
     angeldisguise:
         aliases: [tardisangeldisguise,angeld]
         description: Sets a player's armour so that they are disguised as a Weeping Angel.
@@ -58,15 +64,21 @@ commands:
         usage: /<command> [on|off]
         permission: tardisweepingangels.disguise
         permission-message: You don't have the permission <permission> to use this command
+    emptydisguise:
+        aliases: [emptyd,childd,childdisguise]
+        description: Sets a player's armour so that they are disguised as an Empty Child.
+        usage: /<command> [on|off]
+        permission: tardisweepingangels.disguise
+        permission-message: You don't have the permission <permission> to use this command
     angelcount:
-        aliases: [cybercount,icecount,acount,ccount,icount]
+        aliases: [cybercount,icecount,childcount,acount,ccount,icount,ecount]
         description: Reports the current number of the specifed monster in the specified world.
-        usage: /<command> [a|c|i] [world]
+        usage: /<command> [a|c|i|e] [world]
         permission: tardisweepingangels.count
         permission-message: You don't have the permission <permission> to use this command
     twa:
         aliases: [aadmin,angeladmin,tardisweepingangels]
         description: Add or remove worlds to the worlds list for the specified monster.
-        usage: /<command> [a|c|i] [add|remove] [world]
-        permission: tardisweepingangels.count
+        usage: /<command> [a|c|i|e] [add|remove] [world]
+        permission: tardisweepingangels.admin
         permission-message: You don't have the permission <permission> to use this command
