@@ -117,7 +117,6 @@ public class TARDISWeepingAngelsDeath implements Listener {
                     if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
                         String dn = is.getItemMeta().getDisplayName();
                         if (dn.startsWith("Cyberman")) {
-                            plugin.debug("A cyberman upgraded a " + event.getEntityType().toString() + "!");
                             Location l = event.getEntity().getLocation();
                             LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
                             new TARDISWeepingAngelEquipment().setCyberEquipment(e, false);

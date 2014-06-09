@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -28,48 +29,51 @@ public class TARDISWeepingAngelsRespawn implements Listener {
     @EventHandler
     @SuppressWarnings("deprecation")
     public void onPlayerRespawn(PlayerRespawnEvent event) {
-        Player player = event.getPlayer();
+        final Player player = event.getPlayer();
         final UUID uuid = player.getUniqueId();
         if (!plugin.getEmpty().contains(uuid)) {
             return;
         }
-        plugin.debug(player.getName() + " respawned");
-        final PlayerInventory inv = player.getInventory();
-        ItemStack helmet = inv.getHelmet();
-        if (helmet != null) {
-            // move it to the first free slot
-            int free_slot = inv.firstEmpty();
-            if (free_slot != -1) {
-                inv.setItem(free_slot, helmet);
-            } else {
-                player.getWorld().dropItemNaturally(player.getLocation(), helmet);
-            }
-        }
-        // set helmet to pumpkin
-        inv.setHelmet(new ItemStack(Material.PUMPKIN, 1));
-        player.updateInventory();
-        // schedule delayed task
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
             @Override
             public void run() {
-                plugin.getEmpty().remove(uuid);
-                plugin.getTimesUp().add(uuid);
+                final PlayerInventory inv = player.getInventory();
+                ItemStack helmet = inv.getHelmet();
+                if (helmet != null) {
+                    // move it to the first free slot
+                    int free_slot = inv.firstEmpty();
+                    if (free_slot != -1) {
+                        inv.setItem(free_slot, helmet);
+                    } else {
+                        player.getWorld().dropItemNaturally(player.getLocation(), helmet);
+                    }
+                }
+                // set helmet to pumpkin
+                inv.setHelmet(new ItemStack(Material.PUMPKIN, 1));
+                player.updateInventory();
+                // schedule delayed task
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                    @Override
+                    public void run() {
+                        plugin.getEmpty().remove(uuid);
+                        plugin.getTimesUp().add(uuid);
+                    }
+                }, 600L);
             }
-        }, 600L);
+        }, 5L);
     }
 
     @EventHandler
     @SuppressWarnings("deprecation")
     public void onHelmetClick(InventoryClickEvent event) {
-        if (event.getInventory() instanceof PlayerInventory && event.getRawSlot() == 5) {
+        if (event.getInventory().getType().equals(InventoryType.CRAFTING) && event.getRawSlot() == 5) {
             Player player = (Player) event.getWhoClicked();
             if (plugin.getEmpty().contains(player.getUniqueId())) {
                 event.setCancelled(true);
             }
             if (plugin.getTimesUp().contains(player.getUniqueId())) {
-                plugin.debug("Times up!");
                 event.setCancelled(true);
-                event.getInventory().setItem(event.getSlot(), null);
+                player.getInventory().setHelmet(null);
                 player.updateInventory();
                 plugin.getTimesUp().remove(player.getUniqueId());
             }

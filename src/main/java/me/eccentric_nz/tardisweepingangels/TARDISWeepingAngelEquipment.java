@@ -229,15 +229,15 @@ public class TARDISWeepingAngelEquipment {
         leggings.setItemMeta(lmeta);
 
         EntityEquipment ee = le.getEquipment();
-        ee.setHelmet(helmet);
         ee.setChestplate(chestplate);
         ee.setLeggings(leggings);
         ee.setBoots(null);
+        ee.setItemInHand(null);
+        ee.setHelmet(helmet);
         if (!disguise) {
             PotionEffect p = new PotionEffect(PotionEffectType.SLOW, 36000, 1);
             le.removePotionEffect(PotionEffectType.SPEED);
             le.addPotionEffect(p);
-            ee.setItemInHandDropChance(0F);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);

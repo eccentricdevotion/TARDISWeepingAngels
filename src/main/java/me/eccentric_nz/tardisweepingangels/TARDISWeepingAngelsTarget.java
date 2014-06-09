@@ -24,34 +24,29 @@ public class TARDISWeepingAngelsTarget implements Listener {
 
     @EventHandler
     public void onTargetPlayer(EntityTargetLivingEntityEvent event) {
-        plugin.debug("entity targeted entity");
         Entity ent = event.getEntity();
         final UUID uuid = ent.getUniqueId();
         if (ent instanceof Zombie && !tracker.contains(uuid)) {
-            plugin.debug("It was a zombie");
-            tracker.add(uuid);
             Zombie zombie = (Zombie) ent;
             EntityEquipment ee = zombie.getEquipment();
             ItemStack head = ee.getHelmet();
-            plugin.debug("head was " + head.getType());
-            if (head.hasItemMeta() && head.getItemMeta().hasDisplayName()) {
-                plugin.debug("it has a named helmet");
+            if (head != null && head.hasItemMeta() && head.getItemMeta().hasDisplayName()) {
+                tracker.add(uuid);
                 final LivingEntity le = event.getTarget();
+                String dn = head.getItemMeta().getDisplayName();
                 if (le instanceof Player) {
-                    plugin.debug("it targeted a player");
                     String tmp = "";
                     long delay = 30L;
-                    if (head.getItemMeta().getDisplayName().startsWith("Empty Child")) {
-                        plugin.debug("it was an empty child");
+                    if (zombie.isBaby() && dn.equals("Empty Child Head")) {
                         tmp = "are_you_my_mummy";
-                    } else if (head.getItemMeta().getDisplayName().startsWith("Cyberman")) {
-                        plugin.debug("it was a cyberman");
+                    }
+                    if (dn.equals("Cyberman Head")) {
                         tmp = "cyberman";
                         delay = 80L;
                     }
-                    // schedule delayed task
                     if (!tmp.isEmpty()) {
                         final String sound = tmp;
+                        // schedule delayed task
                         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                             @Override
                             @SuppressWarnings("deprecation")
