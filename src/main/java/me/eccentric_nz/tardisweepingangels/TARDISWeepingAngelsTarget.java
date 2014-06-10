@@ -3,6 +3,7 @@ package me.eccentric_nz.tardisweepingangels;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -30,7 +31,7 @@ public class TARDISWeepingAngelsTarget implements Listener {
             Zombie zombie = (Zombie) ent;
             EntityEquipment ee = zombie.getEquipment();
             ItemStack head = ee.getHelmet();
-            if (head != null && head.hasItemMeta() && head.getItemMeta().hasDisplayName()) {
+            if (head != null && head.hasItemMeta() && head.getItemMeta().hasDisplayName() && head.getType().equals(Material.IRON_HELMET)) {
                 tracker.add(uuid);
                 final LivingEntity le = event.getTarget();
                 String dn = head.getItemMeta().getDisplayName();
