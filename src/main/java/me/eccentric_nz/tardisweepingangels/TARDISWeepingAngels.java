@@ -42,20 +42,24 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getCommand("warrior").setExecutor(command);
         getCommand("cyberman").setExecutor(command);
         getCommand("child").setExecutor(command);
+        getCommand("zygon").setExecutor(command);
         getCommand("angeldisguise").setExecutor(command);
         getCommand("icedisguise").setExecutor(command);
         getCommand("cyberdisguise").setExecutor(command);
         getCommand("childdisguise").setExecutor(command);
+        getCommand("zygondisguise").setExecutor(command);
         getCommand("angelcount").setExecutor(command);
         getCommand("twa").setExecutor(command);
         long angeldelay = getConfig().getLong("angels.spawn_rate.how_often");
         long icedelay = getConfig().getLong("angels.spawn_rate.how_often");
         long cyberdelay = getConfig().getLong("cybermen.spawn_rate.how_often");
         long emptydelay = getConfig().getLong("empty_child.spawn_rate.how_often");
+        long zygondelay = getConfig().getLong("zygon.spawn_rate.how_often");
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISWeepingAngelsRunnable(this), angeldelay, angeldelay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISIceWarriorRunnable(this), icedelay, icedelay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISCybermanRunnable(this), cyberdelay, cyberdelay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISEmptyChildRunnable(this), emptydelay, emptydelay);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISZygonRunnable(this), zygondelay, zygondelay);
         steal = (getConfig().getBoolean("angels.can_steal") && pm.isPluginEnabled("TARDIS"));
     }
 

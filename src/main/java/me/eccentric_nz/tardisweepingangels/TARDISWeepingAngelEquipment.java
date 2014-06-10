@@ -232,12 +232,44 @@ public class TARDISWeepingAngelEquipment {
         ee.setChestplate(chestplate);
         ee.setLeggings(leggings);
         ee.setBoots(null);
-        ee.setItemInHand(null);
         ee.setHelmet(helmet);
         if (!disguise) {
             PotionEffect p = new PotionEffect(PotionEffectType.SLOW, 36000, 1);
             le.removePotionEffect(PotionEffectType.SPEED);
             le.addPotionEffect(p);
+            ee.setItemInHand(null);
+            ee.setHelmetDropChance(0F);
+            ee.setChestplateDropChance(0F);
+            ee.setLeggingsDropChance(0F);
+        }
+    }
+
+    public void setZygonEquipment(LivingEntity le, boolean disguise) {
+        ItemStack helmet = new ItemStack(Material.GOLD_HELMET, 1);
+        ItemStack chestplate = new ItemStack(Material.GOLD_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.GOLD_LEGGINGS, 1);
+        if (disguise) {
+            helmet.setDurability((short) 160);
+            chestplate.setDurability((short) 235);
+            leggings.setDurability((short) 220);
+        }
+        ItemMeta hmeta = helmet.getItemMeta();
+        hmeta.setDisplayName("Zygon Head");
+        helmet.setItemMeta(hmeta);
+        ItemMeta cmeta = chestplate.getItemMeta();
+        cmeta.setDisplayName("Zygon Chest");
+        chestplate.setItemMeta(cmeta);
+        ItemMeta lmeta = leggings.getItemMeta();
+        lmeta.setDisplayName("Zygon Legs");
+        leggings.setItemMeta(lmeta);
+
+        EntityEquipment ee = le.getEquipment();
+        ee.setChestplate(chestplate);
+        ee.setLeggings(leggings);
+        ee.setBoots(null);
+        ee.setHelmet(helmet);
+        if (!disguise) {
+            ee.setItemInHand(null);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);

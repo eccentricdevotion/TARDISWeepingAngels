@@ -20,17 +20,17 @@ import org.bukkit.inventory.ItemStack;
  *
  * @author eccentric_nz
  */
-public class TARDISEmptyChildRunnable implements Runnable {
+public class TARDISZygonRunnable implements Runnable {
 
     private final TARDISWeepingAngels plugin;
     private final int spawn_rate;
     private final int maximum;
     private final TARDISWeepingAngelEquipment equipper;
 
-    public TARDISEmptyChildRunnable(TARDISWeepingAngels plugin) {
+    public TARDISZygonRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.spawn_rate = plugin.getConfig().getInt("empty_child.spawn_rate.how_many");
-        this.maximum = plugin.getConfig().getInt("empty_child.spawn_rate.max_per_world");
+        this.spawn_rate = plugin.getConfig().getInt("zygon.spawn_rate.how_many");
+        this.maximum = plugin.getConfig().getInt("zygon.spawn_rate.max_per_world");
         this.equipper = new TARDISWeepingAngelEquipment();
     }
 
@@ -38,31 +38,31 @@ public class TARDISEmptyChildRunnable implements Runnable {
     public void run() {
         for (World w : plugin.getServer().getWorlds()) {
             // only configured worlds
-            if (plugin.getConfig().getStringList("empty_child.worlds").contains(w.getName())) {
+            if (plugin.getConfig().getStringList("zygon.worlds").contains(w.getName())) {
                 // get the current warriors
-                List<Zombie> wheresmymummy = new ArrayList<Zombie>();
+                List<Zombie> zygons = new ArrayList<Zombie>();
                 Collection<Zombie> children = w.getEntitiesByClass(Zombie.class);
                 for (Zombie c : children) {
                     EntityEquipment ee = c.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
+                    if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
                         ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Empty Child")) {
-                            wheresmymummy.add(c);
+                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Zygon")) {
+                            zygons.add(c);
                         }
                     }
                 }
                 // count the current cybermen
-                if (wheresmymummy.size() < maximum) {
+                if (zygons.size() < maximum) {
                     // if less than maximum, spawn some more
                     for (int i = 0; i < spawn_rate; i++) {
-                        spawnEmptyChild(w);
+                        spawnZygon(w);
                     }
                 }
             }
         }
     }
 
-    private void spawnEmptyChild(World w) {
+    private void spawnZygon(World w) {
         Chunk[] chunks = w.getLoadedChunks();
         if (chunks.length > 0) {
             Chunk c = chunks[plugin.getRandom().nextInt(chunks.length)];
@@ -73,11 +73,10 @@ public class TARDISEmptyChildRunnable implements Runnable {
             final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
             Zombie child = (Zombie) e;
             child.setVillager(false);
-            child.setBaby(true);
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                 @Override
                 public void run() {
-                    equipper.setEmptyChildEquipment(e, false);
+                    equipper.setZygonEquipment(e, false);
                 }
             }, 5L);
         }

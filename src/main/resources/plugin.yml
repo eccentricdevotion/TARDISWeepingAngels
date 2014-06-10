@@ -46,6 +46,12 @@ commands:
         usage: /<command>
         permission: tardisweepingangels.spawn
         permission-message: You don't have the permission <permission> to use this command
+    zygon:
+        aliases: [tzygon,tardiszygon]
+        description: Spawns a Zygon on the block you are targeting.
+        usage: /<command>
+        permission: tardisweepingangels.spawn
+        permission-message: You don't have the permission <permission> to use this command
     angeldisguise:
         aliases: [tardisangeldisguise,angeld]
         description: Sets a player's armour so that they are disguised as a Weeping Angel.
@@ -67,6 +73,12 @@ commands:
     emptydisguise:
         aliases: [emptyd,childd,childdisguise]
         description: Sets a player's armour so that they are disguised as an Empty Child.
+        usage: /<command> [on|off]
+        permission: tardisweepingangels.disguise
+        permission-message: You don't have the permission <permission> to use this command
+    zygondisguise:
+        aliases: [zygond]
+        description: Sets a player's armour so that they are disguised as a Zygon.
         usage: /<command> [on|off]
         permission: tardisweepingangels.disguise
         permission-message: You don't have the permission <permission> to use this command

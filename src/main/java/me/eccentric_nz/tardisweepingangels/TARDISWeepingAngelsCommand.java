@@ -31,11 +31,12 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
         this.types.put("c", "cybermen");
         this.types.put("i", "ice_warriors");
         this.types.put("e", "empty_child");
+        this.types.put("z", "zygons");
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("angel") || cmd.getName().equalsIgnoreCase("warrior") || cmd.getName().equalsIgnoreCase("cyberman") || cmd.getName().equalsIgnoreCase("empty")) {
+        if (cmd.getName().equalsIgnoreCase("angel") || cmd.getName().equalsIgnoreCase("warrior") || cmd.getName().equalsIgnoreCase("cyberman") || cmd.getName().equalsIgnoreCase("empty") || cmd.getName().equalsIgnoreCase("zygon")) {
             Player player = null;
             if (sender instanceof Player) {
                 player = (Player) sender;
@@ -97,10 +98,20 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
                         equip.setEmptyChildEquipment(e, false);
                     }
                 }, 5L);
+            } else if (cmd.getName().equalsIgnoreCase("zygon")) {
+                final LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
+                Zombie zygon = (Zombie) e;
+                zygon.setVillager(false);
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                    @Override
+                    public void run() {
+                        equip.setZygonEquipment(e, false);
+                    }
+                }, 5L);
             }
             return true;
         }
-        if (cmd.getName().equalsIgnoreCase("angeldisguise") || cmd.getName().equalsIgnoreCase("icedisguise") || cmd.getName().equalsIgnoreCase("cyberdisguise") || cmd.getName().equalsIgnoreCase("emptydisguise")) {
+        if (cmd.getName().equalsIgnoreCase("angeldisguise") || cmd.getName().equalsIgnoreCase("icedisguise") || cmd.getName().equalsIgnoreCase("cyberdisguise") || cmd.getName().equalsIgnoreCase("emptydisguise") || cmd.getName().equalsIgnoreCase("zygondisguise")) {
             if (args.length < 1) {
                 return false;
             }
@@ -139,6 +150,8 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
                     }
                 } else if (cmd.getName().equalsIgnoreCase("emptydisguise")) {
                     equip.setEmptyChildEquipment(player, true);
+                } else if (cmd.getName().equalsIgnoreCase("zygondisguise")) {
+                    equip.setZygonEquipment(player, true);
                 }
             } else {
                 equip.removeEquipment(player);

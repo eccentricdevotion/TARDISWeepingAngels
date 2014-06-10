@@ -33,6 +33,7 @@ public class TARDISWeepingAngelsDeath implements Listener {
     private final List<Material> ice_drops = new ArrayList<Material>();
     private final List<Material> cyber_drops = new ArrayList<Material>();
     private final List<Material> empty_drops = new ArrayList<Material>();
+    private final List<Material> zygon_drops = new ArrayList<Material>();
 
     public TARDISWeepingAngelsDeath(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
@@ -47,6 +48,9 @@ public class TARDISWeepingAngelsDeath implements Listener {
         }
         for (String e : plugin.getConfig().getStringList("empty_child.drops")) {
             this.empty_drops.add(Material.valueOf(e));
+        }
+        for (String z : plugin.getConfig().getStringList("zygon.drops")) {
+            this.zygon_drops.add(Material.valueOf(z));
         }
     }
 
@@ -99,6 +103,12 @@ public class TARDISWeepingAngelsDeath implements Listener {
                         } else {
                             stack = new ItemStack(empty_drops.get(plugin.getRandom().nextInt(empty_drops.size())), plugin.getRandom().nextInt(2) + 1);
                         }
+                        event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                    }
+                    if (is.getItemMeta().getDisplayName().startsWith("Zygon")) {
+                        event.getDrops().clear();
+                        ItemStack stack;
+                        stack = new ItemStack(zygon_drops.get(plugin.getRandom().nextInt(zygon_drops.size())), plugin.getRandom().nextInt(2) + 1);
                         event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                     }
                 }

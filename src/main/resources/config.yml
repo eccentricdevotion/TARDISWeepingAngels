@@ -27,7 +27,7 @@ cybermen:
     spawn_rate:
         how_many: 2
         how_often: 400
-        max_per_world: 15
+        max_per_world: 10
     worlds:
         - world
     drops:
@@ -38,10 +38,20 @@ empty_child:
     spawn_rate:
         how_many: 2
         how_often: 400
-        max_per_world: 15
+        max_per_world: 10
     worlds:
         - world
     drops:
         - COOKED_BEEF
         - SUGAR
+zygons:
+    spawn_rate:
+        how_many: 2
+        how_often: 400
+        max_per_world: 10
+    worlds:
+        - world
+    drops:
+        - PAINTING
+        - SAND
 always_use_leather: false

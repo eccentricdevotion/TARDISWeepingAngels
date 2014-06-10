@@ -35,12 +35,15 @@ public class TARDISWeepingAngelsConfig {
         intOptions.put("ice_warriors.spawn_rate.how_many", 3);
         intOptions.put("ice_warriors.spawn_rate.how_often", 400);
         intOptions.put("ice_warriors.spawn_rate.max_per_world", 25);
-        intOptions.put("cybermen.spawn_rate.how_many", 3);
+        intOptions.put("cybermen.spawn_rate.how_many", 2);
         intOptions.put("cybermen.spawn_rate.how_often", 400);
-        intOptions.put("cybermen.spawn_rate.max_per_world", 30);
+        intOptions.put("cybermen.spawn_rate.max_per_world", 10);
         intOptions.put("empty_child.spawn_rate.how_many", 2);
         intOptions.put("empty_child.spawn_rate.how_often", 400);
-        intOptions.put("empty_child.spawn_rate.max_per_world", 15);
+        intOptions.put("empty_child.spawn_rate.max_per_world", 10);
+        intOptions.put("zygon.spawn_rate.how_many", 2);
+        intOptions.put("zygon.spawn_rate.how_often", 400);
+        intOptions.put("zygon.spawn_rate.max_per_world", 10);
         // string
         //strOptions.put("angels.weapon", "DIAMOND_PICKAXE");
         // list
@@ -50,6 +53,8 @@ public class TARDISWeepingAngelsConfig {
         listOptions.put("cybermen.drops", Arrays.asList(new String[]{"REDSTONE", "STONE_BUTTON"}));
         listOptions.put("empty_child.worlds", Arrays.asList(new String[]{"world"}));
         listOptions.put("empty_child.drops", Arrays.asList(new String[]{"COOKED_BEEF", "SUGAR"}));
+        listOptions.put("zygon.worlds", Arrays.asList(new String[]{"world"}));
+        listOptions.put("zygon.drops", Arrays.asList(new String[]{"PAINTING", "SAND"}));
         // boolean
         boolOptions.put("cybermen.can_upgrade", true);
         boolOptions.put("always_use_leather", false);
