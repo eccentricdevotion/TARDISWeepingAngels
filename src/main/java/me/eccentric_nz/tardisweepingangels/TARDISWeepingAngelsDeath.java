@@ -34,6 +34,7 @@ public class TARDISWeepingAngelsDeath implements Listener {
     private final List<Material> cyber_drops = new ArrayList<Material>();
     private final List<Material> empty_drops = new ArrayList<Material>();
     private final List<Material> zygon_drops = new ArrayList<Material>();
+    private final List<Material> silurian_drops = new ArrayList<Material>();
 
     public TARDISWeepingAngelsDeath(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
@@ -52,6 +53,9 @@ public class TARDISWeepingAngelsDeath implements Listener {
         for (String z : plugin.getConfig().getStringList("zygon.drops")) {
             this.zygon_drops.add(Material.valueOf(z));
         }
+        for (String i : plugin.getConfig().getStringList("silurian.drops")) {
+            this.silurian_drops.add(Material.valueOf(i));
+        }
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -67,6 +71,14 @@ public class TARDISWeepingAngelsDeath implements Listener {
                     stack = new ItemStack(angel_drops.get(plugin.getRandom().nextInt(angel_drops.size())), plugin.getRandom().nextInt(3) + 1);
                 }
                 event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+            }
+            if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                ItemStack is = ee.getHelmet();
+                if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Silurian")) {
+                    event.getDrops().clear();
+                    ItemStack stack = new ItemStack(silurian_drops.get(plugin.getRandom().nextInt(silurian_drops.size())), plugin.getRandom().nextInt(2) + 1);
+                    event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                }
             }
         }
         if (event.getEntityType().equals(EntityType.PIG_ZOMBIE)) {

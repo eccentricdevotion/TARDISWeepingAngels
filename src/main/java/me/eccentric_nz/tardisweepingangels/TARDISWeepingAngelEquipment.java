@@ -276,6 +276,42 @@ public class TARDISWeepingAngelEquipment {
         }
     }
 
+    public void setSilurianEquipment(LivingEntity le, boolean disguise) {
+        ItemStack helmet = new ItemStack(Material.GOLD_HELMET, 1);
+        ItemStack chestplate = new ItemStack(Material.GOLD_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.GOLD_LEGGINGS, 1);
+        if (disguise) {
+            helmet.setDurability((short) 160);
+            chestplate.setDurability((short) 235);
+            leggings.setDurability((short) 220);
+        }
+        ItemMeta hmeta = helmet.getItemMeta();
+        hmeta.setDisplayName("Silurian Head");
+        helmet.setItemMeta(hmeta);
+        ItemMeta cmeta = chestplate.getItemMeta();
+        cmeta.setDisplayName("Silurian Chest");
+        chestplate.setItemMeta(cmeta);
+        ItemMeta lmeta = leggings.getItemMeta();
+        lmeta.setDisplayName("Silurian Legs");
+        leggings.setItemMeta(lmeta);
+
+        EntityEquipment ee = le.getEquipment();
+        ee.setChestplate(chestplate);
+        ee.setLeggings(leggings);
+        ee.setBoots(null);
+        ee.setHelmet(helmet);
+        if (!disguise) {
+            ItemStack bow = new ItemStack(Material.BOW, 1);
+            ItemMeta bmeta = bow.getItemMeta();
+            bmeta.setDisplayName("Silurian Weapon");
+            bow.setItemMeta(bmeta);
+            ee.setItemInHand(bow);
+            ee.setHelmetDropChance(0F);
+            ee.setChestplateDropChance(0F);
+            ee.setLeggingsDropChance(0F);
+        }
+    }
+
     public void removeEquipment(Player p) {
         PlayerInventory inv = p.getInventory();
         inv.setHelmet(null);

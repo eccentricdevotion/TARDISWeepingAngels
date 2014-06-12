@@ -1,9 +1,9 @@
 ## spawn rate is how many angels to spawn every x ticks up to a maximum per world
 angels:
     spawn_rate:
-        how_many: 5
+        how_many: 3
         how_often: 400
-        max_per_world: 50
+        max_per_world: 25
     worlds:
         - world
     freeze_time: 100
@@ -54,4 +54,14 @@ zygons:
     drops:
         - PAINTING
         - SAND
+silurians:
+    spawn_rate:
+        how_many: 3
+        how_often: 400
+        max_per_world: 25
+    worlds:
+        - world
+    drops:
+        - GOLD_NUGGET
+        - FEATHER
 always_use_leather: false
