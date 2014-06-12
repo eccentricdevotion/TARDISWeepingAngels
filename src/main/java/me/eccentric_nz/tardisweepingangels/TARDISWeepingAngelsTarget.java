@@ -26,7 +26,7 @@ public class TARDISWeepingAngelsTarget implements Listener {
     @EventHandler
     public void onTargetPlayer(EntityTargetLivingEntityEvent event) {
         plugin.debug("targeting");
-        Entity ent = event.getEntity();
+        final Entity ent = event.getEntity();
         final UUID uuid = ent.getUniqueId();
         if (ent instanceof Zombie && !tracker.contains(uuid)) {
             plugin.debug("entity not in tracker");
@@ -56,7 +56,7 @@ public class TARDISWeepingAngelsTarget implements Listener {
                             @SuppressWarnings("deprecation")
                             public void run() {
                                 Player player = (Player) le;
-                                player.playSound(player.getLocation(), sound, 1.0F, 1.0F);
+                                player.playSound(ent.getLocation(), sound, 1.0F, 1.0F);
                                 tracker.remove(uuid);
                             }
                         }, delay);
