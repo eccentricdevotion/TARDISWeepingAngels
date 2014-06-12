@@ -25,9 +25,11 @@ public class TARDISWeepingAngelsTarget implements Listener {
 
     @EventHandler
     public void onTargetPlayer(EntityTargetLivingEntityEvent event) {
+        plugin.debug("targeting");
         Entity ent = event.getEntity();
         final UUID uuid = ent.getUniqueId();
         if (ent instanceof Zombie && !tracker.contains(uuid)) {
+            plugin.debug("entity not in tracker");
             Zombie zombie = (Zombie) ent;
             EntityEquipment ee = zombie.getEquipment();
             ItemStack head = ee.getHelmet();
@@ -35,6 +37,7 @@ public class TARDISWeepingAngelsTarget implements Listener {
                 tracker.add(uuid);
                 final LivingEntity le = event.getTarget();
                 String dn = head.getItemMeta().getDisplayName();
+                plugin.debug(dn);
                 if (le instanceof Player) {
                     String tmp = "";
                     long delay = 30L;

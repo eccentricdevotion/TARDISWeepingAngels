@@ -22,75 +22,27 @@ permissions:
         description: Allow players to alter plugin settings.
         default: op
 commands:
-    angel:
-        aliases: [tangel,tardisangel]
+    twas:
+        aliases: [twaspawn]
         description: Spawns a Weeping Angel on the block you are targeting.
-        usage: /<command>
+        usage: /<command> [monster type]
         permission: tardisweepingangels.spawn
         permission-message: You don't have the permission <permission> to use this command
-    warrior:
-        aliases: [twarrior,tardiswarrior,ice]
-        description: Spawns an Ice Warrior on the block you are targeting.
-        usage: /<command>
-        permission: tardisweepingangels.spawn
-        permission-message: You don't have the permission <permission> to use this command
-    cyberman:
-        aliases: [tcyberman,tardiscyberman,cyber]
-        description: Spawns an Ice Warrior on the block you are targeting.
-        usage: /<command>
-        permission: tardisweepingangels.spawn
-        permission-message: You don't have the permission <permission> to use this command
-    empty:
-        aliases: [child,emptychild]
-        description: Spawns an Empty Child on the block you are targeting.
-        usage: /<command>
-        permission: tardisweepingangels.spawn
-        permission-message: You don't have the permission <permission> to use this command
-    zygon:
-        aliases: [tzygon,tardiszygon]
-        description: Spawns a Zygon on the block you are targeting.
-        usage: /<command>
-        permission: tardisweepingangels.spawn
-        permission-message: You don't have the permission <permission> to use this command
-    angeldisguise:
-        aliases: [tardisangeldisguise,angeld]
+    twad:
+        aliases: [twadisguise]
         description: Sets a player's armour so that they are disguised as a Weeping Angel.
-        usage: /<command> [on|off]
+        usage: /<command> [monster type] [on|off]
         permission: tardisweepingangels.disguise
         permission-message: You don't have the permission <permission> to use this command
-    icedisguise:
-        aliases: [warriordisguise,iced]
-        description: Sets a player's armour so that they are disguised as an Ice Warrior.
-        usage: /<command> [on|off]
-        permission: tardisweepingangels.disguise
-        permission-message: You don't have the permission <permission> to use this command
-    cyberdisguise:
-        aliases: [cyberd,cybermandisguise,cybermand]
-        description: Sets a player's armour so that they are disguised as a Cyberman.
-        usage: /<command> [on|off]
-        permission: tardisweepingangels.disguise
-        permission-message: You don't have the permission <permission> to use this command
-    emptydisguise:
-        aliases: [emptyd,childd,childdisguise]
-        description: Sets a player's armour so that they are disguised as an Empty Child.
-        usage: /<command> [on|off]
-        permission: tardisweepingangels.disguise
-        permission-message: You don't have the permission <permission> to use this command
-    zygondisguise:
-        aliases: [zygond]
-        description: Sets a player's armour so that they are disguised as a Zygon.
-        usage: /<command> [on|off]
-        permission: tardisweepingangels.disguise
-        permission-message: You don't have the permission <permission> to use this command
-    angelcount:
-        aliases: [cybercount,icecount,childcount,acount,ccount,icount,ecount]
+    twac:
+        aliases: [twacount]
         description: Reports the current number of the specifed monster in the specified world.
-        usage: /<command> [a|c|i|e] [world]
+        usage: /<command> [a|c|i|e|z|s] [world]
         permission: tardisweepingangels.count
         permission-message: You don't have the permission <permission> to use this command
     twa:
-        aliases: [aadmin,angeladmin,tardisweepingangels]
+        aliases: [twaa,twaadmin]
         description: Add or remove worlds to the worlds list for the specified monster.
-        usage: /<command> [a|c|i|e] [add|remove] [world]
+        usage: /<command> [a|c|i|e|z|s] [add|remove] [world]
         permission: tardisweepingangels.admin
         permission-message: You don't have the permission <permission> to use this command
