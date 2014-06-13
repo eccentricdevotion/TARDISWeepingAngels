@@ -40,10 +40,9 @@ public class TARDISWeepingAngelsTarget implements Listener {
                 tracker.add(uuid);
                 final LivingEntity le = event.getTarget();
                 String dn = head.getItemMeta().getDisplayName();
-                plugin.debug(dn);
                 if (le instanceof Player) {
                     String tmp = "";
-                    long delay = 30L;
+                    long delay = 50L;
                     if (zombie.isBaby() && dn.equals("Empty Child Head")) {
                         tmp = "empty_child";
                     }
