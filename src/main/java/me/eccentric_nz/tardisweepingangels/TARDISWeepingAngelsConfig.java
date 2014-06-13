@@ -41,12 +41,15 @@ public class TARDISWeepingAngelsConfig {
         intOptions.put("empty_child.spawn_rate.how_many", 2);
         intOptions.put("empty_child.spawn_rate.how_often", 400);
         intOptions.put("empty_child.spawn_rate.max_per_world", 10);
-        intOptions.put("zygon.spawn_rate.how_many", 2);
-        intOptions.put("zygon.spawn_rate.how_often", 400);
-        intOptions.put("zygon.spawn_rate.max_per_world", 10);
+        intOptions.put("zygons.spawn_rate.how_many", 2);
+        intOptions.put("zygons.spawn_rate.how_often", 400);
+        intOptions.put("zygons.spawn_rate.max_per_world", 10);
         intOptions.put("silurians.spawn_rate.how_many", 3);
         intOptions.put("silurians.spawn_rate.how_often", 400);
         intOptions.put("silurians.spawn_rate.max_per_world", 25);
+        intOptions.put("daleks.spawn_rate.how_many", 3);
+        intOptions.put("daleks.spawn_rate.how_often", 400);
+        intOptions.put("daleks.spawn_rate.max_per_world", 25);
         // string
         //strOptions.put("angels.weapon", "DIAMOND_PICKAXE");
         // list
@@ -56,13 +59,14 @@ public class TARDISWeepingAngelsConfig {
         listOptions.put("cybermen.drops", Arrays.asList(new String[]{"REDSTONE", "STONE_BUTTON"}));
         listOptions.put("empty_child.worlds", Arrays.asList(new String[]{"world"}));
         listOptions.put("empty_child.drops", Arrays.asList(new String[]{"COOKED_BEEF", "SUGAR"}));
-        listOptions.put("zygon.worlds", Arrays.asList(new String[]{"world"}));
-        listOptions.put("zygon.drops", Arrays.asList(new String[]{"PAINTING", "SAND"}));
+        listOptions.put("zygons.worlds", Arrays.asList(new String[]{"world"}));
+        listOptions.put("zygons.drops", Arrays.asList(new String[]{"PAINTING", "SAND"}));
         listOptions.put("silurians.worlds", Arrays.asList(new String[]{"world"}));
         listOptions.put("silurians.drops", Arrays.asList(new String[]{"GOLD_NUGGET", "FEATHER"}));
+        listOptions.put("daleks.worlds", Arrays.asList(new String[]{"world"}));
+        listOptions.put("daleks.drops", Arrays.asList(new String[]{"SLIME_BALL", "ROTTEN_FLESH"}));
         // boolean
         boolOptions.put("cybermen.can_upgrade", true);
-        boolOptions.put("always_use_leather", false);
     }
 
     public void updateConfig() {

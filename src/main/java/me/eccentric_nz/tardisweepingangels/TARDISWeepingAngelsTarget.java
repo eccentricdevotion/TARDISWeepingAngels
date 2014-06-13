@@ -3,16 +3,20 @@ package me.eccentric_nz.tardisweepingangels;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 public class TARDISWeepingAngelsTarget implements Listener {
 
@@ -24,12 +28,11 @@ public class TARDISWeepingAngelsTarget implements Listener {
     }
 
     @EventHandler
+    @SuppressWarnings("deprecation")
     public void onTargetPlayer(EntityTargetLivingEntityEvent event) {
-        plugin.debug("targeting");
         final Entity ent = event.getEntity();
         final UUID uuid = ent.getUniqueId();
         if (ent instanceof Zombie && !tracker.contains(uuid)) {
-            plugin.debug("entity not in tracker");
             Zombie zombie = (Zombie) ent;
             EntityEquipment ee = zombie.getEquipment();
             ItemStack head = ee.getHelmet();
@@ -53,7 +56,6 @@ public class TARDISWeepingAngelsTarget implements Listener {
                         // schedule delayed task
                         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                             @Override
-                            @SuppressWarnings("deprecation")
                             public void run() {
                                 Player player = (Player) le;
                                 player.playSound(ent.getLocation(), sound, 1.0F, 1.0F);
@@ -64,5 +66,28 @@ public class TARDISWeepingAngelsTarget implements Listener {
                 }
             }
         }
+        if (ent instanceof Skeleton && !tracker.contains(uuid)) {
+            Skeleton dalek = (Skeleton) ent;
+            if (dalek.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE)) {
+                final LivingEntity le = event.getTarget();
+                if (le instanceof Player) {
+                    long delay = 30L;
+                    // schedule delayed task
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            Player player = (Player) le;
+                            player.playSound(ent.getLocation(), "dalek", 1.0F, 1.0F);
+                            tracker.remove(uuid);
+                        }
+                    }, delay);
+                }
+            }
+        }
+    }
+
+    private void fireArrow(Location first, Location second) {
+        Vector vector = second.toVector().subtract(first.toVector());
+        first.getWorld().spawnArrow(first, vector, 0.6f, 6.0f);
     }
 }

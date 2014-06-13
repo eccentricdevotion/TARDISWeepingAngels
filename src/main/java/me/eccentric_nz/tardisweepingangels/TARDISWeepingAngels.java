@@ -58,12 +58,14 @@ public class TARDISWeepingAngels extends JavaPlugin {
         long emptydelay = getConfig().getLong("empty_child.spawn_rate.how_often");
         long zygondelay = getConfig().getLong("zygons.spawn_rate.how_often");
         long siluriandelay = getConfig().getLong("silurians.spawn_rate.how_often");
+        long dalekdelay = getConfig().getLong("daleks.spawn_rate.how_often");
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISWeepingAngelsRunnable(this), angeldelay, angeldelay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISIceWarriorRunnable(this), icedelay, icedelay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISCybermanRunnable(this), cyberdelay, cyberdelay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISEmptyChildRunnable(this), emptydelay, emptydelay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISZygonRunnable(this), zygondelay, zygondelay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISSilurianRunnable(this), siluriandelay, siluriandelay);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISDalekRunnable(this), dalekdelay, dalekdelay);
         steal = (getConfig().getBoolean("angels.can_steal") && pm.isPluginEnabled("TARDIS"));
     }
 

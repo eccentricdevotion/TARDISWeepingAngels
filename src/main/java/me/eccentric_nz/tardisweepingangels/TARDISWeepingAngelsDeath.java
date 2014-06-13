@@ -11,6 +11,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Snowman;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -21,6 +22,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 
 /**
  *
@@ -35,6 +37,7 @@ public class TARDISWeepingAngelsDeath implements Listener {
     private final List<Material> empty_drops = new ArrayList<Material>();
     private final List<Material> zygon_drops = new ArrayList<Material>();
     private final List<Material> silurian_drops = new ArrayList<Material>();
+    private final List<Material> dalek_drops = new ArrayList<Material>();
 
     public TARDISWeepingAngelsDeath(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
@@ -50,11 +53,14 @@ public class TARDISWeepingAngelsDeath implements Listener {
         for (String e : plugin.getConfig().getStringList("empty_child.drops")) {
             this.empty_drops.add(Material.valueOf(e));
         }
-        for (String z : plugin.getConfig().getStringList("zygon.drops")) {
+        for (String z : plugin.getConfig().getStringList("zygons.drops")) {
             this.zygon_drops.add(Material.valueOf(z));
         }
-        for (String i : plugin.getConfig().getStringList("silurian.drops")) {
+        for (String i : plugin.getConfig().getStringList("silurians.drops")) {
             this.silurian_drops.add(Material.valueOf(i));
+        }
+        for (String d : plugin.getConfig().getStringList("daleks.drops")) {
+            this.dalek_drops.add(Material.valueOf(d));
         }
     }
 
@@ -90,6 +96,14 @@ public class TARDISWeepingAngelsDeath implements Listener {
                     ItemStack stack = new ItemStack(ice_drops.get(plugin.getRandom().nextInt(ice_drops.size())), plugin.getRandom().nextInt(3) + 1);
                     event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                 }
+            }
+        }
+        if (event.getEntityType().equals(EntityType.SNOWMAN)) {
+            Snowman dalek = (Snowman) event.getEntity();
+            if (dalek.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE)) {
+                event.getDrops().clear();
+                ItemStack stack = new ItemStack(dalek_drops.get(plugin.getRandom().nextInt(dalek_drops.size())), plugin.getRandom().nextInt(2) + 1);
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
             }
         }
         if (event.getEntityType().equals(EntityType.ZOMBIE)) {

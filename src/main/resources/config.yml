@@ -64,4 +64,13 @@ silurians:
     drops:
         - GOLD_NUGGET
         - FEATHER
-always_use_leather: false
+daleks:
+    spawn_rate:
+        how_many: 3
+        how_often: 400
+        max_per_world: 25
+    worlds:
+        - world
+    drops:
+        - SLIME_BALL
+        - ROTTEN_FLESH

@@ -9,6 +9,10 @@
             <id>bukkit-repo</id>
             <url>http://repo.bukkit.org/content/groups/public</url>
         </repository>
+        <repository>
+            <id>md-5</id>
+            <url>http://repo.md-5.net/content/groups/public</url>
+        </repository>
     </repositories>
     <build>
         <finalName>TARDISWeepingAngels</finalName>
@@ -31,6 +35,33 @@
             <version>LATEST</version>
             <type>jar</type>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>LibsDisguises</groupId>
+            <artifactId>LibsDisguises</artifactId>
+            <version>8.2.5-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spigot-api</artifactId>
+                    <groupId>org.spigotmc</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>craftbukkit</artifactId>
+                    <groupId>org.bukkit</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spigot</artifactId>
+                    <groupId>org.spigotmc</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>BukkitExecutors</artifactId>
+                    <groupId>com.comphenix.executors</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>ProtocolLib</artifactId>
+                    <groupId>com.comphenix.protocol</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 </project>
