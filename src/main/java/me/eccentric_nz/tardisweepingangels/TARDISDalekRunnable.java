@@ -38,7 +38,7 @@ public class TARDISDalekRunnable implements Runnable {
         for (World w : plugin.getServer().getWorlds()) {
             // only configured worlds
             if (plugin.getConfig().getStringList("daleks.worlds").contains(w.getName())) {
-                // get the current warriors
+                // get the current daleks
                 List<Skeleton> daleks = new ArrayList<Skeleton>();
                 Collection<Skeleton> disguised = w.getEntitiesByClass(Skeleton.class);
                 for (Skeleton d : disguised) {

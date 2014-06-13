@@ -53,6 +53,8 @@ public class TARDISWeepingAngels extends JavaPlugin {
             getCommand("twad").setTabCompleter(tabCompleter);
             getCommand("twac").setTabCompleter(tabCompleter);
             getCommand("twa").setTabCompleter(tabCompleter);
+            // re-disguise Daleks
+            getServer().getScheduler().scheduleSyncDelayedTask(this, new TARDISWeepingAngelsDisguise(this), 100L);
             // start repeating spawn tasks
             long angeldelay = getConfig().getLong("angels.spawn_rate.how_often");
             long icedelay = getConfig().getLong("angels.spawn_rate.how_often");
