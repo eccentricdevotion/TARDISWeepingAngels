@@ -232,8 +232,14 @@ public class TARDISWeepingAngelEquipment {
 
     public void setDalekEquipment(LivingEntity le) {
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET, 1);
+        ItemMeta hmeta = helmet.getItemMeta();
+        hmeta.setDisplayName("Dalek Head");
+        helmet.setItemMeta(hmeta);
         EntityEquipment ee = le.getEquipment();
         ee.setHelmet(helmet);
+        ee.setChestplate(null);
+        ee.setLeggings(null);
+        ee.setBoots(null);
         MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
         FlagWatcher watcher = mobDisguise.getWatcher();
         watcher.setItemInHand(new ItemStack(Material.POISONOUS_POTATO, 1));
