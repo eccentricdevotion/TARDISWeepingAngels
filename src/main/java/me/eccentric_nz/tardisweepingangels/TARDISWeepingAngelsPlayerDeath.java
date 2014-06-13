@@ -83,20 +83,20 @@ public class TARDISWeepingAngelsPlayerDeath implements Listener {
                         event.setDeathMessage(name + " was slain by a Dalek");
                         return;
                     }
-                }
-                EntityEquipment ee = ((LivingEntity) attacker).getEquipment();
-                ItemStack is = ee.getHelmet();
-                if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
-                    String dn = is.getItemMeta().getDisplayName();
-                    if (ee.getHelmet().getType().equals(Material.WATER_LILY)) {
-                        String name = event.getEntity().getName();
-                        event.setDeathMessage(name + " was slain by a Weeping Angel");
-                        return;
-                    }
-                    if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && dn.startsWith("Silurian")) {
+                    EntityEquipment ee = skeleton.getEquipment();
+                    ItemStack is = ee.getHelmet();
+                    if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
+                        String dn = is.getItemMeta().getDisplayName();
+                        if (ee.getHelmet().getType().equals(Material.WATER_LILY)) {
                             String name = event.getEntity().getName();
-                            event.setDeathMessage(name + " was slain by a Silurian");
+                            event.setDeathMessage(name + " was slain by a Weeping Angel");
+                            return;
+                        }
+                        if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && dn.startsWith("Silurian")) {
+                                String name = event.getEntity().getName();
+                                event.setDeathMessage(name + " was slain by a Silurian");
+                            }
                         }
                     }
                 }
