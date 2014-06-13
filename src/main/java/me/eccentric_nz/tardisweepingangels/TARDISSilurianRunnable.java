@@ -29,8 +29,8 @@ public class TARDISSilurianRunnable implements Runnable {
 
     public TARDISSilurianRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.spawn_rate = plugin.getConfig().getInt("silurian.spawn_rate.how_many");
-        this.maximum = plugin.getConfig().getInt("silurian.spawn_rate.max_per_world");
+        this.spawn_rate = plugin.getConfig().getInt("silurians.spawn_rate.how_many");
+        this.maximum = plugin.getConfig().getInt("silurians.spawn_rate.max_per_world");
         this.equipper = new TARDISWeepingAngelEquipment();
     }
 
@@ -38,7 +38,7 @@ public class TARDISSilurianRunnable implements Runnable {
     public void run() {
         for (World w : plugin.getServer().getWorlds()) {
             // only configured worlds
-            if (plugin.getConfig().getStringList("silurian.worlds").contains(w.getName())) {
+            if (plugin.getConfig().getStringList("silurians.worlds").contains(w.getName())) {
                 long time = w.getTime();
                 // get the current silurian
                 List<Skeleton> silurians = new ArrayList<Skeleton>();

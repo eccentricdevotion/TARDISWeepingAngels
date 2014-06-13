@@ -15,6 +15,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 /**
  *
@@ -29,8 +31,8 @@ public class TARDISZygonRunnable implements Runnable {
 
     public TARDISZygonRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.spawn_rate = plugin.getConfig().getInt("zygon.spawn_rate.how_many");
-        this.maximum = plugin.getConfig().getInt("zygon.spawn_rate.max_per_world");
+        this.spawn_rate = plugin.getConfig().getInt("zygons.spawn_rate.how_many");
+        this.maximum = plugin.getConfig().getInt("zygons.spawn_rate.max_per_world");
         this.equipper = new TARDISWeepingAngelEquipment();
     }
 
@@ -38,7 +40,7 @@ public class TARDISZygonRunnable implements Runnable {
     public void run() {
         for (World w : plugin.getServer().getWorlds()) {
             // only configured worlds
-            if (plugin.getConfig().getStringList("zygon.worlds").contains(w.getName())) {
+            if (plugin.getConfig().getStringList("zygons.worlds").contains(w.getName())) {
                 // get the current warriors
                 List<Zombie> zygons = new ArrayList<Zombie>();
                 Collection<Zombie> children = w.getEntitiesByClass(Zombie.class);
@@ -71,8 +73,10 @@ public class TARDISZygonRunnable implements Runnable {
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
             final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
-            Zombie child = (Zombie) e;
-            child.setVillager(false);
+            Zombie zygon = (Zombie) e;
+            zygon.setVillager(false);
+            PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3);
+            zygon.addPotionEffect(p);
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                 @Override
                 public void run() {
