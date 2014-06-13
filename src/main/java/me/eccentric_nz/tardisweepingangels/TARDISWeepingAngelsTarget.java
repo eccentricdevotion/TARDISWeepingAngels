@@ -45,7 +45,7 @@ public class TARDISWeepingAngelsTarget implements Listener {
                     String tmp = "";
                     long delay = 30L;
                     if (zombie.isBaby() && dn.equals("Empty Child Head")) {
-                        tmp = "are_you_my_mummy";
+                        tmp = "empty_child";
                     }
                     if (dn.equals("Cyberman Head")) {
                         tmp = "cyberman";
