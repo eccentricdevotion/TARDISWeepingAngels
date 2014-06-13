@@ -5,13 +5,14 @@ package me.eccentric_nz.tardisweepingangels;
 
 import java.util.ArrayList;
 import java.util.List;
+import me.libraryaddict.disguise.DisguiseAPI;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Snowman;
+import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -77,6 +78,7 @@ public class TARDISWeepingAngelsDeath implements Listener {
                     stack = new ItemStack(angel_drops.get(plugin.getRandom().nextInt(angel_drops.size())), plugin.getRandom().nextInt(3) + 1);
                 }
                 event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                return;
             }
             if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
                 ItemStack is = ee.getHelmet();
@@ -84,31 +86,32 @@ public class TARDISWeepingAngelsDeath implements Listener {
                     event.getDrops().clear();
                     ItemStack stack = new ItemStack(silurian_drops.get(plugin.getRandom().nextInt(silurian_drops.size())), plugin.getRandom().nextInt(2) + 1);
                     event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                    return;
                 }
+            }
+            Skeleton dalek = (Skeleton) event.getEntity();
+            if (dalek.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE) && DisguiseAPI.isDisguised(dalek)) {
+                event.getDrops().clear();
+                ItemStack stack = new ItemStack(dalek_drops.get(plugin.getRandom().nextInt(dalek_drops.size())), plugin.getRandom().nextInt(2) + 1);
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                return;
             }
         }
         if (event.getEntityType().equals(EntityType.PIG_ZOMBIE)) {
             EntityEquipment ee = event.getEntity().getEquipment();
-            if (ee.getHelmet().getType().equals(Material.IRON_HELMET) || (ee.getHelmet().getType().equals(Material.LEATHER_HELMET) && plugin.getConfig().getBoolean("always_use_leather"))) {
+            if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
                 ItemStack is = ee.getHelmet();
                 if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Ice")) {
                     event.getDrops().clear();
                     ItemStack stack = new ItemStack(ice_drops.get(plugin.getRandom().nextInt(ice_drops.size())), plugin.getRandom().nextInt(3) + 1);
                     event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                    return;
                 }
-            }
-        }
-        if (event.getEntityType().equals(EntityType.SNOWMAN)) {
-            Snowman dalek = (Snowman) event.getEntity();
-            if (dalek.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE)) {
-                event.getDrops().clear();
-                ItemStack stack = new ItemStack(dalek_drops.get(plugin.getRandom().nextInt(dalek_drops.size())), plugin.getRandom().nextInt(2) + 1);
-                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
             }
         }
         if (event.getEntityType().equals(EntityType.ZOMBIE)) {
             EntityEquipment ee = event.getEntity().getEquipment();
-            if (ee.getHelmet().getType().equals(Material.IRON_HELMET) || (ee.getHelmet().getType().equals(Material.LEATHER_HELMET) && plugin.getConfig().getBoolean("always_use_leather"))) {
+            if (ee.getHelmet().getType().equals(Material.IRON_HELMET) || ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
                 ItemStack is = ee.getHelmet();
                 if (is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
                     if (is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
@@ -120,6 +123,7 @@ public class TARDISWeepingAngelsDeath implements Listener {
                             stack = new ItemStack(cyber_drops.get(plugin.getRandom().nextInt(cyber_drops.size())), 1);
                         }
                         event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                        return;
                     }
                     if (is.getItemMeta().getDisplayName().startsWith("Empty Child")) {
                         event.getDrops().clear();
@@ -130,12 +134,14 @@ public class TARDISWeepingAngelsDeath implements Listener {
                             stack = new ItemStack(empty_drops.get(plugin.getRandom().nextInt(empty_drops.size())), plugin.getRandom().nextInt(2) + 1);
                         }
                         event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                        return;
                     }
                     if (is.getItemMeta().getDisplayName().startsWith("Zygon")) {
                         event.getDrops().clear();
                         ItemStack stack;
                         stack = new ItemStack(zygon_drops.get(plugin.getRandom().nextInt(zygon_drops.size())), plugin.getRandom().nextInt(2) + 1);
                         event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                        return;
                     }
                 }
             }
