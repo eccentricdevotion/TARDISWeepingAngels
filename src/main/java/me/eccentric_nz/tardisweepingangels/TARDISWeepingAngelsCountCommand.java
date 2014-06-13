@@ -9,6 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.Snowman;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
@@ -22,10 +23,11 @@ public class TARDISWeepingAngelsCountCommand implements CommandExecutor {
         this.plugin = plugin;
         this.types.put("a", "angels");
         this.types.put("c", "cybermen");
-        this.types.put("i", "ice_warriors");
+        this.types.put("d", "daleks");
         this.types.put("e", "empty_child");
-        this.types.put("z", "zygons");
+        this.types.put("i", "ice_warriors");
         this.types.put("s", "silurians");
+        this.types.put("z", "zygons");
     }
 
     @Override
@@ -99,6 +101,15 @@ public class TARDISWeepingAngelsCountCommand implements CommandExecutor {
                         if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Silurian")) {
                             count++;
                         }
+                    }
+                }
+            } else if (which.equals("d")) {
+                what = "Daleks";
+                Collection<Snowman> daleks = w.getEntitiesByClass(Snowman.class);
+                for (Snowman d : daleks) {
+                    EntityEquipment ee = d.getEquipment();
+                    if (ee.getHelmet().getType().equals(Material.VINE)) {
+                        count++;
                     }
                 }
             }

@@ -37,12 +37,12 @@ commands:
     twac:
         aliases: [twacount]
         description: Reports the current number of the specifed monster in the specified world.
-        usage: /<command> [a|c|i|e|z|s] [world]
+        usage: /<command> [a|c|d|e|i|s|z] [world]
         permission: tardisweepingangels.count
         permission-message: You don't have the permission <permission> to use this command
     twa:
         aliases: [twaa,twaadmin]
         description: Add or remove worlds to the worlds list for the specified monster.
-        usage: /<command> [a|c|i|e|z|s] [add|remove] [world]
+        usage: /<command> [a|c|d|e|i|s|z] [add|remove] [world]
         permission: tardisweepingangels.admin
         permission-message: You don't have the permission <permission> to use this command

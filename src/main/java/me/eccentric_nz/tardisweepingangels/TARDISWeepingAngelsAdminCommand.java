@@ -17,10 +17,11 @@ public class TARDISWeepingAngelsAdminCommand implements CommandExecutor {
         this.plugin = plugin;
         this.types.put("a", "angels");
         this.types.put("c", "cybermen");
-        this.types.put("i", "ice_warriors");
+        this.types.put("d", "daleks");
         this.types.put("e", "empty_child");
-        this.types.put("z", "zygons");
+        this.types.put("i", "ice_warriors");
         this.types.put("s", "silurians");
+        this.types.put("z", "zygons");
     }
 
     @Override
