@@ -5,7 +5,6 @@ package me.eccentric_nz.tardisweepingangels;
 
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
-import me.libraryaddict.disguise.disguisetypes.FlagWatcher;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
@@ -241,8 +240,6 @@ public class TARDISWeepingAngelEquipment {
         ee.setLeggings(null);
         ee.setBoots(null);
         MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
-        FlagWatcher watcher = mobDisguise.getWatcher();
-        watcher.setItemInHand(new ItemStack(Material.POISONOUS_POTATO, 1));
         DisguiseAPI.disguiseToAll(le, mobDisguise);
         PotionEffect p = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 360000, 1);
         le.addPotionEffect(p);
