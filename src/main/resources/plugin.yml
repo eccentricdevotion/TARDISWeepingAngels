@@ -8,6 +8,7 @@ website: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 dev-url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 softdepend: [TARDIS]
+depend: [LibsDisguises]
 permissions:
     tardisweepingangels.spawn:
         description: Allow players to spawn Weeping Angels, Cybermen, Empty Child or Ice Warriors.
