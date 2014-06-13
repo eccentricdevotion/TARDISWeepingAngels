@@ -9,7 +9,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Skeleton;
-import org.bukkit.entity.Snowman;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
@@ -48,18 +47,18 @@ public class TARDISWeepingAngelsCountCommand implements CommandExecutor {
             int count = 0;
             String what = "Angels";
             if (which.equals("a")) {
-                Collection<Skeleton> skellies = w.getEntitiesByClass(Skeleton.class);
-                for (Skeleton s : skellies) {
-                    EntityEquipment ee = s.getEquipment();
+                Collection<Skeleton> angels = w.getEntitiesByClass(Skeleton.class);
+                for (Skeleton a : angels) {
+                    EntityEquipment ee = a.getEquipment();
                     if (ee.getHelmet().getType().equals(Material.WATER_LILY)) {
                         count++;
                     }
                 }
             } else if (which.equals("c")) {
                 what = "Cybermen";
-                Collection<Zombie> zombies = w.getEntitiesByClass(Zombie.class);
-                for (Zombie s : zombies) {
-                    EntityEquipment ee = s.getEquipment();
+                Collection<Zombie> cybermen = w.getEntitiesByClass(Zombie.class);
+                for (Zombie c : cybermen) {
+                    EntityEquipment ee = c.getEquipment();
                     if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
                         ItemStack is = ee.getHelmet();
                         if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
@@ -67,23 +66,23 @@ public class TARDISWeepingAngelsCountCommand implements CommandExecutor {
                         }
                     }
                 }
-            } else if (which.equals("i")) {
-                what = "Ice Warriors";
-                Collection<PigZombie> skellies = w.getEntitiesByClass(PigZombie.class);
-                for (PigZombie s : skellies) {
-                    EntityEquipment ee = s.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.CHAINMAIL_HELMET)) {
+            } else if (which.equals("d")) {
+                what = "Daleks";
+                Collection<Skeleton> daleks = w.getEntitiesByClass(Skeleton.class);
+                for (Skeleton d : daleks) {
+                    EntityEquipment ee = d.getEquipment();
+                    if (ee.getHelmet().getType().equals(Material.LEATHER_HELMET)) {
                         ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
+                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek")) {
                             count++;
                         }
                     }
                 }
             } else if (which.equals("e")) {
                 what = "Empty Children";
-                Collection<Zombie> zombies = w.getEntitiesByClass(Zombie.class);
-                for (Zombie s : zombies) {
-                    EntityEquipment ee = s.getEquipment();
+                Collection<Zombie> kids = w.getEntitiesByClass(Zombie.class);
+                for (Zombie e : kids) {
+                    EntityEquipment ee = e.getEquipment();
                     if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
                         ItemStack is = ee.getHelmet();
                         if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Empty Child")) {
@@ -91,10 +90,22 @@ public class TARDISWeepingAngelsCountCommand implements CommandExecutor {
                         }
                     }
                 }
+            } else if (which.equals("i")) {
+                what = "Ice Warriors";
+                Collection<PigZombie> warriors = w.getEntitiesByClass(PigZombie.class);
+                for (PigZombie i : warriors) {
+                    EntityEquipment ee = i.getEquipment();
+                    if (ee.getHelmet().getType().equals(Material.CHAINMAIL_HELMET)) {
+                        ItemStack is = ee.getHelmet();
+                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
+                            count++;
+                        }
+                    }
+                }
             } else if (which.equals("s")) {
                 what = "Silurians";
-                Collection<Skeleton> skeletons = w.getEntitiesByClass(Skeleton.class);
-                for (Skeleton s : skeletons) {
+                Collection<Skeleton> silurians = w.getEntitiesByClass(Skeleton.class);
+                for (Skeleton s : silurians) {
                     EntityEquipment ee = s.getEquipment();
                     if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
                         ItemStack is = ee.getHelmet();
@@ -103,13 +114,16 @@ public class TARDISWeepingAngelsCountCommand implements CommandExecutor {
                         }
                     }
                 }
-            } else if (which.equals("d")) {
-                what = "Daleks";
-                Collection<Snowman> daleks = w.getEntitiesByClass(Snowman.class);
-                for (Snowman d : daleks) {
-                    EntityEquipment ee = d.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.VINE)) {
-                        count++;
+            } else if (which.equals("z")) {
+                what = "Zygons";
+                Collection<Zombie> zygons = w.getEntitiesByClass(Zombie.class);
+                for (Zombie z : zygons) {
+                    EntityEquipment ee = z.getEquipment();
+                    if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                        ItemStack is = ee.getHelmet();
+                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Zygon")) {
+                            count++;
+                        }
                     }
                 }
             }
