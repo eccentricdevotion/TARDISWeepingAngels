@@ -69,9 +69,10 @@ public class TARDISWeepingAngelsTarget implements Listener {
         if (ent instanceof Skeleton && !tracker.contains(uuid)) {
             Skeleton dalek = (Skeleton) ent;
             if (dalek.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE)) {
+                tracker.add(uuid);
                 final LivingEntity le = event.getTarget();
                 if (le instanceof Player) {
-                    long delay = 30L;
+                    long delay = 50L;
                     // schedule delayed task
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
