@@ -62,13 +62,18 @@ public class TARDISWeepingAngelsSpawnCommand implements CommandExecutor {
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
                         public void run() {
-                            if (plugin.getConfig().getBoolean("always_use_leather")) {
-                                equip.setCyberLeatherEquipment(c, false);
-                            } else {
-                                equip.setCyberEquipment(c, false);
-                            }
+                            equip.setCyberEquipment(c, false);
                         }
                     }, 5L);
+                    break;
+                case DALEK:
+                    final LivingEntity d = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            equip.setDalekEquipment(d);
+                        }
+                    }, 2L);
                     break;
                 case ICE:
                 case ICE_WARRIOR:
@@ -77,11 +82,7 @@ public class TARDISWeepingAngelsSpawnCommand implements CommandExecutor {
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
                         public void run() {
-                            if (plugin.getConfig().getBoolean("always_use_leather")) {
-                                equip.setWarriorLeatherEquipment(i, false);
-                            } else {
-                                equip.setWarriorEquipment(i, false);
-                            }
+                            equip.setWarriorEquipment(i, false);
                         }
                     }, 5L);
                     PigZombie pigman = (PigZombie) i;

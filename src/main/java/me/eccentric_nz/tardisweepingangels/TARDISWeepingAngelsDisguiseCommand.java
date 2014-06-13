@@ -21,9 +21,13 @@ public class TARDISWeepingAngelsDisguiseCommand implements CommandExecutor {
                 return false;
             }
             // check monster type
+            String upper = args[0].toUpperCase();
+            if (upper.equals("DALEK")) {
+                sender.sendMessage(plugin.pluginName + "You cannot disguise as a Dalek!");
+                return true;
+            }
             TARDISWeepingAngelsMonster monster;
             try {
-                String upper = args[0].toUpperCase();
                 monster = TARDISWeepingAngelsMonster.valueOf(upper);
             } catch (IllegalArgumentException e) {
                 sender.sendMessage(plugin.pluginName + "Invalid monster type!");
@@ -54,20 +58,12 @@ public class TARDISWeepingAngelsDisguiseCommand implements CommandExecutor {
                         equip.setAngelEquipment(player, true);
                         break;
                     case CYBERMAN:
-                        if (plugin.getConfig().getBoolean("always_use_leather")) {
-                            equip.setCyberLeatherEquipment(player, true);
-                        } else {
-                            equip.setCyberEquipment(player, true);
-                        }
+                        equip.setCyberEquipment(player, true);
                         break;
                     case ICE:
                     case ICE_WARRIOR:
                     case WARRIOR:
-                        if (plugin.getConfig().getBoolean("always_use_leather")) {
-                            equip.setWarriorLeatherEquipment(player, true);
-                        } else {
-                            equip.setWarriorEquipment(player, true);
-                        }
+                        equip.setWarriorEquipment(player, true);
                         break;
                     case CHILD:
                     case EMPTY:

@@ -16,6 +16,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 /**
  *
@@ -58,7 +60,7 @@ public class TARDISIceWarriorRunnable implements Runnable {
                     Collection<PigZombie> piggies = w.getEntitiesByClass(PigZombie.class);
                     for (PigZombie pz : piggies) {
                         EntityEquipment ee = pz.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.CHAINMAIL_HELMET) || (ee.getHelmet().getType().equals(Material.LEATHER_HELMET) && plugin.getConfig().getBoolean("always_use_leather"))) {
+                        if (ee.getHelmet().getType().equals(Material.CHAINMAIL_HELMET)) {
                             ItemStack is = ee.getHelmet();
                             if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Ice Warrior")) {
                                 warriors.add(pz);
@@ -87,17 +89,15 @@ public class TARDISIceWarriorRunnable implements Runnable {
             Location l = new Location(w, x, y + 1, z);
             if (biomes.contains(l.getBlock().getBiome())) {
                 final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.PIG_ZOMBIE);
-                PigZombie pigman = (PigZombie) e;
-                pigman.setAngry(true);
-                pigman.setAnger(Integer.MAX_VALUE);
+                PigZombie warrior = (PigZombie) e;
+                warrior.setAngry(true);
+                warrior.setAnger(Integer.MAX_VALUE);
+                PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3);
+                warrior.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                     @Override
                     public void run() {
-                        if (plugin.getConfig().getBoolean("always_use_leather")) {
-                            equipper.setWarriorLeatherEquipment(e, false);
-                        } else {
-                            equipper.setWarriorEquipment(e, false);
-                        }
+                        equipper.setWarriorEquipment(e, false);
                     }
                 }, 5L);
             }

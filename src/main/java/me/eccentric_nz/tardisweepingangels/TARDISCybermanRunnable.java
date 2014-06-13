@@ -15,6 +15,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 /**
  *
@@ -44,7 +46,7 @@ public class TARDISCybermanRunnable implements Runnable {
                 Collection<Zombie> zombies = w.getEntitiesByClass(Zombie.class);
                 for (Zombie z : zombies) {
                     EntityEquipment ee = z.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.IRON_HELMET) || (ee.getHelmet().getType().equals(Material.LEATHER_HELMET) && plugin.getConfig().getBoolean("always_use_leather"))) {
+                    if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
                         ItemStack is = ee.getHelmet();
                         if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
                             cyberarmy.add(z);
@@ -71,15 +73,14 @@ public class TARDISCybermanRunnable implements Runnable {
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
             final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
-            ((Zombie) e).setVillager(false);
+            Zombie cyber = (Zombie) e;
+            cyber.setVillager(false);
+            PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3);
+            cyber.addPotionEffect(p);
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                 @Override
                 public void run() {
-                    if (plugin.getConfig().getBoolean("always_use_leather")) {
-                        equipper.setCyberLeatherEquipment(e, false);
-                    } else {
-                        equipper.setCyberEquipment(e, false);
-                    }
+                    equipper.setCyberEquipment(e, false);
                 }
             }, 5L);
         }

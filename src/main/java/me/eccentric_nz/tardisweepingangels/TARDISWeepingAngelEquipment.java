@@ -3,7 +3,10 @@
  */
 package me.eccentric_nz.tardisweepingangels;
 
-import org.bukkit.Color;
+import me.libraryaddict.disguise.DisguiseAPI;
+import me.libraryaddict.disguise.disguisetypes.DisguiseType;
+import me.libraryaddict.disguise.disguisetypes.FlagWatcher;
+import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -11,7 +14,6 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -94,49 +96,6 @@ public class TARDISWeepingAngelEquipment {
         }
     }
 
-    public void setWarriorLeatherEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.LEATHER_HELMET, 1);
-        LeatherArmorMeta hmeta = (LeatherArmorMeta) helmet.getItemMeta();
-        hmeta.setColor(Color.fromRGB(51, 102, 51));
-        hmeta.setDisplayName("Ice Warrior Head");
-        ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE, 1);
-        LeatherArmorMeta cmeta = (LeatherArmorMeta) chestplate.getItemMeta();
-        cmeta.setColor(Color.fromRGB(51, 102, 51));
-        ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS, 1);
-        LeatherArmorMeta lmeta = (LeatherArmorMeta) leggings.getItemMeta();
-        lmeta.setColor(Color.fromRGB(51, 102, 51));
-        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS, 1);
-        LeatherArmorMeta bmeta = (LeatherArmorMeta) boots.getItemMeta();
-        bmeta.setColor(Color.fromRGB(51, 102, 51));
-        ItemStack weapon = new ItemStack(Material.AIR, 1);
-        if (disguise) {
-            helmet.setDurability((short) 50);
-            cmeta.setDisplayName("Ice Warrior Chest");
-            chestplate.setDurability((short) 75);
-            lmeta.setDisplayName("Ice Warrior Legs");
-            leggings.setDurability((short) 70);
-            bmeta.setDisplayName("Ice Warrior Feet");
-            boots.setDurability((short) 60);
-        }
-        helmet.setItemMeta(hmeta);
-        chestplate.setItemMeta(cmeta);
-        leggings.setItemMeta(lmeta);
-        boots.setItemMeta(bmeta);
-
-        EntityEquipment ee = le.getEquipment();
-        ee.setHelmet(helmet);
-        ee.setChestplate(chestplate);
-        ee.setLeggings(leggings);
-        ee.setBoots(boots);
-        if (!disguise) {
-            ee.setItemInHand(weapon);
-            ee.setItemInHandDropChance(0F);
-            ee.setHelmetDropChance(0F);
-            ee.setChestplateDropChance(0F);
-            ee.setLeggingsDropChance(0F);
-        }
-    }
-
     public void setCyberEquipment(LivingEntity le, boolean disguise) {
         ItemStack helmet = new ItemStack(Material.IRON_HELMET, 1);
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
@@ -160,47 +119,6 @@ public class TARDISWeepingAngelEquipment {
         ee.setChestplate(chestplate);
         ee.setLeggings(leggings);
         ee.setBoots(null);
-        if (!disguise) {
-            ee.setItemInHandDropChance(0F);
-            ee.setHelmetDropChance(0F);
-            ee.setChestplateDropChance(0F);
-            ee.setLeggingsDropChance(0F);
-        }
-    }
-
-    public void setCyberLeatherEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.LEATHER_HELMET, 1);
-        LeatherArmorMeta hmeta = (LeatherArmorMeta) helmet.getItemMeta();
-        hmeta.setColor(Color.fromRGB(255, 255, 255));
-        ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE, 1);
-        LeatherArmorMeta cmeta = (LeatherArmorMeta) chestplate.getItemMeta();
-        cmeta.setColor(Color.fromRGB(255, 255, 255));
-        ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS, 1);
-        LeatherArmorMeta lmeta = (LeatherArmorMeta) leggings.getItemMeta();
-        lmeta.setColor(Color.fromRGB(255, 255, 255));
-        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS, 1);
-        LeatherArmorMeta bmeta = (LeatherArmorMeta) boots.getItemMeta();
-        bmeta.setColor(Color.fromRGB(255, 255, 255));
-        hmeta.setDisplayName("Cyberman Head");
-        if (disguise) {
-            helmet.setDurability((short) 50);
-            cmeta.setDisplayName("Cyberman Chest");
-            chestplate.setDurability((short) 75);
-            lmeta.setDisplayName("Cyberman Legs");
-            leggings.setDurability((short) 70);
-            bmeta.setDisplayName("Cyberman Feet");
-            boots.setDurability((short) 60);
-        }
-        helmet.setItemMeta(hmeta);
-        chestplate.setItemMeta(cmeta);
-        leggings.setItemMeta(lmeta);
-        boots.setItemMeta(bmeta);
-
-        EntityEquipment ee = le.getEquipment();
-        ee.setHelmet(helmet);
-        ee.setChestplate(chestplate);
-        ee.setLeggings(leggings);
-        ee.setBoots(boots);
         if (!disguise) {
             ee.setItemInHandDropChance(0F);
             ee.setHelmetDropChance(0F);
@@ -234,7 +152,7 @@ public class TARDISWeepingAngelEquipment {
         ee.setBoots(null);
         ee.setHelmet(helmet);
         if (!disguise) {
-            PotionEffect p = new PotionEffect(PotionEffectType.SLOW, 36000, 1);
+            PotionEffect p = new PotionEffect(PotionEffectType.SLOW, 360000, 1);
             le.removePotionEffect(PotionEffectType.SPEED);
             le.addPotionEffect(p);
             ee.setItemInHand(null);
@@ -310,6 +228,17 @@ public class TARDISWeepingAngelEquipment {
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
         }
+    }
+
+    public void setDalekEquipment(LivingEntity le) {
+        MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
+        FlagWatcher watcher = mobDisguise.getWatcher();
+        watcher.setItemInHand(new ItemStack(Material.POISONOUS_POTATO, 1));
+        DisguiseAPI.disguiseToAll(le, mobDisguise);
+        PotionEffect p = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 360000, 1);
+        le.addPotionEffect(p);
+        le.setMaxHealth(30.0d);
+        le.setHealth(30.0d);
     }
 
     public void removeEquipment(Player p) {
