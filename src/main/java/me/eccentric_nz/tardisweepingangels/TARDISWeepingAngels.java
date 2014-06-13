@@ -41,6 +41,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
             pm.registerEvents(new TARDISWeepingAngelsUndisguise(this), this);
             pm.registerEvents(new TARDISWeepingAngelsTarget(this), this);
             pm.registerEvents(new TARDISWeepingAngelsRespawn(this), this);
+            pm.registerEvents(new TARDISWeepingAngelsSnow(this), this);
             // register commands
             getCommand("twas").setExecutor(new TARDISWeepingAngelsSpawnCommand(this));
             getCommand("twad").setExecutor(new TARDISWeepingAngelsDisguiseCommand(this));
