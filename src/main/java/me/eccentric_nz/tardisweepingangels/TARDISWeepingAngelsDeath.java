@@ -92,7 +92,7 @@ public class TARDISWeepingAngelsDeath implements Listener {
             Skeleton dalek = (Skeleton) event.getEntity();
             if (dalek.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE) && DisguiseAPI.isDisguised(dalek)) {
                 event.getDrops().clear();
-                ItemStack stack = new ItemStack(dalek_drops.get(plugin.getRandom().nextInt(dalek_drops.size())), plugin.getRandom().nextInt(2) + 1);
+                ItemStack stack = new ItemStack(dalek_drops.get(plugin.getRandom().nextInt(dalek_drops.size())), 1);
                 event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                 return;
             }

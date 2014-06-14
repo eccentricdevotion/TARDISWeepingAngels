@@ -3,6 +3,7 @@
  */
 package me.eccentric_nz.tardisweepingangels;
 
+import me.libraryaddict.disguise.DisguiseAPI;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -43,8 +44,8 @@ public class TARDISWeepingAngelsDamage implements Listener {
         EntityType et = event.getEntityType();
         if (et.equals(EntityType.SKELETON)) {
             EntityEquipment ee = ((LivingEntity) event.getEntity()).getEquipment();
+            Entity e = event.getDamager();
             if (ee.getHelmet().getType().equals(Material.WATER_LILY)) {
-                Entity e = event.getDamager();
                 if (e instanceof Arrow) {
                     event.setCancelled(true);
                 }
@@ -53,6 +54,13 @@ public class TARDISWeepingAngelsDamage implements Listener {
                     if (!p.getItemInHand().getType().equals(mat)) {
                         event.setCancelled(true);
                     }
+                }
+                return;
+            }
+            Entity ent = event.getEntity();
+            if (ee.getHelmet().getType().equals(Material.LEATHER_HELMET) && DisguiseAPI.isDisguised(ent)) {
+                if (e instanceof Player) {
+                    ((Player) e).playSound(ent.getLocation(), "dalek_hit", 0.5f, 1.0f);
                 }
             }
         }

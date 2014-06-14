@@ -16,11 +16,11 @@ import org.bukkit.inventory.ItemStack;
  *
  * @author eccentric_nz
  */
-public class TARDISWeepingAngelsDisguise implements Runnable {
+public class TARDISWeepingAngelsReDisguise implements Runnable {
 
     private final TARDISWeepingAngels plugin;
 
-    public TARDISWeepingAngelsDisguise(TARDISWeepingAngels plugin) {
+    public TARDISWeepingAngelsReDisguise(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
     }
 
