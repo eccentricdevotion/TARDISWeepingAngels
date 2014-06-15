@@ -1,9 +1,10 @@
 /*
  *  Copyright 2014 eccentric_nz.
  */
-package me.eccentric_nz.tardisweepingangels;
+package me.eccentric_nz.tardisweepingangels.monsters.empty_child;
 
 import java.util.UUID;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,11 +19,11 @@ import org.bukkit.inventory.PlayerInventory;
  *
  * @author eccentric_nz
  */
-public class TARDISWeepingAngelsRespawn implements Listener {
+public class GasMask implements Listener {
 
     private final TARDISWeepingAngels plugin;
 
-    public TARDISWeepingAngelsRespawn(TARDISWeepingAngels plugin) {
+    public GasMask(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
     }
 

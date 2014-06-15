@@ -1,19 +1,20 @@
-package me.eccentric_nz.tardisweepingangels;
+package me.eccentric_nz.tardisweepingangels.commands;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class TARDISWeepingAngelsAdminCommand implements CommandExecutor {
+public class AdminCommand implements CommandExecutor {
 
     private final TARDISWeepingAngels plugin;
     private final HashMap<String, String> types = new HashMap<String, String>();
 
-    public TARDISWeepingAngelsAdminCommand(TARDISWeepingAngels plugin) {
+    public AdminCommand(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
         this.types.put("a", "angels");
         this.types.put("c", "cybermen");

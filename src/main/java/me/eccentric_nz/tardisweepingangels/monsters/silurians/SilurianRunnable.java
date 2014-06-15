@@ -1,11 +1,13 @@
 /*
  *  Copyright 2014 eccentric_nz.
  */
-package me.eccentric_nz.tardisweepingangels;
+package me.eccentric_nz.tardisweepingangels.monsters.silurians;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -20,18 +22,18 @@ import org.bukkit.inventory.ItemStack;
  *
  * @author eccentric_nz
  */
-public class TARDISSilurianRunnable implements Runnable {
+public class SilurianRunnable implements Runnable {
 
     private final TARDISWeepingAngels plugin;
     private final int spawn_rate;
     private final int maximum;
-    private final TARDISWeepingAngelEquipment equipper;
+    private final MonsterEquipment equipper;
 
-    public TARDISSilurianRunnable(TARDISWeepingAngels plugin) {
+    public SilurianRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
         this.spawn_rate = plugin.getConfig().getInt("silurians.spawn_rate.how_many");
         this.maximum = plugin.getConfig().getInt("silurians.spawn_rate.max_per_world");
-        this.equipper = new TARDISWeepingAngelEquipment();
+        this.equipper = new MonsterEquipment();
     }
 
     @Override
@@ -71,7 +73,7 @@ public class TARDISSilurianRunnable implements Runnable {
             int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
-            Location cave = TARDISWeepingAngelsCaveFinder.searchCave(l);
+            Location cave = CaveFinder.searchCave(l);
             if (cave == null) {
                 cave = l;
             }

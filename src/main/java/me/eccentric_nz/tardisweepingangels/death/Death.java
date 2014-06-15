@@ -1,10 +1,12 @@
 /*
  *  Copyright 2014 eccentric_nz.
  */
-package me.eccentric_nz.tardisweepingangels;
+package me.eccentric_nz.tardisweepingangels.death;
 
 import java.util.ArrayList;
 import java.util.List;
+import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.libraryaddict.disguise.DisguiseAPI;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -29,7 +31,7 @@ import org.bukkit.potion.PotionEffectType;
  *
  * @author eccentric_nz
  */
-public class TARDISWeepingAngelsDeath implements Listener {
+public class Death implements Listener {
 
     private final TARDISWeepingAngels plugin;
     private final List<Material> angel_drops = new ArrayList<Material>();
@@ -41,7 +43,7 @@ public class TARDISWeepingAngelsDeath implements Listener {
     private final List<Material> sontaran_drops = new ArrayList<Material>();
     private final List<Material> zygon_drops = new ArrayList<Material>();
 
-    public TARDISWeepingAngelsDeath(TARDISWeepingAngels plugin) {
+    public Death(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
         for (String a : plugin.getConfig().getStringList("angels.drops")) {
             this.angel_drops.add(Material.valueOf(a));
@@ -179,7 +181,7 @@ public class TARDISWeepingAngelsDeath implements Listener {
                         if (dn.startsWith("Cyberman")) {
                             Location l = event.getEntity().getLocation();
                             LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
-                            new TARDISWeepingAngelEquipment().setCyberEquipment(e, false);
+                            new MonsterEquipment().setCyberEquipment(e, false);
                             if (event.getEntity() instanceof Player) {
                                 String name = ((Player) event.getEntity()).getName();
                                 e.setCustomName(name);

@@ -14,12 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package me.eccentric_nz.tardisweepingangels;
+package me.eccentric_nz.tardisweepingangels.commands;
 
 import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -29,7 +31,7 @@ import org.bukkit.util.StringUtil;
 /**
  * TabCompleter
  */
-public class TARDISWeepingAngelsTabComplete implements TabCompleter {
+public class TabComplete implements TabCompleter {
 
     private final TARDISWeepingAngels plugin;
     ImmutableList<String> LETTER_SUBS = ImmutableList.of("a", "c", "d", "e", "i", "o", "s", "z");
@@ -38,10 +40,10 @@ public class TARDISWeepingAngelsTabComplete implements TabCompleter {
     private final ImmutableList<String> WORLD_SUBS;
     private final ImmutableList<String> MONSTER_SUBS;
 
-    public TARDISWeepingAngelsTabComplete(TARDISWeepingAngels plugin) {
+    public TabComplete(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
         List<String> tmp = new ArrayList<String>();
-        for (TARDISWeepingAngelsMonster m : TARDISWeepingAngelsMonster.values()) {
+        for (Monster m : Monster.values()) {
             tmp.add(m.toString());
         }
         MONSTER_SUBS = ImmutableList.copyOf(tmp);

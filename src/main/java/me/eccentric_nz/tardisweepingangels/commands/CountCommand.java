@@ -1,7 +1,8 @@
-package me.eccentric_nz.tardisweepingangels;
+package me.eccentric_nz.tardisweepingangels.commands;
 
 import java.util.Collection;
 import java.util.HashMap;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -13,12 +14,12 @@ import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 
-public class TARDISWeepingAngelsCountCommand implements CommandExecutor {
+public class CountCommand implements CommandExecutor {
 
     private final TARDISWeepingAngels plugin;
     private final HashMap<String, String> types = new HashMap<String, String>();
 
-    public TARDISWeepingAngelsCountCommand(TARDISWeepingAngels plugin) {
+    public CountCommand(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
         this.types.put("a", "angels");
         this.types.put("c", "cybermen");

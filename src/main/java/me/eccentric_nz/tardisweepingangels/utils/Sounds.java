@@ -1,8 +1,9 @@
-package me.eccentric_nz.tardisweepingangels;
+package me.eccentric_nz.tardisweepingangels.utils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -19,12 +20,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-public class TARDISWeepingAngelsTarget implements Listener {
+public class Sounds implements Listener {
 
     private final TARDISWeepingAngels plugin;
     private final List<UUID> tracker = new ArrayList<UUID>();
 
-    public TARDISWeepingAngelsTarget(TARDISWeepingAngels plugin) {
+    public Sounds(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
     }
 

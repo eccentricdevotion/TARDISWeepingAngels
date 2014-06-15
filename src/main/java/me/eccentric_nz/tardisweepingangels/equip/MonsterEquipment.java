@@ -1,7 +1,7 @@
 /*
  *  Copyright 2014 eccentric_nz.
  */
-package me.eccentric_nz.tardisweepingangels;
+package me.eccentric_nz.tardisweepingangels.equip;
 
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
@@ -20,7 +20,7 @@ import org.bukkit.potion.PotionEffectType;
  *
  * @author eccentric_nz
  */
-public class TARDISWeepingAngelEquipment {
+public class MonsterEquipment {
 
     public void setAngelEquipment(LivingEntity le, boolean disguise) {
         ItemStack helmet = new ItemStack(Material.WATER_LILY, 1);
@@ -262,6 +262,39 @@ public class TARDISWeepingAngelEquipment {
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
+        }
+    }
+
+    public void setButlerEquipment(LivingEntity le, boolean disguise) {
+        ItemStack helmet = new ItemStack(Material.CHAINMAIL_HELMET, 1);
+        ItemStack chestplate = new ItemStack(Material.CHAINMAIL_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.CHAINMAIL_LEGGINGS, 1);
+        if (disguise) {
+            helmet.setDurability((short) 160);
+            chestplate.setDurability((short) 235);
+            leggings.setDurability((short) 220);
+        }
+        ItemMeta hmeta = helmet.getItemMeta();
+        hmeta.setDisplayName("Strax Head");
+        helmet.setItemMeta(hmeta);
+        ItemMeta cmeta = chestplate.getItemMeta();
+        cmeta.setDisplayName("Strax Chest");
+        chestplate.setItemMeta(cmeta);
+        ItemMeta lmeta = leggings.getItemMeta();
+        lmeta.setDisplayName("Strax Legs");
+        leggings.setItemMeta(lmeta);
+
+        EntityEquipment ee = le.getEquipment();
+        ee.setChestplate(chestplate);
+        ee.setLeggings(leggings);
+        ee.setBoots(null);
+        ee.setHelmet(helmet);
+        if (!disguise) {
+            ee.setItemInHand(null);
+            ee.setHelmetDropChance(0F);
+            ee.setChestplateDropChance(0F);
+            ee.setLeggingsDropChance(0F);
+            le.setCustomName("Strax");
         }
     }
 

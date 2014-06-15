@@ -1,16 +1,19 @@
-package me.eccentric_nz.tardisweepingangels;
+package me.eccentric_nz.tardisweepingangels.commands;
 
+import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 
-public class TARDISWeepingAngelsDisguiseCommand implements CommandExecutor {
+public class DisguiseCommand implements CommandExecutor {
 
     private final TARDISWeepingAngels plugin;
 
-    public TARDISWeepingAngelsDisguiseCommand(TARDISWeepingAngels plugin) {
+    public DisguiseCommand(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
     }
 
@@ -26,9 +29,9 @@ public class TARDISWeepingAngelsDisguiseCommand implements CommandExecutor {
                 sender.sendMessage(plugin.pluginName + "You cannot disguise as a Dalek!");
                 return true;
             }
-            TARDISWeepingAngelsMonster monster;
+            Monster monster;
             try {
-                monster = TARDISWeepingAngelsMonster.valueOf(upper);
+                monster = Monster.valueOf(upper);
             } catch (IllegalArgumentException e) {
                 sender.sendMessage(plugin.pluginName + "Invalid monster type!");
                 return true;
@@ -50,7 +53,7 @@ public class TARDISWeepingAngelsDisguiseCommand implements CommandExecutor {
                 player.sendMessage(plugin.pluginName + "Your armour slots must be empty before using this command!");
                 return true;
             }
-            TARDISWeepingAngelEquipment equip = new TARDISWeepingAngelEquipment();
+            MonsterEquipment equip = new MonsterEquipment();
             if (args[1].equalsIgnoreCase("on")) {
                 switch (monster) {
                     case ANGEL:

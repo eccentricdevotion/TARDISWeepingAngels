@@ -1,11 +1,13 @@
 /*
  *  Copyright 2014 eccentric_nz.
  */
-package me.eccentric_nz.tardisweepingangels;
+package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,18 +21,18 @@ import org.bukkit.inventory.EntityEquipment;
  *
  * @author eccentric_nz
  */
-public class TARDISWeepingAngelsRunnable implements Runnable {
+public class WeepingAngelsRunnable implements Runnable {
 
     private final TARDISWeepingAngels plugin;
     private final int spawn_rate;
     private final int maximum;
-    private final TARDISWeepingAngelEquipment equipper;
+    private final MonsterEquipment equipper;
 
-    public TARDISWeepingAngelsRunnable(TARDISWeepingAngels plugin) {
+    public WeepingAngelsRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
         this.spawn_rate = plugin.getConfig().getInt("angels.spawn_rate.how_many");
         this.maximum = plugin.getConfig().getInt("angels.spawn_rate.max_per_world");
-        this.equipper = new TARDISWeepingAngelEquipment();
+        this.equipper = new MonsterEquipment();
     }
 
     @Override

@@ -1,7 +1,9 @@
-package me.eccentric_nz.tardisweepingangels;
+package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 
 import java.util.ArrayList;
 import java.util.List;
+import me.eccentric_nz.tardisweepingangels.utils.Vector3D;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -14,12 +16,12 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class TARDISWeepingAngelsBlink implements Listener {
+public class Blink implements Listener {
 
     private final TARDISWeepingAngels plugin;
     private final List<String> message = new ArrayList<String>();
 
-    public TARDISWeepingAngelsBlink(TARDISWeepingAngels plugin) {
+    public Blink(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
         this.message.add("Don't blink. Blink and you're dead.");
         this.message.add("They are fast. Faster than you can believe.");
@@ -31,17 +33,17 @@ public class TARDISWeepingAngelsBlink implements Listener {
     public void onToggleSneak(PlayerToggleSneakEvent event) {
         Player player = event.getPlayer();
         Location observerPos = player.getEyeLocation();
-        TARDISVector3D observerDir = new TARDISVector3D(observerPos.getDirection());
-        TARDISVector3D observerStart = new TARDISVector3D(observerPos);
-        TARDISVector3D observerEnd = observerStart.add(observerDir.multiply(16));
+        Vector3D observerDir = new Vector3D(observerPos.getDirection());
+        Vector3D observerStart = new Vector3D(observerPos);
+        Vector3D observerEnd = observerStart.add(observerDir.multiply(16));
 
         Skeleton skeleton = null;
         // Get nearby entities
         for (Skeleton target : player.getWorld().getEntitiesByClass(Skeleton.class)) {
             // Bounding box of the given player
-            TARDISVector3D targetPos = new TARDISVector3D(target.getLocation());
-            TARDISVector3D minimum = targetPos.add(-0.5, 0, -0.5);
-            TARDISVector3D maximum = targetPos.add(0.5, 1.67, 0.5);
+            Vector3D targetPos = new Vector3D(target.getLocation());
+            Vector3D minimum = targetPos.add(-0.5, 0, -0.5);
+            Vector3D maximum = targetPos.add(0.5, 1.67, 0.5);
             if (target != player && hasIntersection(observerStart, observerEnd, minimum, maximum)) {
                 if (skeleton == null || skeleton.getLocation().distanceSquared(observerPos) > target.getLocation().distanceSquared(observerPos)) {
                     // is it an angel?
@@ -61,12 +63,12 @@ public class TARDISWeepingAngelsBlink implements Listener {
         }
     }
 
-    private boolean hasIntersection(TARDISVector3D p1, TARDISVector3D p2, TARDISVector3D min, TARDISVector3D max) {
+    private boolean hasIntersection(Vector3D p1, Vector3D p2, Vector3D min, Vector3D max) {
         final double epsilon = 0.0001f;
-        TARDISVector3D d = p2.subtract(p1).multiply(0.5);
-        TARDISVector3D e = max.subtract(min).multiply(0.5);
-        TARDISVector3D c = p1.add(d).subtract(min.add(max).multiply(0.5));
-        TARDISVector3D ad = d.abs();
+        Vector3D d = p2.subtract(p1).multiply(0.5);
+        Vector3D e = max.subtract(min).multiply(0.5);
+        Vector3D c = p1.add(d).subtract(min.add(max).multiply(0.5));
+        Vector3D ad = d.abs();
         if (Math.abs(c.x) > e.x + ad.x) {
             return false;
         }

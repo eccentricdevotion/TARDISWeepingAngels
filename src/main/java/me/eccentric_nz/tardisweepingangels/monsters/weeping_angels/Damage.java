@@ -1,8 +1,9 @@
 /*
  *  Copyright 2014 eccentric_nz.
  */
-package me.eccentric_nz.tardisweepingangels;
+package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.libraryaddict.disguise.DisguiseAPI;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -29,12 +30,12 @@ import org.bukkit.potion.PotionEffectType;
  *
  * @author eccentric_nz
  */
-public class TARDISWeepingAngelsDamage implements Listener {
+public class Damage implements Listener {
 
     private final TARDISWeepingAngels plugin;
     private final Material mat;
 
-    public TARDISWeepingAngelsDamage(TARDISWeepingAngels plugin) {
+    public Damage(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
         this.mat = Material.valueOf(plugin.getConfig().getString("angels.weapon"));
     }

@@ -1,4 +1,4 @@
-package me.eccentric_nz.tardisweepingangels;
+package me.eccentric_nz.tardisweepingangels.monsters.silurians;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,7 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 
-public class TARDISWeepingAngelsCaveFinder {
+public class CaveFinder {
 
     public static Location searchCave(Location random) {
         Location l = null;

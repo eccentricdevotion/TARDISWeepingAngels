@@ -1,8 +1,9 @@
 /*
  *  Copyright 2014 eccentric_nz.
  */
-package me.eccentric_nz.tardisweepingangels;
+package me.eccentric_nz.tardisweepingangels.death;
 
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.libraryaddict.disguise.DisguiseAPI;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
@@ -27,11 +28,11 @@ import org.bukkit.projectiles.ProjectileSource;
  *
  * @author eccentric_nz
  */
-public class TARDISWeepingAngelsPlayerDeath implements Listener {
+public class PlayerDeath implements Listener {
 
     private final TARDISWeepingAngels plugin;
 
-    public TARDISWeepingAngelsPlayerDeath(TARDISWeepingAngels plugin) {
+    public PlayerDeath(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
     }
 

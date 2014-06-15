@@ -1,5 +1,8 @@
-package me.eccentric_nz.tardisweepingangels;
+package me.eccentric_nz.tardisweepingangels.commands;
 
+import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -11,11 +14,11 @@ import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 
-public class TARDISWeepingAngelsSpawnCommand implements CommandExecutor {
+public class SpawnCommand implements CommandExecutor {
 
     private final TARDISWeepingAngels plugin;
 
-    public TARDISWeepingAngelsSpawnCommand(TARDISWeepingAngels plugin) {
+    public SpawnCommand(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
     }
 
@@ -23,10 +26,10 @@ public class TARDISWeepingAngelsSpawnCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("twas")) {
             // check monster type
-            TARDISWeepingAngelsMonster monster;
+            Monster monster;
             try {
                 String upper = args[0].toUpperCase();
-                monster = TARDISWeepingAngelsMonster.valueOf(upper);
+                monster = Monster.valueOf(upper);
             } catch (IllegalArgumentException e) {
                 sender.sendMessage(plugin.pluginName + "Invalid monster type!");
                 return true;
@@ -45,7 +48,7 @@ public class TARDISWeepingAngelsSpawnCommand implements CommandExecutor {
             eyeLocation.setY(eyeLocation.getY() + 1);
             eyeLocation.setZ(eyeLocation.getZ() + 0.5F);
             World world = eyeLocation.getWorld();
-            final TARDISWeepingAngelEquipment equip = new TARDISWeepingAngelEquipment();
+            final MonsterEquipment equip = new MonsterEquipment();
             switch (monster) {
                 case ANGEL:
                 case WEEPING_ANGEL:

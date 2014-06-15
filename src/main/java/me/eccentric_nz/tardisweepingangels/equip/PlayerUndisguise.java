@@ -1,5 +1,6 @@
-package me.eccentric_nz.tardisweepingangels;
+package me.eccentric_nz.tardisweepingangels.equip;
 
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -10,11 +11,11 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class TARDISWeepingAngelsUndisguise implements Listener {
+public class PlayerUndisguise implements Listener {
 
     private final TARDISWeepingAngels plugin;
 
-    public TARDISWeepingAngelsUndisguise(TARDISWeepingAngels plugin) {
+    public PlayerUndisguise(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
     }
 

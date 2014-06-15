@@ -1,9 +1,10 @@
 /*
  *  Copyright 2014 eccentric_nz.
  */
-package me.eccentric_nz.tardisweepingangels;
+package me.eccentric_nz.tardisweepingangels.monsters.daleks;
 
 import java.util.Collection;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
@@ -16,11 +17,11 @@ import org.bukkit.inventory.ItemStack;
  *
  * @author eccentric_nz
  */
-public class TARDISWeepingAngelsReDisguise implements Runnable {
+public class ReDisguise implements Runnable {
 
     private final TARDISWeepingAngels plugin;
 
-    public TARDISWeepingAngelsReDisguise(TARDISWeepingAngels plugin) {
+    public ReDisguise(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
     }
 

@@ -4,6 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import me.eccentric_nz.tardisweepingangels.commands.AdminCommand;
+import me.eccentric_nz.tardisweepingangels.commands.CountCommand;
+import me.eccentric_nz.tardisweepingangels.commands.DisguiseCommand;
+import me.eccentric_nz.tardisweepingangels.commands.SpawnCommand;
+import me.eccentric_nz.tardisweepingangels.commands.TabComplete;
+import me.eccentric_nz.tardisweepingangels.death.Death;
+import me.eccentric_nz.tardisweepingangels.death.PlayerDeath;
+import me.eccentric_nz.tardisweepingangels.equip.PlayerUndisguise;
+import me.eccentric_nz.tardisweepingangels.monsters.CybermanRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.IceWarriorRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.ZygonRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.daleks.ReDisguise;
+import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.empty_child.GasMask;
+import me.eccentric_nz.tardisweepingangels.monsters.silurians.SilurianRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.sontarans.Butler;
+import me.eccentric_nz.tardisweepingangels.monsters.sontarans.SontaranRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.Blink;
+import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.Damage;
+import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.WeepingAngelsRunnable;
+import me.eccentric_nz.tardisweepingangels.utils.Config;
+import me.eccentric_nz.tardisweepingangels.utils.Sounds;
 import org.bukkit.ChatColor;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -32,28 +55,29 @@ public class TARDISWeepingAngels extends JavaPlugin {
             PluginDescriptionFile pdfFile = getDescription();
             pluginName = ChatColor.GOLD + "[" + pdfFile.getName() + "]" + ChatColor.RESET + " ";
             // update the config
-            new TARDISWeepingAngelsConfig(this).updateConfig();
+            new Config(this).updateConfig();
             // register listeners
-            pm.registerEvents(new TARDISWeepingAngelsBlink(this), this);
-            pm.registerEvents(new TARDISWeepingAngelsDamage(this), this);
-            pm.registerEvents(new TARDISWeepingAngelsDeath(this), this);
-            pm.registerEvents(new TARDISWeepingAngelsPlayerDeath(this), this);
-            pm.registerEvents(new TARDISWeepingAngelsUndisguise(this), this);
-            pm.registerEvents(new TARDISWeepingAngelsTarget(this), this);
-            pm.registerEvents(new TARDISWeepingAngelsRespawn(this), this);
+            pm.registerEvents(new Blink(this), this);
+            pm.registerEvents(new Damage(this), this);
+            pm.registerEvents(new Death(this), this);
+            pm.registerEvents(new PlayerDeath(this), this);
+            pm.registerEvents(new PlayerUndisguise(this), this);
+            pm.registerEvents(new Sounds(this), this);
+            pm.registerEvents(new GasMask(this), this);
+            pm.registerEvents(new Butler(), this);
             // register commands
-            getCommand("twas").setExecutor(new TARDISWeepingAngelsSpawnCommand(this));
-            getCommand("twad").setExecutor(new TARDISWeepingAngelsDisguiseCommand(this));
-            getCommand("twac").setExecutor(new TARDISWeepingAngelsCountCommand(this));
-            getCommand("twa").setExecutor(new TARDISWeepingAngelsAdminCommand(this));
+            getCommand("twas").setExecutor(new SpawnCommand(this));
+            getCommand("twad").setExecutor(new DisguiseCommand(this));
+            getCommand("twac").setExecutor(new CountCommand(this));
+            getCommand("twa").setExecutor(new AdminCommand(this));
             // set tab completion
-            TabCompleter tabCompleter = new TARDISWeepingAngelsTabComplete(this);
+            TabCompleter tabCompleter = new TabComplete(this);
             getCommand("twas").setTabCompleter(tabCompleter);
             getCommand("twad").setTabCompleter(tabCompleter);
             getCommand("twac").setTabCompleter(tabCompleter);
             getCommand("twa").setTabCompleter(tabCompleter);
             // re-disguise Daleks
-            getServer().getScheduler().scheduleSyncDelayedTask(this, new TARDISWeepingAngelsReDisguise(this), 100L);
+            getServer().getScheduler().scheduleSyncDelayedTask(this, new ReDisguise(this), 100L);
             // start repeating spawn tasks
             long angeldelay = getConfig().getLong("angels.spawn_rate.how_often");
             long cyberdelay = getConfig().getLong("cybermen.spawn_rate.how_often");
@@ -63,14 +87,14 @@ public class TARDISWeepingAngels extends JavaPlugin {
             long siluriandelay = getConfig().getLong("silurians.spawn_rate.how_often");
             long sontarandelay = getConfig().getLong("sontarans.spawn_rate.how_often");
             long zygondelay = getConfig().getLong("zygons.spawn_rate.how_often");
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISWeepingAngelsRunnable(this), angeldelay, angeldelay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISCybermanRunnable(this), cyberdelay, cyberdelay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISDalekRunnable(this), dalekdelay, dalekdelay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISEmptyChildRunnable(this), emptydelay, emptydelay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISIceWarriorRunnable(this), icedelay, icedelay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISSilurianRunnable(this), siluriandelay, siluriandelay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISSontaranRunnable(this), sontarandelay, sontarandelay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new TARDISZygonRunnable(this), zygondelay, zygondelay);
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new WeepingAngelsRunnable(this), angeldelay, angeldelay);
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new CybermanRunnable(this), cyberdelay, cyberdelay);
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new DalekRunnable(this), dalekdelay, dalekdelay);
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new EmptyChildRunnable(this), emptydelay, emptydelay);
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new IceWarriorRunnable(this), icedelay, icedelay);
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new SilurianRunnable(this), siluriandelay, siluriandelay);
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new SontaranRunnable(this), sontarandelay, sontarandelay);
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new ZygonRunnable(this), zygondelay, zygondelay);
             steal = (getConfig().getBoolean("angels.can_steal") && pm.isPluginEnabled("TARDIS"));
         } else {
             System.err.println(pluginName + ChatColor.RED + "This plugin requires LibsDisguises (http://dev.bukkit.org/bukkit-plugins/libs-disguises/), disabling...");

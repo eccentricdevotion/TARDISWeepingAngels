@@ -1,11 +1,13 @@
 /*
  *  Copyright 2014 eccentric_nz.
  */
-package me.eccentric_nz.tardisweepingangels;
+package me.eccentric_nz.tardisweepingangels.monsters;
 
+import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,18 +24,18 @@ import org.bukkit.potion.PotionEffectType;
  *
  * @author eccentric_nz
  */
-public class TARDISCybermanRunnable implements Runnable {
+public class CybermanRunnable implements Runnable {
 
     private final TARDISWeepingAngels plugin;
     private final int spawn_rate;
     private final int maximum;
-    private final TARDISWeepingAngelEquipment equipper;
+    private final MonsterEquipment equipper;
 
-    public TARDISCybermanRunnable(TARDISWeepingAngels plugin) {
+    public CybermanRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
         this.spawn_rate = plugin.getConfig().getInt("cybermen.spawn_rate.how_many");
         this.maximum = plugin.getConfig().getInt("cybermen.spawn_rate.max_per_world");
-        this.equipper = new TARDISWeepingAngelEquipment();
+        this.equipper = new MonsterEquipment();
     }
 
     @Override
