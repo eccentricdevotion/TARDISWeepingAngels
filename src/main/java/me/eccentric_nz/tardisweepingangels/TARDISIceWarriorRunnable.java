@@ -60,7 +60,7 @@ public class TARDISIceWarriorRunnable implements Runnable {
                     Collection<PigZombie> piggies = w.getEntitiesByClass(PigZombie.class);
                     for (PigZombie pz : piggies) {
                         EntityEquipment ee = pz.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.CHAINMAIL_HELMET)) {
+                        if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
                             ItemStack is = ee.getHelmet();
                             if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Ice Warrior")) {
                                 warriors.add(pz);

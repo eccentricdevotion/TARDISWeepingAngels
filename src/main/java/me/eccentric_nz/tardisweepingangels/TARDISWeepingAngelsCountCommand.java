@@ -25,6 +25,7 @@ public class TARDISWeepingAngelsCountCommand implements CommandExecutor {
         this.types.put("d", "daleks");
         this.types.put("e", "empty_child");
         this.types.put("i", "ice_warriors");
+        this.types.put("o", "sontarans");
         this.types.put("s", "silurians");
         this.types.put("z", "zygons");
     }
@@ -95,7 +96,7 @@ public class TARDISWeepingAngelsCountCommand implements CommandExecutor {
                 Collection<PigZombie> warriors = w.getEntitiesByClass(PigZombie.class);
                 for (PigZombie i : warriors) {
                     EntityEquipment ee = i.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.CHAINMAIL_HELMET)) {
+                    if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
                         ItemStack is = ee.getHelmet();
                         if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
                             count++;
@@ -110,6 +111,18 @@ public class TARDISWeepingAngelsCountCommand implements CommandExecutor {
                     if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
                         ItemStack is = ee.getHelmet();
                         if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Silurian")) {
+                            count++;
+                        }
+                    }
+                }
+            } else if (which.equals("o")) {
+                what = "Sontarans";
+                Collection<PigZombie> sontarans = w.getEntitiesByClass(PigZombie.class);
+                for (PigZombie o : sontarans) {
+                    EntityEquipment ee = o.getEquipment();
+                    if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                        ItemStack is = ee.getHelmet();
+                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Sontaran")) {
                             count++;
                         }
                     }

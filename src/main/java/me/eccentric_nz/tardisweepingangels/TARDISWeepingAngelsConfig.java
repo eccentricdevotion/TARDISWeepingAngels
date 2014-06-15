@@ -32,41 +32,47 @@ public class TARDISWeepingAngelsConfig {
         this.configFile = new File(plugin.getDataFolder(), "config.yml");
         this.config = YamlConfiguration.loadConfiguration(configFile);
         // integer
-        intOptions.put("ice_warriors.spawn_rate.how_many", 3);
-        intOptions.put("ice_warriors.spawn_rate.how_often", 400);
-        intOptions.put("ice_warriors.spawn_rate.max_per_world", 25);
         intOptions.put("cybermen.spawn_rate.how_many", 2);
         intOptions.put("cybermen.spawn_rate.how_often", 400);
         intOptions.put("cybermen.spawn_rate.max_per_world", 10);
+        intOptions.put("daleks.spawn_rate.how_many", 2);
+        intOptions.put("daleks.spawn_rate.how_often", 400);
+        intOptions.put("daleks.spawn_rate.max_per_world", 20);
         intOptions.put("empty_child.spawn_rate.how_many", 2);
         intOptions.put("empty_child.spawn_rate.how_often", 400);
         intOptions.put("empty_child.spawn_rate.max_per_world", 10);
+        intOptions.put("ice_warriors.spawn_rate.how_many", 2);
+        intOptions.put("ice_warriors.spawn_rate.how_often", 400);
+        intOptions.put("ice_warriors.spawn_rate.max_per_world", 20);
+        intOptions.put("silurians.spawn_rate.how_many", 2);
+        intOptions.put("silurians.spawn_rate.how_often", 400);
+        intOptions.put("silurians.spawn_rate.max_per_world", 20);
+        intOptions.put("sontarans.spawn_rate.how_many", 2);
+        intOptions.put("sontarans.spawn_rate.how_often", 400);
+        intOptions.put("sontarans.spawn_rate.max_per_world", 20);
         intOptions.put("zygons.spawn_rate.how_many", 2);
         intOptions.put("zygons.spawn_rate.how_often", 400);
         intOptions.put("zygons.spawn_rate.max_per_world", 10);
-        intOptions.put("silurians.spawn_rate.how_many", 3);
-        intOptions.put("silurians.spawn_rate.how_often", 400);
-        intOptions.put("silurians.spawn_rate.max_per_world", 25);
-        intOptions.put("daleks.spawn_rate.how_many", 3);
-        intOptions.put("daleks.spawn_rate.how_often", 400);
-        intOptions.put("daleks.spawn_rate.max_per_world", 25);
         // string
         //strOptions.put("angels.weapon", "DIAMOND_PICKAXE");
         // list
-        listOptions.put("ice_warriors.worlds", Arrays.asList(new String[]{"world"}));
-        listOptions.put("ice_warriors.drops", Arrays.asList(new String[]{"ICE", "PACKED_ICE", "SNOW_BLOCK"}));
-        listOptions.put("cybermen.worlds", Arrays.asList(new String[]{"world"}));
         listOptions.put("cybermen.drops", Arrays.asList(new String[]{"REDSTONE", "STONE_BUTTON"}));
-        listOptions.put("empty_child.worlds", Arrays.asList(new String[]{"world"}));
-        listOptions.put("empty_child.drops", Arrays.asList(new String[]{"COOKED_BEEF", "SUGAR"}));
-        listOptions.put("zygons.worlds", Arrays.asList(new String[]{"world"}));
-        listOptions.put("zygons.drops", Arrays.asList(new String[]{"PAINTING", "SAND"}));
-        listOptions.put("silurians.worlds", Arrays.asList(new String[]{"world"}));
-        listOptions.put("silurians.drops", Arrays.asList(new String[]{"GOLD_NUGGET", "FEATHER"}));
-        listOptions.put("daleks.worlds", Arrays.asList(new String[]{"world"}));
+        listOptions.put("cybermen.worlds", Arrays.asList(new String[]{"world"}));
         listOptions.put("daleks.drops", Arrays.asList(new String[]{"SLIME_BALL", "ROTTEN_FLESH"}));
+        listOptions.put("daleks.worlds", Arrays.asList(new String[]{"world"}));
+        listOptions.put("empty_child.drops", Arrays.asList(new String[]{"COOKED_BEEF", "SUGAR"}));
+        listOptions.put("empty_child.worlds", Arrays.asList(new String[]{"world"}));
+        listOptions.put("ice_warriors.drops", Arrays.asList(new String[]{"ICE", "PACKED_ICE", "SNOW_BLOCK"}));
+        listOptions.put("ice_warriors.worlds", Arrays.asList(new String[]{"world"}));
+        listOptions.put("silurians.drops", Arrays.asList(new String[]{"GOLD_NUGGET", "FEATHER"}));
+        listOptions.put("silurians.worlds", Arrays.asList(new String[]{"world"}));
+        listOptions.put("sontarans.drops", Arrays.asList(new String[]{"POTATO_ITEM", "MILK_BUCKET"}));
+        listOptions.put("sontarans.worlds", Arrays.asList(new String[]{"world"}));
+        listOptions.put("zygons.drops", Arrays.asList(new String[]{"PAINTING", "SAND"}));
+        listOptions.put("zygons.worlds", Arrays.asList(new String[]{"world"}));
         // boolean
         boolOptions.put("cybermen.can_upgrade", true);
+        boolOptions.put("sontarans.can_tame", true);
     }
 
     public void updateConfig() {

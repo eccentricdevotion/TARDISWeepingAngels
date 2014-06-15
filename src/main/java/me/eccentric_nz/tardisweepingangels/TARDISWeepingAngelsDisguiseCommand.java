@@ -73,6 +73,9 @@ public class TARDISWeepingAngelsDisguiseCommand implements CommandExecutor {
                     case SILURIAN:
                         equip.setSilurianEquipment(player, true);
                         break;
+                    case SONTARAN:
+                        equip.setSontaranEquipment(player, true);
+                        break;
                     case ZYGON:
                         equip.setZygonEquipment(player, true);
                         break;

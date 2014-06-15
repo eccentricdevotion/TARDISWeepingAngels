@@ -33,35 +33,39 @@ public class TARDISWeepingAngelsDeath implements Listener {
 
     private final TARDISWeepingAngels plugin;
     private final List<Material> angel_drops = new ArrayList<Material>();
-    private final List<Material> ice_drops = new ArrayList<Material>();
     private final List<Material> cyber_drops = new ArrayList<Material>();
-    private final List<Material> empty_drops = new ArrayList<Material>();
-    private final List<Material> zygon_drops = new ArrayList<Material>();
-    private final List<Material> silurian_drops = new ArrayList<Material>();
     private final List<Material> dalek_drops = new ArrayList<Material>();
+    private final List<Material> empty_drops = new ArrayList<Material>();
+    private final List<Material> ice_drops = new ArrayList<Material>();
+    private final List<Material> silurian_drops = new ArrayList<Material>();
+    private final List<Material> sontaran_drops = new ArrayList<Material>();
+    private final List<Material> zygon_drops = new ArrayList<Material>();
 
     public TARDISWeepingAngelsDeath(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        for (String s : plugin.getConfig().getStringList("angels.drops")) {
-            this.angel_drops.add(Material.valueOf(s));
-        }
-        for (String i : plugin.getConfig().getStringList("ice_warriors.drops")) {
-            this.ice_drops.add(Material.valueOf(i));
+        for (String a : plugin.getConfig().getStringList("angels.drops")) {
+            this.angel_drops.add(Material.valueOf(a));
         }
         for (String c : plugin.getConfig().getStringList("cybermen.drops")) {
             this.cyber_drops.add(Material.valueOf(c));
         }
+        for (String d : plugin.getConfig().getStringList("daleks.drops")) {
+            this.dalek_drops.add(Material.valueOf(d));
+        }
         for (String e : plugin.getConfig().getStringList("empty_child.drops")) {
             this.empty_drops.add(Material.valueOf(e));
         }
+        for (String i : plugin.getConfig().getStringList("ice_warriors.drops")) {
+            this.ice_drops.add(Material.valueOf(i));
+        }
+        for (String o : plugin.getConfig().getStringList("sontarans.drops")) {
+            this.sontaran_drops.add(Material.valueOf(o));
+        }
+        for (String s : plugin.getConfig().getStringList("silurians.drops")) {
+            this.silurian_drops.add(Material.valueOf(s));
+        }
         for (String z : plugin.getConfig().getStringList("zygons.drops")) {
             this.zygon_drops.add(Material.valueOf(z));
-        }
-        for (String i : plugin.getConfig().getStringList("silurians.drops")) {
-            this.silurian_drops.add(Material.valueOf(i));
-        }
-        for (String d : plugin.getConfig().getStringList("daleks.drops")) {
-            this.dalek_drops.add(Material.valueOf(d));
         }
     }
 
@@ -104,6 +108,20 @@ public class TARDISWeepingAngelsDeath implements Listener {
                 if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Ice")) {
                     event.getDrops().clear();
                     ItemStack stack = new ItemStack(ice_drops.get(plugin.getRandom().nextInt(ice_drops.size())), plugin.getRandom().nextInt(3) + 1);
+                    event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                    return;
+                }
+            }
+            if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                ItemStack is = ee.getHelmet();
+                if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Sontaran")) {
+                    event.getDrops().clear();
+                    ItemStack stack;
+                    if (plugin.getRandom().nextInt(100) < 3) {
+                        stack = new ItemStack(Material.POISONOUS_POTATO, 1);
+                    } else {
+                        stack = new ItemStack(sontaran_drops.get(plugin.getRandom().nextInt(sontaran_drops.size())), plugin.getRandom().nextInt(1) + 1);
+                    }
                     event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                     return;
                 }

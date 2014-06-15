@@ -1,9 +1,9 @@
 ## spawn rate is how many angels to spawn every x ticks up to a maximum per world
 angels:
     spawn_rate:
-        how_many: 3
+        how_many: 2
         how_often: 400
-        max_per_world: 25
+        max_per_world: 20
     worlds:
         - world
     freeze_time: 100
@@ -12,17 +12,6 @@ angels:
         - COBBLESTONE
         - STONE
     angels_can_steal: true
-ice_warriors:
-    spawn_rate:
-        how_many: 3
-        how_often: 400
-        max_per_world: 25
-    worlds:
-        - world
-    drops:
-        - ICE
-        - PACKED_ICE
-        - SNOW_BLOCK
 cybermen:
     spawn_rate:
         how_many: 2
@@ -34,6 +23,16 @@ cybermen:
         - REDSTONE
         - STONE_BUTTON
     can_upgrade: true
+daleks:
+    spawn_rate:
+        how_many: 2
+        how_often: 400
+        max_per_world: 20
+    worlds:
+        - world
+    drops:
+        - SLIME_BALL
+        - ROTTEN_FLESH
 empty_child:
     spawn_rate:
         how_many: 2
@@ -44,6 +43,38 @@ empty_child:
     drops:
         - COOKED_BEEF
         - SUGAR
+ice_warriors:
+    spawn_rate:
+        how_many: 2
+        how_often: 400
+        max_per_world: 20
+    worlds:
+        - world
+    drops:
+        - ICE
+        - PACKED_ICE
+        - SNOW_BLOCK
+silurians:
+    spawn_rate:
+        how_many: 2
+        how_often: 400
+        max_per_world: 20
+    worlds:
+        - world
+    drops:
+        - GOLD_NUGGET
+        - FEATHER
+sontarans:
+    spawn_rate:
+        how_many: 2
+        how_often: 400
+        max_per_world: 20
+    worlds:
+        - world
+    drops:
+        - POTATO_ITEM
+        - MILK_BUCKET
+    can_tame: true
 zygons:
     spawn_rate:
         how_many: 2
@@ -54,23 +85,3 @@ zygons:
     drops:
         - PAINTING
         - SAND
-silurians:
-    spawn_rate:
-        how_many: 3
-        how_often: 400
-        max_per_world: 25
-    worlds:
-        - world
-    drops:
-        - GOLD_NUGGET
-        - FEATHER
-daleks:
-    spawn_rate:
-        how_many: 3
-        how_often: 400
-        max_per_world: 25
-    worlds:
-        - world
-    drops:
-        - SLIME_BALL
-        - ROTTEN_FLESH

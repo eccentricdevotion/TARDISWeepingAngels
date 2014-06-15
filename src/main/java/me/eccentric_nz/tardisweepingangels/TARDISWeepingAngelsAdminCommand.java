@@ -20,6 +20,7 @@ public class TARDISWeepingAngelsAdminCommand implements CommandExecutor {
         this.types.put("d", "daleks");
         this.types.put("e", "empty_child");
         this.types.put("i", "ice_warriors");
+        this.types.put("o", "sontarans");
         this.types.put("s", "silurians");
         this.types.put("z", "zygons");
     }

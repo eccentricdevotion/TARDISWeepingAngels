@@ -229,6 +229,42 @@ public class TARDISWeepingAngelEquipment {
         }
     }
 
+    public void setSontaranEquipment(LivingEntity le, boolean disguise) {
+        ItemStack helmet = new ItemStack(Material.GOLD_HELMET, 1);
+        ItemStack chestplate = new ItemStack(Material.GOLD_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.GOLD_LEGGINGS, 1);
+        if (disguise) {
+            helmet.setDurability((short) 160);
+            chestplate.setDurability((short) 235);
+            leggings.setDurability((short) 220);
+        }
+        ItemMeta hmeta = helmet.getItemMeta();
+        hmeta.setDisplayName("Sontaran Head");
+        helmet.setItemMeta(hmeta);
+        ItemMeta cmeta = chestplate.getItemMeta();
+        cmeta.setDisplayName("Sontaran Chest");
+        chestplate.setItemMeta(cmeta);
+        ItemMeta lmeta = leggings.getItemMeta();
+        lmeta.setDisplayName("Sontaran Legs");
+        leggings.setItemMeta(lmeta);
+
+        EntityEquipment ee = le.getEquipment();
+        ee.setChestplate(chestplate);
+        ee.setLeggings(leggings);
+        ee.setBoots(null);
+        ee.setHelmet(helmet);
+        if (!disguise) {
+            ItemStack sword = new ItemStack(Material.STONE_SWORD, 1);
+            ItemMeta bmeta = sword.getItemMeta();
+            bmeta.setDisplayName("Sontaran Weapon");
+            sword.setItemMeta(bmeta);
+            ee.setItemInHand(sword);
+            ee.setHelmetDropChance(0F);
+            ee.setChestplateDropChance(0F);
+            ee.setLeggingsDropChance(0F);
+        }
+    }
+
     public void setDalekEquipment(LivingEntity le) {
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET, 1);
         ItemMeta hmeta = helmet.getItemMeta();

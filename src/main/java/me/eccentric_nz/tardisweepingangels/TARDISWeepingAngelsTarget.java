@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Zombie;
@@ -81,6 +82,26 @@ public class TARDISWeepingAngelsTarget implements Listener {
                             tracker.remove(uuid);
                         }
                     }, delay);
+                }
+            }
+        }
+        if (ent instanceof PigZombie && !tracker.contains(uuid)) {
+            PigZombie pigz = (PigZombie) ent;
+            EntityEquipment ee = pigz.getEquipment();
+            ItemStack head = ee.getHelmet();
+            if (head != null && head.getType().equals(Material.GOLD_HELMET) && head.hasItemMeta() && head.getItemMeta().hasDisplayName() && head.getItemMeta().getDisplayName().startsWith("Sontaran")) {
+                tracker.add(uuid);
+                final LivingEntity le = event.getTarget();
+                if (le instanceof Player) {
+                    // schedule delayed task
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            Player player = (Player) le;
+                            player.playSound(ent.getLocation(), "sontaran", 1.0F, 1.0F);
+                            tracker.remove(uuid);
+                        }
+                    }, 55L);
                 }
             }
         }

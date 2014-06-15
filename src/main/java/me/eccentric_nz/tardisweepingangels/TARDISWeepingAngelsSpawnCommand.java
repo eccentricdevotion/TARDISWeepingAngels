@@ -112,6 +112,18 @@ public class TARDISWeepingAngelsSpawnCommand implements CommandExecutor {
                         }
                     }, 5L);
                     break;
+                case SONTARAN:
+                    final LivingEntity o = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            equip.setSontaranEquipment(o, false);
+                        }
+                    }, 5L);
+                    PigZombie sontaran = (PigZombie) o;
+                    sontaran.setAngry(true);
+                    sontaran.setAnger(Integer.MAX_VALUE);
+                    break;
                 case ZYGON:
                     final LivingEntity z = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                     Zombie zygon = (Zombie) z;
