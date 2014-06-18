@@ -1,7 +1,7 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
-import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -62,6 +62,9 @@ public class SpawnCommand implements CommandExecutor {
                     break;
                 case CYBERMAN:
                     final LivingEntity c = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
+                    Zombie cyber = (Zombie) c;
+                    cyber.setVillager(false);
+                    cyber.setBaby(false);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
                         public void run() {
@@ -89,6 +92,7 @@ public class SpawnCommand implements CommandExecutor {
                         }
                     }, 5L);
                     PigZombie pigman = (PigZombie) i;
+                    pigman.setBaby(false);
                     pigman.setAngry(true);
                     pigman.setAnger(Integer.MAX_VALUE);
                     break;
@@ -116,16 +120,17 @@ public class SpawnCommand implements CommandExecutor {
                     }, 5L);
                     break;
                 case SONTARAN:
-                    final LivingEntity o = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
+                    final LivingEntity o = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
                         public void run() {
                             equip.setSontaranEquipment(o, false);
                         }
                     }, 5L);
-                    PigZombie sontaran = (PigZombie) o;
-                    sontaran.setAngry(true);
-                    sontaran.setAnger(Integer.MAX_VALUE);
+                    Zombie sontaran = (Zombie) o;
+                    sontaran.setBaby(false);
+//                    sontaran.setAngry(true);
+//                    sontaran.setAnger(Integer.MAX_VALUE);
                     break;
                 case ZYGON:
                     final LivingEntity z = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
