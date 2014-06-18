@@ -5,8 +5,8 @@ package me.eccentric_nz.tardisweepingangels.death;
 
 import java.util.ArrayList;
 import java.util.List;
-import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.libraryaddict.disguise.DisguiseAPI;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -81,7 +81,7 @@ public class Death implements Listener {
                 if (plugin.getRandom().nextInt(100) < 3) {
                     stack = new ItemStack(Material.SKULL_ITEM, 1);
                 } else {
-                    stack = new ItemStack(angel_drops.get(plugin.getRandom().nextInt(angel_drops.size())), plugin.getRandom().nextInt(3) + 1);
+                    stack = new ItemStack(angel_drops.get(plugin.getRandom().nextInt(angel_drops.size())), plugin.getRandom().nextInt(1) + 1);
                 }
                 event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                 return;
@@ -109,7 +109,7 @@ public class Death implements Listener {
                 ItemStack is = ee.getHelmet();
                 if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Ice")) {
                     event.getDrops().clear();
-                    ItemStack stack = new ItemStack(ice_drops.get(plugin.getRandom().nextInt(ice_drops.size())), plugin.getRandom().nextInt(3) + 1);
+                    ItemStack stack = new ItemStack(ice_drops.get(plugin.getRandom().nextInt(ice_drops.size())), plugin.getRandom().nextInt(1) + 1);
                     event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                     return;
                 }
@@ -122,7 +122,7 @@ public class Death implements Listener {
                     if (plugin.getRandom().nextInt(100) < 3) {
                         stack = new ItemStack(Material.POISONOUS_POTATO, 1);
                     } else {
-                        stack = new ItemStack(sontaran_drops.get(plugin.getRandom().nextInt(sontaran_drops.size())), plugin.getRandom().nextInt(1) + 1);
+                        stack = new ItemStack(sontaran_drops.get(plugin.getRandom().nextInt(sontaran_drops.size())), 1);
                     }
                     event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                     return;
@@ -151,7 +151,7 @@ public class Death implements Listener {
                         if (plugin.getRandom().nextInt(100) < 3) {
                             stack = new ItemStack(Material.POTION, 1, (short) 8197);
                         } else {
-                            stack = new ItemStack(empty_drops.get(plugin.getRandom().nextInt(empty_drops.size())), plugin.getRandom().nextInt(2) + 1);
+                            stack = new ItemStack(empty_drops.get(plugin.getRandom().nextInt(empty_drops.size())), plugin.getRandom().nextInt(1) + 1);
                         }
                         event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                         return;
@@ -159,7 +159,7 @@ public class Death implements Listener {
                     if (is.getItemMeta().getDisplayName().startsWith("Zygon")) {
                         event.getDrops().clear();
                         ItemStack stack;
-                        stack = new ItemStack(zygon_drops.get(plugin.getRandom().nextInt(zygon_drops.size())), plugin.getRandom().nextInt(2) + 1);
+                        stack = new ItemStack(zygon_drops.get(plugin.getRandom().nextInt(zygon_drops.size())), plugin.getRandom().nextInt(1) + 1);
                         event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                         return;
                     }
@@ -187,6 +187,7 @@ public class Death implements Listener {
                                 e.setCustomName(name);
                                 e.setCustomNameVisible(true);
                             }
+                            return;
                         }
                         if (dn.startsWith("Empty Child")) {
                             if (event.getEntity() instanceof Player) {
