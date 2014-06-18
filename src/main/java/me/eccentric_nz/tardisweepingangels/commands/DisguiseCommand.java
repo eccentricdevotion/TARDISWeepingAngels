@@ -1,7 +1,7 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
-import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -78,6 +78,9 @@ public class DisguiseCommand implements CommandExecutor {
                         break;
                     case SONTARAN:
                         equip.setSontaranEquipment(player, true);
+                        break;
+                    case STRAX:
+                        equip.setButlerEquipment(player, true);
                         break;
                     case ZYGON:
                         equip.setZygonEquipment(player, true);
