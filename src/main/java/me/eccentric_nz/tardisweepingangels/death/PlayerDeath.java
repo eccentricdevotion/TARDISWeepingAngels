@@ -61,6 +61,10 @@ public class PlayerDeath implements Listener {
                             event.setDeathMessage(name + " was slain by a Zygon");
                             return;
                         }
+                        if (dn.startsWith("Sontaran")) {
+                            event.setDeathMessage(name + " was slain by a Sontaran");
+                            return;
+                        }
                     }
                 }
                 if (attacker instanceof PigZombie) {
@@ -69,8 +73,8 @@ public class PlayerDeath implements Listener {
                         event.setDeathMessage(name + " was slain by an Ice Warrior");
                         return;
                     }
-                    if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
-                        event.setDeathMessage(name + " was slain by a Sontaran");
+                    if (ee.getHelmet().getType().equals(Material.CHAINMAIL_HELMET) && ((PigZombie) attacker).getCustomName().equals("Strax")) {
+                        event.setDeathMessage(name + " was slain by a very angry Sontaran butler called Strax");
                         return;
                     }
                 }

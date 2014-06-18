@@ -6,15 +6,15 @@ package me.eccentric_nz.tardisweepingangels.monsters.sontarans;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.PigZombie;
+import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -47,9 +47,9 @@ public class SontaranRunnable implements Runnable {
                 // only spawn in day - times according to http://minecraft.gamepedia.com/Day-night_cycle
                 if ((time > 0 && time < 13187) || time > 22812) {
                     // get the current warriors
-                    List<PigZombie> sontarans = new ArrayList<PigZombie>();
-                    Collection<PigZombie> potatoes = w.getEntitiesByClass(PigZombie.class);
-                    for (PigZombie pz : potatoes) {
+                    List<Zombie> sontarans = new ArrayList<Zombie>();
+                    Collection<Zombie> potatoes = w.getEntitiesByClass(Zombie.class);
+                    for (Zombie pz : potatoes) {
                         EntityEquipment ee = pz.getEquipment();
                         if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
                             ItemStack is = ee.getHelmet();
@@ -78,10 +78,10 @@ public class SontaranRunnable implements Runnable {
             int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
-            final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.PIG_ZOMBIE);
-            PigZombie sontaran = (PigZombie) e;
-            sontaran.setAngry(true);
-            sontaran.setAnger(Integer.MAX_VALUE);
+            final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
+            Zombie sontaran = (Zombie) e;
+//            sontaran.setAngry(true);
+//            sontaran.setAnger(Integer.MAX_VALUE);
             PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3);
             sontaran.addPotionEffect(p);
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
