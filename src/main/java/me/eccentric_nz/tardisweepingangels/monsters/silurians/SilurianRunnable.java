@@ -6,8 +6,8 @@ package me.eccentric_nz.tardisweepingangels.monsters.silurians;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -17,6 +17,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 /**
  *
@@ -78,6 +80,8 @@ public class SilurianRunnable implements Runnable {
                 cave = l;
             }
             final LivingEntity e = (LivingEntity) w.spawnEntity(cave, EntityType.SKELETON);
+            PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3);
+            e.addPotionEffect(p);
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                 @Override
                 public void run() {
