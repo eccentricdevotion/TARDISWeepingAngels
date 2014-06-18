@@ -62,9 +62,14 @@ public class Butler implements Listener {
                         // switch the armour to a butler uniform
                         Location l = zom.getLocation();
                         zom.remove();
-                        PigZombie pz = (PigZombie) l.getWorld().spawnEntity(l, EntityType.PIG_ZOMBIE);
+                        final PigZombie pz = (PigZombie) l.getWorld().spawnEntity(l, EntityType.PIG_ZOMBIE);
                         pz.setAngry(false);
-                        new MonsterEquipment().setButlerEquipment(pz, false);
+                        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                            @Override
+                            public void run() {
+                                new MonsterEquipment().setButlerEquipment(pz, false);
+                            }
+                        }, 2L);
                     }
                     return;
                 }
