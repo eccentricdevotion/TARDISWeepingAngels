@@ -7,6 +7,7 @@ import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.commands.AdminCommand;
 import me.eccentric_nz.tardisweepingangels.commands.CountCommand;
 import me.eccentric_nz.tardisweepingangels.commands.DisguiseCommand;
+import me.eccentric_nz.tardisweepingangels.commands.KillCommand;
 import me.eccentric_nz.tardisweepingangels.commands.SpawnCommand;
 import me.eccentric_nz.tardisweepingangels.commands.TabComplete;
 import me.eccentric_nz.tardisweepingangels.death.Death;
@@ -64,17 +65,19 @@ public class TARDISWeepingAngels extends JavaPlugin {
             pm.registerEvents(new PlayerUndisguise(this), this);
             pm.registerEvents(new Sounds(this), this);
             pm.registerEvents(new GasMask(this), this);
-            pm.registerEvents(new Butler(), this);
+            pm.registerEvents(new Butler(this), this);
             // register commands
             getCommand("twas").setExecutor(new SpawnCommand(this));
             getCommand("twad").setExecutor(new DisguiseCommand(this));
             getCommand("twac").setExecutor(new CountCommand(this));
+            getCommand("twak").setExecutor(new KillCommand(this));
             getCommand("twa").setExecutor(new AdminCommand(this));
             // set tab completion
             TabCompleter tabCompleter = new TabComplete(this);
             getCommand("twas").setTabCompleter(tabCompleter);
             getCommand("twad").setTabCompleter(tabCompleter);
             getCommand("twac").setTabCompleter(tabCompleter);
+            getCommand("twak").setTabCompleter(tabCompleter);
             getCommand("twa").setTabCompleter(tabCompleter);
             // re-disguise Daleks
             getServer().getScheduler().scheduleSyncDelayedTask(this, new ReDisguise(this), 100L);

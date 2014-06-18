@@ -11,13 +11,16 @@ softdepend: [TARDIS]
 depend: [LibsDisguises]
 permissions:
     tardisweepingangels.spawn:
-        description: Allow players to spawn Weeping Angels, Cybermen, Empty Child or Ice Warriors.
+        description: Allow players to spawn a monster.
         default: op
     tardisweepingangels.disguise:
-        description: Allow players to disguise themselves as Weeping Angels, Cybermen, Empty Children or Ice Warriors.
+        description: Allow players to disguise themselves as a monster.
         default: op
     tardisweepingangels.count:
         description: Allow players to use the count command.
+        default: op
+    tardisweepingangels.kill:
+        description: Allow players to use the kill command.
         default: op
     tardisweepingangels.admin:
         description: Allow players to alter plugin settings.
@@ -38,12 +41,18 @@ commands:
     twac:
         aliases: [twacount]
         description: Reports the current number of the specifed monster in the specified world.
-        usage: /<command> [a|c|d|e|i|s|z] [world]
+        usage: /<command> [a|c|d|e|i|o|s|z] [world]
         permission: tardisweepingangels.count
+        permission-message: You don't have the permission <permission> to use this command
+    twak:
+        aliases: [twakill]
+        description: Kills all of the specifed monster in the specified world.
+        usage: /<command> [a|c|d|e|i|o|s|z] [world]
+        permission: tardisweepingangels.kill
         permission-message: You don't have the permission <permission> to use this command
     twa:
         aliases: [twaa,twaadmin]
         description: Add or remove worlds to the worlds list for the specified monster.
-        usage: /<command> [a|c|d|e|i|s|z] [add|remove] [world]
+        usage: /<command> [a|c|d|e|i|o|s|z] [add|remove] [world]
         permission: tardisweepingangels.admin
         permission-message: You don't have the permission <permission> to use this command

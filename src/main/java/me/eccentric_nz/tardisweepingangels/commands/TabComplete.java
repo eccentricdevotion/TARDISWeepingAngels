@@ -57,7 +57,7 @@ public class TabComplete implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 1) {
-            if (command.getName().equals("twac") || command.getName().equals("twa")) {
+            if (command.getName().equals("twac") || command.getName().equals("twak") || command.getName().equals("twa")) {
                 return partial(args[0], LETTER_SUBS);
             }
             if (command.getName().equals("twas") || command.getName().equals("twad")) {
@@ -70,7 +70,7 @@ public class TabComplete implements TabCompleter {
             if (command.getName().equals("twa")) {
                 return partial(args[1], CONFIG_SUBS);
             }
-            if (command.getName().equals("twac")) {
+            if (command.getName().equals("twac") || command.getName().equals("twak")) {
                 return partial(args[1], WORLD_SUBS);
             }
         } else if (args.length == 3) {
