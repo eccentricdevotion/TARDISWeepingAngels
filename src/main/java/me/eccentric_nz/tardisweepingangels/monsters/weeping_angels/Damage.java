@@ -59,7 +59,7 @@ public class Damage implements Listener {
                 return;
             }
             Entity ent = event.getEntity();
-            if (ee.getHelmet().getType().equals(Material.LEATHER_HELMET) && DisguiseAPI.isDisguised(ent)) {
+            if (ee.getHelmet().getType().equals(Material.VINE) && DisguiseAPI.isDisguised(ent)) {
                 if (e instanceof Player) {
                     ((Player) e).playSound(ent.getLocation(), "dalek_hit", 0.5f, 1.0f);
                 }

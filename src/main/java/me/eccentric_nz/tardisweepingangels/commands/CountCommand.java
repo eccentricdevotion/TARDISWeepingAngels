@@ -73,7 +73,7 @@ public class CountCommand implements CommandExecutor {
                 Collection<Skeleton> daleks = w.getEntitiesByClass(Skeleton.class);
                 for (Skeleton d : daleks) {
                     EntityEquipment ee = d.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.LEATHER_HELMET)) {
+                    if (ee.getHelmet().getType().equals(Material.VINE)) {
                         ItemStack is = ee.getHelmet();
                         if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek")) {
                             count++;
@@ -118,8 +118,8 @@ public class CountCommand implements CommandExecutor {
                 }
             } else if (which.equals("o")) {
                 what = "Sontarans";
-                Collection<PigZombie> sontarans = w.getEntitiesByClass(PigZombie.class);
-                for (PigZombie o : sontarans) {
+                Collection<Zombie> sontarans = w.getEntitiesByClass(Zombie.class);
+                for (Zombie o : sontarans) {
                     EntityEquipment ee = o.getEquipment();
                     if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
                         ItemStack is = ee.getHelmet();
