@@ -55,6 +55,7 @@ public class MonsterEquipment {
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
             ee.setBootsDropChance(0F);
+            le.setCanPickupItems(false);
         }
     }
 
@@ -92,6 +93,7 @@ public class MonsterEquipment {
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
+            le.setCanPickupItems(false);
         }
     }
 
@@ -123,6 +125,7 @@ public class MonsterEquipment {
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
+            le.setCanPickupItems(false);
         }
     }
 
@@ -154,6 +157,7 @@ public class MonsterEquipment {
             PotionEffect p = new PotionEffect(PotionEffectType.SLOW, 360000, 1);
             le.removePotionEffect(PotionEffectType.SPEED);
             le.addPotionEffect(p);
+            le.setCanPickupItems(false);
             ee.setItemInHand(null);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
@@ -190,6 +194,7 @@ public class MonsterEquipment {
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
+            le.setCanPickupItems(false);
         }
     }
 
@@ -226,6 +231,7 @@ public class MonsterEquipment {
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
+            le.setCanPickupItems(false);
         }
     }
 
@@ -262,6 +268,7 @@ public class MonsterEquipment {
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
+            le.setCanPickupItems(false);
         }
     }
 
@@ -295,16 +302,19 @@ public class MonsterEquipment {
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
             le.setCustomName("Strax");
+            le.setCanPickupItems(false);
         }
     }
 
     public void setDalekEquipment(LivingEntity le) {
-        ItemStack helmet = new ItemStack(Material.LEATHER_HELMET, 1);
+        ItemStack helmet = new ItemStack(Material.VINE, 1);
         ItemMeta hmeta = helmet.getItemMeta();
         hmeta.setDisplayName("Dalek Head");
+        //hmeta.addEnchant(Enchantment.PROTECTION_FIRE, 10, true);
         helmet.setItemMeta(hmeta);
         EntityEquipment ee = le.getEquipment();
         ee.setHelmet(helmet);
+        ee.setHelmetDropChance(0F);
         ee.setChestplate(null);
         ee.setLeggings(null);
         ee.setBoots(null);
@@ -314,6 +324,7 @@ public class MonsterEquipment {
         le.addPotionEffect(p);
         le.setMaxHealth(30.0d);
         le.setHealth(30.0d);
+        le.setCanPickupItems(false);
     }
 
     public void removeEquipment(Player p) {
