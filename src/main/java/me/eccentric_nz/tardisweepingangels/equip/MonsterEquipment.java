@@ -28,9 +28,9 @@ public class MonsterEquipment {
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
         ItemStack boots = new ItemStack(Material.IRON_BOOTS, 1);
         if (disguise) {
-            chestplate.setDurability((short) 75);
-            leggings.setDurability((short) 70);
-            boots.setDurability((short) 60);
+            helmet.setDurability((short) 160);
+            chestplate.setDurability((short) 235);
+            leggings.setDurability((short) 220);
         }
         ItemMeta hmeta = helmet.getItemMeta();
         hmeta.setDisplayName("Weeping Angel Wing");
