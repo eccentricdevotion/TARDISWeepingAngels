@@ -39,7 +39,7 @@ public class PlayerDeath implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         EntityDamageEvent damage = event.getEntity().getLastDamageCause();
-        if (damage != null) {
+        if (damage != null && damage instanceof EntityDamageByEntityEvent) {
             Entity attacker = (((EntityDamageByEntityEvent) damage).getDamager());
             if (damage.getCause().equals(DamageCause.ENTITY_ATTACK)) {
                 String name = event.getEntity().getName();
