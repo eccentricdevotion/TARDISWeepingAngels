@@ -84,6 +84,7 @@ public class HelmetChecker implements Listener {
                     hmeta.setDisplayName(name);
                     helmet.setItemMeta(hmeta);
                     ee.setHelmet(helmet);
+                    ee.setHelmetDropChance(0F);
                 }
             }
         }
