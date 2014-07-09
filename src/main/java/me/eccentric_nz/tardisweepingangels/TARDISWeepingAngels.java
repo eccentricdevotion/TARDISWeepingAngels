@@ -27,6 +27,7 @@ import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.Blink;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.Damage;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.WeepingAngelsRunnable;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
+import me.eccentric_nz.tardisweepingangels.utils.HelmetChecker;
 import me.eccentric_nz.tardisweepingangels.utils.Sounds;
 import org.bukkit.ChatColor;
 import org.bukkit.command.TabCompleter;
@@ -66,6 +67,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
             pm.registerEvents(new Sounds(this), this);
             pm.registerEvents(new GasMask(this), this);
             pm.registerEvents(new Butler(this), this);
+            pm.registerEvents(new HelmetChecker(this), this);
             // register commands
             getCommand("twas").setExecutor(new SpawnCommand(this));
             getCommand("twad").setExecutor(new DisguiseCommand(this));

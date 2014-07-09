@@ -310,7 +310,6 @@ public class MonsterEquipment {
         ItemStack helmet = new ItemStack(Material.VINE, 1);
         ItemMeta hmeta = helmet.getItemMeta();
         hmeta.setDisplayName("Dalek Head");
-        //hmeta.addEnchant(Enchantment.PROTECTION_FIRE, 10, true);
         helmet.setItemMeta(hmeta);
         EntityEquipment ee = le.getEquipment();
         ee.setHelmet(helmet);
