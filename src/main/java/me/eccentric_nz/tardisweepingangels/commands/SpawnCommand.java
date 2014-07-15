@@ -129,8 +129,16 @@ public class SpawnCommand implements CommandExecutor {
                     }, 5L);
                     Zombie sontaran = (Zombie) o;
                     sontaran.setBaby(false);
-//                    sontaran.setAngry(true);
-//                    sontaran.setAnger(Integer.MAX_VALUE);
+                    break;
+                case VASHTA:
+                case VASHTA_NERADA:
+                    final LivingEntity v = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            equip.setVashtaNeradaEquipment(v, false);
+                        }
+                    }, 5L);
                     break;
                 case ZYGON:
                     final LivingEntity z = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);

@@ -41,6 +41,7 @@ public class Death implements Listener {
     private final List<Material> ice_drops = new ArrayList<Material>();
     private final List<Material> silurian_drops = new ArrayList<Material>();
     private final List<Material> sontaran_drops = new ArrayList<Material>();
+    private final List<Material> vashta_drops = new ArrayList<Material>();
     private final List<Material> zygon_drops = new ArrayList<Material>();
 
     public Death(TARDISWeepingAngels plugin) {
@@ -65,6 +66,9 @@ public class Death implements Listener {
         }
         for (String s : plugin.getConfig().getStringList("silurians.drops")) {
             this.silurian_drops.add(Material.valueOf(s));
+        }
+        for (String v : plugin.getConfig().getStringList("vashta_nerada.drops")) {
+            this.vashta_drops.add(Material.valueOf(v));
         }
         for (String z : plugin.getConfig().getStringList("zygons.drops")) {
             this.zygon_drops.add(Material.valueOf(z));
@@ -134,9 +138,9 @@ public class Death implements Listener {
             if (ee.getHelmet().getType().equals(Material.IRON_HELMET) || ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
                 ItemStack is = ee.getHelmet();
                 if (is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
+                    ItemStack stack;
                     if (is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
                         event.getDrops().clear();
-                        ItemStack stack;
                         if (plugin.getRandom().nextInt(100) < 3) {
                             stack = new ItemStack(Material.IRON_INGOT, 1);
                         } else {
@@ -147,7 +151,6 @@ public class Death implements Listener {
                     }
                     if (is.getItemMeta().getDisplayName().startsWith("Empty Child")) {
                         event.getDrops().clear();
-                        ItemStack stack;
                         if (plugin.getRandom().nextInt(100) < 3) {
                             stack = new ItemStack(Material.POTION, 1, (short) 8197);
                         } else {
@@ -156,9 +159,14 @@ public class Death implements Listener {
                         event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                         return;
                     }
+                    if (is.getItemMeta().getDisplayName().startsWith("Vashta")) {
+                        event.getDrops().clear();
+                        stack = new ItemStack(vashta_drops.get(plugin.getRandom().nextInt(vashta_drops.size())), plugin.getRandom().nextInt(2) + 1);
+                        event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+
+                    }
                     if (is.getItemMeta().getDisplayName().startsWith("Zygon")) {
                         event.getDrops().clear();
-                        ItemStack stack;
                         stack = new ItemStack(zygon_drops.get(plugin.getRandom().nextInt(zygon_drops.size())), plugin.getRandom().nextInt(1) + 1);
                         event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                         return;

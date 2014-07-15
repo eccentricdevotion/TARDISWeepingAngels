@@ -51,6 +51,7 @@ public class Config {
         intOptions.put("sontarans.spawn_rate.how_many", 2);
         intOptions.put("sontarans.spawn_rate.how_often", 400);
         intOptions.put("sontarans.spawn_rate.max_per_world", 20);
+        intOptions.put("vashta_nerada.spawn_chance", 10);
         intOptions.put("zygons.spawn_rate.how_many", 2);
         intOptions.put("zygons.spawn_rate.how_often", 400);
         intOptions.put("zygons.spawn_rate.max_per_world", 10);
@@ -69,6 +70,8 @@ public class Config {
         listOptions.put("silurians.worlds", Arrays.asList(new String[]{"world"}));
         listOptions.put("sontarans.drops", Arrays.asList(new String[]{"POTATO_ITEM", "MILK_BUCKET"}));
         listOptions.put("sontarans.worlds", Arrays.asList(new String[]{"world"}));
+        listOptions.put("vashta_nerada.drops", Arrays.asList(new String[]{"BONE", "LEATHER"}));
+        listOptions.put("vashta_nerada.worlds", Arrays.asList(new String[]{"world"}));
         listOptions.put("zygons.drops", Arrays.asList(new String[]{"PAINTING", "SAND"}));
         listOptions.put("zygons.worlds", Arrays.asList(new String[]{"world"}));
         // boolean

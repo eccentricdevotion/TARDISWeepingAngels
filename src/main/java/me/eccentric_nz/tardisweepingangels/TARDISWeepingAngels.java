@@ -15,6 +15,7 @@ import me.eccentric_nz.tardisweepingangels.death.PlayerDeath;
 import me.eccentric_nz.tardisweepingangels.equip.PlayerUndisguise;
 import me.eccentric_nz.tardisweepingangels.monsters.CybermanRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.IceWarriorRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.VashtaNeradaListener;
 import me.eccentric_nz.tardisweepingangels.monsters.ZygonRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.ReDisguise;
@@ -61,6 +62,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
             // register listeners
             pm.registerEvents(new Blink(this), this);
             pm.registerEvents(new Damage(this), this);
+            pm.registerEvents(new VashtaNeradaListener(this), this);
             pm.registerEvents(new Death(this), this);
             pm.registerEvents(new PlayerDeath(this), this);
             pm.registerEvents(new PlayerUndisguise(this), this);

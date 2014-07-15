@@ -29,7 +29,7 @@ public class PlayerUndisguise implements Listener {
                 if (is != null) {
                     if (is.hasItemMeta()) {
                         ItemMeta im = is.getItemMeta();
-                        if (im.hasDisplayName() && (im.getDisplayName().startsWith("Weeping Angel") || im.getDisplayName().startsWith("Ice Warrior") || im.getDisplayName().startsWith("Cyberman") || im.getDisplayName().startsWith("Empty Child") || im.getDisplayName().startsWith("Silurian") || im.getDisplayName().startsWith("Sontaran") || im.getDisplayName().startsWith("Zygon"))) {
+                        if (im.hasDisplayName() && (im.getDisplayName().startsWith("Weeping Angel") || im.getDisplayName().startsWith("Ice Warrior") || im.getDisplayName().startsWith("Cyberman") || im.getDisplayName().startsWith("Empty Child") || im.getDisplayName().startsWith("Silurian") || im.getDisplayName().startsWith("Sontaran") || im.getDisplayName().startsWith("Zygon") || im.getDisplayName().startsWith("Vashta"))) {
                             event.setCancelled(true);
                             ((Player) event.getWhoClicked()).sendMessage(plugin.pluginName + "You must use the '/twad [monster] off' command to remove this armour!");
                         }

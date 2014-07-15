@@ -34,7 +34,7 @@ import org.bukkit.util.StringUtil;
 public class TabComplete implements TabCompleter {
 
     private final TARDISWeepingAngels plugin;
-    ImmutableList<String> LETTER_SUBS = ImmutableList.of("a", "c", "d", "e", "i", "o", "s", "z");
+    ImmutableList<String> LETTER_SUBS = ImmutableList.of("a", "c", "d", "e", "i", "o", "s", "v", "z");
     private final ImmutableList<String> ONOFF_SUBS = ImmutableList.of("on", "off");
     private final ImmutableList<String> CONFIG_SUBS = ImmutableList.of("add", "remove");
     private final ImmutableList<String> WORLD_SUBS;

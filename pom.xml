@@ -48,7 +48,7 @@
         <dependency>
             <groupId>LibsDisguises</groupId>
             <artifactId>LibsDisguises</artifactId>
-            <version>8.2.5-SNAPSHOT</version>
+            <version>8.2.6-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <artifactId>spigot-api</artifactId>

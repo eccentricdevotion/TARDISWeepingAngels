@@ -23,6 +23,7 @@ public class AdminCommand implements CommandExecutor {
         this.types.put("i", "ice_warriors");
         this.types.put("o", "sontarans");
         this.types.put("s", "silurians");
+        this.types.put("v", "vashta_nerada");
         this.types.put("z", "zygons");
     }
 

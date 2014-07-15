@@ -75,6 +75,13 @@ sontarans:
         - POTATO_ITEM
         - MILK_BUCKET
     can_tame: true
+vashta_nerada:
+    spawn_chance: 10
+    worlds:
+        - world
+    drops:
+        - BONE
+        - LEATHER
 zygons:
     spawn_rate:
         how_many: 2

@@ -59,7 +59,7 @@ public class HelmetChecker implements Listener {
             ItemStack c = ee.getChestplate();
             if (c.hasItemMeta() && c.getItemMeta().hasDisplayName()) {
                 String dn = c.getItemMeta().getDisplayName();
-                if (dn.startsWith("Cyberman") || dn.startsWith("Ice") || dn.startsWith("Silurian") || dn.startsWith("Sontaran") || dn.startsWith("Zygon")) {
+                if (dn.startsWith("Cyberman") || dn.startsWith("Ice") || dn.startsWith("Silurian") || dn.startsWith("Sontaran") || dn.startsWith("Vashta") || dn.startsWith("Zygon")) {
                     event.setCancelled(true);
                     // restore head
                     ItemStack helmet;
@@ -76,6 +76,9 @@ public class HelmetChecker implements Listener {
                     } else if (dn.startsWith("Sontaran")) {
                         helmet = new ItemStack(Material.GOLD_HELMET, 1);
                         name = "Sontaran Head";
+                    } else if (dn.startsWith("Vashta")) {
+                        helmet = new ItemStack(Material.GOLD_HELMET, 1);
+                        name = "Vashta Nerada Head";
                     } else {
                         helmet = new ItemStack(Material.GOLD_HELMET, 1);
                         name = "Zygon Head";

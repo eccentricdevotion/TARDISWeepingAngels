@@ -1,7 +1,8 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -17,18 +18,19 @@ import org.bukkit.inventory.ItemStack;
 public class CountCommand implements CommandExecutor {
 
     private final TARDISWeepingAngels plugin;
-    private final HashMap<String, String> types = new HashMap<String, String>();
+    private final List<String> types = new ArrayList<String>();
 
     public CountCommand(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.types.put("a", "angels");
-        this.types.put("c", "cybermen");
-        this.types.put("d", "daleks");
-        this.types.put("e", "empty_child");
-        this.types.put("i", "ice_warriors");
-        this.types.put("o", "sontarans");
-        this.types.put("s", "silurians");
-        this.types.put("z", "zygons");
+        this.types.add("a");
+        this.types.add("c");
+        this.types.add("d");
+        this.types.add("e");
+        this.types.add("i");
+        this.types.add("o");
+        this.types.add("s");
+        this.types.add("v");
+        this.types.add("z");
     }
 
     @Override
@@ -38,7 +40,7 @@ public class CountCommand implements CommandExecutor {
                 return false;
             }
             String which = args[0].toLowerCase();
-            if (!types.containsKey(which)) {
+            if (!types.contains(which)) {
                 return false;
             }
             World w = plugin.getServer().getWorld(args[1]);
@@ -124,6 +126,18 @@ public class CountCommand implements CommandExecutor {
                     if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
                         ItemStack is = ee.getHelmet();
                         if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Sontaran")) {
+                            count++;
+                        }
+                    }
+                }
+            } else if (which.equals("v")) {
+                what = "Vashta Nerada";
+                Collection<Zombie> vashta = w.getEntitiesByClass(Zombie.class);
+                for (Zombie v : vashta) {
+                    EntityEquipment ee = v.getEquipment();
+                    if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                        ItemStack is = ee.getHelmet();
+                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Vashta")) {
                             count++;
                         }
                     }

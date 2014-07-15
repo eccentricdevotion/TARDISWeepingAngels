@@ -82,6 +82,10 @@ public class DisguiseCommand implements CommandExecutor {
                     case STRAX:
                         equip.setButlerEquipment(player, true);
                         break;
+                    case VASHTA:
+                    case VASHTA_NERADA:
+                        equip.setVashtaNeradaEquipment(player, true);
+                        break;
                     case ZYGON:
                         equip.setZygonEquipment(player, true);
                         break;

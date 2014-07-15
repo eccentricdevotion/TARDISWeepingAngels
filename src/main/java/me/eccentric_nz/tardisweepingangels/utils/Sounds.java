@@ -56,6 +56,10 @@ public class Sounds implements Listener {
                         tmp = "sontaran";
                         delay = 55L;
                     }
+                    if (dn.equals("Vashta Nerada Head") && head.getType().equals(Material.GOLD_HELMET)) {
+                        tmp = "vashta";
+                        delay = 30L;
+                    }
                     if (!tmp.isEmpty()) {
                         final String sound = tmp;
                         // schedule delayed task
@@ -70,6 +74,7 @@ public class Sounds implements Listener {
                     }
                 }
             }
+            return;
         }
         if (ent instanceof Skeleton) {
             Skeleton dalek = (Skeleton) ent;

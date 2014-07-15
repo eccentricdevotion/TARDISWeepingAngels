@@ -326,6 +326,39 @@ public class MonsterEquipment {
         le.setCanPickupItems(false);
     }
 
+    public void setVashtaNeradaEquipment(LivingEntity le, boolean disguise) {
+        ItemStack helmet = new ItemStack(Material.GOLD_HELMET, 1);
+        ItemStack chestplate = new ItemStack(Material.GOLD_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.GOLD_LEGGINGS, 1);
+        if (disguise) {
+            helmet.setDurability((short) 160);
+            chestplate.setDurability((short) 235);
+            leggings.setDurability((short) 220);
+        }
+        ItemMeta hmeta = helmet.getItemMeta();
+        hmeta.setDisplayName("Vashta Nerada Head");
+        helmet.setItemMeta(hmeta);
+        ItemMeta cmeta = chestplate.getItemMeta();
+        cmeta.setDisplayName("Vashta Nerada Chest");
+        chestplate.setItemMeta(cmeta);
+        ItemMeta lmeta = leggings.getItemMeta();
+        lmeta.setDisplayName("Vashta Nerada Legs");
+        leggings.setItemMeta(lmeta);
+
+        EntityEquipment ee = le.getEquipment();
+        ee.setChestplate(chestplate);
+        ee.setLeggings(leggings);
+        ee.setBoots(null);
+        ee.setHelmet(helmet);
+        if (!disguise) {
+            ee.setItemInHand(null);
+            ee.setHelmetDropChance(0F);
+            ee.setChestplateDropChance(0F);
+            ee.setLeggingsDropChance(0F);
+            le.setCanPickupItems(false);
+        }
+    }
+
     public void removeEquipment(Player p) {
         PlayerInventory inv = p.getInventory();
         inv.setHelmet(null);

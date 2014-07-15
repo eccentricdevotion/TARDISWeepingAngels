@@ -65,6 +65,10 @@ public class PlayerDeath implements Listener {
                             event.setDeathMessage(name + " was slain by a Sontaran");
                             return;
                         }
+                        if (dn.startsWith("Vashta")) {
+                            event.setDeathMessage(name + " was eaten by a Vashta Nerada");
+                            return;
+                        }
                     }
                 }
                 if (attacker instanceof PigZombie) {
@@ -75,6 +79,14 @@ public class PlayerDeath implements Listener {
                     }
                     if (ee.getHelmet().getType().equals(Material.CHAINMAIL_HELMET) && ((PigZombie) attacker).getCustomName().equals("Strax")) {
                         event.setDeathMessage(name + " was slain by a very angry Sontaran butler called Strax");
+                        return;
+                    }
+                }
+                if (attacker instanceof Skeleton) {
+                    EntityEquipment ee = ((LivingEntity) attacker).getEquipment();
+                    ItemStack is = ee.getHelmet();
+                    if (is.getType().equals(Material.WATER_LILY)) {
+                        event.setDeathMessage(name + " was slain by a Weeping Angel");
                         return;
                     }
                 }
