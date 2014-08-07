@@ -5,6 +5,7 @@ package me.eccentric_nz.tardisweepingangels.monsters.daleks;
 
 import java.util.Collection;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
@@ -31,7 +32,8 @@ public class ReDisguise implements Runnable {
         int count = 0;
         for (World w : plugin.getServer().getWorlds()) {
             // only configured worlds
-            if (plugin.getConfig().getStringList("daleks.worlds").contains(w.getName())) {
+            String name = Config.sanitiseName(w.getName());
+            if (plugin.getConfig().getInt("daleks.worlds." + name) > 0) {
                 // get the current daleks
                 Collection<Skeleton> daleks = w.getEntitiesByClass(Skeleton.class);
                 for (Skeleton d : daleks) {

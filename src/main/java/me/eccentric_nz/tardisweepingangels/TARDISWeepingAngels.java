@@ -86,25 +86,18 @@ public class TARDISWeepingAngels extends JavaPlugin {
             // re-disguise Daleks
             getServer().getScheduler().scheduleSyncDelayedTask(this, new ReDisguise(this), 100L);
             // start repeating spawn tasks
-            long angeldelay = getConfig().getLong("angels.spawn_rate.how_often");
-            long cyberdelay = getConfig().getLong("cybermen.spawn_rate.how_often");
-            long dalekdelay = getConfig().getLong("daleks.spawn_rate.how_often");
-            long emptydelay = getConfig().getLong("empty_child.spawn_rate.how_often");
-            long icedelay = getConfig().getLong("angels.spawn_rate.how_often");
-            long siluriandelay = getConfig().getLong("silurians.spawn_rate.how_often");
-            long sontarandelay = getConfig().getLong("sontarans.spawn_rate.how_often");
-            long zygondelay = getConfig().getLong("zygons.spawn_rate.how_often");
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new WeepingAngelsRunnable(this), angeldelay, angeldelay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new CybermanRunnable(this), cyberdelay, cyberdelay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new DalekRunnable(this), dalekdelay, dalekdelay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new EmptyChildRunnable(this), emptydelay, emptydelay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new IceWarriorRunnable(this), icedelay, icedelay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new SilurianRunnable(this), siluriandelay, siluriandelay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new SontaranRunnable(this), sontarandelay, sontarandelay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new ZygonRunnable(this), zygondelay, zygondelay);
+            long delay = getConfig().getLong("spawn_rate.how_often");
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new WeepingAngelsRunnable(this), delay, delay);
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new CybermanRunnable(this), delay, delay);
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new DalekRunnable(this), delay, delay);
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new EmptyChildRunnable(this), delay, delay);
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new IceWarriorRunnable(this), delay, delay);
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new SilurianRunnable(this), delay, delay);
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new SontaranRunnable(this), delay, delay);
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new ZygonRunnable(this), delay, delay);
             steal = (getConfig().getBoolean("angels.can_steal") && pm.isPluginEnabled("TARDIS"));
         } else {
-            System.err.println(pluginName + ChatColor.RED + "This plugin requires LibsDisguises (http://dev.bukkit.org/bukkit-plugins/libs-disguises/), disabling...");
+            System.err.println(pluginName + ChatColor.RED + "This plugin requires LibsDisguises (http://ci.md-5.net/job/LibsDisguises/), disabling...");
             pm.disablePlugin(this);
         }
     }

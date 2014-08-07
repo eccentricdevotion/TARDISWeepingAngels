@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Random;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
+import me.eccentric_nz.tardisweepingangels.utils.Config;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -32,16 +33,12 @@ import org.bukkit.potion.PotionEffectType;
 public class VashtaNeradaListener implements Listener {
 
     private final TARDISWeepingAngels plugin;
-    private final List<String> worlds;
     private final Random r = new Random();
-    private final int chance;
     private final List<BlockFace> faces = new ArrayList<BlockFace>();
     private final MonsterEquipment equipper;
 
     public VashtaNeradaListener(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.worlds = this.plugin.getConfig().getStringList("vashta_nerada.worlds");
-        this.chance = this.plugin.getConfig().getInt("vashta_nerada.spawn_chance");
         faces.add(BlockFace.EAST);
         faces.add(BlockFace.NORTH);
         faces.add(BlockFace.SOUTH);
@@ -53,7 +50,8 @@ public class VashtaNeradaListener implements Listener {
     public void onBookshelfBreak(BlockBreakEvent event) {
         Block b = event.getBlock();
         if (b != null && b.getType().equals(Material.BOOKSHELF)) {
-            if (worlds.contains(b.getWorld().getName()) && r.nextInt(100) < chance) {
+            String name = Config.sanitiseName(b.getWorld().getName());
+            if (plugin.getConfig().getInt("vashta_nerada.worlds." + name) > 0 && r.nextInt(100) < plugin.getConfig().getInt("vashta_nerada.worlds." + name)) {
                 Location l = getClearLocation(event.getPlayer());
                 if (l != null) {
                     // spawn Vashta Nerada at location

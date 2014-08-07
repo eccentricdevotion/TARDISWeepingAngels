@@ -3,11 +3,12 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters;
 
-import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
+import me.eccentric_nz.tardisweepingangels.utils.Config;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -28,13 +29,11 @@ public class CybermanRunnable implements Runnable {
 
     private final TARDISWeepingAngels plugin;
     private final int spawn_rate;
-    private final int maximum;
     private final MonsterEquipment equipper;
 
     public CybermanRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.spawn_rate = plugin.getConfig().getInt("cybermen.spawn_rate.how_many");
-        this.maximum = plugin.getConfig().getInt("cybermen.spawn_rate.max_per_world");
+        this.spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
         this.equipper = new MonsterEquipment();
     }
 
@@ -42,7 +41,8 @@ public class CybermanRunnable implements Runnable {
     public void run() {
         for (World w : plugin.getServer().getWorlds()) {
             // only configured worlds
-            if (plugin.getConfig().getStringList("cybermen.worlds").contains(w.getName())) {
+            String name = Config.sanitiseName(w.getName());
+            if (plugin.getConfig().getInt("cybermen.worlds." + name) > 0) {
                 // get the current warriors
                 List<Zombie> cyberarmy = new ArrayList<Zombie>();
                 Collection<Zombie> zombies = w.getEntitiesByClass(Zombie.class);
@@ -56,7 +56,7 @@ public class CybermanRunnable implements Runnable {
                     }
                 }
                 // count the current cybermen
-                if (cyberarmy.size() < maximum) {
+                if (cyberarmy.size() < plugin.getConfig().getInt("cybermen.worlds." + name)) {
                     // if less than maximum, spawn some more
                     for (int i = 0; i < spawn_rate; i++) {
                         spawnCyberman(w);

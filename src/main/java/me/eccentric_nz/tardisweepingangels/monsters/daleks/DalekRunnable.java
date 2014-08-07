@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
+import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.libraryaddict.disguise.DisguiseAPI;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -26,13 +27,11 @@ public class DalekRunnable implements Runnable {
 
     private final TARDISWeepingAngels plugin;
     private final int spawn_rate;
-    private final int maximum;
     private final MonsterEquipment equipper;
 
     public DalekRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.spawn_rate = plugin.getConfig().getInt("daleks.spawn_rate.how_many");
-        this.maximum = plugin.getConfig().getInt("daleks.spawn_rate.max_per_world");
+        this.spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
         this.equipper = new MonsterEquipment();
     }
 
@@ -40,7 +39,8 @@ public class DalekRunnable implements Runnable {
     public void run() {
         for (World w : plugin.getServer().getWorlds()) {
             // only configured worlds
-            if (plugin.getConfig().getStringList("daleks.worlds").contains(w.getName())) {
+            String name = Config.sanitiseName(w.getName());
+            if (plugin.getConfig().getInt("daleks.worlds." + name) > 0) {
                 // get the current daleks
                 List<Skeleton> daleks = new ArrayList<Skeleton>();
                 Collection<Skeleton> disguised = w.getEntitiesByClass(Skeleton.class);
@@ -51,7 +51,7 @@ public class DalekRunnable implements Runnable {
                     }
                 }
                 // count the current cybermen
-                if (daleks.size() < maximum) {
+                if (daleks.size() < plugin.getConfig().getInt("daleks.worlds." + name)) {
                     // if less than maximum, spawn some more
                     for (int i = 0; i < spawn_rate; i++) {
                         spawnDalek(w);

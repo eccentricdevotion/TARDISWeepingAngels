@@ -1,11 +1,12 @@
 ## spawn rate is how many angels to spawn every x ticks up to a maximum per world
+config_version: 2.0
+spawn_rate:
+    how_many: 2
+    how_often: 400
+    default_max: 0
 angels:
-    spawn_rate:
-        how_many: 2
-        how_often: 400
-        max_per_world: 20
     worlds:
-        - world
+        world: 20
     freeze_time: 100
     weapon: DIAMOND_PICKAXE
     drops:
@@ -13,82 +14,53 @@ angels:
         - STONE
     angels_can_steal: true
 cybermen:
-    spawn_rate:
-        how_many: 2
-        how_often: 400
-        max_per_world: 10
     worlds:
-        - world
+        world: 10
     drops:
         - REDSTONE
         - STONE_BUTTON
     can_upgrade: true
 daleks:
-    spawn_rate:
-        how_many: 2
-        how_often: 400
-        max_per_world: 20
     worlds:
-        - world
+        world: 20
     drops:
         - SLIME_BALL
         - ROTTEN_FLESH
 empty_child:
-    spawn_rate:
-        how_many: 2
-        how_often: 400
-        max_per_world: 10
     worlds:
-        - world
+        world: 10
     drops:
         - COOKED_BEEF
         - SUGAR
 ice_warriors:
-    spawn_rate:
-        how_many: 2
-        how_often: 400
-        max_per_world: 20
     worlds:
-        - world
+        world: 20
     drops:
         - ICE
         - PACKED_ICE
         - SNOW_BLOCK
 silurians:
-    spawn_rate:
-        how_many: 2
-        how_often: 400
-        max_per_world: 20
     worlds:
-        - world
+        world: 20
     drops:
         - GOLD_NUGGET
         - FEATHER
 sontarans:
-    spawn_rate:
-        how_many: 2
-        how_often: 400
-        max_per_world: 20
     worlds:
-        - world
+        world: 20
     drops:
         - POTATO_ITEM
         - MILK_BUCKET
     can_tame: true
 vashta_nerada:
-    spawn_chance: 10
     worlds:
-        - world
+        world: 10
     drops:
         - BONE
         - LEATHER
 zygons:
-    spawn_rate:
-        how_many: 2
-        how_often: 400
-        max_per_world: 10
     worlds:
-        - world
+        world: 10
     drops:
         - PAINTING
         - SAND

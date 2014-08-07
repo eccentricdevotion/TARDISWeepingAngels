@@ -3,7 +3,7 @@ description: Weeping Angel add-on for the TARDIS plugin
 main: me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels
 name: TARDISWeepingAngels
 load: POSTWORLD
-version: '1.3'
+version: '2.0'
 website: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 dev-url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
@@ -53,6 +53,6 @@ commands:
     twa:
         aliases: [twaa,twaadmin]
         description: Add or remove worlds to the worlds list for the specified monster.
-        usage: /<command> [a|c|d|e|i|o|s|v|z] [add|remove] [world]
+        usage: /<command> [a|c|d|e|i|o|s|v|z|all] [world] [max monsters]
         permission: tardisweepingangels.admin
         permission-message: You don't have the permission <permission> to use this command

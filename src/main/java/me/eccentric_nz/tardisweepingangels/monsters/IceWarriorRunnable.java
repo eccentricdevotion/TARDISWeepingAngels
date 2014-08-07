@@ -3,11 +3,12 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters;
 
-import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
+import me.eccentric_nz.tardisweepingangels.utils.Config;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -29,14 +30,12 @@ public class IceWarriorRunnable implements Runnable {
 
     private final TARDISWeepingAngels plugin;
     private final int spawn_rate;
-    private final int maximum;
     private final MonsterEquipment equipper;
     private final List<Biome> biomes = new ArrayList<Biome>();
 
     public IceWarriorRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.spawn_rate = plugin.getConfig().getInt("ice_warriors.spawn_rate.how_many");
-        this.maximum = plugin.getConfig().getInt("ice_warriors.spawn_rate.max_per_world");
+        this.spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
         this.equipper = new MonsterEquipment();
         biomes.add(Biome.COLD_BEACH);
         biomes.add(Biome.COLD_TAIGA);
@@ -53,7 +52,8 @@ public class IceWarriorRunnable implements Runnable {
     public void run() {
         for (World w : plugin.getServer().getWorlds()) {
             // only configured worlds
-            if (plugin.getConfig().getStringList("ice_warriors.worlds").contains(w.getName())) {
+            String name = Config.sanitiseName(w.getName());
+            if (plugin.getConfig().getInt("ice_warriors.worlds." + name) > 0) {
                 long time = w.getTime();
                 // only spawn in day - times according to http://minecraft.gamepedia.com/Day-night_cycle
                 if ((time > 0 && time < 13187) || time > 22812) {
@@ -70,7 +70,7 @@ public class IceWarriorRunnable implements Runnable {
                         }
                     }
                     // count the current warriors
-                    if (warriors.size() < maximum) {
+                    if (warriors.size() < plugin.getConfig().getInt("ice_warriors.worlds." + name)) {
                         // if less than maximum, spawn some more
                         for (int i = 0; i < spawn_rate; i++) {
                             spawnIceWarrior(w);

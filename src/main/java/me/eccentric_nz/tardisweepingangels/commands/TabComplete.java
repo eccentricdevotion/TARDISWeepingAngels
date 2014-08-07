@@ -36,7 +36,6 @@ public class TabComplete implements TabCompleter {
     private final TARDISWeepingAngels plugin;
     ImmutableList<String> LETTER_SUBS = ImmutableList.of("a", "c", "d", "e", "i", "o", "s", "v", "z");
     private final ImmutableList<String> ONOFF_SUBS = ImmutableList.of("on", "off");
-    private final ImmutableList<String> CONFIG_SUBS = ImmutableList.of("add", "remove");
     private final ImmutableList<String> WORLD_SUBS;
     private final ImmutableList<String> MONSTER_SUBS;
 
@@ -67,15 +66,8 @@ public class TabComplete implements TabCompleter {
             if (command.getName().equals("twad")) {
                 return partial(args[1], ONOFF_SUBS);
             }
-            if (command.getName().equals("twa")) {
-                return partial(args[1], CONFIG_SUBS);
-            }
-            if (command.getName().equals("twac") || command.getName().equals("twak")) {
+            if (command.getName().equals("twac") || command.getName().equals("twak") || command.getName().equals("twa")) {
                 return partial(args[1], WORLD_SUBS);
-            }
-        } else if (args.length == 3) {
-            if (command.getName().equals("twa")) {
-                return partial(args[2], WORLD_SUBS);
             }
         }
         return ImmutableList.of();

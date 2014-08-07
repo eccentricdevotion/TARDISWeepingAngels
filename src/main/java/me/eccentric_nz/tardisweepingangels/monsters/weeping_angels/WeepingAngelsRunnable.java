@@ -6,8 +6,9 @@ package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
+import me.eccentric_nz.tardisweepingangels.utils.Config;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -25,13 +26,11 @@ public class WeepingAngelsRunnable implements Runnable {
 
     private final TARDISWeepingAngels plugin;
     private final int spawn_rate;
-    private final int maximum;
     private final MonsterEquipment equipper;
 
     public WeepingAngelsRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.spawn_rate = plugin.getConfig().getInt("angels.spawn_rate.how_many");
-        this.maximum = plugin.getConfig().getInt("angels.spawn_rate.max_per_world");
+        this.spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
         this.equipper = new MonsterEquipment();
     }
 
@@ -39,7 +38,8 @@ public class WeepingAngelsRunnable implements Runnable {
     public void run() {
         for (World w : plugin.getServer().getWorlds()) {
             // only configured worlds
-            if (plugin.getConfig().getStringList("angels.worlds").contains(w.getName())) {
+            String name = Config.sanitiseName(w.getName());
+            if (plugin.getConfig().getInt("angels.worlds." + name) > 0) {
                 long time = w.getTime();
                 // only spawn at night - times according to http://minecraft.gamepedia.com/Day-night_cycle
                 if (time > 13187 && time < 22812) {
@@ -53,7 +53,7 @@ public class WeepingAngelsRunnable implements Runnable {
                         }
                     }
                     // count the current angels
-                    if (angels.size() < maximum) {
+                    if (angels.size() < plugin.getConfig().getInt("angels.worlds." + name)) {
                         // if less than maximum, spawn some more
                         for (int i = 0; i < spawn_rate; i++) {
                             spawnAngel(w);

@@ -1,10 +1,7 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,6 +22,7 @@ public class AdminCommand implements CommandExecutor {
         this.types.put("s", "silurians");
         this.types.put("v", "vashta_nerada");
         this.types.put("z", "zygons");
+        this.types.put("all", "");
     }
 
     @Override
@@ -35,29 +33,33 @@ public class AdminCommand implements CommandExecutor {
             }
             String which = args[0].toLowerCase();
             if (!types.containsKey(which)) {
+                sender.sendMessage(plugin.pluginName + "Could not find a world with that name!");
                 return false;
             }
-            String ar = args[1].toLowerCase();
-            if (!Arrays.asList(new String[]{"add", "remove"}).contains(ar)) {
+            if (plugin.getServer().getWorld(args[1]) == null) {
                 return false;
             }
-            List<String> worlds = plugin.getConfig().getStringList(types.get(which) + ".worlds");
-            if (ar.equals("add")) {
-                World w = plugin.getServer().getWorld(args[2]);
-                if (w == null) {
-                    sender.sendMessage(plugin.pluginName + "Could not find a world with that name!");
-                    return true;
-                }
-                worlds.add(args[2]);
+            int m;
+            try {
+                m = Integer.parseInt(args[2]);
+            } catch (NumberFormatException e) {
+                sender.sendMessage(plugin.pluginName + "Last argument must be a number!");
+                return false;
+            }
+            if (which.equals("all")) {
+                plugin.getConfig().set("angels.worlds." + args[1], m);
+                plugin.getConfig().set("cybermen.worlds." + args[1], m);
+                plugin.getConfig().set("daleks.worlds." + args[1], m);
+                plugin.getConfig().set("empty_child.worlds." + args[1], m);
+                plugin.getConfig().set("ice_warriors.worlds." + args[1], m);
+                plugin.getConfig().set("sontarans.worlds." + args[1], m);
+                plugin.getConfig().set("silurians.worlds." + args[1], m);
+                plugin.getConfig().set("vashta_nerada.worlds." + args[1], m);
+                plugin.getConfig().set("zygons.worlds." + args[1], m);
+
             } else {
-                if (worlds.contains(args[2])) {
-                    worlds.remove(args[2]);
-                } else {
-                    sender.sendMessage(plugin.pluginName + "World is not in config, no action taken...");
-                    return true;
-                }
+                plugin.getConfig().set(types.get(which) + ".worlds." + args[1], m);
             }
-            plugin.getConfig().set(types.get(which) + ".worlds", worlds);
             plugin.saveConfig();
             sender.sendMessage(plugin.pluginName + "Config updated!");
             return true;
