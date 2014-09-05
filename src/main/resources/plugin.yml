@@ -28,13 +28,13 @@ permissions:
 commands:
     twas:
         aliases: [twaspawn]
-        description: Spawns a Weeping Angel on the block you are targeting.
+        description: Spawns a monster on the block you are targeting.
         usage: /<command> [monster type]
         permission: tardisweepingangels.spawn
         permission-message: You don't have the permission <permission> to use this command
     twad:
         aliases: [twadisguise]
-        description: Sets a player's armour so that they are disguised as a Weeping Angel.
+        description: Sets a player's armour so that they are disguised as a monster.
         usage: /<command> [monster type] [on|off]
         permission: tardisweepingangels.disguise
         permission-message: You don't have the permission <permission> to use this command
@@ -52,7 +52,7 @@ commands:
         permission-message: You don't have the permission <permission> to use this command
     twa:
         aliases: [twaa,twaadmin]
-        description: Add or remove worlds to the worlds list for the specified monster.
+        description: Set the maximum number of the specified monster allowed to spawn in the specified world.
         usage: /<command> [a|c|d|e|i|o|s|v|z|all] [world] [max monsters]
         permission: tardisweepingangels.admin
         permission-message: You don't have the permission <permission> to use this command
