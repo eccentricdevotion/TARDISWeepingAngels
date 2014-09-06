@@ -43,7 +43,6 @@ public class SilurianRunnable implements Runnable {
             // only configured worlds
             String name = Config.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("silurians.worlds." + name) > 0) {
-                long time = w.getTime();
                 // get the current silurian
                 List<Skeleton> silurians = new ArrayList<Skeleton>();
                 Collection<Skeleton> skeletons = w.getEntitiesByClass(Skeleton.class);

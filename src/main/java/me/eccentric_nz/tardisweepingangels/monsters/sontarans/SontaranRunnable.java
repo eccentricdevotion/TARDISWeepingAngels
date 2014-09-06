@@ -80,6 +80,7 @@ public class SontaranRunnable implements Runnable {
             Location l = new Location(w, x, y + 1, z);
             final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
             Zombie sontaran = (Zombie) e;
+            sontaran.setVillager(false);
             PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3);
             sontaran.addPotionEffect(p);
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
