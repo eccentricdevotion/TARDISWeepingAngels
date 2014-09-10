@@ -53,6 +53,7 @@ public class SpawnCommand implements CommandExecutor {
                 case ANGEL:
                 case WEEPING_ANGEL:
                     final LivingEntity a = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
+                    a.setNoDamageTicks(75);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
                         public void run() {
@@ -62,6 +63,7 @@ public class SpawnCommand implements CommandExecutor {
                     break;
                 case CYBERMAN:
                     final LivingEntity c = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
+                    c.setNoDamageTicks(75);
                     Zombie cyber = (Zombie) c;
                     cyber.setVillager(false);
                     cyber.setBaby(false);
@@ -74,6 +76,7 @@ public class SpawnCommand implements CommandExecutor {
                     break;
                 case DALEK:
                     final LivingEntity d = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
+                    d.setNoDamageTicks(75);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
                         public void run() {
@@ -100,6 +103,7 @@ public class SpawnCommand implements CommandExecutor {
                 case EMPTY:
                 case EMPTY_CHILD:
                     final LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
+                    e.setNoDamageTicks(75);
                     Zombie child = (Zombie) e;
                     child.setVillager(false);
                     child.setBaby(true);
@@ -112,6 +116,7 @@ public class SpawnCommand implements CommandExecutor {
                     break;
                 case SILURIAN:
                     final LivingEntity s = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
+                    s.setNoDamageTicks(75);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
                         public void run() {
@@ -121,18 +126,37 @@ public class SpawnCommand implements CommandExecutor {
                     break;
                 case SONTARAN:
                     final LivingEntity o = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
+                    o.setNoDamageTicks(75);
+                    Zombie sontaran = (Zombie) o;
+                    sontaran.setBaby(false);
+                    sontaran.setVillager(false);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
                         public void run() {
                             equip.setSontaranEquipment(o, false);
                         }
                     }, 5L);
-                    Zombie sontaran = (Zombie) o;
-                    sontaran.setBaby(false);
+                    break;
+                case STRAX:
+                    final LivingEntity x = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
+                    x.setNoDamageTicks(75);
+                    PigZombie strax = (PigZombie) x;
+                    strax.setBaby(false);
+                    strax.setAngry(false);
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            equip.setButlerEquipment(x, false);
+                        }
+                    }, 5L);
                     break;
                 case VASHTA:
                 case VASHTA_NERADA:
                     final LivingEntity v = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
+                    v.setNoDamageTicks(75);
+                    Zombie vashta = (Zombie) v;
+                    vashta.setVillager(false);
+                    vashta.setBaby(false);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
                         public void run() {
@@ -142,8 +166,10 @@ public class SpawnCommand implements CommandExecutor {
                     break;
                 case ZYGON:
                     final LivingEntity z = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
+                    z.setNoDamageTicks(75);
                     Zombie zygon = (Zombie) z;
                     zygon.setVillager(false);
+                    zygon.setBaby(false);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
                         public void run() {
@@ -152,7 +178,6 @@ public class SpawnCommand implements CommandExecutor {
                     }, 5L);
                     break;
             }
-
             return true;
         }
         return false;

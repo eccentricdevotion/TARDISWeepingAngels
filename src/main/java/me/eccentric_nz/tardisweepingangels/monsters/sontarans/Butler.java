@@ -63,6 +63,7 @@ public class Butler implements Listener {
                         Location l = zom.getLocation();
                         zom.remove();
                         final PigZombie pz = (PigZombie) l.getWorld().spawnEntity(l, EntityType.PIG_ZOMBIE);
+                        pz.setBaby(false);
                         pz.setAngry(false);
                         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                             @Override
