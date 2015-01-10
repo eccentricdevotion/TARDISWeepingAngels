@@ -37,11 +37,10 @@ public class ReDisguise implements Runnable {
                 // get the current daleks
                 Collection<Skeleton> daleks = w.getEntitiesByClass(Skeleton.class);
                 for (Skeleton d : daleks) {
-                    // does it have a leather helmet
+                    // does it have a helmet with a display name
                     EntityEquipment ee = d.getEquipment();
                     ItemStack is = ee.getHelmet();
-                    if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()
-                            && is.getItemMeta().getDisplayName().startsWith("Dalek") && !DisguiseAPI.isDisguised(d)) {
+                    if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek") && !DisguiseAPI.isDisguised(d)) {
                         MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
                         DisguiseAPI.disguiseToAll(d, mobDisguise);
                         count++;

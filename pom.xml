@@ -6,12 +6,8 @@
     <name>TARDISWeepingAngels</name>
     <repositories>
         <repository>
-            <id>macgeek</id>
-            <url>http://tardisjenkins.duckdns.org:8888</url>
-        </repository>
-        <repository>
-            <id>Bromley Massive</id>
-            <url>http://tardisjenkins.duckdns.org:8080/plugin/repository/everything/</url>
+            <id>Spigot</id>
+            <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
         </repository>
     </repositories>
     <build>
@@ -44,6 +40,28 @@
             <version>1.8-R0.1-SNAPSHOT</version>
             <type>jar</type>
             <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-lang</groupId>
+                    <artifactId>commons-lang</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.avaje</groupId>
+                    <artifactId>ebean</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.hamcrest</groupId>
+                    <artifactId>hamcrest-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.googlecode.json-simple</groupId>
+                    <artifactId>json-simple</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.yaml</groupId>
+                    <artifactId>snakeyaml</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>LibsDisguises</groupId>

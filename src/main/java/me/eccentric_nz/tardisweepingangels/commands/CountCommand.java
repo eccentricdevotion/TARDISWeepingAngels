@@ -106,18 +106,6 @@ public class CountCommand implements CommandExecutor {
                         }
                     }
                 }
-            } else if (which.equals("s")) {
-                what = "Silurians";
-                Collection<Skeleton> silurians = w.getEntitiesByClass(Skeleton.class);
-                for (Skeleton s : silurians) {
-                    EntityEquipment ee = s.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
-                        ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Silurian")) {
-                            count++;
-                        }
-                    }
-                }
             } else if (which.equals("o")) {
                 what = "Sontarans";
                 Collection<Zombie> sontarans = w.getEntitiesByClass(Zombie.class);
@@ -126,6 +114,18 @@ public class CountCommand implements CommandExecutor {
                     if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
                         ItemStack is = ee.getHelmet();
                         if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Sontaran")) {
+                            count++;
+                        }
+                    }
+                }
+            } else if (which.equals("s")) {
+                what = "Silurians";
+                Collection<Skeleton> silurians = w.getEntitiesByClass(Skeleton.class);
+                for (Skeleton s : silurians) {
+                    EntityEquipment ee = s.getEquipment();
+                    if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                        ItemStack is = ee.getHelmet();
+                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Silurian")) {
                             count++;
                         }
                     }

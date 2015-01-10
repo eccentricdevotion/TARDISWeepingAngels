@@ -9,13 +9,14 @@ import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
-import me.libraryaddict.disguise.DisguiseAPI;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Skeleton;
+import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -45,12 +46,14 @@ public class DalekRunnable implements Runnable {
                 List<Skeleton> daleks = new ArrayList<Skeleton>();
                 Collection<Skeleton> disguised = w.getEntitiesByClass(Skeleton.class);
                 for (Skeleton d : disguised) {
-                    // check if disguised
-                    if (d.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE) && DisguiseAPI.isDisguised(d)) {
+                    // does it have a helmet with a display name
+                    EntityEquipment ee = d.getEquipment();
+                    ItemStack is = ee.getHelmet();
+                    if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek")) {
                         daleks.add(d);
                     }
                 }
-                // count the current cybermen
+                // count the current daleks
                 if (daleks.size() < plugin.getConfig().getInt("daleks.worlds." + name)) {
                     // if less than maximum, spawn some more
                     for (int i = 0; i < spawn_rate; i++) {
