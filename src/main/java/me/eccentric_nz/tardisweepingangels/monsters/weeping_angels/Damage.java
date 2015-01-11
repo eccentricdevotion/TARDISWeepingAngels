@@ -83,6 +83,12 @@ public class Damage implements Listener {
     }
 
     private Location getRandomLocation(World w) {
+        // if it is a TARDIS world,
+        // don't teleport player into the void
+        // use the main world instead
+        if (w.getName().startsWith("TARDIS_")) {
+            w = plugin.getServer().getWorlds().get(0);
+        }
         Chunk[] chunks = w.getLoadedChunks();
         Chunk c = chunks[plugin.getRandom().nextInt(chunks.length)];
         int x = c.getX() * 16 + plugin.getRandom().nextInt(16);
