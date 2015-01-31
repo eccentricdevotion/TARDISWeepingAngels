@@ -15,6 +15,11 @@ angels:
         - COBBLESTONE
         - STONE
     angels_can_steal: true
+    can_build: true
+    spawn_from_chat:
+        enabled: true
+        chance: 50
+        distance_from_player: 10
 cybermen:
     worlds:
         world: 10

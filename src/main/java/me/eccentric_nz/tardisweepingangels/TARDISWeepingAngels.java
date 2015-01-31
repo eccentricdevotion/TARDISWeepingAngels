@@ -18,6 +18,7 @@ import me.eccentric_nz.tardisweepingangels.monsters.IceWarriorRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.VashtaNeradaListener;
 import me.eccentric_nz.tardisweepingangels.monsters.ZygonRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.daleks.Portal;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.ReDisguise;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.GasMask;
@@ -25,7 +26,9 @@ import me.eccentric_nz.tardisweepingangels.monsters.silurians.SilurianRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.Butler;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.SontaranRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.Blink;
+import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.Builder;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.Damage;
+import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.ImageHolder;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.WeepingAngelsRunnable;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.eccentric_nz.tardisweepingangels.utils.HelmetChecker;
@@ -61,6 +64,12 @@ public class TARDISWeepingAngels extends JavaPlugin {
             new Config(this).updateConfig();
             // register listeners
             pm.registerEvents(new Blink(this), this);
+            if (getConfig().getBoolean("angels.can_build")) {
+                pm.registerEvents(new Builder(this), this);
+            }
+            if (getConfig().getBoolean("angels.spawn_from_chat.enabled")) {
+                pm.registerEvents(new ImageHolder(this), this);
+            }
             pm.registerEvents(new Damage(this), this);
             pm.registerEvents(new VashtaNeradaListener(this), this);
             pm.registerEvents(new Death(this), this);
@@ -70,6 +79,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
             pm.registerEvents(new GasMask(this), this);
             pm.registerEvents(new Butler(this), this);
             pm.registerEvents(new HelmetChecker(this), this);
+            pm.registerEvents(new Portal(this), this);
             // register commands
             getCommand("twas").setExecutor(new SpawnCommand(this));
             getCommand("twad").setExecutor(new DisguiseCommand(this));
