@@ -13,6 +13,9 @@ permissions:
     tardisweepingangels.spawn:
         description: Allow players to spawn a monster.
         default: op
+    tardisweepingangels.build:
+        description: Allow players to build a monster.
+        default: op
     tardisweepingangels.disguise:
         description: Allow players to disguise themselves as a monster.
         default: op

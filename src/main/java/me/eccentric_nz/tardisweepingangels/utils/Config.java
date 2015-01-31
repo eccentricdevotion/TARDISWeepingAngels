@@ -40,6 +40,8 @@ public class Config {
         intOptions.put("spawn_rate.how_many", 2);
         intOptions.put("spawn_rate.how_often", 400);
         intOptions.put("spawn_rate.default_max", 0);
+        intOptions.put("angels.spawn_from_chat.chance", 50);
+        intOptions.put("angels.spawn_from_chat.distance_from_player", 10);
         // string
         strOptions.put("angels.weapon", "DIAMOND_PICKAXE");
         // list
@@ -55,6 +57,8 @@ public class Config {
         listOptions.put("zygons.drops", Arrays.asList(new String[]{"PAINTING", "SAND"}));
         // boolean
         boolOptions.put("angels.angels_can_steal", true);
+        boolOptions.put("angels.can_build", true);
+        boolOptions.put("angels.spawn_from_chat.enabled", true);
         boolOptions.put("cybermen.can_upgrade", true);
         boolOptions.put("sontarans.can_tame", true);
         // float
