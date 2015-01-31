@@ -55,8 +55,7 @@ public class SpawnCommand implements CommandExecutor {
                 case ANGEL:
                 case WEEPING_ANGEL:
                     final LivingEntity a = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
-                    Skeleton ang = (Skeleton) a;
-                    ang.setSkeletonType(SkeletonType.NORMAL);
+                    setNormal(a);
                     a.setNoDamageTicks(75);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
@@ -80,8 +79,7 @@ public class SpawnCommand implements CommandExecutor {
                     break;
                 case DALEK:
                     final LivingEntity d = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
-                    Skeleton dal = (Skeleton) d;
-                    dal.setSkeletonType(SkeletonType.NORMAL);
+                    setNormal(d);
                     d.setNoDamageTicks(75);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
@@ -122,8 +120,7 @@ public class SpawnCommand implements CommandExecutor {
                     break;
                 case SILURIAN:
                     final LivingEntity s = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
-                    Skeleton sil = (Skeleton) s;
-                    sil.setSkeletonType(SkeletonType.NORMAL);
+                    setNormal(s);
                     s.setNoDamageTicks(75);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
@@ -189,5 +186,10 @@ public class SpawnCommand implements CommandExecutor {
             return true;
         }
         return false;
+    }
+
+    private void setNormal(LivingEntity e) {
+        Skeleton s = (Skeleton) e;
+        s.setSkeletonType(SkeletonType.NORMAL);
     }
 }
