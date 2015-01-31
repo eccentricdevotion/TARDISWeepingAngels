@@ -12,6 +12,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.Skeleton.SkeletonType;
 import org.bukkit.entity.Zombie;
 
 public class SpawnCommand implements CommandExecutor {
@@ -53,6 +55,8 @@ public class SpawnCommand implements CommandExecutor {
                 case ANGEL:
                 case WEEPING_ANGEL:
                     final LivingEntity a = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
+                    Skeleton ang = (Skeleton) a;
+                    ang.setSkeletonType(SkeletonType.NORMAL);
                     a.setNoDamageTicks(75);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
@@ -76,6 +80,8 @@ public class SpawnCommand implements CommandExecutor {
                     break;
                 case DALEK:
                     final LivingEntity d = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
+                    Skeleton dal = (Skeleton) d;
+                    dal.setSkeletonType(SkeletonType.NORMAL);
                     d.setNoDamageTicks(75);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
@@ -116,6 +122,8 @@ public class SpawnCommand implements CommandExecutor {
                     break;
                 case SILURIAN:
                     final LivingEntity s = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
+                    Skeleton sil = (Skeleton) s;
+                    sil.setSkeletonType(SkeletonType.NORMAL);
                     s.setNoDamageTicks(75);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
