@@ -7,6 +7,8 @@ spawn_rate:
 angels:
     worlds:
         world: 20
+    teleport_worlds:
+    - world
     freeze_time: 100
     weapon: DIAMOND_PICKAXE
     drops:

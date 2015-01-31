@@ -3,6 +3,9 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.libraryaddict.disguise.DisguiseAPI;
 import org.bukkit.Chunk;
@@ -34,10 +37,18 @@ public class Damage implements Listener {
 
     private final TARDISWeepingAngels plugin;
     private final Material mat;
+    private final List<World> angel_tp_worlds = new ArrayList<World>();
+    Random rand = new Random();
 
     public Damage(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
         this.mat = Material.valueOf(plugin.getConfig().getString("angels.weapon"));
+        for (String w : plugin.getConfig().getStringList("angels.teleport_worlds")) {
+            World world = plugin.getServer().getWorld(w);
+            if (w != null) {
+                angel_tp_worlds.add(world);
+            }
+        }
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -83,11 +94,10 @@ public class Damage implements Listener {
     }
 
     private Location getRandomLocation(World w) {
-        // if it is a TARDIS world,
-        // don't teleport player into the void
-        // use the main world instead
-        if (w.getName().startsWith("TARDIS_")) {
-            w = plugin.getServer().getWorlds().get(0);
+        // is this world an allowable world? - we don't want Nether or TARDIS worlds
+        if (!angel_tp_worlds.contains(w)) {
+            // get a random teleport world
+            w = angel_tp_worlds.get(rand.nextInt(angel_tp_worlds.size()));
         }
         Chunk[] chunks = w.getLoadedChunks();
         Chunk c = chunks[plugin.getRandom().nextInt(chunks.length)];
