@@ -207,5 +207,14 @@ public class Death implements Listener {
                 }
             }
         }
+        if (event.getEntityType().equals(EntityType.ENDERMAN)) {
+            Entity enderman = event.getEntity();
+            if (enderman.getPassenger() != null && enderman.getPassenger().getType().equals(EntityType.GUARDIAN)) {
+                // remove the guardian as well
+                Entity guardian = enderman.getPassenger();
+                guardian.remove();
+                event.getDrops().clear();
+            }
+        }
     }
 }

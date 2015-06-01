@@ -1,9 +1,11 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
+import java.util.Set;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,6 +21,7 @@ import org.bukkit.entity.Zombie;
 public class SpawnCommand implements CommandExecutor {
 
     private final TARDISWeepingAngels plugin;
+    private final Set<Material> trans = null;
 
     public SpawnCommand(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
@@ -45,7 +48,7 @@ public class SpawnCommand implements CommandExecutor {
                 return true;
             }
             @SuppressWarnings("deprecation")
-            final Location eyeLocation = player.getTargetBlock(null, 50).getLocation();
+            final Location eyeLocation = player.getTargetBlock(trans, 50).getLocation();
             eyeLocation.setX(eyeLocation.getX() + 0.5F);
             eyeLocation.setY(eyeLocation.getY() + 1);
             eyeLocation.setZ(eyeLocation.getZ() + 0.5F);
@@ -115,6 +118,15 @@ public class SpawnCommand implements CommandExecutor {
                         @Override
                         public void run() {
                             equip.setEmptyChildEquipment(e, false);
+                        }
+                    }, 5L);
+                    break;
+                case SILENT:
+                    final LivingEntity l = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ENDERMAN);
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            equip.setSilentEquipment(l);
                         }
                     }, 5L);
                     break;

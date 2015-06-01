@@ -30,6 +30,7 @@ import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.Builder;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.Damage;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.ImageHolder;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.WeepingAngelsRunnable;
+import me.eccentric_nz.tardisweepingangels.silent.AntiTeleport;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.eccentric_nz.tardisweepingangels.utils.HelmetChecker;
 import me.eccentric_nz.tardisweepingangels.utils.Sounds;
@@ -80,6 +81,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
             pm.registerEvents(new Butler(this), this);
             pm.registerEvents(new HelmetChecker(this), this);
             pm.registerEvents(new Portal(this), this);
+            pm.registerEvents(new AntiTeleport(this), this);
             // register commands
             getCommand("twas").setExecutor(new SpawnCommand(this));
             getCommand("twad").setExecutor(new DisguiseCommand(this));
