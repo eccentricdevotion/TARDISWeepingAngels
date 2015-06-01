@@ -10,6 +10,29 @@
             <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
         </repository>
     </repositories>
+    <profiles>
+        <profile>
+            <id>jenkins</id>
+            <activation>
+                <property>
+                    <name>env.BUILD_NUMBER</name>
+                </property>
+            </activation>
+            <properties>
+                <project.build.number>${env.BUILD_NUMBER}</project.build.number>
+            </properties>
+            <repositories>
+                <repository>
+                    <id>macgeek</id>
+                    <url>http://tardisjenkins.duckdns.org:8888</url>
+                </repository>
+                <repository>
+                    <id>Bromley Massive</id>
+                    <url>http://tardisjenkins.duckdns.org:8080/plugin/repository/everything/</url>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
     <build>
         <finalName>TARDISWeepingAngels</finalName>
         <plugins>
