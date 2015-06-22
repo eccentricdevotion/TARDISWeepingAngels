@@ -46,7 +46,7 @@ public class Config {
         strOptions.put("angels.weapon", "DIAMOND_PICKAXE");
         // list
         listOptions.put("angels.drops", Arrays.asList(new String[]{"STONE", "COBBLESTONE"}));
-        listOptions.put("angels.angel_tp_worlds", Arrays.asList(new String[]{"world"}));
+        listOptions.put("angels.teleport_worlds", Arrays.asList(new String[]{"world"}));
         listOptions.put("cybermen.drops", Arrays.asList(new String[]{"REDSTONE", "STONE_BUTTON"}));
         listOptions.put("daleks.drops", Arrays.asList(new String[]{"SLIME_BALL", "ROTTEN_FLESH"}));
         listOptions.put("empty_child.drops", Arrays.asList(new String[]{"COOKED_BEEF", "SUGAR"}));
@@ -163,6 +163,12 @@ public class Config {
                 plugin.getConfig().set(entry.getKey(), entry.getValue());
                 i++;
             }
+        }
+        // fix wrong config node name
+        if (config.contains("angels.angel_tp_worlds")) {
+            List<String> tpws = config.getStringList("angels.angel_tp_worlds");
+            plugin.getConfig().set("angels.teleport_worlds", tpws);
+            plugin.getConfig().set("angels.angel_tp_worlds", null);
         }
         plugin.saveConfig();
         if (i > 0) {
