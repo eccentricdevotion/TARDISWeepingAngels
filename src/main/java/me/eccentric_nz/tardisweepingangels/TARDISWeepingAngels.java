@@ -56,7 +56,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
     @Override
     public void onEnable() {
         PluginManager pm = getServer().getPluginManager();
-        if (pm.isPluginEnabled("LibsDisguises")) {
+        if (pm.isPluginEnabled("ProtocolLib") && pm.isPluginEnabled("LibsDisguises")) {
             saveDefaultConfig();
             random = new Random();
             PluginDescriptionFile pdfFile = getDescription();
@@ -109,7 +109,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
             getServer().getScheduler().scheduleSyncRepeatingTask(this, new ZygonRunnable(this), delay, delay);
             steal = (getConfig().getBoolean("angels.can_steal") && pm.isPluginEnabled("TARDIS"));
         } else {
-            System.err.println(pluginName + ChatColor.RED + "This plugin requires LibsDisguises (http://ci.md-5.net/job/LibsDisguises/), disabling...");
+            System.err.println("[TARDISWeepingAngels] This plugin requires ProtocolLib & LibsDisguises, disabling...");
             pm.disablePlugin(this);
         }
     }
