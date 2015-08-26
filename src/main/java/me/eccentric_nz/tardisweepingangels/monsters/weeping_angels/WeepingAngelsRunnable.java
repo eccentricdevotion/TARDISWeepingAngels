@@ -48,7 +48,7 @@ public class WeepingAngelsRunnable implements Runnable {
                     Collection<Skeleton> skellies = w.getEntitiesByClass(Skeleton.class);
                     for (Skeleton s : skellies) {
                         EntityEquipment ee = s.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.WATER_LILY)) {
+                        if (ee.getItemInHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.WATER_LILY)) {
                             angels.add(s);
                         }
                     }

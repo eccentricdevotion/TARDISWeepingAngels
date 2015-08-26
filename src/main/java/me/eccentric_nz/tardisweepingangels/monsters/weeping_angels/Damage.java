@@ -57,7 +57,7 @@ public class Damage implements Listener {
         if (et.equals(EntityType.SKELETON)) {
             EntityEquipment ee = ((LivingEntity) event.getEntity()).getEquipment();
             Entity e = event.getDamager();
-            if (ee.getHelmet().getType().equals(Material.WATER_LILY)) {
+            if (ee.getItemInHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.WATER_LILY)) {
                 if (e instanceof Arrow) {
                     event.setCancelled(true);
                 }
@@ -80,7 +80,7 @@ public class Damage implements Listener {
             Entity e = event.getDamager();
             if (e instanceof Skeleton) {
                 EntityEquipment ee = ((LivingEntity) e).getEquipment();
-                if (ee.getHelmet().getType().equals(Material.WATER_LILY)) {
+                if (ee.getItemInHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.WATER_LILY)) {
                     Entity t = event.getEntity();
                     Player p = (Player) t;
                     p.teleport(getRandomLocation(t.getWorld()));

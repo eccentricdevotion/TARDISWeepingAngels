@@ -54,7 +54,7 @@ public class CountCommand implements CommandExecutor {
                 Collection<Skeleton> angels = w.getEntitiesByClass(Skeleton.class);
                 for (Skeleton a : angels) {
                     EntityEquipment ee = a.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.WATER_LILY)) {
+                    if (ee.getItemInHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.WATER_LILY)) {
                         count++;
                     }
                 }

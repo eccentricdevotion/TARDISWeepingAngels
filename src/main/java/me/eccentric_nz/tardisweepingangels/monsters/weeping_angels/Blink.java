@@ -2,8 +2,8 @@ package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 
 import java.util.ArrayList;
 import java.util.List;
-import me.eccentric_nz.tardisweepingangels.utils.Vector3D;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.utils.Vector3D;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -48,7 +48,7 @@ public class Blink implements Listener {
                 if (skeleton == null || skeleton.getLocation().distanceSquared(observerPos) > target.getLocation().distanceSquared(observerPos)) {
                     // is it an angel?
                     EntityEquipment ee = target.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.WATER_LILY)) {
+                    if (ee.getItemInHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.WATER_LILY)) {
                         skeleton = target;
                     }
                 }

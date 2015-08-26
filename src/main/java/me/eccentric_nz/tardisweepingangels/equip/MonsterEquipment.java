@@ -24,18 +24,19 @@ import org.bukkit.potion.PotionEffectType;
 public class MonsterEquipment {
 
     public void setAngelEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.WATER_LILY, 1);
+//        ItemStack helmet = new ItemStack(Material.WATER_LILY, 1);
+        ItemStack wing = new ItemStack(Material.BARRIER, 1);
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
         ItemStack boots = new ItemStack(Material.IRON_BOOTS, 1);
         if (disguise) {
-            helmet.setDurability((short) 160);
+//            helmet.setDurability((short) 160);
             chestplate.setDurability((short) 235);
             leggings.setDurability((short) 220);
         }
-        ItemMeta hmeta = helmet.getItemMeta();
-        hmeta.setDisplayName("Weeping Angel Wing");
-        helmet.setItemMeta(hmeta);
+//        ItemMeta hmeta = helmet.getItemMeta();
+//        hmeta.setDisplayName("Weeping Angel Wing");
+//        helmet.setItemMeta(hmeta);
         ItemMeta cmeta = chestplate.getItemMeta();
         cmeta.setDisplayName("Weeping Angel Chest");
         chestplate.setItemMeta(cmeta);
@@ -46,12 +47,12 @@ public class MonsterEquipment {
         bmeta.setDisplayName("Weeping Angel Feet");
         boots.setItemMeta(bmeta);
         EntityEquipment ee = le.getEquipment();
-        ee.setHelmet(helmet);
+//        ee.setHelmet(helmet);
         ee.setChestplate(chestplate);
         ee.setLeggings(leggings);
         ee.setBoots(boots);
         if (!disguise) {
-            ee.setItemInHand(null);
+            ee.setItemInHand(wing);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
