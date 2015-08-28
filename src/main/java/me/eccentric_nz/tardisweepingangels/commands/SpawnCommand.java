@@ -30,6 +30,9 @@ public class SpawnCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("twas")) {
+            if (args.length == 0) {
+                return false;
+            }
             // check monster type
             Monster monster;
             try {
