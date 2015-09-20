@@ -118,20 +118,6 @@ public class Death implements Listener {
                     return;
                 }
             }
-            if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
-                ItemStack is = ee.getHelmet();
-                if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Sontaran")) {
-                    event.getDrops().clear();
-                    ItemStack stack;
-                    if (plugin.getRandom().nextInt(100) < 3) {
-                        stack = new ItemStack(Material.POISONOUS_POTATO, 1);
-                    } else {
-                        stack = new ItemStack(sontaran_drops.get(plugin.getRandom().nextInt(sontaran_drops.size())), 1);
-                    }
-                    event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
-                    return;
-                }
-            }
         }
         if (event.getEntityType().equals(EntityType.ZOMBIE)) {
             EntityEquipment ee = event.getEntity().getEquipment();
@@ -155,6 +141,16 @@ public class Death implements Listener {
                             stack = new ItemStack(Material.POTION, 1, (short) 8197);
                         } else {
                             stack = new ItemStack(empty_drops.get(plugin.getRandom().nextInt(empty_drops.size())), plugin.getRandom().nextInt(1) + 1);
+                        }
+                        event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                        return;
+                    }
+                    if (is.getItemMeta().getDisplayName().startsWith("Sontaran")) {
+                        event.getDrops().clear();
+                        if (plugin.getRandom().nextInt(100) < 3) {
+                            stack = new ItemStack(Material.POISONOUS_POTATO, 1);
+                        } else {
+                            stack = new ItemStack(sontaran_drops.get(plugin.getRandom().nextInt(sontaran_drops.size())), 1);
                         }
                         event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                         return;
