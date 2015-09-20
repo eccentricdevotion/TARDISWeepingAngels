@@ -11,7 +11,7 @@
         </repository>
         <repository>
             <id>libsdisguises-repo</id>
-            <url>http://psmc.ca/repo/</url>
+            <url>http://server.psmc.ca/repo/</url>
         </repository>
     </repositories>
     <profiles>
