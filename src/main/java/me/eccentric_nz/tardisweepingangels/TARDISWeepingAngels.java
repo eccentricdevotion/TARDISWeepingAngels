@@ -35,6 +35,7 @@ import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.eccentric_nz.tardisweepingangels.utils.HelmetChecker;
 import me.eccentric_nz.tardisweepingangels.utils.Sounds;
 import org.bukkit.ChatColor;
+import org.bukkit.block.Biome;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -47,6 +48,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
     private boolean steal;
     private final List<UUID> empty = new ArrayList<UUID>();
     private final List<UUID> timesUp = new ArrayList<UUID>();
+    private final List<Biome> notOnWater = new ArrayList<Biome>();
 
     @Override
     public void onDisable() {
@@ -108,6 +110,9 @@ public class TARDISWeepingAngels extends JavaPlugin {
             getServer().getScheduler().scheduleSyncRepeatingTask(this, new SontaranRunnable(this), delay, delay);
             getServer().getScheduler().scheduleSyncRepeatingTask(this, new ZygonRunnable(this), delay, delay);
             steal = (getConfig().getBoolean("angels.can_steal") && pm.isPluginEnabled("TARDIS"));
+            this.notOnWater.add(Biome.DEEP_OCEAN);
+            this.notOnWater.add(Biome.OCEAN);
+            this.notOnWater.add(Biome.RIVER);
         } else {
             System.err.println("[TARDISWeepingAngels] This plugin requires ProtocolLib & LibsDisguises, disabling...");
             pm.disablePlugin(this);
@@ -128,6 +133,10 @@ public class TARDISWeepingAngels extends JavaPlugin {
 
     public List<UUID> getTimesUp() {
         return timesUp;
+    }
+
+    public List<Biome> getNotOnWater() {
+        return notOnWater;
     }
 
     /**

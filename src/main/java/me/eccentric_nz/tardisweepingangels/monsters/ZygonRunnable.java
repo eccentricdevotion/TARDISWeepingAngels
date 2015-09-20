@@ -74,17 +74,19 @@ public class ZygonRunnable implements Runnable {
             int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
-            final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
-            Zombie zygon = (Zombie) e;
-            zygon.setVillager(false);
-            PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3);
-            zygon.addPotionEffect(p);
-            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                @Override
-                public void run() {
-                    equipper.setZygonEquipment(e, false);
-                }
-            }, 5L);
+            if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {
+                final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
+                Zombie zygon = (Zombie) e;
+                zygon.setVillager(false);
+                PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3);
+                zygon.addPotionEffect(p);
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                    @Override
+                    public void run() {
+                        equipper.setZygonEquipment(e, false);
+                    }
+                }, 5L);
+            }
         }
     }
 }
