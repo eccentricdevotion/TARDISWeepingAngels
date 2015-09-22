@@ -51,6 +51,7 @@ public class Config {
         listOptions.put("daleks.drops", Arrays.asList(new String[]{"SLIME_BALL", "ROTTEN_FLESH"}));
         listOptions.put("empty_child.drops", Arrays.asList(new String[]{"COOKED_BEEF", "SUGAR"}));
         listOptions.put("ice_warriors.drops", Arrays.asList(new String[]{"ICE", "PACKED_ICE", "SNOW_BLOCK"}));
+        listOptions.put("silent.drops", Arrays.asList(new String[]{"INK_SACK", "FLOWER_POT_ITEM"}));
         listOptions.put("silurians.drops", Arrays.asList(new String[]{"GOLD_NUGGET", "FEATHER"}));
         listOptions.put("sontarans.drops", Arrays.asList(new String[]{"POTATO_ITEM", "MILK_BUCKET"}));
         listOptions.put("vashta_nerada.drops", Arrays.asList(new String[]{"BONE", "LEATHER"}));
@@ -101,6 +102,9 @@ public class Config {
             }
             if (!config.contains("ice_warriors.worlds." + n)) {
                 plugin.getConfig().set("ice_warriors.worlds." + n, m);
+            }
+            if (!config.contains("silent.worlds." + n)) {
+                plugin.getConfig().set("silent.worlds." + n, m);
             }
             if (!config.contains("silurians.worlds." + n)) {
                 plugin.getConfig().set("silurians.worlds." + n, m);

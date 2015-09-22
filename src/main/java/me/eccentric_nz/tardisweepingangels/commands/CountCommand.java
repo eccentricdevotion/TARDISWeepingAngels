@@ -9,6 +9,8 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Enderman;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Zombie;
@@ -27,6 +29,7 @@ public class CountCommand implements CommandExecutor {
         this.types.add("d");
         this.types.add("e");
         this.types.add("i");
+        this.types.add("m");
         this.types.add("o");
         this.types.add("s");
         this.types.add("v");
@@ -104,6 +107,14 @@ public class CountCommand implements CommandExecutor {
                         if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
                             count++;
                         }
+                    }
+                }
+            } else if (which.equals("m")) {
+                what = "Silence";
+                Collection<Enderman> silence = w.getEntitiesByClass(Enderman.class);
+                for (Enderman m : silence) {
+                    if (m.getPassenger() != null && m.getPassenger().getType().equals(EntityType.GUARDIAN)) {
+                        count++;
                     }
                 }
             } else if (which.equals("o")) {

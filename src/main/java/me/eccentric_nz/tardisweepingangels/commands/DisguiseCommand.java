@@ -31,6 +31,10 @@ public class DisguiseCommand implements CommandExecutor {
                 sender.sendMessage(plugin.pluginName + "You cannot disguise as a Dalek!");
                 return true;
             }
+            if (upper.equals("SILENT")) {
+                sender.sendMessage(plugin.pluginName + "You cannot disguise as a Silent!");
+                return true;
+            }
             Monster monster;
             try {
                 monster = Monster.valueOf(upper);

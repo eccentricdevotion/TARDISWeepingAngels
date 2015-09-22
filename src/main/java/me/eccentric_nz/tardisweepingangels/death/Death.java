@@ -38,6 +38,7 @@ public class Death implements Listener {
     private final List<Material> cyber_drops = new ArrayList<Material>();
     private final List<Material> dalek_drops = new ArrayList<Material>();
     private final List<Material> empty_drops = new ArrayList<Material>();
+    private final List<Material> silent_drops = new ArrayList<Material>();
     private final List<Material> ice_drops = new ArrayList<Material>();
     private final List<Material> silurian_drops = new ArrayList<Material>();
     private final List<Material> sontaran_drops = new ArrayList<Material>();
@@ -63,6 +64,9 @@ public class Death implements Listener {
         }
         for (String o : plugin.getConfig().getStringList("sontarans.drops")) {
             this.sontaran_drops.add(Material.valueOf(o));
+        }
+        for (String m : plugin.getConfig().getStringList("silent.drops")) {
+            this.silent_drops.add(Material.valueOf(m));
         }
         for (String s : plugin.getConfig().getStringList("silurians.drops")) {
             this.silurian_drops.add(Material.valueOf(s));
@@ -210,6 +214,8 @@ public class Death implements Listener {
                 Entity guardian = enderman.getPassenger();
                 guardian.remove();
                 event.getDrops().clear();
+                ItemStack stack = new ItemStack(silent_drops.get(plugin.getRandom().nextInt(silent_drops.size())), plugin.getRandom().nextInt(1) + 1);
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
             }
         }
     }

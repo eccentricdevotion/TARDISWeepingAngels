@@ -12,6 +12,7 @@ import me.eccentric_nz.tardisweepingangels.commands.SpawnCommand;
 import me.eccentric_nz.tardisweepingangels.commands.TabComplete;
 import me.eccentric_nz.tardisweepingangels.death.Death;
 import me.eccentric_nz.tardisweepingangels.death.PlayerDeath;
+import me.eccentric_nz.tardisweepingangels.death.RainDamage;
 import me.eccentric_nz.tardisweepingangels.equip.PlayerUndisguise;
 import me.eccentric_nz.tardisweepingangels.monsters.CybermanRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.IceWarriorRunnable;
@@ -31,6 +32,7 @@ import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.Damage;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.ImageHolder;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.WeepingAngelsRunnable;
 import me.eccentric_nz.tardisweepingangels.silent.AntiTeleport;
+import me.eccentric_nz.tardisweepingangels.silent.SilentRunnable;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.eccentric_nz.tardisweepingangels.utils.HelmetChecker;
 import me.eccentric_nz.tardisweepingangels.utils.Sounds;
@@ -84,6 +86,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
             pm.registerEvents(new HelmetChecker(this), this);
             pm.registerEvents(new Portal(this), this);
             pm.registerEvents(new AntiTeleport(this), this);
+            pm.registerEvents(new RainDamage(), this);
             // register commands
             getCommand("twas").setExecutor(new SpawnCommand(this));
             getCommand("twad").setExecutor(new DisguiseCommand(this));
@@ -107,6 +110,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
             getServer().getScheduler().scheduleSyncRepeatingTask(this, new EmptyChildRunnable(this), delay, delay);
             getServer().getScheduler().scheduleSyncRepeatingTask(this, new IceWarriorRunnable(this), delay, delay);
             getServer().getScheduler().scheduleSyncRepeatingTask(this, new SilurianRunnable(this), delay, delay);
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new SilentRunnable(this), delay, delay);
             getServer().getScheduler().scheduleSyncRepeatingTask(this, new SontaranRunnable(this), delay, delay);
             getServer().getScheduler().scheduleSyncRepeatingTask(this, new ZygonRunnable(this), delay, delay);
             steal = (getConfig().getBoolean("angels.can_steal") && pm.isPluginEnabled("TARDIS"));
