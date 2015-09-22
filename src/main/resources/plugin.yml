@@ -3,7 +3,7 @@ description: Weeping Angel add-on for the TARDIS plugin
 main: me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels
 name: TARDISWeepingAngels
 load: POSTWORLD
-version: '2.0.11'
+version: '2.1'
 website: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 dev-url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
@@ -44,18 +44,18 @@ commands:
     twac:
         aliases: [twacount]
         description: Reports the current number of the specifed monster in the specified world.
-        usage: /<command> [a|c|d|e|i|o|s|v|z] [world]
+        usage: /<command> [a|c|d|e|i|m|o|s|v|z] [world]
         permission: tardisweepingangels.count
         permission-message: You don't have the permission <permission> to use this command
     twak:
         aliases: [twakill]
         description: Kills all of the specifed monster in the specified world.
-        usage: /<command> [a|c|d|e|i|o|s|v|z] [world]
+        usage: /<command> [a|c|d|e|i|m|o|s|v|z] [world]
         permission: tardisweepingangels.kill
         permission-message: You don't have the permission <permission> to use this command
     twa:
         aliases: [twaa,twaadmin]
         description: Set the maximum number of the specified monster allowed to spawn in the specified world.
-        usage: /<command> [a|c|d|e|i|o|s|v|z|all] [world] [max monsters]
+        usage: /<command> [a|c|d|e|i|m|o|s|v|z|all] [world] [max monsters]
         permission: tardisweepingangels.admin
         permission-message: You don't have the permission <permission> to use this command
