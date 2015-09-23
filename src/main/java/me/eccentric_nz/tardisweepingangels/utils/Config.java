@@ -53,7 +53,7 @@ public class Config {
         listOptions.put("ice_warriors.drops", Arrays.asList(new String[]{"ICE", "PACKED_ICE", "SNOW_BLOCK"}));
         listOptions.put("silent.drops", Arrays.asList(new String[]{"INK_SACK", "FLOWER_POT_ITEM"}));
         listOptions.put("silurians.drops", Arrays.asList(new String[]{"GOLD_NUGGET", "FEATHER"}));
-        listOptions.put("sontarans.drops", Arrays.asList(new String[]{"POTATO_ITEM", "MILK_BUCKET"}));
+        listOptions.put("sontarans.drops", Arrays.asList(new String[]{"POTATO_ITEM", "POISONOUS_POTATO"}));
         listOptions.put("vashta_nerada.drops", Arrays.asList(new String[]{"BONE", "LEATHER"}));
         listOptions.put("zygons.drops", Arrays.asList(new String[]{"PAINTING", "SAND"}));
         // boolean
@@ -173,6 +173,13 @@ public class Config {
             List<String> tpws = config.getStringList("angels.angel_tp_worlds");
             plugin.getConfig().set("angels.teleport_worlds", tpws);
             plugin.getConfig().set("angels.angel_tp_worlds", null);
+        }
+        // remove milk bucket from Sontaran drops
+        List<String> sontaran_old = config.getStringList("sontarans.drops");
+        if (sontaran_old.contains("MILK_BUCKET")) {
+            sontaran_old.remove("MILK_BUCKET");
+            sontaran_old.add("POISONOUS_POTATO");
+            plugin.getConfig().set("sontarans.drops", sontaran_old);
         }
         plugin.saveConfig();
         if (i > 0) {

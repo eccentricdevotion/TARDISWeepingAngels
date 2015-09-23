@@ -152,7 +152,7 @@ public class Death implements Listener {
                     if (is.getItemMeta().getDisplayName().startsWith("Sontaran")) {
                         event.getDrops().clear();
                         if (plugin.getRandom().nextInt(100) < 3) {
-                            stack = new ItemStack(Material.POISONOUS_POTATO, 1);
+                            stack = new ItemStack(Material.MILK_BUCKET, 1);
                         } else {
                             stack = new ItemStack(sontaran_drops.get(plugin.getRandom().nextInt(sontaran_drops.size())), 1);
                         }
