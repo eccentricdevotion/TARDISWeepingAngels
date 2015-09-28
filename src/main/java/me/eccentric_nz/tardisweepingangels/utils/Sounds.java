@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.Material;
+import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Skeleton;
@@ -33,6 +35,24 @@ public class Sounds implements Listener {
         final UUID uuid = ent.getUniqueId();
         if (tracker.contains(uuid)) {
             return;
+        }
+        if (ent instanceof Enderman) {
+            if (ent.getPassenger() != null && ent.getPassenger().getType().equals(EntityType.GUARDIAN)) {
+                tracker.add(uuid);
+                final LivingEntity le = event.getTarget();
+                if (le instanceof Player) {
+                    long delay = 90L;
+                    // schedule delayed task
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            Player player = (Player) le;
+                            player.playSound(ent.getLocation(), "silence", 1.0f, 1.0f);
+                            tracker.remove(uuid);
+                        }
+                    }, delay);
+                }
+            }
         }
         if (ent instanceof Zombie) {
             Zombie zombie = (Zombie) ent;
