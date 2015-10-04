@@ -83,9 +83,9 @@ public class TARDISWeepingAngels extends JavaPlugin {
             pm.registerEvents(new Sounds(this), this);
             pm.registerEvents(new GasMask(this), this);
             pm.registerEvents(new Butler(this), this);
-            pm.registerEvents(new HelmetChecker(this), this);
+            pm.registerEvents(new HelmetChecker(), this);
             pm.registerEvents(new Portal(this), this);
-            pm.registerEvents(new AntiTeleport(this), this);
+            pm.registerEvents(new AntiTeleport(), this);
             pm.registerEvents(new RainDamage(), this);
             // register commands
             getCommand("twas").setExecutor(new SpawnCommand(this));
@@ -101,7 +101,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
             getCommand("twak").setTabCompleter(tabCompleter);
             getCommand("twa").setTabCompleter(tabCompleter);
             // re-disguise Daleks
-            getServer().getScheduler().scheduleSyncDelayedTask(this, new ReDisguise(this), 100L);
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new ReDisguise(this), 100L, 6000L);
             // start repeating spawn tasks
             long delay = getConfig().getLong("spawn_rate.how_often");
             getServer().getScheduler().scheduleSyncRepeatingTask(this, new WeepingAngelsRunnable(this), delay, delay);
