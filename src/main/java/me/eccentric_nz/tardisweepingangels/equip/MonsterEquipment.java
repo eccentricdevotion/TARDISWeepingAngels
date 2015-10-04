@@ -25,6 +25,7 @@ public class MonsterEquipment {
 
     public void setAngelEquipment(LivingEntity le, boolean disguise) {
         ItemStack wing = new ItemStack(Material.BARRIER, 1);
+        ItemStack head = new ItemStack(Material.STONE_BUTTON, 1);
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
         ItemStack boots = new ItemStack(Material.IRON_BOOTS, 1);
@@ -32,6 +33,9 @@ public class MonsterEquipment {
             chestplate.setDurability((short) 235);
             leggings.setDurability((short) 220);
         }
+        ItemMeta hmeta = head.getItemMeta();
+        hmeta.setDisplayName("Weeping Angel Head");
+        head.setItemMeta(hmeta);
         ItemMeta cmeta = chestplate.getItemMeta();
         cmeta.setDisplayName("Weeping Angel Chest");
         chestplate.setItemMeta(cmeta);
@@ -42,6 +46,7 @@ public class MonsterEquipment {
         bmeta.setDisplayName("Weeping Angel Feet");
         boots.setItemMeta(bmeta);
         EntityEquipment ee = le.getEquipment();
+        ee.setHelmet(head);
         ee.setChestplate(chestplate);
         ee.setLeggings(leggings);
         ee.setBoots(boots);
