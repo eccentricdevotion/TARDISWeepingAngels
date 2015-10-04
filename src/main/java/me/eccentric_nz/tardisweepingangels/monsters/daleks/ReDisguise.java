@@ -30,8 +30,8 @@ public class ReDisguise implements Runnable {
 
     @Override
     public void run() {
-        plugin.debug("Checking Daleks for disguises...");
-        int count = 0;
+//        plugin.debug("Checking Daleks for disguises...");
+//        int count = 0;
         for (World w : plugin.getServer().getWorlds()) {
             // only configured worlds
             String name = Config.sanitiseName(w.getName());
@@ -45,7 +45,7 @@ public class ReDisguise implements Runnable {
                     if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek") && !DisguiseAPI.isDisguised(d)) {
                         MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
                         DisguiseAPI.disguiseToAll(d, mobDisguise);
-                        count++;
+//                        count++;
                     }
                 }
                 Collection<Guardian> guardians = w.getEntitiesByClass(Guardian.class);
@@ -53,11 +53,11 @@ public class ReDisguise implements Runnable {
                     // does it have invisibilty but not riding an Enderman
                     if (g.hasPotionEffect(PotionEffectType.INVISIBILITY) && g.getVehicle() == null) {
                         g.remove();
-                        plugin.debug("Removed an invisible Guardian without an Enderman to ride");
+//                        plugin.debug("Removed an invisible Guardian without an Enderman to ride");
                     }
                 }
             }
         }
-        plugin.debug("Found & re-disguised " + count + " Daleks");
+//        plugin.debug("Found & re-disguised " + count + " Daleks");
     }
 }
