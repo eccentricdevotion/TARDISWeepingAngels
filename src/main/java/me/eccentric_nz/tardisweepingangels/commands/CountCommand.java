@@ -11,11 +11,13 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Guardian;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 
 public class CountCommand implements CommandExecutor {
 
@@ -34,6 +36,7 @@ public class CountCommand implements CommandExecutor {
         this.types.add("s");
         this.types.add("v");
         this.types.add("z");
+        this.types.add("g");
     }
 
     @Override
@@ -163,6 +166,14 @@ public class CountCommand implements CommandExecutor {
                         if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Zygon")) {
                             count++;
                         }
+                    }
+                }
+            } else if (which.equals("g")) {
+                what = "Invisible Guardians without Endermen";
+                Collection<Guardian> guardians = w.getEntitiesByClass(Guardian.class);
+                for (Guardian g : guardians) {
+                    if (g.hasPotionEffect(PotionEffectType.INVISIBILITY) && g.getVehicle() == null) {
+                        count++;
                     }
                 }
             }
