@@ -7,8 +7,10 @@ import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.libraryaddict.disguise.DisguiseAPI;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Guardian;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Projectile;
@@ -69,6 +71,20 @@ public class PlayerDeath implements Listener {
                             event.setDeathMessage(name + " was eaten by a Vashta Nerada");
                             return;
                         }
+                    }
+                }
+                if (attacker instanceof Enderman) {
+                    Entity passenger = ((Enderman) attacker).getPassenger();
+                    if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
+                        event.setDeathMessage(name + " was slain by a Silent");
+                        return;
+                    }
+                }
+                if (attacker instanceof Guardian) {
+                    Entity silent = ((Guardian) attacker).getVehicle();
+                    if (silent != null && silent.getType().equals(EntityType.ENDERMAN)) {
+                        event.setDeathMessage(name + " was slain by a Silent");
+                        return;
                     }
                 }
                 if (attacker instanceof PigZombie) {
