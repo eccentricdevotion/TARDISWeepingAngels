@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.commands.AdminCommand;
 import me.eccentric_nz.tardisweepingangels.commands.CountCommand;
+import me.eccentric_nz.tardisweepingangels.commands.DalekCommand;
 import me.eccentric_nz.tardisweepingangels.commands.DisguiseCommand;
 import me.eccentric_nz.tardisweepingangels.commands.KillCommand;
 import me.eccentric_nz.tardisweepingangels.commands.SpawnCommand;
@@ -85,7 +86,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
             pm.registerEvents(new Butler(this), this);
             pm.registerEvents(new HelmetChecker(), this);
             pm.registerEvents(new Portal(this), this);
-            pm.registerEvents(new AntiTeleport(), this);
+            pm.registerEvents(new AntiTeleport(this), this);
             pm.registerEvents(new RainDamage(), this);
             // register commands
             getCommand("twas").setExecutor(new SpawnCommand(this));
@@ -93,6 +94,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
             getCommand("twac").setExecutor(new CountCommand(this));
             getCommand("twak").setExecutor(new KillCommand(this));
             getCommand("twa").setExecutor(new AdminCommand(this));
+            getCommand("twar").setExecutor(new DalekCommand(this));
             // set tab completion
             TabCompleter tabCompleter = new TabComplete(this);
             getCommand("twas").setTabCompleter(tabCompleter);

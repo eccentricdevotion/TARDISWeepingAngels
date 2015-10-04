@@ -59,3 +59,8 @@ commands:
         usage: /<command> [a|c|d|e|i|m|o|s|v|z|all] [world] [max monsters]
         permission: tardisweepingangels.admin
         permission-message: You don't have the permission <permission> to use this command
+    twar:
+        description: Try to redisguise Daleks.
+        usage: /<command>
+        permission: tardisweepingangels.admin
+        permission-message: You don't have the permission <permission> to use this command
