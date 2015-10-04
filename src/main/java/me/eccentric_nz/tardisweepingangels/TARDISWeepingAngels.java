@@ -19,6 +19,7 @@ import me.eccentric_nz.tardisweepingangels.monsters.CybermanRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.IceWarriorRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.VashtaNeradaListener;
 import me.eccentric_nz.tardisweepingangels.monsters.ZygonRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.daleks.ChunkLoad;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.Portal;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.ReDisguise;
@@ -88,6 +89,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
             pm.registerEvents(new Portal(this), this);
             pm.registerEvents(new AntiTeleport(this), this);
             pm.registerEvents(new RainDamage(), this);
+            pm.registerEvents(new ChunkLoad(), this);
             // register commands
             getCommand("twas").setExecutor(new SpawnCommand(this));
             getCommand("twad").setExecutor(new DisguiseCommand(this));
