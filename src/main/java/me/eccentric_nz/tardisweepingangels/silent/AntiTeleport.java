@@ -3,7 +3,6 @@
  */
 package me.eccentric_nz.tardisweepingangels.silent;
 
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -16,12 +15,6 @@ import org.bukkit.event.entity.EntityTeleportEvent;
  * @author eccentric_nz
  */
 public class AntiTeleport implements Listener {
-
-    private final TARDISWeepingAngels plugin;
-
-    public AntiTeleport(TARDISWeepingAngels plugin) {
-        this.plugin = plugin;
-    }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onEndermanTeleport(EntityTeleportEvent event) {

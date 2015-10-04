@@ -87,7 +87,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
             pm.registerEvents(new Butler(this), this);
             pm.registerEvents(new HelmetChecker(), this);
             pm.registerEvents(new Portal(this), this);
-            pm.registerEvents(new AntiTeleport(this), this);
+            pm.registerEvents(new AntiTeleport(), this);
             pm.registerEvents(new RainDamage(), this);
             pm.registerEvents(new ChunkLoad(), this);
             // register commands

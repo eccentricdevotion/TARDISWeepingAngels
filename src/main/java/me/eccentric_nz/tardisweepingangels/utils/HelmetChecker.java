@@ -5,7 +5,6 @@ package me.eccentric_nz.tardisweepingangels.utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -25,11 +24,9 @@ import org.bukkit.inventory.meta.ItemMeta;
  */
 public class HelmetChecker implements Listener {
 
-    private final TARDISWeepingAngels plugin;
     private final List<EntityType> heads = new ArrayList<EntityType>();
 
-    public HelmetChecker(TARDISWeepingAngels plugin) {
-        this.plugin = plugin;
+    public HelmetChecker() {
         heads.add(EntityType.PIG_ZOMBIE);
         heads.add(EntityType.SKELETON);
         heads.add(EntityType.ZOMBIE);
