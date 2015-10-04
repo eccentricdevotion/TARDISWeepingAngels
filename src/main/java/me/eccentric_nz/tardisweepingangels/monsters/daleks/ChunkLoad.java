@@ -15,6 +15,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 /**
  *
@@ -27,11 +28,28 @@ public class ChunkLoad implements Listener {
         for (Entity d : event.getChunk().getEntities()) {
             if (d instanceof Skeleton) {
                 EntityEquipment ee = ((Skeleton) d).getEquipment();
-                if (ee.getHelmet().getType().equals(Material.VINE)) {
-                    ItemStack is = ee.getHelmet();
-                    if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek") && !DisguiseAPI.isDisguised(d)) {
+                ItemStack is = ee.getHelmet();
+                // check the helmet
+                if (is != null && is.getType().equals(Material.VINE)) {
+                    if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek") && !DisguiseAPI.isDisguised(d)) {
                         MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
                         DisguiseAPI.disguiseToAll(d, mobDisguise);
+                    }
+                } else if (is != null && is.getType().equals(Material.WATER_LILY)) {
+                    ItemStack head = new ItemStack(Material.STONE_BUTTON, 1);
+                    ItemMeta hmeta = head.getItemMeta();
+                    hmeta.setDisplayName("Weeping Angel Head");
+                    head.setItemMeta(hmeta);
+                    ee.setHelmet(head);
+                } else if (is == null || is.getType().equals(Material.AIR) || is.getType().equals(Material.IRON_HELMET)) {
+                    // check the chestplate
+                    ItemStack chest = ee.getChestplate();
+                    if (chest.hasItemMeta() && chest.getItemMeta().hasDisplayName() && chest.getItemMeta().getDisplayName().startsWith("Weeping Angel")) {
+                        ItemStack head = new ItemStack(Material.STONE_BUTTON, 1);
+                        ItemMeta hmeta = head.getItemMeta();
+                        hmeta.setDisplayName("Weeping Angel Head");
+                        head.setItemMeta(hmeta);
+                        ee.setHelmet(head);
                     }
                 }
             }
