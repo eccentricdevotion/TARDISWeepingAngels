@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Guardian;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Skeleton;
@@ -42,6 +43,24 @@ public class Sounds implements Listener {
                 final LivingEntity le = event.getTarget();
                 if (le instanceof Player) {
                     long delay = 90L;
+                    // schedule delayed task
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            Player player = (Player) le;
+                            player.playSound(ent.getLocation(), "silence", 1.0f, 1.0f);
+                            tracker.remove(uuid);
+                        }
+                    }, delay);
+                }
+            }
+        }
+        if (ent instanceof Guardian) {
+            if (ent.getVehicle() != null && ent.getVehicle().getType().equals(EntityType.ENDERMAN)) {
+                tracker.add(uuid);
+                final LivingEntity le = event.getTarget();
+                if (le instanceof Player) {
+                    long delay = 20L;
                     // schedule delayed task
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
