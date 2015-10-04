@@ -10,9 +10,11 @@ import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import org.bukkit.World;
+import org.bukkit.entity.Guardian;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 
 /**
  *
@@ -44,6 +46,14 @@ public class ReDisguise implements Runnable {
                         MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
                         DisguiseAPI.disguiseToAll(d, mobDisguise);
                         count++;
+                    }
+                }
+                Collection<Guardian> guardians = w.getEntitiesByClass(Guardian.class);
+                for (Guardian g : guardians) {
+                    // does it have invisibilty but not riding an Enderman
+                    if (g.hasPotionEffect(PotionEffectType.INVISIBILITY) && g.getVehicle() == null) {
+                        g.remove();
+                        plugin.debug("Removed an invisible Guardian without an Enderman to ride");
                     }
                 }
             }
