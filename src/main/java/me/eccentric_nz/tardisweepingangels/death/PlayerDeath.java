@@ -105,10 +105,6 @@ public class PlayerDeath implements Listener {
                     ItemStack is = ee.getHelmet();
                     if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
                         String dn = is.getItemMeta().getDisplayName();
-                        if (ee.getHelmet().getType().equals(Material.WATER_LILY)) {
-                            event.setDeathMessage(name + " was slain by a Weeping Angel");
-                            return;
-                        }
                         if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
                             if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && dn.startsWith("Silurian")) {
                                 event.setDeathMessage(name + " was slain by a Silurian");
