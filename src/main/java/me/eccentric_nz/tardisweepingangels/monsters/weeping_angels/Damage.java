@@ -83,7 +83,10 @@ public class Damage implements Listener {
                 if (ee.getItemInHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.WATER_LILY)) {
                     Entity t = event.getEntity();
                     Player p = (Player) t;
-                    p.teleport(getRandomLocation(t.getWorld()));
+                    Location l = getRandomLocation(t.getWorld());
+                    if (l != null) {
+                        p.teleport(l);
+                    }
                     p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 300, 5));
                     if (plugin.angelsCanSteal()) {
                         stealKey(p);

@@ -38,14 +38,14 @@ public class IceWarriorRunnable implements Runnable {
         this.spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
         this.equipper = new MonsterEquipment();
         biomes.add(Biome.COLD_BEACH);
-        biomes.add(Biome.COLD_TAIGA);
-        biomes.add(Biome.COLD_TAIGA_HILLS);
-        biomes.add(Biome.COLD_TAIGA_MOUNTAINS);
+        biomes.add(Biome.TAIGA_COLD);
+        biomes.add(Biome.TAIGA_COLD_HILLS);
+        biomes.add(Biome.MUTATED_TAIGA_COLD);
         biomes.add(Biome.FROZEN_OCEAN);
         biomes.add(Biome.FROZEN_RIVER);
         biomes.add(Biome.ICE_MOUNTAINS);
-        biomes.add(Biome.ICE_PLAINS);
-        biomes.add(Biome.ICE_PLAINS_SPIKES);
+        biomes.add(Biome.ICE_FLATS);
+        biomes.add(Biome.MUTATED_ICE_FLATS);
     }
 
     @Override
