@@ -74,7 +74,8 @@ public class SpawnCommand implements CommandExecutor {
                     final LivingEntity c = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                     c.setNoDamageTicks(75);
                     Zombie cyber = (Zombie) c;
-                    cyber.setVillager(false);
+                    //cyber.setVillager(false);
+                    cyber.setVillagerProfession(null);
                     cyber.setBaby(false);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
@@ -115,7 +116,8 @@ public class SpawnCommand implements CommandExecutor {
                     final LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                     e.setNoDamageTicks(75);
                     Zombie child = (Zombie) e;
-                    child.setVillager(false);
+                    //child.setVillager(false);
+                    child.setVillagerProfession(null);
                     child.setBaby(true);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
@@ -149,7 +151,8 @@ public class SpawnCommand implements CommandExecutor {
                     o.setNoDamageTicks(75);
                     Zombie sontaran = (Zombie) o;
                     sontaran.setBaby(false);
-                    sontaran.setVillager(false);
+                    //sontaran.setVillager(false);
+                    sontaran.setVillagerProfession(null);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
                         public void run() {
@@ -175,7 +178,8 @@ public class SpawnCommand implements CommandExecutor {
                     final LivingEntity v = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                     v.setNoDamageTicks(75);
                     Zombie vashta = (Zombie) v;
-                    vashta.setVillager(false);
+                    //vashta.setVillager(false);
+                    vashta.setVillagerProfession(null);
                     vashta.setBaby(false);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
@@ -188,7 +192,8 @@ public class SpawnCommand implements CommandExecutor {
                     final LivingEntity z = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                     z.setNoDamageTicks(75);
                     Zombie zygon = (Zombie) z;
-                    zygon.setVillager(false);
+                    //zygon.setVillager(false);
+                    zygon.setVillagerProfession(null);
                     zygon.setBaby(false);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override

@@ -81,7 +81,8 @@ public class SontaranRunnable implements Runnable {
             if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {
                 final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
                 Zombie sontaran = (Zombie) e;
-                sontaran.setVillager(false);
+                //sontaran.setVillager(false);
+                sontaran.setVillagerProfession(null);
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3);
                 sontaran.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {

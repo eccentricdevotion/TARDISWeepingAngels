@@ -77,7 +77,8 @@ public class ZygonRunnable implements Runnable {
             if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {
                 final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
                 Zombie zygon = (Zombie) e;
-                zygon.setVillager(false);
+                //zygon.setVillager(false);
+                zygon.setVillagerProfession(null);
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3);
                 zygon.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {

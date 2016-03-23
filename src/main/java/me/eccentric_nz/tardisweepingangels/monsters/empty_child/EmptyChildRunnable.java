@@ -75,7 +75,8 @@ public class EmptyChildRunnable implements Runnable {
             if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {
                 final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
                 Zombie child = (Zombie) e;
-                child.setVillager(false);
+                //child.setVillager(false);
+                child.setVillagerProfession(null);
                 child.setBaby(true);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                     @Override

@@ -79,7 +79,8 @@ public class VashtaNeradaListener implements Listener {
     private void spawnVashtaNerada(Location l) {
         final LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
         Zombie vashta = (Zombie) e;
-        vashta.setVillager(false);
+        //vashta.setVillager(false);
+        vashta.setVillagerProfession(null);
         vashta.setBaby(false);
         PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3);
         e.addPotionEffect(p);

@@ -77,7 +77,8 @@ public class CybermanRunnable implements Runnable {
             if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {
                 final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
                 Zombie cyber = (Zombie) e;
-                cyber.setVillager(false);
+                //cyber.setVillager(false);
+                cyber.setVillagerProfession(null);
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3);
                 cyber.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
