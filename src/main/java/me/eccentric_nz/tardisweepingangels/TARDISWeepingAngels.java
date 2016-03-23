@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import java.util.logging.Level;
 import me.eccentric_nz.tardisweepingangels.commands.AdminCommand;
 import me.eccentric_nz.tardisweepingangels.commands.CountCommand;
 import me.eccentric_nz.tardisweepingangels.commands.DalekCommand;
@@ -38,9 +39,11 @@ import me.eccentric_nz.tardisweepingangels.silent.SilentRunnable;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.eccentric_nz.tardisweepingangels.utils.HelmetChecker;
 import me.eccentric_nz.tardisweepingangels.utils.Sounds;
+import me.eccentric_nz.tardisweepingangels.utils.Version;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -53,6 +56,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
     private final List<UUID> empty = new ArrayList<UUID>();
     private final List<UUID> timesUp = new ArrayList<UUID>();
     private final List<Biome> notOnWater = new ArrayList<Biome>();
+    private PluginManager pm;
 
     @Override
     public void onDisable() {
@@ -61,12 +65,23 @@ public class TARDISWeepingAngels extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        PluginManager pm = getServer().getPluginManager();
+        pm = getServer().getPluginManager();
+        PluginDescriptionFile pdfFile = getDescription();
+        pluginName = ChatColor.GOLD + "[" + pdfFile.getName() + "]" + ChatColor.RESET + " ";
         if (pm.isPluginEnabled("ProtocolLib") && pm.isPluginEnabled("LibsDisguises")) {
+            // check dependent plugin versions
+            if (!checkPluginVersion("ProtocolLib", "4.0")) {
+                getServer().getConsoleSender().sendMessage(pluginName + ChatColor.RED + "This plugin requires ProtocolLib to be v4.0 or higher, disabling...");
+                pm.disablePlugin(this);
+                return;
+            }
+            if (!checkPluginVersion("LibsDisguises", "9.0.2")) {
+                getServer().getConsoleSender().sendMessage(pluginName + ChatColor.RED + "This plugin requires LibsDisguises to be v9.0.2 or higher, disabling...");
+                pm.disablePlugin(this);
+                return;
+            }
             saveDefaultConfig();
             random = new Random();
-            PluginDescriptionFile pdfFile = getDescription();
-            pluginName = ChatColor.GOLD + "[" + pdfFile.getName() + "]" + ChatColor.RESET + " ";
             // update the config
             new Config(this).updateConfig();
             // register listeners
@@ -154,5 +169,31 @@ public class TARDISWeepingAngels extends JavaPlugin {
      */
     public void debug(Object o) {
         getServer().getConsoleSender().sendMessage(pluginName + "Debug: " + o);
+    }
+
+    private boolean checkPluginVersion(String plg, String min) {
+        if (pm.isPluginEnabled(plg)) {
+            Plugin check = pm.getPlugin(plg);
+            Version minver = new Version(min);
+            String preSplit = check.getDescription().getVersion();
+            String[] split = preSplit.split("-");
+            try {
+                Version ver;
+                if (check.getName().equals("TARDISChunkGenerator") && check.getDescription().getVersion().startsWith("1")) {
+                    ver = new Version("1");
+                } else {
+                    ver = new Version(split[0]);
+                }
+                return (ver.compareTo(minver) >= 0);
+            } catch (IllegalArgumentException e) {
+                getServer().getLogger().log(Level.WARNING, "TARDIS failed to get the version for {0}.", plg);
+                getServer().getLogger().log(Level.WARNING, "This could cause issues with enabling the plugin.");
+                getServer().getLogger().log(Level.WARNING, "Please check you have at least v{0}", min);
+                getServer().getLogger().log(Level.WARNING, "The invalid version format was {0}", preSplit);
+                return true;
+            }
+        } else {
+            return true;
+        }
     }
 }
