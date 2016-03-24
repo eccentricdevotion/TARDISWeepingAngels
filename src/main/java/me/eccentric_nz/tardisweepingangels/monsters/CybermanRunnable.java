@@ -79,6 +79,7 @@ public class CybermanRunnable implements Runnable {
                 Zombie cyber = (Zombie) e;
                 //cyber.setVillager(false);
                 cyber.setVillagerProfession(null);
+                cyber.setBaby(false);
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3);
                 cyber.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {

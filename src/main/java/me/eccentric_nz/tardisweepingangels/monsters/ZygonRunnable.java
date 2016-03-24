@@ -79,6 +79,7 @@ public class ZygonRunnable implements Runnable {
                 Zombie zygon = (Zombie) e;
                 //zygon.setVillager(false);
                 zygon.setVillagerProfession(null);
+                zygon.setBaby(false);
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3);
                 zygon.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
