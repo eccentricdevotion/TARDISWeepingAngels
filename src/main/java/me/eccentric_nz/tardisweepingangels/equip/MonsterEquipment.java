@@ -51,7 +51,8 @@ public class MonsterEquipment {
         ee.setLeggings(leggings);
         ee.setBoots(boots);
         if (!disguise) {
-            ee.setItemInHand(wing);
+            ee.setItemInMainHand(wing);
+            ee.setItemInOffHand(wing);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
@@ -89,8 +90,9 @@ public class MonsterEquipment {
             ItemMeta sword = weapon.getItemMeta();
             sword.setDisplayName("Ice Warrior Dagger");
             weapon.setItemMeta(sword);
-            ee.setItemInHand(weapon);
-            ee.setItemInHandDropChance(0F);
+            ee.setItemInMainHand(weapon);
+            ee.setItemInOffHand(null);
+            ee.setItemInMainHandDropChance(0F);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
@@ -122,7 +124,9 @@ public class MonsterEquipment {
         ee.setLeggings(leggings);
         ee.setBoots(null);
         if (!disguise) {
-            ee.setItemInHandDropChance(0F);
+            ee.setItemInMainHandDropChance(0F);
+            ee.setItemInMainHand(null);
+            ee.setItemInOffHand(null);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
@@ -159,7 +163,8 @@ public class MonsterEquipment {
             le.removePotionEffect(PotionEffectType.SPEED);
             le.addPotionEffect(p);
             le.setCanPickupItems(false);
-            ee.setItemInHand(null);
+            ee.setItemInMainHand(null);
+            ee.setItemInOffHand(null);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
@@ -191,7 +196,8 @@ public class MonsterEquipment {
         ee.setBoots(null);
         ee.setHelmet(helmet);
         if (!disguise) {
-            ee.setItemInHand(null);
+            ee.setItemInMainHand(null);
+            ee.setItemInOffHand(null);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
@@ -228,7 +234,8 @@ public class MonsterEquipment {
             ItemMeta bmeta = bow.getItemMeta();
             bmeta.setDisplayName("Silurian Weapon");
             bow.setItemMeta(bmeta);
-            ee.setItemInHand(bow);
+            ee.setItemInMainHand(bow);
+            ee.setItemInOffHand(null);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
@@ -265,7 +272,8 @@ public class MonsterEquipment {
             ItemMeta bmeta = sword.getItemMeta();
             bmeta.setDisplayName("Sontaran Weapon");
             sword.setItemMeta(bmeta);
-            ee.setItemInHand(sword);
+            ee.setItemInMainHand(sword);
+            ee.setItemInOffHand(null);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
@@ -298,7 +306,8 @@ public class MonsterEquipment {
         ee.setBoots(null);
         ee.setHelmet(helmet);
         if (!disguise) {
-            ee.setItemInHand(null);
+            ee.setItemInMainHand(null);
+            ee.setItemInOffHand(null);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
@@ -360,7 +369,8 @@ public class MonsterEquipment {
         ee.setBoots(null);
         ee.setHelmet(helmet);
         if (!disguise) {
-            ee.setItemInHand(null);
+            ee.setItemInMainHand(null);
+            ee.setItemInOffHand(null);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
