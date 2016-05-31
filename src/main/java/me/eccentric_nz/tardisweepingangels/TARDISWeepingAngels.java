@@ -15,6 +15,7 @@ import me.eccentric_nz.tardisweepingangels.commands.TabComplete;
 import me.eccentric_nz.tardisweepingangels.death.Death;
 import me.eccentric_nz.tardisweepingangels.death.PlayerDeath;
 import me.eccentric_nz.tardisweepingangels.death.RainDamage;
+import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.equip.PlayerUndisguise;
 import me.eccentric_nz.tardisweepingangels.monsters.CybermanRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.IceWarriorRunnable;
@@ -195,5 +196,9 @@ public class TARDISWeepingAngels extends JavaPlugin {
         } else {
             return true;
         }
+    }
+
+    public MonsterEquipment getWeepingAngelsAPI() {
+        return new MonsterEquipment();
     }
 }

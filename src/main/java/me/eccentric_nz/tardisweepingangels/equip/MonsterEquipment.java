@@ -3,6 +3,7 @@
  */
 package me.eccentric_nz.tardisweepingangels.equip;
 
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelsAPI;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
@@ -21,8 +22,9 @@ import org.bukkit.potion.PotionEffectType;
  *
  * @author eccentric_nz
  */
-public class MonsterEquipment {
+public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
+    @Override
     public void setAngelEquipment(LivingEntity le, boolean disguise) {
         ItemStack wing = new ItemStack(Material.BARRIER, 1);
         ItemStack head = new ItemStack(Material.STONE_BUTTON, 1);
@@ -61,6 +63,7 @@ public class MonsterEquipment {
         }
     }
 
+    @Override
     public void setWarriorEquipment(LivingEntity le, boolean disguise) {
         ItemStack helmet = new ItemStack(Material.IRON_HELMET, 1);
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
@@ -100,6 +103,7 @@ public class MonsterEquipment {
         }
     }
 
+    @Override
     public void setCyberEquipment(LivingEntity le, boolean disguise) {
         ItemStack helmet = new ItemStack(Material.IRON_HELMET, 1);
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
@@ -134,6 +138,7 @@ public class MonsterEquipment {
         }
     }
 
+    @Override
     public void setEmptyChildEquipment(LivingEntity le, boolean disguise) {
         ItemStack helmet = new ItemStack(Material.IRON_HELMET, 1);
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
@@ -171,6 +176,7 @@ public class MonsterEquipment {
         }
     }
 
+    @Override
     public void setZygonEquipment(LivingEntity le, boolean disguise) {
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET, 1);
         ItemStack chestplate = new ItemStack(Material.GOLD_CHESTPLATE, 1);
@@ -205,6 +211,7 @@ public class MonsterEquipment {
         }
     }
 
+    @Override
     public void setSilurianEquipment(LivingEntity le, boolean disguise) {
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET, 1);
         ItemStack chestplate = new ItemStack(Material.GOLD_CHESTPLATE, 1);
@@ -243,6 +250,7 @@ public class MonsterEquipment {
         }
     }
 
+    @Override
     public void setSontaranEquipment(LivingEntity le, boolean disguise) {
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET, 1);
         ItemStack chestplate = new ItemStack(Material.GOLD_CHESTPLATE, 1);
@@ -281,6 +289,7 @@ public class MonsterEquipment {
         }
     }
 
+    @Override
     public void setButlerEquipment(LivingEntity le, boolean disguise) {
         ItemStack helmet = new ItemStack(Material.CHAINMAIL_HELMET, 1);
         ItemStack chestplate = new ItemStack(Material.CHAINMAIL_CHESTPLATE, 1);
@@ -316,6 +325,7 @@ public class MonsterEquipment {
         }
     }
 
+    @Override
     public void setSilentEquipment(LivingEntity le) {
         final LivingEntity g = (LivingEntity) le.getLocation().getWorld().spawnEntity(le.getLocation(), EntityType.GUARDIAN);
         PotionEffect p = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1);
@@ -324,6 +334,7 @@ public class MonsterEquipment {
 //        /summon Guardian ~ ~ ~ {Invulnerable:1b,ActiveEffects:[{Id:14b,Duration:20000000,ShowParticles:0b}],Riding:{id:"Enderman"}}
     }
 
+    @Override
     public void setDalekEquipment(LivingEntity le) {
         ItemStack helmet = new ItemStack(Material.VINE, 1);
         ItemMeta hmeta = helmet.getItemMeta();
@@ -344,6 +355,7 @@ public class MonsterEquipment {
         le.setCanPickupItems(false);
     }
 
+    @Override
     public void setVashtaNeradaEquipment(LivingEntity le, boolean disguise) {
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET, 1);
         ItemStack chestplate = new ItemStack(Material.GOLD_CHESTPLATE, 1);
@@ -378,6 +390,7 @@ public class MonsterEquipment {
         }
     }
 
+    @Override
     public void removeEquipment(Player p) {
         PlayerInventory inv = p.getInventory();
         inv.setHelmet(null);
