@@ -133,7 +133,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
             getServer().getScheduler().scheduleSyncRepeatingTask(this, new SilentRunnable(this), delay, delay);
             getServer().getScheduler().scheduleSyncRepeatingTask(this, new SontaranRunnable(this), delay, delay);
             getServer().getScheduler().scheduleSyncRepeatingTask(this, new ZygonRunnable(this), delay, delay);
-            steal = (getConfig().getBoolean("angels.can_steal") && pm.isPluginEnabled("TARDIS"));
+            steal = (getConfig().getBoolean("angels.can_steal"));
             this.notOnWater.add(Biome.DEEP_OCEAN);
             this.notOnWater.add(Biome.OCEAN);
             this.notOnWater.add(Biome.RIVER);

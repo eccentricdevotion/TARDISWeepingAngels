@@ -7,7 +7,7 @@ version: '2.3'
 website: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 dev-url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
-softdepend: [TARDIS]
+softdepend: []
 depend: [LibsDisguises]
 permissions:
     tardisweepingangels.spawn:
