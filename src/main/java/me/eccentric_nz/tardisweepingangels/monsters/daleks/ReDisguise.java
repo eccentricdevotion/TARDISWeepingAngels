@@ -9,6 +9,8 @@ import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
+import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
+import me.libraryaddict.disguise.disguisetypes.watchers.SnowmanWatcher;
 import org.bukkit.World;
 import org.bukkit.entity.Guardian;
 import org.bukkit.entity.Skeleton;
@@ -30,8 +32,6 @@ public class ReDisguise implements Runnable {
 
     @Override
     public void run() {
-//        plugin.debug("Checking Daleks for disguises...");
-//        int count = 0;
         for (World w : plugin.getServer().getWorlds()) {
             // only configured worlds
             String name = Config.sanitiseName(w.getName());
@@ -44,8 +44,10 @@ public class ReDisguise implements Runnable {
                     ItemStack is = ee.getHelmet();
                     if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek") && !DisguiseAPI.isDisguised(d)) {
                         MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
+                        LivingWatcher livingWatcher = mobDisguise.getWatcher();
+                        SnowmanWatcher snw = (SnowmanWatcher) livingWatcher;
+                        snw.setHat(false);
                         DisguiseAPI.disguiseToAll(d, mobDisguise);
-//                        count++;
                     }
                 }
                 Collection<Guardian> guardians = w.getEntitiesByClass(Guardian.class);
@@ -53,11 +55,9 @@ public class ReDisguise implements Runnable {
                     // does it have invisibilty but not riding an Enderman
                     if (g.hasPotionEffect(PotionEffectType.INVISIBILITY) && g.getVehicle() == null) {
                         g.remove();
-//                        plugin.debug("Removed an invisible Guardian without an Enderman to ride");
                     }
                 }
             }
         }
-//        plugin.debug("Found & re-disguised " + count + " Daleks");
     }
 }

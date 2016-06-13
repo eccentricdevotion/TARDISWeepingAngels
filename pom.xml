@@ -9,10 +9,6 @@
             <id>Spigot</id>
             <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
         </repository>
-        <repository>
-            <id>libsdisguises-repo</id>
-            <url>http://server.psmc.ca/repo/</url>
-        </repository>
     </repositories>
     <profiles>
         <profile>
@@ -33,10 +29,6 @@
                 <repository>
                     <id>Bromley Massive</id>
                     <url>http://tardisjenkins.duckdns.org:8080/plugin/repository/everything/</url>
-                </repository>
-                <repository>
-                    <id>md_5-public</id>
-                    <url>http://repo.md-5.net/content/groups/public/</url>
                 </repository>
             </repositories>
         </profile>
@@ -68,7 +60,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.9.4-R0.1-SNAPSHOT</version>
+            <version>1.10-R0.1-SNAPSHOT</version>
             <type>jar</type>
             <scope>compile</scope>
             <exclusions>
@@ -105,7 +97,7 @@
         <dependency>
             <groupId>LibsDisguises</groupId>
             <artifactId>LibsDisguises</artifactId>
-            <version>9.0.6-SNAPSHOT</version>
+            <version>9.0.7</version>
             <type>jar</type>
             <!--<scope>compile</scope>-->
             <scope>system</scope>

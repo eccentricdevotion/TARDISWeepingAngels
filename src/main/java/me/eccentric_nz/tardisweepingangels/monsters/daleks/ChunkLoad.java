@@ -6,6 +6,8 @@ package me.eccentric_nz.tardisweepingangels.monsters.daleks;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
+import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
+import me.libraryaddict.disguise.disguisetypes.watchers.SnowmanWatcher;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Skeleton;
@@ -33,6 +35,9 @@ public class ChunkLoad implements Listener {
                 if (is != null && is.getType().equals(Material.VINE)) {
                     if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek") && !DisguiseAPI.isDisguised(d)) {
                         MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
+                        LivingWatcher livingWatcher = mobDisguise.getWatcher();
+                        SnowmanWatcher snw = (SnowmanWatcher) livingWatcher;
+                        snw.setHat(false);
                         DisguiseAPI.disguiseToAll(d, mobDisguise);
                     }
                 } else if (is != null && is.getType().equals(Material.WATER_LILY)) {

@@ -7,6 +7,8 @@ import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
+import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
+import me.libraryaddict.disguise.disguisetypes.watchers.SnowmanWatcher;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -41,6 +43,9 @@ public class Portal implements Listener {
                 public void run() {
                     if (is.getType().equals(Material.VINE) && !DisguiseAPI.isDisguised(skeleton)) {
                         MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
+                        LivingWatcher livingWatcher = mobDisguise.getWatcher();
+                        SnowmanWatcher snw = (SnowmanWatcher) livingWatcher;
+                        snw.setHat(false);
                         DisguiseAPI.disguiseToAll(skeleton, mobDisguise);
                     }
                 }

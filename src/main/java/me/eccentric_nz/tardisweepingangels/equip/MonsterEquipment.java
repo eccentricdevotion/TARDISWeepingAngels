@@ -7,6 +7,8 @@ import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelsAPI;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
+import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
+import me.libraryaddict.disguise.disguisetypes.watchers.SnowmanWatcher;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -347,6 +349,9 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         ee.setLeggings(null);
         ee.setBoots(null);
         MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
+        LivingWatcher livingWatcher = mobDisguise.getWatcher();
+        SnowmanWatcher snw = (SnowmanWatcher) livingWatcher;
+        snw.setHat(false);
         DisguiseAPI.disguiseToAll(le, mobDisguise);
         PotionEffect p = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 360000, 1);
         le.addPotionEffect(p);
