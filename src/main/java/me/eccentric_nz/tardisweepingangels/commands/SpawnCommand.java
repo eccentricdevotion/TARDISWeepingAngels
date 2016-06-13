@@ -1,6 +1,7 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
 import java.util.Set;
+import me.eccentric_nz.tardischunkgenerator.TARDISHelper;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
@@ -17,6 +18,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Skeleton.SkeletonType;
 import org.bukkit.entity.Zombie;
+import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.ItemStack;
 
 public class SpawnCommand implements CommandExecutor {
 
@@ -28,7 +31,7 @@ public class SpawnCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(CommandSender sender, Command cmd, String label, final String[] args) {
         if (cmd.getName().equalsIgnoreCase("twas")) {
             if (args.length == 0) {
                 return false;
@@ -92,6 +95,15 @@ public class SpawnCommand implements CommandExecutor {
                         @Override
                         public void run() {
                             equip.setDalekEquipment(d);
+                            if (args.length > 1 && args[1].equalsIgnoreCase("flying") && plugin.getServer().getPluginManager().isPluginEnabled("TARDISChunkGenerator")) {
+                                TARDISHelper tardisHelper = (TARDISHelper) plugin.getServer().getPluginManager().getPlugin("TARDISChunkGenerator");
+                                // make the Dalek fly
+                                EntityEquipment ee = d.getEquipment();
+                                ee.setChestplate(new ItemStack(Material.ELYTRA, 1));
+                                // teleport them straight up
+                                d.teleport(d.getLocation().add(0.0d, 20.0d, 0.0d));
+                                tardisHelper.setFallFlyingTag(d);
+                            }
                         }
                     }, 2L);
                     break;

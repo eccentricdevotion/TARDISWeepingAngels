@@ -125,6 +125,13 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>me.eccentric_nz.tardischunkgenerator</groupId>
+            <artifactId>TARDISChunkGenerator</artifactId>
+            <version>2.4.1</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
