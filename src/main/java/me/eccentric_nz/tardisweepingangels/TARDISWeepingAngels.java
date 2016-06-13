@@ -71,13 +71,13 @@ public class TARDISWeepingAngels extends JavaPlugin {
         pluginName = ChatColor.GOLD + "[" + pdfFile.getName() + "]" + ChatColor.RESET + " ";
         if (pm.isPluginEnabled("ProtocolLib") && pm.isPluginEnabled("LibsDisguises")) {
             // check dependent plugin versions
-            if (!checkPluginVersion("ProtocolLib", "4.0")) {
-                getServer().getConsoleSender().sendMessage(pluginName + ChatColor.RED + "This plugin requires ProtocolLib to be v4.0 or higher, disabling...");
+            if (!checkPluginVersion("ProtocolLib", "4.0.2")) {
+                getServer().getConsoleSender().sendMessage(pluginName + ChatColor.RED + "This plugin requires ProtocolLib to be v4.0.2 or higher, disabling...");
                 pm.disablePlugin(this);
                 return;
             }
-            if (!checkPluginVersion("LibsDisguises", "9.0.2")) {
-                getServer().getConsoleSender().sendMessage(pluginName + ChatColor.RED + "This plugin requires LibsDisguises to be v9.0.2 or higher, disabling...");
+            if (!checkPluginVersion("LibsDisguises", "9.0.7")) {
+                getServer().getConsoleSender().sendMessage(pluginName + ChatColor.RED + "This plugin requires LibsDisguises to be v9.0.7 or higher, disabling...");
                 pm.disablePlugin(this);
                 return;
             }
