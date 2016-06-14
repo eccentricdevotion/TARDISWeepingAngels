@@ -71,6 +71,7 @@ public class Builder implements Listener {
                             }
                             Location l = bottom.getLocation();
                             final LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.SKELETON);
+                            e.setSilent(true);
                             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                                 @Override
                                 public void run() {

@@ -189,6 +189,7 @@ public class Death implements Listener {
                         if (dn.startsWith("Cyberman")) {
                             Location l = event.getEntity().getLocation();
                             LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
+                            e.setSilent(true);
                             new MonsterEquipment().setCyberEquipment(e, false);
                             if (event.getEntity() instanceof Player) {
                                 String name = ((Player) event.getEntity()).getName();

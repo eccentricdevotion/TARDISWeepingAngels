@@ -56,7 +56,7 @@ public class Blink implements Listener {
         }
         // freeze the closest skeleton
         if (skeleton != null) {
-            skeleton.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, plugin.getConfig().getInt("angels.freeze_time"), 30));
+            skeleton.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, plugin.getConfig().getInt("angels.freeze_time"), 30, true, false));
             if (!player.isSneaking()) {
                 player.sendMessage(plugin.pluginName + message.get(plugin.getRandom().nextInt(4)));
             }

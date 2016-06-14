@@ -91,10 +91,11 @@ public class IceWarriorRunnable implements Runnable {
             Location l = new Location(w, x, y + 1, z);
             if (biomes.contains(l.getBlock().getBiome())) {
                 final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.PIG_ZOMBIE);
+                e.setSilent(true);
                 PigZombie warrior = (PigZombie) e;
                 warrior.setAngry(true);
                 warrior.setAnger(Integer.MAX_VALUE);
-                PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3);
+                PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 warrior.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                     @Override

@@ -166,7 +166,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         ee.setBoots(null);
         ee.setHelmet(helmet);
         if (!disguise) {
-            PotionEffect p = new PotionEffect(PotionEffectType.SLOW, 360000, 1);
+            PotionEffect p = new PotionEffect(PotionEffectType.SLOW, 360000, 1, true, false);
             le.removePotionEffect(PotionEffectType.SPEED);
             le.addPotionEffect(p);
             le.setCanPickupItems(false);
@@ -330,7 +330,8 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
     @Override
     public void setSilentEquipment(LivingEntity le) {
         final LivingEntity g = (LivingEntity) le.getLocation().getWorld().spawnEntity(le.getLocation(), EntityType.GUARDIAN);
-        PotionEffect p = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1);
+        g.setSilent(true);
+        PotionEffect p = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
         g.addPotionEffect(p);
         le.setPassenger(g);
 //        /summon Guardian ~ ~ ~ {Invulnerable:1b,ActiveEffects:[{Id:14b,Duration:20000000,ShowParticles:0b}],Riding:{id:"Enderman"}}
@@ -353,7 +354,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         SnowmanWatcher snw = (SnowmanWatcher) livingWatcher;
         snw.setHat(false);
         DisguiseAPI.disguiseToAll(le, mobDisguise);
-        PotionEffect p = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 360000, 1);
+        PotionEffect p = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 360000, 1, true, false);
         le.addPotionEffect(p);
         le.setMaxHealth(30.0d);
         le.setHealth(30.0d);

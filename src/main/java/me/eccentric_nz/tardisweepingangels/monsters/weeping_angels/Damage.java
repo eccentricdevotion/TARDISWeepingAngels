@@ -87,7 +87,7 @@ public class Damage implements Listener {
                     if (l != null) {
                         p.teleport(l);
                     }
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 300, 5));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 300, 5, true, false));
                     if (plugin.angelsCanSteal()) {
                         stealKey(p);
                     }

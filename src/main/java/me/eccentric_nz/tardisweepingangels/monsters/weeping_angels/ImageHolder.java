@@ -51,6 +51,7 @@ public class ImageHolder implements Listener {
                 @Override
                 public void run() {
                     final LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.SKELETON);
+                    e.setSilent(true);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
                         public void run() {

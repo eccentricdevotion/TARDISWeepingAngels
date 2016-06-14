@@ -74,6 +74,7 @@ public class WeepingAngelsRunnable implements Runnable {
             Location l = new Location(w, x, y + 1, z);
             if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {
                 final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.SKELETON);
+                e.setSilent(true);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                     @Override
                     public void run() {

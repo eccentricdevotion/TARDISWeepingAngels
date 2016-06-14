@@ -79,7 +79,8 @@ public class SilurianRunnable implements Runnable {
                 cave = l;
             }
             final LivingEntity e = (LivingEntity) w.spawnEntity(cave, EntityType.SKELETON);
-            PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3);
+            e.setSilent(true);
+            PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
             e.addPotionEffect(p);
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                 @Override

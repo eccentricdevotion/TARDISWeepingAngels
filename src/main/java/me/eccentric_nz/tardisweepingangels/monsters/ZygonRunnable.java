@@ -76,11 +76,12 @@ public class ZygonRunnable implements Runnable {
             Location l = new Location(w, x, y + 1, z);
             if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {
                 final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
+                e.setSilent(true);
                 Zombie zygon = (Zombie) e;
                 //zygon.setVillager(false);
                 zygon.setVillagerProfession(null);
                 zygon.setBaby(false);
-                PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3);
+                PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 zygon.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                     @Override

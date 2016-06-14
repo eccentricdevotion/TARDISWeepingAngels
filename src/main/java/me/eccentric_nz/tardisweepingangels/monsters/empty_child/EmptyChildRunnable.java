@@ -74,6 +74,7 @@ public class EmptyChildRunnable implements Runnable {
             Location l = new Location(w, x, y + 1, z);
             if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {
                 final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
+                e.setSilent(true);
                 Zombie child = (Zombie) e;
                 //child.setVillager(false);
                 child.setVillagerProfession(null);
