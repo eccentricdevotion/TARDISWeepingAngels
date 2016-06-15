@@ -101,7 +101,7 @@ public class PlayerDeath implements Listener {
                 if (attacker instanceof Skeleton) {
                     EntityEquipment ee = ((LivingEntity) attacker).getEquipment();
                     ItemStack is = ee.getHelmet();
-                    if (ee.getItemInHand().getType().equals(Material.BARRIER) || is.getType().equals(Material.WATER_LILY)) {
+                    if (ee.getItemInMainHand().getType().equals(Material.BARRIER) || is.getType().equals(Material.WATER_LILY)) {
                         event.setDeathMessage(name + " was slain by a Weeping Angel");
                         return;
                     }

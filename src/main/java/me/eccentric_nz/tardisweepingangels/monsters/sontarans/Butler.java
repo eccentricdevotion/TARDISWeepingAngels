@@ -49,13 +49,13 @@ public class Butler implements Listener {
                 ItemStack h = ee.getHelmet();
                 if (h.hasItemMeta() && h.getItemMeta().hasDisplayName() && h.getItemMeta().getDisplayName().startsWith("Sontaran")) {
                     Player p = event.getPlayer();
-                    ItemStack is = p.getItemInHand();
+                    ItemStack is = p.getInventory().getItemInMainHand();
                     if (is.getType().equals(Material.POTION) && is.getDurability() == (short) 8264) {
                         // remove the potion
-                        int a = p.getInventory().getItemInHand().getAmount();
+                        int a = p.getInventory().getItemInMainHand().getAmount();
                         int a2 = a - 1;
                         if (a2 > 0) {
-                            p.getInventory().getItemInHand().setAmount(a2);
+                            p.getInventory().getItemInMainHand().setAmount(a2);
                         } else {
                             p.getInventory().removeItem(new ItemStack(Material.POTION, 1, (short) 8264));
                         }
@@ -81,7 +81,7 @@ public class Butler implements Listener {
                 if (h.hasItemMeta() && h.getItemMeta().hasDisplayName() && h.getItemMeta().getDisplayName().startsWith("Strax")) {
                     Player p = event.getPlayer();
                     final UUID uuid = p.getUniqueId();
-                    ItemStack is = p.getItemInHand();
+                    ItemStack is = p.getInventory().getItemInMainHand();
                     if (is.getType().equals(Material.BUCKET)) {
                         if (!milkers.contains(uuid)) {
                             milkers.add(uuid);

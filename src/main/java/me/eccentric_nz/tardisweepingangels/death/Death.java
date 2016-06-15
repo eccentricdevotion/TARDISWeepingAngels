@@ -83,7 +83,7 @@ public class Death implements Listener {
     public void onEntityDeath(EntityDeathEvent event) {
         if (event.getEntityType().equals(EntityType.SKELETON)) {
             EntityEquipment ee = event.getEntity().getEquipment();
-            if (ee.getItemInHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.WATER_LILY)) {
+            if (ee.getItemInMainHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.WATER_LILY)) {
                 event.getDrops().clear();
                 ItemStack stack;
                 if (plugin.getRandom().nextInt(100) < 3) {
