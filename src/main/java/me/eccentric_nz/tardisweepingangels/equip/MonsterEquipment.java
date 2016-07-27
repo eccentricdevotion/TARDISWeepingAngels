@@ -4,15 +4,21 @@
 package me.eccentric_nz.tardisweepingangels.equip;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelsAPI;
+import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
 import me.libraryaddict.disguise.disguisetypes.watchers.SnowmanWatcher;
 import org.bukkit.Material;
+import org.bukkit.entity.Enderman;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -403,5 +409,74 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         inv.setChestplate(null);
         inv.setLeggings(null);
         inv.setBoots(null);
+    }
+
+    @Override
+    public boolean isWeepingAngelMonster(Entity entity) {
+        if (entity instanceof Zombie || entity instanceof PigZombie || entity instanceof Skeleton) {
+            EntityEquipment ee = ((LivingEntity) entity).getEquipment();
+            ItemStack is = ee.getHelmet();
+            if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
+                String dn = is.getItemMeta().getDisplayName();
+                if (dn.startsWith("Cyberman") || dn.startsWith("Dalek") || dn.startsWith("Empty Child") || dn.startsWith("Ice Warrior") || dn.startsWith("Silurian") || dn.startsWith("Sontaran") || dn.startsWith("Strax") || dn.startsWith("Vashta") || dn.startsWith("Weeping Angel") || dn.startsWith("Zygon")) {
+                    return true;
+                }
+            }
+        }
+        if (entity instanceof Enderman) {
+            Entity passenger = ((Enderman) entity).getPassenger();
+            if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public Monster getWeepingAngelMonsterType(Entity entity) {
+        if (entity instanceof Zombie || entity instanceof PigZombie || entity instanceof Skeleton) {
+            EntityEquipment ee = ((LivingEntity) entity).getEquipment();
+            ItemStack is = ee.getHelmet();
+            if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
+                String dn = is.getItemMeta().getDisplayName();
+                if (dn.startsWith("Cyberman")) {
+                    return Monster.CYBERMAN;
+                }
+                if (dn.startsWith("Dalek")) {
+                    return Monster.DALEK;
+                }
+                if (dn.startsWith("Empty Child")) {
+                    return Monster.EMPTY_CHILD;
+                }
+                if (dn.startsWith("Ice Warrior")) {
+                    return Monster.ICE_WARRIOR;
+                }
+                if (dn.startsWith("Silurian")) {
+                    return Monster.SILURIAN;
+                }
+                if (dn.startsWith("Sontaran")) {
+                    return Monster.SONTARAN;
+                }
+                if (dn.startsWith("Strax")) {
+                    return Monster.STRAX;
+                }
+                if (dn.startsWith("Vashta")) {
+                    return Monster.VASHTA_NERADA;
+                }
+                if (dn.startsWith("Weeping Angel")) {
+                    return Monster.WEEPING_ANGEL;
+                }
+                if (dn.startsWith("Zygon")) {
+                    return Monster.ZYGON;
+                }
+            }
+        }
+        if (entity instanceof Enderman) {
+            Entity passenger = ((Enderman) entity).getPassenger();
+            if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
+                return Monster.SILENT;
+            }
+        }
+        return null;
     }
 }

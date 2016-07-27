@@ -3,6 +3,8 @@
  */
 package me.eccentric_nz.tardisweepingangels;
 
+import me.eccentric_nz.tardisweepingangels.utils.Monster;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
@@ -104,4 +106,20 @@ public interface TARDISWeepingAngelsAPI {
      * @param p The Player to un-disguise
      */
     public void removeEquipment(Player p);
+
+    /**
+     * Returns whether an entity is a TARDISWeepingAngels entity.
+     *
+     * @param entity the entity to check
+     * @return true if the entity is a TARDISWeepingAngels entity
+     */
+    public boolean isWeepingAngelMonster(Entity entity);
+
+    /**
+     * Returns the Monster type for a TARDISWeepingAngels entity.
+     *
+     * @param entity the entity to get the Monster type for
+     * @return the Monster type
+     */
+    public Monster getWeepingAngelMonsterType(Entity entity);
 }
