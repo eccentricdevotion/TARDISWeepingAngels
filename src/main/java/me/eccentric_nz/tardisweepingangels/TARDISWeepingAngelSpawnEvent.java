@@ -31,18 +31,39 @@ public final class TARDISWeepingAngelSpawnEvent extends Event {
         this.location = location;
     }
 
+    /**
+     * Returns the Entity involved in this event
+     *
+     * @return Entity who is involved in this event
+     */
     public Entity getEntity() {
         return entity;
     }
 
+    /**
+     * Gets the EntityType of the Entity involved in this event.
+     *
+     * @return EntityType of the Entity involved in this event
+     */
     public EntityType getEntityType() {
         return entityType;
     }
 
+    /**
+     * Gets the the Monster type for a TARDISWeepingAngels entity involved in
+     * this event.
+     *
+     * @return Monster of the TARDISWeepingAngels entity involved in this event
+     */
     public Monster getMonsterType() {
         return monsterType;
     }
 
+    /**
+     * Gets the location at which the creature is spawning.
+     *
+     * @return The location at which the creature is spawning
+     */
     public Location getLocation() {
         return location;
     }
