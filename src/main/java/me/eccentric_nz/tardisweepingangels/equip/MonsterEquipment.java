@@ -62,7 +62,9 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         ee.setBoots(boots);
         if (!disguise) {
             ee.setItemInMainHand(wing);
+            ee.setItemInMainHandDropChance(0F);
             ee.setItemInOffHand(wing);
+            ee.setItemInOffHandDropChance(0F);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
