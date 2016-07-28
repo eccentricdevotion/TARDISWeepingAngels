@@ -6,6 +6,7 @@ package me.eccentric_nz.tardisweepingangels.monsters.silurians;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.logging.Level;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
@@ -43,23 +44,29 @@ public class SilurianRunnable implements Runnable {
             // only configured worlds
             String name = Config.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("silurians.worlds." + name) > 0) {
-                // get the current silurian
-                List<Skeleton> silurians = new ArrayList<Skeleton>();
-                Collection<Skeleton> skeletons = w.getEntitiesByClass(Skeleton.class);
-                for (Skeleton s : skeletons) {
-                    EntityEquipment ee = s.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
-                        ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Silurian")) {
-                            silurians.add(s);
+                // check the world generator
+                if (w.getGenerator() != null) {
+                    plugin.getConfig().set("silurians.worlds." + name, 0);
+                    plugin.saveConfig();
+                    plugin.getServer().getLogger().log(Level.WARNING, "TARDISWeepingAngels cannot safely spawn Silurians in custom worlds!");
+                } else {
+                    // get the current silurian count
+                    List<Skeleton> silurians = new ArrayList<Skeleton>();
+                    Collection<Skeleton> skeletons = w.getEntitiesByClass(Skeleton.class);
+                    for (Skeleton s : skeletons) {
+                        EntityEquipment ee = s.getEquipment();
+                        if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                            ItemStack is = ee.getHelmet();
+                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Silurian")) {
+                                silurians.add(s);
+                            }
                         }
                     }
-                }
-                // count the current silurians
-                if (silurians.size() < plugin.getConfig().getInt("silurians.worlds." + name)) {
-                    // if less than maximum, spawn some more
-                    for (int i = 0; i < spawn_rate; i++) {
-                        spawnSilurian(w);
+                    if (silurians.size() < plugin.getConfig().getInt("silurians.worlds." + name)) {
+                        // if less than maximum, spawn some more
+                        for (int i = 0; i < spawn_rate; i++) {
+                            spawnSilurian(w);
+                        }
                     }
                 }
             }
