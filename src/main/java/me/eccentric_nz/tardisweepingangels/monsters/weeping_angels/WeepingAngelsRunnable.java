@@ -6,9 +6,11 @@ package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
+import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -71,7 +73,7 @@ public class WeepingAngelsRunnable implements Runnable {
             int x = c.getX() * 16 + plugin.getRandom().nextInt(16);
             int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
-            Location l = new Location(w, x, y + 1, z);
+            final Location l = new Location(w, x, y + 1, z);
             if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {
                 final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.SKELETON);
                 e.setSilent(true);
@@ -79,6 +81,7 @@ public class WeepingAngelsRunnable implements Runnable {
                     @Override
                     public void run() {
                         equipper.setAngelEquipment(e, false);
+                        plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.WEEPING_ANGEL, l));
                     }
                 }, 5L);
             }

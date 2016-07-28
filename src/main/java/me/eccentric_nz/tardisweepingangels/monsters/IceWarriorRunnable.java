@@ -6,9 +6,11 @@ package me.eccentric_nz.tardisweepingangels.monsters;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
+import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -88,7 +90,7 @@ public class IceWarriorRunnable implements Runnable {
             int x = c.getX() * 16 + plugin.getRandom().nextInt(16);
             int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
-            Location l = new Location(w, x, y + 1, z);
+            final Location l = new Location(w, x, y + 1, z);
             if (biomes.contains(l.getBlock().getBiome())) {
                 final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.PIG_ZOMBIE);
                 e.setSilent(true);
@@ -101,6 +103,7 @@ public class IceWarriorRunnable implements Runnable {
                     @Override
                     public void run() {
                         equipper.setWarriorEquipment(e, false);
+                        plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.PIG_ZOMBIE, Monster.ICE_WARRIOR, l));
                     }
                 }, 5L);
             }

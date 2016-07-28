@@ -2,6 +2,7 @@ package me.eccentric_nz.tardisweepingangels.commands;
 
 import java.util.Set;
 import me.eccentric_nz.tardischunkgenerator.TARDISHelper;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
@@ -71,6 +72,7 @@ public class SpawnCommand implements CommandExecutor {
                         @Override
                         public void run() {
                             equip.setAngelEquipment(a, false);
+                            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(a, EntityType.SKELETON, Monster.WEEPING_ANGEL, eyeLocation));
                         }
                     }, 5L);
                     break;
@@ -86,6 +88,7 @@ public class SpawnCommand implements CommandExecutor {
                         @Override
                         public void run() {
                             equip.setCyberEquipment(c, false);
+                            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(c, EntityType.ZOMBIE, Monster.CYBERMAN, eyeLocation));
                         }
                     }, 5L);
                     break;
@@ -98,6 +101,7 @@ public class SpawnCommand implements CommandExecutor {
                         @Override
                         public void run() {
                             equip.setDalekEquipment(d);
+                            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(d, EntityType.SKELETON, Monster.DALEK, eyeLocation));
                             if (args.length > 1 && args[1].equalsIgnoreCase("flying") && plugin.getServer().getPluginManager().isPluginEnabled("TARDISChunkGenerator")) {
                                 TARDISHelper tardisHelper = (TARDISHelper) plugin.getServer().getPluginManager().getPlugin("TARDISChunkGenerator");
                                 // make the Dalek fly
@@ -119,6 +123,7 @@ public class SpawnCommand implements CommandExecutor {
                         @Override
                         public void run() {
                             equip.setWarriorEquipment(i, false);
+                            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(i, EntityType.PIG_ZOMBIE, Monster.ICE_WARRIOR, eyeLocation));
                         }
                     }, 5L);
                     PigZombie pigman = (PigZombie) i;
@@ -140,6 +145,7 @@ public class SpawnCommand implements CommandExecutor {
                         @Override
                         public void run() {
                             equip.setEmptyChildEquipment(e, false);
+                            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.EMPTY_CHILD, eyeLocation));
                         }
                     }, 5L);
                     break;
@@ -150,6 +156,7 @@ public class SpawnCommand implements CommandExecutor {
                         @Override
                         public void run() {
                             equip.setSilentEquipment(l);
+                            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(l, EntityType.ENDERMAN, Monster.SILENT, eyeLocation));
                         }
                     }, 5L);
                     break;
@@ -162,6 +169,7 @@ public class SpawnCommand implements CommandExecutor {
                         @Override
                         public void run() {
                             equip.setSilurianEquipment(s, false);
+                            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(s, EntityType.SKELETON, Monster.SILURIAN, eyeLocation));
                         }
                     }, 5L);
                     break;
@@ -177,6 +185,7 @@ public class SpawnCommand implements CommandExecutor {
                         @Override
                         public void run() {
                             equip.setSontaranEquipment(o, false);
+                            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(o, EntityType.ZOMBIE, Monster.SONTARAN, eyeLocation));
                         }
                     }, 5L);
                     break;
@@ -191,6 +200,7 @@ public class SpawnCommand implements CommandExecutor {
                         @Override
                         public void run() {
                             equip.setButlerEquipment(x, false);
+                            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(x, EntityType.PIG_ZOMBIE, Monster.STRAX, eyeLocation));
                         }
                     }, 5L);
                     break;
@@ -207,6 +217,7 @@ public class SpawnCommand implements CommandExecutor {
                         @Override
                         public void run() {
                             equip.setVashtaNeradaEquipment(v, false);
+                            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(v, EntityType.ZOMBIE, Monster.VASHTA_NERADA, eyeLocation));
                         }
                     }, 5L);
                     break;
@@ -222,6 +233,7 @@ public class SpawnCommand implements CommandExecutor {
                         @Override
                         public void run() {
                             equip.setZygonEquipment(z, false);
+                            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(z, EntityType.ZOMBIE, Monster.ZYGON, eyeLocation));
                         }
                     }, 5L);
                     break;

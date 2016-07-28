@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
+import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -81,10 +83,8 @@ public class SilurianRunnable implements Runnable {
             int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
-            Location cave = CaveFinder.searchCave(l);
-            if (cave == null) {
-                cave = l;
-            }
+            Location search = CaveFinder.searchCave(l);
+            final Location cave = ((search == null)) ? l : search;
             final LivingEntity e = (LivingEntity) w.spawnEntity(cave, EntityType.SKELETON);
             e.setSilent(true);
             PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
@@ -93,6 +93,7 @@ public class SilurianRunnable implements Runnable {
                 @Override
                 public void run() {
                     equipper.setSilurianEquipment(e, false);
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.SILURIAN, cave));
                 }
             }, 5L);
         }

@@ -5,8 +5,10 @@ package me.eccentric_nz.tardisweepingangels.death;
 
 import java.util.ArrayList;
 import java.util.List;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
+import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.libraryaddict.disguise.DisguiseAPI;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -191,6 +193,7 @@ public class Death implements Listener {
                             LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
                             e.setSilent(true);
                             new MonsterEquipment().setCyberEquipment(e, false);
+                            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.CYBERMAN, l));
                             if (event.getEntity() instanceof Player) {
                                 String name = ((Player) event.getEntity()).getName();
                                 e.setCustomName(name);

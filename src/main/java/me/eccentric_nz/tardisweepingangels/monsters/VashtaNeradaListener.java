@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
+import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -76,7 +78,7 @@ public class VashtaNeradaListener implements Listener {
         return ret;
     }
 
-    private void spawnVashtaNerada(Location l) {
+    private void spawnVashtaNerada(final Location l) {
         final LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
         e.setSilent(true);
         Zombie vashta = (Zombie) e;
@@ -89,6 +91,7 @@ public class VashtaNeradaListener implements Listener {
             @Override
             public void run() {
                 equipper.setVashtaNeradaEquipment(e, false);
+                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.VASHTA_NERADA, l));
             }
         }, 5L);
     }

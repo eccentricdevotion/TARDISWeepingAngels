@@ -6,8 +6,10 @@ package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
+import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -38,7 +40,7 @@ public class ImageHolder implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onSkullPlace(AsyncPlayerChatEvent event) {
+    public void onChatAboutWeepingAngel(AsyncPlayerChatEvent event) {
         String message = event.getMessage();
         if (message.toLowerCase().contains("angel") && rand.nextInt(100) < plugin.getConfig().getInt("angels.spawn_from_chat.chance")) {
             int dist = plugin.getConfig().getInt("angels.spawn_from_chat.distance_from_player");
@@ -56,6 +58,7 @@ public class ImageHolder implements Listener {
                         @Override
                         public void run() {
                             equipper.setAngelEquipment(e, false);
+                            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.WEEPING_ANGEL, l));
                         }
                     }, 5L);
                 }

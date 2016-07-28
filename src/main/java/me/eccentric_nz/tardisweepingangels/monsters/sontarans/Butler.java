@@ -6,8 +6,10 @@ package me.eccentric_nz.tardisweepingangels.monsters.sontarans;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
+import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -60,7 +62,7 @@ public class Butler implements Listener {
                             p.getInventory().removeItem(new ItemStack(Material.POTION, 1, (short) 8264));
                         }
                         // switch the armour to a butler uniform
-                        Location l = zom.getLocation();
+                        final Location l = zom.getLocation();
                         zom.remove();
                         final PigZombie pz = (PigZombie) l.getWorld().spawnEntity(l, EntityType.PIG_ZOMBIE);
                         pz.setSilent(true);
@@ -70,6 +72,7 @@ public class Butler implements Listener {
                             @Override
                             public void run() {
                                 new MonsterEquipment().setButlerEquipment(pz, false);
+                                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(pz, EntityType.PIG_ZOMBIE, Monster.STRAX, l));
                             }
                         }, 2L);
                     }

@@ -3,8 +3,10 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
+import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.SkullType;
@@ -69,13 +71,14 @@ public class Builder implements Listener {
                                 north.setType(Material.AIR);
                                 south.setType(Material.AIR);
                             }
-                            Location l = bottom.getLocation();
+                            final Location l = bottom.getLocation();
                             final LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.SKELETON);
                             e.setSilent(true);
                             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                                 @Override
                                 public void run() {
                                     equipper.setAngelEquipment(e, false);
+                                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.WEEPING_ANGEL, l));
                                 }
                             }, 5L);
                         }
