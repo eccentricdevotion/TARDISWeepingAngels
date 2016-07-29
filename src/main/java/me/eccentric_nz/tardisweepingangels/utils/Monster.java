@@ -3,6 +3,9 @@
  */
 package me.eccentric_nz.tardisweepingangels.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author eccentric_nz
@@ -28,6 +31,21 @@ public enum Monster {
     ZYGON("Zygon");
 
     public String name;
+    static final List<Monster> values = new ArrayList<Monster>();
+
+    static {
+        values.add(CYBERMAN);
+        values.add(DALEK);
+        values.add(EMPTY_CHILD);
+        values.add(ICE_WARRIOR);
+        values.add(SILENT);
+        values.add(SILURIAN);
+        values.add(SONTARAN);
+        values.add(STRAX);
+        values.add(VASHTA_NERADA);
+        values.add(WEEPING_ANGEL);
+        values.add(ZYGON);
+    }
 
     private Monster(String name) {
         this.name = name;
@@ -35,5 +53,9 @@ public enum Monster {
 
     public String getName() {
         return name;
+    }
+
+    public static List<Monster> getValues() {
+        return values;
     }
 }
