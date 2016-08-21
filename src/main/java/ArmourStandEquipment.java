@@ -150,6 +150,7 @@ public class ArmourStandEquipment {
 
     public void setSilurianEquipment(ArmorStand as) {
         as.setSmall(false);
+        as.setArms(true);
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET, 1);
         ItemStack chestplate = new ItemStack(Material.GOLD_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.GOLD_LEGGINGS, 1);
