@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.logging.Level;
 import me.eccentric_nz.tardisweepingangels.commands.AdminCommand;
+import me.eccentric_nz.tardisweepingangels.commands.ArmourStandCommand;
 import me.eccentric_nz.tardisweepingangels.commands.CountCommand;
 import me.eccentric_nz.tardisweepingangels.commands.DalekCommand;
 import me.eccentric_nz.tardisweepingangels.commands.DisguiseCommand;
@@ -107,19 +108,21 @@ public class TARDISWeepingAngels extends JavaPlugin {
             pm.registerEvents(new RainDamage(), this);
             pm.registerEvents(new ChunkLoad(), this);
             // register commands
-            getCommand("twas").setExecutor(new SpawnCommand(this));
-            getCommand("twad").setExecutor(new DisguiseCommand(this));
-            getCommand("twac").setExecutor(new CountCommand(this));
-            getCommand("twak").setExecutor(new KillCommand(this));
             getCommand("twa").setExecutor(new AdminCommand(this));
+            getCommand("twac").setExecutor(new CountCommand(this));
+            getCommand("twad").setExecutor(new DisguiseCommand(this));
+            getCommand("twae").setExecutor(new ArmourStandCommand(this));
+            getCommand("twak").setExecutor(new KillCommand(this));
             getCommand("twar").setExecutor(new DalekCommand(this));
+            getCommand("twas").setExecutor(new SpawnCommand(this));
             // set tab completion
             TabCompleter tabCompleter = new TabComplete(this);
-            getCommand("twas").setTabCompleter(tabCompleter);
-            getCommand("twad").setTabCompleter(tabCompleter);
-            getCommand("twac").setTabCompleter(tabCompleter);
-            getCommand("twak").setTabCompleter(tabCompleter);
             getCommand("twa").setTabCompleter(tabCompleter);
+            getCommand("twac").setTabCompleter(tabCompleter);
+            getCommand("twad").setTabCompleter(tabCompleter);
+            getCommand("twae").setTabCompleter(tabCompleter);
+            getCommand("twak").setTabCompleter(tabCompleter);
+            getCommand("twas").setTabCompleter(tabCompleter);
             // re-disguise Daleks
             getServer().getScheduler().scheduleSyncRepeatingTask(this, new ReDisguise(this), 100L, 6000L);
             // start repeating spawn tasks

@@ -64,3 +64,8 @@ commands:
         usage: /<command>
         permission: tardisweepingangels.admin
         permission-message: You don't have the permission <permission> to use this command
+    twae:
+        description: Equip an armour stand with monster armour.
+        usage: /<command> [monster type]
+        permission: tardisweepingangels.admin
+        permission-message: You don't have the permission <permission> to use this command

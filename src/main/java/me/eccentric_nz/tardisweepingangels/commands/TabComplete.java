@@ -59,7 +59,7 @@ public class TabComplete implements TabCompleter {
             if (command.getName().equals("twac") || command.getName().equals("twak") || command.getName().equals("twa")) {
                 return partial(args[0], LETTER_SUBS);
             }
-            if (command.getName().equals("twas") || command.getName().equals("twad")) {
+            if (command.getName().equals("twas") || command.getName().equals("twad") || command.getName().equals("twae")) {
                 return partial(args[0], MONSTER_SUBS);
             }
         } else if (args.length == 2) {

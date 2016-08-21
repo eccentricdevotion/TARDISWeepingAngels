@@ -63,7 +63,7 @@ public class Blink implements Listener {
         }
     }
 
-    private boolean hasIntersection(Vector3D p1, Vector3D p2, Vector3D min, Vector3D max) {
+    public static boolean hasIntersection(Vector3D p1, Vector3D p2, Vector3D min, Vector3D max) {
         final double epsilon = 0.0001f;
         Vector3D d = p2.subtract(p1).multiply(0.5);
         Vector3D e = max.subtract(min).multiply(0.5);
