@@ -51,7 +51,7 @@ public class Damage implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onBeatUpAngel(EntityDamageByEntityEvent event) {
         EntityType et = event.getEntityType();
         if (et.equals(EntityType.SKELETON)) {
