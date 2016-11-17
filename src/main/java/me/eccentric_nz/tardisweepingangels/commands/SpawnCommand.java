@@ -16,8 +16,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Skeleton;
-import org.bukkit.entity.Skeleton.SkeletonType;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
@@ -66,7 +64,7 @@ public class SpawnCommand implements CommandExecutor {
                 case WEEPING_ANGEL:
                     final LivingEntity a = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                     a.setSilent(true);
-                    setNormal(a);
+                    //setNormal(a);
                     a.setNoDamageTicks(75);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
@@ -82,7 +80,7 @@ public class SpawnCommand implements CommandExecutor {
                     c.setNoDamageTicks(75);
                     Zombie cyber = (Zombie) c;
                     //cyber.setVillager(false);
-                    cyber.setVillagerProfession(null);
+                    //cyber.setVillagerProfession(null);
                     cyber.setBaby(false);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
@@ -95,7 +93,7 @@ public class SpawnCommand implements CommandExecutor {
                 case DALEK:
                     final LivingEntity d = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                     d.setSilent(true);
-                    setNormal(d);
+                    //setNormal(d);
                     d.setNoDamageTicks(75);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
@@ -139,7 +137,7 @@ public class SpawnCommand implements CommandExecutor {
                     e.setNoDamageTicks(75);
                     Zombie child = (Zombie) e;
                     //child.setVillager(false);
-                    child.setVillagerProfession(null);
+                    //child.setVillagerProfession(null);
                     child.setBaby(true);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
@@ -163,7 +161,7 @@ public class SpawnCommand implements CommandExecutor {
                 case SILURIAN:
                     final LivingEntity s = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                     s.setSilent(true);
-                    setNormal(s);
+                    //setNormal(s);
                     s.setNoDamageTicks(75);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
@@ -180,7 +178,7 @@ public class SpawnCommand implements CommandExecutor {
                     Zombie sontaran = (Zombie) o;
                     sontaran.setBaby(false);
                     //sontaran.setVillager(false);
-                    sontaran.setVillagerProfession(null);
+                    //sontaran.setVillagerProfession(null);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
                         public void run() {
@@ -211,7 +209,7 @@ public class SpawnCommand implements CommandExecutor {
                     v.setNoDamageTicks(75);
                     Zombie vashta = (Zombie) v;
                     //vashta.setVillager(false);
-                    vashta.setVillagerProfession(null);
+                    //vashta.setVillagerProfession(null);
                     vashta.setBaby(false);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
@@ -227,7 +225,7 @@ public class SpawnCommand implements CommandExecutor {
                     z.setNoDamageTicks(75);
                     Zombie zygon = (Zombie) z;
                     //zygon.setVillager(false);
-                    zygon.setVillagerProfession(null);
+                    //zygon.setVillagerProfession(null);
                     zygon.setBaby(false);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                         @Override
@@ -243,8 +241,8 @@ public class SpawnCommand implements CommandExecutor {
         return false;
     }
 
-    private void setNormal(LivingEntity e) {
-        Skeleton s = (Skeleton) e;
-        s.setSkeletonType(SkeletonType.NORMAL);
-    }
+//    private void setNormal(LivingEntity e) {
+//        Skeleton s = (Skeleton) e;
+//        s.setSkeletonType(SkeletonType.NORMAL);
+//    }
 }

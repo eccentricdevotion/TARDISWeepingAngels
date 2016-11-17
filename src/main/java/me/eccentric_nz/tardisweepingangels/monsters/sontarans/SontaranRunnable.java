@@ -85,7 +85,7 @@ public class SontaranRunnable implements Runnable {
                 e.setSilent(true);
                 Zombie sontaran = (Zombie) e;
                 //sontaran.setVillager(false);
-                sontaran.setVillagerProfession(null);
+                //sontaran.setVillagerProfession(null);
                 sontaran.setBaby(false);
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 sontaran.addPotionEffect(p);

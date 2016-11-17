@@ -81,7 +81,7 @@ public class ZygonRunnable implements Runnable {
                 e.setSilent(true);
                 Zombie zygon = (Zombie) e;
                 //zygon.setVillager(false);
-                zygon.setVillagerProfession(null);
+                //zygon.setVillagerProfession(null);
                 zygon.setBaby(false);
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 zygon.addPotionEffect(p);

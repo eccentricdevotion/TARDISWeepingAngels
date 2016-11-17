@@ -83,7 +83,7 @@ public class VashtaNeradaListener implements Listener {
         e.setSilent(true);
         Zombie vashta = (Zombie) e;
         //vashta.setVillager(false);
-        vashta.setVillagerProfession(null);
+        //vashta.setVillagerProfession(null);
         vashta.setBaby(false);
         PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
         e.addPotionEffect(p);

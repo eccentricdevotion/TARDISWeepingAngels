@@ -81,7 +81,7 @@ public class CybermanRunnable implements Runnable {
                 e.setSilent(true);
                 Zombie cyber = (Zombie) e;
                 //cyber.setVillager(false);
-                cyber.setVillagerProfession(null);
+                //cyber.setVillagerProfession(null);
                 cyber.setBaby(false);
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 cyber.addPotionEffect(p);

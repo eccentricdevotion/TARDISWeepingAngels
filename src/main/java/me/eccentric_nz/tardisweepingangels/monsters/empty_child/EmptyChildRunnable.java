@@ -79,7 +79,7 @@ public class EmptyChildRunnable implements Runnable {
                 e.setSilent(true);
                 Zombie child = (Zombie) e;
                 //child.setVillager(false);
-                child.setVillagerProfession(null);
+                //child.setVillagerProfession(null);
                 child.setBaby(true);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                     @Override
