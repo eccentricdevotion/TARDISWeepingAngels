@@ -10,6 +10,7 @@ import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.libraryaddict.disguise.DisguiseAPI;
+import net.citizensnpcs.api.CitizensAPI;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -178,6 +179,9 @@ public class Death implements Listener {
         }
         if (event.getEntityType().equals(EntityType.VILLAGER) || event.getEntityType().equals(EntityType.PLAYER)) {
             if (!plugin.getConfig().getBoolean("cybermen.can_upgrade")) {
+                return;
+            }
+            if (plugin.isCitizensEnabled() && CitizensAPI.getNPCRegistry().isNPC(event.getEntity())) {
                 return;
             }
             EntityDamageEvent damage = event.getEntity().getLastDamageCause();

@@ -114,7 +114,6 @@ public class ArmourStandCommand implements CommandExecutor {
             }
             return true;
         }
-
         return false;
     }
 }

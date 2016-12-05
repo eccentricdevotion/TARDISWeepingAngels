@@ -97,7 +97,7 @@
         <dependency>
             <groupId>LibsDisguises</groupId>
             <artifactId>LibsDisguises</artifactId>
-            <version>9.0.9</version>
+            <version>9.2.2</version>
             <type>jar</type>
             <!--<scope>compile</scope>-->
             <scope>system</scope>
@@ -124,6 +124,14 @@
                     <groupId>com.comphenix.protocol</groupId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>net.citizensnpcs</groupId>
+            <artifactId>citizensapi</artifactId>
+            <version>2.0.21-SNAPSHOT</version>
+            <type>jar</type>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/CitizensAPI.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>me.eccentric_nz.tardischunkgenerator</groupId>

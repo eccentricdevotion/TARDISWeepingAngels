@@ -59,6 +59,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
     private final List<UUID> timesUp = new ArrayList<UUID>();
     private final List<Biome> notOnWater = new ArrayList<Biome>();
     private PluginManager pm;
+    private boolean citizensEnabled;
 
     @Override
     public void onDisable() {
@@ -71,6 +72,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         PluginDescriptionFile pdfFile = getDescription();
         pluginName = ChatColor.GOLD + "[" + pdfFile.getName() + "]" + ChatColor.RESET + " ";
         if (pm.isPluginEnabled("ProtocolLib") && pm.isPluginEnabled("LibsDisguises")) {
+            citizensEnabled = pm.isPluginEnabled("Citizens");
             // check dependent plugin versions
             if (!checkPluginVersion("ProtocolLib", "4.1.0")) {
                 getServer().getConsoleSender().sendMessage(pluginName + ChatColor.RED + "This plugin requires ProtocolLib to be v4.1.0 or higher, disabling...");
@@ -164,6 +166,10 @@ public class TARDISWeepingAngels extends JavaPlugin {
 
     public List<Biome> getNotOnWater() {
         return notOnWater;
+    }
+
+    public boolean isCitizensEnabled() {
+        return citizensEnabled;
     }
 
     /**
