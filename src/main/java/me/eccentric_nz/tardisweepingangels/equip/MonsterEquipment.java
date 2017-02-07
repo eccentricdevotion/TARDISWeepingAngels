@@ -360,7 +360,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
         LivingWatcher livingWatcher = mobDisguise.getWatcher();
         SnowmanWatcher snw = (SnowmanWatcher) livingWatcher;
-        snw.setHat(false);
+        snw.setDerp(true);
         DisguiseAPI.disguiseToAll(le, mobDisguise);
         PotionEffect p = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 360000, 1, true, false);
         le.addPotionEffect(p);

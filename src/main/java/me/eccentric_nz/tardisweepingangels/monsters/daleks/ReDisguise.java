@@ -46,7 +46,7 @@ public class ReDisguise implements Runnable {
                         MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
                         LivingWatcher livingWatcher = mobDisguise.getWatcher();
                         SnowmanWatcher snw = (SnowmanWatcher) livingWatcher;
-                        snw.setHat(false);
+                        snw.setDerp(true);
                         DisguiseAPI.disguiseToAll(d, mobDisguise);
                     }
                 }

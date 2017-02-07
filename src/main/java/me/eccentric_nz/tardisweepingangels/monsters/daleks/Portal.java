@@ -45,7 +45,7 @@ public class Portal implements Listener {
                         MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
                         LivingWatcher livingWatcher = mobDisguise.getWatcher();
                         SnowmanWatcher snw = (SnowmanWatcher) livingWatcher;
-                        snw.setHat(false);
+                        snw.setDerp(true);
                         DisguiseAPI.disguiseToAll(skeleton, mobDisguise);
                     }
                 }

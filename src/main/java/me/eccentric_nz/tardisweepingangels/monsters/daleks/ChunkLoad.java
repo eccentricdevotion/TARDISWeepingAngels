@@ -37,7 +37,7 @@ public class ChunkLoad implements Listener {
                         MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
                         LivingWatcher livingWatcher = mobDisguise.getWatcher();
                         SnowmanWatcher snw = (SnowmanWatcher) livingWatcher;
-                        snw.setHat(false);
+                        snw.setDerp(true);
                         DisguiseAPI.disguiseToAll(d, mobDisguise);
                     }
                 } else if (is != null && is.getType().equals(Material.WATER_LILY)) {
