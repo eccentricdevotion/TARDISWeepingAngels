@@ -74,13 +74,13 @@ public class TARDISWeepingAngels extends JavaPlugin {
         if (pm.isPluginEnabled("ProtocolLib") && pm.isPluginEnabled("LibsDisguises")) {
             citizensEnabled = pm.isPluginEnabled("Citizens");
             // check dependent plugin versions
-            if (!checkPluginVersion("ProtocolLib", "4.1.0")) {
-                getServer().getConsoleSender().sendMessage(pluginName + ChatColor.RED + "This plugin requires ProtocolLib to be v4.1.0 or higher, disabling...");
+            if (!checkPluginVersion("ProtocolLib", "4.2.0")) {
+                getServer().getConsoleSender().sendMessage(pluginName + ChatColor.RED + "This plugin requires ProtocolLib to be v4.2.0 or higher, disabling...");
                 pm.disablePlugin(this);
                 return;
             }
-            if (!checkPluginVersion("LibsDisguises", "9.0.9")) {
-                getServer().getConsoleSender().sendMessage(pluginName + ChatColor.RED + "This plugin requires LibsDisguises to be v9.0.9 or higher, disabling...");
+            if (!checkPluginVersion("LibsDisguises", "9.2.4")) {
+                getServer().getConsoleSender().sendMessage(pluginName + ChatColor.RED + "This plugin requires LibsDisguises to be v9.2.4 or higher, disabling...");
                 pm.disablePlugin(this);
                 return;
             }
