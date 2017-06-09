@@ -38,16 +38,13 @@ public class Portal implements Listener {
             final Skeleton skeleton = (Skeleton) e;
             final EntityEquipment ee = skeleton.getEquipment();
             final ItemStack is = ee.getHelmet();
-            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                @Override
-                public void run() {
-                    if (is.getType().equals(Material.VINE) && !DisguiseAPI.isDisguised(skeleton)) {
-                        MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
-                        LivingWatcher livingWatcher = mobDisguise.getWatcher();
-                        SnowmanWatcher snw = (SnowmanWatcher) livingWatcher;
-                        snw.setDerp(true);
-                        DisguiseAPI.disguiseToAll(skeleton, mobDisguise);
-                    }
+            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                if (is.getType().equals(Material.VINE) && !DisguiseAPI.isDisguised(skeleton)) {
+                    MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
+                    LivingWatcher livingWatcher = mobDisguise.getWatcher();
+                    SnowmanWatcher snw = (SnowmanWatcher) livingWatcher;
+                    snw.setDerp(true);
+                    DisguiseAPI.disguiseToAll(skeleton, mobDisguise);
                 }
             }, 5L);
         }

@@ -27,7 +27,7 @@ public class ImageHolder implements Listener {
 
     private final TARDISWeepingAngels plugin;
     private final MonsterEquipment equipper;
-    private final List<BlockFace> faces = new ArrayList<BlockFace>();
+    private final List<BlockFace> faces = new ArrayList<>();
     Random rand = new Random();
 
     public ImageHolder(TARDISWeepingAngels plugin) {
@@ -49,19 +49,13 @@ public class ImageHolder implements Listener {
             Location highest = b.getWorld().getHighestBlockAt(b.getLocation()).getLocation();
             final Location l = highest.add(0, 1, 0);
             // spawn an angel
-            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                @Override
-                public void run() {
-                    final LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.SKELETON);
-                    e.setSilent(true);
-                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                        @Override
-                        public void run() {
-                            equipper.setAngelEquipment(e, false);
-                            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.WEEPING_ANGEL, l));
-                        }
-                    }, 5L);
-                }
+            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                final LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.SKELETON);
+                e.setSilent(true);
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                    equipper.setAngelEquipment(e, false);
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.WEEPING_ANGEL, l));
+                }, 5L);
             }, 20L);
         }
     }

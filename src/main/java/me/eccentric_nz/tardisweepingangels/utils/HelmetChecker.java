@@ -24,7 +24,7 @@ import org.bukkit.inventory.meta.ItemMeta;
  */
 public class HelmetChecker implements Listener {
 
-    private final List<EntityType> heads = new ArrayList<EntityType>();
+    private final List<EntityType> heads = new ArrayList<>();
 
     public HelmetChecker() {
         heads.add(EntityType.PIG_ZOMBIE);

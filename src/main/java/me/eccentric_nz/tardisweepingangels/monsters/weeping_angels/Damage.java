@@ -37,18 +37,18 @@ public class Damage implements Listener {
 
     private final TARDISWeepingAngels plugin;
     private final Material mat;
-    private final List<World> angel_tp_worlds = new ArrayList<World>();
+    private final List<World> angel_tp_worlds = new ArrayList<>();
     Random rand = new Random();
 
     public Damage(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
         this.mat = Material.valueOf(plugin.getConfig().getString("angels.weapon"));
-        for (String w : plugin.getConfig().getStringList("angels.teleport_worlds")) {
+        plugin.getConfig().getStringList("angels.teleport_worlds").forEach((w) -> {
             World world = plugin.getServer().getWorld(w);
             if (w != null) {
                 angel_tp_worlds.add(world);
             }
-        }
+        });
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

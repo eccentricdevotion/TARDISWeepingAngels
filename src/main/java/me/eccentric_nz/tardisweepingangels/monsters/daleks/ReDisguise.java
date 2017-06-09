@@ -11,7 +11,6 @@ import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
 import me.libraryaddict.disguise.disguisetypes.watchers.SnowmanWatcher;
-import org.bukkit.World;
 import org.bukkit.entity.Guardian;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.inventory.EntityEquipment;
@@ -32,13 +31,13 @@ public class ReDisguise implements Runnable {
 
     @Override
     public void run() {
-        for (World w : plugin.getServer().getWorlds()) {
+        plugin.getServer().getWorlds().forEach((w) -> {
             // only configured worlds
             String name = Config.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("daleks.worlds." + name) > 0) {
                 // get the current daleks
                 Collection<Skeleton> daleks = w.getEntitiesByClass(Skeleton.class);
-                for (Skeleton d : daleks) {
+                daleks.forEach((d) -> {
                     // does it have a helmet with a display name
                     EntityEquipment ee = d.getEquipment();
                     ItemStack is = ee.getHelmet();
@@ -49,15 +48,15 @@ public class ReDisguise implements Runnable {
                         snw.setDerp(true);
                         DisguiseAPI.disguiseToAll(d, mobDisguise);
                     }
-                }
+                });
                 Collection<Guardian> guardians = w.getEntitiesByClass(Guardian.class);
-                for (Guardian g : guardians) {
+                guardians.forEach((g) -> {
                     // does it have invisibilty but not riding an Enderman
                     if (g.hasPotionEffect(PotionEffectType.INVISIBILITY) && g.getVehicle() == null) {
                         g.remove();
                     }
-                }
+                });
             }
-        }
+        });
     }
 }

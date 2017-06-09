@@ -40,21 +40,21 @@ public class DalekRunnable implements Runnable {
 
     @Override
     public void run() {
-        for (World w : plugin.getServer().getWorlds()) {
+        plugin.getServer().getWorlds().forEach((w) -> {
             // only configured worlds
             String name = Config.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("daleks.worlds." + name) > 0) {
                 // get the current daleks
-                List<Skeleton> daleks = new ArrayList<Skeleton>();
+                List<Skeleton> daleks = new ArrayList<>();
                 Collection<Skeleton> disguised = w.getEntitiesByClass(Skeleton.class);
-                for (Skeleton d : disguised) {
+                disguised.forEach((d) -> {
                     // does it have a helmet with a display name
                     EntityEquipment ee = d.getEquipment();
                     ItemStack is = ee.getHelmet();
                     if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek")) {
                         daleks.add(d);
                     }
-                }
+                });
                 // count the current daleks
                 if (daleks.size() < plugin.getConfig().getInt("daleks.worlds." + name)) {
                     // if less than maximum, spawn some more
@@ -63,7 +63,7 @@ public class DalekRunnable implements Runnable {
                     }
                 }
             }
-        }
+        });
     }
 
     private void spawnDalek(World w) {
@@ -79,12 +79,9 @@ public class DalekRunnable implements Runnable {
                 e.setSilent(true);
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 e.addPotionEffect(p);
-                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                    @Override
-                    public void run() {
-                        equipper.setDalekEquipment(e);
-                        plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.DALEK, l));
-                    }
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                    equipper.setDalekEquipment(e);
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.DALEK, l));
                 }, 5L);
             }
         }

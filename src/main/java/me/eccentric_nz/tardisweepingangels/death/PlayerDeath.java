@@ -74,10 +74,12 @@ public class PlayerDeath implements Listener {
                     }
                 }
                 if (attacker instanceof Enderman) {
-                    Entity passenger = ((Enderman) attacker).getPassenger();
-                    if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
-                        event.setDeathMessage(name + " was slain by a Silent");
-                        return;
+                    if (!attacker.getPassengers().isEmpty()) {
+                        Entity passenger = ((Enderman) attacker).getPassengers().get(0);
+                        if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
+                            event.setDeathMessage(name + " was slain by a Silent");
+                            return;
+                        }
                     }
                 }
                 if (attacker instanceof Guardian) {

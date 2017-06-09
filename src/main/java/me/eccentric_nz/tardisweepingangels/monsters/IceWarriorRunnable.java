@@ -33,7 +33,7 @@ public class IceWarriorRunnable implements Runnable {
     private final TARDISWeepingAngels plugin;
     private final int spawn_rate;
     private final MonsterEquipment equipper;
-    private final List<Biome> biomes = new ArrayList<Biome>();
+    private final List<Biome> biomes = new ArrayList<>();
 
     public IceWarriorRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
@@ -52,7 +52,7 @@ public class IceWarriorRunnable implements Runnable {
 
     @Override
     public void run() {
-        for (World w : plugin.getServer().getWorlds()) {
+        plugin.getServer().getWorlds().forEach((w) -> {
             // only configured worlds
             String name = Config.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("ice_warriors.worlds." + name) > 0) {
@@ -60,9 +60,9 @@ public class IceWarriorRunnable implements Runnable {
                 // only spawn in day - times according to http://minecraft.gamepedia.com/Day-night_cycle
                 if ((time > 0 && time < 13187) || time > 22812) {
                     // get the current warriors
-                    List<PigZombie> warriors = new ArrayList<PigZombie>();
+                    List<PigZombie> warriors = new ArrayList<>();
                     Collection<PigZombie> piggies = w.getEntitiesByClass(PigZombie.class);
-                    for (PigZombie pz : piggies) {
+                    piggies.forEach((pz) -> {
                         EntityEquipment ee = pz.getEquipment();
                         if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
                             ItemStack is = ee.getHelmet();
@@ -70,7 +70,7 @@ public class IceWarriorRunnable implements Runnable {
                                 warriors.add(pz);
                             }
                         }
-                    }
+                    });
                     // count the current warriors
                     if (warriors.size() < plugin.getConfig().getInt("ice_warriors.worlds." + name)) {
                         // if less than maximum, spawn some more
@@ -80,7 +80,7 @@ public class IceWarriorRunnable implements Runnable {
                     }
                 }
             }
-        }
+        });
     }
 
     private void spawnIceWarrior(World w) {
@@ -99,12 +99,9 @@ public class IceWarriorRunnable implements Runnable {
                 warrior.setAnger(Integer.MAX_VALUE);
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 warrior.addPotionEffect(p);
-                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                    @Override
-                    public void run() {
-                        equipper.setWarriorEquipment(e, false);
-                        plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.PIG_ZOMBIE, Monster.ICE_WARRIOR, l));
-                    }
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                    equipper.setWarriorEquipment(e, false);
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.PIG_ZOMBIE, Monster.ICE_WARRIOR, l));
                 }, 5L);
             }
         }

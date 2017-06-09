@@ -39,14 +39,14 @@ public class EmptyChildRunnable implements Runnable {
 
     @Override
     public void run() {
-        for (World w : plugin.getServer().getWorlds()) {
+        plugin.getServer().getWorlds().forEach((w) -> {
             // only configured worlds
             String name = Config.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("empty_child.worlds." + name) > 0) {
                 // get the current warriors
-                List<Zombie> wheresmymummy = new ArrayList<Zombie>();
+                List<Zombie> wheresmymummy = new ArrayList<>();
                 Collection<Zombie> children = w.getEntitiesByClass(Zombie.class);
-                for (Zombie c : children) {
+                children.forEach((c) -> {
                     EntityEquipment ee = c.getEquipment();
                     if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
                         ItemStack is = ee.getHelmet();
@@ -54,7 +54,7 @@ public class EmptyChildRunnable implements Runnable {
                             wheresmymummy.add(c);
                         }
                     }
-                }
+                });
                 // count the current cybermen
                 if (wheresmymummy.size() < plugin.getConfig().getInt("empty_child.worlds." + name)) {
                     // if less than maximum, spawn some more
@@ -63,7 +63,7 @@ public class EmptyChildRunnable implements Runnable {
                     }
                 }
             }
-        }
+        });
     }
 
     private void spawnEmptyChild(World w) {
@@ -81,12 +81,9 @@ public class EmptyChildRunnable implements Runnable {
                 //child.setVillager(false);
                 //child.setVillagerProfession(null);
                 child.setBaby(true);
-                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                    @Override
-                    public void run() {
-                        equipper.setEmptyChildEquipment(e, false);
-                        plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.EMPTY_CHILD, l));
-                    }
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                    equipper.setEmptyChildEquipment(e, false);
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.EMPTY_CHILD, l));
                 }, 5L);
             }
         }

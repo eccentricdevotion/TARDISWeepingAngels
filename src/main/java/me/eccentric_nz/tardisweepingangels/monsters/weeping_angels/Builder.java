@@ -58,30 +58,24 @@ public class Builder implements Listener {
                         return;
                     }
                     // we're building an angel
-                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                        @Override
-                        public void run() {
-                            placed.setType(Material.AIR);
-                            below.setType(Material.AIR);
-                            bottom.setType(Material.AIR);
-                            if (east.getType().equals(Material.COBBLE_WALL)) {
-                                east.setType(Material.AIR);
-                                west.setType(Material.AIR);
-                            } else {
-                                north.setType(Material.AIR);
-                                south.setType(Material.AIR);
-                            }
-                            final Location l = bottom.getLocation();
-                            final LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.SKELETON);
-                            e.setSilent(true);
-                            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                                @Override
-                                public void run() {
-                                    equipper.setAngelEquipment(e, false);
-                                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.WEEPING_ANGEL, l));
-                                }
-                            }, 5L);
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                        placed.setType(Material.AIR);
+                        below.setType(Material.AIR);
+                        bottom.setType(Material.AIR);
+                        if (east.getType().equals(Material.COBBLE_WALL)) {
+                            east.setType(Material.AIR);
+                            west.setType(Material.AIR);
+                        } else {
+                            north.setType(Material.AIR);
+                            south.setType(Material.AIR);
                         }
+                        final Location l = bottom.getLocation();
+                        final LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.SKELETON);
+                        e.setSilent(true);
+                        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                            equipper.setAngelEquipment(e, false);
+                            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.WEEPING_ANGEL, l));
+                        }, 5L);
                     }, 20L);
                 }
             }

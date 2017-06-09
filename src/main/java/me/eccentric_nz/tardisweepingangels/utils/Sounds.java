@@ -23,7 +23,7 @@ import org.bukkit.potion.PotionEffectType;
 public class Sounds implements Listener {
 
     private final TARDISWeepingAngels plugin;
-    private final List<UUID> tracker = new ArrayList<UUID>();
+    private final List<UUID> tracker = new ArrayList<>();
 
     public Sounds(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
@@ -44,13 +44,10 @@ public class Sounds implements Listener {
                 if (le instanceof Player) {
                     long delay = 90L;
                     // schedule delayed task
-                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                        @Override
-                        public void run() {
-                            Player player = (Player) le;
-                            player.playSound(ent.getLocation(), "silence", 1.0f, 1.0f);
-                            tracker.remove(uuid);
-                        }
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                        Player player = (Player) le;
+                        player.playSound(ent.getLocation(), "silence", 1.0f, 1.0f);
+                        tracker.remove(uuid);
                     }, delay);
                 }
             }
@@ -62,13 +59,10 @@ public class Sounds implements Listener {
                 if (le instanceof Player) {
                     long delay = 20L;
                     // schedule delayed task
-                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                        @Override
-                        public void run() {
-                            Player player = (Player) le;
-                            player.playSound(ent.getLocation(), "silence", 1.0f, 1.0f);
-                            tracker.remove(uuid);
-                        }
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                        Player player = (Player) le;
+                        player.playSound(ent.getLocation(), "silence", 1.0f, 1.0f);
+                        tracker.remove(uuid);
                     }, delay);
                 }
             }
@@ -102,13 +96,10 @@ public class Sounds implements Listener {
                     if (!tmp.isEmpty()) {
                         final String sound = tmp;
                         // schedule delayed task
-                        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                            @Override
-                            public void run() {
-                                Player player = (Player) le;
-                                player.playSound(ent.getLocation(), sound, 1.0f, 1.0f);
-                                tracker.remove(uuid);
-                            }
+                        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                            Player player = (Player) le;
+                            player.playSound(ent.getLocation(), sound, 1.0f, 1.0f);
+                            tracker.remove(uuid);
                         }, delay);
                     }
                 }
@@ -123,21 +114,13 @@ public class Sounds implements Listener {
                 if (le instanceof Player) {
                     long delay = 50L;
                     // schedule delayed task
-                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                        @Override
-                        public void run() {
-                            Player player = (Player) le;
-                            player.playSound(ent.getLocation(), "dalek", 1.0f, 1.0f);
-                            tracker.remove(uuid);
-                        }
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                        Player player = (Player) le;
+                        player.playSound(ent.getLocation(), "dalek", 1.0f, 1.0f);
+                        tracker.remove(uuid);
                     }, delay);
                 }
             }
         }
     }
-//
-//    private void fireArrow(Location first, Location second) {
-//        Vector vector = second.toVector().subtract(first.toVector());
-//        first.getWorld().spawnArrow(first, vector, 0.6f, 6.0f);
-//    }
 }

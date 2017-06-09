@@ -22,7 +22,7 @@ import org.bukkit.potion.PotionEffectType;
 public class CountCommand implements CommandExecutor {
 
     private final TARDISWeepingAngels plugin;
-    private final List<String> types = new ArrayList<String>();
+    private final List<String> types = new ArrayList<>();
 
     public CountCommand(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
@@ -56,126 +56,140 @@ public class CountCommand implements CommandExecutor {
             }
             int count = 0;
             String what = "Angels";
-            if (which.equals("a")) {
-                Collection<Skeleton> angels = w.getEntitiesByClass(Skeleton.class);
-                for (Skeleton a : angels) {
-                    EntityEquipment ee = a.getEquipment();
-                    if (ee.getItemInMainHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.WATER_LILY)) {
-                        count++;
-                    }
-                }
-            } else if (which.equals("c")) {
-                what = "Cybermen";
-                Collection<Zombie> cybermen = w.getEntitiesByClass(Zombie.class);
-                for (Zombie c : cybermen) {
-                    EntityEquipment ee = c.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
-                        ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
+            switch (which) {
+                case "a":
+                    Collection<Skeleton> angels = w.getEntitiesByClass(Skeleton.class);
+                    for (Skeleton a : angels) {
+                        EntityEquipment ee = a.getEquipment();
+                        if (ee.getItemInMainHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.WATER_LILY)) {
                             count++;
                         }
                     }
-                }
-            } else if (which.equals("d")) {
-                what = "Daleks";
-                Collection<Skeleton> daleks = w.getEntitiesByClass(Skeleton.class);
-                for (Skeleton d : daleks) {
-                    EntityEquipment ee = d.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.VINE)) {
-                        ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek")) {
+                    break;
+                case "c":
+                    what = "Cybermen";
+                    Collection<Zombie> cybermen = w.getEntitiesByClass(Zombie.class);
+                    for (Zombie c : cybermen) {
+                        EntityEquipment ee = c.getEquipment();
+                        if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
+                            ItemStack is = ee.getHelmet();
+                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
+                                count++;
+                            }
+                        }
+                    }
+                    break;
+                case "d":
+                    what = "Daleks";
+                    Collection<Skeleton> daleks = w.getEntitiesByClass(Skeleton.class);
+                    for (Skeleton d : daleks) {
+                        EntityEquipment ee = d.getEquipment();
+                        if (ee.getHelmet().getType().equals(Material.VINE)) {
+                            ItemStack is = ee.getHelmet();
+                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek")) {
+                                count++;
+                            }
+                        }
+                    }
+                    break;
+                case "e":
+                    what = "Empty Children";
+                    Collection<Zombie> kids = w.getEntitiesByClass(Zombie.class);
+                    for (Zombie e : kids) {
+                        EntityEquipment ee = e.getEquipment();
+                        if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
+                            ItemStack is = ee.getHelmet();
+                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Empty Child")) {
+                                count++;
+                            }
+                        }
+                    }
+                    break;
+                case "i":
+                    what = "Ice Warriors";
+                    Collection<PigZombie> warriors = w.getEntitiesByClass(PigZombie.class);
+                    for (PigZombie i : warriors) {
+                        EntityEquipment ee = i.getEquipment();
+                        if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
+                            ItemStack is = ee.getHelmet();
+                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
+                                count++;
+                            }
+                        }
+                    }
+                    break;
+                case "m":
+                    what = "Silence";
+                    Collection<Enderman> silence = w.getEntitiesByClass(Enderman.class);
+                    for (Enderman m : silence) {
+                        if (!m.getPassengers().isEmpty() && m.getPassengers().get(0) != null && m.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
                             count++;
                         }
                     }
-                }
-            } else if (which.equals("e")) {
-                what = "Empty Children";
-                Collection<Zombie> kids = w.getEntitiesByClass(Zombie.class);
-                for (Zombie e : kids) {
-                    EntityEquipment ee = e.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
-                        ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Empty Child")) {
+                    break;
+                case "o":
+                    what = "Sontarans";
+                    Collection<Zombie> sontarans = w.getEntitiesByClass(Zombie.class);
+                    for (Zombie o : sontarans) {
+                        EntityEquipment ee = o.getEquipment();
+                        if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                            ItemStack is = ee.getHelmet();
+                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Sontaran")) {
+                                count++;
+                            }
+                        }
+                    }
+                    break;
+                case "s":
+                    what = "Silurians";
+                    Collection<Skeleton> silurians = w.getEntitiesByClass(Skeleton.class);
+                    for (Skeleton s : silurians) {
+                        EntityEquipment ee = s.getEquipment();
+                        if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                            ItemStack is = ee.getHelmet();
+                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Silurian")) {
+                                count++;
+                            }
+                        }
+                    }
+                    break;
+                case "v":
+                    what = "Vashta Nerada";
+                    Collection<Zombie> vashta = w.getEntitiesByClass(Zombie.class);
+                    for (Zombie v : vashta) {
+                        EntityEquipment ee = v.getEquipment();
+                        if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                            ItemStack is = ee.getHelmet();
+                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Vashta")) {
+                                count++;
+                            }
+                        }
+                    }
+                    break;
+                case "z":
+                    what = "Zygons";
+                    Collection<Zombie> zygons = w.getEntitiesByClass(Zombie.class);
+                    for (Zombie z : zygons) {
+                        EntityEquipment ee = z.getEquipment();
+                        if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                            ItemStack is = ee.getHelmet();
+                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Zygon")) {
+                                count++;
+                            }
+                        }
+                    }
+                    break;
+                case "g":
+                    what = "Invisible Guardians without Endermen";
+                    Collection<Guardian> guardians = w.getEntitiesByClass(Guardian.class);
+                    for (Guardian g : guardians) {
+                        if (g.hasPotionEffect(PotionEffectType.INVISIBILITY) && g.getVehicle() == null) {
                             count++;
                         }
                     }
-                }
-            } else if (which.equals("i")) {
-                what = "Ice Warriors";
-                Collection<PigZombie> warriors = w.getEntitiesByClass(PigZombie.class);
-                for (PigZombie i : warriors) {
-                    EntityEquipment ee = i.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
-                        ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
-                            count++;
-                        }
-                    }
-                }
-            } else if (which.equals("m")) {
-                what = "Silence";
-                Collection<Enderman> silence = w.getEntitiesByClass(Enderman.class);
-                for (Enderman m : silence) {
-                    if (m.getPassenger() != null && m.getPassenger().getType().equals(EntityType.GUARDIAN)) {
-                        count++;
-                    }
-                }
-            } else if (which.equals("o")) {
-                what = "Sontarans";
-                Collection<Zombie> sontarans = w.getEntitiesByClass(Zombie.class);
-                for (Zombie o : sontarans) {
-                    EntityEquipment ee = o.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
-                        ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Sontaran")) {
-                            count++;
-                        }
-                    }
-                }
-            } else if (which.equals("s")) {
-                what = "Silurians";
-                Collection<Skeleton> silurians = w.getEntitiesByClass(Skeleton.class);
-                for (Skeleton s : silurians) {
-                    EntityEquipment ee = s.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
-                        ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Silurian")) {
-                            count++;
-                        }
-                    }
-                }
-            } else if (which.equals("v")) {
-                what = "Vashta Nerada";
-                Collection<Zombie> vashta = w.getEntitiesByClass(Zombie.class);
-                for (Zombie v : vashta) {
-                    EntityEquipment ee = v.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
-                        ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Vashta")) {
-                            count++;
-                        }
-                    }
-                }
-            } else if (which.equals("z")) {
-                what = "Zygons";
-                Collection<Zombie> zygons = w.getEntitiesByClass(Zombie.class);
-                for (Zombie z : zygons) {
-                    EntityEquipment ee = z.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
-                        ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Zygon")) {
-                            count++;
-                        }
-                    }
-                }
-            } else if (which.equals("g")) {
-                what = "Invisible Guardians without Endermen";
-                Collection<Guardian> guardians = w.getEntitiesByClass(Guardian.class);
-                for (Guardian g : guardians) {
-                    if (g.hasPotionEffect(PotionEffectType.INVISIBILITY) && g.getVehicle() == null) {
-                        count++;
-                    }
-                }
+                    break;
+                default:
+                    break;
             }
             sender.sendMessage(plugin.pluginName + "There are " + count + " " + what + " in " + w.getName());
             return true;

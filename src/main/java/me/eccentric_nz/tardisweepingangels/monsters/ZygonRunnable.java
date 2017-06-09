@@ -41,14 +41,14 @@ public class ZygonRunnable implements Runnable {
 
     @Override
     public void run() {
-        for (World w : plugin.getServer().getWorlds()) {
+        plugin.getServer().getWorlds().forEach((w) -> {
             // only configured worlds
             String name = Config.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("zygons.worlds." + name) > 0) {
                 // get the current warriors
-                List<Zombie> zygons = new ArrayList<Zombie>();
+                List<Zombie> zygons = new ArrayList<>();
                 Collection<Zombie> children = w.getEntitiesByClass(Zombie.class);
-                for (Zombie c : children) {
+                children.forEach((c) -> {
                     EntityEquipment ee = c.getEquipment();
                     if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
                         ItemStack is = ee.getHelmet();
@@ -56,7 +56,7 @@ public class ZygonRunnable implements Runnable {
                             zygons.add(c);
                         }
                     }
-                }
+                });
                 // count the current cybermen
                 if (zygons.size() < plugin.getConfig().getInt("zygons.worlds." + name)) {
                     // if less than maximum, spawn some more
@@ -65,7 +65,7 @@ public class ZygonRunnable implements Runnable {
                     }
                 }
             }
-        }
+        });
     }
 
     private void spawnZygon(World w) {
@@ -85,12 +85,9 @@ public class ZygonRunnable implements Runnable {
                 zygon.setBaby(false);
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 zygon.addPotionEffect(p);
-                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                    @Override
-                    public void run() {
-                        equipper.setZygonEquipment(e, false);
-                        plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.ZYGON, l));
-                    }
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                    equipper.setZygonEquipment(e, false);
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.ZYGON, l));
                 }, 5L);
             }
         }

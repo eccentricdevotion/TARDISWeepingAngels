@@ -35,32 +35,26 @@ public class GasMask implements Listener {
         if (!plugin.getEmpty().contains(uuid)) {
             return;
         }
-        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-            @Override
-            public void run() {
-                final PlayerInventory inv = player.getInventory();
-                ItemStack helmet = inv.getHelmet();
-                if (helmet != null) {
-                    // move it to the first free slot
-                    int free_slot = inv.firstEmpty();
-                    if (free_slot != -1) {
-                        inv.setItem(free_slot, helmet);
-                    } else {
-                        player.getWorld().dropItemNaturally(player.getLocation(), helmet);
-                    }
+        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+            final PlayerInventory inv = player.getInventory();
+            ItemStack helmet = inv.getHelmet();
+            if (helmet != null) {
+                // move it to the first free slot
+                int free_slot = inv.firstEmpty();
+                if (free_slot != -1) {
+                    inv.setItem(free_slot, helmet);
+                } else {
+                    player.getWorld().dropItemNaturally(player.getLocation(), helmet);
                 }
-                // set helmet to pumpkin
-                inv.setHelmet(new ItemStack(Material.PUMPKIN, 1));
-                player.updateInventory();
-                // schedule delayed task
-                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                    @Override
-                    public void run() {
-                        plugin.getEmpty().remove(uuid);
-                        plugin.getTimesUp().add(uuid);
-                    }
-                }, 600L);
             }
+            // set helmet to pumpkin
+            inv.setHelmet(new ItemStack(Material.PUMPKIN, 1));
+            player.updateInventory();
+            // schedule delayed task
+            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                plugin.getEmpty().remove(uuid);
+                plugin.getTimesUp().add(uuid);
+            }, 600L);
         }, 5L);
     }
 

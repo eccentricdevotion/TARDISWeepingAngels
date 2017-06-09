@@ -41,14 +41,14 @@ public class CybermanRunnable implements Runnable {
 
     @Override
     public void run() {
-        for (World w : plugin.getServer().getWorlds()) {
+        plugin.getServer().getWorlds().forEach((w) -> {
             // only configured worlds
             String name = Config.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("cybermen.worlds." + name) > 0) {
                 // get the current warriors
-                List<Zombie> cyberarmy = new ArrayList<Zombie>();
+                List<Zombie> cyberarmy = new ArrayList<>();
                 Collection<Zombie> zombies = w.getEntitiesByClass(Zombie.class);
-                for (Zombie z : zombies) {
+                zombies.forEach((z) -> {
                     EntityEquipment ee = z.getEquipment();
                     if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
                         ItemStack is = ee.getHelmet();
@@ -56,7 +56,7 @@ public class CybermanRunnable implements Runnable {
                             cyberarmy.add(z);
                         }
                     }
-                }
+                });
                 // count the current cybermen
                 if (cyberarmy.size() < plugin.getConfig().getInt("cybermen.worlds." + name)) {
                     // if less than maximum, spawn some more
@@ -65,7 +65,7 @@ public class CybermanRunnable implements Runnable {
                     }
                 }
             }
-        }
+        });
     }
 
     private void spawnCyberman(World w) {
@@ -85,12 +85,9 @@ public class CybermanRunnable implements Runnable {
                 cyber.setBaby(false);
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 cyber.addPotionEffect(p);
-                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                    @Override
-                    public void run() {
-                        equipper.setCyberEquipment(e, false);
-                        plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.CYBERMAN, l));
-                    }
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                    equipper.setCyberEquipment(e, false);
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.CYBERMAN, l));
                 }, 5L);
             }
         }

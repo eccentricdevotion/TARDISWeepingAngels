@@ -36,18 +36,18 @@ public class SilentRunnable implements Runnable {
 
     @Override
     public void run() {
-        for (World w : plugin.getServer().getWorlds()) {
+        plugin.getServer().getWorlds().forEach((w) -> {
             // only configured worlds
             String name = Config.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("silent.worlds." + name) > 0) {
-                // get the current warriors
-                List<Enderman> papal = new ArrayList<Enderman>();
+                // get the current silents
+                List<Enderman> papal = new ArrayList<>();
                 Collection<Enderman> mainframe = w.getEntitiesByClass(Enderman.class);
-                for (Enderman c : mainframe) {
-                    if (c.getPassenger() != null && c.getPassenger().getType().equals(EntityType.GUARDIAN)) {
+                mainframe.forEach((c) -> {
+                    if (!c.getPassengers().isEmpty() && c.getPassengers().get(0) != null && c.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
                         papal.add(c);
                     }
-                }
+                });
                 // count the current cybermen
                 if (papal.size() < plugin.getConfig().getInt("silent.worlds." + name)) {
                     // if less than maximum, spawn some more
@@ -56,7 +56,7 @@ public class SilentRunnable implements Runnable {
                     }
                 }
             }
-        }
+        });
     }
 
     private void spawnSilent(World w) {
@@ -71,12 +71,9 @@ public class SilentRunnable implements Runnable {
                 final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ENDERMAN);
                 e.setSilent(true);
                 e.setCanPickupItems(false);
-                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                    @Override
-                    public void run() {
-                        equipper.setSilentEquipment(e);
-                        plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ENDERMAN, Monster.SILENT, l));
-                    }
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                    equipper.setSilentEquipment(e);
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ENDERMAN, Monster.SILENT, l));
                 }, 5L);
             }
         }

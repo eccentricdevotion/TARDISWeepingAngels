@@ -41,7 +41,7 @@ public class SontaranRunnable implements Runnable {
 
     @Override
     public void run() {
-        for (World w : plugin.getServer().getWorlds()) {
+        plugin.getServer().getWorlds().forEach((w) -> {
             // only configured worlds
             String name = Config.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("sontarans.worlds." + name) > 0) {
@@ -49,9 +49,9 @@ public class SontaranRunnable implements Runnable {
                 // only spawn in day - times according to http://minecraft.gamepedia.com/Day-night_cycle
                 if ((time > 0 && time < 13187) || time > 22812) {
                     // get the current warriors
-                    List<Zombie> sontarans = new ArrayList<Zombie>();
+                    List<Zombie> sontarans = new ArrayList<>();
                     Collection<Zombie> potatoes = w.getEntitiesByClass(Zombie.class);
-                    for (Zombie pz : potatoes) {
+                    potatoes.forEach((pz) -> {
                         EntityEquipment ee = pz.getEquipment();
                         if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
                             ItemStack is = ee.getHelmet();
@@ -59,7 +59,7 @@ public class SontaranRunnable implements Runnable {
                                 sontarans.add(pz);
                             }
                         }
-                    }
+                    });
                     // count the current sontarans
                     if (sontarans.size() < plugin.getConfig().getInt("sontarans.worlds." + name)) {
                         // if less than maximum, spawn some more
@@ -69,7 +69,7 @@ public class SontaranRunnable implements Runnable {
                     }
                 }
             }
-        }
+        });
     }
 
     private void spawnSontaran(World w) {
@@ -89,12 +89,9 @@ public class SontaranRunnable implements Runnable {
                 sontaran.setBaby(false);
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 sontaran.addPotionEffect(p);
-                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                    @Override
-                    public void run() {
-                        equipper.setSontaranEquipment(e, false);
-                        plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.SONTARAN, l));
-                    }
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                    equipper.setSontaranEquipment(e, false);
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.SONTARAN, l));
                 }, 5L);
             }
         }

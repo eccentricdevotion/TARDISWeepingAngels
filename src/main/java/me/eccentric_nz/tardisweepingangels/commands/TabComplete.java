@@ -22,7 +22,6 @@ import java.util.Collection;
 import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
-import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -41,15 +40,15 @@ public class TabComplete implements TabCompleter {
 
     public TabComplete(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        List<String> tmp = new ArrayList<String>();
+        List<String> tmp = new ArrayList<>();
         for (Monster m : Monster.values()) {
             tmp.add(m.toString());
         }
         MONSTER_SUBS = ImmutableList.copyOf(tmp);
-        List<String> worlds = new ArrayList<String>();
-        for (World w : this.plugin.getServer().getWorlds()) {
+        List<String> worlds = new ArrayList<>();
+        this.plugin.getServer().getWorlds().forEach((w) -> {
             worlds.add(w.getName());
-        }
+        });
         WORLD_SUBS = ImmutableList.copyOf(worlds);
     }
 
@@ -74,6 +73,6 @@ public class TabComplete implements TabCompleter {
     }
 
     private List<String> partial(String token, Collection<String> from) {
-        return StringUtil.copyPartialMatches(token, from, new ArrayList<String>(from.size()));
+        return StringUtil.copyPartialMatches(token, from, new ArrayList<>(from.size()));
     }
 }

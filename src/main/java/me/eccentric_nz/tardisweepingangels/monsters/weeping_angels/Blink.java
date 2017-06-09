@@ -19,7 +19,7 @@ import org.bukkit.potion.PotionEffectType;
 public class Blink implements Listener {
 
     private final TARDISWeepingAngels plugin;
-    private final List<String> message = new ArrayList<String>();
+    private final List<String> message = new ArrayList<>();
 
     public Blink(TARDISWeepingAngels plugin) {
         this.plugin = plugin;

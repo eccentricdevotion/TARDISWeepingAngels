@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 public class AdminCommand implements CommandExecutor {
 
     private final TARDISWeepingAngels plugin;
-    private final HashMap<String, String> types = new HashMap<String, String>();
+    private final HashMap<String, String> types = new HashMap<>();
 
     public AdminCommand(TARDISWeepingAngels plugin) {
         this.plugin = plugin;

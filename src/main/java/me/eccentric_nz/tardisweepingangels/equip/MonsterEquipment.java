@@ -11,6 +11,8 @@ import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
 import me.libraryaddict.disguise.disguisetypes.watchers.SnowmanWatcher;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -341,7 +343,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         g.setSilent(true);
         PotionEffect p = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
         g.addPotionEffect(p);
-        le.setPassenger(g);
+        le.addPassenger(g);
 //        /summon Guardian ~ ~ ~ {Invulnerable:1b,ActiveEffects:[{Id:14b,Duration:20000000,ShowParticles:0b}],Riding:{id:"Enderman"}}
     }
 
@@ -364,7 +366,8 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         DisguiseAPI.disguiseToAll(le, mobDisguise);
         PotionEffect p = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 360000, 1, true, false);
         le.addPotionEffect(p);
-        le.setMaxHealth(30.0d);
+        AttributeInstance attribute = le.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+        attribute.setBaseValue(30.0d);
         le.setHealth(30.0d);
         le.setCanPickupItems(false);
     }
@@ -426,9 +429,11 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             }
         }
         if (entity instanceof Enderman) {
-            Entity passenger = ((Enderman) entity).getPassenger();
-            if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
-                return true;
+            if (!entity.getPassengers().isEmpty()) {
+                Entity passenger = ((Enderman) entity).getPassengers().get(0);
+                if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -474,7 +479,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             }
         }
         if (entity instanceof Enderman) {
-            Entity passenger = ((Enderman) entity).getPassenger();
+            Entity passenger = ((Enderman) entity).getPassengers().get(0);
             if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
                 return Monster.SILENT;
             }

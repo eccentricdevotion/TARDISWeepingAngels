@@ -33,7 +33,7 @@ import org.bukkit.inventory.meta.ItemMeta;
  */
 public class Butler implements Listener {
 
-    private final List<UUID> milkers = new ArrayList<UUID>();
+    private final List<UUID> milkers = new ArrayList<>();
     private final TARDISWeepingAngels plugin;
 
     public Butler(TARDISWeepingAngels plugin) {
@@ -68,12 +68,9 @@ public class Butler implements Listener {
                         pz.setSilent(true);
                         pz.setBaby(false);
                         pz.setAngry(false);
-                        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                            @Override
-                            public void run() {
-                                new MonsterEquipment().setButlerEquipment(pz, false);
-                                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(pz, EntityType.PIG_ZOMBIE, Monster.STRAX, l));
-                            }
+                        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                            new MonsterEquipment().setButlerEquipment(pz, false);
+                            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(pz, EntityType.PIG_ZOMBIE, Monster.STRAX, l));
                         }, 2L);
                     }
                     return;
@@ -94,11 +91,8 @@ public class Butler implements Listener {
                             m.setDisplayName("Sontaran Lactic Fluid");
                             milk.setItemMeta(m);
                             p.setItemInHand(milk);
-                            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                                @Override
-                                public void run() {
-                                    milkers.remove(uuid);
-                                }
+                            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                                milkers.remove(uuid);
                             }, 3000L);
                         } else {
                             p.sendMessage(plugin.pluginName + "Strax is not lactating right now, try again later.");

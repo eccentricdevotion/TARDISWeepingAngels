@@ -38,7 +38,7 @@ public class WeepingAngelsRunnable implements Runnable {
 
     @Override
     public void run() {
-        for (World w : plugin.getServer().getWorlds()) {
+        plugin.getServer().getWorlds().forEach((w) -> {
             // only configured worlds
             String name = Config.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("angels.worlds." + name) > 0) {
@@ -46,14 +46,14 @@ public class WeepingAngelsRunnable implements Runnable {
                 // only spawn at night - times according to http://minecraft.gamepedia.com/Day-night_cycle
                 if (time > 13187 && time < 22812) {
                     // get the current angels
-                    List<Skeleton> angels = new ArrayList<Skeleton>();
+                    List<Skeleton> angels = new ArrayList<>();
                     Collection<Skeleton> skellies = w.getEntitiesByClass(Skeleton.class);
-                    for (Skeleton s : skellies) {
+                    skellies.forEach((s) -> {
                         EntityEquipment ee = s.getEquipment();
                         if (ee.getItemInMainHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.WATER_LILY)) {
                             angels.add(s);
                         }
-                    }
+                    });
                     // count the current angels
                     if (angels.size() < plugin.getConfig().getInt("angels.worlds." + name)) {
                         // if less than maximum, spawn some more
@@ -63,7 +63,7 @@ public class WeepingAngelsRunnable implements Runnable {
                     }
                 }
             }
-        }
+        });
     }
 
     private void spawnAngel(World w) {
@@ -77,12 +77,9 @@ public class WeepingAngelsRunnable implements Runnable {
             if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {
                 final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.SKELETON);
                 e.setSilent(true);
-                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                    @Override
-                    public void run() {
-                        equipper.setAngelEquipment(e, false);
-                        plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.WEEPING_ANGEL, l));
-                    }
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                    equipper.setAngelEquipment(e, false);
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.WEEPING_ANGEL, l));
                 }, 5L);
             }
         }

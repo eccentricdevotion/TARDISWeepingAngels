@@ -36,7 +36,7 @@ public class VashtaNeradaListener implements Listener {
 
     private final TARDISWeepingAngels plugin;
     private final Random r = new Random();
-    private final List<BlockFace> faces = new ArrayList<BlockFace>();
+    private final List<BlockFace> faces = new ArrayList<>();
     private final MonsterEquipment equipper;
 
     public VashtaNeradaListener(TARDISWeepingAngels plugin) {
@@ -87,12 +87,9 @@ public class VashtaNeradaListener implements Listener {
         vashta.setBaby(false);
         PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
         e.addPotionEffect(p);
-        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-            @Override
-            public void run() {
-                equipper.setVashtaNeradaEquipment(e, false);
-                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.VASHTA_NERADA, l));
-            }
+        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+            equipper.setVashtaNeradaEquipment(e, false);
+            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.VASHTA_NERADA, l));
         }, 5L);
     }
 }

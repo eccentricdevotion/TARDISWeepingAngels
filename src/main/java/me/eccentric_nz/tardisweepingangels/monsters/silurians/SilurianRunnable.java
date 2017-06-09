@@ -42,7 +42,7 @@ public class SilurianRunnable implements Runnable {
 
     @Override
     public void run() {
-        for (World w : plugin.getServer().getWorlds()) {
+        plugin.getServer().getWorlds().forEach((w) -> {
             // only configured worlds
             String name = Config.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("silurians.worlds." + name) > 0) {
@@ -53,9 +53,9 @@ public class SilurianRunnable implements Runnable {
                     plugin.getServer().getLogger().log(Level.WARNING, "TARDISWeepingAngels cannot safely spawn Silurians in custom worlds!");
                 } else {
                     // get the current silurian count
-                    List<Skeleton> silurians = new ArrayList<Skeleton>();
+                    List<Skeleton> silurians = new ArrayList<>();
                     Collection<Skeleton> skeletons = w.getEntitiesByClass(Skeleton.class);
-                    for (Skeleton s : skeletons) {
+                    skeletons.forEach((s) -> {
                         EntityEquipment ee = s.getEquipment();
                         if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
                             ItemStack is = ee.getHelmet();
@@ -63,7 +63,7 @@ public class SilurianRunnable implements Runnable {
                                 silurians.add(s);
                             }
                         }
-                    }
+                    });
                     if (silurians.size() < plugin.getConfig().getInt("silurians.worlds." + name)) {
                         // if less than maximum, spawn some more
                         for (int i = 0; i < spawn_rate; i++) {
@@ -72,7 +72,7 @@ public class SilurianRunnable implements Runnable {
                     }
                 }
             }
-        }
+        });
     }
 
     private void spawnSilurian(World w) {
@@ -89,12 +89,9 @@ public class SilurianRunnable implements Runnable {
             e.setSilent(true);
             PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
             e.addPotionEffect(p);
-            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                @Override
-                public void run() {
-                    equipper.setSilurianEquipment(e, false);
-                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.SILURIAN, cave));
-                }
+            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                equipper.setSilurianEquipment(e, false);
+                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.SILURIAN, cave));
             }, 5L);
         }
     }

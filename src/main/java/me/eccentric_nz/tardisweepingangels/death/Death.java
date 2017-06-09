@@ -37,49 +37,49 @@ import org.bukkit.potion.PotionEffectType;
 public class Death implements Listener {
 
     private final TARDISWeepingAngels plugin;
-    private final List<Material> angel_drops = new ArrayList<Material>();
-    private final List<Material> cyber_drops = new ArrayList<Material>();
-    private final List<Material> dalek_drops = new ArrayList<Material>();
-    private final List<Material> empty_drops = new ArrayList<Material>();
-    private final List<Material> silent_drops = new ArrayList<Material>();
-    private final List<Material> ice_drops = new ArrayList<Material>();
-    private final List<Material> silurian_drops = new ArrayList<Material>();
-    private final List<Material> sontaran_drops = new ArrayList<Material>();
-    private final List<Material> vashta_drops = new ArrayList<Material>();
-    private final List<Material> zygon_drops = new ArrayList<Material>();
+    private final List<Material> angel_drops = new ArrayList<>();
+    private final List<Material> cyber_drops = new ArrayList<>();
+    private final List<Material> dalek_drops = new ArrayList<>();
+    private final List<Material> empty_drops = new ArrayList<>();
+    private final List<Material> silent_drops = new ArrayList<>();
+    private final List<Material> ice_drops = new ArrayList<>();
+    private final List<Material> silurian_drops = new ArrayList<>();
+    private final List<Material> sontaran_drops = new ArrayList<>();
+    private final List<Material> vashta_drops = new ArrayList<>();
+    private final List<Material> zygon_drops = new ArrayList<>();
 
     public Death(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        for (String a : plugin.getConfig().getStringList("angels.drops")) {
+        plugin.getConfig().getStringList("angels.drops").forEach((a) -> {
             this.angel_drops.add(Material.valueOf(a));
-        }
-        for (String c : plugin.getConfig().getStringList("cybermen.drops")) {
+        });
+        plugin.getConfig().getStringList("cybermen.drops").forEach((c) -> {
             this.cyber_drops.add(Material.valueOf(c));
-        }
-        for (String d : plugin.getConfig().getStringList("daleks.drops")) {
+        });
+        plugin.getConfig().getStringList("daleks.drops").forEach((d) -> {
             this.dalek_drops.add(Material.valueOf(d));
-        }
-        for (String e : plugin.getConfig().getStringList("empty_child.drops")) {
+        });
+        plugin.getConfig().getStringList("empty_child.drops").forEach((e) -> {
             this.empty_drops.add(Material.valueOf(e));
-        }
-        for (String i : plugin.getConfig().getStringList("ice_warriors.drops")) {
+        });
+        plugin.getConfig().getStringList("ice_warriors.drops").forEach((i) -> {
             this.ice_drops.add(Material.valueOf(i));
-        }
-        for (String o : plugin.getConfig().getStringList("sontarans.drops")) {
+        });
+        plugin.getConfig().getStringList("sontarans.drops").forEach((o) -> {
             this.sontaran_drops.add(Material.valueOf(o));
-        }
-        for (String m : plugin.getConfig().getStringList("silent.drops")) {
+        });
+        plugin.getConfig().getStringList("silent.drops").forEach((m) -> {
             this.silent_drops.add(Material.valueOf(m));
-        }
-        for (String s : plugin.getConfig().getStringList("silurians.drops")) {
+        });
+        plugin.getConfig().getStringList("silurians.drops").forEach((s) -> {
             this.silurian_drops.add(Material.valueOf(s));
-        }
-        for (String v : plugin.getConfig().getStringList("vashta_nerada.drops")) {
+        });
+        plugin.getConfig().getStringList("vashta_nerada.drops").forEach((v) -> {
             this.vashta_drops.add(Material.valueOf(v));
-        }
-        for (String z : plugin.getConfig().getStringList("zygons.drops")) {
+        });
+        plugin.getConfig().getStringList("zygons.drops").forEach((z) -> {
             this.zygon_drops.add(Material.valueOf(z));
-        }
+        });
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -217,9 +217,9 @@ public class Death implements Listener {
         }
         if (event.getEntityType().equals(EntityType.ENDERMAN)) {
             Entity enderman = event.getEntity();
-            if (enderman.getPassenger() != null && enderman.getPassenger().getType().equals(EntityType.GUARDIAN)) {
+            if (!enderman.getPassengers().isEmpty() && enderman.getPassengers().get(0) != null && enderman.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
                 // remove the guardian as well
-                Entity guardian = enderman.getPassenger();
+                Entity guardian = enderman.getPassengers().get(0);
                 guardian.remove();
                 event.getDrops().clear();
                 ItemStack stack = new ItemStack(silent_drops.get(plugin.getRandom().nextInt(silent_drops.size())), plugin.getRandom().nextInt(1) + 1);

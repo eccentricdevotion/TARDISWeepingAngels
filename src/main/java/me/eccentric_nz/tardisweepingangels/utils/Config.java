@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.ChatColor;
-import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.util.FileUtil;
@@ -24,11 +23,11 @@ public class Config {
     private final TARDISWeepingAngels plugin;
     private FileConfiguration config = null;
     private File configFile = null;
-    HashMap<String, List<String>> listOptions = new HashMap<String, List<String>>();
-    HashMap<String, String> strOptions = new HashMap<String, String>();
-    HashMap<String, Integer> intOptions = new HashMap<String, Integer>();
-    HashMap<String, Double> doubleOptions = new HashMap<String, Double>();
-    HashMap<String, Boolean> boolOptions = new HashMap<String, Boolean>();
+    HashMap<String, List<String>> listOptions = new HashMap<>();
+    HashMap<String, String> strOptions = new HashMap<>();
+    HashMap<String, Integer> intOptions = new HashMap<>();
+    HashMap<String, Double> doubleOptions = new HashMap<>();
+    HashMap<String, Boolean> boolOptions = new HashMap<>();
     final double min_version = 2.0d;
 
     public Config(TARDISWeepingAngels plugin) {
@@ -84,7 +83,7 @@ public class Config {
             plugin.getConfig().set("zygons.worlds", null);
         }
         // add new world settings
-        for (World w : this.plugin.getServer().getWorlds()) {
+        this.plugin.getServer().getWorlds().forEach((w) -> {
             String n = sanitiseName(w.getName());
             // set TARDIS worlds, nether and end worlds to zero by default
             int m = (config.contains("spawn_rate.default_max")) ? config.getInt("spawn_rate.default_max") : 0;
@@ -118,7 +117,7 @@ public class Config {
             if (!config.contains("zygons.worlds." + n)) {
                 plugin.getConfig().set("zygons.worlds." + n, m);
             }
-        }
+        });
         // clear the old spawn_rate settings
         if (config.contains("angels.spawn_rate")) {
             plugin.getConfig().set("angels.spawn_rate", null);
