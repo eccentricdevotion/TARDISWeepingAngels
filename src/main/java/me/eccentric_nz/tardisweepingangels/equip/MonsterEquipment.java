@@ -3,6 +3,7 @@
  */
 package me.eccentric_nz.tardisweepingangels.equip;
 
+import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelsAPI;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.libraryaddict.disguise.DisguiseAPI;
@@ -479,9 +480,12 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             }
         }
         if (entity instanceof Enderman) {
-            Entity passenger = ((Enderman) entity).getPassengers().get(0);
-            if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
-                return Monster.SILENT;
+            List<Entity> passengers = ((Enderman) entity).getPassengers();
+            if (passengers.size() > 0) {
+                Entity passenger = passengers.get(0);
+                if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
+                    return Monster.SILENT;
+                }
             }
         }
         return null;
