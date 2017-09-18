@@ -16,6 +16,7 @@ import me.eccentric_nz.tardisweepingangels.commands.TabComplete;
 import me.eccentric_nz.tardisweepingangels.death.Death;
 import me.eccentric_nz.tardisweepingangels.death.PlayerDeath;
 import me.eccentric_nz.tardisweepingangels.death.RainDamage;
+import me.eccentric_nz.tardisweepingangels.equip.K9TameOrBreed;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.equip.PlayerUndisguise;
 import me.eccentric_nz.tardisweepingangels.monsters.CybermanRunnable;
@@ -106,7 +107,8 @@ public class TARDISWeepingAngels extends JavaPlugin {
             pm.registerEvents(new Butler(this), this);
             pm.registerEvents(new HelmetChecker(), this);
             pm.registerEvents(new Portal(this), this);
-            pm.registerEvents(new AntiTeleport(), this);
+            pm.registerEvents(new AntiTeleport(this), this);
+            pm.registerEvents(new K9TameOrBreed(), this);
             pm.registerEvents(new RainDamage(), this);
             pm.registerEvents(new ChunkLoad(), this);
             // register commands
