@@ -85,11 +85,11 @@ public class Sounds implements Listener {
                         tmp = "cyberman";
                         delay = 80L;
                     }
-                    if (dn.equals("Sontaran Head") && head.getType().equals(Material.GOLD_HELMET)) {
+                    if (dn.equals("Sontaran Head") && head.getType().equals(Material.GOLDEN_HELMET)) {
                         tmp = "sontaran";
                         delay = 55L;
                     }
-                    if (dn.equals("Vashta Nerada Head") && head.getType().equals(Material.GOLD_HELMET)) {
+                    if (dn.equals("Vashta Nerada Head") && head.getType().equals(Material.GOLDEN_HELMET)) {
                         tmp = "vashta";
                         delay = 30L;
                     }

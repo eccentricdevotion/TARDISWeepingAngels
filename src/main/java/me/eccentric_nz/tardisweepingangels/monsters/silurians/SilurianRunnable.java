@@ -57,7 +57,7 @@ public class SilurianRunnable implements Runnable {
                     Collection<Skeleton> skeletons = w.getEntitiesByClass(Skeleton.class);
                     skeletons.forEach((s) -> {
                         EntityEquipment ee = s.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                        if (ee.getHelmet().getType().equals(Material.GOLDEN_HELMET)) {
                             ItemStack is = ee.getHelmet();
                             if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Silurian")) {
                                 silurians.add(s);

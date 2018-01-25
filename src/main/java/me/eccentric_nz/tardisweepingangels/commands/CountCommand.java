@@ -61,7 +61,7 @@ public class CountCommand implements CommandExecutor {
                     Collection<Skeleton> angels = w.getEntitiesByClass(Skeleton.class);
                     for (Skeleton a : angels) {
                         EntityEquipment ee = a.getEquipment();
-                        if (ee.getItemInMainHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.WATER_LILY)) {
+                        if (ee.getItemInMainHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.LILY_PAD)) {
                             count++;
                         }
                     }
@@ -132,7 +132,7 @@ public class CountCommand implements CommandExecutor {
                     Collection<Zombie> sontarans = w.getEntitiesByClass(Zombie.class);
                     for (Zombie o : sontarans) {
                         EntityEquipment ee = o.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                        if (ee.getHelmet().getType().equals(Material.GOLDEN_HELMET)) {
                             ItemStack is = ee.getHelmet();
                             if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Sontaran")) {
                                 count++;
@@ -145,7 +145,7 @@ public class CountCommand implements CommandExecutor {
                     Collection<Skeleton> silurians = w.getEntitiesByClass(Skeleton.class);
                     for (Skeleton s : silurians) {
                         EntityEquipment ee = s.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                        if (ee.getHelmet().getType().equals(Material.GOLDEN_HELMET)) {
                             ItemStack is = ee.getHelmet();
                             if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Silurian")) {
                                 count++;
@@ -158,7 +158,7 @@ public class CountCommand implements CommandExecutor {
                     Collection<Zombie> vashta = w.getEntitiesByClass(Zombie.class);
                     for (Zombie v : vashta) {
                         EntityEquipment ee = v.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                        if (ee.getHelmet().getType().equals(Material.GOLDEN_HELMET)) {
                             ItemStack is = ee.getHelmet();
                             if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Vashta")) {
                                 count++;
@@ -171,7 +171,7 @@ public class CountCommand implements CommandExecutor {
                     Collection<Zombie> zygons = w.getEntitiesByClass(Zombie.class);
                     for (Zombie z : zygons) {
                         EntityEquipment ee = z.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                        if (ee.getHelmet().getType().equals(Material.GOLDEN_HELMET)) {
                             ItemStack is = ee.getHelmet();
                             if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Zygon")) {
                                 count++;

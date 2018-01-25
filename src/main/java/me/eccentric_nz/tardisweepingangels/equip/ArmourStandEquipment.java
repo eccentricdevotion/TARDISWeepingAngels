@@ -18,7 +18,7 @@ public class ArmourStandEquipment {
         as.setSmall(false);
         as.setArms(true);
         ItemStack wing = new ItemStack(Material.BARRIER, 1);
-        ItemStack head = new ItemStack(Material.SKULL_ITEM, 1);
+        ItemStack head = new ItemStack(Material.SKELETON_SKULL, 1);
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
         ItemStack boots = new ItemStack(Material.IRON_BOOTS, 1);
@@ -125,9 +125,9 @@ public class ArmourStandEquipment {
 
     public void setZygonEquipment(ArmorStand as) {
         as.setSmall(false);
-        ItemStack helmet = new ItemStack(Material.GOLD_HELMET, 1);
-        ItemStack chestplate = new ItemStack(Material.GOLD_CHESTPLATE, 1);
-        ItemStack leggings = new ItemStack(Material.GOLD_LEGGINGS, 1);
+        ItemStack helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
+        ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
         helmet.setDurability((short) 160);
         chestplate.setDurability((short) 235);
         leggings.setDurability((short) 220);
@@ -151,9 +151,9 @@ public class ArmourStandEquipment {
     public void setSilurianEquipment(ArmorStand as) {
         as.setSmall(false);
         as.setArms(true);
-        ItemStack helmet = new ItemStack(Material.GOLD_HELMET, 1);
-        ItemStack chestplate = new ItemStack(Material.GOLD_CHESTPLATE, 1);
-        ItemStack leggings = new ItemStack(Material.GOLD_LEGGINGS, 1);
+        ItemStack helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
+        ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
         helmet.setDurability((short) 160);
         chestplate.setDurability((short) 235);
         leggings.setDurability((short) 220);
@@ -180,9 +180,9 @@ public class ArmourStandEquipment {
 
     public void setSontaranEquipment(ArmorStand as) {
         as.setSmall(false);
-        ItemStack helmet = new ItemStack(Material.GOLD_HELMET, 1);
-        ItemStack chestplate = new ItemStack(Material.GOLD_CHESTPLATE, 1);
-        ItemStack leggings = new ItemStack(Material.GOLD_LEGGINGS, 1);
+        ItemStack helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
+        ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
         helmet.setDurability((short) 160);
         chestplate.setDurability((short) 235);
         leggings.setDurability((short) 220);
@@ -234,9 +234,9 @@ public class ArmourStandEquipment {
 
     public void setVashtaNeradaEquipment(ArmorStand as) {
         as.setSmall(false);
-        ItemStack helmet = new ItemStack(Material.GOLD_HELMET, 1);
-        ItemStack chestplate = new ItemStack(Material.GOLD_CHESTPLATE, 1);
-        ItemStack leggings = new ItemStack(Material.GOLD_LEGGINGS, 1);
+        ItemStack helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
+        ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
         helmet.setDurability((short) 160);
         chestplate.setDurability((short) 235);
         leggings.setDurability((short) 220);

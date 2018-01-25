@@ -68,16 +68,16 @@ public class HelmetChecker implements Listener {
                         helmet = new ItemStack(Material.IRON_HELMET, 1);
                         name = "Ice Warrior Head";
                     } else if (dn.startsWith("Silurian")) {
-                        helmet = new ItemStack(Material.GOLD_HELMET, 1);
+                        helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
                         name = "Silurian Head";
                     } else if (dn.startsWith("Sontaran")) {
-                        helmet = new ItemStack(Material.GOLD_HELMET, 1);
+                        helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
                         name = "Sontaran Head";
                     } else if (dn.startsWith("Vashta")) {
-                        helmet = new ItemStack(Material.GOLD_HELMET, 1);
+                        helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
                         name = "Vashta Nerada Head";
                     } else {
-                        helmet = new ItemStack(Material.GOLD_HELMET, 1);
+                        helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
                         name = "Zygon Head";
                     }
                     ItemMeta hmeta = helmet.getItemMeta();

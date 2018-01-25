@@ -53,7 +53,7 @@ public class SontaranRunnable implements Runnable {
                     Collection<Zombie> potatoes = w.getEntitiesByClass(Zombie.class);
                     potatoes.forEach((pz) -> {
                         EntityEquipment ee = pz.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                        if (ee.getHelmet().getType().equals(Material.GOLDEN_HELMET)) {
                             ItemStack is = ee.getHelmet();
                             if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Sontaran")) {
                                 sontarans.add(pz);

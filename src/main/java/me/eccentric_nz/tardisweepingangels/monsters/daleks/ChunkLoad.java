@@ -40,7 +40,7 @@ public class ChunkLoad implements Listener {
                         snw.setDerp(true);
                         DisguiseAPI.disguiseToAll(d, mobDisguise);
                     }
-                } else if (is != null && is.getType().equals(Material.WATER_LILY)) {
+                } else if (is != null && is.getType().equals(Material.LILY_PAD)) {
                     ItemStack head = new ItemStack(Material.STONE_BUTTON, 1);
                     ItemMeta hmeta = head.getItemMeta();
                     hmeta.setDisplayName("Weeping Angel Head");

@@ -50,7 +50,7 @@ public class ZygonRunnable implements Runnable {
                 Collection<Zombie> children = w.getEntitiesByClass(Zombie.class);
                 children.forEach((c) -> {
                     EntityEquipment ee = c.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                    if (ee.getHelmet().getType().equals(Material.GOLDEN_HELMET)) {
                         ItemStack is = ee.getHelmet();
                         if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Zygon")) {
                             zygons.add(c);

@@ -191,9 +191,9 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setZygonEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.GOLD_HELMET, 1);
-        ItemStack chestplate = new ItemStack(Material.GOLD_CHESTPLATE, 1);
-        ItemStack leggings = new ItemStack(Material.GOLD_LEGGINGS, 1);
+        ItemStack helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
+        ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
         if (disguise) {
             helmet.setDurability((short) 160);
             chestplate.setDurability((short) 235);
@@ -226,9 +226,9 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setSilurianEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.GOLD_HELMET, 1);
-        ItemStack chestplate = new ItemStack(Material.GOLD_CHESTPLATE, 1);
-        ItemStack leggings = new ItemStack(Material.GOLD_LEGGINGS, 1);
+        ItemStack helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
+        ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
         if (disguise) {
             helmet.setDurability((short) 160);
             chestplate.setDurability((short) 235);
@@ -265,9 +265,9 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setSontaranEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.GOLD_HELMET, 1);
-        ItemStack chestplate = new ItemStack(Material.GOLD_CHESTPLATE, 1);
-        ItemStack leggings = new ItemStack(Material.GOLD_LEGGINGS, 1);
+        ItemStack helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
+        ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
         if (disguise) {
             helmet.setDurability((short) 160);
             chestplate.setDurability((short) 235);
@@ -375,9 +375,9 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setVashtaNeradaEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.GOLD_HELMET, 1);
-        ItemStack chestplate = new ItemStack(Material.GOLD_CHESTPLATE, 1);
-        ItemStack leggings = new ItemStack(Material.GOLD_LEGGINGS, 1);
+        ItemStack helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
+        ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
         if (disguise) {
             helmet.setDurability((short) 160);
             chestplate.setDurability((short) 235);

@@ -47,7 +47,7 @@ public class Butler implements Listener {
         if (ent instanceof Zombie) {
             Zombie zom = (Zombie) ent;
             EntityEquipment ee = zom.getEquipment();
-            if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+            if (ee.getHelmet().getType().equals(Material.GOLDEN_HELMET)) {
                 ItemStack h = ee.getHelmet();
                 if (h.hasItemMeta() && h.getItemMeta().hasDisplayName() && h.getItemMeta().getDisplayName().startsWith("Sontaran")) {
                     Player p = event.getPlayer();

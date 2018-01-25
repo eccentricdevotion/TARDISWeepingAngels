@@ -103,7 +103,7 @@ public class PlayerDeath implements Listener {
                 if (attacker instanceof Skeleton) {
                     EntityEquipment ee = ((LivingEntity) attacker).getEquipment();
                     ItemStack is = ee.getHelmet();
-                    if (ee.getItemInMainHand().getType().equals(Material.BARRIER) || is.getType().equals(Material.WATER_LILY)) {
+                    if (ee.getItemInMainHand().getType().equals(Material.BARRIER) || is.getType().equals(Material.LILY_PAD)) {
                         event.setDeathMessage(name + " was slain by a Weeping Angel");
                         return;
                     }
@@ -123,7 +123,7 @@ public class PlayerDeath implements Listener {
                     ItemStack is = ee.getHelmet();
                     if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
                         String dn = is.getItemMeta().getDisplayName();
-                        if (ee.getHelmet().getType().equals(Material.GOLD_HELMET)) {
+                        if (ee.getHelmet().getType().equals(Material.GOLDEN_HELMET)) {
                             if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && dn.startsWith("Silurian")) {
                                 event.setDeathMessage(name + " was slain by a Silurian");
                             }

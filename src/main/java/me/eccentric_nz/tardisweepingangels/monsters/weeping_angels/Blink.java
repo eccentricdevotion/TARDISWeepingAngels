@@ -48,7 +48,7 @@ public class Blink implements Listener {
                 if (skeleton == null || skeleton.getLocation().distanceSquared(observerPos) > target.getLocation().distanceSquared(observerPos)) {
                     // is it an angel?
                     EntityEquipment ee = target.getEquipment();
-                    if (ee.getItemInMainHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.WATER_LILY)) {
+                    if (ee.getItemInMainHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.LILY_PAD)) {
                         skeleton = target;
                     }
                 }
