@@ -4,7 +4,7 @@ Inspired by: [TARDIS Ticket #530 - Weeping Angels](http://dev.bukkit.org/bukkit-
 
 This plugin tranforms skeletons into terrifying Weeping Angels (as seen on  [Doctor Who](http://www.bbc.co.uk/programmes/p00wqr12/profiles/weeping-angels)).
 
-![Weeping Angel](https://www.dropbox.com/s/iulxdqis25j5fen/weepingangel1.jpg?dl=1)
+![Weeping Angel](https://dl.dropboxusercontent.com/s/iulxdqis25j5fen/weepingangel1.jpg?dl=1)
 
 JAR available here: [http://dev.bukkit.org/bukkit-plugins/tardisweepingangels/files/](http://dev.bukkit.org/bukkit-plugins/tardisweepingangels/files/)
 
