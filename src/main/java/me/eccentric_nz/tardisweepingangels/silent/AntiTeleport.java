@@ -14,7 +14,6 @@ import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
 
 /**
- *
  * @author eccentric_nz
  */
 public class AntiTeleport implements Listener {
@@ -27,7 +26,7 @@ public class AntiTeleport implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onSilentTeleport(EntityTeleportEvent event) {
-        final Entity ent = event.getEntity();
+        Entity ent = event.getEntity();
         if (ent.getType().equals(EntityType.ENDERMAN) && !ent.getPassengers().isEmpty() && ent.getPassengers().get(0) != null && ent.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
             event.setCancelled(true);
         }
@@ -47,7 +46,7 @@ public class AntiTeleport implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onSilentPickup(EntityChangeBlockEvent event) {
-        final Entity ent = event.getEntity();
+        Entity ent = event.getEntity();
         if (ent.getType().equals(EntityType.ENDERMAN) && !ent.getPassengers().isEmpty() && ent.getPassengers().get(0) != null && ent.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
             event.setCancelled(true);
         }

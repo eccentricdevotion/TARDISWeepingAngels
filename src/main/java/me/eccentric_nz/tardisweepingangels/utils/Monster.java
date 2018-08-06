@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author eccentric_nz
  */
 public enum Monster {
@@ -30,8 +29,7 @@ public enum Monster {
     WEEPING_ANGEL("Weeping Angel"),
     ZYGON("Zygon");
 
-    public String name;
-    static final List<Monster> values = new ArrayList<Monster>();
+    static final List<Monster> values = new ArrayList<>();
 
     static {
         values.add(CYBERMAN);
@@ -47,15 +45,17 @@ public enum Monster {
         values.add(ZYGON);
     }
 
+    public String name;
+
     private Monster(String name) {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public static List<Monster> getValues() {
         return values;
+    }
+
+    public String getName() {
+        return name;
     }
 }

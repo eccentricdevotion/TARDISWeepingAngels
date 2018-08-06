@@ -3,10 +3,6 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters.silurians;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.logging.Level;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
@@ -24,8 +20,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.logging.Level;
+
 /**
- *
  * @author eccentric_nz
  */
 public class SilurianRunnable implements Runnable {
@@ -36,8 +36,8 @@ public class SilurianRunnable implements Runnable {
 
     public SilurianRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
-        this.equipper = new MonsterEquipment();
+        spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
+        equipper = new MonsterEquipment();
     }
 
     @Override
@@ -84,8 +84,8 @@ public class SilurianRunnable implements Runnable {
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
             Location search = CaveFinder.searchCave(l);
-            final Location cave = ((search == null)) ? l : search;
-            final LivingEntity e = (LivingEntity) w.spawnEntity(cave, EntityType.SKELETON);
+            Location cave = ((search == null)) ? l : search;
+            LivingEntity e = (LivingEntity) w.spawnEntity(cave, EntityType.SKELETON);
             e.setSilent(true);
             PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
             e.addPotionEffect(p);

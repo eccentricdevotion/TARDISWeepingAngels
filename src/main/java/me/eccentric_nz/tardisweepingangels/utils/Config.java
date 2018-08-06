@@ -3,37 +3,37 @@
  */
 package me.eccentric_nz.tardisweepingangels.utils;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.util.FileUtil;
 
+import java.io.File;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
- *
  * @author eccentric_nz
  */
 public class Config {
 
+    final double min_version = 2.0d;
     private final TARDISWeepingAngels plugin;
-    private FileConfiguration config = null;
-    private File configFile = null;
     HashMap<String, List<String>> listOptions = new HashMap<>();
     HashMap<String, String> strOptions = new HashMap<>();
     HashMap<String, Integer> intOptions = new HashMap<>();
     HashMap<String, Double> doubleOptions = new HashMap<>();
     HashMap<String, Boolean> boolOptions = new HashMap<>();
-    final double min_version = 2.0d;
+    private FileConfiguration config = null;
+    private File configFile = null;
 
     public Config(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.configFile = new File(plugin.getDataFolder(), "config.yml");
-        this.config = YamlConfiguration.loadConfiguration(configFile);
+        configFile = new File(plugin.getDataFolder(), "config.yml");
+        config = YamlConfiguration.loadConfiguration(configFile);
         // integer
         intOptions.put("angels.freeze_time", 100);
         intOptions.put("spawn_rate.how_many", 2);
@@ -65,6 +65,10 @@ public class Config {
         doubleOptions.put("config_version", min_version);
     }
 
+    public static String sanitiseName(String name) {
+        return name.replaceAll("\\.", "_");
+    }
+
     public void updateConfig() {
         if (!config.contains("config_version")) {
             // back up the old config
@@ -83,7 +87,7 @@ public class Config {
             plugin.getConfig().set("zygons.worlds", null);
         }
         // add new world settings
-        this.plugin.getServer().getWorlds().forEach((w) -> {
+        plugin.getServer().getWorlds().forEach((w) -> {
             String n = sanitiseName(w.getName());
             // set TARDIS worlds, nether and end worlds to zero by default
             int m = (config.contains("spawn_rate.default_max")) ? config.getInt("spawn_rate.default_max") : 0;
@@ -199,9 +203,5 @@ public class Config {
         if (i > 0) {
             plugin.getServer().getConsoleSender().sendMessage(plugin.pluginName + "Added " + ChatColor.AQUA + i + ChatColor.RESET + " new items to config");
         }
-    }
-
-    public static String sanitiseName(String name) {
-        return name.replaceAll("\\.", "_");
     }
 }

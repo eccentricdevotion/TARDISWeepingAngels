@@ -20,7 +20,6 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 
 /**
- *
  * @author eccentric_nz
  */
 public class Portal implements Listener {
@@ -35,9 +34,9 @@ public class Portal implements Listener {
     public void dalekExitPortal(EntityPortalExitEvent event) {
         Entity e = event.getEntity();
         if (e.getType().equals(EntityType.SKELETON)) {
-            final Skeleton skeleton = (Skeleton) e;
-            final EntityEquipment ee = skeleton.getEquipment();
-            final ItemStack is = ee.getHelmet();
+            Skeleton skeleton = (Skeleton) e;
+            EntityEquipment ee = skeleton.getEquipment();
+            ItemStack is = ee.getHelmet();
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 if (is.getType().equals(Material.VINE) && !DisguiseAPI.isDisguised(skeleton)) {
                     MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);

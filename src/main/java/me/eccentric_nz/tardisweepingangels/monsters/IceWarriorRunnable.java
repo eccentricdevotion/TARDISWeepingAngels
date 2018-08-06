@@ -3,9 +3,6 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
@@ -24,8 +21,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 /**
- *
  * @author eccentric_nz
  */
 public class IceWarriorRunnable implements Runnable {
@@ -37,8 +37,8 @@ public class IceWarriorRunnable implements Runnable {
 
     public IceWarriorRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
-        this.equipper = new MonsterEquipment();
+        spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
+        equipper = new MonsterEquipment();
         biomes.add(Biome.DEEP_FROZEN_OCEAN);
         biomes.add(Biome.FROZEN_OCEAN);
         biomes.add(Biome.FROZEN_RIVER);
@@ -91,9 +91,9 @@ public class IceWarriorRunnable implements Runnable {
             int x = c.getX() * 16 + plugin.getRandom().nextInt(16);
             int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
-            final Location l = new Location(w, x, y + 1, z);
+            Location l = new Location(w, x, y + 1, z);
             if (biomes.contains(l.getBlock().getBiome())) {
-                final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.PIG_ZOMBIE);
+                LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.PIG_ZOMBIE);
                 e.setSilent(true);
                 PigZombie warrior = (PigZombie) e;
                 warrior.setAngry(true);

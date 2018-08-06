@@ -18,7 +18,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 /**
- *
  * @author eccentric_nz
  */
 public class Builder implements Listener {
@@ -28,26 +27,26 @@ public class Builder implements Listener {
 
     public Builder(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.equipper = new MonsterEquipment();
+        equipper = new MonsterEquipment();
     }
 
     @EventHandler(ignoreCancelled = true)
     public void onSkullPlace(BlockPlaceEvent event) {
         if (event.getBlock().getType().equals(Material.SKELETON_SKULL)) {
-            final Block placed = event.getBlockPlaced();
+            Block placed = event.getBlockPlaced();
             // check the blocks below
-            final Block below = placed.getRelative(BlockFace.DOWN);
+            Block below = placed.getRelative(BlockFace.DOWN);
             if (!below.getType().equals(Material.COBBLESTONE_WALL)) {
                 return;
             }
-            final Block bottom = below.getRelative(BlockFace.DOWN);
+            Block bottom = below.getRelative(BlockFace.DOWN);
             if (!bottom.getType().equals(Material.COBBLESTONE_WALL)) {
                 return;
             }
-            final Block east = below.getRelative(BlockFace.EAST);
-            final Block west = below.getRelative(BlockFace.WEST);
-            final Block north = below.getRelative(BlockFace.NORTH);
-            final Block south = below.getRelative(BlockFace.SOUTH);
+            Block east = below.getRelative(BlockFace.EAST);
+            Block west = below.getRelative(BlockFace.WEST);
+            Block north = below.getRelative(BlockFace.NORTH);
+            Block south = below.getRelative(BlockFace.SOUTH);
             if ((east.getType().equals(Material.COBBLESTONE_WALL) && west.getType().equals(Material.COBBLESTONE_WALL)) || (north.getType().equals(Material.COBBLESTONE_WALL) && south.getType().equals(Material.COBBLESTONE_WALL))) {
                 if (!event.getPlayer().hasPermission("tardisweepingangels.build")) {
                     event.getPlayer().sendMessage(plugin.pluginName + "You don't have permission to build a Weeping Angel!");
@@ -65,8 +64,8 @@ public class Builder implements Listener {
                         north.setType(Material.AIR);
                         south.setType(Material.AIR);
                     }
-                    final Location l = bottom.getLocation();
-                    final LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.SKELETON);
+                    Location l = bottom.getLocation();
+                    LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.SKELETON);
                     e.setSilent(true);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                         equipper.setAngelEquipment(e, false);

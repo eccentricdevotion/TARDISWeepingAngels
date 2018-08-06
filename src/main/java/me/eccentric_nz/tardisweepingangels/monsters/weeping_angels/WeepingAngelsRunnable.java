@@ -3,9 +3,6 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
@@ -20,8 +17,11 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.inventory.EntityEquipment;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 /**
- *
  * @author eccentric_nz
  */
 public class WeepingAngelsRunnable implements Runnable {
@@ -32,8 +32,8 @@ public class WeepingAngelsRunnable implements Runnable {
 
     public WeepingAngelsRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
-        this.equipper = new MonsterEquipment();
+        spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
+        equipper = new MonsterEquipment();
     }
 
     @Override
@@ -73,9 +73,9 @@ public class WeepingAngelsRunnable implements Runnable {
             int x = c.getX() * 16 + plugin.getRandom().nextInt(16);
             int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
-            final Location l = new Location(w, x, y + 1, z);
+            Location l = new Location(w, x, y + 1, z);
             if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {
-                final LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.SKELETON);
+                LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.SKELETON);
                 e.setSilent(true);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                     equipper.setAngelEquipment(e, false);

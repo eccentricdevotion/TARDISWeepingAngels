@@ -1,7 +1,5 @@
 package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 
-import java.util.ArrayList;
-import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.utils.Vector3D;
 import org.bukkit.Location;
@@ -16,6 +14,9 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Blink implements Listener {
 
     private final TARDISWeepingAngels plugin;
@@ -23,10 +24,34 @@ public class Blink implements Listener {
 
     public Blink(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.message.add("Don't blink. Blink and you're dead.");
-        this.message.add("They are fast. Faster than you can believe.");
-        this.message.add("Don't turn your back. Don't look away.");
-        this.message.add("And don't blink. Good Luck.");
+        message.add("Don't blink. Blink and you're dead.");
+        message.add("They are fast. Faster than you can believe.");
+        message.add("Don't turn your back. Don't look away.");
+        message.add("And don't blink. Good Luck.");
+    }
+
+    public static boolean hasIntersection(Vector3D p1, Vector3D p2, Vector3D min, Vector3D max) {
+        double epsilon = 0.0001f;
+        Vector3D d = p2.subtract(p1).multiply(0.5);
+        Vector3D e = max.subtract(min).multiply(0.5);
+        Vector3D c = p1.add(d).subtract(min.add(max).multiply(0.5));
+        Vector3D ad = d.abs();
+        if (Math.abs(c.x) > e.x + ad.x) {
+            return false;
+        }
+        if (Math.abs(c.y) > e.y + ad.y) {
+            return false;
+        }
+        if (Math.abs(c.z) > e.z + ad.z) {
+            return false;
+        }
+        if (Math.abs(d.y * c.z - d.z * c.y) > e.y * ad.z + e.z * ad.y + epsilon) {
+            return false;
+        }
+        if (Math.abs(d.z * c.x - d.x * c.z) > e.z * ad.x + e.x * ad.z + epsilon) {
+            return false;
+        }
+        return Math.abs(d.x * c.y - d.y * c.x) <= e.x * ad.y + e.y * ad.x + epsilon;
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
@@ -61,29 +86,5 @@ public class Blink implements Listener {
                 player.sendMessage(plugin.pluginName + message.get(plugin.getRandom().nextInt(4)));
             }
         }
-    }
-
-    public static boolean hasIntersection(Vector3D p1, Vector3D p2, Vector3D min, Vector3D max) {
-        final double epsilon = 0.0001f;
-        Vector3D d = p2.subtract(p1).multiply(0.5);
-        Vector3D e = max.subtract(min).multiply(0.5);
-        Vector3D c = p1.add(d).subtract(min.add(max).multiply(0.5));
-        Vector3D ad = d.abs();
-        if (Math.abs(c.x) > e.x + ad.x) {
-            return false;
-        }
-        if (Math.abs(c.y) > e.y + ad.y) {
-            return false;
-        }
-        if (Math.abs(c.z) > e.z + ad.z) {
-            return false;
-        }
-        if (Math.abs(d.y * c.z - d.z * c.y) > e.y * ad.z + e.z * ad.y + epsilon) {
-            return false;
-        }
-        if (Math.abs(d.z * c.x - d.x * c.z) > e.z * ad.x + e.x * ad.z + epsilon) {
-            return false;
-        }
-        return Math.abs(d.x * c.y - d.y * c.x) <= e.x * ad.y + e.y * ad.x + epsilon;
     }
 }

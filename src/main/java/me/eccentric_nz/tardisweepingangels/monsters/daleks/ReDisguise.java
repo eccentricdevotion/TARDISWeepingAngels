@@ -3,7 +3,6 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters.daleks;
 
-import java.util.Collection;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.libraryaddict.disguise.DisguiseAPI;
@@ -17,8 +16,9 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Collection;
+
 /**
- *
  * @author eccentric_nz
  */
 public class ReDisguise implements Runnable {

@@ -3,8 +3,6 @@
  */
 package me.eccentric_nz.tardisweepingangels.death;
 
-import java.util.ArrayList;
-import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
@@ -13,12 +11,7 @@ import me.libraryaddict.disguise.DisguiseAPI;
 import net.citizensnpcs.api.CitizensAPI;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Skeleton;
-import org.bukkit.entity.Zombie;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -30,8 +23,10 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author eccentric_nz
  */
 public class Death implements Listener {
@@ -51,34 +46,34 @@ public class Death implements Listener {
     public Death(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
         plugin.getConfig().getStringList("angels.drops").forEach((a) -> {
-            this.angel_drops.add(Material.valueOf(a));
+            angel_drops.add(Material.valueOf(a));
         });
         plugin.getConfig().getStringList("cybermen.drops").forEach((c) -> {
-            this.cyber_drops.add(Material.valueOf(c));
+            cyber_drops.add(Material.valueOf(c));
         });
         plugin.getConfig().getStringList("daleks.drops").forEach((d) -> {
-            this.dalek_drops.add(Material.valueOf(d));
+            dalek_drops.add(Material.valueOf(d));
         });
         plugin.getConfig().getStringList("empty_child.drops").forEach((e) -> {
-            this.empty_drops.add(Material.valueOf(e));
+            empty_drops.add(Material.valueOf(e));
         });
         plugin.getConfig().getStringList("ice_warriors.drops").forEach((i) -> {
-            this.ice_drops.add(Material.valueOf(i));
+            ice_drops.add(Material.valueOf(i));
         });
         plugin.getConfig().getStringList("sontarans.drops").forEach((o) -> {
-            this.sontaran_drops.add(Material.valueOf(o));
+            sontaran_drops.add(Material.valueOf(o));
         });
         plugin.getConfig().getStringList("silent.drops").forEach((m) -> {
-            this.silent_drops.add(Material.valueOf(m));
+            silent_drops.add(Material.valueOf(m));
         });
         plugin.getConfig().getStringList("silurians.drops").forEach((s) -> {
-            this.silurian_drops.add(Material.valueOf(s));
+            silurian_drops.add(Material.valueOf(s));
         });
         plugin.getConfig().getStringList("vashta_nerada.drops").forEach((v) -> {
-            this.vashta_drops.add(Material.valueOf(v));
+            vashta_drops.add(Material.valueOf(v));
         });
         plugin.getConfig().getStringList("zygons.drops").forEach((z) -> {
-            this.zygon_drops.add(Material.valueOf(z));
+            zygon_drops.add(Material.valueOf(z));
         });
     }
 
@@ -166,7 +161,6 @@ public class Death implements Listener {
                         event.getDrops().clear();
                         stack = new ItemStack(vashta_drops.get(plugin.getRandom().nextInt(vashta_drops.size())), plugin.getRandom().nextInt(2) + 1);
                         event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
-
                     }
                     if (is.getItemMeta().getDisplayName().startsWith("Zygon")) {
                         event.getDrops().clear();

@@ -3,7 +3,6 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters.empty_child;
 
-import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,8 +14,9 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import java.util.UUID;
+
 /**
- *
  * @author eccentric_nz
  */
 public class GasMask implements Listener {
@@ -28,15 +28,14 @@ public class GasMask implements Listener {
     }
 
     @EventHandler
-    @SuppressWarnings("deprecation")
     public void onPlayerRespawn(PlayerRespawnEvent event) {
-        final Player player = event.getPlayer();
-        final UUID uuid = player.getUniqueId();
+        Player player = event.getPlayer();
+        UUID uuid = player.getUniqueId();
         if (!plugin.getEmpty().contains(uuid)) {
             return;
         }
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            final PlayerInventory inv = player.getInventory();
+            PlayerInventory inv = player.getInventory();
             ItemStack helmet = inv.getHelmet();
             if (helmet != null) {
                 // move it to the first free slot
@@ -59,7 +58,6 @@ public class GasMask implements Listener {
     }
 
     @EventHandler
-    @SuppressWarnings("deprecation")
     public void onHelmetClick(InventoryClickEvent event) {
         if (event.getInventory().getType().equals(InventoryType.CRAFTING) && event.getRawSlot() == 5) {
             Player player = (Player) event.getWhoClicked();

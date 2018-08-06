@@ -6,16 +6,7 @@ package me.eccentric_nz.tardisweepingangels.death;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.libraryaddict.disguise.DisguiseAPI;
 import org.bukkit.Material;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Enderman;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Guardian;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.PigZombie;
-import org.bukkit.entity.Projectile;
-import org.bukkit.entity.Skeleton;
-import org.bukkit.entity.Zombie;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -27,7 +18,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
 /**
- *
  * @author eccentric_nz
  */
 public class PlayerDeath implements Listener {

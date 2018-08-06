@@ -1,6 +1,5 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
-import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
@@ -10,6 +9,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
+
+import java.util.UUID;
 
 public class DisguiseCommand implements CommandExecutor {
 

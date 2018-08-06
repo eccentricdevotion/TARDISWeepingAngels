@@ -3,21 +3,13 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.libraryaddict.disguise.DisguiseAPI;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -29,8 +21,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 /**
- *
  * @author eccentric_nz
  */
 public class Damage implements Listener {
@@ -42,7 +37,7 @@ public class Damage implements Listener {
 
     public Damage(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.mat = Material.valueOf(plugin.getConfig().getString("angels.weapon"));
+        mat = Material.valueOf(plugin.getConfig().getString("angels.weapon"));
         plugin.getConfig().getStringList("angels.teleport_worlds").forEach((w) -> {
             World world = plugin.getServer().getWorld(w);
             if (w != null) {
@@ -110,7 +105,6 @@ public class Damage implements Listener {
         return new Location(w, x, y + 1, z);
     }
 
-    @SuppressWarnings("deprecation")
     private void stealKey(Player p) {
         // only works if the item is named "TARDIS Key"
         PlayerInventory inv = p.getInventory();

@@ -12,7 +12,6 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 /**
- *
  * @author eccentric_nz
  */
 
@@ -29,6 +28,10 @@ public final class TARDISWeepingAngelSpawnEvent extends Event {
         this.entityType = entityType;
         this.monsterType = monsterType;
         this.location = location;
+    }
+
+    public static HandlerList getHandlerList() {
+        return HANDLERS;
     }
 
     /**
@@ -50,8 +53,7 @@ public final class TARDISWeepingAngelSpawnEvent extends Event {
     }
 
     /**
-     * Gets the the Monster type for the TARDISWeepingAngels entity involved in
-     * this event.
+     * Gets the the Monster type for the TARDISWeepingAngels entity involved in this event.
      *
      * @return Monster of the TARDISWeepingAngels entity involved in this event
      */
@@ -70,10 +72,6 @@ public final class TARDISWeepingAngelSpawnEvent extends Event {
 
     @Override
     public HandlerList getHandlers() {
-        return HANDLERS;
-    }
-
-    public static HandlerList getHandlerList() {
         return HANDLERS;
     }
 }

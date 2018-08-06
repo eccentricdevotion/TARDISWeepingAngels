@@ -1,10 +1,11 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
-import java.util.HashMap;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+
+import java.util.HashMap;
 
 public class AdminCommand implements CommandExecutor {
 
@@ -13,16 +14,16 @@ public class AdminCommand implements CommandExecutor {
 
     public AdminCommand(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.types.put("a", "angels");
-        this.types.put("c", "cybermen");
-        this.types.put("d", "daleks");
-        this.types.put("e", "empty_child");
-        this.types.put("i", "ice_warriors");
-        this.types.put("o", "sontarans");
-        this.types.put("s", "silurians");
-        this.types.put("v", "vashta_nerada");
-        this.types.put("z", "zygons");
-        this.types.put("all", "");
+        types.put("a", "angels");
+        types.put("c", "cybermen");
+        types.put("d", "daleks");
+        types.put("e", "empty_child");
+        types.put("i", "ice_warriors");
+        types.put("o", "sontarans");
+        types.put("s", "silurians");
+        types.put("v", "vashta_nerada");
+        types.put("z", "zygons");
+        types.put("all", "");
     }
 
     @Override
@@ -56,7 +57,6 @@ public class AdminCommand implements CommandExecutor {
                 plugin.getConfig().set("silurians.worlds." + args[1], m);
                 plugin.getConfig().set("vashta_nerada.worlds." + args[1], m);
                 plugin.getConfig().set("zygons.worlds." + args[1], m);
-
             } else {
                 plugin.getConfig().set(types.get(which) + ".worlds." + args[1], m);
             }

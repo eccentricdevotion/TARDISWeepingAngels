@@ -4,10 +4,6 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
@@ -28,8 +24,12 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 /**
- *
  * @author eccentric_nz
  */
 public class VashtaNeradaListener implements Listener {
@@ -45,7 +45,7 @@ public class VashtaNeradaListener implements Listener {
         faces.add(BlockFace.NORTH);
         faces.add(BlockFace.SOUTH);
         faces.add(BlockFace.WEST);
-        this.equipper = new MonsterEquipment();
+        equipper = new MonsterEquipment();
     }
 
     @EventHandler
@@ -78,8 +78,8 @@ public class VashtaNeradaListener implements Listener {
         return ret;
     }
 
-    private void spawnVashtaNerada(final Location l) {
-        final LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
+    private void spawnVashtaNerada(Location l) {
+        LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
         e.setSilent(true);
         Zombie vashta = (Zombie) e;
         //vashta.setVillager(false);

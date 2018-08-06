@@ -3,13 +3,13 @@ package me.eccentric_nz.tardisweepingangels.equip;
 /*
  *  Copyright 2014 eccentric_nz.
  */
+
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 /**
- *
  * @author eccentric_nz
  */
 public class ArmourStandEquipment {

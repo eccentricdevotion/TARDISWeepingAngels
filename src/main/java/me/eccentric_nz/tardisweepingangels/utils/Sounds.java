@@ -1,24 +1,18 @@
 package me.eccentric_nz.tardisweepingangels.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.Material;
-import org.bukkit.entity.Enderman;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Guardian;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Skeleton;
-import org.bukkit.entity.Zombie;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class Sounds implements Listener {
 
@@ -30,17 +24,16 @@ public class Sounds implements Listener {
     }
 
     @EventHandler
-    @SuppressWarnings("deprecation")
     public void onTargetPlayer(EntityTargetLivingEntityEvent event) {
-        final Entity ent = event.getEntity();
-        final UUID uuid = ent.getUniqueId();
+        Entity ent = event.getEntity();
+        UUID uuid = ent.getUniqueId();
         if (tracker.contains(uuid)) {
             return;
         }
         if (ent instanceof Enderman) {
             if (ent.getPassenger() != null && ent.getPassenger().getType().equals(EntityType.GUARDIAN)) {
                 tracker.add(uuid);
-                final LivingEntity le = event.getTarget();
+                LivingEntity le = event.getTarget();
                 if (le instanceof Player) {
                     long delay = 90L;
                     // schedule delayed task
@@ -55,7 +48,7 @@ public class Sounds implements Listener {
         if (ent instanceof Guardian) {
             if (ent.getVehicle() != null && ent.getVehicle().getType().equals(EntityType.ENDERMAN)) {
                 tracker.add(uuid);
-                final LivingEntity le = event.getTarget();
+                LivingEntity le = event.getTarget();
                 if (le instanceof Player) {
                     long delay = 20L;
                     // schedule delayed task
@@ -73,7 +66,7 @@ public class Sounds implements Listener {
             ItemStack head = ee.getHelmet();
             if (head != null && head.hasItemMeta() && head.getItemMeta().hasDisplayName()) {
                 tracker.add(uuid);
-                final LivingEntity le = event.getTarget();
+                LivingEntity le = event.getTarget();
                 String dn = head.getItemMeta().getDisplayName();
                 if (le instanceof Player) {
                     String tmp = "";
@@ -94,7 +87,7 @@ public class Sounds implements Listener {
                         delay = 30L;
                     }
                     if (!tmp.isEmpty()) {
-                        final String sound = tmp;
+                        String sound = tmp;
                         // schedule delayed task
                         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                             Player player = (Player) le;
@@ -110,7 +103,7 @@ public class Sounds implements Listener {
             Skeleton dalek = (Skeleton) ent;
             if (dalek.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE)) {
                 tracker.add(uuid);
-                final LivingEntity le = event.getTarget();
+                LivingEntity le = event.getTarget();
                 if (le instanceof Player) {
                     long delay = 50L;
                     // schedule delayed task

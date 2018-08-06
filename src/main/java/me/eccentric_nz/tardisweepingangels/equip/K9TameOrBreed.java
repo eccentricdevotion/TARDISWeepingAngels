@@ -13,7 +13,6 @@ import org.bukkit.event.entity.EntityBreedEvent;
 import org.bukkit.event.entity.EntityTameEvent;
 
 /**
- *
  * @author eccentric_nz
  */
 public class K9TameOrBreed implements Listener {

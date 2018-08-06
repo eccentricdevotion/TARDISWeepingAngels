@@ -17,9 +17,6 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
 import com.google.common.collect.ImmutableList;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.command.Command;
@@ -27,16 +24,20 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.util.StringUtil;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 /**
  * TabCompleter
  */
 public class TabComplete implements TabCompleter {
 
     private final TARDISWeepingAngels plugin;
-    ImmutableList<String> LETTER_SUBS = ImmutableList.of("a", "c", "d", "e", "i", "m", "o", "s", "v", "z");
     private final ImmutableList<String> ONOFF_SUBS = ImmutableList.of("on", "off");
     private final ImmutableList<String> WORLD_SUBS;
     private final ImmutableList<String> MONSTER_SUBS;
+    ImmutableList<String> LETTER_SUBS = ImmutableList.of("a", "c", "d", "e", "i", "m", "o", "s", "v", "z");
 
     public TabComplete(TARDISWeepingAngels plugin) {
         this.plugin = plugin;

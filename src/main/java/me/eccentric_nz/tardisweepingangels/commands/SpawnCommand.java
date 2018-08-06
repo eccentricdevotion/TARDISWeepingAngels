@@ -1,6 +1,5 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
-import java.util.Set;
 import me.eccentric_nz.tardischunkgenerator.TARDISHelper;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
@@ -12,13 +11,11 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.PigZombie;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Zombie;
+import org.bukkit.entity.*;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.Set;
 
 public class SpawnCommand implements CommandExecutor {
 
@@ -30,7 +27,7 @@ public class SpawnCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, final String[] args) {
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("twas")) {
             if (args.length == 0) {
                 return false;
@@ -52,17 +49,16 @@ public class SpawnCommand implements CommandExecutor {
                 sender.sendMessage(plugin.pluginName + "Command can only be used by a player!");
                 return true;
             }
-            @SuppressWarnings("deprecation")
-            final Location eyeLocation = player.getTargetBlock(trans, 50).getLocation();
+            Location eyeLocation = player.getTargetBlock(trans, 50).getLocation();
             eyeLocation.setX(eyeLocation.getX() + 0.5F);
             eyeLocation.setY(eyeLocation.getY() + 1);
             eyeLocation.setZ(eyeLocation.getZ() + 0.5F);
             World world = eyeLocation.getWorld();
-            final MonsterEquipment equip = new MonsterEquipment();
+            MonsterEquipment equip = new MonsterEquipment();
             switch (monster) {
                 case ANGEL:
                 case WEEPING_ANGEL:
-                    final LivingEntity a = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
+                    LivingEntity a = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                     a.setSilent(true);
                     //setNormal(a);
                     a.setNoDamageTicks(75);
@@ -72,7 +68,7 @@ public class SpawnCommand implements CommandExecutor {
                     }, 5L);
                     break;
                 case CYBERMAN:
-                    final LivingEntity c = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
+                    LivingEntity c = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                     c.setSilent(true);
                     c.setNoDamageTicks(75);
                     Zombie cyber = (Zombie) c;
@@ -85,7 +81,7 @@ public class SpawnCommand implements CommandExecutor {
                     }, 5L);
                     break;
                 case DALEK:
-                    final LivingEntity d = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
+                    LivingEntity d = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                     d.setSilent(true);
                     //setNormal(d);
                     d.setNoDamageTicks(75);
@@ -106,7 +102,7 @@ public class SpawnCommand implements CommandExecutor {
                 case ICE:
                 case ICE_WARRIOR:
                 case WARRIOR:
-                    final LivingEntity i = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
+                    LivingEntity i = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
                     i.setSilent(true);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                         equip.setWarriorEquipment(i, false);
@@ -120,7 +116,7 @@ public class SpawnCommand implements CommandExecutor {
                 case CHILD:
                 case EMPTY:
                 case EMPTY_CHILD:
-                    final LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
+                    LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                     e.setSilent(true);
                     e.setNoDamageTicks(75);
                     Zombie child = (Zombie) e;
@@ -133,7 +129,7 @@ public class SpawnCommand implements CommandExecutor {
                     }, 5L);
                     break;
                 case SILENT:
-                    final LivingEntity l = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ENDERMAN);
+                    LivingEntity l = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ENDERMAN);
                     l.setSilent(true);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                         equip.setSilentEquipment(l);
@@ -141,7 +137,7 @@ public class SpawnCommand implements CommandExecutor {
                     }, 5L);
                     break;
                 case SILURIAN:
-                    final LivingEntity s = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
+                    LivingEntity s = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                     s.setSilent(true);
                     //setNormal(s);
                     s.setNoDamageTicks(75);
@@ -151,7 +147,7 @@ public class SpawnCommand implements CommandExecutor {
                     }, 5L);
                     break;
                 case SONTARAN:
-                    final LivingEntity o = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
+                    LivingEntity o = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                     o.setSilent(true);
                     o.setNoDamageTicks(75);
                     Zombie sontaran = (Zombie) o;
@@ -164,7 +160,7 @@ public class SpawnCommand implements CommandExecutor {
                     }, 5L);
                     break;
                 case STRAX:
-                    final LivingEntity x = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
+                    LivingEntity x = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
                     x.setSilent(true);
                     x.setNoDamageTicks(75);
                     PigZombie strax = (PigZombie) x;
@@ -177,7 +173,7 @@ public class SpawnCommand implements CommandExecutor {
                     break;
                 case VASHTA:
                 case VASHTA_NERADA:
-                    final LivingEntity v = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
+                    LivingEntity v = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                     v.setSilent(true);
                     v.setNoDamageTicks(75);
                     Zombie vashta = (Zombie) v;
@@ -190,7 +186,7 @@ public class SpawnCommand implements CommandExecutor {
                     }, 5L);
                     break;
                 case ZYGON:
-                    final LivingEntity z = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
+                    LivingEntity z = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                     z.setSilent(true);
                     z.setNoDamageTicks(75);
                     Zombie zygon = (Zombie) z;

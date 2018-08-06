@@ -12,7 +12,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 /**
- *
  * @author eccentric_nz
  */
 public class RainDamage implements Listener {

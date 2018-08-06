@@ -1,12 +1,13 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
-import java.util.Set;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.ReDisguise;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+
+import java.util.Set;
 
 public class DalekCommand implements CommandExecutor {
 

@@ -1,18 +1,6 @@
 package me.eccentric_nz.tardisweepingangels;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
-import java.util.logging.Level;
-import me.eccentric_nz.tardisweepingangels.commands.AdminCommand;
-import me.eccentric_nz.tardisweepingangels.commands.ArmourStandCommand;
-import me.eccentric_nz.tardisweepingangels.commands.CountCommand;
-import me.eccentric_nz.tardisweepingangels.commands.DalekCommand;
-import me.eccentric_nz.tardisweepingangels.commands.DisguiseCommand;
-import me.eccentric_nz.tardisweepingangels.commands.KillCommand;
-import me.eccentric_nz.tardisweepingangels.commands.SpawnCommand;
-import me.eccentric_nz.tardisweepingangels.commands.TabComplete;
+import me.eccentric_nz.tardisweepingangels.commands.*;
 import me.eccentric_nz.tardisweepingangels.death.Death;
 import me.eccentric_nz.tardisweepingangels.death.PlayerDeath;
 import me.eccentric_nz.tardisweepingangels.death.RainDamage;
@@ -32,11 +20,7 @@ import me.eccentric_nz.tardisweepingangels.monsters.empty_child.GasMask;
 import me.eccentric_nz.tardisweepingangels.monsters.silurians.SilurianRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.Butler;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.SontaranRunnable;
-import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.Blink;
-import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.Builder;
-import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.Damage;
-import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.ImageHolder;
-import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.WeepingAngelsRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.*;
 import me.eccentric_nz.tardisweepingangels.silent.AntiTeleport;
 import me.eccentric_nz.tardisweepingangels.silent.SilentRunnable;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
@@ -51,14 +35,20 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
+import java.util.logging.Level;
+
 public class TARDISWeepingAngels extends JavaPlugin {
 
-    public String pluginName;
-    private Random random;
-    private boolean steal;
     private final List<UUID> empty = new ArrayList<>();
     private final List<UUID> timesUp = new ArrayList<>();
     private final List<Biome> notOnWater = new ArrayList<>();
+    public String pluginName;
+    private Random random;
+    private boolean steal;
     private PluginManager pm;
     private boolean citizensEnabled;
 
@@ -141,9 +131,9 @@ public class TARDISWeepingAngels extends JavaPlugin {
             getServer().getScheduler().scheduleSyncRepeatingTask(this, new SontaranRunnable(this), delay, delay);
             getServer().getScheduler().scheduleSyncRepeatingTask(this, new ZygonRunnable(this), delay, delay);
             steal = (getConfig().getBoolean("angels.can_steal"));
-            this.notOnWater.add(Biome.DEEP_OCEAN);
-            this.notOnWater.add(Biome.OCEAN);
-            this.notOnWater.add(Biome.RIVER);
+            notOnWater.add(Biome.DEEP_OCEAN);
+            notOnWater.add(Biome.OCEAN);
+            notOnWater.add(Biome.RIVER);
         } else {
             System.err.println("[TARDISWeepingAngels] This plugin requires ProtocolLib & LibsDisguises, disabling...");
             pm.disablePlugin(this);

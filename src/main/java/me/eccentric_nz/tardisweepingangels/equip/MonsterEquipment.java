@@ -3,7 +3,6 @@
  */
 package me.eccentric_nz.tardisweepingangels.equip;
 
-import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelsAPI;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.libraryaddict.disguise.DisguiseAPI;
@@ -14,14 +13,7 @@ import me.libraryaddict.disguise.disguisetypes.watchers.SnowmanWatcher;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
-import org.bukkit.entity.Enderman;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.PigZombie;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Skeleton;
-import org.bukkit.entity.Zombie;
+import org.bukkit.entity.*;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -29,8 +21,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.List;
+
 /**
- *
  * @author eccentric_nz
  */
 public class MonsterEquipment implements TARDISWeepingAngelsAPI {
@@ -340,7 +333,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setSilentEquipment(LivingEntity le) {
-        final LivingEntity g = (LivingEntity) le.getLocation().getWorld().spawnEntity(le.getLocation(), EntityType.GUARDIAN);
+        LivingEntity g = (LivingEntity) le.getLocation().getWorld().spawnEntity(le.getLocation(), EntityType.GUARDIAN);
         g.setSilent(true);
         PotionEffect p = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
         g.addPotionEffect(p);

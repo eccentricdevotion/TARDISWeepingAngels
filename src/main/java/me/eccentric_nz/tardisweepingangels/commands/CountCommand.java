@@ -1,23 +1,19 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Enderman;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Guardian;
-import org.bukkit.entity.PigZombie;
-import org.bukkit.entity.Skeleton;
-import org.bukkit.entity.Zombie;
+import org.bukkit.entity.*;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class CountCommand implements CommandExecutor {
 
@@ -26,17 +22,17 @@ public class CountCommand implements CommandExecutor {
 
     public CountCommand(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        this.types.add("a");
-        this.types.add("c");
-        this.types.add("d");
-        this.types.add("e");
-        this.types.add("i");
-        this.types.add("m");
-        this.types.add("o");
-        this.types.add("s");
-        this.types.add("v");
-        this.types.add("z");
-        this.types.add("g");
+        types.add("a");
+        types.add("c");
+        types.add("d");
+        types.add("e");
+        types.add("i");
+        types.add("m");
+        types.add("o");
+        types.add("s");
+        types.add("v");
+        types.add("z");
+        types.add("g");
     }
 
     @Override

@@ -20,7 +20,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 /**
- *
  * @author eccentric_nz
  */
 public class ChunkLoad implements Listener {
