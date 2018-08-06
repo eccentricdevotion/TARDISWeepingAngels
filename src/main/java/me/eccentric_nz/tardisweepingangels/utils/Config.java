@@ -50,9 +50,9 @@ public class Config {
         listOptions.put("daleks.drops", Arrays.asList(new String[]{"SLIME_BALL", "ROTTEN_FLESH"}));
         listOptions.put("empty_child.drops", Arrays.asList(new String[]{"COOKED_BEEF", "SUGAR"}));
         listOptions.put("ice_warriors.drops", Arrays.asList(new String[]{"ICE", "PACKED_ICE", "SNOW_BLOCK"}));
-        listOptions.put("silent.drops", Arrays.asList(new String[]{"INK_SACK", "FLOWER_POT_ITEM"}));
+        listOptions.put("silent.drops", Arrays.asList(new String[]{"INK_SAC", "FLOWER_POT"}));
         listOptions.put("silurians.drops", Arrays.asList(new String[]{"GOLD_NUGGET", "FEATHER"}));
-        listOptions.put("sontarans.drops", Arrays.asList(new String[]{"POTATO_ITEM", "POISONOUS_POTATO"}));
+        listOptions.put("sontarans.drops", Arrays.asList(new String[]{"POTATO", "POISONOUS_POTATO"}));
         listOptions.put("vashta_nerada.drops", Arrays.asList(new String[]{"BONE", "LEATHER"}));
         listOptions.put("zygons.drops", Arrays.asList(new String[]{"PAINTING", "SAND"}));
         // boolean
@@ -179,6 +179,21 @@ public class Config {
             sontaran_old.remove("MILK_BUCKET");
             sontaran_old.add("POISONOUS_POTATO");
             plugin.getConfig().set("sontarans.drops", sontaran_old);
+        }
+        // set POTATO_ITEM to POTATO
+        if (sontaran_old.contains("POTATO_ITEM")) {
+            sontaran_old.remove("POTATO_ITEM");
+            sontaran_old.add("POTATO");
+            plugin.getConfig().set("sontarans.drops", sontaran_old);
+        }
+        // set INK_SACK to INK_SAC, FLOWER_POT_ITEM to FLOWER_POT
+        List<String> silent_old = config.getStringList("silent.drops");
+        if (silent_old.contains("INK_SACK")) {
+            silent_old.remove("INK_SACK");
+            silent_old.add("INK_SAC");
+            silent_old.remove("FLOWER_POT_ITEM");
+            silent_old.add("FLOWER_POT");
+            plugin.getConfig().set("silent.drops", silent_old);
         }
         plugin.saveConfig();
         if (i > 0) {

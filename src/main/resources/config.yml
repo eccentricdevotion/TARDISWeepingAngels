@@ -56,7 +56,7 @@ sontarans:
     worlds:
         world: 20
     drops:
-        - POTATO_ITEM
+        - POTATO
         - MILK_BUCKET
     can_tame: true
 vashta_nerada:
