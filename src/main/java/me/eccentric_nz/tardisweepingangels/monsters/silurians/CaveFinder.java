@@ -1,22 +1,23 @@
 package me.eccentric_nz.tardisweepingangels.monsters.silurians;
 
-import java.util.Arrays;
-import java.util.Collections;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.BlockFace;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 public class CaveFinder {
 
     public static Location searchCave(Location random) {
         Location l = null;
         World w = random.getWorld();
-        int startx = random.getBlockX();
-        int startz = random.getBlockZ();
+        int startX = random.getBlockX();
+        int startZ = random.getBlockZ();
         if (worldCheck(w)) {
-            int limitx = 2000;
-            int limitz = 2000;
+            int limitX = 2000;
+            int limitZ = 2000;
             int step = 25;
             // search in a random direction
             Integer[] directions = new Integer[]{0, 1, 2, 3};
@@ -25,37 +26,37 @@ public class CaveFinder {
                 switch (directions[i]) {
                     case 0:
                         // east
-                        for (int east = startx; east < east + limitx; east += step) {
-                            Check chk = isThereRoom(w, east, startz);
+                        for (int east = startX; east < startX + limitX; east += step) {
+                            Check chk = isThereRoom(w, east, startZ);
                             if (chk.isSafe()) {
-                                return new Location(w, east, chk.getY(), startz);
+                                return new Location(w, east, chk.getY(), startZ);
                             }
                         }
                         break;
                     case 1:
                         // south
-                        for (int south = startz; south < south + limitz; south += step) {
-                            Check chk = isThereRoom(w, startx, south);
+                        for (int south = startZ; south < startZ + limitZ; south += step) {
+                            Check chk = isThereRoom(w, startX, south);
                             if (chk.isSafe()) {
-                                return new Location(w, startx, chk.getY(), south);
+                                return new Location(w, startX, chk.getY(), south);
                             }
                         }
                         break;
                     case 2:
                         // west
-                        for (int west = startx; west > west - limitx; west -= step) {
-                            Check chk = isThereRoom(w, west, startz);
+                        for (int west = startX; west > startX - limitX; west -= step) {
+                            Check chk = isThereRoom(w, west, startZ);
                             if (chk.isSafe()) {
-                                return new Location(w, west, chk.getY(), startz);
+                                return new Location(w, west, chk.getY(), startZ);
                             }
                         }
                         break;
                     case 3:
                         // north
-                        for (int north = startz; north > north - limitz; north -= step) {
-                            Check chk = isThereRoom(w, startx, north);
+                        for (int north = startZ; north > startZ - limitZ; north -= step) {
+                            Check chk = isThereRoom(w, startX, north);
                             if (chk.isSafe()) {
-                                return new Location(w, startx, chk.getY(), north);
+                                return new Location(w, startX, chk.getY(), north);
                             }
                         }
                         break;
@@ -72,7 +73,7 @@ public class CaveFinder {
             if (w.getBlockAt(x, y, z).getType().equals(Material.AIR)) {
                 int yy = getLowestAirBlock(w, x, y, z);
                 // check there is enough height for the police box
-                if (yy <= y - 3 && w.getBlockAt(x - 1, yy - 1, z - 1).getType().equals(Material.STONE)) {
+                if (yy <= y - 2 && w.getBlockAt(x - 1, yy - 1, z - 1).getType().equals(Material.STONE)) {
                     // check there is room for the police box
                     if (w.getBlockAt(x - 1, yy, z - 1).getType().equals(Material.AIR)
                             && w.getBlockAt(x - 1, yy, z).getType().equals(Material.AIR)
