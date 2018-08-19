@@ -16,8 +16,10 @@ public class CaveFinder {
         int startX = random.getBlockX();
         int startZ = random.getBlockZ();
         if (worldCheck(w)) {
-            int limitX = 2000;
-            int limitZ = 2000;
+            int plusX = startX + 2000;
+            int plusZ = startZ + 2000;
+            int minusX = startX - 2000;
+            int minusZ = startZ - 2000;
             int step = 25;
             // search in a random direction
             Integer[] directions = new Integer[]{0, 1, 2, 3};
@@ -26,7 +28,7 @@ public class CaveFinder {
                 switch (directions[i]) {
                     case 0:
                         // east
-                        for (int east = startX; east < startX + limitX; east += step) {
+                        for (int east = startX; east < plusX; east += step) {
                             Check chk = isThereRoom(w, east, startZ);
                             if (chk.isSafe()) {
                                 return new Location(w, east, chk.getY(), startZ);
@@ -35,7 +37,7 @@ public class CaveFinder {
                         break;
                     case 1:
                         // south
-                        for (int south = startZ; south < startZ + limitZ; south += step) {
+                        for (int south = startZ; south < plusZ; south += step) {
                             Check chk = isThereRoom(w, startX, south);
                             if (chk.isSafe()) {
                                 return new Location(w, startX, chk.getY(), south);
@@ -44,7 +46,7 @@ public class CaveFinder {
                         break;
                     case 2:
                         // west
-                        for (int west = startX; west > startX - limitX; west -= step) {
+                        for (int west = startX; west > minusX; west -= step) {
                             Check chk = isThereRoom(w, west, startZ);
                             if (chk.isSafe()) {
                                 return new Location(w, west, chk.getY(), startZ);
@@ -53,7 +55,7 @@ public class CaveFinder {
                         break;
                     case 3:
                         // north
-                        for (int north = startZ; north > startZ - limitZ; north -= step) {
+                        for (int north = startZ; north > minusZ; north -= step) {
                             Check chk = isThereRoom(w, startX, north);
                             if (chk.isSafe()) {
                                 return new Location(w, startX, chk.getY(), north);
