@@ -70,19 +70,19 @@ public class CaveFinder {
         Check ret = new Check();
         ret.setSafe(false);
         for (int y = 35; y > 14; y--) {
-            if (w.getBlockAt(x, y, z).getType().equals(Material.AIR)) {
+            if (isAir(w.getBlockAt(x, y, z).getType())) {
                 int yy = getLowestAirBlock(w, x, y, z);
                 // check there is enough height for the police box
                 if (yy <= y - 2 && w.getBlockAt(x - 1, yy - 1, z - 1).getType().equals(Material.STONE)) {
                     // check there is room for the police box
-                    if (w.getBlockAt(x - 1, yy, z - 1).getType().equals(Material.AIR)
-                            && w.getBlockAt(x - 1, yy, z).getType().equals(Material.AIR)
-                            && w.getBlockAt(x - 1, yy, z + 1).getType().equals(Material.AIR)
-                            && w.getBlockAt(x, yy, z - 1).getType().equals(Material.AIR)
-                            && w.getBlockAt(x, yy, z + 1).getType().equals(Material.AIR)
-                            && w.getBlockAt(x + 1, yy, z - 1).getType().equals(Material.AIR)
-                            && w.getBlockAt(x + 1, yy, z).getType().equals(Material.AIR)
-                            && w.getBlockAt(x + 1, yy, z + 1).getType().equals(Material.AIR)) {
+                    if (isAir(w.getBlockAt(x - 1, yy, z - 1).getType())
+                            && isAir(w.getBlockAt(x - 1, yy, z).getType())
+                            && isAir(w.getBlockAt(x - 1, yy, z + 1).getType())
+                            && isAir(w.getBlockAt(x, yy, z - 1).getType())
+                            && isAir(w.getBlockAt(x, yy, z + 1).getType())
+                            && isAir(w.getBlockAt(x + 1, yy, z - 1).getType())
+                            && isAir(w.getBlockAt(x + 1, yy, z).getType())
+                            && isAir(w.getBlockAt(x + 1, yy, z + 1).getType())) {
                         ret.setSafe(true);
                         ret.setY(yy);
                     }
@@ -94,7 +94,7 @@ public class CaveFinder {
 
     private static int getLowestAirBlock(World w, int x, int y, int z) {
         int yy = y;
-        while (w.getBlockAt(x, yy, z).getRelative(BlockFace.DOWN).getType().equals(Material.AIR)) {
+        while (isAir(w.getBlockAt(x, yy, z).getRelative(BlockFace.DOWN).getType())) {
             yy--;
         }
         return yy;
@@ -115,6 +115,10 @@ public class CaveFinder {
             int sy = w.getHighestBlockYAt(spawn);
             return (y != ny && y != ey && y != sy);
         }
+    }
+
+    private static boolean isAir(Material material) {
+        return (material == Material.AIR || material == Material.CAVE_AIR || material == Material.VOID_AIR);
     }
 
     private static class Check {
