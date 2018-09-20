@@ -65,7 +65,7 @@ public class PlayerDeath implements Listener {
                 }
                 if (attacker instanceof Enderman) {
                     if (!attacker.getPassengers().isEmpty()) {
-                        Entity passenger = ((Enderman) attacker).getPassengers().get(0);
+                        Entity passenger = attacker.getPassengers().get(0);
                         if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
                             event.setDeathMessage(name + " was slain by a Silent");
                             return;
@@ -73,7 +73,7 @@ public class PlayerDeath implements Listener {
                     }
                 }
                 if (attacker instanceof Guardian) {
-                    Entity silent = ((Guardian) attacker).getVehicle();
+                    Entity silent = attacker.getVehicle();
                     if (silent != null && silent.getType().equals(EntityType.ENDERMAN)) {
                         event.setDeathMessage(name + " was slain by a Silent");
                         return;

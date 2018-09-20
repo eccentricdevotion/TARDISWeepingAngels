@@ -47,7 +47,7 @@ public class GasMask implements Listener {
                 }
             }
             // set helmet to pumpkin
-            inv.setHelmet(new ItemStack(Material.PUMPKIN, 1));
+            inv.setHelmet(new ItemStack(Material.CARVED_PUMPKIN, 1));
             player.updateInventory();
             // schedule delayed task
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
