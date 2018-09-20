@@ -3,7 +3,7 @@ description: Weeping Angel add-on for the TARDIS plugin
 main: me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels
 name: TARDISWeepingAngels
 load: POSTWORLD
-version: 3.0
+version: 3.0.1
 api-version: 1.13
 website: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 dev-url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
@@ -11,62 +11,62 @@ url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 softdepend: []
 depend: [LibsDisguises]
 permissions:
-    tardisweepingangels.spawn:
-        description: Allow players to spawn a monster.
-        default: op
-    tardisweepingangels.build:
-        description: Allow players to build a monster.
-        default: op
-    tardisweepingangels.disguise:
-        description: Allow players to disguise themselves as a monster.
-        default: op
-    tardisweepingangels.count:
-        description: Allow players to use the count command.
-        default: op
-    tardisweepingangels.kill:
-        description: Allow players to use the kill command.
-        default: op
-    tardisweepingangels.admin:
-        description: Allow players to alter plugin settings.
-        default: op
+  tardisweepingangels.spawn:
+    description: Allow players to spawn a monster.
+    default: op
+  tardisweepingangels.build:
+    description: Allow players to build a monster.
+    default: op
+  tardisweepingangels.disguise:
+    description: Allow players to disguise themselves as a monster.
+    default: op
+  tardisweepingangels.count:
+    description: Allow players to use the count command.
+    default: op
+  tardisweepingangels.kill:
+    description: Allow players to use the kill command.
+    default: op
+  tardisweepingangels.admin:
+    description: Allow players to alter plugin settings.
+    default: op
 commands:
-    twas:
-        aliases: [twaspawn]
-        description: Spawns a monster on the block you are targeting.
-        usage: /<command> [monster type]
-        permission: tardisweepingangels.spawn
-        permission-message: You don't have the permission <permission> to use this command
-    twad:
-        aliases: [twadisguise]
-        description: Sets a player's armour so that they are disguised as a monster.
-        usage: /<command> [monster type] [on|off]
-        permission: tardisweepingangels.disguise
-        permission-message: You don't have the permission <permission> to use this command
-    twac:
-        aliases: [twacount]
-        description: Reports the current number of the specifed monster in the specified world.
-        usage: /<command> [a|c|d|e|i|m|o|s|v|z] [world]
-        permission: tardisweepingangels.count
-        permission-message: You don't have the permission <permission> to use this command
-    twak:
-        aliases: [twakill]
-        description: Kills all of the specifed monster in the specified world.
-        usage: /<command> [a|c|d|e|i|m|o|s|v|z] [world]
-        permission: tardisweepingangels.kill
-        permission-message: You don't have the permission <permission> to use this command
-    twa:
-        aliases: [twaa,twaadmin]
-        description: Set the maximum number of the specified monster allowed to spawn in the specified world.
-        usage: /<command> [a|c|d|e|i|m|o|s|v|z|all] [world] [max monsters]
-        permission: tardisweepingangels.admin
-        permission-message: You don't have the permission <permission> to use this command
-    twar:
-        description: Try to redisguise Daleks.
-        usage: /<command>
-        permission: tardisweepingangels.admin
-        permission-message: You don't have the permission <permission> to use this command
-    twae:
-        description: Equip an armour stand with monster armour.
-        usage: /<command> [monster type]
-        permission: tardisweepingangels.admin
-        permission-message: You don't have the permission <permission> to use this command
+  twas:
+    aliases: [twaspawn]
+    description: Spawns a monster on the block you are targeting.
+    usage: /<command> [monster type]
+    permission: tardisweepingangels.spawn
+    permission-message: You don't have the permission <permission> to use this command
+  twad:
+    aliases: [twadisguise]
+    description: Sets a player's armour so that they are disguised as a monster.
+    usage: /<command> [monster type] [on|off]
+    permission: tardisweepingangels.disguise
+    permission-message: You don't have the permission <permission> to use this command
+  twac:
+    aliases: [twacount]
+    description: Reports the current number of the specifed monster in the specified world.
+    usage: /<command> [a|c|d|e|i|m|o|s|v|z] [world]
+    permission: tardisweepingangels.count
+    permission-message: You don't have the permission <permission> to use this command
+  twak:
+    aliases: [twakill]
+    description: Kills all of the specifed monster in the specified world.
+    usage: /<command> [a|c|d|e|i|m|o|s|v|z] [world]
+    permission: tardisweepingangels.kill
+    permission-message: You don't have the permission <permission> to use this command
+  twa:
+    aliases: [twaa,twaadmin]
+    description: Set the maximum number of the specified monster allowed to spawn in the specified world.
+    usage: /<command> [a|c|d|e|i|m|o|s|v|z|all] [world] [max monsters]
+    permission: tardisweepingangels.admin
+    permission-message: You don't have the permission <permission> to use this command
+  twar:
+    description: Try to redisguise Daleks.
+    usage: /<command>
+    permission: tardisweepingangels.admin
+    permission-message: You don't have the permission <permission> to use this command
+  twae:
+    description: Equip an armour stand with monster armour.
+    usage: /<command> [monster type]
+    permission: tardisweepingangels.admin
+    permission-message: You don't have the permission <permission> to use this command
