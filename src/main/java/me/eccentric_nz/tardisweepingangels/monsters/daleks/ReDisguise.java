@@ -49,6 +49,8 @@ public class ReDisguise implements Runnable {
                         DisguiseAPI.disguiseToAll(d, mobDisguise);
                     }
                 });
+            }
+            if (plugin.getConfig().getInt("silent.worlds." + name) > 0) {
                 Collection<Guardian> guardians = w.getEntitiesByClass(Guardian.class);
                 guardians.forEach((g) -> {
                     // does it have invisibilty but not riding an Enderman
