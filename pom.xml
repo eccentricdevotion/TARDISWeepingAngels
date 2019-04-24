@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.eccentric_nz.tardisweepingangels</groupId>
     <artifactId>TARDISWeepingAngels</artifactId>
-    <version>3.0.1</version>
+    <version>3.1.0</version>
     <name>TARDISWeepingAngels</name>
     <repositories>
         <repository>
@@ -61,7 +61,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.13.1-R0.1-SNAPSHOT</version>
+            <version>1.14-pre5-SNAPSHOT</version>
             <type>jar</type>
             <scope>compile</scope>
             <exclusions>
@@ -137,7 +137,7 @@
         <dependency>
             <groupId>me.eccentric_nz.tardischunkgenerator</groupId>
             <artifactId>TARDISChunkGenerator</artifactId>
-            <version>4.0.1</version>
+            <version>4.1.0</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
