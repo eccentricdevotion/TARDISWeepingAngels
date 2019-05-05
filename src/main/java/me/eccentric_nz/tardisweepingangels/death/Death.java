@@ -21,6 +21,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
@@ -191,9 +192,10 @@ public class Death implements Listener {
                             LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
                             e.setSilent(true);
                             new MonsterEquipment().setCyberEquipment(e, false);
+                            e.getPersistentDataContainer().set(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER, Monster.CYBERMAN.getPersist());
                             plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.CYBERMAN, l));
                             if (event.getEntity() instanceof Player) {
-                                String name = ((Player) event.getEntity()).getName();
+                                String name = event.getEntity().getName();
                                 e.setCustomName(name);
                                 e.setCustomNameVisible(true);
                             }

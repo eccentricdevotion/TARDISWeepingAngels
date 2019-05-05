@@ -21,6 +21,7 @@ import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -89,6 +90,7 @@ public class VashtaNeradaListener implements Listener {
         e.addPotionEffect(p);
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
             equipper.setVashtaNeradaEquipment(e, false);
+            e.getPersistentDataContainer().set(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER, Monster.VASHTA.getPersist());
             plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.VASHTA_NERADA, l));
         }, 5L);
     }

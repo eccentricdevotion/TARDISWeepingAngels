@@ -16,6 +16,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +66,8 @@ public class Butler implements Listener {
                         pz.setAngry(false);
                         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                             new MonsterEquipment().setButlerEquipment(pz, false);
+                            pz.getPersistentDataContainer().set(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER, Monster.STRAX.getPersist());
+                            pz.getPersistentDataContainer().remove(TARDISWeepingAngels.SONTARAN);
                             plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(pz, EntityType.PIG_ZOMBIE, Monster.STRAX, l));
                         }, 2L);
                     }

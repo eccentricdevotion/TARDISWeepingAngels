@@ -28,6 +28,7 @@ import me.eccentric_nz.tardisweepingangels.utils.HelmetChecker;
 import me.eccentric_nz.tardisweepingangels.utils.Sounds;
 import me.eccentric_nz.tardisweepingangels.utils.Version;
 import org.bukkit.ChatColor;
+import org.bukkit.NamespacedKey;
 import org.bukkit.block.Biome;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.Plugin;
@@ -43,6 +44,7 @@ import java.util.logging.Level;
 
 public class TARDISWeepingAngels extends JavaPlugin {
 
+    public static TARDISWeepingAngels plugin;
     private final List<UUID> empty = new ArrayList<>();
     private final List<UUID> timesUp = new ArrayList<>();
     private final List<Biome> notOnWater = new ArrayList<>();
@@ -59,6 +61,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        plugin = this;
         pm = getServer().getPluginManager();
         PluginDescriptionFile pdfFile = getDescription();
         pluginName = ChatColor.GOLD + "[" + pdfFile.getName() + "]" + ChatColor.RESET + " ";
@@ -202,4 +205,17 @@ public class TARDISWeepingAngels extends JavaPlugin {
     public MonsterEquipment getWeepingAngelsAPI() {
         return new MonsterEquipment();
     }
+
+    public static final NamespacedKey ANGEL = new NamespacedKey(plugin, "angel");
+    public static final NamespacedKey CYBERMAN = new NamespacedKey(plugin, "cyberman");
+    public static final NamespacedKey DALEK = new NamespacedKey(plugin, "dalek");
+    public static final NamespacedKey EMPTY = new NamespacedKey(plugin, "empty");
+    public static final NamespacedKey K9 = new NamespacedKey(plugin, "k9");
+    public static final NamespacedKey SILENT = new NamespacedKey(plugin, "silent");
+    public static final NamespacedKey SILURIAN = new NamespacedKey(plugin, "silurian");
+    public static final NamespacedKey SONTARAN = new NamespacedKey(plugin, "sontaran");
+    public static final NamespacedKey STRAX = new NamespacedKey(plugin, "strax");
+    public static final NamespacedKey VASHTA = new NamespacedKey(plugin, "vashta");
+    public static final NamespacedKey WARRIOR = new NamespacedKey(plugin, "warrior");
+    public static final NamespacedKey ZYGON = new NamespacedKey(plugin, "zygon");
 }

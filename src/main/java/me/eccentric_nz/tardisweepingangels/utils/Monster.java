@@ -11,23 +11,23 @@ import java.util.List;
  */
 public enum Monster {
 
-    ANGEL("Weeping Angel"),
-    CHILD("Empty Child"),
-    CYBERMAN("Cyberman"),
-    DALEK("Dalek"),
-    EMPTY("Empty Child"),
-    EMPTY_CHILD("Empty Child"),
-    ICE("Ice Warrior"),
-    ICE_WARRIOR("Ice Warrior"),
-    SILENT("Silent"),
-    SILURIAN("Silurian"),
-    SONTARAN("Sontaran"),
-    STRAX("Strax"),
-    VASHTA("Vashta Nerada"),
-    VASHTA_NERADA("Vashta Nerada"),
-    WARRIOR("Ice Warrior"),
-    WEEPING_ANGEL("Weeping Angel"),
-    ZYGON("Zygon");
+    ANGEL("Weeping Angel", 1),
+    CHILD("Empty Child", 4),
+    CYBERMAN("Cyberman", 2),
+    DALEK("Dalek", 3),
+    EMPTY("Empty Child", 4),
+    EMPTY_CHILD("Empty Child", 4),
+    ICE("Ice Warrior", 5),
+    ICE_WARRIOR("Ice Warrior", 5),
+    SILENT("Silent", 6),
+    SILURIAN("Silurian", 7),
+    SONTARAN("Sontaran", 8),
+    STRAX("Strax", 9),
+    VASHTA("Vashta Nerada", 10),
+    VASHTA_NERADA("Vashta Nerada", 10),
+    WARRIOR("Ice Warrior", 5),
+    WEEPING_ANGEL("Weeping Angel", 1),
+    ZYGON("Zygon", 11);
 
     static final List<Monster> values = new ArrayList<>();
 
@@ -46,8 +46,9 @@ public enum Monster {
     }
 
     public String name;
+    public int persist;
 
-    private Monster(String name) {
+    Monster(String name, int persist) {
         this.name = name;
     }
 
@@ -57,5 +58,9 @@ public enum Monster {
 
     public String getName() {
         return name;
+    }
+
+    public int getPersist() {
+        return persist;
     }
 }
