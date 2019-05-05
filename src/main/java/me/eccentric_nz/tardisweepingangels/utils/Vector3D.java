@@ -71,15 +71,6 @@ public class Vector3D {
     }
 
     /**
-     * Convert this instance to an equivalent real 3D vector.
-     *
-     * @return Real 3D vector.
-     */
-    public Vector toVector() {
-        return new Vector(x, y, z);
-    }
-
-    /**
      * Adds the current vector and a given position vector, producing a result vector.
      *
      * @param other - the other vector.
@@ -118,18 +109,6 @@ public class Vector3D {
     }
 
     /**
-     * Substracts the current vector and a given vector together, producing a result vector.
-     *
-     * @param x
-     * @param y
-     * @param z
-     * @return The new result vector.
-     */
-    public Vector3D subtract(double x, double y, double z) {
-        return new Vector3D(this.x - x, this.y - y, this.z - z);
-    }
-
-    /**
      * Multiply each dimension in the current vector by the given factor.
      *
      * @param factor - multiplier.
@@ -147,32 +126,6 @@ public class Vector3D {
      */
     public Vector3D multiply(double factor) {
         return new Vector3D(x * factor, y * factor, z * factor);
-    }
-
-    /**
-     * Divide each dimension in the current vector by the given divisor.
-     *
-     * @param divisor - the divisor.
-     * @return The new result.
-     */
-    public Vector3D divide(int divisor) {
-        if (divisor == 0) {
-            throw new IllegalArgumentException("Cannot divide by null.");
-        }
-        return new Vector3D(x / divisor, y / divisor, z / divisor);
-    }
-
-    /**
-     * Divide each dimension in the current vector by the given divisor.
-     *
-     * @param divisor - the divisor.
-     * @return The new result.
-     */
-    public Vector3D divide(double divisor) {
-        if (divisor == 0) {
-            throw new IllegalArgumentException("Cannot divide by null.");
-        }
-        return new Vector3D(x / divisor, y / divisor, z / divisor);
     }
 
     /**
