@@ -141,6 +141,22 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.sk89q</groupId>
+            <artifactId>worldguard</artifactId>
+            <version>7.0.0</version>
+            <type>jar</type>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/WorldGuard.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.sk89q</groupId>
+            <artifactId>worldedit</artifactId>
+            <version>7.0.0</version>
+            <type>jar</type>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/WorldEdit.jar</systemPath>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

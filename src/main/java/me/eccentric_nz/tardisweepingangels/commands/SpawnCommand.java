@@ -120,8 +120,6 @@ public class SpawnCommand implements CommandExecutor {
                     e.setSilent(true);
                     e.setNoDamageTicks(75);
                     Zombie child = (Zombie) e;
-                    //child.setVillager(false);
-                    //child.setVillagerProfession(null);
                     child.setBaby(true);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                         equip.setEmptyChildEquipment(e, false);
@@ -139,7 +137,6 @@ public class SpawnCommand implements CommandExecutor {
                 case SILURIAN:
                     LivingEntity s = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                     s.setSilent(true);
-                    //setNormal(s);
                     s.setNoDamageTicks(75);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                         equip.setSilurianEquipment(s, false);
@@ -152,8 +149,6 @@ public class SpawnCommand implements CommandExecutor {
                     o.setNoDamageTicks(75);
                     Zombie sontaran = (Zombie) o;
                     sontaran.setBaby(false);
-                    //sontaran.setVillager(false);
-                    //sontaran.setVillagerProfession(null);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                         equip.setSontaranEquipment(o, false);
                         plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(o, EntityType.ZOMBIE, Monster.SONTARAN, eyeLocation));
@@ -177,8 +172,6 @@ public class SpawnCommand implements CommandExecutor {
                     v.setSilent(true);
                     v.setNoDamageTicks(75);
                     Zombie vashta = (Zombie) v;
-                    //vashta.setVillager(false);
-                    //vashta.setVillagerProfession(null);
                     vashta.setBaby(false);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                         equip.setVashtaNeradaEquipment(v, false);
@@ -190,8 +183,6 @@ public class SpawnCommand implements CommandExecutor {
                     z.setSilent(true);
                     z.setNoDamageTicks(75);
                     Zombie zygon = (Zombie) z;
-                    //zygon.setVillager(false);
-                    //zygon.setVillagerProfession(null);
                     zygon.setBaby(false);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                         equip.setZygonEquipment(z, false);

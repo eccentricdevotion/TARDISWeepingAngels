@@ -8,6 +8,7 @@ import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
+import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -93,7 +94,7 @@ public class IceWarriorRunnable implements Runnable {
             int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
-            if (biomes.contains(l.getBlock().getBiome())) {
+            if (biomes.contains(l.getBlock().getBiome()) && WorldGuardChecker.canSpawn(l)) {
                 LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.PIG_ZOMBIE);
                 e.setSilent(true);
                 PigZombie warrior = (PigZombie) e;

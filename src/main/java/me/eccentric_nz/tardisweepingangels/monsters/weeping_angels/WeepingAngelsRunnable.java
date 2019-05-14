@@ -8,6 +8,7 @@ import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
+import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -75,7 +76,7 @@ public class WeepingAngelsRunnable implements Runnable {
             int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
-            if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {
+            if (!plugin.getNotOnWater().contains(l.getBlock().getBiome()) && WorldGuardChecker.canSpawn(l)) {
                 LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.SKELETON);
                 e.setSilent(true);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {

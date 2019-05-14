@@ -8,7 +8,7 @@ api-version: 1.14
 website: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 dev-url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
-softdepend: []
+softdepend: [WorldGuard]
 depend: [LibsDisguises]
 permissions:
   tardisweepingangels.spawn:
