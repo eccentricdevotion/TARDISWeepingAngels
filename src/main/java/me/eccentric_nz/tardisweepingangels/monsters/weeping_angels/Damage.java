@@ -53,7 +53,7 @@ public class Damage implements Listener {
             EntityEquipment ee = ((LivingEntity) event.getEntity()).getEquipment();
             Entity e = event.getDamager();
             if (ee.getItemInMainHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.LILY_PAD)) {
-                if (e instanceof Arrow) {
+                if (e instanceof AbstractArrow) {
                     event.setCancelled(true);
                 }
                 if (e instanceof Player) {
