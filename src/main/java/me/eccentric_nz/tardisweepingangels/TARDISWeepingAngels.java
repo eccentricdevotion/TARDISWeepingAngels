@@ -53,6 +53,18 @@ public class TARDISWeepingAngels extends JavaPlugin {
     private boolean steal;
     private PluginManager pm;
     private boolean citizensEnabled;
+    public static NamespacedKey ANGEL;
+    public static NamespacedKey CYBERMAN;
+    public static NamespacedKey DALEK;
+    public static NamespacedKey EMPTY;
+    public static NamespacedKey K9;
+    public static NamespacedKey SILENT;
+    public static NamespacedKey SILURIAN;
+    public static NamespacedKey SONTARAN;
+    public static NamespacedKey STRAX;
+    public static NamespacedKey VASHTA;
+    public static NamespacedKey WARRIOR;
+    public static NamespacedKey ZYGON;
 
     @Override
     public void onDisable() {
@@ -82,6 +94,8 @@ public class TARDISWeepingAngels extends JavaPlugin {
             random = new Random();
             // update the config
             new Config(this).updateConfig();
+            // initialise namespaced keys
+            initKeys(this);
             // register listeners
             pm.registerEvents(new Blink(this), this);
             if (getConfig().getBoolean("angels.can_build")) {
@@ -206,16 +220,18 @@ public class TARDISWeepingAngels extends JavaPlugin {
         return new MonsterEquipment();
     }
 
-    public static final NamespacedKey ANGEL = new NamespacedKey(plugin, "angel");
-    public static final NamespacedKey CYBERMAN = new NamespacedKey(plugin, "cyberman");
-    public static final NamespacedKey DALEK = new NamespacedKey(plugin, "dalek");
-    public static final NamespacedKey EMPTY = new NamespacedKey(plugin, "empty");
-    public static final NamespacedKey K9 = new NamespacedKey(plugin, "k9");
-    public static final NamespacedKey SILENT = new NamespacedKey(plugin, "silent");
-    public static final NamespacedKey SILURIAN = new NamespacedKey(plugin, "silurian");
-    public static final NamespacedKey SONTARAN = new NamespacedKey(plugin, "sontaran");
-    public static final NamespacedKey STRAX = new NamespacedKey(plugin, "strax");
-    public static final NamespacedKey VASHTA = new NamespacedKey(plugin, "vashta");
-    public static final NamespacedKey WARRIOR = new NamespacedKey(plugin, "warrior");
-    public static final NamespacedKey ZYGON = new NamespacedKey(plugin, "zygon");
+    private void initKeys(TARDISWeepingAngels plugin) {
+        ANGEL = new NamespacedKey(plugin, "angel");
+        CYBERMAN = new NamespacedKey(plugin, "cyberman");
+        DALEK = new NamespacedKey(plugin, "dalek");
+        EMPTY = new NamespacedKey(plugin, "empty");
+        K9 = new NamespacedKey(plugin, "k9");
+        SILENT = new NamespacedKey(plugin, "silent");
+        SILURIAN = new NamespacedKey(plugin, "silurian");
+        SONTARAN = new NamespacedKey(plugin, "sontaran");
+        STRAX = new NamespacedKey(plugin, "strax");
+        VASHTA = new NamespacedKey(plugin, "vashta");
+        WARRIOR = new NamespacedKey(plugin, "warrior");
+        ZYGON = new NamespacedKey(plugin, "zygon");
+    }
 }
