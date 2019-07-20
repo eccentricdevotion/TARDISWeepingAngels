@@ -338,7 +338,6 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         PotionEffect p = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
         g.addPotionEffect(p);
         le.addPassenger(g);
-//        /summon Guardian ~ ~ ~ {Invulnerable:1b,ActiveEffects:[{Id:14b,Duration:20000000,ShowParticles:0b}],Riding:{id:"Enderman"}}
     }
 
     @Override
