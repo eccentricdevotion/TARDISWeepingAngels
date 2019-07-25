@@ -9,10 +9,7 @@ import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
-import org.bukkit.Chunk;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -94,7 +91,10 @@ public class IceWarriorRunnable implements Runnable {
             int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
-            if (biomes.contains(l.getBlock().getBiome()) && WorldGuardChecker.canSpawn(l)) {
+            if (biomes.contains(l.getBlock().getBiome())) {
+                if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(l)) {
+                    return;
+                }
                 LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.PIG_ZOMBIE);
                 e.setSilent(true);
                 PigZombie warrior = (PigZombie) e;
