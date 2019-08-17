@@ -3,11 +3,7 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters.daleks;
 
-import me.libraryaddict.disguise.DisguiseAPI;
-import me.libraryaddict.disguise.disguisetypes.DisguiseType;
-import me.libraryaddict.disguise.disguisetypes.MobDisguise;
-import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
-import me.libraryaddict.disguise.disguisetypes.watchers.SnowmanWatcher;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Skeleton;
@@ -24,6 +20,12 @@ import org.bukkit.inventory.meta.ItemMeta;
  */
 public class ChunkLoad implements Listener {
 
+    private final TARDISWeepingAngels plugin;
+
+    public ChunkLoad(TARDISWeepingAngels plugin) {
+        this.plugin = plugin;
+    }
+
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onChunkLoad(ChunkLoadEvent event) {
         for (Entity d : event.getChunk().getEntities()) {
@@ -32,12 +34,12 @@ public class ChunkLoad implements Listener {
                 ItemStack is = ee.getHelmet();
                 // check the helmet
                 if (is != null && is.getType().equals(Material.VINE)) {
-                    if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek") && !DisguiseAPI.isDisguised(d)) {
-                        MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
-                        LivingWatcher livingWatcher = mobDisguise.getWatcher();
-                        SnowmanWatcher snw = (SnowmanWatcher) livingWatcher;
-                        snw.setDerp(true);
-                        DisguiseAPI.disguiseToAll(d, mobDisguise);
+                    if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek")) {
+                        if (plugin.isLibsEnabled() && !DalekDisguiseLibs.isDisguised(d)) {
+                            DalekDisguiseLibs.disguise(d);
+                        } else if (!DalekDisguise.isDisguised(d)) {
+                            DalekDisguise.disguise(d);
+                        }
                     }
                 } else if (is != null && is.getType().equals(Material.LILY_PAD)) {
                     ItemStack head = new ItemStack(Material.STONE_BUTTON, 1);

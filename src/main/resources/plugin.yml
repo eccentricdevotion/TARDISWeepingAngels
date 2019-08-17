@@ -8,8 +8,7 @@ api-version: 1.14
 website: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 dev-url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
-softdepend: [WorldGuard]
-depend: [LibsDisguises]
+softdepend: [TARDISChunkGenerator,LibsDisguises,WorldGuard]
 permissions:
   tardisweepingangels.spawn:
     description: Allow players to spawn a monster.

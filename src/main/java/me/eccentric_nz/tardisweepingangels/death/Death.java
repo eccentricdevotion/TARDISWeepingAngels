@@ -6,8 +6,9 @@ package me.eccentric_nz.tardisweepingangels.death;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
+import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekDisguise;
+import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekDisguiseLibs;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
-import me.libraryaddict.disguise.DisguiseAPI;
 import net.citizensnpcs.api.CitizensAPI;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -21,7 +22,6 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
@@ -103,7 +103,7 @@ public class Death implements Listener {
                 }
             }
             Skeleton dalek = (Skeleton) event.getEntity();
-            if (dalek.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE) && DisguiseAPI.isDisguised(dalek)) {
+            if (dalek.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE) && (plugin.isLibsEnabled() && DalekDisguiseLibs.isDisguised(dalek) || DalekDisguise.isDisguised(dalek))) {
                 event.getDrops().clear();
                 ItemStack stack = new ItemStack(dalek_drops.get(plugin.getRandom().nextInt(dalek_drops.size())), 1);
                 event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
@@ -192,7 +192,6 @@ public class Death implements Listener {
                             LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
                             e.setSilent(true);
                             new MonsterEquipment().setCyberEquipment(e, false);
-                            e.getPersistentDataContainer().set(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER, Monster.CYBERMAN.getPersist());
                             plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.CYBERMAN, l));
                             if (event.getEntity() instanceof Player) {
                                 String name = event.getEntity().getName();

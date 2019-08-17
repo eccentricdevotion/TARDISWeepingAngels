@@ -5,11 +5,6 @@ package me.eccentric_nz.tardisweepingangels.monsters.daleks;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
-import me.libraryaddict.disguise.DisguiseAPI;
-import me.libraryaddict.disguise.disguisetypes.DisguiseType;
-import me.libraryaddict.disguise.disguisetypes.MobDisguise;
-import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
-import me.libraryaddict.disguise.disguisetypes.watchers.SnowmanWatcher;
 import org.bukkit.entity.Guardian;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.inventory.EntityEquipment;
@@ -34,19 +29,19 @@ public class ReDisguise implements Runnable {
         plugin.getServer().getWorlds().forEach((w) -> {
             // only configured worlds
             String name = Config.sanitiseName(w.getName());
-            if (plugin.getConfig().getInt("daleks.worlds." + name) > 0) {
+            if (plugin.getConfig().getInt("daleks.worlds." + name) > 0 || name.equals("Skaro")) {
                 // get the current daleks
                 Collection<Skeleton> daleks = w.getEntitiesByClass(Skeleton.class);
                 daleks.forEach((d) -> {
                     // does it have a helmet with a display name
                     EntityEquipment ee = d.getEquipment();
                     ItemStack is = ee.getHelmet();
-                    if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek") && !DisguiseAPI.isDisguised(d)) {
-                        MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
-                        LivingWatcher livingWatcher = mobDisguise.getWatcher();
-                        SnowmanWatcher snw = (SnowmanWatcher) livingWatcher;
-                        snw.setDerp(true);
-                        DisguiseAPI.disguiseToAll(d, mobDisguise);
+                    if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek")) {
+                        if (plugin.isLibsEnabled() && !DalekDisguiseLibs.isDisguised(d)) {
+                            DalekDisguiseLibs.disguise(d);
+                        } else if (!DalekDisguise.isDisguised(d)) {
+                            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> DalekDisguise.redisguise(d, w), 1L);
+                        }
                     }
                 });
             }

@@ -4,7 +4,8 @@
 package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.libraryaddict.disguise.DisguiseAPI;
+import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekDisguise;
+import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekDisguiseLibs;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -65,10 +66,8 @@ public class Damage implements Listener {
                 return;
             }
             Entity ent = event.getEntity();
-            if (ee.getHelmet().getType().equals(Material.VINE) && DisguiseAPI.isDisguised(ent)) {
-                if (e instanceof Player) {
-                    ((Player) e).playSound(ent.getLocation(), "dalek_hit", 0.5f, 1.0f);
-                }
+            if (ee.getHelmet().getType().equals(Material.VINE) && ((plugin.isLibsEnabled() && DalekDisguiseLibs.isDisguised(ent)) || DalekDisguise.isDisguised(ent)) && (e instanceof Player)) {
+                ((Player) e).playSound(ent.getLocation(), "dalek_hit", 0.5f, 1.0f);
             }
         }
         if (et.equals(EntityType.PLAYER)) {

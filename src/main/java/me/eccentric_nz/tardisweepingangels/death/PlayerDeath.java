@@ -4,7 +4,8 @@
 package me.eccentric_nz.tardisweepingangels.death;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.libraryaddict.disguise.DisguiseAPI;
+import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekDisguise;
+import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekDisguiseLibs;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -105,7 +106,7 @@ public class PlayerDeath implements Listener {
                 if (source instanceof Skeleton) {
                     Skeleton skeleton = (Skeleton) source;
                     String name = event.getEntity().getName();
-                    if (DisguiseAPI.isDisguised(skeleton)) {
+                    if ((plugin.isLibsEnabled() && DalekDisguiseLibs.isDisguised(skeleton)) || DalekDisguise.isDisguised(skeleton)) {
                         event.setDeathMessage(name + " was slain by a Dalek");
                         return;
                     }

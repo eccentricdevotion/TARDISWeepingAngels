@@ -52,7 +52,8 @@ public class TARDISWeepingAngels extends JavaPlugin {
     private Random random;
     private boolean steal;
     private PluginManager pm;
-    private boolean citizensEnabled;
+    private boolean libsEnabled = false;
+    private boolean citizensEnabled = false;
     public static NamespacedKey ANGEL;
     public static NamespacedKey CYBERMAN;
     public static NamespacedKey DALEK;
@@ -78,83 +79,91 @@ public class TARDISWeepingAngels extends JavaPlugin {
         PluginDescriptionFile pdfFile = getDescription();
         pluginName = ChatColor.GOLD + "[" + pdfFile.getName() + "]" + ChatColor.RESET + " ";
         if (pm.isPluginEnabled("ProtocolLib") && pm.isPluginEnabled("LibsDisguises")) {
-            citizensEnabled = pm.isPluginEnabled("Citizens");
+            libsEnabled = true;
             // check dependent plugin versions
             if (!checkPluginVersion("ProtocolLib", "4.4.0")) {
                 getServer().getConsoleSender().sendMessage(pluginName + ChatColor.RED + "This plugin requires ProtocolLib to be v4.4.0 or higher, disabling...");
                 pm.disablePlugin(this);
                 return;
             }
-            if (!checkPluginVersion("LibsDisguises", "9.6.0")) {
-                getServer().getConsoleSender().sendMessage(pluginName + ChatColor.RED + "This plugin requires LibsDisguises to be v9.6.0 or higher, disabling...");
+            if (!checkPluginVersion("LibsDisguises", "9.8.2")) {
+                getServer().getConsoleSender().sendMessage(pluginName + ChatColor.RED + "This plugin requires LibsDisguises to be v9.8.2 or higher, disabling...");
                 pm.disablePlugin(this);
                 return;
             }
-            saveDefaultConfig();
-            random = new Random();
-            // update the config
-            new Config(this).updateConfig();
-            // initialise namespaced keys
-            initKeys(this);
-            // register listeners
-            pm.registerEvents(new Blink(this), this);
-            if (getConfig().getBoolean("angels.can_build")) {
-                pm.registerEvents(new Builder(this), this);
+        } else if (pm.isPluginEnabled("TARDISChunkGenerator")) {
+            if (!checkPluginVersion("TARDISChunkGenerator", "4.1.1")) {
+                getServer().getConsoleSender().sendMessage(pluginName + ChatColor.RED + "This plugin requires TARDISChunkGenerator to be v4.1.1 or higher, disabling...");
+                pm.disablePlugin(this);
+                return;
             }
-            if (getConfig().getBoolean("angels.spawn_from_chat.enabled")) {
-                pm.registerEvents(new ImageHolder(this), this);
-            }
-            pm.registerEvents(new Damage(this), this);
-            pm.registerEvents(new VashtaNeradaListener(this), this);
-            pm.registerEvents(new Death(this), this);
-            pm.registerEvents(new PlayerDeath(this), this);
-            pm.registerEvents(new PlayerUndisguise(this), this);
-            pm.registerEvents(new Sounds(this), this);
-            pm.registerEvents(new GasMask(this), this);
-            pm.registerEvents(new Butler(this), this);
-            pm.registerEvents(new HelmetChecker(), this);
-            pm.registerEvents(new Portal(this), this);
-            pm.registerEvents(new AntiTeleport(this), this);
-            pm.registerEvents(new K9TameOrBreed(), this);
-            pm.registerEvents(new RainDamage(), this);
-            pm.registerEvents(new ChunkLoad(), this);
-            // register commands
-            getCommand("twa").setExecutor(new AdminCommand(this));
-            getCommand("twac").setExecutor(new CountCommand(this));
-            getCommand("twad").setExecutor(new DisguiseCommand(this));
-            getCommand("twae").setExecutor(new ArmourStandCommand(this));
-            getCommand("twak").setExecutor(new KillCommand(this));
-            getCommand("twar").setExecutor(new DalekCommand(this));
-            getCommand("twas").setExecutor(new SpawnCommand(this));
-            // set tab completion
-            TabCompleter tabCompleter = new TabComplete(this);
-            getCommand("twa").setTabCompleter(tabCompleter);
-            getCommand("twac").setTabCompleter(tabCompleter);
-            getCommand("twad").setTabCompleter(tabCompleter);
-            getCommand("twae").setTabCompleter(tabCompleter);
-            getCommand("twak").setTabCompleter(tabCompleter);
-            getCommand("twas").setTabCompleter(tabCompleter);
-            // re-disguise Daleks
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new ReDisguise(this), 100L, 6000L);
-            // start repeating spawn tasks
-            long delay = getConfig().getLong("spawn_rate.how_often");
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new WeepingAngelsRunnable(this), delay, delay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new CybermanRunnable(this), delay, delay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new DalekRunnable(this), delay, delay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new EmptyChildRunnable(this), delay, delay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new IceWarriorRunnable(this), delay, delay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new SilurianRunnable(this), delay, delay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new SilentRunnable(this), delay, delay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new SontaranRunnable(this), delay, delay);
-            getServer().getScheduler().scheduleSyncRepeatingTask(this, new ZygonRunnable(this), delay, delay);
-            steal = (getConfig().getBoolean("angels.can_steal"));
-            notOnWater.add(Biome.DEEP_OCEAN);
-            notOnWater.add(Biome.OCEAN);
-            notOnWater.add(Biome.RIVER);
         } else {
-            System.err.println("[TARDISWeepingAngels] This plugin requires ProtocolLib & LibsDisguises, disabling...");
+            System.err.println("[TARDISWeepingAngels] This plugin requires either TARDISChunkGenerator OR LibsDisguises, disabling...");
             pm.disablePlugin(this);
+            return;
         }
+        citizensEnabled = pm.isPluginEnabled("Citizens");
+        saveDefaultConfig();
+        random = new Random();
+        // update the config
+        new Config(this).updateConfig();
+        // initialise namespaced keys
+        initKeys(this);
+        // register listeners
+        pm.registerEvents(new Blink(this), this);
+        if (getConfig().getBoolean("angels.can_build")) {
+            pm.registerEvents(new Builder(this), this);
+        }
+        if (getConfig().getBoolean("angels.spawn_from_chat.enabled")) {
+            pm.registerEvents(new ImageHolder(this), this);
+        }
+        pm.registerEvents(new Damage(this), this);
+        pm.registerEvents(new VashtaNeradaListener(this), this);
+        pm.registerEvents(new Death(this), this);
+        pm.registerEvents(new PlayerDeath(this), this);
+        pm.registerEvents(new PlayerUndisguise(this), this);
+        pm.registerEvents(new Sounds(this), this);
+        pm.registerEvents(new GasMask(this), this);
+        pm.registerEvents(new Butler(this), this);
+        pm.registerEvents(new HelmetChecker(), this);
+        pm.registerEvents(new Portal(this), this);
+        pm.registerEvents(new AntiTeleport(this), this);
+        pm.registerEvents(new K9TameOrBreed(), this);
+        pm.registerEvents(new RainDamage(), this);
+        pm.registerEvents(new ChunkLoad(this), this);
+        // register commands
+        getCommand("twa").setExecutor(new AdminCommand(this));
+        getCommand("twac").setExecutor(new CountCommand(this));
+        getCommand("twad").setExecutor(new DisguiseCommand(this));
+        getCommand("twae").setExecutor(new ArmourStandCommand(this));
+        getCommand("twak").setExecutor(new KillCommand(this));
+        getCommand("twar").setExecutor(new DalekCommand(this));
+        getCommand("twas").setExecutor(new SpawnCommand(this));
+        // set tab completion
+        TabCompleter tabCompleter = new TabComplete(this);
+        getCommand("twa").setTabCompleter(tabCompleter);
+        getCommand("twac").setTabCompleter(tabCompleter);
+        getCommand("twad").setTabCompleter(tabCompleter);
+        getCommand("twae").setTabCompleter(tabCompleter);
+        getCommand("twak").setTabCompleter(tabCompleter);
+        getCommand("twas").setTabCompleter(tabCompleter);
+        // re-disguise Daleks
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new ReDisguise(this), 100L, 6000L);
+        // start repeating spawn tasks
+        long delay = getConfig().getLong("spawn_rate.how_often");
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new WeepingAngelsRunnable(this), delay, delay);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new CybermanRunnable(this), delay, delay);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new DalekRunnable(this), delay, delay);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new EmptyChildRunnable(this), delay, delay);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new IceWarriorRunnable(this), delay, delay);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new SilurianRunnable(this), delay, delay);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new SilentRunnable(this), delay, delay);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new SontaranRunnable(this), delay, delay);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new ZygonRunnable(this), delay, delay);
+        steal = (getConfig().getBoolean("angels.can_steal"));
+        notOnWater.add(Biome.DEEP_OCEAN);
+        notOnWater.add(Biome.OCEAN);
+        notOnWater.add(Biome.RIVER);
     }
 
     public Random getRandom() {
@@ -175,6 +184,10 @@ public class TARDISWeepingAngels extends JavaPlugin {
 
     public List<Biome> getNotOnWater() {
         return notOnWater;
+    }
+
+    public boolean isLibsEnabled() {
+        return libsEnabled;
     }
 
     public boolean isCitizensEnabled() {
