@@ -14,7 +14,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.inventory.EntityEquipment;
-import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -81,7 +80,6 @@ public class WeepingAngelsRunnable implements Runnable {
                 e.setSilent(true);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                     equipper.setAngelEquipment(e, false);
-                    e.getPersistentDataContainer().set(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER, Monster.ANGEL.getPersist());
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.WEEPING_ANGEL, l));
                 }, 5L);
             }

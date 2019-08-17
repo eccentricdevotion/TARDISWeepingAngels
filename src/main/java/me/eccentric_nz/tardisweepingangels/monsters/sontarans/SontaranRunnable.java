@@ -15,7 +15,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -91,7 +90,6 @@ public class SontaranRunnable implements Runnable {
                 sontaran.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                     equipper.setSontaranEquipment(e, false);
-                    e.getPersistentDataContainer().set(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER, Monster.SONTARAN.getPersist());
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.SONTARAN, l));
                 }, 5L);
             }

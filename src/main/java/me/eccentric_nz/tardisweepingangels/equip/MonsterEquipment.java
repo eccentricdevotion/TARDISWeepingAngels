@@ -3,13 +3,11 @@
  */
 package me.eccentric_nz.tardisweepingangels.equip;
 
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelsAPI;
+import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekDisguise;
+import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekDisguiseLibs;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
-import me.libraryaddict.disguise.DisguiseAPI;
-import me.libraryaddict.disguise.disguisetypes.DisguiseType;
-import me.libraryaddict.disguise.disguisetypes.MobDisguise;
-import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
-import me.libraryaddict.disguise.disguisetypes.watchers.SnowmanWatcher;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -18,6 +16,7 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -66,6 +65,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             ee.setLeggingsDropChance(0F);
             ee.setBootsDropChance(0F);
             le.setCanPickupItems(false);
+            le.getPersistentDataContainer().set(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER, Monster.ANGEL.getPersist());
         }
     }
 
@@ -106,6 +106,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
             le.setCanPickupItems(false);
+            le.getPersistentDataContainer().set(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER, Monster.WARRIOR.getPersist());
         }
     }
 
@@ -141,6 +142,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
             le.setCanPickupItems(false);
+            le.getPersistentDataContainer().set(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER, Monster.CYBERMAN.getPersist());
         }
     }
 
@@ -179,6 +181,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
+            le.getPersistentDataContainer().set(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER, Monster.EMPTY.getPersist());
         }
     }
 
@@ -214,6 +217,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
             le.setCanPickupItems(false);
+            le.getPersistentDataContainer().set(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER, Monster.ZYGON.getPersist());
         }
     }
 
@@ -253,6 +257,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
             le.setCanPickupItems(false);
+            le.getPersistentDataContainer().set(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER, Monster.SILURIAN.getPersist());
         }
     }
 
@@ -292,6 +297,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
             le.setCanPickupItems(false);
+            le.getPersistentDataContainer().set(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER, Monster.SONTARAN.getPersist());
         }
     }
 
@@ -338,10 +344,12 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         PotionEffect p = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
         g.addPotionEffect(p);
         le.addPassenger(g);
+        le.getPersistentDataContainer().set(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER, Monster.SILENT.getPersist());
     }
 
     @Override
     public void setDalekEquipment(LivingEntity le) {
+        le.getPersistentDataContainer().set(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER, Monster.DALEK.getPersist());
         ItemStack helmet = new ItemStack(Material.VINE, 1);
         ItemMeta hmeta = helmet.getItemMeta();
         hmeta.setDisplayName("Dalek Head");
@@ -352,17 +360,18 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         ee.setChestplate(null);
         ee.setLeggings(null);
         ee.setBoots(null);
-        MobDisguise mobDisguise = new MobDisguise(DisguiseType.SNOWMAN);
-        LivingWatcher livingWatcher = mobDisguise.getWatcher();
-        SnowmanWatcher snw = (SnowmanWatcher) livingWatcher;
-        snw.setDerp(true);
-        DisguiseAPI.disguiseToAll(le, mobDisguise);
+        if (TARDISWeepingAngels.plugin.isLibsEnabled()) {
+            DalekDisguiseLibs.disguise(le);
+        } else {
+            DalekDisguise.disguise(le);
+        }
         PotionEffect p = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 360000, 1, true, false);
         le.addPotionEffect(p);
         AttributeInstance attribute = le.getAttribute(Attribute.GENERIC_MAX_HEALTH);
         attribute.setBaseValue(30.0d);
         le.setHealth(30.0d);
         le.setCanPickupItems(false);
+        le.setRemoveWhenFarAway(false);
     }
 
     @Override
@@ -397,6 +406,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
             le.setCanPickupItems(false);
+            le.getPersistentDataContainer().set(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER, Monster.VASHTA.getPersist());
         }
     }
 
