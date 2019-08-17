@@ -1,4 +1,3 @@
-## spawn rate is how many angels to spawn every x ticks up to a maximum per world
 config_version: 2.0
 spawn_rate:
     how_many: 2
@@ -12,8 +11,8 @@ angels:
     freeze_time: 100
     weapon: DIAMOND_PICKAXE
     drops:
-        - COBBLESTONE
-        - STONE
+    - COBBLESTONE
+    - STONE
     angels_can_steal: true
     can_build: true
     spawn_from_chat:
@@ -24,50 +23,56 @@ cybermen:
     worlds:
         world: 10
     drops:
-        - REDSTONE
-        - STONE_BUTTON
+    - REDSTONE
+    - STONE_BUTTON
     can_upgrade: true
 daleks:
     worlds:
         world: 20
     drops:
-        - SLIME_BALL
-        - ROTTEN_FLESH
+    - SLIME_BALL
+    - ROTTEN_FLESH
 empty_child:
     worlds:
         world: 10
     drops:
-        - COOKED_BEEF
-        - SUGAR
+    - COOKED_BEEF
+    - SUGAR
 ice_warriors:
     worlds:
         world: 20
     drops:
-        - ICE
-        - PACKED_ICE
-        - SNOW_BLOCK
+    - ICE
+    - PACKED_ICE
+    - SNOW_BLOCK
 silurians:
     worlds:
         world: 20
     drops:
-        - GOLD_NUGGET
-        - FEATHER
+    - GOLD_NUGGET
+    - FEATHER
 sontarans:
     worlds:
         world: 20
     drops:
-        - POTATO
-        - MILK_BUCKET
+    - POTATO
+    - MILK_BUCKET
     can_tame: true
 vashta_nerada:
     worlds:
         world: 10
     drops:
-        - BONE
-        - LEATHER
+    - BONE
+    - LEATHER
 zygons:
     worlds:
         world: 10
     drops:
-        - PAINTING
-        - SAND
+    - PAINTING
+    - SAND
+silent:
+    worlds:
+        world: 10
+    drops:
+    - INK_SAC
+    - FLOWER_POT
