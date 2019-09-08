@@ -4,8 +4,6 @@
 package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekDisguise;
-import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekDisguiseLibs;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,6 +17,7 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -51,9 +50,9 @@ public class Damage implements Listener {
     public void onBeatUpAngel(EntityDamageByEntityEvent event) {
         EntityType et = event.getEntityType();
         if (et.equals(EntityType.SKELETON)) {
-            EntityEquipment ee = ((LivingEntity) event.getEntity()).getEquipment();
+            LivingEntity entity = (LivingEntity) event.getEntity();
             Entity e = event.getDamager();
-            if (ee.getItemInMainHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.LILY_PAD)) {
+            if (entity.getPersistentDataContainer().has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
                 if (e instanceof AbstractArrow) {
                     event.setCancelled(true);
                 }
@@ -65,16 +64,15 @@ public class Damage implements Listener {
                 }
                 return;
             }
-            Entity ent = event.getEntity();
-            if (ee.getHelmet().getType().equals(Material.VINE) && ((plugin.isLibsEnabled() && DalekDisguiseLibs.isDisguised(ent)) || DalekDisguise.isDisguised(ent)) && (e instanceof Player)) {
-                ((Player) e).playSound(ent.getLocation(), "dalek_hit", 0.5f, 1.0f);
+            if (entity.getPersistentDataContainer().has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER) && (e instanceof Player)) {
+                ((Player) e).playSound(entity.getLocation(), "dalek_hit", 0.5f, 1.0f);
             }
         }
         if (et.equals(EntityType.PLAYER)) {
             Entity e = event.getDamager();
             if (e instanceof Skeleton) {
                 EntityEquipment ee = ((LivingEntity) e).getEquipment();
-                if (ee.getItemInMainHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.LILY_PAD)) {
+                if (ee.getHelmet().getType().equals(Material.STONE_BUTTON) || ee.getHelmet().getType().equals(Material.LILY_PAD)) {
                     Entity t = event.getEntity();
                     Player p = (Player) t;
                     Location l = getRandomLocation(t.getWorld());

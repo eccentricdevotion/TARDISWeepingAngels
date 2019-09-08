@@ -50,6 +50,7 @@ public enum Monster {
 
     Monster(String name, int persist) {
         this.name = name;
+        this.persist = persist;
     }
 
     public static List<Monster> getValues() {

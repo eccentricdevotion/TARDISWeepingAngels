@@ -14,6 +14,7 @@ import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 /**
  * @author eccentric_nz
@@ -30,33 +31,19 @@ public class ChunkLoad implements Listener {
     public void onChunkLoad(ChunkLoadEvent event) {
         for (Entity d : event.getChunk().getEntities()) {
             if (d instanceof Skeleton) {
-                EntityEquipment ee = ((Skeleton) d).getEquipment();
-                ItemStack is = ee.getHelmet();
-                // check the helmet
-                if (is != null && is.getType().equals(Material.VINE)) {
-                    if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek")) {
-                        if (plugin.isLibsEnabled() && !DalekDisguiseLibs.isDisguised(d)) {
-                            DalekDisguiseLibs.disguise(d);
-                        } else if (!DalekDisguise.isDisguised(d)) {
-                            DalekDisguise.disguise(d);
-                        }
+                if (d.getPersistentDataContainer().has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
+                    Skeleton skeleton = (Skeleton) d;
+                    if (skeleton.getEquipment().getHelmet() == null) {
+                        TARDISWeepingAngels.getEqipper().setDalekEquipment(skeleton);
                     }
-                } else if (is != null && is.getType().equals(Material.LILY_PAD)) {
+                } else if (d.getPersistentDataContainer().has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
                     ItemStack head = new ItemStack(Material.STONE_BUTTON, 1);
                     ItemMeta hmeta = head.getItemMeta();
                     hmeta.setDisplayName("Weeping Angel Head");
+                    hmeta.setCustomModelData(10000001);
                     head.setItemMeta(hmeta);
+                    EntityEquipment ee = ((Skeleton) d).getEquipment();
                     ee.setHelmet(head);
-                } else if (is == null || is.getType().equals(Material.AIR) || is.getType().equals(Material.IRON_HELMET)) {
-                    // check the chestplate
-                    ItemStack chest = ee.getChestplate();
-                    if (chest.hasItemMeta() && chest.getItemMeta().hasDisplayName() && chest.getItemMeta().getDisplayName().startsWith("Weeping Angel")) {
-                        ItemStack head = new ItemStack(Material.STONE_BUTTON, 1);
-                        ItemMeta hmeta = head.getItemMeta();
-                        hmeta.setDisplayName("Weeping Angel Head");
-                        head.setItemMeta(hmeta);
-                        ee.setHelmet(head);
-                    }
                 }
             }
         }

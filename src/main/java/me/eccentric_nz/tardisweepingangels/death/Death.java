@@ -6,8 +6,6 @@ package me.eccentric_nz.tardisweepingangels.death;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekDisguise;
-import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekDisguiseLibs;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import net.citizensnpcs.api.CitizensAPI;
 import org.bukkit.Location;
@@ -20,9 +18,9 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffectType;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,9 +78,9 @@ public class Death implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onEntityDeath(EntityDeathEvent event) {
+        PersistentDataContainer pdc = event.getEntity().getPersistentDataContainer();
         if (event.getEntityType().equals(EntityType.SKELETON)) {
-            EntityEquipment ee = event.getEntity().getEquipment();
-            if (ee.getItemInMainHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.LILY_PAD)) {
+            if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
                 event.getDrops().clear();
                 ItemStack stack;
                 if (plugin.getRandom().nextInt(100) < 3) {
@@ -93,17 +91,13 @@ public class Death implements Listener {
                 event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                 return;
             }
-            if (ee.getHelmet().getType().equals(Material.GOLDEN_HELMET)) {
-                ItemStack is = ee.getHelmet();
-                if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Silurian")) {
-                    event.getDrops().clear();
-                    ItemStack stack = new ItemStack(silurian_drops.get(plugin.getRandom().nextInt(silurian_drops.size())), plugin.getRandom().nextInt(2) + 1);
-                    event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
-                    return;
-                }
+            if (pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)) {
+                event.getDrops().clear();
+                ItemStack stack = new ItemStack(silurian_drops.get(plugin.getRandom().nextInt(silurian_drops.size())), plugin.getRandom().nextInt(2) + 1);
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                return;
             }
-            Skeleton dalek = (Skeleton) event.getEntity();
-            if (dalek.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE) && (plugin.isLibsEnabled() && DalekDisguiseLibs.isDisguised(dalek) || DalekDisguise.isDisguised(dalek))) {
+            if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
                 event.getDrops().clear();
                 ItemStack stack = new ItemStack(dalek_drops.get(plugin.getRandom().nextInt(dalek_drops.size())), 1);
                 event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
@@ -111,65 +105,55 @@ public class Death implements Listener {
             }
         }
         if (event.getEntityType().equals(EntityType.PIG_ZOMBIE)) {
-            EntityEquipment ee = event.getEntity().getEquipment();
-            if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
-                ItemStack is = ee.getHelmet();
-                if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Ice")) {
-                    event.getDrops().clear();
-                    ItemStack stack = new ItemStack(ice_drops.get(plugin.getRandom().nextInt(ice_drops.size())), plugin.getRandom().nextInt(1) + 1);
-                    event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
-                    return;
-                }
+            if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
+                event.getDrops().clear();
+                ItemStack stack = new ItemStack(ice_drops.get(plugin.getRandom().nextInt(ice_drops.size())), plugin.getRandom().nextInt(1) + 1);
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                return;
             }
         }
         if (event.getEntityType().equals(EntityType.ZOMBIE)) {
-            EntityEquipment ee = event.getEntity().getEquipment();
-            if (ee.getHelmet().getType().equals(Material.IRON_HELMET) || ee.getHelmet().getType().equals(Material.GOLDEN_HELMET)) {
-                ItemStack is = ee.getHelmet();
-                if (is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
-                    ItemStack stack;
-                    if (is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
-                        event.getDrops().clear();
-                        if (plugin.getRandom().nextInt(100) < 3) {
-                            stack = new ItemStack(Material.IRON_INGOT, 1);
-                        } else {
-                            stack = new ItemStack(cyber_drops.get(plugin.getRandom().nextInt(cyber_drops.size())), 1);
-                        }
-                        event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
-                        return;
-                    }
-                    if (is.getItemMeta().getDisplayName().startsWith("Empty Child")) {
-                        event.getDrops().clear();
-                        if (plugin.getRandom().nextInt(100) < 3) {
-                            stack = new ItemStack(Material.POTION, 1, (short) 8197);
-                        } else {
-                            stack = new ItemStack(empty_drops.get(plugin.getRandom().nextInt(empty_drops.size())), plugin.getRandom().nextInt(1) + 1);
-                        }
-                        event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
-                        return;
-                    }
-                    if (is.getItemMeta().getDisplayName().startsWith("Sontaran")) {
-                        event.getDrops().clear();
-                        if (plugin.getRandom().nextInt(100) < 3) {
-                            stack = new ItemStack(Material.MILK_BUCKET, 1);
-                        } else {
-                            stack = new ItemStack(sontaran_drops.get(plugin.getRandom().nextInt(sontaran_drops.size())), 1);
-                        }
-                        event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
-                        return;
-                    }
-                    if (is.getItemMeta().getDisplayName().startsWith("Vashta")) {
-                        event.getDrops().clear();
-                        stack = new ItemStack(vashta_drops.get(plugin.getRandom().nextInt(vashta_drops.size())), plugin.getRandom().nextInt(2) + 1);
-                        event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
-                    }
-                    if (is.getItemMeta().getDisplayName().startsWith("Zygon")) {
-                        event.getDrops().clear();
-                        stack = new ItemStack(zygon_drops.get(plugin.getRandom().nextInt(zygon_drops.size())), plugin.getRandom().nextInt(1) + 1);
-                        event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
-                        return;
-                    }
+            ItemStack stack;
+            if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)) {
+                event.getDrops().clear();
+                if (plugin.getRandom().nextInt(100) < 3) {
+                    stack = new ItemStack(Material.IRON_INGOT, 1);
+                } else {
+                    stack = new ItemStack(cyber_drops.get(plugin.getRandom().nextInt(cyber_drops.size())), 1);
                 }
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                return;
+            }
+            if (pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
+                event.getDrops().clear();
+                if (plugin.getRandom().nextInt(100) < 3) {
+                    stack = new ItemStack(Material.POTION, 1, (short) 8197);
+                } else {
+                    stack = new ItemStack(empty_drops.get(plugin.getRandom().nextInt(empty_drops.size())), plugin.getRandom().nextInt(1) + 1);
+                }
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                return;
+            }
+            if (pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
+                event.getDrops().clear();
+                if (plugin.getRandom().nextInt(100) < 3) {
+                    stack = new ItemStack(Material.MILK_BUCKET, 1);
+                } else {
+                    stack = new ItemStack(sontaran_drops.get(plugin.getRandom().nextInt(sontaran_drops.size())), 1);
+                }
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                return;
+            }
+            if (pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)) {
+                event.getDrops().clear();
+                stack = new ItemStack(vashta_drops.get(plugin.getRandom().nextInt(vashta_drops.size())), plugin.getRandom().nextInt(2) + 1);
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+            }
+            if (pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
+                event.getDrops().clear();
+                stack = new ItemStack(zygon_drops.get(plugin.getRandom().nextInt(zygon_drops.size())), plugin.getRandom().nextInt(1) + 1);
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                return;
             }
         }
         if (event.getEntityType().equals(EntityType.VILLAGER) || event.getEntityType().equals(EntityType.PLAYER)) {
@@ -182,39 +166,32 @@ public class Death implements Listener {
             EntityDamageEvent damage = event.getEntity().getLastDamageCause();
             if (damage != null && damage.getCause().equals(DamageCause.ENTITY_ATTACK)) {
                 Entity attacker = (((EntityDamageByEntityEvent) damage).getDamager());
-                if (attacker instanceof Zombie) {
-                    EntityEquipment ee = ((LivingEntity) attacker).getEquipment();
-                    ItemStack is = ee.getHelmet();
-                    if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
-                        String dn = is.getItemMeta().getDisplayName();
-                        if (dn.startsWith("Cyberman")) {
-                            Location l = event.getEntity().getLocation();
-                            LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
-                            e.setSilent(true);
-                            new MonsterEquipment().setCyberEquipment(e, false);
-                            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.CYBERMAN, l));
-                            if (event.getEntity() instanceof Player) {
-                                String name = event.getEntity().getName();
-                                e.setCustomName(name);
-                                e.setCustomNameVisible(true);
-                            }
-                            return;
-                        }
-                        if (dn.startsWith("Empty Child")) {
-                            if (event.getEntity() instanceof Player) {
-                                Player p = (Player) event.getEntity();
-                                plugin.getEmpty().add(p.getUniqueId());
-                            }
-                        }
+                PersistentDataContainer apdc = attacker.getPersistentDataContainer();
+                if (attacker instanceof Zombie && apdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)) {
+                    Location l = event.getEntity().getLocation();
+                    LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
+                    e.setSilent(true);
+                    new MonsterEquipment().setCyberEquipment(e, false);
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.CYBERMAN, l));
+                    if (event.getEntity() instanceof Player) {
+                        String name = event.getEntity().getName();
+                        e.setCustomName(name);
+                        e.setCustomNameVisible(true);
+                    }
+                    return;
+                }
+                if (apdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
+                    if (event.getEntity() instanceof Player) {
+                        Player p = (Player) event.getEntity();
+                        plugin.getEmpty().add(p.getUniqueId());
                     }
                 }
             }
         }
         if (event.getEntityType().equals(EntityType.ENDERMAN)) {
-            Entity enderman = event.getEntity();
-            if (!enderman.getPassengers().isEmpty() && enderman.getPassengers().get(0) != null && enderman.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
+            if (pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
                 // remove the guardian as well
-                Entity guardian = enderman.getPassengers().get(0);
+                Entity guardian = event.getEntity().getPassengers().get(0);
                 guardian.remove();
                 event.getDrops().clear();
                 ItemStack stack = new ItemStack(silent_drops.get(plugin.getRandom().nextInt(silent_drops.size())), plugin.getRandom().nextInt(1) + 1);

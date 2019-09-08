@@ -79,8 +79,6 @@ public class EmptyChildRunnable implements Runnable {
                 LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
                 e.setSilent(true);
                 Zombie child = (Zombie) e;
-                //child.setVillager(false);
-                //child.setVillagerProfession(null);
                 child.setBaby(true);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                     equipper.setEmptyChildEquipment(e, false);

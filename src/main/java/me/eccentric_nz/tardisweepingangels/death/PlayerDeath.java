@@ -4,9 +4,6 @@
 package me.eccentric_nz.tardisweepingangels.death;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekDisguise;
-import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekDisguiseLibs;
-import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,8 +11,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.inventory.EntityEquipment;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.projectiles.ProjectileSource;
 
 /**
@@ -35,33 +32,29 @@ public class PlayerDeath implements Listener {
         if (damage != null && damage instanceof EntityDamageByEntityEvent) {
             Entity attacker = (((EntityDamageByEntityEvent) damage).getDamager());
             if (damage.getCause().equals(DamageCause.ENTITY_ATTACK)) {
+                PersistentDataContainer pdc = attacker.getPersistentDataContainer();
                 String name = event.getEntity().getName();
                 if (attacker instanceof Zombie) {
-                    EntityEquipment ee = ((LivingEntity) attacker).getEquipment();
-                    ItemStack is = ee.getHelmet();
-                    if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
-                        String dn = is.getItemMeta().getDisplayName();
-                        if (dn.startsWith("Cyberman")) {
-                            String what_happened = (plugin.getConfig().getBoolean("cybermen.can_upgrade")) ? "upgraded" : "slain";
-                            event.setDeathMessage(name + " was " + what_happened + " by a Cyberman");
-                            return;
-                        }
-                        if (dn.startsWith("Empty Child")) {
-                            event.setDeathMessage(name + " was slain by an Empty Child");
-                            return;
-                        }
-                        if (dn.startsWith("Zygon")) {
-                            event.setDeathMessage(name + " was slain by a Zygon");
-                            return;
-                        }
-                        if (dn.startsWith("Sontaran")) {
-                            event.setDeathMessage(name + " was slain by a Sontaran");
-                            return;
-                        }
-                        if (dn.startsWith("Vashta")) {
-                            event.setDeathMessage(name + " was eaten by a Vashta Nerada");
-                            return;
-                        }
+                    if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)) {
+                        String what_happened = (plugin.getConfig().getBoolean("cybermen.can_upgrade")) ? "upgraded" : "slain";
+                        event.setDeathMessage(name + " was " + what_happened + " by a Cyberman");
+                        return;
+                    }
+                    if (pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
+                        event.setDeathMessage(name + " was slain by an Empty Child");
+                        return;
+                    }
+                    if (pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
+                        event.setDeathMessage(name + " was slain by a Zygon");
+                        return;
+                    }
+                    if (pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
+                        event.setDeathMessage(name + " was slain by a Sontaran");
+                        return;
+                    }
+                    if (pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)) {
+                        event.setDeathMessage(name + " was eaten by a Vashta Nerada");
+                        return;
                     }
                 }
                 if (attacker instanceof Enderman) {
@@ -81,20 +74,17 @@ public class PlayerDeath implements Listener {
                     }
                 }
                 if (attacker instanceof PigZombie) {
-                    EntityEquipment ee = ((LivingEntity) attacker).getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
+                    if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
                         event.setDeathMessage(name + " was slain by an Ice Warrior");
                         return;
                     }
-                    if (ee.getHelmet().getType().equals(Material.CHAINMAIL_HELMET) && ((PigZombie) attacker).getCustomName().equals("Strax")) {
+                    if (pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER)) {
                         event.setDeathMessage(name + " was slain by a very angry Sontaran butler called Strax");
                         return;
                     }
                 }
                 if (attacker instanceof Skeleton) {
-                    EntityEquipment ee = ((LivingEntity) attacker).getEquipment();
-                    ItemStack is = ee.getHelmet();
-                    if (ee.getItemInMainHand().getType().equals(Material.BARRIER) || is.getType().equals(Material.LILY_PAD)) {
+                    if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
                         event.setDeathMessage(name + " was slain by a Weeping Angel");
                         return;
                     }
@@ -105,20 +95,14 @@ public class PlayerDeath implements Listener {
                 ProjectileSource source = arrow.getShooter();
                 if (source instanceof Skeleton) {
                     Skeleton skeleton = (Skeleton) source;
+                    PersistentDataContainer spdc = skeleton.getPersistentDataContainer();
                     String name = event.getEntity().getName();
-                    if ((plugin.isLibsEnabled() && DalekDisguiseLibs.isDisguised(skeleton)) || DalekDisguise.isDisguised(skeleton)) {
+                    if (spdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
                         event.setDeathMessage(name + " was slain by a Dalek");
                         return;
                     }
-                    EntityEquipment ee = skeleton.getEquipment();
-                    ItemStack is = ee.getHelmet();
-                    if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
-                        String dn = is.getItemMeta().getDisplayName();
-                        if (ee.getHelmet().getType().equals(Material.GOLDEN_HELMET)) {
-                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && dn.startsWith("Silurian")) {
-                                event.setDeathMessage(name + " was slain by a Silurian");
-                            }
-                        }
+                    if (spdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)) {
+                        event.setDeathMessage(name + " was slain by a Silurian");
                     }
                 }
             }

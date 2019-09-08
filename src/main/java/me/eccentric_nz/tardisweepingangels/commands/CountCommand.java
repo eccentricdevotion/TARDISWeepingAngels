@@ -1,14 +1,12 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
-import org.bukkit.inventory.EntityEquipment;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
@@ -56,8 +54,7 @@ public class CountCommand implements CommandExecutor {
                 case "a":
                     Collection<Skeleton> angels = w.getEntitiesByClass(Skeleton.class);
                     for (Skeleton a : angels) {
-                        EntityEquipment ee = a.getEquipment();
-                        if (ee.getItemInMainHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.LILY_PAD)) {
+                        if (a.getPersistentDataContainer().has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
@@ -66,12 +63,8 @@ public class CountCommand implements CommandExecutor {
                     what = "Cybermen";
                     Collection<Zombie> cybermen = w.getEntitiesByClass(Zombie.class);
                     for (Zombie c : cybermen) {
-                        EntityEquipment ee = c.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
-                            ItemStack is = ee.getHelmet();
-                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
-                                count++;
-                            }
+                        if (c.getPersistentDataContainer().has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)) {
+                            count++;
                         }
                     }
                     break;
@@ -79,12 +72,8 @@ public class CountCommand implements CommandExecutor {
                     what = "Daleks";
                     Collection<Skeleton> daleks = w.getEntitiesByClass(Skeleton.class);
                     for (Skeleton d : daleks) {
-                        EntityEquipment ee = d.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.VINE)) {
-                            ItemStack is = ee.getHelmet();
-                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek")) {
-                                count++;
-                            }
+                        if (d.getPersistentDataContainer().has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
+                            count++;
                         }
                     }
                     break;
@@ -92,12 +81,8 @@ public class CountCommand implements CommandExecutor {
                     what = "Empty Children";
                     Collection<Zombie> kids = w.getEntitiesByClass(Zombie.class);
                     for (Zombie e : kids) {
-                        EntityEquipment ee = e.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
-                            ItemStack is = ee.getHelmet();
-                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Empty Child")) {
-                                count++;
-                            }
+                        if (e.getPersistentDataContainer().has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
+                            count++;
                         }
                     }
                     break;
@@ -105,12 +90,8 @@ public class CountCommand implements CommandExecutor {
                     what = "Ice Warriors";
                     Collection<PigZombie> warriors = w.getEntitiesByClass(PigZombie.class);
                     for (PigZombie i : warriors) {
-                        EntityEquipment ee = i.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
-                            ItemStack is = ee.getHelmet();
-                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
-                                count++;
-                            }
+                        if (i.getPersistentDataContainer().has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
+                            count++;
                         }
                     }
                     break;
@@ -118,7 +99,7 @@ public class CountCommand implements CommandExecutor {
                     what = "Silence";
                     Collection<Enderman> silence = w.getEntitiesByClass(Enderman.class);
                     for (Enderman m : silence) {
-                        if (!m.getPassengers().isEmpty() && m.getPassengers().get(0) != null && m.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
+                        if (m.getPersistentDataContainer().has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
@@ -127,12 +108,8 @@ public class CountCommand implements CommandExecutor {
                     what = "Sontarans";
                     Collection<Zombie> sontarans = w.getEntitiesByClass(Zombie.class);
                     for (Zombie o : sontarans) {
-                        EntityEquipment ee = o.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.GOLDEN_HELMET)) {
-                            ItemStack is = ee.getHelmet();
-                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Sontaran")) {
-                                count++;
-                            }
+                        if (o.getPersistentDataContainer().has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
+                            count++;
                         }
                     }
                     break;
@@ -140,12 +117,8 @@ public class CountCommand implements CommandExecutor {
                     what = "Silurians";
                     Collection<Skeleton> silurians = w.getEntitiesByClass(Skeleton.class);
                     for (Skeleton s : silurians) {
-                        EntityEquipment ee = s.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.GOLDEN_HELMET)) {
-                            ItemStack is = ee.getHelmet();
-                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Silurian")) {
-                                count++;
-                            }
+                        if (s.getPersistentDataContainer().has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)) {
+                            count++;
                         }
                     }
                     break;
@@ -153,12 +126,8 @@ public class CountCommand implements CommandExecutor {
                     what = "Vashta Nerada";
                     Collection<Zombie> vashta = w.getEntitiesByClass(Zombie.class);
                     for (Zombie v : vashta) {
-                        EntityEquipment ee = v.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.GOLDEN_HELMET)) {
-                            ItemStack is = ee.getHelmet();
-                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Vashta")) {
-                                count++;
-                            }
+                        if (v.getPersistentDataContainer().has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)) {
+                            count++;
                         }
                     }
                     break;
@@ -166,12 +135,8 @@ public class CountCommand implements CommandExecutor {
                     what = "Zygons";
                     Collection<Zombie> zygons = w.getEntitiesByClass(Zombie.class);
                     for (Zombie z : zygons) {
-                        EntityEquipment ee = z.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.GOLDEN_HELMET)) {
-                            ItemStack is = ee.getHelmet();
-                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Zygon")) {
-                                count++;
-                            }
+                        if (z.getPersistentDataContainer().has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
+                            count++;
                         }
                     }
                     break;
