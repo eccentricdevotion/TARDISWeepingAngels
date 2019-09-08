@@ -55,7 +55,7 @@ public class KillCommand implements CommandExecutor {
                     Collection<Skeleton> angels = w.getEntitiesByClass(Skeleton.class);
                     for (Skeleton a : angels) {
                         EntityEquipment ee = a.getEquipment();
-                        if (ee.getItemInMainHand().getType().equals(Material.BARRIER) || ee.getHelmet().getType().equals(Material.LILY_PAD)) {
+                        if (ee.getHelmet().getType().equals(Material.STONE_BUTTON) || ee.getHelmet().getType().equals(Material.LILY_PAD)) {
                             a.remove();
                             count++;
                         }
