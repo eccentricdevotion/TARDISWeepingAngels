@@ -5,8 +5,7 @@ package me.eccentric_nz.tardisweepingangels.equip;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelsAPI;
-import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekDisguise;
-import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekDisguiseLibs;
+import me.eccentric_nz.tardisweepingangels.monsters.daleks.WeightedChoice;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -16,16 +15,17 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import java.util.List;
 
 /**
  * @author eccentric_nz
  */
 public class MonsterEquipment implements TARDISWeepingAngelsAPI {
+
+    WeightedChoice<Integer> weightedChoice = new WeightedChoice<Integer>().add(48, 0).add(3, 1).add(3, 2).add(3, 3).add(3, 4).add(3, 5).add(3, 6).add(3, 7).add(3, 8).add(3, 9).add(3, 10).add(3, 11).add(3, 12).add(3, 13).add(3, 14).add(3, 15).add(3, 16);
 
     @Override
     public void setAngelEquipment(LivingEntity le, boolean disguise) {
@@ -38,8 +38,12 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             chestplate.setDurability((short) 235);
             leggings.setDurability((short) 220);
         }
+        ItemMeta wmeta = wing.getItemMeta();
+        wmeta.setCustomModelData(10000001);
+        wing.setItemMeta(wmeta);
         ItemMeta hmeta = head.getItemMeta();
         hmeta.setDisplayName("Weeping Angel Head");
+        hmeta.setCustomModelData(10000001);
         head.setItemMeta(hmeta);
         ItemMeta cmeta = chestplate.getItemMeta();
         cmeta.setDisplayName("Weeping Angel Chest");
@@ -112,7 +116,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setCyberEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.IRON_HELMET, 1);
+        ItemStack helmet = new ItemStack(Material.MUSHROOM_STEM, 1);
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
         if (disguise) {
@@ -122,6 +126,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         }
         ItemMeta hmeta = helmet.getItemMeta();
         hmeta.setDisplayName("Cyberman Head");
+        hmeta.setCustomModelData(10000002);
         helmet.setItemMeta(hmeta);
         ItemMeta cmeta = chestplate.getItemMeta();
         cmeta.setDisplayName("Cyberman Chest");
@@ -187,7 +192,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setZygonEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
+        ItemStack helmet = new ItemStack(Material.MUSHROOM_STEM, 1);
         ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
         if (disguise) {
@@ -197,6 +202,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         }
         ItemMeta hmeta = helmet.getItemMeta();
         hmeta.setDisplayName("Zygon Head");
+        hmeta.setCustomModelData(10000003);
         helmet.setItemMeta(hmeta);
         ItemMeta cmeta = chestplate.getItemMeta();
         cmeta.setDisplayName("Zygon Chest");
@@ -223,7 +229,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setSilurianEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
+        ItemStack helmet = new ItemStack(Material.MUSHROOM_STEM, 1);
         ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
         if (disguise) {
@@ -233,6 +239,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         }
         ItemMeta hmeta = helmet.getItemMeta();
         hmeta.setDisplayName("Silurian Head");
+        hmeta.setCustomModelData(10000022);
         helmet.setItemMeta(hmeta);
         ItemMeta cmeta = chestplate.getItemMeta();
         cmeta.setDisplayName("Silurian Chest");
@@ -250,6 +257,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             ItemStack bow = new ItemStack(Material.BOW, 1);
             ItemMeta bmeta = bow.getItemMeta();
             bmeta.setDisplayName("Silurian Weapon");
+            bmeta.setCustomModelData(2);
             bow.setItemMeta(bmeta);
             ee.setItemInMainHand(bow);
             ee.setItemInOffHand(null);
@@ -350,23 +358,27 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
     @Override
     public void setDalekEquipment(LivingEntity le) {
         le.getPersistentDataContainer().set(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER, Monster.DALEK.getPersist());
-        ItemStack helmet = new ItemStack(Material.VINE, 1);
+        ItemStack helmet = new ItemStack(Material.MUSHROOM_STEM, 1);
         ItemMeta hmeta = helmet.getItemMeta();
         hmeta.setDisplayName("Dalek Head");
+        hmeta.setCustomModelData(10000005 + weightedChoice.next());
         helmet.setItemMeta(hmeta);
+        ItemStack bow = new ItemStack(Material.BOW, 1);
+        ItemMeta bim = bow.getItemMeta();
+        bim.setCustomModelData(1);
+        bow.setItemMeta(bim);
         EntityEquipment ee = le.getEquipment();
         ee.setHelmet(helmet);
         ee.setHelmetDropChance(0F);
+        ee.setItemInMainHand(bow);
+        ee.setItemInMainHandDropChance(0F);
         ee.setChestplate(null);
         ee.setLeggings(null);
         ee.setBoots(null);
-        if (TARDISWeepingAngels.plugin.isLibsEnabled()) {
-            DalekDisguiseLibs.disguise(le);
-        } else {
-            DalekDisguise.disguise(le);
-        }
-        PotionEffect p = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 360000, 1, true, false);
-        le.addPotionEffect(p);
+        PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
+        PotionEffect resistance = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 360000, 1, true, false);
+        le.addPotionEffect(invisibility);
+        le.addPotionEffect(resistance);
         AttributeInstance attribute = le.getAttribute(Attribute.GENERIC_MAX_HEALTH);
         attribute.setBaseValue(30.0d);
         le.setHealth(30.0d);
@@ -444,50 +456,40 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public Monster getWeepingAngelMonsterType(Entity entity) {
-        if (entity instanceof Zombie || entity instanceof PigZombie || entity instanceof Skeleton) {
-            EntityEquipment ee = ((LivingEntity) entity).getEquipment();
-            ItemStack is = ee.getHelmet();
-            if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
-                String dn = is.getItemMeta().getDisplayName();
-                if (dn.startsWith("Cyberman")) {
-                    return Monster.CYBERMAN;
-                }
-                if (dn.startsWith("Dalek")) {
-                    return Monster.DALEK;
-                }
-                if (dn.startsWith("Empty Child")) {
-                    return Monster.EMPTY_CHILD;
-                }
-                if (dn.startsWith("Ice Warrior")) {
-                    return Monster.ICE_WARRIOR;
-                }
-                if (dn.startsWith("Silurian")) {
-                    return Monster.SILURIAN;
-                }
-                if (dn.startsWith("Sontaran")) {
-                    return Monster.SONTARAN;
-                }
-                if (dn.startsWith("Strax")) {
-                    return Monster.STRAX;
-                }
-                if (dn.startsWith("Vashta")) {
-                    return Monster.VASHTA_NERADA;
-                }
-                if (dn.startsWith("Weeping Angel")) {
-                    return Monster.WEEPING_ANGEL;
-                }
-                if (dn.startsWith("Zygon")) {
-                    return Monster.ZYGON;
-                }
+        if (entity instanceof Zombie || entity instanceof PigZombie || entity instanceof Skeleton || entity instanceof Enderman) {
+            PersistentDataContainer pdc = entity.getPersistentDataContainer();
+            if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)) {
+                return Monster.CYBERMAN;
             }
-        }
-        if (entity instanceof Enderman) {
-            List<Entity> passengers = ((Enderman) entity).getPassengers();
-            if (passengers.size() > 0) {
-                Entity passenger = passengers.get(0);
-                if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
-                    return Monster.SILENT;
-                }
+            if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
+                return Monster.DALEK;
+            }
+            if (pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
+                return Monster.EMPTY_CHILD;
+            }
+            if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
+                return Monster.ICE_WARRIOR;
+            }
+            if (pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)) {
+                return Monster.SILURIAN;
+            }
+            if (pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
+                return Monster.SONTARAN;
+            }
+            if (pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER)) {
+                return Monster.STRAX;
+            }
+            if (pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)) {
+                return Monster.VASHTA_NERADA;
+            }
+            if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
+                return Monster.WEEPING_ANGEL;
+            }
+            if (pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
+                return Monster.ZYGON;
+            }
+            if (pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
+                return Monster.SILENT;
             }
         }
         return null;
