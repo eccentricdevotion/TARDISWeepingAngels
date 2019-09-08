@@ -7,8 +7,8 @@ import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
 import org.bukkit.entity.Guardian;
 import org.bukkit.entity.Skeleton;
-import org.bukkit.inventory.EntityEquipment;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Collection;
@@ -33,14 +33,10 @@ public class ReDisguise implements Runnable {
                 // get the current daleks
                 Collection<Skeleton> daleks = w.getEntitiesByClass(Skeleton.class);
                 daleks.forEach((d) -> {
-                    // does it have a helmet with a display name
-                    EntityEquipment ee = d.getEquipment();
-                    ItemStack is = ee.getHelmet();
-                    if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek")) {
-                        if (plugin.isLibsEnabled() && !DalekDisguiseLibs.isDisguised(d)) {
-                            DalekDisguiseLibs.disguise(d);
-                        } else if (!DalekDisguise.isDisguised(d)) {
-                            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> DalekDisguise.redisguise(d, w), 1L);
+                    PersistentDataContainer pdc = d.getPersistentDataContainer();
+                    if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
+                        if (d.getEquipment().getHelmet() == null) {
+                            TARDISWeepingAngels.getEqipper().setDalekEquipment(d);
                         }
                     }
                 });

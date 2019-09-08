@@ -4,15 +4,20 @@
 package me.eccentric_nz.tardisweepingangels.monsters.daleks;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPortalExitEvent;
-import org.bukkit.inventory.EntityEquipment;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
+
+import java.util.Collection;
 
 /**
  * @author eccentric_nz
@@ -30,17 +35,42 @@ public class Portal implements Listener {
         Entity e = event.getEntity();
         if (e.getType().equals(EntityType.SKELETON)) {
             Skeleton skeleton = (Skeleton) e;
-            EntityEquipment ee = skeleton.getEquipment();
-            ItemStack is = ee.getHelmet();
-            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                if (is.getType().equals(Material.VINE)) {
-                    if (plugin.isLibsEnabled() && !DalekDisguiseLibs.isDisguised(skeleton)) {
-                        DalekDisguiseLibs.disguise(skeleton);
-                    } else if (!DalekDisguise.isDisguised(skeleton)) {
-                        DalekDisguise.disguise(skeleton);
-                    }
-                }
-            }, 5L);
+            if (skeleton.getPersistentDataContainer().has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                    TARDISWeepingAngels.getEqipper().setDalekEquipment(skeleton);
+                }, 5L);
+            }
         }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void playerJoin(PlayerJoinEvent event) {
+        World world = event.getPlayer().getWorld();
+        redisguise(world);
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void playerRespawn(PlayerRespawnEvent event) {
+        World world = event.getPlayer().getWorld();
+        redisguise(world);
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void playerChangedWorld(PlayerChangedWorldEvent event) {
+        World world = event.getPlayer().getWorld();
+        redisguise(world);
+    }
+
+    private void redisguise(World w) {
+        // get the current daleks
+        Collection<Skeleton> daleks = w.getEntitiesByClass(Skeleton.class);
+        daleks.forEach((d) -> {
+            PersistentDataContainer pdc = d.getPersistentDataContainer();
+            if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
+                if (d.getEquipment().getHelmet() == null) {
+                    TARDISWeepingAngels.getEqipper().setDalekEquipment(d);
+                }
+            }
+        });
     }
 }
