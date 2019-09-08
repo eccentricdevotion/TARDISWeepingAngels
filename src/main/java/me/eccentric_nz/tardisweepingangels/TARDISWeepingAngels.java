@@ -52,7 +52,6 @@ public class TARDISWeepingAngels extends JavaPlugin {
     private Random random;
     private boolean steal;
     private PluginManager pm;
-    private boolean libsEnabled = false;
     private boolean citizensEnabled = false;
     public static NamespacedKey ANGEL;
     public static NamespacedKey CYBERMAN;
@@ -66,6 +65,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
     public static NamespacedKey VASHTA;
     public static NamespacedKey WARRIOR;
     public static NamespacedKey ZYGON;
+    public static MonsterEquipment eqipper;
 
     @Override
     public void onDisable() {
@@ -78,33 +78,10 @@ public class TARDISWeepingAngels extends JavaPlugin {
         pm = getServer().getPluginManager();
         PluginDescriptionFile pdfFile = getDescription();
         pluginName = ChatColor.GOLD + "[" + pdfFile.getName() + "]" + ChatColor.RESET + " ";
-        if (pm.isPluginEnabled("ProtocolLib") && pm.isPluginEnabled("LibsDisguises")) {
-            libsEnabled = true;
-            // check dependent plugin versions
-            if (!checkPluginVersion("ProtocolLib", "4.4.0")) {
-                getServer().getConsoleSender().sendMessage(pluginName + ChatColor.RED + "This plugin requires ProtocolLib to be v4.4.0 or higher, disabling...");
-                pm.disablePlugin(this);
-                return;
-            }
-            if (!checkPluginVersion("LibsDisguises", "9.8.2")) {
-                getServer().getConsoleSender().sendMessage(pluginName + ChatColor.RED + "This plugin requires LibsDisguises to be v9.8.2 or higher, disabling...");
-                pm.disablePlugin(this);
-                return;
-            }
-        } else if (pm.isPluginEnabled("TARDISChunkGenerator")) {
-            if (!checkPluginVersion("TARDISChunkGenerator", "4.1.1")) {
-                getServer().getConsoleSender().sendMessage(pluginName + ChatColor.RED + "This plugin requires TARDISChunkGenerator to be v4.1.1 or higher, disabling...");
-                pm.disablePlugin(this);
-                return;
-            }
-        } else {
-            System.err.println("[TARDISWeepingAngels] This plugin requires either TARDISChunkGenerator OR LibsDisguises, disabling...");
-            pm.disablePlugin(this);
-            return;
-        }
         citizensEnabled = pm.isPluginEnabled("Citizens");
         saveDefaultConfig();
         random = new Random();
+        eqipper = new MonsterEquipment();
         // update the config
         new Config(this).updateConfig();
         // initialise namespaced keys
@@ -161,8 +138,14 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new SontaranRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new ZygonRunnable(this), delay, delay);
         steal = (getConfig().getBoolean("angels.can_steal"));
-        notOnWater.add(Biome.DEEP_OCEAN);
         notOnWater.add(Biome.OCEAN);
+        notOnWater.add(Biome.DEEP_OCEAN);
+        notOnWater.add(Biome.COLD_OCEAN);
+        notOnWater.add(Biome.DEEP_COLD_OCEAN);
+        notOnWater.add(Biome.LUKEWARM_OCEAN);
+        notOnWater.add(Biome.DEEP_LUKEWARM_OCEAN);
+        notOnWater.add(Biome.WARM_OCEAN);
+        notOnWater.add(Biome.DEEP_WARM_OCEAN);
         notOnWater.add(Biome.RIVER);
     }
 
@@ -184,10 +167,6 @@ public class TARDISWeepingAngels extends JavaPlugin {
 
     public List<Biome> getNotOnWater() {
         return notOnWater;
-    }
-
-    public boolean isLibsEnabled() {
-        return libsEnabled;
     }
 
     public boolean isCitizensEnabled() {
@@ -229,8 +208,12 @@ public class TARDISWeepingAngels extends JavaPlugin {
         }
     }
 
+    public static MonsterEquipment getEqipper() {
+        return eqipper;
+    }
+
     public MonsterEquipment getWeepingAngelsAPI() {
-        return new MonsterEquipment();
+        return eqipper;
     }
 
     private void initKeys(TARDISWeepingAngels plugin) {
