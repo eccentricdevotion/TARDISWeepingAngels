@@ -36,7 +36,7 @@ public class ReDisguise implements Runnable {
                     PersistentDataContainer pdc = d.getPersistentDataContainer();
                     if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
                         if (d.getEquipment().getHelmet() == null) {
-                            TARDISWeepingAngels.getEqipper().setDalekEquipment(d);
+                            TARDISWeepingAngels.getEqipper().setDalekEquipment(d, false);
                         }
                     }
                 });

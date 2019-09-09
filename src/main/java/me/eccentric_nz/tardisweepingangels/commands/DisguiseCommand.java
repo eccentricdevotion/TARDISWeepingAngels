@@ -1,7 +1,6 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -28,10 +27,6 @@ public class DisguiseCommand implements CommandExecutor {
             }
             // check monster type
             String upper = args[0].toUpperCase();
-            if (upper.equals("DALEK")) {
-                sender.sendMessage(plugin.pluginName + "You cannot disguise as a Dalek!");
-                return true;
-            }
             if (upper.equals("SILENT")) {
                 sender.sendMessage(plugin.pluginName + "You cannot disguise as a Silent!");
                 return true;
@@ -69,45 +64,47 @@ public class DisguiseCommand implements CommandExecutor {
                 player.sendMessage(plugin.pluginName + "Your armour slots must be empty before using this command!");
                 return true;
             }
-            MonsterEquipment equip = new MonsterEquipment();
             if (args[1].equalsIgnoreCase("on")) {
                 switch (monster) {
                     case ANGEL:
                     case WEEPING_ANGEL:
-                        equip.setAngelEquipment(player, true);
+                        TARDISWeepingAngels.getEqipper().setAngelEquipment(player, true);
                         break;
                     case CYBERMAN:
-                        equip.setCyberEquipment(player, true);
+                        TARDISWeepingAngels.getEqipper().setCyberEquipment(player, true);
+                        break;
+                    case DALEK:
+                        TARDISWeepingAngels.getEqipper().setDalekEquipment(player, true);
                         break;
                     case ICE:
                     case ICE_WARRIOR:
                     case WARRIOR:
-                        equip.setWarriorEquipment(player, true);
+                        TARDISWeepingAngels.getEqipper().setWarriorEquipment(player, true);
                         break;
                     case CHILD:
                     case EMPTY:
                     case EMPTY_CHILD:
-                        equip.setEmptyChildEquipment(player, true);
+                        TARDISWeepingAngels.getEqipper().setEmptyChildEquipment(player, true);
                         break;
                     case SILURIAN:
-                        equip.setSilurianEquipment(player, true);
+                        TARDISWeepingAngels.getEqipper().setSilurianEquipment(player, true);
                         break;
                     case SONTARAN:
-                        equip.setSontaranEquipment(player, true);
+                        TARDISWeepingAngels.getEqipper().setSontaranEquipment(player, true);
                         break;
                     case STRAX:
-                        equip.setButlerEquipment(player, true);
+                        TARDISWeepingAngels.getEqipper().setButlerEquipment(player, true);
                         break;
                     case VASHTA:
                     case VASHTA_NERADA:
-                        equip.setVashtaNeradaEquipment(player, true);
+                        TARDISWeepingAngels.getEqipper().setVashtaNeradaEquipment(player, true);
                         break;
                     case ZYGON:
-                        equip.setZygonEquipment(player, true);
+                        TARDISWeepingAngels.getEqipper().setZygonEquipment(player, true);
                         break;
                 }
             } else {
-                equip.removeEquipment(player);
+                TARDISWeepingAngels.getEqipper().removeEquipment(player);
             }
             return true;
         }

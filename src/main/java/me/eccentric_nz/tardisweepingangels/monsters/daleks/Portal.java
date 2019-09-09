@@ -37,7 +37,7 @@ public class Portal implements Listener {
             Skeleton skeleton = (Skeleton) e;
             if (skeleton.getPersistentDataContainer().has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    TARDISWeepingAngels.getEqipper().setDalekEquipment(skeleton);
+                    TARDISWeepingAngels.getEqipper().setDalekEquipment(skeleton, false);
                 }, 5L);
             }
         }
@@ -68,7 +68,7 @@ public class Portal implements Listener {
             PersistentDataContainer pdc = d.getPersistentDataContainer();
             if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
                 if (d.getEquipment().getHelmet() == null) {
-                    TARDISWeepingAngels.getEqipper().setDalekEquipment(d);
+                    TARDISWeepingAngels.getEqipper().setDalekEquipment(d, false);
                 }
             }
         });

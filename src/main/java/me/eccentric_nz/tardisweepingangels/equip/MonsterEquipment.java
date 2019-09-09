@@ -356,34 +356,36 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
     }
 
     @Override
-    public void setDalekEquipment(LivingEntity le) {
+    public void setDalekEquipment(LivingEntity le, boolean disguise) {
         le.getPersistentDataContainer().set(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER, Monster.DALEK.getPersist());
         ItemStack helmet = new ItemStack(Material.MUSHROOM_STEM, 1);
         ItemMeta hmeta = helmet.getItemMeta();
         hmeta.setDisplayName("Dalek Head");
         hmeta.setCustomModelData(10000005 + weightedChoice.next());
         helmet.setItemMeta(hmeta);
-        ItemStack bow = new ItemStack(Material.BOW, 1);
-        ItemMeta bim = bow.getItemMeta();
-        bim.setCustomModelData(1);
-        bow.setItemMeta(bim);
         EntityEquipment ee = le.getEquipment();
         ee.setHelmet(helmet);
-        ee.setHelmetDropChance(0F);
-        ee.setItemInMainHand(bow);
-        ee.setItemInMainHandDropChance(0F);
         ee.setChestplate(null);
         ee.setLeggings(null);
         ee.setBoots(null);
         PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
-        PotionEffect resistance = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 360000, 1, true, false);
         le.addPotionEffect(invisibility);
-        le.addPotionEffect(resistance);
-        AttributeInstance attribute = le.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-        attribute.setBaseValue(30.0d);
-        le.setHealth(30.0d);
-        le.setCanPickupItems(false);
-        le.setRemoveWhenFarAway(false);
+        if (!disguise) {
+            ee.setHelmetDropChance(0F);
+            ItemStack bow = new ItemStack(Material.BOW, 1);
+            ItemMeta bim = bow.getItemMeta();
+            bim.setCustomModelData(1);
+            bow.setItemMeta(bim);
+            ee.setItemInMainHand(bow);
+            ee.setItemInMainHandDropChance(0F);
+            PotionEffect resistance = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 360000, 1, true, false);
+            le.addPotionEffect(resistance);
+            AttributeInstance attribute = le.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+            attribute.setBaseValue(30.0d);
+            le.setHealth(30.0d);
+            le.setCanPickupItems(false);
+            le.setRemoveWhenFarAway(false);
+        }
     }
 
     @Override
@@ -425,10 +427,18 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
     @Override
     public void removeEquipment(Player p) {
         PlayerInventory inv = p.getInventory();
+        ItemStack is = inv.getHelmet();
+        if (is != null && is.hasItemMeta()) {
+            ItemMeta im = is.getItemMeta();
+            if (im.hasDisplayName() && im.getDisplayName().equals("Dalek Head")) {
+                p.removePotionEffect(PotionEffectType.INVISIBILITY);
+            }
+        }
         inv.setHelmet(null);
         inv.setChestplate(null);
         inv.setLeggings(null);
         inv.setBoots(null);
+        p.updateInventory();
     }
 
     @Override

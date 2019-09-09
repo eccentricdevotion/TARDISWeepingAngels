@@ -87,9 +87,10 @@ public interface TARDISWeepingAngelsAPI {
     /**
      * Sets an entity as a Dalek.
      *
-     * @param le The LivingEntity to disguise
+     * @param le       The LivingEntity to disguise
+     * @param disguise A boolean to determine if this is a player disguise
      */
-    public void setDalekEquipment(LivingEntity le);
+    public void setDalekEquipment(LivingEntity le, boolean disguise);
 
     /**
      * Sets an entity as a Vashta Nerada.

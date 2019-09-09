@@ -3,7 +3,6 @@ package me.eccentric_nz.tardisweepingangels.commands;
 import me.eccentric_nz.tardischunkgenerator.TARDISHelper;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -54,7 +53,6 @@ public class SpawnCommand implements CommandExecutor {
             eyeLocation.setY(eyeLocation.getY() + 1);
             eyeLocation.setZ(eyeLocation.getZ() + 0.5F);
             World world = eyeLocation.getWorld();
-            MonsterEquipment equip = new MonsterEquipment();
             switch (monster) {
                 case ANGEL:
                 case WEEPING_ANGEL:
@@ -63,7 +61,7 @@ public class SpawnCommand implements CommandExecutor {
                     //setNormal(a);
                     a.setNoDamageTicks(75);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        equip.setAngelEquipment(a, false);
+                        TARDISWeepingAngels.getEqipper().setAngelEquipment(a, false);
                         plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(a, EntityType.SKELETON, Monster.WEEPING_ANGEL, eyeLocation));
                     }, 5L);
                     break;
@@ -76,7 +74,7 @@ public class SpawnCommand implements CommandExecutor {
                     //cyber.setVillagerProfession(null);
                     cyber.setBaby(false);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        equip.setCyberEquipment(c, false);
+                        TARDISWeepingAngels.getEqipper().setCyberEquipment(c, false);
                         plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(c, EntityType.ZOMBIE, Monster.CYBERMAN, eyeLocation));
                     }, 5L);
                     break;
@@ -86,7 +84,7 @@ public class SpawnCommand implements CommandExecutor {
                     //setNormal(d);
                     d.setNoDamageTicks(75);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        equip.setDalekEquipment(d);
+                        TARDISWeepingAngels.getEqipper().setDalekEquipment(d, false);
                         plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(d, EntityType.SKELETON, Monster.DALEK, eyeLocation));
                         if (args.length > 1 && args[1].equalsIgnoreCase("flying") && plugin.getServer().getPluginManager().isPluginEnabled("TARDISChunkGenerator")) {
                             TARDISHelper tardisHelper = (TARDISHelper) plugin.getServer().getPluginManager().getPlugin("TARDISChunkGenerator");
@@ -105,7 +103,7 @@ public class SpawnCommand implements CommandExecutor {
                     LivingEntity i = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
                     i.setSilent(true);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        equip.setWarriorEquipment(i, false);
+                        TARDISWeepingAngels.getEqipper().setWarriorEquipment(i, false);
                         plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(i, EntityType.PIG_ZOMBIE, Monster.ICE_WARRIOR, eyeLocation));
                     }, 5L);
                     PigZombie pigman = (PigZombie) i;
@@ -122,7 +120,7 @@ public class SpawnCommand implements CommandExecutor {
                     Zombie child = (Zombie) e;
                     child.setBaby(true);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        equip.setEmptyChildEquipment(e, false);
+                        TARDISWeepingAngels.getEqipper().setEmptyChildEquipment(e, false);
                         plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.EMPTY_CHILD, eyeLocation));
                     }, 5L);
                     break;
@@ -130,7 +128,7 @@ public class SpawnCommand implements CommandExecutor {
                     LivingEntity l = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ENDERMAN);
                     l.setSilent(true);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        equip.setSilentEquipment(l);
+                        TARDISWeepingAngels.getEqipper().setSilentEquipment(l);
                         plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(l, EntityType.ENDERMAN, Monster.SILENT, eyeLocation));
                     }, 5L);
                     break;
@@ -139,7 +137,7 @@ public class SpawnCommand implements CommandExecutor {
                     s.setSilent(true);
                     s.setNoDamageTicks(75);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        equip.setSilurianEquipment(s, false);
+                        TARDISWeepingAngels.getEqipper().setSilurianEquipment(s, false);
                         plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(s, EntityType.SKELETON, Monster.SILURIAN, eyeLocation));
                     }, 5L);
                     break;
@@ -150,7 +148,7 @@ public class SpawnCommand implements CommandExecutor {
                     Zombie sontaran = (Zombie) o;
                     sontaran.setBaby(false);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        equip.setSontaranEquipment(o, false);
+                        TARDISWeepingAngels.getEqipper().setSontaranEquipment(o, false);
                         plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(o, EntityType.ZOMBIE, Monster.SONTARAN, eyeLocation));
                     }, 5L);
                     break;
@@ -162,7 +160,7 @@ public class SpawnCommand implements CommandExecutor {
                     strax.setBaby(false);
                     strax.setAngry(false);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        equip.setButlerEquipment(x, false);
+                        TARDISWeepingAngels.getEqipper().setButlerEquipment(x, false);
                         plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(x, EntityType.PIG_ZOMBIE, Monster.STRAX, eyeLocation));
                     }, 5L);
                     break;
@@ -174,7 +172,7 @@ public class SpawnCommand implements CommandExecutor {
                     Zombie vashta = (Zombie) v;
                     vashta.setBaby(false);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        equip.setVashtaNeradaEquipment(v, false);
+                        TARDISWeepingAngels.getEqipper().setVashtaNeradaEquipment(v, false);
                         plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(v, EntityType.ZOMBIE, Monster.VASHTA_NERADA, eyeLocation));
                     }, 5L);
                     break;
@@ -185,7 +183,7 @@ public class SpawnCommand implements CommandExecutor {
                     Zombie zygon = (Zombie) z;
                     zygon.setBaby(false);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        equip.setZygonEquipment(z, false);
+                        TARDISWeepingAngels.getEqipper().setZygonEquipment(z, false);
                         plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(z, EntityType.ZOMBIE, Monster.ZYGON, eyeLocation));
                     }, 5L);
                     break;

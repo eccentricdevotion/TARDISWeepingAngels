@@ -34,7 +34,7 @@ public class ChunkLoad implements Listener {
                 if (d.getPersistentDataContainer().has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
                     Skeleton skeleton = (Skeleton) d;
                     if (skeleton.getEquipment().getHelmet() == null) {
-                        TARDISWeepingAngels.getEqipper().setDalekEquipment(skeleton);
+                        TARDISWeepingAngels.getEqipper().setDalekEquipment(skeleton, false);
                     }
                 } else if (d.getPersistentDataContainer().has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
                     ItemStack head = new ItemStack(Material.STONE_BUTTON, 1);
