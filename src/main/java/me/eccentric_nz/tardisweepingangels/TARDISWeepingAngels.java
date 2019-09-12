@@ -17,7 +17,7 @@ import me.eccentric_nz.tardisweepingangels.monsters.daleks.Portal;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.ReDisguise;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.GasMask;
-import me.eccentric_nz.tardisweepingangels.monsters.silurians.SilurianRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.silurians.SilurianSpawnerListener;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.Butler;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.SontaranRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.*;
@@ -108,6 +108,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         pm.registerEvents(new K9TameOrBreed(), this);
         pm.registerEvents(new RainDamage(), this);
         pm.registerEvents(new ChunkLoad(this), this);
+        pm.registerEvents(new SilurianSpawnerListener(this), this);
         // register commands
         getCommand("twa").setExecutor(new AdminCommand(this));
         getCommand("twac").setExecutor(new CountCommand(this));
@@ -133,7 +134,6 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new DalekRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new EmptyChildRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new IceWarriorRunnable(this), delay, delay);
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, new SilurianRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new SilentRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new SontaranRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new ZygonRunnable(this), delay, delay);
