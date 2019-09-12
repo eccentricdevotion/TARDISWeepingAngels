@@ -6,7 +6,6 @@ package me.eccentric_nz.tardisweepingangels.monsters;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Location;
@@ -37,7 +36,6 @@ public class VashtaNeradaListener implements Listener {
     private final TARDISWeepingAngels plugin;
     private final Random r = new Random();
     private final List<BlockFace> faces = new ArrayList<>();
-    private final MonsterEquipment equipper;
 
     public VashtaNeradaListener(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
@@ -45,7 +43,6 @@ public class VashtaNeradaListener implements Listener {
         faces.add(BlockFace.NORTH);
         faces.add(BlockFace.SOUTH);
         faces.add(BlockFace.WEST);
-        equipper = new MonsterEquipment();
     }
 
     @EventHandler
@@ -82,13 +79,11 @@ public class VashtaNeradaListener implements Listener {
         LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
         e.setSilent(true);
         Zombie vashta = (Zombie) e;
-        //vashta.setVillager(false);
-        //vashta.setVillagerProfession(null);
         vashta.setBaby(false);
         PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
         e.addPotionEffect(p);
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            equipper.setVashtaNeradaEquipment(e, false);
+            TARDISWeepingAngels.getEqipper().setVashtaNeradaEquipment(e, false);
             plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.VASHTA_NERADA, l));
         }, 5L);
     }

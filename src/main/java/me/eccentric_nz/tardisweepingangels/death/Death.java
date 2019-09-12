@@ -5,7 +5,6 @@ package me.eccentric_nz.tardisweepingangels.death;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import net.citizensnpcs.api.CitizensAPI;
 import org.bukkit.Location;
@@ -171,7 +170,7 @@ public class Death implements Listener {
                     Location l = event.getEntity().getLocation();
                     LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
                     e.setSilent(true);
-                    new MonsterEquipment().setCyberEquipment(e, false);
+                    TARDISWeepingAngels.getEqipper().setCyberEquipment(e, false);
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.CYBERMAN, l));
                     if (event.getEntity() instanceof Player) {
                         String name = event.getEntity().getName();

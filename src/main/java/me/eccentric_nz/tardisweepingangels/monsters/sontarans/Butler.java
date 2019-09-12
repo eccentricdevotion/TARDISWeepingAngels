@@ -5,7 +5,6 @@ package me.eccentric_nz.tardisweepingangels.monsters.sontarans;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -65,7 +64,7 @@ public class Butler implements Listener {
                         pz.setBaby(false);
                         pz.setAngry(false);
                         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                            new MonsterEquipment().setButlerEquipment(pz, false);
+                            TARDISWeepingAngels.getEqipper().setButlerEquipment(pz, false);
                             pz.getPersistentDataContainer().set(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER, Monster.STRAX.getPersist());
                             pz.getPersistentDataContainer().remove(TARDISWeepingAngels.SONTARAN);
                             plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(pz, EntityType.PIG_ZOMBIE, Monster.STRAX, l));

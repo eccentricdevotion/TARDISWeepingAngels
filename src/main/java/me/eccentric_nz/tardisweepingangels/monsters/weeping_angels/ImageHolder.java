@@ -5,7 +5,6 @@ package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -26,13 +25,11 @@ import java.util.Random;
 public class ImageHolder implements Listener {
 
     private final TARDISWeepingAngels plugin;
-    private final MonsterEquipment equipper;
     private final List<BlockFace> faces = new ArrayList<>();
     Random rand = new Random();
 
     public ImageHolder(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        equipper = new MonsterEquipment();
         faces.add(BlockFace.EAST);
         faces.add(BlockFace.NORTH);
         faces.add(BlockFace.WEST);
@@ -53,7 +50,7 @@ public class ImageHolder implements Listener {
                 LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.SKELETON);
                 e.setSilent(true);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    equipper.setAngelEquipment(e, false);
+                    TARDISWeepingAngels.getEqipper().setAngelEquipment(e, false);
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.WEEPING_ANGEL, l));
                 }, 5L);
             }, 20L);
