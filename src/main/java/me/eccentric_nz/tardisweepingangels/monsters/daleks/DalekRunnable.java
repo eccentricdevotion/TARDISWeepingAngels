@@ -15,8 +15,8 @@ import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Skeleton;
-import org.bukkit.inventory.EntityEquipment;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -45,12 +45,14 @@ public class DalekRunnable implements Runnable {
             if (plugin.getConfig().getInt("daleks.worlds." + name) > 0) {
                 // get the current daleks
                 List<Skeleton> daleks = new ArrayList<>();
-                Collection<Skeleton> disguised = w.getEntitiesByClass(Skeleton.class);
-                disguised.forEach((d) -> {
-                    // does it have a helmet with a display name
-                    EntityEquipment ee = d.getEquipment();
-                    ItemStack is = ee.getHelmet();
-                    if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek")) {
+                Collection<Skeleton> skeletons = w.getEntitiesByClass(Skeleton.class);
+                skeletons.forEach((d) -> {
+                    PersistentDataContainer pdc = d.getPersistentDataContainer();
+                    if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
+//                    // does it have a helmet with a display name
+//                    EntityEquipment ee = d.getEquipment();
+//                    ItemStack is = ee.getHelmet();
+//                    if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek")) {
                         daleks.add(d);
                     }
                 });

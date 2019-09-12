@@ -5,16 +5,18 @@ package me.eccentric_nz.tardisweepingangels.monsters.empty_child;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Zombie;
-import org.bukkit.inventory.EntityEquipment;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,12 +29,10 @@ public class EmptyChildRunnable implements Runnable {
 
     private final TARDISWeepingAngels plugin;
     private final int spawn_rate;
-    private final MonsterEquipment equipper;
 
     public EmptyChildRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
         spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
-        equipper = new MonsterEquipment();
     }
 
     @Override
@@ -45,12 +45,9 @@ public class EmptyChildRunnable implements Runnable {
                 List<Zombie> wheresmymummy = new ArrayList<>();
                 Collection<Zombie> children = w.getEntitiesByClass(Zombie.class);
                 children.forEach((c) -> {
-                    EntityEquipment ee = c.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
-                        ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Empty Child")) {
-                            wheresmymummy.add(c);
-                        }
+                    PersistentDataContainer pdc = c.getPersistentDataContainer();
+                    if (pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
+                        wheresmymummy.add(c);
                     }
                 });
                 // count the current empty children
@@ -81,7 +78,7 @@ public class EmptyChildRunnable implements Runnable {
                 Zombie child = (Zombie) e;
                 child.setBaby(true);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    equipper.setEmptyChildEquipment(e, false);
+                    TARDISWeepingAngels.getEqipper().setEmptyChildEquipment(e, false);
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.EMPTY_CHILD, l));
                 }, 5L);
             }

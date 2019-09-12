@@ -5,7 +5,6 @@ package me.eccentric_nz.tardisweepingangels.silent;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
@@ -16,6 +15,8 @@ import org.bukkit.World;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,12 +29,10 @@ public class SilentRunnable implements Runnable {
 
     private final TARDISWeepingAngels plugin;
     private final int spawn_rate;
-    private final MonsterEquipment equipper;
 
     public SilentRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
         spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
-        equipper = new MonsterEquipment();
     }
 
     @Override
@@ -45,12 +44,12 @@ public class SilentRunnable implements Runnable {
                 // get the current silents
                 List<Enderman> papal = new ArrayList<>();
                 Collection<Enderman> mainframe = w.getEntitiesByClass(Enderman.class);
-                mainframe.forEach((c) -> {
-                    if (!c.getPassengers().isEmpty() && c.getPassengers().get(0) != null && c.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
-                        papal.add(c);
+                mainframe.forEach((s) -> {
+                    PersistentDataContainer pdc = s.getPersistentDataContainer();
+                    if (pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
+                        papal.add(s);
                     }
                 });
-                // count the current cybermen
                 if (papal.size() < plugin.getConfig().getInt("silent.worlds." + name)) {
                     // if less than maximum, spawn some more
                     for (int i = 0; i < spawn_rate; i++) {
@@ -77,7 +76,7 @@ public class SilentRunnable implements Runnable {
                 e.setSilent(true);
                 e.setCanPickupItems(false);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    equipper.setSilentEquipment(e);
+                    TARDISWeepingAngels.getEqipper().setSilentEquipment(e);
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ENDERMAN, Monster.SILENT, l));
                 }, 5L);
             }

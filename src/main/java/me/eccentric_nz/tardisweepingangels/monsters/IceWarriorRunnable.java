@@ -5,17 +5,19 @@ package me.eccentric_nz.tardisweepingangels.monsters;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.PigZombie;
-import org.bukkit.inventory.EntityEquipment;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -30,13 +32,11 @@ public class IceWarriorRunnable implements Runnable {
 
     private final TARDISWeepingAngels plugin;
     private final int spawn_rate;
-    private final MonsterEquipment equipper;
     private final List<Biome> biomes = new ArrayList<>();
 
     public IceWarriorRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
         spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
-        equipper = new MonsterEquipment();
         biomes.add(Biome.DEEP_FROZEN_OCEAN);
         biomes.add(Biome.FROZEN_OCEAN);
         biomes.add(Biome.FROZEN_RIVER);
@@ -62,12 +62,9 @@ public class IceWarriorRunnable implements Runnable {
                     List<PigZombie> warriors = new ArrayList<>();
                     Collection<PigZombie> piggies = w.getEntitiesByClass(PigZombie.class);
                     piggies.forEach((pz) -> {
-                        EntityEquipment ee = pz.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.IRON_HELMET)) {
-                            ItemStack is = ee.getHelmet();
-                            if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Ice Warrior")) {
-                                warriors.add(pz);
-                            }
+                        PersistentDataContainer pdc = pz.getPersistentDataContainer();
+                        if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
+                            warriors.add(pz);
                         }
                     });
                     // count the current warriors
@@ -102,7 +99,7 @@ public class IceWarriorRunnable implements Runnable {
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 warrior.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    equipper.setWarriorEquipment(e, false);
+                    TARDISWeepingAngels.getEqipper().setWarriorEquipment(e, false);
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.PIG_ZOMBIE, Monster.ICE_WARRIOR, l));
                 }, 5L);
             }

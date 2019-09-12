@@ -5,15 +5,18 @@ package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Skeleton;
-import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,12 +29,10 @@ public class WeepingAngelsRunnable implements Runnable {
 
     private final TARDISWeepingAngels plugin;
     private final int spawn_rate;
-    private final MonsterEquipment equipper;
 
     public WeepingAngelsRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
         spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
-        equipper = new MonsterEquipment();
     }
 
     @Override
@@ -46,10 +47,10 @@ public class WeepingAngelsRunnable implements Runnable {
                     // get the current angels
                     List<Skeleton> angels = new ArrayList<>();
                     Collection<Skeleton> skellies = w.getEntitiesByClass(Skeleton.class);
-                    skellies.forEach((s) -> {
-                        EntityEquipment ee = s.getEquipment();
-                        if (ee.getHelmet().getType().equals(Material.STONE_BUTTON) || ee.getHelmet().getType().equals(Material.LILY_PAD)) {
-                            angels.add(s);
+                    skellies.forEach((a) -> {
+                        PersistentDataContainer pdc = a.getPersistentDataContainer();
+                        if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
+                            angels.add(a);
                         }
                     });
                     // count the current angels
@@ -79,7 +80,7 @@ public class WeepingAngelsRunnable implements Runnable {
                 LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.SKELETON);
                 e.setSilent(true);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    equipper.setAngelEquipment(e, false);
+                    TARDISWeepingAngels.getEqipper().setAngelEquipment(e, false);
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.WEEPING_ANGEL, l));
                 }, 5L);
             }
