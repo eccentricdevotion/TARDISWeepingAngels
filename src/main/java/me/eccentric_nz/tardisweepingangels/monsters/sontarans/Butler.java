@@ -15,7 +15,9 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,28 +49,31 @@ public class Butler implements Listener {
                 if (h.hasItemMeta() && h.getItemMeta().hasDisplayName() && h.getItemMeta().getDisplayName().startsWith("Sontaran")) {
                     Player p = event.getPlayer();
                     ItemStack is = p.getInventory().getItemInMainHand();
-                    if (is.getType().equals(Material.POTION) && is.getDurability() == (short) 8264) {
-                        // remove the potion
-                        int a = p.getInventory().getItemInMainHand().getAmount();
-                        int a2 = a - 1;
-                        if (a2 > 0) {
-                            p.getInventory().getItemInMainHand().setAmount(a2);
-                        } else {
-                            p.getInventory().removeItem(new ItemStack(Material.POTION, 1, (short) 8264));
+                    if (is.getType().equals(Material.POTION)) {
+                        PotionMeta potionMeta = (PotionMeta) is.getItemMeta();
+                        if (potionMeta != null && potionMeta.getBasePotionData().getType().equals(PotionType.WEAKNESS)) {
+                            // remove the potion
+                            int a = p.getInventory().getItemInMainHand().getAmount();
+                            int a2 = a - 1;
+                            if (a2 > 0) {
+                                p.getInventory().getItemInMainHand().setAmount(a2);
+                            } else {
+                                p.getInventory().removeItem(is);
+                            }
+                            // switch the armour to a butler uniform
+                            Location l = zom.getLocation();
+                            zom.remove();
+                            PigZombie pz = (PigZombie) l.getWorld().spawnEntity(l, EntityType.PIG_ZOMBIE);
+                            pz.setSilent(true);
+                            pz.setBaby(false);
+                            pz.setAngry(false);
+                            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                                TARDISWeepingAngels.getEqipper().setButlerEquipment(pz, false);
+                                pz.getPersistentDataContainer().set(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER, Monster.STRAX.getPersist());
+                                pz.getPersistentDataContainer().remove(TARDISWeepingAngels.SONTARAN);
+                                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(pz, EntityType.PIG_ZOMBIE, Monster.STRAX, l));
+                            }, 2L);
                         }
-                        // switch the armour to a butler uniform
-                        Location l = zom.getLocation();
-                        zom.remove();
-                        PigZombie pz = (PigZombie) l.getWorld().spawnEntity(l, EntityType.PIG_ZOMBIE);
-                        pz.setSilent(true);
-                        pz.setBaby(false);
-                        pz.setAngry(false);
-                        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                            TARDISWeepingAngels.getEqipper().setButlerEquipment(pz, false);
-                            pz.getPersistentDataContainer().set(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER, Monster.STRAX.getPersist());
-                            pz.getPersistentDataContainer().remove(TARDISWeepingAngels.SONTARAN);
-                            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(pz, EntityType.PIG_ZOMBIE, Monster.STRAX, l));
-                        }, 2L);
                     }
                     return;
                 }
