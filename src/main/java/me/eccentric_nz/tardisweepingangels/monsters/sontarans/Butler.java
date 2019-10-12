@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -99,7 +100,7 @@ public class Butler implements Listener {
                         } else {
                             p.sendMessage(plugin.pluginName + "Strax is not lactating right now, try again later.");
                         }
-                    } else {
+                    } else if (event.getHand().equals(EquipmentSlot.HAND)) {
                         p.playSound(zom.getLocation(), "strax", 1.0f, 1.0f);
                     }
                 }
