@@ -77,7 +77,7 @@
         <dependency>
             <groupId>net.citizensnpcs</groupId>
             <artifactId>citizensapi</artifactId>
-            <version>2.0.23-SNAPSHOT</version>
+            <version>2.0.25-SNAPSHOT</version>
             <type>jar</type>
             <scope>system</scope>
             <systemPath>${basedir}/lib/CitizensAPI.jar</systemPath>
@@ -85,7 +85,7 @@
         <dependency>
             <groupId>me.eccentric_nz.tardischunkgenerator</groupId>
             <artifactId>TARDISChunkGenerator</artifactId>
-            <version>4.1.1</version>
+            <version>4.2</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
