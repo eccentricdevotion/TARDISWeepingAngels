@@ -4,11 +4,11 @@ main: me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels
 name: TARDISWeepingAngels
 load: POSTWORLD
 version: 3.2
-api-version: 1.14
+api-version: 1.15
 website: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 dev-url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
-softdepend: [TARDISChunkGenerator,LibsDisguises,WorldGuard]
+softdepend: [TARDISChunkGenerator,WorldGuard]
 permissions:
   tardisweepingangels.spawn:
     description: Allow players to spawn a monster.
