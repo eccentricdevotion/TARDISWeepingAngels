@@ -88,6 +88,10 @@ public class PlayerDeath implements Listener {
                         event.setDeathMessage(name + " was slain by a Weeping Angel");
                         return;
                     }
+                    if (pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)) {
+                        event.setDeathMessage(name + " was slain by a Silurian");
+                        return;
+                    }
                 }
             }
             if (attacker.getType().equals(EntityType.ARROW)) {
