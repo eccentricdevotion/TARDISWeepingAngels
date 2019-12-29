@@ -107,7 +107,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         pm.registerEvents(new AntiTeleport(this), this);
         pm.registerEvents(new K9TameOrBreed(), this);
         pm.registerEvents(new RainDamage(), this);
-        pm.registerEvents(new ChunkLoad(this), this);
+        pm.registerEvents(new ChunkLoad(), this);
         pm.registerEvents(new SilurianSpawnerListener(this), this);
         // register commands
         getCommand("twa").setExecutor(new AdminCommand(this));
@@ -137,7 +137,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new SilentRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new SontaranRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new ZygonRunnable(this), delay, delay);
-        steal = (getConfig().getBoolean("angels.can_steal"));
+        steal = (getConfig().getBoolean("angels.angels_can_steal"));
         notOnWater.add(Biome.OCEAN);
         notOnWater.add(Biome.DEEP_OCEAN);
         notOnWater.add(Biome.COLD_OCEAN);
