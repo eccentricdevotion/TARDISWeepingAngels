@@ -29,8 +29,8 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setAngelEquipment(LivingEntity le, boolean disguise) {
-        ItemStack wing = new ItemStack(Material.BARRIER, 1);
-        ItemStack head = new ItemStack(Material.STONE_BUTTON, 1);
+        ItemStack head = new ItemStack(Material.BRICK, 1);
+        ItemStack arm = new ItemStack(Material.BRICK, 1);
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
         ItemStack boots = new ItemStack(Material.IRON_BOOTS, 1);
@@ -38,31 +38,32 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             chestplate.setDurability((short) 235);
             leggings.setDurability((short) 220);
         }
-        ItemMeta wmeta = wing.getItemMeta();
-        wmeta.setCustomModelData(10000001);
-        wing.setItemMeta(wmeta);
-        ItemMeta hmeta = head.getItemMeta();
-        hmeta.setDisplayName("Weeping Angel Head");
-        hmeta.setCustomModelData(10000001);
-        head.setItemMeta(hmeta);
-        ItemMeta cmeta = chestplate.getItemMeta();
-        cmeta.setDisplayName("Weeping Angel Chest");
-        chestplate.setItemMeta(cmeta);
-        ItemMeta lmeta = leggings.getItemMeta();
-        lmeta.setDisplayName("Weeping Angel Legs");
-        leggings.setItemMeta(lmeta);
-        ItemMeta bmeta = boots.getItemMeta();
-        bmeta.setDisplayName("Weeping Angel Feet");
-        boots.setItemMeta(bmeta);
+        ItemMeta headMeta = head.getItemMeta();
+        headMeta.setDisplayName("Weeping Angel Head");
+        headMeta.setCustomModelData(4);
+        head.setItemMeta(headMeta);
+        ItemMeta armMeta = arm.getItemMeta();
+        armMeta.setDisplayName("Weeping Angel Arm");
+        armMeta.setCustomModelData(2);
+        arm.setItemMeta(armMeta);
+        ItemMeta chestMeta = chestplate.getItemMeta();
+        chestMeta.setDisplayName("Weeping Angel Chest");
+        chestplate.setItemMeta(chestMeta);
+        ItemMeta legMeta = leggings.getItemMeta();
+        legMeta.setDisplayName("Weeping Angel Legs");
+        leggings.setItemMeta(legMeta);
+        ItemMeta waeponMeta = boots.getItemMeta();
+        waeponMeta.setDisplayName("Weeping Angel Feet");
+        boots.setItemMeta(waeponMeta);
         EntityEquipment ee = le.getEquipment();
         ee.setHelmet(head);
         ee.setChestplate(chestplate);
         ee.setLeggings(leggings);
         ee.setBoots(boots);
         if (!disguise) {
-            ee.setItemInMainHand(wing);
+            ee.setItemInMainHand(arm);
+            ee.setItemInOffHand(arm.clone());
             ee.setItemInMainHandDropChance(0F);
-            ee.setItemInOffHand(wing);
             ee.setItemInOffHandDropChance(0F);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
@@ -75,24 +76,29 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setWarriorEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.IRON_HELMET, 1);
+        ItemStack helmet = new ItemStack(Material.SNOWBALL, 1);
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
-        ItemStack weapon = new ItemStack(Material.IRON_SWORD, 1);
+        ItemStack arm = new ItemStack(Material.SNOWBALL, 1);
+        ItemStack weapon = new ItemStack(Material.SNOWBALL, 1);
         if (disguise) {
-            helmet.setDurability((short) 160);
             chestplate.setDurability((short) 235);
             leggings.setDurability((short) 220);
         }
-        ItemMeta hmeta = helmet.getItemMeta();
-        hmeta.setDisplayName("Ice Warrior Head");
-        helmet.setItemMeta(hmeta);
-        ItemMeta cmeta = chestplate.getItemMeta();
-        cmeta.setDisplayName("Ice Warrior Chest");
-        chestplate.setItemMeta(cmeta);
-        ItemMeta lmeta = leggings.getItemMeta();
-        lmeta.setDisplayName("Ice Warrior Legs");
-        leggings.setItemMeta(lmeta);
+        ItemMeta headMeta = helmet.getItemMeta();
+        headMeta.setDisplayName("Ice Warrior Head");
+        headMeta.setCustomModelData(4);
+        helmet.setItemMeta(headMeta);
+        ItemMeta armMeta = arm.getItemMeta();
+        armMeta.setDisplayName("Ice Warrior Arm");
+        armMeta.setCustomModelData(2);
+        arm.setItemMeta(armMeta);
+        ItemMeta chestMeta = chestplate.getItemMeta();
+        chestMeta.setDisplayName("Ice Warrior Chest");
+        chestplate.setItemMeta(chestMeta);
+        ItemMeta legMeta = leggings.getItemMeta();
+        legMeta.setDisplayName("Ice Warrior Legs");
+        leggings.setItemMeta(legMeta);
 
         EntityEquipment ee = le.getEquipment();
         ee.setHelmet(helmet);
@@ -102,10 +108,12 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         if (!disguise) {
             ItemMeta sword = weapon.getItemMeta();
             sword.setDisplayName("Ice Warrior Dagger");
+            sword.setCustomModelData(3);
             weapon.setItemMeta(sword);
             ee.setItemInMainHand(weapon);
-            ee.setItemInOffHand(null);
+            ee.setItemInOffHand(arm);
             ee.setItemInMainHandDropChance(0F);
+            ee.setItemInOffHandDropChance(0F);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
@@ -116,24 +124,28 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setCyberEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.MUSHROOM_STEM, 1);
+        ItemStack helmet = new ItemStack(Material.IRON_INGOT, 1);
+        ItemStack arm = new ItemStack(Material.IRON_INGOT, 1);
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
         if (disguise) {
-            helmet.setDurability((short) 160);
             chestplate.setDurability((short) 235);
             leggings.setDurability((short) 220);
         }
-        ItemMeta hmeta = helmet.getItemMeta();
-        hmeta.setDisplayName("Cyberman Head");
-        hmeta.setCustomModelData(10000002);
-        helmet.setItemMeta(hmeta);
-        ItemMeta cmeta = chestplate.getItemMeta();
-        cmeta.setDisplayName("Cyberman Chest");
-        chestplate.setItemMeta(cmeta);
-        ItemMeta lmeta = leggings.getItemMeta();
-        lmeta.setDisplayName("Cyberman Legs");
-        leggings.setItemMeta(lmeta);
+        ItemMeta headMeta = helmet.getItemMeta();
+        headMeta.setDisplayName("Cyberman Head");
+        headMeta.setCustomModelData(3);
+        helmet.setItemMeta(headMeta);
+        ItemMeta armMeta = arm.getItemMeta();
+        armMeta.setDisplayName("Cyberman Arm");
+        armMeta.setCustomModelData(2);
+        arm.setItemMeta(armMeta);
+        ItemMeta chestMeta = chestplate.getItemMeta();
+        chestMeta.setDisplayName("Cyberman Chest");
+        chestplate.setItemMeta(chestMeta);
+        ItemMeta legMeta = leggings.getItemMeta();
+        legMeta.setDisplayName("Cyberman Legs");
+        leggings.setItemMeta(legMeta);
         EntityEquipment ee = le.getEquipment();
         ee.setHelmet(helmet);
         ee.setChestplate(chestplate);
@@ -141,8 +153,9 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         ee.setBoots(null);
         if (!disguise) {
             ee.setItemInMainHandDropChance(0F);
-            ee.setItemInMainHand(null);
-            ee.setItemInOffHand(null);
+            ee.setItemInOffHandDropChance(0F);
+            ee.setItemInMainHand(arm);
+            ee.setItemInOffHand(arm.clone());
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
@@ -153,23 +166,28 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setEmptyChildEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.IRON_HELMET, 1);
+        ItemStack helmet = new ItemStack(Material.SUGAR, 1);
+        ItemStack arm = new ItemStack(Material.SUGAR, 1);
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
         if (disguise) {
-            helmet.setDurability((short) 160);
             chestplate.setDurability((short) 235);
             leggings.setDurability((short) 220);
         }
-        ItemMeta hmeta = helmet.getItemMeta();
-        hmeta.setDisplayName("Empty Child Head");
-        helmet.setItemMeta(hmeta);
-        ItemMeta cmeta = chestplate.getItemMeta();
-        cmeta.setDisplayName("Empty Child Chest");
-        chestplate.setItemMeta(cmeta);
-        ItemMeta lmeta = leggings.getItemMeta();
-        lmeta.setDisplayName("Empty Child Legs");
-        leggings.setItemMeta(lmeta);
+        ItemMeta headMeta = helmet.getItemMeta();
+        headMeta.setDisplayName("Empty Child Head");
+        headMeta.setCustomModelData(3);
+        helmet.setItemMeta(headMeta);
+        ItemMeta armMeta = arm.getItemMeta();
+        armMeta.setDisplayName("Empty Child Arm");
+        armMeta.setCustomModelData(3);
+        arm.setItemMeta(armMeta);
+        ItemMeta chestMeta = chestplate.getItemMeta();
+        chestMeta.setDisplayName("Empty Child Chest");
+        chestplate.setItemMeta(chestMeta);
+        ItemMeta legMeta = leggings.getItemMeta();
+        legMeta.setDisplayName("Empty Child Legs");
+        leggings.setItemMeta(legMeta);
 
         EntityEquipment ee = le.getEquipment();
         ee.setChestplate(chestplate);
@@ -181,8 +199,10 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             le.removePotionEffect(PotionEffectType.SPEED);
             le.addPotionEffect(p);
             le.setCanPickupItems(false);
-            ee.setItemInMainHand(null);
-            ee.setItemInOffHand(null);
+            ee.setItemInMainHand(arm);
+            ee.setItemInOffHand(arm.clone());
+            ee.setItemInMainHandDropChance(0F);
+            ee.setItemInOffHandDropChance(0F);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
@@ -192,24 +212,28 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setZygonEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.MUSHROOM_STEM, 1);
+        ItemStack helmet = new ItemStack(Material.PAINTING, 1);
+        ItemStack arm = new ItemStack(Material.PAINTING, 1);
         ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
         if (disguise) {
-            helmet.setDurability((short) 160);
             chestplate.setDurability((short) 235);
             leggings.setDurability((short) 220);
         }
-        ItemMeta hmeta = helmet.getItemMeta();
-        hmeta.setDisplayName("Zygon Head");
-        hmeta.setCustomModelData(10000003);
-        helmet.setItemMeta(hmeta);
-        ItemMeta cmeta = chestplate.getItemMeta();
-        cmeta.setDisplayName("Zygon Chest");
-        chestplate.setItemMeta(cmeta);
-        ItemMeta lmeta = leggings.getItemMeta();
-        lmeta.setDisplayName("Zygon Legs");
-        leggings.setItemMeta(lmeta);
+        ItemMeta headMeta = helmet.getItemMeta();
+        headMeta.setDisplayName("Zygon Head");
+        headMeta.setCustomModelData(3);
+        helmet.setItemMeta(headMeta);
+        ItemMeta armMeta = arm.getItemMeta();
+        armMeta.setDisplayName("Zygon Arm");
+        armMeta.setCustomModelData(2);
+        arm.setItemMeta(armMeta);
+        ItemMeta chestMeta = chestplate.getItemMeta();
+        chestMeta.setDisplayName("Zygon Chest");
+        chestplate.setItemMeta(chestMeta);
+        ItemMeta legMeta = leggings.getItemMeta();
+        legMeta.setDisplayName("Zygon Legs");
+        leggings.setItemMeta(legMeta);
 
         EntityEquipment ee = le.getEquipment();
         ee.setChestplate(chestplate);
@@ -217,8 +241,10 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         ee.setBoots(null);
         ee.setHelmet(helmet);
         if (!disguise) {
-            ee.setItemInMainHand(null);
-            ee.setItemInOffHand(null);
+            ee.setItemInMainHand(arm);
+            ee.setItemInOffHand(arm.clone());
+            ee.setItemInMainHandDropChance(0F);
+            ee.setItemInOffHandDropChance(0F);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
@@ -229,24 +255,28 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setSilurianEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.MUSHROOM_STEM, 1);
+        ItemStack helmet = new ItemStack(Material.FEATHER, 1);
+        ItemStack arm = new ItemStack(Material.BOW, 1);
         ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
         if (disguise) {
-            helmet.setDurability((short) 160);
             chestplate.setDurability((short) 235);
             leggings.setDurability((short) 220);
         }
-        ItemMeta hmeta = helmet.getItemMeta();
-        hmeta.setDisplayName("Silurian Head");
-        hmeta.setCustomModelData(10000022);
-        helmet.setItemMeta(hmeta);
-        ItemMeta cmeta = chestplate.getItemMeta();
-        cmeta.setDisplayName("Silurian Chest");
-        chestplate.setItemMeta(cmeta);
-        ItemMeta lmeta = leggings.getItemMeta();
-        lmeta.setDisplayName("Silurian Legs");
-        leggings.setItemMeta(lmeta);
+        ItemMeta headMeta = helmet.getItemMeta();
+        headMeta.setDisplayName("Silurian Head");
+        headMeta.setCustomModelData(3);
+        helmet.setItemMeta(headMeta);
+        ItemMeta armMeta = arm.getItemMeta();
+        armMeta.setDisplayName("Silurian Arm");
+        armMeta.setCustomModelData(2);
+        arm.setItemMeta(armMeta);
+        ItemMeta chestMeta = chestplate.getItemMeta();
+        chestMeta.setDisplayName("Silurian Chest");
+        chestplate.setItemMeta(chestMeta);
+        ItemMeta legMeta = leggings.getItemMeta();
+        legMeta.setDisplayName("Silurian Legs");
+        leggings.setItemMeta(legMeta);
 
         EntityEquipment ee = le.getEquipment();
         ee.setChestplate(chestplate);
@@ -255,12 +285,14 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         ee.setHelmet(helmet);
         if (!disguise) {
             ItemStack bow = new ItemStack(Material.BOW, 1);
-            ItemMeta bmeta = bow.getItemMeta();
-            bmeta.setDisplayName("Silurian Weapon");
-            bmeta.setCustomModelData(2);
-            bow.setItemMeta(bmeta);
+            ItemMeta waeponMeta = bow.getItemMeta();
+            waeponMeta.setDisplayName("Silurian Weapon");
+            waeponMeta.setCustomModelData(3);
+            bow.setItemMeta(waeponMeta);
             ee.setItemInMainHand(bow);
-            ee.setItemInOffHand(null);
+            ee.setItemInOffHand(arm);
+            ee.setItemInMainHandDropChance(0F);
+            ee.setItemInOffHandDropChance(0F);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
@@ -271,23 +303,28 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setSontaranEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
+        ItemStack helmet = new ItemStack(Material.POTATO, 1);
+        ItemStack arm = new ItemStack(Material.POTATO, 1);
         ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
         if (disguise) {
-            helmet.setDurability((short) 160);
             chestplate.setDurability((short) 235);
             leggings.setDurability((short) 220);
         }
-        ItemMeta hmeta = helmet.getItemMeta();
-        hmeta.setDisplayName("Sontaran Head");
-        helmet.setItemMeta(hmeta);
-        ItemMeta cmeta = chestplate.getItemMeta();
-        cmeta.setDisplayName("Sontaran Chest");
-        chestplate.setItemMeta(cmeta);
-        ItemMeta lmeta = leggings.getItemMeta();
-        lmeta.setDisplayName("Sontaran Legs");
-        leggings.setItemMeta(lmeta);
+        ItemMeta headMeta = helmet.getItemMeta();
+        headMeta.setDisplayName("Sontaran Head");
+        headMeta.setCustomModelData(4);
+        helmet.setItemMeta(headMeta);
+        ItemMeta armMeta = arm.getItemMeta();
+        armMeta.setDisplayName("Sontaran Arm");
+        armMeta.setCustomModelData(2);
+        arm.setItemMeta(armMeta);
+        ItemMeta chestMeta = chestplate.getItemMeta();
+        chestMeta.setDisplayName("Sontaran Chest");
+        chestplate.setItemMeta(chestMeta);
+        ItemMeta legMeta = leggings.getItemMeta();
+        legMeta.setDisplayName("Sontaran Legs");
+        leggings.setItemMeta(legMeta);
 
         EntityEquipment ee = le.getEquipment();
         ee.setChestplate(chestplate);
@@ -295,12 +332,15 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         ee.setBoots(null);
         ee.setHelmet(helmet);
         if (!disguise) {
-            ItemStack sword = new ItemStack(Material.STONE_SWORD, 1);
-            ItemMeta bmeta = sword.getItemMeta();
-            bmeta.setDisplayName("Sontaran Weapon");
-            sword.setItemMeta(bmeta);
+            ItemStack sword = new ItemStack(Material.POTATO, 1);
+            ItemMeta waeponMeta = sword.getItemMeta();
+            waeponMeta.setDisplayName("Sontaran Weapon");
+            waeponMeta.setCustomModelData(3);
+            sword.setItemMeta(waeponMeta);
             ee.setItemInMainHand(sword);
-            ee.setItemInOffHand(null);
+            ee.setItemInOffHand(arm);
+            ee.setItemInMainHandDropChance(0F);
+            ee.setItemInOffHandDropChance(0F);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
@@ -311,23 +351,28 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setButlerEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.CHAINMAIL_HELMET, 1);
+        ItemStack helmet = new ItemStack(Material.BAKED_POTATO, 1);
+        ItemStack arm = new ItemStack(Material.BAKED_POTATO, 1);
         ItemStack chestplate = new ItemStack(Material.CHAINMAIL_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.CHAINMAIL_LEGGINGS, 1);
         if (disguise) {
-            helmet.setDurability((short) 160);
             chestplate.setDurability((short) 235);
             leggings.setDurability((short) 220);
         }
-        ItemMeta hmeta = helmet.getItemMeta();
-        hmeta.setDisplayName("Strax Head");
-        helmet.setItemMeta(hmeta);
-        ItemMeta cmeta = chestplate.getItemMeta();
-        cmeta.setDisplayName("Strax Chest");
-        chestplate.setItemMeta(cmeta);
-        ItemMeta lmeta = leggings.getItemMeta();
-        lmeta.setDisplayName("Strax Legs");
-        leggings.setItemMeta(lmeta);
+        ItemMeta headMeta = helmet.getItemMeta();
+        headMeta.setDisplayName("Strax Head");
+        headMeta.setCustomModelData(3);
+        helmet.setItemMeta(headMeta);
+        ItemMeta armMeta = arm.getItemMeta();
+        armMeta.setDisplayName("Strax Arm");
+        armMeta.setCustomModelData(2);
+        arm.setItemMeta(armMeta);
+        ItemMeta chestMeta = chestplate.getItemMeta();
+        chestMeta.setDisplayName("Strax Chest");
+        chestplate.setItemMeta(chestMeta);
+        ItemMeta legMeta = leggings.getItemMeta();
+        legMeta.setDisplayName("Strax Legs");
+        leggings.setItemMeta(legMeta);
 
         EntityEquipment ee = le.getEquipment();
         ee.setChestplate(chestplate);
@@ -335,8 +380,10 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         ee.setBoots(null);
         ee.setHelmet(helmet);
         if (!disguise) {
-            ee.setItemInMainHand(null);
-            ee.setItemInOffHand(null);
+            ee.setItemInMainHand(arm);
+            ee.setItemInOffHand(arm.clone());
+            ee.setItemInMainHandDropChance(0F);
+            ee.setItemInOffHandDropChance(0F);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);
@@ -359,10 +406,10 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
     public void setDalekEquipment(LivingEntity le, boolean disguise) {
         le.getPersistentDataContainer().set(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER, Monster.DALEK.getPersist());
         ItemStack helmet = new ItemStack(Material.MUSHROOM_STEM, 1);
-        ItemMeta hmeta = helmet.getItemMeta();
-        hmeta.setDisplayName("Dalek Head");
-        hmeta.setCustomModelData(10000005 + weightedChoice.next());
-        helmet.setItemMeta(hmeta);
+        ItemMeta headMeta = helmet.getItemMeta();
+        headMeta.setDisplayName("Dalek Head");
+        headMeta.setCustomModelData(10000005 + weightedChoice.next());
+        helmet.setItemMeta(headMeta);
         EntityEquipment ee = le.getEquipment();
         ee.setHelmet(helmet);
         ee.setChestplate(null);
@@ -390,23 +437,28 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setVashtaNeradaEquipment(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
+        ItemStack helmet = new ItemStack(Material.BOOK, 1);
+        ItemStack arm = new ItemStack(Material.BOOK, 1);
         ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
         if (disguise) {
-            helmet.setDurability((short) 160);
             chestplate.setDurability((short) 235);
             leggings.setDurability((short) 220);
         }
-        ItemMeta hmeta = helmet.getItemMeta();
-        hmeta.setDisplayName("Vashta Nerada Head");
-        helmet.setItemMeta(hmeta);
-        ItemMeta cmeta = chestplate.getItemMeta();
-        cmeta.setDisplayName("Vashta Nerada Chest");
-        chestplate.setItemMeta(cmeta);
-        ItemMeta lmeta = leggings.getItemMeta();
-        lmeta.setDisplayName("Vashta Nerada Legs");
-        leggings.setItemMeta(lmeta);
+        ItemMeta headMeta = helmet.getItemMeta();
+        headMeta.setDisplayName("Vashta Nerada Head");
+        headMeta.setCustomModelData(4);
+        helmet.setItemMeta(headMeta);
+        ItemMeta armMeta = arm.getItemMeta();
+        armMeta.setDisplayName("Vashta Nerada Arm");
+        armMeta.setCustomModelData(3);
+        arm.setItemMeta(armMeta);
+        ItemMeta chestMeta = chestplate.getItemMeta();
+        chestMeta.setDisplayName("Vashta Nerada Chest");
+        chestplate.setItemMeta(chestMeta);
+        ItemMeta legMeta = leggings.getItemMeta();
+        legMeta.setDisplayName("Vashta Nerada Legs");
+        leggings.setItemMeta(legMeta);
 
         EntityEquipment ee = le.getEquipment();
         ee.setChestplate(chestplate);
@@ -414,8 +466,10 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         ee.setBoots(null);
         ee.setHelmet(helmet);
         if (!disguise) {
-            ee.setItemInMainHand(null);
-            ee.setItemInOffHand(null);
+            ee.setItemInMainHand(arm);
+            ee.setItemInOffHand(arm.clone());
+            ee.setItemInMainHandDropChance(0F);
+            ee.setItemInOffHandDropChance(0F);
             ee.setHelmetDropChance(0F);
             ee.setChestplateDropChance(0F);
             ee.setLeggingsDropChance(0F);

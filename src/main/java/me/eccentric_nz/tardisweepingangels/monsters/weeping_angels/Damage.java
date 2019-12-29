@@ -13,7 +13,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -71,8 +70,7 @@ public class Damage implements Listener {
         if (et.equals(EntityType.PLAYER)) {
             Entity e = event.getDamager();
             if (e instanceof Skeleton) {
-                EntityEquipment ee = ((LivingEntity) e).getEquipment();
-                if (ee.getHelmet().getType().equals(Material.STONE_BUTTON) || ee.getHelmet().getType().equals(Material.LILY_PAD)) {
+                if (e.getPersistentDataContainer().has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
                     Entity t = event.getEntity();
                     Player p = (Player) t;
                     Location l = getRandomLocation(t.getWorld());

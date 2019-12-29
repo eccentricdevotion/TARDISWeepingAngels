@@ -58,27 +58,27 @@ public class HelmetChecker implements Listener {
                     ItemStack helmet;
                     String name;
                     if (dn.startsWith("Cyberman")) {
-                        helmet = new ItemStack(Material.IRON_HELMET, 1);
+                        helmet = new ItemStack(Material.IRON_INGOT, 1);
                         name = "Cyberman Head";
                     } else if (dn.startsWith("Ice")) {
-                        helmet = new ItemStack(Material.IRON_HELMET, 1);
+                        helmet = new ItemStack(Material.SNOWBALL, 1);
                         name = "Ice Warrior Head";
                     } else if (dn.startsWith("Silurian")) {
-                        helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
+                        helmet = new ItemStack(Material.FEATHER, 1);
                         name = "Silurian Head";
                     } else if (dn.startsWith("Sontaran")) {
-                        helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
+                        helmet = new ItemStack(Material.POTATO, 1);
                         name = "Sontaran Head";
                     } else if (dn.startsWith("Vashta")) {
-                        helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
+                        helmet = new ItemStack(Material.BOOK, 1);
                         name = "Vashta Nerada Head";
                     } else {
-                        helmet = new ItemStack(Material.GOLDEN_HELMET, 1);
+                        helmet = new ItemStack(Material.PAINTING, 1);
                         name = "Zygon Head";
                     }
-                    ItemMeta hmeta = helmet.getItemMeta();
-                    hmeta.setDisplayName(name);
-                    helmet.setItemMeta(hmeta);
+                    ItemMeta headMeta = helmet.getItemMeta();
+                    headMeta.setDisplayName(name);
+                    helmet.setItemMeta(headMeta);
                     ee.setHelmet(helmet);
                     ee.setHelmetDropChance(0F);
                 }

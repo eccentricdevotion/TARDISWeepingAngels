@@ -71,18 +71,18 @@ public class Sounds implements Listener {
                 if (le instanceof Player) {
                     String tmp = "";
                     long delay = 50L;
-                    if (zombie.isBaby() && dn.equals("Empty Child Head") && head.getType().equals(Material.IRON_HELMET)) {
+                    if (zombie.isBaby() && dn.equals("Empty Child Head") && head.getType().equals(Material.SUGAR)) {
                         tmp = "empty_child";
                     }
-                    if (dn.equals("Cyberman Head") && head.getType().equals(Material.IRON_HELMET)) {
+                    if (dn.equals("Cyberman Head") && head.getType().equals(Material.IRON_INGOT)) {
                         tmp = "cyberman";
                         delay = 80L;
                     }
-                    if (dn.equals("Sontaran Head") && head.getType().equals(Material.GOLDEN_HELMET)) {
+                    if (dn.equals("Sontaran Head") && head.getType().equals(Material.POTATO)) {
                         tmp = "sontaran";
                         delay = 55L;
                     }
-                    if (dn.equals("Vashta Nerada Head") && head.getType().equals(Material.GOLDEN_HELMET)) {
+                    if (dn.equals("Vashta Nerada Head") && head.getType().equals(Material.BOOK)) {
                         tmp = "vashta";
                         delay = 30L;
                     }
