@@ -123,6 +123,7 @@ public class ArmourStandEquipment {
 
     public void setDalekEquipment(ArmorStand as) {
         as.setSmall(false);
+        as.setArms(false);
         ItemStack helmet = new ItemStack(Material.MUSHROOM_STEM, 1);
         ItemMeta headMeta = helmet.getItemMeta();
         headMeta.setDisplayName("Dalek Head");
