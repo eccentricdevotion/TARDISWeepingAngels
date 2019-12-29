@@ -30,10 +30,6 @@ public class ArmourStandCommand implements CommandExecutor {
             }
             // check monster type
             String upper = args[0].toUpperCase();
-            if (upper.equals("DALEK")) {
-                sender.sendMessage(plugin.pluginName + "You cannot equip an armour stand with a Dalek disguise!");
-                return true;
-            }
             if (upper.equals("SILENT")) {
                 sender.sendMessage(plugin.pluginName + "You cannot equip an armour stand with a Silent disguise!");
                 return true;
@@ -72,7 +68,7 @@ public class ArmourStandCommand implements CommandExecutor {
                 }
             }
             if (as != null) {
-                ArmourStandEquipment equip = new ArmourStandEquipment();
+                ArmourStandEquipment equip = new ArmourStandEquipment(plugin);
                 switch (monster) {
                     case ANGEL:
                     case WEEPING_ANGEL:
@@ -80,6 +76,9 @@ public class ArmourStandCommand implements CommandExecutor {
                         break;
                     case CYBERMAN:
                         equip.setCyberEquipment(as);
+                        break;
+                    case DALEK:
+                        equip.setDalekEquipment(as);
                         break;
                     case ICE:
                     case ICE_WARRIOR:
