@@ -31,6 +31,10 @@ public class DisguiseCommand implements CommandExecutor {
                 sender.sendMessage(plugin.pluginName + "You cannot disguise as a Silent!");
                 return true;
             }
+            if (upper.equals("OOD")) {
+                sender.sendMessage(plugin.pluginName + "You cannot disguise as an Ood!");
+                return true;
+            }
             Monster monster;
             try {
                 monster = Monster.valueOf(upper);

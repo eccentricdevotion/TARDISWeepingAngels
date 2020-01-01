@@ -1,78 +1,83 @@
 config_version: 2.0
 spawn_rate:
-    how_many: 2
-    how_often: 400
-    default_max: 0
+  how_many: 2
+  how_often: 400
+  default_max: 0
 angels:
-    worlds:
-        world: 20
-    teleport_worlds:
+  worlds:
+    world: 20
+  teleport_worlds:
     - world
-    freeze_time: 100
-    weapon: DIAMOND_PICKAXE
-    drops:
+  freeze_time: 100
+  weapon: DIAMOND_PICKAXE
+  drops:
     - COBBLESTONE
     - STONE
-    angels_can_steal: true
-    can_build: true
-    spawn_from_chat:
-        enabled: true
-        chance: 50
-        distance_from_player: 10
+  angels_can_steal: true
+  can_build: true
+  spawn_from_chat:
+    enabled: true
+    chance: 50
+    distance_from_player: 10
 cybermen:
-    worlds:
-        world: 10
-    drops:
+  worlds:
+    world: 10
+  drops:
     - REDSTONE
     - STONE_BUTTON
-    can_upgrade: true
+  can_upgrade: true
 daleks:
-    worlds:
-        world: 20
-    drops:
+  worlds:
+    world: 20
+  drops:
     - SLIME_BALL
     - ROTTEN_FLESH
 empty_child:
-    worlds:
-        world: 10
-    drops:
+  worlds:
+    world: 10
+  drops:
     - COOKED_BEEF
     - SUGAR
 ice_warriors:
-    worlds:
-        world: 20
-    drops:
+  worlds:
+    world: 20
+  drops:
     - ICE
     - PACKED_ICE
     - SNOW_BLOCK
 silurians:
-    worlds:
-        world: 20
-    drops:
+  worlds:
+    world: 20
+  drops:
     - GOLD_NUGGET
     - FEATHER
+ood:
+  worlds:
+    world: 20
+  drops:
+    - NAME_TAG
 sontarans:
-    worlds:
-        world: 20
-    drops:
+  worlds:
+    world: 20
+  drops:
     - POTATO
     - MILK_BUCKET
-    can_tame: true
+  can_tame: true
 vashta_nerada:
-    worlds:
-        world: 10
-    drops:
+  worlds:
+    world: 10
+  drops:
     - BONE
     - LEATHER
 zygons:
-    worlds:
-        world: 10
-    drops:
+  worlds:
+    world: 10
+  drops:
     - PAINTING
     - SAND
 silent:
-    worlds:
-        world: 10
-    drops:
+  worlds:
+    world: 10
+  drops:
     - INK_SAC
     - FLOWER_POT

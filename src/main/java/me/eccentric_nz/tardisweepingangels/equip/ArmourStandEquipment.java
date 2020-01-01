@@ -54,6 +54,7 @@ public class ArmourStandEquipment {
         as.setBoots(boots);
         as.getEquipment().setItemInMainHand(arm);
         as.getEquipment().setItemInOffHand(arm.clone());
+        as.setVisible(false);
     }
 
     public void setWarriorEquipment(ArmorStand as) {
@@ -89,6 +90,7 @@ public class ArmourStandEquipment {
         weapon.setItemMeta(sword);
         as.setItemInHand(weapon);
         as.getEquipment().setItemInOffHand(arm);
+        as.setVisible(false);
     }
 
     public void setCyberEquipment(ArmorStand as) {
@@ -119,6 +121,7 @@ public class ArmourStandEquipment {
         as.setBoots(null);
         as.getEquipment().setItemInMainHand(arm);
         as.getEquipment().setItemInOffHand(arm.clone());
+        as.setVisible(false);
     }
 
     public void setDalekEquipment(ArmorStand as) {
@@ -135,6 +138,7 @@ public class ArmourStandEquipment {
         as.setBoots(null);
         as.getEquipment().setItemInMainHand(null);
         as.getEquipment().setItemInOffHand(null);
+        as.setVisible(false);
     }
 
     public void setEmptyChildEquipment(ArmorStand as) {
@@ -165,6 +169,7 @@ public class ArmourStandEquipment {
         as.setHelmet(helmet);
         as.getEquipment().setItemInMainHand(arm);
         as.getEquipment().setItemInOffHand(arm.clone());
+        as.setVisible(false);
     }
 
     public void setZygonEquipment(ArmorStand as) {
@@ -195,6 +200,7 @@ public class ArmourStandEquipment {
         as.setHelmet(helmet);
         as.getEquipment().setItemInMainHand(arm);
         as.getEquipment().setItemInOffHand(arm.clone());
+        as.setVisible(false);
     }
 
     public void setSilurianEquipment(ArmorStand as) {
@@ -231,6 +237,7 @@ public class ArmourStandEquipment {
         bow.setItemMeta(waeponMeta);
         as.getEquipment().setItemInMainHand(bow);
         as.getEquipment().setItemInOffHand(arm);
+        as.setVisible(false);
     }
 
     public void setSontaranEquipment(ArmorStand as) {
@@ -266,6 +273,7 @@ public class ArmourStandEquipment {
         sword.setItemMeta(waeponMeta);
         as.getEquipment().setItemInMainHand(sword);
         as.getEquipment().setItemInOffHand(arm);
+        as.setVisible(false);
     }
 
     public void setButlerEquipment(ArmorStand as) {
@@ -296,6 +304,7 @@ public class ArmourStandEquipment {
         as.setHelmet(helmet);
         as.getEquipment().setItemInMainHand(arm);
         as.getEquipment().setItemInOffHand(arm.clone());
+        as.setVisible(false);
     }
 
     public void setVashtaNeradaEquipment(ArmorStand as) {
@@ -326,5 +335,6 @@ public class ArmourStandEquipment {
         as.setHelmet(helmet);
         as.getEquipment().setItemInMainHand(arm);
         as.getEquipment().setItemInOffHand(arm.clone());
+        as.setVisible(false);
     }
 }

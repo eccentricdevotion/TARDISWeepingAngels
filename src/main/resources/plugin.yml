@@ -13,6 +13,9 @@ permissions:
   tardisweepingangels.spawn:
     description: Allow players to spawn a monster.
     default: op
+  tardisweepingangels.ood:
+    description: Allow players to spawn an Ood.
+    default: op
   tardisweepingangels.build:
     description: Allow players to build a monster.
     default: op
@@ -44,19 +47,19 @@ commands:
   twac:
     aliases: [twacount]
     description: Reports the current number of the specifed monster in the specified world.
-    usage: /<command> [a|c|d|e|i|m|o|s|v|z] [world]
+    usage: /<command> [a|c|d|e|i|m|r|o|s|v|z] [world]
     permission: tardisweepingangels.count
     permission-message: You don't have the permission <permission> to use this command
   twak:
     aliases: [twakill]
     description: Kills all of the specifed monster in the specified world.
-    usage: /<command> [a|c|d|e|i|m|o|s|v|z] [world]
+    usage: /<command> [a|c|d|e|i|m|r|o|s|v|z] [world]
     permission: tardisweepingangels.kill
     permission-message: You don't have the permission <permission> to use this command
   twa:
     aliases: [twaa,twaadmin]
     description: Set the maximum number of the specified monster allowed to spawn in the specified world.
-    usage: /<command> [a|c|d|e|i|m|o|s|v|z|all] [world] [max monsters]
+    usage: /<command> [a|c|d|e|i|m|r|o|s|v|z|all] [world] [max monsters]
     permission: tardisweepingangels.admin
     permission-message: You don't have the permission <permission> to use this command
   twar:
@@ -68,4 +71,9 @@ commands:
     description: Equip an armour stand with monster armour.
     usage: /<command> [monster type]
     permission: tardisweepingangels.admin
+    permission-message: You don't have the permission <permission> to use this command
+  ood:
+    description: Equip an armour stand with monster armour.
+    usage: /<command> [spawn|follow|stay|remove]
+    permission: tardisweepingangels.ood
     permission-message: You don't have the permission <permission> to use this command

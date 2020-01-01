@@ -44,17 +44,18 @@ public class Config {
         // string
         strOptions.put("angels.weapon", "DIAMOND_PICKAXE");
         // list
-        listOptions.put("angels.drops", Arrays.asList(new String[]{"STONE", "COBBLESTONE"}));
-        listOptions.put("angels.teleport_worlds", Arrays.asList(new String[]{"world"}));
-        listOptions.put("cybermen.drops", Arrays.asList(new String[]{"REDSTONE", "STONE_BUTTON"}));
-        listOptions.put("daleks.drops", Arrays.asList(new String[]{"SLIME_BALL", "ROTTEN_FLESH"}));
-        listOptions.put("empty_child.drops", Arrays.asList(new String[]{"COOKED_BEEF", "SUGAR"}));
-        listOptions.put("ice_warriors.drops", Arrays.asList(new String[]{"ICE", "PACKED_ICE", "SNOW_BLOCK"}));
-        listOptions.put("silent.drops", Arrays.asList(new String[]{"INK_SAC", "FLOWER_POT"}));
-        listOptions.put("silurians.drops", Arrays.asList(new String[]{"GOLD_NUGGET", "FEATHER"}));
-        listOptions.put("sontarans.drops", Arrays.asList(new String[]{"POTATO", "POISONOUS_POTATO"}));
-        listOptions.put("vashta_nerada.drops", Arrays.asList(new String[]{"BONE", "LEATHER"}));
-        listOptions.put("zygons.drops", Arrays.asList(new String[]{"PAINTING", "SAND"}));
+        listOptions.put("angels.drops", Arrays.asList("STONE", "COBBLESTONE"));
+        listOptions.put("angels.teleport_worlds", Arrays.asList("world"));
+        listOptions.put("cybermen.drops", Arrays.asList("REDSTONE", "STONE_BUTTON"));
+        listOptions.put("daleks.drops", Arrays.asList("SLIME_BALL", "ROTTEN_FLESH"));
+        listOptions.put("empty_child.drops", Arrays.asList("COOKED_BEEF", "SUGAR"));
+        listOptions.put("ice_warriors.drops", Arrays.asList("ICE", "PACKED_ICE", "SNOW_BLOCK"));
+        listOptions.put("silent.drops", Arrays.asList("INK_SAC", "FLOWER_POT"));
+        listOptions.put("ood.drops", Arrays.asList("NAME_TAG"));
+        listOptions.put("silurians.drops", Arrays.asList("GOLD_NUGGET", "FEATHER"));
+        listOptions.put("sontarans.drops", Arrays.asList("POTATO", "POISONOUS_POTATO"));
+        listOptions.put("vashta_nerada.drops", Arrays.asList("BONE", "LEATHER"));
+        listOptions.put("zygons.drops", Arrays.asList("PAINTING", "SAND"));
         // boolean
         boolOptions.put("angels.angels_can_steal", true);
         boolOptions.put("angels.can_build", true);
@@ -108,6 +109,9 @@ public class Config {
             }
             if (!config.contains("silent.worlds." + n)) {
                 plugin.getConfig().set("silent.worlds." + n, m);
+            }
+            if (!config.contains("ood.worlds." + n)) {
+                plugin.getConfig().set("ood.worlds." + n, m);
             }
             if (!config.contains("silurians.worlds." + n)) {
                 plugin.getConfig().set("silurians.worlds." + n, m);

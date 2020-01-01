@@ -26,6 +26,7 @@ public class CountCommand implements CommandExecutor {
         types.add("e");
         types.add("i");
         types.add("m");
+        types.add("r");
         types.add("o");
         types.add("s");
         types.add("v");
@@ -109,6 +110,15 @@ public class CountCommand implements CommandExecutor {
                     Collection<Zombie> sontarans = w.getEntitiesByClass(Zombie.class);
                     for (Zombie o : sontarans) {
                         if (o.getPersistentDataContainer().has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
+                            count++;
+                        }
+                    }
+                    break;
+                case "r":
+                    what = "Ood";
+                    Collection<ArmorStand> ood = w.getEntitiesByClass(ArmorStand.class);
+                    for (ArmorStand o : ood) {
+                        if (o.getPersistentDataContainer().has(TARDISWeepingAngels.OOD, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }

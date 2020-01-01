@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,6 +28,7 @@ public class KillCommand implements CommandExecutor {
         types.add("e");
         types.add("i");
         types.add("m");
+        types.add("r");
         types.add("o");
         types.add("s");
         types.add("v");
@@ -152,6 +154,16 @@ public class KillCommand implements CommandExecutor {
                                 o.remove();
                                 count++;
                             }
+                        }
+                    }
+                    break;
+                case "r":
+                    what = "Ood";
+                    Collection<ArmorStand> ood = w.getEntitiesByClass(ArmorStand.class);
+                    for (ArmorStand o : ood) {
+                        if (o.getPersistentDataContainer().has(TARDISWeepingAngels.OOD, PersistentDataType.INTEGER)) {
+                            o.remove();
+                            count++;
                         }
                     }
                     break;

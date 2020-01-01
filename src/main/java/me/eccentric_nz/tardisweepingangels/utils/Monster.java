@@ -19,6 +19,7 @@ public enum Monster {
     EMPTY_CHILD("Empty Child", 4),
     ICE("Ice Warrior", 5),
     ICE_WARRIOR("Ice Warrior", 5),
+    OOD("Ood", 12),
     SILENT("Silent", 6),
     SILURIAN("Silurian", 7),
     SONTARAN("Sontaran", 8),
@@ -36,6 +37,7 @@ public enum Monster {
         values.add(DALEK);
         values.add(EMPTY_CHILD);
         values.add(ICE_WARRIOR);
+        values.add(OOD);
         values.add(SILENT);
         values.add(SILURIAN);
         values.add(SONTARAN);

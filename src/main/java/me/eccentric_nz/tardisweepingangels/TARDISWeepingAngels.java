@@ -17,20 +17,19 @@ import me.eccentric_nz.tardisweepingangels.monsters.daleks.Portal;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.ReDisguise;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.GasMask;
+import me.eccentric_nz.tardisweepingangels.monsters.ood.OodListener;
 import me.eccentric_nz.tardisweepingangels.monsters.silurians.SilurianSpawnerListener;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.Butler;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.SontaranRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.*;
 import me.eccentric_nz.tardisweepingangels.silent.AntiTeleport;
 import me.eccentric_nz.tardisweepingangels.silent.SilentRunnable;
-import me.eccentric_nz.tardisweepingangels.utils.Config;
-import me.eccentric_nz.tardisweepingangels.utils.HelmetChecker;
-import me.eccentric_nz.tardisweepingangels.utils.Sounds;
-import me.eccentric_nz.tardisweepingangels.utils.Version;
+import me.eccentric_nz.tardisweepingangels.utils.*;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Biome;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -58,6 +57,8 @@ public class TARDISWeepingAngels extends JavaPlugin {
     public static NamespacedKey DALEK;
     public static NamespacedKey EMPTY;
     public static NamespacedKey K9;
+    public static NamespacedKey OOD;
+    public static NamespacedKey OOD_UUID;
     public static NamespacedKey SILENT;
     public static NamespacedKey SILURIAN;
     public static NamespacedKey SONTARAN;
@@ -65,6 +66,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
     public static NamespacedKey VASHTA;
     public static NamespacedKey WARRIOR;
     public static NamespacedKey ZYGON;
+    public static PersistentDataType<byte[], UUID> PersistentDataTypeUUID;
     public static MonsterEquipment eqipper;
 
     @Override
@@ -109,6 +111,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         pm.registerEvents(new RainDamage(), this);
         pm.registerEvents(new ChunkLoad(), this);
         pm.registerEvents(new SilurianSpawnerListener(this), this);
+        pm.registerEvents(new OodListener(), this);
         // register commands
         getCommand("twa").setExecutor(new AdminCommand(this));
         getCommand("twac").setExecutor(new CountCommand(this));
@@ -117,6 +120,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getCommand("twak").setExecutor(new KillCommand(this));
         getCommand("twar").setExecutor(new DalekCommand(this));
         getCommand("twas").setExecutor(new SpawnCommand(this));
+        getCommand("ood").setExecutor(new OodCommand(this));
         // set tab completion
         TabCompleter tabCompleter = new TabComplete(this);
         getCommand("twa").setTabCompleter(tabCompleter);
@@ -125,6 +129,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getCommand("twae").setTabCompleter(tabCompleter);
         getCommand("twak").setTabCompleter(tabCompleter);
         getCommand("twas").setTabCompleter(tabCompleter);
+        getCommand("ood").setTabCompleter(tabCompleter);
         // re-disguise Daleks
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new ReDisguise(this), 100L, 6000L);
         // start repeating spawn tasks
@@ -222,6 +227,8 @@ public class TARDISWeepingAngels extends JavaPlugin {
         DALEK = new NamespacedKey(plugin, "dalek");
         EMPTY = new NamespacedKey(plugin, "empty");
         K9 = new NamespacedKey(plugin, "k9");
+        OOD = new NamespacedKey(plugin, "ood");
+        OOD_UUID = new NamespacedKey(plugin, "ood_uuid");
         SILENT = new NamespacedKey(plugin, "silent");
         SILURIAN = new NamespacedKey(plugin, "silurian");
         SONTARAN = new NamespacedKey(plugin, "sontaran");
@@ -229,5 +236,6 @@ public class TARDISWeepingAngels extends JavaPlugin {
         VASHTA = new NamespacedKey(plugin, "vashta");
         WARRIOR = new NamespacedKey(plugin, "warrior");
         ZYGON = new NamespacedKey(plugin, "zygon");
+        PersistentDataTypeUUID = new UUIDDataType();
     }
 }

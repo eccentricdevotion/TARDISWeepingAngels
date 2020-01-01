@@ -34,6 +34,10 @@ public class ArmourStandCommand implements CommandExecutor {
                 sender.sendMessage(plugin.pluginName + "You cannot equip an armour stand with a Silent disguise!");
                 return true;
             }
+            if (upper.equals("OOD")) {
+                sender.sendMessage(plugin.pluginName + "You cannot equip an armour stand with an Ood disguise!");
+                return true;
+            }
             Monster monster;
             try {
                 monster = Monster.valueOf(upper);

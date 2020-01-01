@@ -31,10 +31,14 @@ public class SpawnCommand implements CommandExecutor {
             if (args.length == 0) {
                 return false;
             }
+            String upper = args[0].toUpperCase();
+            if (upper.equals("OOD")) {
+                sender.sendMessage(plugin.pluginName + "Please use the '/ood spawn' command to make an Ood!");
+                return true;
+            }
             // check monster type
             Monster monster;
             try {
-                String upper = args[0].toUpperCase();
                 monster = Monster.valueOf(upper);
             } catch (IllegalArgumentException e) {
                 sender.sendMessage(plugin.pluginName + "Invalid monster type!");
@@ -58,7 +62,6 @@ public class SpawnCommand implements CommandExecutor {
                 case WEEPING_ANGEL:
                     LivingEntity a = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                     a.setSilent(true);
-                    //setNormal(a);
                     a.setNoDamageTicks(75);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                         TARDISWeepingAngels.getEqipper().setAngelEquipment(a, false);
@@ -70,8 +73,6 @@ public class SpawnCommand implements CommandExecutor {
                     c.setSilent(true);
                     c.setNoDamageTicks(75);
                     Zombie cyber = (Zombie) c;
-                    //cyber.setVillager(false);
-                    //cyber.setVillagerProfession(null);
                     cyber.setBaby(false);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                         TARDISWeepingAngels.getEqipper().setCyberEquipment(c, false);
@@ -81,7 +82,6 @@ public class SpawnCommand implements CommandExecutor {
                 case DALEK:
                     LivingEntity d = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                     d.setSilent(true);
-                    //setNormal(d);
                     d.setNoDamageTicks(75);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                         TARDISWeepingAngels.getEqipper().setDalekEquipment(d, false);
@@ -123,7 +123,6 @@ public class SpawnCommand implements CommandExecutor {
                         TARDISWeepingAngels.getEqipper().setEmptyChildEquipment(e, false);
                         plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.EMPTY_CHILD, eyeLocation));
                     }, 5L);
-                    break;
                 case SILENT:
                     LivingEntity l = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ENDERMAN);
                     l.setSilent(true);

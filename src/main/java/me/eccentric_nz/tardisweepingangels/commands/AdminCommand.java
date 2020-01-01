@@ -19,7 +19,9 @@ public class AdminCommand implements CommandExecutor {
         types.put("d", "daleks");
         types.put("e", "empty_child");
         types.put("i", "ice_warriors");
+        types.put("m", "silence");
         types.put("o", "sontarans");
+        types.put("r", "ood");
         types.put("s", "silurians");
         types.put("v", "vashta_nerada");
         types.put("z", "zygons");
@@ -53,7 +55,9 @@ public class AdminCommand implements CommandExecutor {
                 plugin.getConfig().set("daleks.worlds." + args[1], m);
                 plugin.getConfig().set("empty_child.worlds." + args[1], m);
                 plugin.getConfig().set("ice_warriors.worlds." + args[1], m);
+                plugin.getConfig().set("silence.worlds." + args[1], m);
                 plugin.getConfig().set("sontarans.worlds." + args[1], m);
+                plugin.getConfig().set("ood.worlds." + args[1], m);
                 plugin.getConfig().set("silurians.worlds." + args[1], m);
                 plugin.getConfig().set("vashta_nerada.worlds." + args[1], m);
                 plugin.getConfig().set("zygons.worlds." + args[1], m);
