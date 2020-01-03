@@ -17,20 +17,25 @@ import me.eccentric_nz.tardisweepingangels.monsters.daleks.Portal;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.ReDisguise;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.GasMask;
+import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonAmmoRecipe;
+import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonGuardRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonListener;
 import me.eccentric_nz.tardisweepingangels.monsters.ood.OodListener;
+import me.eccentric_nz.tardisweepingangels.monsters.silent.AntiTeleport;
+import me.eccentric_nz.tardisweepingangels.monsters.silent.SilentRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.silurians.SilurianSpawnerListener;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.Butler;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.SontaranRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.*;
-import me.eccentric_nz.tardisweepingangels.silent.AntiTeleport;
-import me.eccentric_nz.tardisweepingangels.silent.SilentRunnable;
-import me.eccentric_nz.tardisweepingangels.utils.*;
+import me.eccentric_nz.tardisweepingangels.utils.Config;
+import me.eccentric_nz.tardisweepingangels.utils.HelmetChecker;
+import me.eccentric_nz.tardisweepingangels.utils.Sounds;
+import me.eccentric_nz.tardisweepingangels.utils.UUIDDataType;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Biome;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -39,7 +44,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
-import java.util.logging.Level;
 
 public class TARDISWeepingAngels extends JavaPlugin {
 
@@ -56,9 +60,10 @@ public class TARDISWeepingAngels extends JavaPlugin {
     public static NamespacedKey CYBERMAN;
     public static NamespacedKey DALEK;
     public static NamespacedKey EMPTY;
+    public static NamespacedKey JUDOON;
     public static NamespacedKey K9;
     public static NamespacedKey OOD;
-    public static NamespacedKey OOD_UUID;
+    public static NamespacedKey OWNER_UUID;
     public static NamespacedKey SILENT;
     public static NamespacedKey SILURIAN;
     public static NamespacedKey SONTARAN;
@@ -68,6 +73,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
     public static NamespacedKey ZYGON;
     public static PersistentDataType<byte[], UUID> PersistentDataTypeUUID;
     public static MonsterEquipment eqipper;
+    public static List<UUID> guards = new ArrayList<>();
 
     @Override
     public void onDisable() {
@@ -112,6 +118,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         pm.registerEvents(new ChunkLoad(), this);
         pm.registerEvents(new SilurianSpawnerListener(this), this);
         pm.registerEvents(new OodListener(), this);
+        pm.registerEvents(new JudoonListener(this), this);
         // register commands
         getCommand("twa").setExecutor(new AdminCommand(this));
         getCommand("twac").setExecutor(new CountCommand(this));
@@ -121,6 +128,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getCommand("twar").setExecutor(new DalekCommand(this));
         getCommand("twas").setExecutor(new SpawnCommand(this));
         getCommand("ood").setExecutor(new OodCommand(this));
+        getCommand("judoon").setExecutor(new JudoonCommand(this));
         // set tab completion
         TabCompleter tabCompleter = new TabComplete(this);
         getCommand("twa").setTabCompleter(tabCompleter);
@@ -130,6 +138,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getCommand("twak").setTabCompleter(tabCompleter);
         getCommand("twas").setTabCompleter(tabCompleter);
         getCommand("ood").setTabCompleter(tabCompleter);
+        getCommand("judoon").setTabCompleter(tabCompleter);
         // re-disguise Daleks
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new ReDisguise(this), 100L, 6000L);
         // start repeating spawn tasks
@@ -152,6 +161,12 @@ public class TARDISWeepingAngels extends JavaPlugin {
         notOnWater.add(Biome.WARM_OCEAN);
         notOnWater.add(Biome.DEEP_WARM_OCEAN);
         notOnWater.add(Biome.RIVER);
+        if (getConfig().getBoolean("judoon.guards")) {
+            // add recipe
+            new JudoonAmmoRecipe(this).addRecipe();
+            // start guarding task
+            getServer().getScheduler().scheduleSyncRepeatingTask(this, new JudoonGuardRunnable(this), 20L, 20L);
+        }
     }
 
     public Random getRandom() {
@@ -187,32 +202,6 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getServer().getConsoleSender().sendMessage(pluginName + "Debug: " + o);
     }
 
-    private boolean checkPluginVersion(String plg, String min) {
-        if (pm.isPluginEnabled(plg)) {
-            Plugin check = pm.getPlugin(plg);
-            Version minver = new Version(min);
-            String preSplit = check.getDescription().getVersion();
-            String[] split = preSplit.split("-");
-            try {
-                Version ver;
-                if (check.getName().equals("TARDISChunkGenerator") && check.getDescription().getVersion().startsWith("1")) {
-                    ver = new Version("1");
-                } else {
-                    ver = new Version(split[0]);
-                }
-                return (ver.compareTo(minver) >= 0);
-            } catch (IllegalArgumentException e) {
-                getServer().getLogger().log(Level.WARNING, "TARDIS failed to get the version for {0}.", plg);
-                getServer().getLogger().log(Level.WARNING, "This could cause issues with enabling the plugin.");
-                getServer().getLogger().log(Level.WARNING, "Please check you have at least v{0}", min);
-                getServer().getLogger().log(Level.WARNING, "The invalid version format was {0}", preSplit);
-                return true;
-            }
-        } else {
-            return true;
-        }
-    }
-
     public static MonsterEquipment getEqipper() {
         return eqipper;
     }
@@ -226,9 +215,10 @@ public class TARDISWeepingAngels extends JavaPlugin {
         CYBERMAN = new NamespacedKey(plugin, "cyberman");
         DALEK = new NamespacedKey(plugin, "dalek");
         EMPTY = new NamespacedKey(plugin, "empty");
+        JUDOON = new NamespacedKey(plugin, "judoon");
         K9 = new NamespacedKey(plugin, "k9");
         OOD = new NamespacedKey(plugin, "ood");
-        OOD_UUID = new NamespacedKey(plugin, "ood_uuid");
+        OWNER_UUID = new NamespacedKey(plugin, "ood_uuid");
         SILENT = new NamespacedKey(plugin, "silent");
         SILURIAN = new NamespacedKey(plugin, "silurian");
         SONTARAN = new NamespacedKey(plugin, "sontaran");

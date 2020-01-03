@@ -41,6 +41,8 @@ public class Config {
         intOptions.put("spawn_rate.default_max", 0);
         intOptions.put("angels.spawn_from_chat.chance", 50);
         intOptions.put("angels.spawn_from_chat.distance_from_player", 10);
+        intOptions.put("judoon.ammunition", 25);
+        intOptions.put("judoon.damage", 4);
         // string
         strOptions.put("angels.weapon", "DIAMOND_PICKAXE");
         // list
@@ -62,6 +64,7 @@ public class Config {
         boolOptions.put("angels.spawn_from_chat.enabled", true);
         boolOptions.put("cybermen.can_upgrade", true);
         boolOptions.put("sontarans.can_tame", true);
+        boolOptions.put("judoon.guards", true);
         // float
         doubleOptions.put("config_version", min_version);
     }

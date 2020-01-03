@@ -56,6 +56,10 @@ ood:
     world: 20
   drops:
     - NAME_TAG
+judoon:
+  guards: true
+  ammunition: 25
+  damage: 4
 sontarans:
   worlds:
     world: 20

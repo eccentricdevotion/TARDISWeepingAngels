@@ -16,6 +16,9 @@ permissions:
   tardisweepingangels.ood:
     description: Allow players to spawn an Ood.
     default: op
+  tardisweepingangels.judoon:
+    description: Allow players to spawn a Judoon.
+    default: op
   tardisweepingangels.build:
     description: Allow players to build a monster.
     default: op
@@ -73,7 +76,12 @@ commands:
     permission: tardisweepingangels.admin
     permission-message: You don't have the permission <permission> to use this command
   ood:
-    description: Equip an armour stand with monster armour.
+    description: Spawn and manipulate an Ood.
     usage: /<command> [spawn|follow|stay|remove]
     permission: tardisweepingangels.ood
+    permission-message: You don't have the permission <permission> to use this command
+  judoon:
+    description: Spawn and manipulate a Judoon guard.
+    usage: /<command> [spawn|follow|stay|remove]
+    permission: tardisweepingangels.judoon
     permission-message: You don't have the permission <permission> to use this command
