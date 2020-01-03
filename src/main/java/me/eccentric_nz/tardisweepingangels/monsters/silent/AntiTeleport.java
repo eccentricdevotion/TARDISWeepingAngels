@@ -1,7 +1,7 @@
 /*
  *  Copyright 2015 eccentric_nz.
  */
-package me.eccentric_nz.tardisweepingangels.silent;
+package me.eccentric_nz.tardisweepingangels.monsters.silent;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.entity.Entity;
