@@ -23,8 +23,8 @@ public class JudoonGuardRunnable implements Runnable {
 
     @Override
     public void run() {
-        if (TARDISWeepingAngels.guards.size() > 0) {
-            Iterator it = TARDISWeepingAngels.guards.iterator();
+        if (plugin.getGuards().size() > 0) {
+            Iterator it = plugin.getGuards().iterator();
             while (it.hasNext()) {
                 Entity entity = Bukkit.getEntity((UUID) it.next());
                 if (entity != null) {

@@ -27,7 +27,7 @@ public class JudoonListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onDamage(EntityDamageByEntityEvent event) {
+    public void onDamageJudoon(EntityDamageByEntityEvent event) {
         if (event.getEntity() instanceof ArmorStand && event.getDamager() instanceof Player) {
             ArmorStand stand = (ArmorStand) event.getEntity();
             if (stand.getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID) && stand.getPersistentDataContainer().has(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER)) {
@@ -85,12 +85,17 @@ public class JudoonListener implements Listener {
                         arm.setItemMeta(im);
                         stand.getEquipment().setItemInMainHand(arm);
                         if (ammo > 0) {
-                            // add to repeating task
-                            TARDISWeepingAngels.guards.add(stand.getUniqueId());
+                            if (!plugin.getPlayersWithGuards().contains(player.getUniqueId())) {
+                                // add to repeating task
+                                plugin.getGuards().add(stand.getUniqueId());
+                                plugin.getPlayersWithGuards().add(player.getUniqueId());
+                            } else {
+                                player.sendMessage("You already have a Judoon guard!");
+                            }
                         } else {
                             // end guarding task
                             player.sendMessage((cmd == 9) ? "Your Judoon has no ammunition!" : "Judoon standing at ease.");
-                            TARDISWeepingAngels.guards.remove(stand.getUniqueId());
+                            plugin.getGuards().remove(stand.getUniqueId());
                         }
                     }
                 }

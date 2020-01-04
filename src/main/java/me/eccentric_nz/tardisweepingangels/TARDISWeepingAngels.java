@@ -73,7 +73,8 @@ public class TARDISWeepingAngels extends JavaPlugin {
     public static NamespacedKey ZYGON;
     public static PersistentDataType<byte[], UUID> PersistentDataTypeUUID;
     public static MonsterEquipment eqipper;
-    public static List<UUID> guards = new ArrayList<>();
+    private final List<UUID> guards = new ArrayList<>();
+    private final List<UUID> playersWithGuards = new ArrayList<>();
 
     @Override
     public void onDisable() {
@@ -208,6 +209,14 @@ public class TARDISWeepingAngels extends JavaPlugin {
 
     public MonsterEquipment getWeepingAngelsAPI() {
         return eqipper;
+    }
+
+    public List<UUID> getGuards() {
+        return guards;
+    }
+
+    public List<UUID> getPlayersWithGuards() {
+        return playersWithGuards;
     }
 
     private void initKeys(TARDISWeepingAngels plugin) {
