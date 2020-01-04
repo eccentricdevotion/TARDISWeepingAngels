@@ -6,8 +6,6 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Iterator;
@@ -44,12 +42,6 @@ public class JudoonGuardRunnable implements Runnable {
                                         entity.getPersistentDataContainer().set(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER, ammo);
                                         if (ammo == 0) {
                                             it.remove();
-                                            ItemStack is = stand.getEquipment().getItemInMainHand();
-                                            ItemMeta im = is.getItemMeta();
-                                            im.setCustomModelData(4);
-                                            is.setItemMeta(im);
-                                            stand.getEquipment().setItemInMainHand(is);
-                                            stand.setCustomNameVisible(false);
                                         }
                                     }
                                 }

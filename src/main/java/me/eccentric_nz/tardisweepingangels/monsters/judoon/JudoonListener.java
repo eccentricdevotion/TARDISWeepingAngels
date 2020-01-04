@@ -96,6 +96,7 @@ public class JudoonListener implements Listener {
                             // end guarding task
                             player.sendMessage((cmd == 9) ? "Your Judoon has no ammunition!" : "Judoon standing at ease.");
                             plugin.getGuards().remove(stand.getUniqueId());
+                            plugin.getPlayersWithGuards().remove(player.getUniqueId());
                         }
                     }
                 }
