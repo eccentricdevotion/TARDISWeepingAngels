@@ -17,14 +17,14 @@ import java.util.UUID;
 public class OodListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onManipulate(PlayerArmorStandManipulateEvent event) {
+    public void onManipulateOodJudoon(PlayerArmorStandManipulateEvent event) {
         if (event.getRightClicked().getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID)) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onDamage(EntityDamageByEntityEvent event) {
+    public void onDamageOod(EntityDamageByEntityEvent event) {
         if (event.getEntity() instanceof ArmorStand && event.getDamager() instanceof Player) {
             ArmorStand stand = (ArmorStand) event.getEntity();
             if (stand.getPersistentDataContainer().has(TARDISWeepingAngels.OOD, PersistentDataType.INTEGER) && stand.getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID)) {

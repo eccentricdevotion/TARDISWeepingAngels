@@ -113,8 +113,11 @@ public class Config {
             if (!config.contains("silent.worlds." + n)) {
                 plugin.getConfig().set("silent.worlds." + n, m);
             }
-            if (!config.contains("ood.worlds." + n)) {
-                plugin.getConfig().set("ood.worlds." + n, m);
+            if (!config.contains("ood.worlds." + n) || (config.contains("ood.worlds." + n) && config.getInt("ood.worlds." + n) == 20)) {
+                plugin.getConfig().set("ood.worlds." + n, true);
+            }
+            if (!config.contains("judoon.worlds." + n)) {
+                plugin.getConfig().set("judoon.worlds." + n, true);
             }
             if (!config.contains("silurians.worlds." + n)) {
                 plugin.getConfig().set("silurians.worlds." + n, m);

@@ -59,6 +59,11 @@ public class OodCommand implements CommandExecutor {
                 }
                 Block block = player.getTargetBlock(null, 25);
                 Location location = block.getLocation().add(0.5, 1.0, 0.5);
+                String world = location.getWorld().getName();
+                if (!plugin.getConfig().getBoolean("ood.worlds." + world)) {
+                    player.sendMessage(plugin.pluginName + "You cannot spawn an Ood in this world!");
+                    return true;
+                }
                 location.setYaw(player.getLocation().getYaw() - 180.0f);
                 Entity entity = block.getLocation().getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
                 ArmorStand armorStand = (ArmorStand) entity;

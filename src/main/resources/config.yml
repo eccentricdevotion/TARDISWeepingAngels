@@ -53,13 +53,15 @@ silurians:
     - FEATHER
 ood:
   worlds:
-    world: 20
+    world: true
   drops:
     - NAME_TAG
 judoon:
   guards: true
   ammunition: 25
   damage: 4
+  worlds:
+    world: true
 sontarans:
   worlds:
     world: 20

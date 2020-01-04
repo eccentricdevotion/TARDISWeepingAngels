@@ -53,6 +53,11 @@ public class JudoonCommand implements CommandExecutor {
             if (args[0].equalsIgnoreCase("spawn")) {
                 Block block = player.getTargetBlock(null, 25);
                 Location location = block.getLocation().add(0.5, 1.0, 0.5);
+                String world = location.getWorld().getName();
+                if (!plugin.getConfig().getBoolean("judoon.worlds." + world)) {
+                    player.sendMessage(plugin.pluginName + "You cannot spawn a Judoon in this world!");
+                    return true;
+                }
                 location.setYaw(player.getLocation().getYaw() - 180.0f);
                 Entity entity = block.getLocation().getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
                 ArmorStand armorStand = (ArmorStand) entity;
@@ -76,7 +81,6 @@ public class JudoonCommand implements CommandExecutor {
                 EntityEquipment ee = armorStand.getEquipment();
                 armorStand.setHelmet(head);
                 ee.setItemInMainHand(weapon_arm);
-//                armorStand.setRightArmPose(new EulerAngle(-1d, 0, 0.175d));
                 ee.setItemInOffHand(arm);
                 armorStand.setVisible(false);
                 armorStand.setSilent(true);
