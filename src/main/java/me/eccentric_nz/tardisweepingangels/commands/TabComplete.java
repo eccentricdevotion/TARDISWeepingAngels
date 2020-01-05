@@ -39,6 +39,7 @@ public class TabComplete implements TabCompleter {
     private final ImmutableList<String> MONSTER_SUBS;
     ImmutableList<String> LETTER_SUBS = ImmutableList.of("a", "c", "d", "e", "i", "m", "o", "s", "v", "z");
     ImmutableList<String> OOD_SUBS = ImmutableList.of("spawn", "follow", "stay", "remove");
+    ImmutableList<String> TOC_SUBS = ImmutableList.of("spawn", "remove");
 
     public TabComplete(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
@@ -65,6 +66,9 @@ public class TabComplete implements TabCompleter {
             }
             if (command.getName().equals("ood") || command.getName().equals("judoon")) {
                 return partial(args[0], OOD_SUBS);
+            }
+            if (command.getName().equals("toclafane")) {
+                return partial(args[0], TOC_SUBS);
             }
         } else if (args.length == 2) {
             if (command.getName().equals("twad")) {

@@ -19,6 +19,9 @@ permissions:
   tardisweepingangels.judoon:
     description: Allow players to spawn a Judoon.
     default: op
+  tardisweepingangels.toclafane:
+    description: Allow players to spawn a Toclafane.
+    default: op
   tardisweepingangels.build:
     description: Allow players to build a monster.
     default: op
@@ -84,4 +87,10 @@ commands:
     description: Spawn and manipulate a Judoon guard.
     usage: /<command> [spawn|follow|stay|remove]
     permission: tardisweepingangels.judoon
+    permission-message: You don't have the permission <permission> to use this command
+  toclafane:
+    description: Spawn a Toclafane.
+    aliases: toc
+    usage: /<command> [spawn|remove]
+    permission: tardisweepingangels.toclafane
     permission-message: You don't have the permission <permission> to use this command

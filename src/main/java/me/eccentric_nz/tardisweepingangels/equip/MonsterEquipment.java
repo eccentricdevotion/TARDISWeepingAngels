@@ -509,10 +509,23 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         }
         if (entity instanceof Enderman) {
             if (!entity.getPassengers().isEmpty()) {
-                Entity passenger = ((Enderman) entity).getPassengers().get(0);
+                Entity passenger = entity.getPassengers().get(0);
                 if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
                     return true;
                 }
+            }
+        }
+        if (entity instanceof Bee) {
+            if (!entity.getPassengers().isEmpty()) {
+                Entity passenger = entity.getPassengers().get(0);
+                if (passenger != null && passenger.getType().equals(EntityType.ARMOR_STAND)) {
+                    return true;
+                }
+            }
+        }
+        if (entity instanceof ArmorStand) {
+            if (entity.getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID)) {
+                return true;
             }
         }
         return false;

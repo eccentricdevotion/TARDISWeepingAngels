@@ -43,6 +43,7 @@ public class Config {
         intOptions.put("angels.spawn_from_chat.distance_from_player", 10);
         intOptions.put("judoon.ammunition", 25);
         intOptions.put("judoon.damage", 4);
+        intOptions.put("toclafane.spawn_from_bee", 5);
         // string
         strOptions.put("angels.weapon", "DIAMOND_PICKAXE");
         // list
@@ -56,6 +57,7 @@ public class Config {
         listOptions.put("ood.drops", Arrays.asList("NAME_TAG"));
         listOptions.put("silurians.drops", Arrays.asList("GOLD_NUGGET", "FEATHER"));
         listOptions.put("sontarans.drops", Arrays.asList("POTATO", "POISONOUS_POTATO"));
+        listOptions.put("toclafane.drops", Arrays.asList("GUNPOWDER"));
         listOptions.put("vashta_nerada.drops", Arrays.asList("BONE", "LEATHER"));
         listOptions.put("zygons.drops", Arrays.asList("PAINTING", "SAND"));
         // boolean
@@ -118,6 +120,9 @@ public class Config {
             }
             if (!config.contains("judoon.worlds." + n)) {
                 plugin.getConfig().set("judoon.worlds." + n, true);
+            }
+            if (!config.contains("toclafane.worlds." + n)) {
+                plugin.getConfig().set("toclafane.worlds." + n, true);
             }
             if (!config.contains("silurians.worlds." + n)) {
                 plugin.getConfig().set("silurians.worlds." + n, m);

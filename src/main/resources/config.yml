@@ -69,6 +69,12 @@ sontarans:
     - POTATO
     - MILK_BUCKET
   can_tame: true
+toclafane:
+  spawn_from_bee: 5
+  worlds:
+    world: true
+  drops:
+    - GUNPOWDER
 vashta_nerada:
   worlds:
     world: 10

@@ -26,6 +26,7 @@ import me.eccentric_nz.tardisweepingangels.monsters.silent.SilentRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.silurians.SilurianSpawnerListener;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.Butler;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.SontaranRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.toclafane.ToclafaneListener;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.*;
 import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.eccentric_nz.tardisweepingangels.utils.HelmetChecker;
@@ -69,6 +70,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
     public static NamespacedKey SONTARAN;
     public static NamespacedKey STRAX;
     public static NamespacedKey VASHTA;
+    public static NamespacedKey TOCLAFANE;
     public static NamespacedKey WARRIOR;
     public static NamespacedKey ZYGON;
     public static PersistentDataType<byte[], UUID> PersistentDataTypeUUID;
@@ -120,6 +122,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         pm.registerEvents(new SilurianSpawnerListener(this), this);
         pm.registerEvents(new OodListener(), this);
         pm.registerEvents(new JudoonListener(this), this);
+        pm.registerEvents(new ToclafaneListener(), this);
         // register commands
         getCommand("twa").setExecutor(new AdminCommand(this));
         getCommand("twac").setExecutor(new CountCommand(this));
@@ -130,6 +133,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getCommand("twas").setExecutor(new SpawnCommand(this));
         getCommand("ood").setExecutor(new OodCommand(this));
         getCommand("judoon").setExecutor(new JudoonCommand(this));
+        getCommand("toclafane").setExecutor(new ToclafaneCommand(this));
         // set tab completion
         TabCompleter tabCompleter = new TabComplete(this);
         getCommand("twa").setTabCompleter(tabCompleter);
@@ -140,6 +144,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getCommand("twas").setTabCompleter(tabCompleter);
         getCommand("ood").setTabCompleter(tabCompleter);
         getCommand("judoon").setTabCompleter(tabCompleter);
+        getCommand("toclafane").setTabCompleter(tabCompleter);
         // re-disguise Daleks
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new ReDisguise(this), 100L, 6000L);
         // start repeating spawn tasks
@@ -233,6 +238,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         SONTARAN = new NamespacedKey(plugin, "sontaran");
         STRAX = new NamespacedKey(plugin, "strax");
         VASHTA = new NamespacedKey(plugin, "vashta");
+        TOCLAFANE = new NamespacedKey(plugin, "toclafane");
         WARRIOR = new NamespacedKey(plugin, "warrior");
         ZYGON = new NamespacedKey(plugin, "zygon");
         PersistentDataTypeUUID = new UUIDDataType();
