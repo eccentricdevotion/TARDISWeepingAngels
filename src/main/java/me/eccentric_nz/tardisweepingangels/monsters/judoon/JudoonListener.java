@@ -64,14 +64,22 @@ public class JudoonListener implements Listener {
                                 box.setItemMeta(bsm);
                                 stand.getPersistentDataContainer().set(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER, (ammo + remove));
                                 stand.setCustomName("Ammunition: " + (ammo + remove));
-                                player.sendMessage("You reloaded " + remove + " Judoon ammunition.");
+                                player.sendMessage(plugin.pluginName + "You reloaded " + remove + " Judoon ammunition.");
                             }
                         }
                     } else {
                         ItemStack arm = stand.getEquipment().getItemInMainHand();
                         ItemMeta im = arm.getItemMeta();
                         int cmd = im.getCustomModelData();
-                        if (cmd == 4) {
+                        if (cmd == 4 && ammo > 0) {
+                            if (!plugin.getPlayersWithGuards().contains(player.getUniqueId())) {
+                                player.sendMessage(plugin.pluginName + "Judoon ready for action.");
+                                // add to repeating task
+                                plugin.getGuards().add(stand.getUniqueId());
+                                plugin.getPlayersWithGuards().add(player.getUniqueId());
+                            } else {
+                                player.sendMessage(plugin.pluginName + "You already have a Judoon guard!");
+                            }
                             // point weapon
                             cmd = 9;
                             stand.setCustomName("Ammunition: " + ammo);
@@ -80,24 +88,14 @@ public class JudoonListener implements Listener {
                             // stand easy
                             cmd = 4;
                             stand.setCustomNameVisible(false);
+                            player.sendMessage(plugin.pluginName + "Judoon standing at ease.");
+                            // end guarding task
+                            plugin.getGuards().remove(stand.getUniqueId());
+                            plugin.getPlayersWithGuards().remove(player.getUniqueId());
                         }
                         im.setCustomModelData(cmd);
                         arm.setItemMeta(im);
                         stand.getEquipment().setItemInMainHand(arm);
-                        if (ammo > 0) {
-                            if (!plugin.getPlayersWithGuards().contains(player.getUniqueId())) {
-                                // add to repeating task
-                                plugin.getGuards().add(stand.getUniqueId());
-                                plugin.getPlayersWithGuards().add(player.getUniqueId());
-                            } else {
-                                player.sendMessage("You already have a Judoon guard!");
-                            }
-                        } else {
-                            // end guarding task
-                            player.sendMessage((cmd == 9) ? "Your Judoon has no ammunition!" : "Judoon standing at ease.");
-                            plugin.getGuards().remove(stand.getUniqueId());
-                            plugin.getPlayersWithGuards().remove(player.getUniqueId());
-                        }
                     }
                 }
             }
