@@ -8,7 +8,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.Iterator;
 import java.util.UUID;
 
 public class JudoonGuardRunnable implements Runnable {
@@ -22,9 +21,8 @@ public class JudoonGuardRunnable implements Runnable {
     @Override
     public void run() {
         if (plugin.getGuards().size() > 0) {
-            Iterator it = plugin.getGuards().iterator();
-            while (it.hasNext()) {
-                Entity entity = Bukkit.getEntity((UUID) it.next());
+            for (UUID uuid : plugin.getGuards()) {
+                Entity entity = Bukkit.getEntity(uuid);
                 if (entity != null) {
                     for (Entity e : entity.getNearbyEntities(8.0d, 8.0d, 8.0d)) {
                         if (e instanceof Monster) {
@@ -34,15 +32,13 @@ public class JudoonGuardRunnable implements Runnable {
                                 int ammo = entity.getPersistentDataContainer().get(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER);
                                 if (ammo > 0 && health > 0) {
                                     damageable.damage(plugin.getConfig().getDouble("judoon.damage"), entity);
+                                    entity.getWorld().playSound(entity.getLocation(), "judoon_fire", 1.0f, 1.0f);
                                     ammo -= 1;
                                     if (ammo >= 0) {
                                         ArmorStand stand = (ArmorStand) entity;
                                         stand.setCustomName("Ammunition: " + ammo);
                                         stand.setCustomNameVisible(true);
                                         entity.getPersistentDataContainer().set(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER, ammo);
-                                        if (ammo == 0) {
-                                            it.remove();
-                                        }
                                     }
                                 }
                             }
