@@ -7,7 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -15,13 +14,6 @@ import org.bukkit.persistence.PersistentDataType;
 import java.util.UUID;
 
 public class OodListener implements Listener {
-
-    @EventHandler(priority = EventPriority.NORMAL)
-    public void onManipulateOodJudoon(PlayerArmorStandManipulateEvent event) {
-        if (event.getRightClicked().getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID)) {
-            event.setCancelled(true);
-        }
-    }
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onDamageOod(EntityDamageByEntityEvent event) {
@@ -51,6 +43,10 @@ public class OodListener implements Listener {
                     head.setItemMeta(im);
                     stand.setHelmet(head);
                     stand.getPersistentDataContainer().set(TARDISWeepingAngels.OOD, PersistentDataType.INTEGER, rage);
+                } else if (oodId.equals(TARDISWeepingAngels.UNCLAIMED)) {
+                    // claim the Ood
+                    stand.getPersistentDataContainer().set(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID, player.getUniqueId());
+                    player.sendMessage(TARDISWeepingAngels.plugin.pluginName + "You have claimed this Ood!");
                 }
             }
         }
