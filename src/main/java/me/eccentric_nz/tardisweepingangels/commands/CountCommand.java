@@ -1,58 +1,53 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.World;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
-public class CountCommand implements CommandExecutor {
+public class CountCommand {
 
     private final TARDISWeepingAngels plugin;
-    private final List<String> types = new ArrayList<>();
 
     public CountCommand(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        types.add("a");
-        types.add("c");
-        types.add("d");
-        types.add("e");
-        types.add("i");
-        types.add("m");
-        types.add("r");
-        types.add("o");
-        types.add("s");
-        types.add("v");
-        types.add("z");
-        types.add("g");
     }
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("twac")) {
-            if (args.length < 2) {
-                return false;
+    public boolean count(CommandSender sender, String[] args) {
+        if (args.length < 3) {
+            return false;
+        }
+        String which = args[1].toUpperCase();
+        String what = "Angels";
+        int count = 0;
+        World w = plugin.getServer().getWorld(args[2]);
+        if (w == null) {
+            sender.sendMessage(plugin.pluginName + "Could not find a world with that name!");
+            return true;
+        }
+        if (which.equals("g")) {
+            what = "Invisible Guardians without Endermen";
+            Collection<Guardian> guardians = w.getEntitiesByClass(Guardian.class);
+            for (Guardian g : guardians) {
+                if (g.hasPotionEffect(PotionEffectType.INVISIBILITY) && g.getVehicle() == null) {
+                    count++;
+                }
             }
-            String which = args[0].toLowerCase();
-            if (!types.contains(which)) {
-                return false;
-            }
-            World w = plugin.getServer().getWorld(args[1]);
-            if (w == null) {
-                sender.sendMessage(plugin.pluginName + "Could not find a world with that name!");
+        } else {
+            Monster monster;
+            try {
+                monster = Monster.valueOf(which);
+            } catch (IllegalArgumentException e) {
+                sender.sendMessage(plugin.pluginName + "Invalid monster type!");
                 return true;
             }
-            int count = 0;
-            String what = "Angels";
-            switch (which) {
-                case "a":
+            switch (monster) {
+                case WEEPING_ANGEL:
                     Collection<Skeleton> angels = w.getEntitiesByClass(Skeleton.class);
                     for (Skeleton a : angels) {
                         if (a.getPersistentDataContainer().has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
@@ -60,7 +55,7 @@ public class CountCommand implements CommandExecutor {
                         }
                     }
                     break;
-                case "c":
+                case CYBERMAN:
                     what = "Cybermen";
                     Collection<Zombie> cybermen = w.getEntitiesByClass(Zombie.class);
                     for (Zombie c : cybermen) {
@@ -69,7 +64,7 @@ public class CountCommand implements CommandExecutor {
                         }
                     }
                     break;
-                case "d":
+                case DALEK:
                     what = "Daleks";
                     Collection<Skeleton> daleks = w.getEntitiesByClass(Skeleton.class);
                     for (Skeleton d : daleks) {
@@ -78,7 +73,7 @@ public class CountCommand implements CommandExecutor {
                         }
                     }
                     break;
-                case "e":
+                case EMPTY_CHILD:
                     what = "Empty Children";
                     Collection<Zombie> kids = w.getEntitiesByClass(Zombie.class);
                     for (Zombie e : kids) {
@@ -87,7 +82,7 @@ public class CountCommand implements CommandExecutor {
                         }
                     }
                     break;
-                case "i":
+                case ICE_WARRIOR:
                     what = "Ice Warriors";
                     Collection<PigZombie> warriors = w.getEntitiesByClass(PigZombie.class);
                     for (PigZombie i : warriors) {
@@ -96,7 +91,25 @@ public class CountCommand implements CommandExecutor {
                         }
                     }
                     break;
-                case "m":
+                case JUDOON:
+                    what = "Judoon";
+                    Collection<ArmorStand> galactic_police = w.getEntitiesByClass(ArmorStand.class);
+                    for (ArmorStand g : galactic_police) {
+                        if (g.getPersistentDataContainer().has(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER)) {
+                            count++;
+                        }
+                    }
+                    break;
+                case K9:
+                    what = "K9";
+                    Collection<ArmorStand> companions = w.getEntitiesByClass(ArmorStand.class);
+                    for (ArmorStand k : companions) {
+                        if (k.getPersistentDataContainer().has(TARDISWeepingAngels.K9, PersistentDataType.INTEGER)) {
+                            count++;
+                        }
+                    }
+                    break;
+                case SILENT:
                     what = "Silence";
                     Collection<Enderman> silence = w.getEntitiesByClass(Enderman.class);
                     for (Enderman m : silence) {
@@ -105,7 +118,7 @@ public class CountCommand implements CommandExecutor {
                         }
                     }
                     break;
-                case "o":
+                case SONTARAN:
                     what = "Sontarans";
                     Collection<Zombie> sontarans = w.getEntitiesByClass(Zombie.class);
                     for (Zombie o : sontarans) {
@@ -114,7 +127,7 @@ public class CountCommand implements CommandExecutor {
                         }
                     }
                     break;
-                case "r":
+                case OOD:
                     what = "Ood";
                     Collection<ArmorStand> ood = w.getEntitiesByClass(ArmorStand.class);
                     for (ArmorStand o : ood) {
@@ -123,7 +136,7 @@ public class CountCommand implements CommandExecutor {
                         }
                     }
                     break;
-                case "s":
+                case SILURIAN:
                     what = "Silurians";
                     Collection<Skeleton> silurians = w.getEntitiesByClass(Skeleton.class);
                     for (Skeleton s : silurians) {
@@ -132,7 +145,7 @@ public class CountCommand implements CommandExecutor {
                         }
                     }
                     break;
-                case "v":
+                case VASHTA_NERADA:
                     what = "Vashta Nerada";
                     Collection<Zombie> vashta = w.getEntitiesByClass(Zombie.class);
                     for (Zombie v : vashta) {
@@ -141,7 +154,7 @@ public class CountCommand implements CommandExecutor {
                         }
                     }
                     break;
-                case "z":
+                case ZYGON:
                     what = "Zygons";
                     Collection<Zombie> zygons = w.getEntitiesByClass(Zombie.class);
                     for (Zombie z : zygons) {
@@ -150,21 +163,11 @@ public class CountCommand implements CommandExecutor {
                         }
                     }
                     break;
-                case "g":
-                    what = "Invisible Guardians without Endermen";
-                    Collection<Guardian> guardians = w.getEntitiesByClass(Guardian.class);
-                    for (Guardian g : guardians) {
-                        if (g.hasPotionEffect(PotionEffectType.INVISIBILITY) && g.getVehicle() == null) {
-                            count++;
-                        }
-                    }
-                    break;
                 default:
                     break;
             }
-            sender.sendMessage(plugin.pluginName + "There are " + count + " " + what + " in " + w.getName());
-            return true;
         }
-        return false;
+        sender.sendMessage(plugin.pluginName + "There are " + count + " " + what + " in " + w.getName());
+        return true;
     }
 }

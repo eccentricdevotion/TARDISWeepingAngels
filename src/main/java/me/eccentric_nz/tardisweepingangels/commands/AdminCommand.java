@@ -1,73 +1,79 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
+import me.eccentric_nz.tardisweepingangels.utils.Monster;
+import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 
 import java.util.HashMap;
 
-public class AdminCommand implements CommandExecutor {
+public class AdminCommand {
 
     private final TARDISWeepingAngels plugin;
-    private final HashMap<String, String> types = new HashMap<>();
+    private final HashMap<Monster, String> types = new HashMap<>();
 
     public AdminCommand(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        types.put("a", "angels");
-        types.put("c", "cybermen");
-        types.put("d", "daleks");
-        types.put("e", "empty_child");
-        types.put("i", "ice_warriors");
-        types.put("m", "silence");
-        types.put("o", "sontarans");
-        types.put("r", "ood");
-        types.put("s", "silurians");
-        types.put("v", "vashta_nerada");
-        types.put("z", "zygons");
-        types.put("all", "");
+        types.put(Monster.CYBERMAN, "cybermen");
+        types.put(Monster.DALEK, "daleks");
+        types.put(Monster.EMPTY_CHILD, "empty_child");
+        types.put(Monster.ICE_WARRIOR, "ice_warriors");
+        types.put(Monster.JUDOON, "judoon");
+        types.put(Monster.K9, "k9");
+        types.put(Monster.OOD, "ood");
+        types.put(Monster.SILENT, "silence");
+        types.put(Monster.SILURIAN, "silurians");
+        types.put(Monster.SONTARAN, "sontarans");
+        types.put(Monster.TOCLAFANE, "toclafane");
+        types.put(Monster.VASHTA_NERADA, "vashta_nerada");
+        types.put(Monster.WEEPING_ANGEL, "angels");
+        types.put(Monster.ZYGON, "zygons");
     }
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("twa")) {
-            if (args.length < 3) {
-                return false;
-            }
-            String which = args[0].toLowerCase();
-            if (!types.containsKey(which)) {
-                sender.sendMessage(plugin.pluginName + "Could not find a world with that name!");
-                return false;
-            }
-            if (plugin.getServer().getWorld(args[1]) == null) {
-                return false;
-            }
-            int m;
-            try {
-                m = Integer.parseInt(args[2]);
-            } catch (NumberFormatException e) {
-                sender.sendMessage(plugin.pluginName + "Last argument must be a number!");
-                return false;
-            }
-            if (which.equals("all")) {
-                plugin.getConfig().set("angels.worlds." + args[1], m);
-                plugin.getConfig().set("cybermen.worlds." + args[1], m);
-                plugin.getConfig().set("daleks.worlds." + args[1], m);
-                plugin.getConfig().set("empty_child.worlds." + args[1], m);
-                plugin.getConfig().set("ice_warriors.worlds." + args[1], m);
-                plugin.getConfig().set("silence.worlds." + args[1], m);
-                plugin.getConfig().set("sontarans.worlds." + args[1], m);
-                plugin.getConfig().set("ood.worlds." + args[1], m);
-                plugin.getConfig().set("silurians.worlds." + args[1], m);
-                plugin.getConfig().set("vashta_nerada.worlds." + args[1], m);
-                plugin.getConfig().set("zygons.worlds." + args[1], m);
-            } else {
-                plugin.getConfig().set(types.get(which) + ".worlds." + args[1], m);
-            }
-            plugin.saveConfig();
-            sender.sendMessage(plugin.pluginName + "Config updated!");
+    public boolean set(CommandSender sender, String[] args) {
+        if (args.length < 4) {
+            return false;
+        }
+        World w = plugin.getServer().getWorld(args[2]);
+        if (w == null) {
+            sender.sendMessage(plugin.pluginName + "Could not find a world with that name!");
             return true;
         }
-        return false;
+        int m;
+        try {
+            m = Integer.parseInt(args[3]);
+        } catch (NumberFormatException e) {
+            sender.sendMessage(plugin.pluginName + "Last argument must be a number!");
+            return false;
+        }
+        String which = args[1].toLowerCase();
+        Monster monster;
+        try {
+            monster = Monster.valueOf(which);
+            plugin.getConfig().set(types.get(monster) + ".worlds." + args[2], m);
+        } catch (IllegalArgumentException e) {
+            if (which.equals("all")) {
+                plugin.getConfig().set("angels.worlds." + args[2], m);
+                plugin.getConfig().set("cybermen.worlds." + args[2], m);
+                plugin.getConfig().set("daleks.worlds." + args[2], m);
+                plugin.getConfig().set("empty_child.worlds." + args[2], m);
+                plugin.getConfig().set("ice_warriors.worlds." + args[2], m);
+                plugin.getConfig().set("silence.worlds." + args[2], m);
+                plugin.getConfig().set("sontarans.worlds." + args[2], m);
+                plugin.getConfig().set("ood.worlds." + args[2], true);
+                plugin.getConfig().set("judoon.worlds." + args[2], true);
+                plugin.getConfig().set("toclafane.worlds." + args[2], m);
+                plugin.getConfig().set("k9.worlds." + args[2], true);
+                plugin.getConfig().set("silurians.worlds." + args[2], m);
+                plugin.getConfig().set("vashta_nerada.worlds." + args[2], m);
+                plugin.getConfig().set("zygons.worlds." + args[2], m);
+            } else {
+                sender.sendMessage(plugin.pluginName + "Invalid monster type!");
+                return true;
+            }
+        }
+        plugin.saveConfig();
+        sender.sendMessage(plugin.pluginName + "Config updated!");
+        return true;
     }
 }

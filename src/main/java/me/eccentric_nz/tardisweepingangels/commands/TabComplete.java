@@ -26,6 +26,7 @@ import org.bukkit.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -37,9 +38,7 @@ public class TabComplete implements TabCompleter {
     private final ImmutableList<String> ONOFF_SUBS = ImmutableList.of("on", "off");
     private final ImmutableList<String> WORLD_SUBS;
     private final ImmutableList<String> MONSTER_SUBS;
-    ImmutableList<String> LETTER_SUBS = ImmutableList.of("a", "c", "d", "e", "i", "m", "o", "s", "v", "z");
-    ImmutableList<String> OOD_SUBS = ImmutableList.of("spawn", "follow", "stay", "remove");
-    ImmutableList<String> TOC_SUBS = ImmutableList.of("spawn", "remove");
+    ImmutableList<String> CMD_SUBS = ImmutableList.of("spawn", "equip", "disguise", "undisguise", "kill", "count", "follow", "stay", "remove", "set");
 
     public TabComplete(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
@@ -58,24 +57,16 @@ public class TabComplete implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 1) {
-            if (command.getName().equals("twac") || command.getName().equals("twak") || command.getName().equals("twa")) {
-                return partial(args[0], LETTER_SUBS);
-            }
-            if (command.getName().equals("twas") || command.getName().equals("twad") || command.getName().equals("twae")) {
-                return partial(args[0], MONSTER_SUBS);
-            }
-            if (command.getName().equals("ood") || command.getName().equals("judoon")) {
-                return partial(args[0], OOD_SUBS);
-            }
-            if (command.getName().equals("toclafane")) {
-                return partial(args[0], TOC_SUBS);
-            }
+            return partial(args[0], CMD_SUBS);
         } else if (args.length == 2) {
-            if (command.getName().equals("twad")) {
-                return partial(args[1], ONOFF_SUBS);
-            }
-            if (command.getName().equals("twac") || command.getName().equals("twak") || command.getName().equals("twa")) {
-                return partial(args[1], WORLD_SUBS);
+            return partial(args[1], MONSTER_SUBS);
+        } else if (args.length == 3) {
+            if (args[0].equals("disguise")) {
+                return partial(args[2], ONOFF_SUBS);
+            } else if (args[0].equals("follow")) {
+                return Collections.singletonList("15");
+            } else {
+                return partial(args[2], WORLD_SUBS);
             }
         }
         return ImmutableList.of();

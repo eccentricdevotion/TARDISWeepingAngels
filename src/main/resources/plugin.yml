@@ -10,21 +10,50 @@ dev-url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 softdepend: [TARDISChunkGenerator,WorldGuard]
 permissions:
+  tardisweepingangels.k9:
+    description: Allow players to have a K9 companion.
+    default: op
   tardisweepingangels.spawn:
     description: Allow players to spawn a monster.
     default: op
-  tardisweepingangels.ood:
-    description: Allow players to spawn an Ood.
+    children:
+      tardisweepingangels.spawn.angel: true
+      tardisweepingangels.spawn.cyberman: true
+      tardisweepingangels.spawn.dalek: true
+      tardisweepingangels.spawn.empty: true
+      tardisweepingangels.spawn.ice: true
+      tardisweepingangels.spawn.judoon: true
+      tardisweepingangels.spawn.k9: true
+      tardisweepingangels.spawn.ood: true
+      tardisweepingangels.spawn.silent: true
+      tardisweepingangels.spawn.silurian: true
+      tardisweepingangels.spawn.sontaran: true
+      tardisweepingangels.spawn.strax: true
+      tardisweepingangels.spawn.toclafane: true
+      tardisweepingangels.spawn.vashta: true
+      tardisweepingangels.spawn.zygon: true
+  tardisweepingangels.follow:
+    description: Allow players to make an Ood, Judoon or K9 follow them.
     default: op
-  tardisweepingangels.judoon:
-    description: Allow players to spawn a Judoon.
+    children:
+      tardisweepingangels.follow.judoon: true
+      tardisweepingangels.follow.k9: true
+      tardisweepingangels.follow.ood: true
+  tardisweepingangels.remove:
+    description: Allow players to remove an Ood, Judoon or K9.
     default: op
-  tardisweepingangels.toclafane:
-    description: Allow players to spawn a Toclafane.
-    default: op
+    children:
+      tardisweepingangels.remove.judoon: true
+      tardisweepingangels.remove.k9: true
+      tardisweepingangels.remove.ood: true
   tardisweepingangels.build:
-    description: Allow players to build a monster.
+    description: Allow players to build a monster (Weeping Angel, Ood, Judoon, K9).
     default: op
+    children:
+      tardisweepingangels.build.angel: true
+      tardisweepingangels.build.judoon: true
+      tardisweepingangels.build.k9: true
+      tardisweepingangels.build.ood: true
   tardisweepingangels.disguise:
     description: Allow players to disguise themselves as a monster.
     default: op
@@ -38,59 +67,57 @@ permissions:
     description: Allow players to alter plugin settings.
     default: op
 commands:
-  twas:
-    aliases: [twaspawn]
-    description: Spawns a monster on the block you are targeting.
-    usage: /<command> [monster type]
-    permission: tardisweepingangels.spawn
-    permission-message: You don't have the permission <permission> to use this command
-  twad:
-    aliases: [twadisguise]
-    description: Sets a player's armour so that they are disguised as a monster.
-    usage: /<command> [monster type] [on|off]
-    permission: tardisweepingangels.disguise
-    permission-message: You don't have the permission <permission> to use this command
-  twac:
-    aliases: [twacount]
-    description: Reports the current number of the specifed monster in the specified world.
-    usage: /<command> [a|c|d|e|i|m|r|o|s|v|z] [world]
-    permission: tardisweepingangels.count
-    permission-message: You don't have the permission <permission> to use this command
-  twak:
-    aliases: [twakill]
-    description: Kills all of the specifed monster in the specified world.
-    usage: /<command> [a|c|d|e|i|m|r|o|s|v|z] [world]
-    permission: tardisweepingangels.kill
-    permission-message: You don't have the permission <permission> to use this command
   twa:
-    aliases: [twaa,twaadmin]
-    description: Set the maximum number of the specified monster allowed to spawn in the specified world.
-    usage: /<command> [a|c|d|e|i|m|r|o|s|v|z|all] [world] [max monsters]
-    permission: tardisweepingangels.admin
-    permission-message: You don't have the permission <permission> to use this command
-  twar:
-    description: Try to redisguise Daleks.
-    usage: /<command>
-    permission: tardisweepingangels.admin
-    permission-message: You don't have the permission <permission> to use this command
-  twae:
-    description: Equip an armour stand with monster armour.
-    usage: /<command> [monster type]
-    permission: tardisweepingangels.admin
-    permission-message: You don't have the permission <permission> to use this command
-  ood:
-    description: Spawn and manipulate an Ood.
-    usage: /<command> [spawn|follow|stay|remove]
-    permission: tardisweepingangels.ood
-    permission-message: You don't have the permission <permission> to use this command
-  judoon:
-    description: Spawn and manipulate a Judoon guard.
-    usage: /<command> [spawn|follow|stay|remove]
-    permission: tardisweepingangels.judoon
-    permission-message: You don't have the permission <permission> to use this command
-  toclafane:
-    description: Spawn a Toclafane.
-    aliases: toc
-    usage: /<command> [spawn|remove]
-    permission: tardisweepingangels.toclafane
-    permission-message: You don't have the permission <permission> to use this command
+    aliases: [tardisweepingangels]
+    description: Manipulate TARDISWeepingAngels monsters with various arguments (spawn, kill, remove, count, disguise, equip, etc)..
+    usage: /<command> [subcommand] <monster type> <world> <max>
+    spawn:
+      description: Spawns a monster on the block you are targeting.
+      usage: /<command> spawn [monster type]
+      permission: tardisweepingangels.spawn
+      permission-message: You don't have the permission <permission> to use this command
+    disguise:
+      description: Sets a player's armour so that they are disguised as a monster.
+      usage: /<command> disguise [monster type] [on|off]
+      permission: tardisweepingangels.disguise
+      permission-message: You don't have the permission <permission> to use this command
+    count:
+      description: Reports the current number of the specifed monster in the specified world.
+      usage: /<command> count [monster type] [world]
+      permission: tardisweepingangels.count
+      permission-message: You don't have the permission <permission> to use this command
+    kill:
+      description: Kills all of the specifed monster in the specified world.
+      usage: /<command> kill [monster type] [world]
+      permission: tardisweepingangels.kill
+      permission-message: You don't have the permission <permission> to use this command
+    remove:
+      description: Removes an Ood, Judoon, K9.
+      usage: /<command> remove
+      permission: tardisweepingangels.remove
+      permission-message: You don't have the permission <permission> to use this command
+    equip:
+      description: Equip an armour stand with monster armour.
+      usage: /<command> equip [monster type]
+      permission: tardisweepingangels.admin
+      permission-message: You don't have the permission <permission> to use this command
+    follow:
+      description: Make an Ood, Judoon or K9 follow you.
+      usage: /<command> follow <speed from 1-50>
+      permission: tardisweepingangels.follow
+      permission-message: You don't have the permission <permission> to use this command
+    stay:
+      description: Make an Ood, Judoon or K9 stop following you.
+      usage: /<command> stay
+      permission: tardisweepingangels.follow
+      permission-message: You don't have the permission <permission> to use this command
+    set:
+      description: Set the maximum number of the specified monster allowed to spawn in the specified world.
+      usage: /<command> set [monser type|all] [world] [max number]
+      permission: tardisweepingangels.admin
+      permission-message: You don't have the permission <permission> to use this command
+    redisguise:
+      description: Try to redisguise Daleks.
+      usage: /<command> redisguise
+      permission: tardisweepingangels.admin
+      permission-message: You don't have the permission <permission> to use this command
