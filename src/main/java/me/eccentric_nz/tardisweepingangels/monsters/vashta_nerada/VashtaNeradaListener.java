@@ -81,7 +81,7 @@ public class VashtaNeradaListener implements Listener {
         PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
         e.addPotionEffect(p);
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            TARDISWeepingAngels.getEqipper().setVashtaNeradaEquipment(e, false);
+            VashtaNeradaEquipment.set(e, false);
             plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.VASHTA_NERADA, l));
         }, 5L);
     }

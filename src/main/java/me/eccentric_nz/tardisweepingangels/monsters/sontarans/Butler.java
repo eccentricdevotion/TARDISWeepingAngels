@@ -69,7 +69,7 @@ public class Butler implements Listener {
                             pz.setBaby(false);
                             pz.setAngry(false);
                             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                                TARDISWeepingAngels.getEqipper().setStraxEquipment(pz, false);
+                                StraxEquipment.set(pz, false);
                                 pz.getPersistentDataContainer().set(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER, Monster.STRAX.getPersist());
                                 pz.getPersistentDataContainer().remove(TARDISWeepingAngels.SONTARAN);
                                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(pz, EntityType.PIG_ZOMBIE, Monster.STRAX, l));

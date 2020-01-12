@@ -99,7 +99,7 @@ public class IceWarriorRunnable implements Runnable {
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 warrior.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    TARDISWeepingAngels.getEqipper().setWarriorEquipment(e, false);
+                    IceWarriorEquipment.set(e, false);
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.PIG_ZOMBIE, Monster.ICE_WARRIOR, l));
                 }, 5L);
             }

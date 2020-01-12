@@ -86,7 +86,7 @@ public class SilurianRunnable implements Runnable {
             PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
             e.addPotionEffect(p);
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                TARDISWeepingAngels.getEqipper().setSilurianEquipment(e, false);
+                SilurianEquipment.set(e, false);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.SILURIAN, cave));
             }, 5L);
         }

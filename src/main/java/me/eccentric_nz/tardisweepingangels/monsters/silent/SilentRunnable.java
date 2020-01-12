@@ -74,7 +74,7 @@ public class SilentRunnable implements Runnable {
                 e.setSilent(true);
                 e.setCanPickupItems(false);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    TARDISWeepingAngels.getEqipper().setSilentEquipment(e, false);
+                    SilentEquipment.set(e, false);
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ENDERMAN, Monster.SILENT, l));
                 }, 5L);
             }

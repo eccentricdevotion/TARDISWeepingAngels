@@ -79,7 +79,7 @@ public class ZygonRunnable implements Runnable {
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 zygon.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    TARDISWeepingAngels.getEqipper().setZygonEquipment(e, false);
+                    ZygonEquipment.set(e, false);
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.ZYGON, l));
                 }, 5L);
             }

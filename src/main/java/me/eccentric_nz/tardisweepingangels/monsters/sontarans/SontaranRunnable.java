@@ -84,7 +84,7 @@ public class SontaranRunnable implements Runnable {
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 sontaran.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    TARDISWeepingAngels.getEqipper().setSontaranEquipment(e, false);
+                    SontaranEquipment.set(e, false);
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.SONTARAN, l));
                 }, 5L);
             }

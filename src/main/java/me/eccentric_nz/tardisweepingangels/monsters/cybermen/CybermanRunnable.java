@@ -79,7 +79,7 @@ public class CybermanRunnable implements Runnable {
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 cyber.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    TARDISWeepingAngels.getEqipper().setCyberEquipment(e, false);
+                    CybermanEquipment.set(e, false);
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.CYBERMAN, l));
                 }, 5L);
             }

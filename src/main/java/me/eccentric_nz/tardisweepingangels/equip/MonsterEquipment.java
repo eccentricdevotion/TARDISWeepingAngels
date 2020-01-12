@@ -24,10 +24,8 @@ import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.potion.PotionEffectType;
 
 import javax.annotation.Nullable;
 
@@ -118,18 +116,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void removeEquipment(Player p) {
-        PlayerInventory inv = p.getInventory();
-        if (p.hasPotionEffect(PotionEffectType.INVISIBILITY)) {
-            p.removePotionEffect(PotionEffectType.INVISIBILITY);
-            if (inv.getItemInOffHand() != null) {
-                inv.setItemInOffHand(null);
-            }
-        }
-        inv.setHelmet(null);
-        inv.setChestplate(null);
-        inv.setLeggings(null);
-        inv.setBoots(null);
-        p.updateInventory();
+        RemoveEquipment.set(p);
     }
 
     @Override

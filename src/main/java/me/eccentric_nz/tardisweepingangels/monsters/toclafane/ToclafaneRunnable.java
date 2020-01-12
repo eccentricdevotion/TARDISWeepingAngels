@@ -64,7 +64,7 @@ public class ToclafaneRunnable implements Runnable {
                 }
                 Entity e = w.spawnEntity(l, EntityType.ARMOR_STAND);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    TARDISWeepingAngels.getEqipper().setToclafaneEquipment(e, false);
+                    ToclafaneEquipment.set(e, false);
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ARMOR_STAND, Monster.TOCLAFANE, l));
                 }, 5L);
             }

@@ -76,7 +76,7 @@ public class EmptyChildRunnable implements Runnable {
                 Zombie child = (Zombie) e;
                 child.setBaby(true);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    TARDISWeepingAngels.getEqipper().setEmptyChildEquipment(e, false);
+                    EmptyChildEquipment.set(e, false);
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.EMPTY_CHILD, l));
                 }, 5L);
             }

@@ -48,7 +48,7 @@ public class K9Listener implements Listener {
                     return;
                 }
                 Entity k9 = world.spawnEntity(location, EntityType.ARMOR_STAND);
-                TARDISWeepingAngels.getEqipper().setK9Equipment(player, k9, false);
+                K9Equipment.set(player, k9, false);
                 ent.remove();
                 player.playSound(k9.getLocation(), "k9", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(k9, EntityType.ARMOR_STAND, Monster.K9, location));
@@ -111,7 +111,7 @@ public class K9Listener implements Listener {
                     }
                     // spawn a K9 instead
                     Entity k9 = world.spawnEntity(location, EntityType.ARMOR_STAND);
-                    TARDISWeepingAngels.getEqipper().setK9Equipment(player, k9, false);
+                    K9Equipment.set(player, k9, false);
                     player.playSound(k9.getLocation(), "k9", 1.0f, 1.0f);
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(k9, EntityType.ARMOR_STAND, Monster.K9, location));
                 }
