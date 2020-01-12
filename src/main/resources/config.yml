@@ -45,6 +45,10 @@ ice_warriors:
     - ICE
     - PACKED_ICE
     - SNOW_BLOCK
+k9:
+  by_taming: true
+  worlds:
+    world: true
 silurians:
   worlds:
     world: 20
@@ -56,6 +60,8 @@ ood:
     world: true
   drops:
     - NAME_TAG
+  spawn_from_villager: 20
+  spawn_from_cured: 5
 judoon:
   guards: true
   ammunition: 25
@@ -72,9 +78,10 @@ sontarans:
 toclafane:
   spawn_from_bee: 5
   worlds:
-    world: true
+    world: 20
   drops:
     - GUNPOWDER
+    - HONEYCOMB
 vashta_nerada:
   worlds:
     world: 10

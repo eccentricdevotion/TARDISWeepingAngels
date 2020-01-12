@@ -43,6 +43,8 @@ public class Config {
         intOptions.put("angels.spawn_from_chat.distance_from_player", 10);
         intOptions.put("judoon.ammunition", 25);
         intOptions.put("judoon.damage", 4);
+        intOptions.put("ood.spawn_from_villager", 20);
+        intOptions.put("ood.spawn_from_cured", 5);
         intOptions.put("toclafane.spawn_from_bee", 5);
         // string
         strOptions.put("angels.weapon", "DIAMOND_PICKAXE");
@@ -57,7 +59,7 @@ public class Config {
         listOptions.put("ood.drops", Arrays.asList("NAME_TAG"));
         listOptions.put("silurians.drops", Arrays.asList("GOLD_NUGGET", "FEATHER"));
         listOptions.put("sontarans.drops", Arrays.asList("POTATO", "POISONOUS_POTATO"));
-        listOptions.put("toclafane.drops", Arrays.asList("GUNPOWDER"));
+        listOptions.put("toclafane.drops", Arrays.asList("GUNPOWDER", "HONEYCOMB"));
         listOptions.put("vashta_nerada.drops", Arrays.asList("BONE", "LEATHER"));
         listOptions.put("zygons.drops", Arrays.asList("PAINTING", "SAND"));
         // boolean
@@ -67,6 +69,7 @@ public class Config {
         boolOptions.put("cybermen.can_upgrade", true);
         boolOptions.put("sontarans.can_tame", true);
         boolOptions.put("judoon.guards", true);
+        boolOptions.put("k9.by_taming", true);
         // float
         doubleOptions.put("config_version", min_version);
     }
@@ -121,8 +124,11 @@ public class Config {
             if (!config.contains("judoon.worlds." + n)) {
                 plugin.getConfig().set("judoon.worlds." + n, true);
             }
+            if (!config.contains("k9.worlds." + n)) {
+                plugin.getConfig().set("k9.worlds." + n, true);
+            }
             if (!config.contains("toclafane.worlds." + n)) {
-                plugin.getConfig().set("toclafane.worlds." + n, true);
+                plugin.getConfig().set("toclafane.worlds." + n, m);
             }
             if (!config.contains("silurians.worlds." + n)) {
                 plugin.getConfig().set("silurians.worlds." + n, m);
