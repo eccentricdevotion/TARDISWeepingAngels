@@ -3,64 +3,43 @@
  */
 package me.eccentric_nz.tardisweepingangels.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author eccentric_nz
  */
 public enum Monster {
 
-    ANGEL("Weeping Angel", 1),
-    CHILD("Empty Child", 4),
-    CYBERMAN("Cyberman", 2),
-    DALEK("Dalek", 3),
-    EMPTY("Empty Child", 4),
-    EMPTY_CHILD("Empty Child", 4),
-    ICE("Ice Warrior", 5),
-    ICE_WARRIOR("Ice Warrior", 5),
-    OOD("Ood", 12),
-    SILENT("Silent", 6),
-    SILURIAN("Silurian", 7),
-    SONTARAN("Sontaran", 8),
-    STRAX("Strax", 9),
-    VASHTA("Vashta Nerada", 10),
-    VASHTA_NERADA("Vashta Nerada", 10),
-    WARRIOR("Ice Warrior", 5),
-    WEEPING_ANGEL("Weeping Angel", 1),
-    ZYGON("Zygon", 11);
-
-    static final List<Monster> values = new ArrayList<>();
-
-    static {
-        values.add(CYBERMAN);
-        values.add(DALEK);
-        values.add(EMPTY_CHILD);
-        values.add(ICE_WARRIOR);
-        values.add(OOD);
-        values.add(SILENT);
-        values.add(SILURIAN);
-        values.add(SONTARAN);
-        values.add(STRAX);
-        values.add(VASHTA_NERADA);
-        values.add(WEEPING_ANGEL);
-        values.add(ZYGON);
-    }
+    CYBERMAN("Cyberman", "cyberman", 2),
+    DALEK("Dalek", "dalek", 3),
+    EMPTY_CHILD("Empty Child", "empty", 4),
+    ICE_WARRIOR("Ice Warrior", "ice", 5),
+    JUDOON("Judoon", "judoon", 14),
+    K9("K9", "k9", 15),
+    OOD("Ood", "ood", 12),
+    SILENT("Silent", "silent", 6),
+    SILURIAN("Silurian", "silurian", 7),
+    SONTARAN("Sontaran", "sontaran", 8),
+    STRAX("Strax", "strax", 9),
+    TOCLAFANE("Toclafane", "toclafane", 13),
+    VASHTA_NERADA("Vashta Nerada", "vashta", 10),
+    WEEPING_ANGEL("Weeping Angel", "angel", 1),
+    ZYGON("Zygon", "zygon", 11);
 
     public String name;
+    public String permission;
     public int persist;
 
-    Monster(String name, int persist) {
+    Monster(String name, String permission, int persist) {
         this.name = name;
+        this.permission = permission;
         this.persist = persist;
-    }
-
-    public static List<Monster> getValues() {
-        return values;
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getPermission() {
+        return permission;
     }
 
     public int getPersist() {
