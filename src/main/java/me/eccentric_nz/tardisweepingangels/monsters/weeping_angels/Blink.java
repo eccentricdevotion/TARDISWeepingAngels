@@ -83,7 +83,7 @@ public class Blink implements Listener {
         if (skeleton != null) {
             skeleton.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, plugin.getConfig().getInt("angels.freeze_time"), 30, true, false));
             if (!player.isSneaking()) {
-                player.sendMessage(plugin.pluginName + message.get(plugin.getRandom().nextInt(4)));
+                player.sendMessage(plugin.pluginName + message.get(TARDISWeepingAngels.random.nextInt(4)));
             }
         }
     }

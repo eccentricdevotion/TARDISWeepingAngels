@@ -17,7 +17,6 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author eccentric_nz
@@ -26,7 +25,6 @@ public class ImageHolder implements Listener {
 
     private final TARDISWeepingAngels plugin;
     private final List<BlockFace> faces = new ArrayList<>();
-    Random rand = new Random();
 
     public ImageHolder(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
@@ -39,9 +37,9 @@ public class ImageHolder implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onChatAboutWeepingAngel(AsyncPlayerChatEvent event) {
         String message = event.getMessage();
-        if (message.toLowerCase().contains("angel") && rand.nextInt(100) < plugin.getConfig().getInt("angels.spawn_from_chat.chance")) {
+        if (message.toLowerCase().contains("angel") && TARDISWeepingAngels.random.nextInt(100) < plugin.getConfig().getInt("angels.spawn_from_chat.chance")) {
             int dist = plugin.getConfig().getInt("angels.spawn_from_chat.distance_from_player");
-            Block b = event.getPlayer().getLocation().getBlock().getRelative(faces.get(rand.nextInt(4)), dist);
+            Block b = event.getPlayer().getLocation().getBlock().getRelative(faces.get(TARDISWeepingAngels.random.nextInt(4)), dist);
             // get highest block in a random direction
             Location highest = b.getWorld().getHighestBlockAt(b.getLocation()).getLocation();
             Location l = highest.add(0, 1, 0);

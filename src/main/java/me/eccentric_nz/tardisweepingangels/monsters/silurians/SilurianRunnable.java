@@ -20,9 +20,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.logging.Level;
 
 /**
@@ -51,15 +49,15 @@ public class SilurianRunnable implements Runnable {
                     plugin.getServer().getLogger().log(Level.WARNING, "TARDISWeepingAngels cannot safely spawn Silurians in custom worlds!");
                 } else {
                     // get the current silurian count
-                    List<Skeleton> silurians = new ArrayList<>();
+                    int silurians = 0;
                     Collection<Skeleton> skeletons = w.getEntitiesByClass(Skeleton.class);
-                    skeletons.forEach((s) -> {
+                    for (Skeleton s : skeletons) {
                         PersistentDataContainer pdc = s.getPersistentDataContainer();
                         if (pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)) {
-                            silurians.add(s);
+                            silurians++;
                         }
-                    });
-                    if (silurians.size() < plugin.getConfig().getInt("silurians.worlds." + name)) {
+                    }
+                    if (silurians < plugin.getConfig().getInt("silurians.worlds." + name)) {
                         // if less than maximum, spawn some more
                         for (int i = 0; i < spawn_rate; i++) {
                             spawnSilurian(w);
@@ -73,9 +71,9 @@ public class SilurianRunnable implements Runnable {
     private void spawnSilurian(World w) {
         Chunk[] chunks = w.getLoadedChunks();
         if (chunks.length > 0) {
-            Chunk c = chunks[plugin.getRandom().nextInt(chunks.length)];
-            int x = c.getX() * 16 + plugin.getRandom().nextInt(16);
-            int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
+            Chunk c = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
+            int x = c.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int z = c.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
             Location search = CaveFinder.searchCave(l);

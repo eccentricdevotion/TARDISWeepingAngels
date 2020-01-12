@@ -18,9 +18,7 @@ import org.bukkit.entity.Zombie;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * @author eccentric_nz
@@ -42,16 +40,16 @@ public class EmptyChildRunnable implements Runnable {
             String name = Config.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("empty_child.worlds." + name) > 0) {
                 // get the current warriors
-                List<Zombie> wheresmymummy = new ArrayList<>();
+                int wheresmymummy = 0;
                 Collection<Zombie> children = w.getEntitiesByClass(Zombie.class);
-                children.forEach((c) -> {
+                for (Zombie c : children) {
                     PersistentDataContainer pdc = c.getPersistentDataContainer();
                     if (pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
-                        wheresmymummy.add(c);
+                        wheresmymummy++;
                     }
-                });
+                }
                 // count the current empty children
-                if (wheresmymummy.size() < plugin.getConfig().getInt("empty_child.worlds." + name)) {
+                if (wheresmymummy < plugin.getConfig().getInt("empty_child.worlds." + name)) {
                     // if less than maximum, spawn some more
                     for (int i = 0; i < spawn_rate; i++) {
                         spawnEmptyChild(w);
@@ -64,9 +62,9 @@ public class EmptyChildRunnable implements Runnable {
     private void spawnEmptyChild(World w) {
         Chunk[] chunks = w.getLoadedChunks();
         if (chunks.length > 0) {
-            Chunk c = chunks[plugin.getRandom().nextInt(chunks.length)];
-            int x = c.getX() * 16 + plugin.getRandom().nextInt(16);
-            int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
+            Chunk c = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
+            int x = c.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int z = c.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
             if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {

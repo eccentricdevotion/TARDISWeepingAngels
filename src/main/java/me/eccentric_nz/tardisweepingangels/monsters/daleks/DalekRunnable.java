@@ -20,9 +20,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * @author eccentric_nz
@@ -44,20 +42,16 @@ public class DalekRunnable implements Runnable {
             String name = Config.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("daleks.worlds." + name) > 0) {
                 // get the current daleks
-                List<Skeleton> daleks = new ArrayList<>();
+                int daleks = 0;
                 Collection<Skeleton> skeletons = w.getEntitiesByClass(Skeleton.class);
-                skeletons.forEach((d) -> {
+                for (Skeleton d : skeletons) {
                     PersistentDataContainer pdc = d.getPersistentDataContainer();
                     if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
-//                    // does it have a helmet with a display name
-//                    EntityEquipment ee = d.getEquipment();
-//                    ItemStack is = ee.getHelmet();
-//                    if (is != null && is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek")) {
-                        daleks.add(d);
+                        daleks++;
                     }
-                });
+                }
                 // count the current daleks
-                if (daleks.size() < plugin.getConfig().getInt("daleks.worlds." + name)) {
+                if (daleks < plugin.getConfig().getInt("daleks.worlds." + name)) {
                     // if less than maximum, spawn some more
                     for (int i = 0; i < spawn_rate; i++) {
                         spawnDalek(w);
@@ -70,9 +64,9 @@ public class DalekRunnable implements Runnable {
     private void spawnDalek(World w) {
         Chunk[] chunks = w.getLoadedChunks();
         if (chunks.length > 0) {
-            Chunk c = chunks[plugin.getRandom().nextInt(chunks.length)];
-            int x = c.getX() * 16 + plugin.getRandom().nextInt(16);
-            int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
+            Chunk c = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
+            int x = c.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int z = c.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
             if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {

@@ -22,7 +22,6 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author eccentric_nz
@@ -32,7 +31,6 @@ public class Damage implements Listener {
     private final TARDISWeepingAngels plugin;
     private final Material mat;
     private final List<World> angel_tp_worlds = new ArrayList<>();
-    Random rand = new Random();
 
     public Damage(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
@@ -90,12 +88,12 @@ public class Damage implements Listener {
         // is this world an allowable world? - we don't want Nether or TARDIS worlds
         if (!angel_tp_worlds.contains(w)) {
             // get a random teleport world
-            w = angel_tp_worlds.get(rand.nextInt(angel_tp_worlds.size()));
+            w = angel_tp_worlds.get(TARDISWeepingAngels.random.nextInt(angel_tp_worlds.size()));
         }
         Chunk[] chunks = w.getLoadedChunks();
-        Chunk c = chunks[plugin.getRandom().nextInt(chunks.length)];
-        int x = c.getX() * 16 + plugin.getRandom().nextInt(16);
-        int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
+        Chunk c = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
+        int x = c.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
+        int z = c.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
         int y = w.getHighestBlockYAt(x, z);
         return new Location(w, x, y + 1, z);
     }

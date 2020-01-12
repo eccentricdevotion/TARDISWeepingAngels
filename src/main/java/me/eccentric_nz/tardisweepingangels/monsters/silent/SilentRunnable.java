@@ -18,9 +18,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * @author eccentric_nz
@@ -32,7 +30,7 @@ public class SilentRunnable implements Runnable {
 
     public SilentRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
-        spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
+        spawn_rate = this.plugin.getConfig().getInt("spawn_rate.how_many");
     }
 
     @Override
@@ -42,15 +40,15 @@ public class SilentRunnable implements Runnable {
             String name = Config.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("silent.worlds." + name) > 0) {
                 // get the current silents
-                List<Enderman> papal = new ArrayList<>();
+                int papal = 0;
                 Collection<Enderman> mainframe = w.getEntitiesByClass(Enderman.class);
-                mainframe.forEach((s) -> {
+                for (Enderman s : mainframe) {
                     PersistentDataContainer pdc = s.getPersistentDataContainer();
                     if (pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
-                        papal.add(s);
+                        papal++;
                     }
-                });
-                if (papal.size() < plugin.getConfig().getInt("silent.worlds." + name)) {
+                }
+                if (papal < plugin.getConfig().getInt("silent.worlds." + name)) {
                     // if less than maximum, spawn some more
                     for (int i = 0; i < spawn_rate; i++) {
                         spawnSilent(w);
@@ -63,9 +61,9 @@ public class SilentRunnable implements Runnable {
     private void spawnSilent(World w) {
         Chunk[] chunks = w.getLoadedChunks();
         if (chunks.length > 0) {
-            Chunk c = chunks[plugin.getRandom().nextInt(chunks.length)];
-            int x = c.getX() * 16 + plugin.getRandom().nextInt(16);
-            int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
+            Chunk c = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
+            int x = c.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int z = c.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
             if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {
@@ -76,7 +74,7 @@ public class SilentRunnable implements Runnable {
                 e.setSilent(true);
                 e.setCanPickupItems(false);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    TARDISWeepingAngels.getEqipper().setSilentEquipment(e);
+                    TARDISWeepingAngels.getEqipper().setSilentEquipment(e, false);
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ENDERMAN, Monster.SILENT, l));
                 }, 5L);
             }

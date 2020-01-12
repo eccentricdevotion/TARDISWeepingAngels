@@ -18,9 +18,7 @@ import org.bukkit.entity.Skeleton;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * @author eccentric_nz
@@ -45,16 +43,16 @@ public class WeepingAngelsRunnable implements Runnable {
                 // only spawn at night - times according to http://minecraft.gamepedia.com/Day-night_cycle
                 if (time > 13187 && time < 22812) {
                     // get the current angels
-                    List<Skeleton> angels = new ArrayList<>();
+                    int angels = 0;
                     Collection<Skeleton> skellies = w.getEntitiesByClass(Skeleton.class);
-                    skellies.forEach((a) -> {
+                    for (Skeleton a : skellies) {
                         PersistentDataContainer pdc = a.getPersistentDataContainer();
                         if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
-                            angels.add(a);
+                            angels++;
                         }
-                    });
+                    }
                     // count the current angels
-                    if (angels.size() < plugin.getConfig().getInt("angels.worlds." + name)) {
+                    if (angels < plugin.getConfig().getInt("angels.worlds." + name)) {
                         // if less than maximum, spawn some more
                         for (int i = 0; i < spawn_rate; i++) {
                             spawnAngel(w);
@@ -68,9 +66,9 @@ public class WeepingAngelsRunnable implements Runnable {
     private void spawnAngel(World w) {
         Chunk[] chunks = w.getLoadedChunks();
         if (chunks.length > 0) {
-            Chunk c = chunks[plugin.getRandom().nextInt(chunks.length)];
-            int x = c.getX() * 16 + plugin.getRandom().nextInt(16);
-            int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
+            Chunk c = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
+            int x = c.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int z = c.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
             if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {

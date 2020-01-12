@@ -20,9 +20,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * @author eccentric_nz
@@ -47,16 +45,16 @@ public class SontaranRunnable implements Runnable {
                 // only spawn in day - times according to http://minecraft.gamepedia.com/Day-night_cycle
                 if ((time > 0 && time < 13187) || time > 22812) {
                     // get the current warriors
-                    List<Zombie> sontarans = new ArrayList<>();
+                    int sontarans = 0;
                     Collection<Zombie> potatoes = w.getEntitiesByClass(Zombie.class);
-                    potatoes.forEach((pz) -> {
+                    for (Zombie pz : potatoes) {
                         PersistentDataContainer pdc = pz.getPersistentDataContainer();
                         if (pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
-                            sontarans.add(pz);
+                            sontarans++;
                         }
-                    });
+                    }
                     // count the current sontarans
-                    if (sontarans.size() < plugin.getConfig().getInt("sontarans.worlds." + name)) {
+                    if (sontarans < plugin.getConfig().getInt("sontarans.worlds." + name)) {
                         // if less than maximum, spawn some more
                         for (int i = 0; i < spawn_rate; i++) {
                             spawnSontaran(w);
@@ -70,9 +68,9 @@ public class SontaranRunnable implements Runnable {
     private void spawnSontaran(World w) {
         Chunk[] chunks = w.getLoadedChunks();
         if (chunks.length > 0) {
-            Chunk c = chunks[plugin.getRandom().nextInt(chunks.length)];
-            int x = c.getX() * 16 + plugin.getRandom().nextInt(16);
-            int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
+            Chunk c = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
+            int x = c.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int z = c.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
             if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {
