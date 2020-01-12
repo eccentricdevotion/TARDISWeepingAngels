@@ -25,8 +25,6 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
                     return new SpawnCommand(plugin).spawn(sender, args);
                 case "disguise":
                     return new DisguiseCommand(plugin).disguise(sender, args);
-                case "redisguise":
-                    return new RedisguiseCommand(plugin).redisguise();
                 case "equip":
                     return new EquipCommand(plugin).equip(sender, args);
                 case "count":

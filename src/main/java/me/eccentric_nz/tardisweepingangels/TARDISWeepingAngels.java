@@ -10,8 +10,6 @@ import me.eccentric_nz.tardisweepingangels.equip.PlayerUndisguise;
 import me.eccentric_nz.tardisweepingangels.monsters.cybermen.CybermanRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.ChunkLoad;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekRunnable;
-import me.eccentric_nz.tardisweepingangels.monsters.daleks.Portal;
-import me.eccentric_nz.tardisweepingangels.monsters.daleks.ReDisguise;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.GasMask;
 import me.eccentric_nz.tardisweepingangels.monsters.ice_warriors.IceWarriorRunnable;
@@ -24,6 +22,7 @@ import me.eccentric_nz.tardisweepingangels.monsters.ood.OodListener;
 import me.eccentric_nz.tardisweepingangels.monsters.ood.VillagerCuredListener;
 import me.eccentric_nz.tardisweepingangels.monsters.ood.VillagerSpawnListener;
 import me.eccentric_nz.tardisweepingangels.monsters.silent.AntiTeleport;
+import me.eccentric_nz.tardisweepingangels.monsters.silent.CleanGuardians;
 import me.eccentric_nz.tardisweepingangels.monsters.silent.SilentRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.silurians.SilurianSpawnerListener;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.Butler;
@@ -74,7 +73,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
     public static NamespacedKey ZYGON;
     public static UUID UNCLAIMED = UUID.fromString("00000000-aaaa-bbbb-cccc-000000000000");
     public static PersistentDataType<byte[], UUID> PersistentDataTypeUUID;
-    public static MonsterEquipment eqipper;
+    public static MonsterEquipment api;
     private final List<UUID> guards = new ArrayList<>();
     private final List<UUID> playersWithGuards = new ArrayList<>();
     private final HashMap<UUID, Integer> followTasks = new HashMap<>();
@@ -92,7 +91,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         pluginName = ChatColor.GOLD + "[" + pdfFile.getName() + "]" + ChatColor.RESET + " ";
         citizensEnabled = pm.isPluginEnabled("Citizens");
         saveDefaultConfig();
-        eqipper = new MonsterEquipment();
+        api = new MonsterEquipment();
         // update the config
         new Config(this).updateConfig();
         // initialise namespaced keys
@@ -114,7 +113,6 @@ public class TARDISWeepingAngels extends JavaPlugin {
         pm.registerEvents(new GasMask(this), this);
         pm.registerEvents(new Butler(this), this);
         pm.registerEvents(new HelmetChecker(), this);
-        pm.registerEvents(new Portal(this), this);
         pm.registerEvents(new AntiTeleport(this), this);
         pm.registerEvents(new K9Listener(this), this);
         pm.registerEvents(new RainDamage(), this);
@@ -137,8 +135,8 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getCommand("twa").setExecutor(new TARDISWeepingAngelsCommand(this));
         // set tab completion
         getCommand("twa").setTabCompleter(new TabComplete(this));
-        // re-disguise Daleks
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, new ReDisguise(this), 100L, 6000L);
+        // remove invisible Guardians not riding an Enderman
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new CleanGuardians(this), 100L, 6000L);
         // start repeating spawn tasks
         long delay = getConfig().getLong("spawn_rate.how_often");
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new WeepingAngelsRunnable(this), delay, delay);
@@ -199,12 +197,8 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getServer().getConsoleSender().sendMessage(pluginName + "Debug: " + o);
     }
 
-    public static MonsterEquipment getEqipper() {
-        return eqipper;
-    }
-
     public MonsterEquipment getWeepingAngelsAPI() {
-        return eqipper;
+        return api;
     }
 
     public List<UUID> getGuards() {

@@ -116,8 +116,3 @@ commands:
       usage: /<command> set [monser type|all] [world] [max number]
       permission: tardisweepingangels.admin
       permission-message: You don't have the permission <permission> to use this command
-    redisguise:
-      description: Try to redisguise Daleks.
-      usage: /<command> redisguise
-      permission: tardisweepingangels.admin
-      permission-message: You don't have the permission <permission> to use this command
