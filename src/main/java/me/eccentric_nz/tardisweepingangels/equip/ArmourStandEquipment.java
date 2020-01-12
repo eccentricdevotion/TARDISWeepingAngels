@@ -130,15 +130,9 @@ public class ArmourStandEquipment {
         ItemStack helmet = new ItemStack(Material.MUSHROOM_STEM, 1);
         ItemMeta headMeta = helmet.getItemMeta();
         headMeta.setDisplayName("Dalek Head");
-        headMeta.setCustomModelData(10000005 + plugin.getRandom().nextInt(16));
+        headMeta.setCustomModelData(10000005 + TARDISWeepingAngels.random.nextInt(16));
         helmet.setItemMeta(headMeta);
-        as.setHelmet(helmet);
-        as.setChestplate(null);
-        as.setLeggings(null);
-        as.setBoots(null);
-        as.getEquipment().setItemInMainHand(null);
-        as.getEquipment().setItemInOffHand(null);
-        as.setVisible(false);
+        setHelmetOnly(as, helmet);
     }
 
     public void setEmptyChildEquipment(ArmorStand as) {
@@ -169,6 +163,66 @@ public class ArmourStandEquipment {
         as.setHelmet(helmet);
         as.getEquipment().setItemInMainHand(arm);
         as.getEquipment().setItemInOffHand(arm.clone());
+        as.setVisible(false);
+    }
+
+    public void setJudoonEquipment(ArmorStand as) {
+        as.setSmall(false);
+        ItemStack helmet = new ItemStack(Material.YELLOW_DYE, 1);
+        ItemMeta headMeta = helmet.getItemMeta();
+        headMeta.setDisplayName("Judoon Head");
+        headMeta.setCustomModelData(10);
+        helmet.setItemMeta(headMeta);
+        setHelmetOnly(as, helmet);
+    }
+
+    public void setK9Equipment(ArmorStand as) {
+        as.setSmall(false);
+        ItemStack helmet = new ItemStack(Material.BONE, 1);
+        ItemMeta headMeta = helmet.getItemMeta();
+        headMeta.setDisplayName("K9");
+        headMeta.setCustomModelData(1);
+        helmet.setItemMeta(headMeta);
+        setHelmetOnly(as, helmet);
+    }
+
+    public void setOodEquipment(ArmorStand as) {
+        as.setSmall(false);
+        ItemStack helmet = new ItemStack(Material.ROTTEN_FLESH, 1);
+        ItemMeta headMeta = helmet.getItemMeta();
+        headMeta.setDisplayName("Ood Head");
+        headMeta.setCustomModelData(29);
+        helmet.setItemMeta(headMeta);
+        setHelmetOnly(as, helmet);
+    }
+
+    public void setSilentEquipment(ArmorStand as) {
+        as.setSmall(false);
+        ItemStack helmet = new ItemStack(Material.END_STONE, 1);
+        ItemMeta headMeta = helmet.getItemMeta();
+        headMeta.setDisplayName("Silent Head");
+        headMeta.setCustomModelData(3);
+        helmet.setItemMeta(headMeta);
+        setHelmetOnly(as, helmet);
+    }
+
+    public void setToclafaneEquipment(ArmorStand as) {
+        as.setSmall(false);
+        ItemStack helmet = new ItemStack(Material.GUNPOWDER, 1);
+        ItemMeta headMeta = helmet.getItemMeta();
+        headMeta.setDisplayName("Toclafane");
+        headMeta.setCustomModelData(3);
+        helmet.setItemMeta(headMeta);
+        setHelmetOnly(as, helmet);
+    }
+
+    private void setHelmetOnly(ArmorStand as, ItemStack is) {
+        as.setChestplate(null);
+        as.setLeggings(null);
+        as.setBoots(null);
+        as.setHelmet(is);
+        as.getEquipment().setItemInMainHand(null);
+        as.getEquipment().setItemInOffHand(null);
         as.setVisible(false);
     }
 
