@@ -8,6 +8,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nullable;
+
 /**
  * @author eccentric_nz
  */
@@ -38,6 +40,14 @@ public interface TARDISWeepingAngelsAPI {
     public void setCyberEquipment(LivingEntity le, boolean disguise);
 
     /**
+     * Sets an entity as a Dalek.
+     *
+     * @param le       The LivingEntity to disguise
+     * @param disguise A boolean to determine if this is a player disguise
+     */
+    public void setDalekEquipment(LivingEntity le, boolean disguise);
+
+    /**
      * Sets an entity as a Empty Child.
      *
      * @param le       The LivingEntity to disguise
@@ -46,12 +56,46 @@ public interface TARDISWeepingAngelsAPI {
     public void setEmptyChildEquipment(LivingEntity le, boolean disguise);
 
     /**
-     * Sets an entity as a Zygon.
+     * Sets an armour stand, or disguises a player as a Judoon.
+     *
+     * @param player     The player that will own this Judoon - may be null
+     * @param armorStand The armour stand or player to disguise
+     * @param disguise   A boolean to determine if this is a player disguise
+     */
+    public void setJudoonEquipment(@Nullable Player player, Entity armorStand, boolean disguise);
+
+    /**
+     * Sets an armour stand, or disguises a player as K9.
+     *
+     * @param player     The player that will own this K9 - may be null
+     * @param armorStand The armour stand or player to disguise
+     * @param disguise   A boolean to determine if this is a player disguise
+     */
+    public void setK9Equipment(@Nullable Player player, Entity armorStand, boolean disguise);
+
+    /**
+     * Sets an armour stand, or disguises a player as an Ood.
+     *
+     * @param player     The player that will own this Ood - may be null
+     * @param armorStand The armour stand or player to disguise
+     * @param disguise   A boolean to determine if this is a player disguise
+     */
+    public void setOodEquipment(@Nullable Player player, Entity armorStand, boolean disguise);
+
+    /**
+     * Sets an entity as a Silent.
+     *
+     * @param le The LivingEntity to disguise
+     */
+    public void setSilentEquipment(LivingEntity le);
+
+    /**
+     * Sets an entity as a Silent.
      *
      * @param le       The LivingEntity to disguise
      * @param disguise A boolean to determine if this is a player disguise
      */
-    public void setZygonEquipment(LivingEntity le, boolean disguise);
+    public void setSilentEquipment(LivingEntity le, boolean disguise);
 
     /**
      * Sets an entity as a Silurian.
@@ -75,22 +119,15 @@ public interface TARDISWeepingAngelsAPI {
      * @param le       The LivingEntity to disguise
      * @param disguise A boolean to determine if this is a player disguise
      */
-    public void setButlerEquipment(LivingEntity le, boolean disguise);
+    public void setStraxEquipment(LivingEntity le, boolean disguise);
 
     /**
-     * Sets an entity as a Silent.
+     * Sets an armour stand, or disguises a player as a Toclafane.
      *
-     * @param le The LivingEntity to disguise
+     * @param armorStand The armour stand to disguise
+     * @param disguise   A boolean to determine if this is a player disguise
      */
-    public void setSilentEquipment(LivingEntity le);
-
-    /**
-     * Sets an entity as a Dalek.
-     *
-     * @param le       The LivingEntity to disguise
-     * @param disguise A boolean to determine if this is a player disguise
-     */
-    public void setDalekEquipment(LivingEntity le, boolean disguise);
+    public void setToclafaneEquipment(Entity armorStand, boolean disguise);
 
     /**
      * Sets an entity as a Vashta Nerada.
@@ -99,6 +136,14 @@ public interface TARDISWeepingAngelsAPI {
      * @param disguise A boolean to determine if this is a player disguise
      */
     public void setVashtaNeradaEquipment(LivingEntity le, boolean disguise);
+
+    /**
+     * Sets an entity as a Zygon.
+     *
+     * @param le       The LivingEntity to disguise
+     * @param disguise A boolean to determine if this is a player disguise
+     */
+    public void setZygonEquipment(LivingEntity le, boolean disguise);
 
     /**
      * Removes a disguise from a Player.
