@@ -1,7 +1,7 @@
 /*
  *  Copyright 2014 eccentric_nz.
  */
-package me.eccentric_nz.tardisweepingangels.monsters;
+package me.eccentric_nz.tardisweepingangels.monsters.ice_warriors;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
@@ -59,16 +59,16 @@ public class IceWarriorRunnable implements Runnable {
                 // only spawn in day - times according to http://minecraft.gamepedia.com/Day-night_cycle
                 if ((time > 0 && time < 13187) || time > 22812) {
                     // get the current warriors
-                    List<PigZombie> warriors = new ArrayList<>();
+                    int warriors = 0;
                     Collection<PigZombie> piggies = w.getEntitiesByClass(PigZombie.class);
-                    piggies.forEach((pz) -> {
+                    for (PigZombie pz : piggies) {
                         PersistentDataContainer pdc = pz.getPersistentDataContainer();
                         if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
-                            warriors.add(pz);
+                            warriors++;
                         }
-                    });
+                    }
                     // count the current warriors
-                    if (warriors.size() < plugin.getConfig().getInt("ice_warriors.worlds." + name)) {
+                    if (warriors < plugin.getConfig().getInt("ice_warriors.worlds." + name)) {
                         // if less than maximum, spawn some more
                         for (int i = 0; i < spawn_rate; i++) {
                             spawnIceWarrior(w);
@@ -82,9 +82,9 @@ public class IceWarriorRunnable implements Runnable {
     private void spawnIceWarrior(World w) {
         Chunk[] chunks = w.getLoadedChunks();
         if (chunks.length > 0) {
-            Chunk c = chunks[plugin.getRandom().nextInt(chunks.length)];
-            int x = c.getX() * 16 + plugin.getRandom().nextInt(16);
-            int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
+            Chunk c = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
+            int x = c.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int z = c.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
             if (biomes.contains(l.getBlock().getBiome())) {

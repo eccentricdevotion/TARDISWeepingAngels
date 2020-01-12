@@ -1,7 +1,7 @@
 /*
  *  Copyright 2014 eccentric_nz.
  */
-package me.eccentric_nz.tardisweepingangels.monsters;
+package me.eccentric_nz.tardisweepingangels.monsters.zygons;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
@@ -20,19 +20,17 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * @author eccentric_nz
  */
-public class CybermanRunnable implements Runnable {
+public class ZygonRunnable implements Runnable {
 
     private final TARDISWeepingAngels plugin;
     private final int spawn_rate;
 
-    public CybermanRunnable(TARDISWeepingAngels plugin) {
+    public ZygonRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
         spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
     }
@@ -42,32 +40,32 @@ public class CybermanRunnable implements Runnable {
         plugin.getServer().getWorlds().forEach((w) -> {
             // only configured worlds
             String name = Config.sanitiseName(w.getName());
-            if (plugin.getConfig().getInt("cybermen.worlds." + name) > 0) {
+            if (plugin.getConfig().getInt("zygons.worlds." + name) > 0) {
                 // get the current warriors
-                List<Zombie> cyberarmy = new ArrayList<>();
+                int zygons = 0;
                 Collection<Zombie> zombies = w.getEntitiesByClass(Zombie.class);
-                zombies.forEach((c) -> {
-                    PersistentDataContainer pdc = c.getPersistentDataContainer();
-                    if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)) {
-                        cyberarmy.add(c);
+                for (Zombie z : zombies) {
+                    PersistentDataContainer pdc = z.getPersistentDataContainer();
+                    if (pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
+                        zygons++;
                     }
-                });
-                if (cyberarmy.size() < plugin.getConfig().getInt("cybermen.worlds." + name)) {
+                }
+                if (zygons < plugin.getConfig().getInt("zygons.worlds." + name)) {
                     // if less than maximum, spawn some more
                     for (int i = 0; i < spawn_rate; i++) {
-                        spawnCyberman(w);
+                        spawnZygon(w);
                     }
                 }
             }
         });
     }
 
-    private void spawnCyberman(World w) {
+    private void spawnZygon(World w) {
         Chunk[] chunks = w.getLoadedChunks();
         if (chunks.length > 0) {
-            Chunk c = chunks[plugin.getRandom().nextInt(chunks.length)];
-            int x = c.getX() * 16 + plugin.getRandom().nextInt(16);
-            int z = c.getZ() * 16 + plugin.getRandom().nextInt(16);
+            Chunk c = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
+            int x = c.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int z = c.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
             if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {
@@ -76,13 +74,13 @@ public class CybermanRunnable implements Runnable {
                 }
                 LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
                 e.setSilent(true);
-                Zombie cyber = (Zombie) e;
-                cyber.setBaby(false);
+                Zombie zygon = (Zombie) e;
+                zygon.setBaby(false);
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
-                cyber.addPotionEffect(p);
+                zygon.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    TARDISWeepingAngels.getEqipper().setCyberEquipment(e, false);
-                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.CYBERMAN, l));
+                    TARDISWeepingAngels.getEqipper().setZygonEquipment(e, false);
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.ZYGON, l));
                 }, 5L);
             }
         }

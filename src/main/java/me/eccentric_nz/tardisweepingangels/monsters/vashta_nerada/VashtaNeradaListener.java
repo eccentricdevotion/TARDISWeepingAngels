@@ -2,7 +2,7 @@
  *  Copyright Error: on line 4, column 30 in Templates/Licenses/license-default.txt
  The string doesn't match the expected date/time format. The string to parse was: "15/07/2014". The expected format was: "MMM d, yyyy". eccentric_nz.
  */
-package me.eccentric_nz.tardisweepingangels.monsters;
+package me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
@@ -26,7 +26,6 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author eccentric_nz
@@ -34,7 +33,6 @@ import java.util.Random;
 public class VashtaNeradaListener implements Listener {
 
     private final TARDISWeepingAngels plugin;
-    private final Random r = new Random();
     private final List<BlockFace> faces = new ArrayList<>();
 
     public VashtaNeradaListener(TARDISWeepingAngels plugin) {
@@ -50,7 +48,7 @@ public class VashtaNeradaListener implements Listener {
         Block b = event.getBlock();
         if (b != null && b.getType().equals(Material.BOOKSHELF)) {
             String name = Config.sanitiseName(b.getWorld().getName());
-            if (plugin.getConfig().getInt("vashta_nerada.worlds." + name) > 0 && r.nextInt(100) < plugin.getConfig().getInt("vashta_nerada.worlds." + name)) {
+            if (plugin.getConfig().getInt("vashta_nerada.worlds." + name) > 0 && TARDISWeepingAngels.random.nextInt(100) < plugin.getConfig().getInt("vashta_nerada.worlds." + name)) {
                 Location l = getClearLocation(event.getPlayer());
                 if (l != null) {
                     // spawn Vashta Nerada at location
@@ -64,7 +62,7 @@ public class VashtaNeradaListener implements Listener {
         Location ret = null;
         Block l = p.getLocation().getBlock();
         World w = l.getWorld();
-        Collections.shuffle(faces, r);
+        Collections.shuffle(faces, TARDISWeepingAngels.random);
         for (BlockFace f : faces) {
             Block b = l.getRelative(f, 3);
             if (b.getType().equals(Material.AIR) && b.getRelative(BlockFace.UP).getType().equals(Material.AIR)) {
