@@ -40,7 +40,7 @@ public class ChunkLoad implements Listener {
                 if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER) && pigZombie.getEquipment().getHelmet() != null && pigZombie.getEquipment().getHelmet().getType() == Material.IRON_HELMET) {
                     TARDISWeepingAngels.getEqipper().setWarriorEquipment(pigZombie, false);
                 } else if (pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER) && pigZombie.getEquipment().getHelmet() != null && pigZombie.getEquipment().getHelmet().getType() == Material.CHAINMAIL_HELMET) {
-                    TARDISWeepingAngels.getEqipper().setButlerEquipment(pigZombie, false);
+                    TARDISWeepingAngels.getEqipper().setStraxEquipment(pigZombie, false);
                 }
             }
             if (d instanceof Zombie) {
