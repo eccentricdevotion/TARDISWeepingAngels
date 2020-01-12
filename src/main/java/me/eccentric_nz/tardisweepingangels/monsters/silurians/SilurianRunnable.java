@@ -5,9 +5,9 @@ package me.eccentric_nz.tardisweepingangels.monsters.silurians;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
+import me.eccentric_nz.tardisweepingangels.utils.WorldProcessor;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -40,7 +40,7 @@ public class SilurianRunnable implements Runnable {
     public void run() {
         plugin.getServer().getWorlds().forEach((w) -> {
             // only configured worlds
-            String name = Config.sanitiseName(w.getName());
+            String name = WorldProcessor.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("silurians.worlds." + name) > 0) {
                 // check the world generator
                 if (w.getGenerator() != null) {

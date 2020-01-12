@@ -5,9 +5,9 @@ package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
+import me.eccentric_nz.tardisweepingangels.utils.WorldProcessor;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -37,7 +37,7 @@ public class WeepingAngelsRunnable implements Runnable {
     public void run() {
         plugin.getServer().getWorlds().forEach((w) -> {
             // only configured worlds
-            String name = Config.sanitiseName(w.getName());
+            String name = WorldProcessor.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("angels.worlds." + name) > 0) {
                 long time = w.getTime();
                 // only spawn at night - times according to http://minecraft.gamepedia.com/Day-night_cycle

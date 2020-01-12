@@ -2,9 +2,9 @@ package me.eccentric_nz.tardisweepingangels.monsters.silurians;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
+import me.eccentric_nz.tardisweepingangels.utils.WorldProcessor;
 import org.bukkit.Location;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.EntityType;
@@ -37,7 +37,7 @@ public class SilurianSpawnerListener implements Listener {
         CreatureSpawner spawner = event.getSpawner();
         if (spawner.getSpawnedType().equals(EntityType.CAVE_SPIDER)) {
             Location cave = event.getLocation();
-            String name = Config.sanitiseName(cave.getWorld().getName());
+            String name = WorldProcessor.sanitiseName(cave.getWorld().getName());
             if (plugin.getConfig().getInt("silurians.worlds." + name) <= 0) {
                 return;
             }

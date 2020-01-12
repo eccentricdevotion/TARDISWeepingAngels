@@ -4,7 +4,7 @@
 package me.eccentric_nz.tardisweepingangels.monsters.silent;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.eccentric_nz.tardisweepingangels.utils.Config;
+import me.eccentric_nz.tardisweepingangels.utils.WorldProcessor;
 import org.bukkit.entity.Guardian;
 import org.bukkit.potion.PotionEffectType;
 
@@ -25,7 +25,7 @@ public class CleanGuardians implements Runnable {
     public void run() {
         plugin.getServer().getWorlds().forEach((w) -> {
             // only configured worlds
-            String name = Config.sanitiseName(w.getName());
+            String name = WorldProcessor.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("silent.worlds." + name) > 0) {
                 Collection<Guardian> guardians = w.getEntitiesByClass(Guardian.class);
                 guardians.forEach((g) -> {

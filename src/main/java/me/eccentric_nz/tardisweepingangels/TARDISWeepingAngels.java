@@ -166,6 +166,8 @@ public class TARDISWeepingAngels extends JavaPlugin {
             getServer().getScheduler().scheduleSyncRepeatingTask(this, new JudoonGuardRunnable(this), 20L, 20L);
         }
         new K9Recipe(this).addRecipe();
+        // process worlds
+        getServer().getScheduler().scheduleSyncDelayedTask(this, new WorldProcessor(this), 200L);
     }
 
     public boolean angelsCanSteal() {

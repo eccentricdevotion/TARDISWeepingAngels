@@ -6,8 +6,8 @@ package me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.eccentric_nz.tardisweepingangels.utils.Config;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
+import me.eccentric_nz.tardisweepingangels.utils.WorldProcessor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -47,7 +47,7 @@ public class VashtaNeradaListener implements Listener {
     public void onBookshelfBreak(BlockBreakEvent event) {
         Block b = event.getBlock();
         if (b != null && b.getType().equals(Material.BOOKSHELF)) {
-            String name = Config.sanitiseName(b.getWorld().getName());
+            String name = WorldProcessor.sanitiseName(b.getWorld().getName());
             if (plugin.getConfig().getInt("vashta_nerada.worlds." + name) > 0 && TARDISWeepingAngels.random.nextInt(100) < plugin.getConfig().getInt("vashta_nerada.worlds." + name)) {
                 Location l = getClearLocation(event.getPlayer());
                 if (l != null) {
