@@ -1,6 +1,7 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.RemoveEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.cybermen.CybermanEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildEquipment;
@@ -120,7 +121,7 @@ public class DisguiseCommand {
                     break;
             }
         } else {
-            TARDISWeepingAngels.getEqipper().removeEquipment(player);
+            RemoveEquipment.set(player);
         }
         return true;
     }
