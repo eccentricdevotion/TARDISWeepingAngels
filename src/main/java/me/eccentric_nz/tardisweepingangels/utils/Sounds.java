@@ -8,7 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffectType;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,8 +101,8 @@ public class Sounds implements Listener {
             return;
         }
         if (ent instanceof Skeleton) {
-            Skeleton dalek = (Skeleton) ent;
-            if (dalek.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE)) {
+            PersistentDataContainer pdc = ent.getPersistentDataContainer();
+            if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
                 tracker.add(uuid);
                 LivingEntity le = event.getTarget();
                 if (le instanceof Player) {
@@ -110,6 +111,18 @@ public class Sounds implements Listener {
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                         Player player = (Player) le;
                         player.playSound(ent.getLocation(), "dalek", 1.0f, 1.0f);
+                        tracker.remove(uuid);
+                    }, delay);
+                }
+            } else if (pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)) {
+                tracker.add(uuid);
+                LivingEntity le = event.getTarget();
+                if (le instanceof Player) {
+                    long delay = 50L;
+                    // schedule delayed task
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                        Player player = (Player) le;
+                        player.playSound(ent.getLocation(), "silurian", 1.0f, 1.0f);
                         tracker.remove(uuid);
                     }, delay);
                 }
