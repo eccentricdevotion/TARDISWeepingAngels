@@ -47,6 +47,7 @@ ice_warriors:
     - SNOW_BLOCK
 k9:
   by_taming: true
+  can_build: true
   worlds:
     world: true
 silurians:
@@ -64,10 +65,11 @@ ood:
   spawn_from_cured: 5
 judoon:
   guards: true
+  can_build: true
   ammunition: 25
   damage: 4
   worlds:
-    world: true
+    world: 20
 sontarans:
   worlds:
     world: 20

@@ -7,7 +7,6 @@ import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.util.FileUtil;
 
 import java.io.File;
 import java.util.Arrays;
@@ -69,80 +68,14 @@ public class Config {
         boolOptions.put("cybermen.can_upgrade", true);
         boolOptions.put("sontarans.can_tame", true);
         boolOptions.put("judoon.guards", true);
+        boolOptions.put("judoon.can_build", true);
+        boolOptions.put("k9.can_build", true);
         boolOptions.put("k9.by_taming", true);
         // float
         doubleOptions.put("config_version", min_version);
     }
 
-    public static String sanitiseName(String name) {
-        return name.replaceAll("\\.", "_");
-    }
-
     public void updateConfig() {
-        if (!config.contains("config_version")) {
-            // back up the old config
-            File oldFile = new File(plugin.getDataFolder() + File.separator + "config.yml");
-            File newFile = new File(plugin.getDataFolder() + File.separator + "config_" + System.currentTimeMillis() + ".yml");
-            FileUtil.copy(oldFile, newFile);
-            // clear old world settings
-            plugin.getConfig().set("angels.worlds", null);
-            plugin.getConfig().set("cybermen.worlds", null);
-            plugin.getConfig().set("daleks.worlds", null);
-            plugin.getConfig().set("empty_child.worlds", null);
-            plugin.getConfig().set("ice_warriors.worlds", null);
-            plugin.getConfig().set("silurians.worlds", null);
-            plugin.getConfig().set("sontarans.worlds", null);
-            plugin.getConfig().set("vashta_nerada.worlds", null);
-            plugin.getConfig().set("zygons.worlds", null);
-        }
-        // add new world settings
-        plugin.getServer().getWorlds().forEach((w) -> {
-            String n = sanitiseName(w.getName());
-            // set TARDIS worlds, nether and end worlds to zero by default
-            int m = (config.contains("spawn_rate.default_max")) ? config.getInt("spawn_rate.default_max") : 0;
-            if (!config.contains("angels.worlds." + n)) {
-                plugin.getConfig().set("angels.worlds." + n, m);
-            }
-            if (!config.contains("cybermen.worlds." + n)) {
-                plugin.getConfig().set("cybermen.worlds." + n, m);
-            }
-            if (!config.contains("daleks.worlds." + n)) {
-                plugin.getConfig().set("daleks.worlds." + n, m);
-            }
-            if (!config.contains("empty_child.worlds." + n)) {
-                plugin.getConfig().set("empty_child.worlds." + n, m);
-            }
-            if (!config.contains("ice_warriors.worlds." + n)) {
-                plugin.getConfig().set("ice_warriors.worlds." + n, m);
-            }
-            if (!config.contains("silent.worlds." + n)) {
-                plugin.getConfig().set("silent.worlds." + n, m);
-            }
-            if (!config.contains("ood.worlds." + n) || (config.contains("ood.worlds." + n) && config.getInt("ood.worlds." + n) == 20)) {
-                plugin.getConfig().set("ood.worlds." + n, true);
-            }
-            if (!config.contains("judoon.worlds." + n)) {
-                plugin.getConfig().set("judoon.worlds." + n, true);
-            }
-            if (!config.contains("k9.worlds." + n)) {
-                plugin.getConfig().set("k9.worlds." + n, true);
-            }
-            if (!config.contains("toclafane.worlds." + n)) {
-                plugin.getConfig().set("toclafane.worlds." + n, m);
-            }
-            if (!config.contains("silurians.worlds." + n)) {
-                plugin.getConfig().set("silurians.worlds." + n, m);
-            }
-            if (!config.contains("sontarans.worlds." + n)) {
-                plugin.getConfig().set("sontarans.worlds." + n, m);
-            }
-            if (!config.contains("vashta_nerada.worlds." + n)) {
-                plugin.getConfig().set("vashta_nerada.worlds." + n, m);
-            }
-            if (!config.contains("zygons.worlds." + n)) {
-                plugin.getConfig().set("zygons.worlds." + n, m);
-            }
-        });
         // clear the old spawn_rate settings
         if (config.contains("angels.spawn_rate")) {
             plugin.getConfig().set("angels.spawn_rate", null);

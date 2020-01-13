@@ -14,8 +14,10 @@ import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildRunnab
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.GasMask;
 import me.eccentric_nz.tardisweepingangels.monsters.ice_warriors.IceWarriorRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonAmmoRecipe;
+import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonBuilder;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonGuardRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonListener;
+import me.eccentric_nz.tardisweepingangels.monsters.k9.K9Builder;
 import me.eccentric_nz.tardisweepingangels.monsters.k9.K9Listener;
 import me.eccentric_nz.tardisweepingangels.monsters.k9.K9Recipe;
 import me.eccentric_nz.tardisweepingangels.monsters.ood.OodListener;
@@ -99,10 +101,16 @@ public class TARDISWeepingAngels extends JavaPlugin {
         // register listeners
         pm.registerEvents(new Blink(this), this);
         if (getConfig().getBoolean("angels.can_build")) {
-            pm.registerEvents(new Builder(this), this);
+            pm.registerEvents(new AngelBuilder(this), this);
         }
         if (getConfig().getBoolean("angels.spawn_from_chat.enabled")) {
             pm.registerEvents(new ImageHolder(this), this);
+        }
+        if (getConfig().getBoolean("judoon.can_build")) {
+            pm.registerEvents(new JudoonBuilder(this), this);
+        }
+        if (getConfig().getBoolean("k9.can_build")) {
+            pm.registerEvents(new K9Builder(this), this);
         }
         pm.registerEvents(new Damage(this), this);
         pm.registerEvents(new VashtaNeradaListener(this), this);
