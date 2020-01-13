@@ -97,6 +97,10 @@ public class JudoonListener implements Listener {
                         arm.setItemMeta(im);
                         stand.getEquipment().setItemInMainHand(arm);
                     }
+                } else if (judoonId.equals(TARDISWeepingAngels.UNCLAIMED)) {
+                    // claim the Judoon
+                    stand.getPersistentDataContainer().set(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID, player.getUniqueId());
+                    player.sendMessage(TARDISWeepingAngels.plugin.pluginName + "You have claimed this Judoon!");
                 }
             }
         }
