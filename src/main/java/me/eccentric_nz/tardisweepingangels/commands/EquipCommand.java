@@ -60,54 +60,7 @@ public class EquipCommand {
             }
         }
         if (as != null) {
-            ArmourStandEquipment equip = new ArmourStandEquipment(plugin);
-            switch (monster) {
-                case WEEPING_ANGEL:
-                    equip.setAngelEquipment(as);
-                    break;
-                case CYBERMAN:
-                    equip.setCyberEquipment(as);
-                    break;
-                case DALEK:
-                    equip.setDalekEquipment(as);
-                    break;
-                case ICE_WARRIOR:
-                    equip.setWarriorEquipment(as);
-                    break;
-                case EMPTY_CHILD:
-                    equip.setEmptyChildEquipment(as);
-                    break;
-                case JUDOON:
-                    equip.setJudoonEquipment(as);
-                    break;
-                case K9:
-                    equip.setK9Equipment(as);
-                    break;
-                case OOD:
-                    equip.setOodEquipment(as);
-                    break;
-                case SILENT:
-                    equip.setSilentEquipment(as);
-                    break;
-                case SILURIAN:
-                    equip.setSilurianEquipment(as);
-                    break;
-                case SONTARAN:
-                    equip.setSontaranEquipment(as);
-                    break;
-                case STRAX:
-                    equip.setButlerEquipment(as);
-                    break;
-                case TOCLAFANE:
-                    equip.setToclafaneEquipment(as);
-                    break;
-                case VASHTA_NERADA:
-                    equip.setVashtaNeradaEquipment(as);
-                    break;
-                case ZYGON:
-                    equip.setZygonEquipment(as);
-                    break;
-            }
+            new ArmourStandEquipment().setStandEquipment(as, monster, (monster == Monster.EMPTY_CHILD));
         } else {
             sender.sendMessage(plugin.pluginName + "You are not looking at an armour stand within 8 blocks!");
             return true;
