@@ -71,6 +71,7 @@ public class Config {
         boolOptions.put("judoon.can_build", true);
         boolOptions.put("k9.can_build", true);
         boolOptions.put("k9.by_taming", true);
+        boolOptions.put("toclafane.destroy_blocks", true);
         // float
         doubleOptions.put("config_version", min_version);
     }

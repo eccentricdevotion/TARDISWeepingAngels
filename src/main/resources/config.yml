@@ -79,6 +79,7 @@ sontarans:
   can_tame: true
 toclafane:
   spawn_from_bee: 5
+  destroy_blocks: true
   worlds:
     world: 20
   drops:
