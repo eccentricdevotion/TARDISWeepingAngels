@@ -1,6 +1,7 @@
 package me.eccentric_nz.tardisweepingangels.monsters.toclafane;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -78,8 +79,9 @@ public class ToclafaneListener implements Listener {
                         } else {
                             stand.remove();
                         }
+                        boolean destroy = (plugin.getConfig().getBoolean("toclafane.destroy_blocks") && WorldGuardChecker.canExplode(location));
                         // explode
-                        location.getWorld().createExplosion(location, 2.0f, false, true);
+                        location.getWorld().createExplosion(location, 2.0f, false, destroy);
                         // give drops
                         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                             ItemStack stack = new ItemStack(drops.get(TARDISWeepingAngels.random.nextInt(drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
