@@ -33,7 +33,7 @@ public class WorldGuardChecker {
             BlockVector3 vector = BlockVector3.at(l.getX(), l.getY(), l.getZ());
             RegionManager rm = wg.getRegionContainer().get(new BukkitWorld(l.getWorld()));
             ApplicableRegionSet rs = rm.getApplicableRegions(vector);
-            return rs.testState(null, Flags.OTHER_EXPLOSION, Flags.CREEPER_EXPLOSION, Flags.TNT);
+            return rs.testState(null, Flags.OTHER_EXPLOSION, Flags.CREEPER_EXPLOSION, Flags.TNT, Flags.BUILD);
         } else {
             return true;
         }
