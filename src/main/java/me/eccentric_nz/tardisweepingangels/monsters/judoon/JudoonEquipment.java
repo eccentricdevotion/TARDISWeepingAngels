@@ -22,7 +22,7 @@ public class JudoonEquipment {
         headMeta.setDisplayName("Judoon Head");
         headMeta.setCustomModelData((disguise) ? 10 : 2);
         head.setItemMeta(headMeta);
-        if (entity instanceof ArmorStand && player != null) {
+        if (!disguise) {
             UUID uuid;
             if (player != null) {
                 uuid = player.getUniqueId();
@@ -49,7 +49,7 @@ public class JudoonEquipment {
             armorStand.setVisible(false);
             armorStand.setSilent(true);
             armorStand.setCollidable(true);
-        } else if (disguise) {
+        } else {
             Player p = (Player) entity;
             p.getInventory().setHelmet(head);
             PotionEffect potionEffect = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
