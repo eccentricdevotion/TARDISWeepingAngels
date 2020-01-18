@@ -46,7 +46,7 @@ public class AdminCommand {
             sender.sendMessage(plugin.pluginName + "Last argument must be a number!");
             return false;
         }
-        String which = args[1].toLowerCase();
+        String which = args[1].toUpperCase();
         Monster monster;
         try {
             monster = Monster.valueOf(which);
@@ -61,7 +61,7 @@ public class AdminCommand {
                 plugin.getConfig().set("silence.worlds." + args[2], m);
                 plugin.getConfig().set("sontarans.worlds." + args[2], m);
                 plugin.getConfig().set("ood.worlds." + args[2], true);
-                plugin.getConfig().set("judoon.worlds." + args[2], true);
+                plugin.getConfig().set("judoon.worlds." + args[2], m);
                 plugin.getConfig().set("toclafane.worlds." + args[2], m);
                 plugin.getConfig().set("k9.worlds." + args[2], true);
                 plugin.getConfig().set("silurians.worlds." + args[2], m);
