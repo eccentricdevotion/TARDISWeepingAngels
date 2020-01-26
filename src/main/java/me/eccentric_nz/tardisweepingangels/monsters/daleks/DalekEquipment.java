@@ -19,7 +19,7 @@ public class DalekEquipment {
 
     public static void set(LivingEntity le, boolean disguise) {
         le.getPersistentDataContainer().set(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER, Monster.DALEK.getPersist());
-        ItemStack helmet = new ItemStack(Material.MUSHROOM_STEM, 1);
+        ItemStack helmet = new ItemStack(Material.SLIME_BALL, 1);
         ItemMeta headMeta = helmet.getItemMeta();
         headMeta.setDisplayName("Dalek Head");
         headMeta.setCustomModelData(10000005 + weightedChoice.next());

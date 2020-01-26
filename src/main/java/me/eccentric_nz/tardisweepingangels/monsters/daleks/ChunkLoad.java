@@ -36,9 +36,9 @@ public class ChunkLoad implements Listener {
             PersistentDataContainer pdc = d.getPersistentDataContainer();
             if (d instanceof Skeleton) {
                 Skeleton skeleton = (Skeleton) d;
-                if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER) && skeleton.getEquipment().getHelmet() == null) {
+                if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER) && (skeleton.getEquipment().getHelmet() == null || skeleton.getEquipment().getHelmet().getType() == Material.MUSHROOM_STEM)) {
                     DalekEquipment.set(skeleton, false);
-                } else if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER) && skeleton.getEquipment().getHelmet() != null && skeleton.getEquipment().getHelmet().getType() == Material.STONE_BUTTON) {
+                } else if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER) && (skeleton.getEquipment().getHelmet() != null && skeleton.getEquipment().getHelmet().getType() == Material.STONE_BUTTON)) {
                     AngelEquipment.set(skeleton, false);
                 } else if (pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER) && skeleton.getEquipment().getHelmet() != null && skeleton.getEquipment().getHelmet().getType() == Material.GOLDEN_HELMET) {
                     SilurianEquipment.set(skeleton, false);

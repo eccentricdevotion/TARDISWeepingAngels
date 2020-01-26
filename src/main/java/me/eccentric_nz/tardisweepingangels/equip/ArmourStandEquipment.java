@@ -24,7 +24,7 @@ public class ArmourStandEquipment {
                 head = new ItemStack(Material.IRON_INGOT, 1);
                 break;
             case DALEK:
-                head = new ItemStack(Material.MUSHROOM_STEM, 1);
+                head = new ItemStack(Material.SLIME_BALL, 1);
                 break;
             case EMPTY_CHILD:
                 head = new ItemStack(Material.SUGAR, 1);
