@@ -73,7 +73,9 @@ public class Damage implements Listener {
                     Player p = (Player) t;
                     Location l = getRandomLocation(t.getWorld());
                     if (l != null) {
-                        p.teleport(l);
+                        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                            p.teleport(l);
+                        }, 1L);
                     }
                     p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 300, 5, true, false));
                     if (plugin.angelsCanSteal()) {
