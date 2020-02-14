@@ -73,11 +73,9 @@ public class SpawnCommand {
                 LivingEntity a = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                 a.setSilent(true);
                 a.setNoDamageTicks(75);
-//                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 AngelEquipment.set(a, false);
                 player.playSound(a.getLocation(), "blink", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(a, EntityType.SKELETON, Monster.WEEPING_ANGEL, eyeLocation));
-//                }, 5L);
                 break;
             case CYBERMAN:
                 LivingEntity c = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
@@ -85,17 +83,14 @@ public class SpawnCommand {
                 c.setNoDamageTicks(75);
                 Zombie cyber = (Zombie) c;
                 cyber.setBaby(false);
-//                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 player.playSound(c.getLocation(), "cyberman", 1.0f, 1.0f);
                 CybermanEquipment.set(c, false);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(c, EntityType.ZOMBIE, Monster.CYBERMAN, eyeLocation));
-//                }, 5L);
                 break;
             case DALEK:
                 LivingEntity d = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                 d.setSilent(true);
                 d.setNoDamageTicks(75);
-//                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 DalekEquipment.set(d, false);
                 player.playSound(d.getLocation(), "dalek", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(d, EntityType.SKELETON, Monster.DALEK, eyeLocation));
@@ -108,7 +103,6 @@ public class SpawnCommand {
                     d.teleport(d.getLocation().add(0.0d, 20.0d, 0.0d));
                     tardisHelper.setFallFlyingTag(d);
                 }
-//                }, 2L);
                 break;
             case EMPTY_CHILD:
                 LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
@@ -116,19 +110,16 @@ public class SpawnCommand {
                 e.setNoDamageTicks(75);
                 Zombie child = (Zombie) e;
                 child.setBaby(true);
-//                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 EmptyChildEquipment.set(e, false);
                 player.playSound(e.getLocation(), "empty_child", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.EMPTY_CHILD, eyeLocation));
-//                }, 5L);
+                break;
             case ICE_WARRIOR:
                 LivingEntity i = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
                 i.setSilent(true);
-//                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 IceWarriorEquipment.set(i, false);
 //                player.playSound(i.getLocation(), "ice_warrior", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(i, EntityType.PIG_ZOMBIE, Monster.ICE_WARRIOR, eyeLocation));
-//                }, 5L);
                 PigZombie pigman = (PigZombie) i;
                 pigman.setBaby(false);
                 pigman.setAngry(true);
@@ -155,21 +146,17 @@ public class SpawnCommand {
             case SILENT:
                 LivingEntity l = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ENDERMAN);
                 l.setSilent(true);
-//                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 SilentEquipment.set(l, false);
                 player.playSound(l.getLocation(), "silence", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(l, EntityType.ENDERMAN, Monster.SILENT, eyeLocation));
-//                }, 5L);
                 break;
             case SILURIAN:
                 LivingEntity s = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                 s.setSilent(true);
                 s.setNoDamageTicks(75);
-//                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 SilurianEquipment.set(s, false);
                 player.playSound(s.getLocation(), "silurian", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(s, EntityType.SKELETON, Monster.SILURIAN, eyeLocation));
-//                }, 5L);
                 break;
             case SONTARAN:
                 LivingEntity o = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
@@ -177,11 +164,9 @@ public class SpawnCommand {
                 o.setNoDamageTicks(75);
                 Zombie sontaran = (Zombie) o;
                 sontaran.setBaby(false);
-//                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 SontaranEquipment.set(o, false);
                 player.playSound(o.getLocation(), "sontaran", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(o, EntityType.ZOMBIE, Monster.SONTARAN, eyeLocation));
-//                }, 5L);
                 break;
             case STRAX:
                 LivingEntity x = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
@@ -190,11 +175,9 @@ public class SpawnCommand {
                 PigZombie strax = (PigZombie) x;
                 strax.setBaby(false);
                 strax.setAngry(false);
-//                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 StraxEquipment.set(x, false);
                 player.playSound(x.getLocation(), "strax", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(x, EntityType.PIG_ZOMBIE, Monster.STRAX, eyeLocation));
-//                }, 5L);
                 break;
             case TOCLAFANE:
                 Entity toclafane = world.spawnEntity(eyeLocation, EntityType.ARMOR_STAND);
@@ -208,11 +191,9 @@ public class SpawnCommand {
                 v.setNoDamageTicks(75);
                 Zombie vashta = (Zombie) v;
                 vashta.setBaby(false);
-//                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 VashtaNeradaEquipment.set(v, false);
                 player.playSound(v.getLocation(), "vashta", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(v, EntityType.ZOMBIE, Monster.VASHTA_NERADA, eyeLocation));
-//                }, 5L);
                 break;
             case ZYGON:
                 LivingEntity z = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
@@ -220,11 +201,9 @@ public class SpawnCommand {
                 z.setNoDamageTicks(75);
                 Zombie zygon = (Zombie) z;
                 zygon.setBaby(false);
-//                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
 //                player.playSound(z.getLocation(), "zygon", 1.0f, 1.0f);
                 ZygonEquipment.set(z, false);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(z, EntityType.ZOMBIE, Monster.ZYGON, eyeLocation));
-//                }, 5L);
                 break;
         }
         return true;
