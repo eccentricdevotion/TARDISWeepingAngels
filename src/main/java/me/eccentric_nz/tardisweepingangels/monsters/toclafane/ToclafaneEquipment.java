@@ -1,8 +1,6 @@
 package me.eccentric_nz.tardisweepingangels.monsters.toclafane;
 
-import me.eccentric_nz.tardischunkgenerator.TARDISHelper;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
@@ -31,10 +29,7 @@ public class ToclafaneEquipment {
             armorStand.setSilent(true);
             armorStand.setCollidable(true);
             Bee bee = (Bee) location.getWorld().spawnEntity(location, EntityType.BEE);
-            if (Bukkit.getServer().getPluginManager().isPluginEnabled("TARDISChunkGenerator")) {
-                TARDISHelper tardisHelper = (TARDISHelper) Bukkit.getServer().getPluginManager().getPlugin("TARDISChunkGenerator");
-                tardisHelper.setBeeTicks(bee, Integer.MAX_VALUE);
-            }
+            bee.setCannotEnterHiveTicks(Integer.MAX_VALUE);
             PotionEffect p = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
             bee.addPotionEffect(p);
             bee.addPassenger(entity);
