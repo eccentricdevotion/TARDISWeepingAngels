@@ -28,7 +28,7 @@ public class EmptyChildEquipment {
         helmet.setItemMeta(headMeta);
         ItemMeta armMeta = arm.getItemMeta();
         armMeta.setDisplayName("Empty Child Arm");
-        armMeta.setCustomModelData(3);
+        armMeta.setCustomModelData(2);
         arm.setItemMeta(armMeta);
         ItemMeta chestMeta = chestplate.getItemMeta();
         chestMeta.setDisplayName("Empty Child Chest");
