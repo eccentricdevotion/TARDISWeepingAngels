@@ -10,6 +10,7 @@ import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.ice_warriors.IceWarriorEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonEquipment;
+import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonWalkRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.k9.K9Equipment;
 import me.eccentric_nz.tardisweepingangels.monsters.ood.OodEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.silent.SilentEquipment;
@@ -20,8 +21,8 @@ import me.eccentric_nz.tardisweepingangels.monsters.toclafane.ToclafaneEquipment
 import me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada.VashtaNeradaEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.AngelEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.zygons.ZygonEquipment;
+import me.eccentric_nz.tardisweepingangels.utils.FollowerChecker;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
-import org.bukkit.NamespacedKey;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
@@ -199,27 +200,19 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
     }
 
     @Override
-    public NamespacedKey getJudoonKey() {
-        return TARDISWeepingAngels.JUDOON;
+    public FollowerChecker isClaimedMonster(Entity entity, UUID uuid) {
+        return new FollowerChecker(entity, uuid);
     }
 
     @Override
-    public NamespacedKey getK9Key() {
-        return TARDISWeepingAngels.K9;
+    public void setJudoonEquipment(Player player, Entity armorStand, int ammunition) {
+        setJudoonEquipment(player, armorStand, false);
+        armorStand.getPersistentDataContainer().set(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER, ammunition);
     }
 
     @Override
-    public NamespacedKey getOodKey() {
-        return TARDISWeepingAngels.OOD;
-    }
-
-    @Override
-    public NamespacedKey getOwnerUuidKey() {
-        return TARDISWeepingAngels.OWNER_UUID;
-    }
-
-    @Override
-    public PersistentDataType<byte[], UUID> getPersistentDataTypeUUID() {
-        return TARDISWeepingAngels.PersistentDataTypeUUID;
+    public void setFollowing(ArmorStand stand, Player player) {
+        int taskId = TARDISWeepingAngels.plugin.getServer().getScheduler().scheduleSyncRepeatingTask(TARDISWeepingAngels.plugin, new JudoonWalkRunnable(stand, 0.15d, player), 2L, 2L);
+        TARDISWeepingAngels.plugin.getFollowTasks().put(player.getUniqueId(), taskId);
     }
 }

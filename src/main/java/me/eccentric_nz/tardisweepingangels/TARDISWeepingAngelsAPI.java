@@ -3,12 +3,12 @@
  */
 package me.eccentric_nz.tardisweepingangels;
 
+import me.eccentric_nz.tardisweepingangels.utils.FollowerChecker;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
-import org.bukkit.NamespacedKey;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.persistence.PersistentDataType;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -172,27 +172,29 @@ public interface TARDISWeepingAngelsAPI {
     public Monster getWeepingAngelMonsterType(Entity entity);
 
     /**
-     * Returns the Judoon namespaced key
+     * Returns whether the specified entity is a claimed TARDISWeepingAngels monster.
+     *
+     * @param entity the entity to check
+     * @param uuid   the UUID of the claiming player
+     * @return a FollowerChecker containing the type of TARDISWeepingAngels monster (JUDOON, K9, OOD) - if the monster
+     * is not claimable it will return WEEPING_ANGEL - and an integer from its persistent data container
      */
-    public NamespacedKey getJudoonKey();
+    public FollowerChecker isClaimedMonster(Entity entity, UUID uuid);
 
     /**
-     * Returns the K9 namespaced key
+     * Set the entity entity equipment and ammunition count for a claimed Judoon
+     *
+     * @param player     the player that will own this Judoon
+     * @param armorStand the armour stand to apply the equipment to
+     * @param ammunition the persistent data container value with the amount of ammunition
      */
-    public NamespacedKey getK9Key();
+    public void setJudoonEquipment(Player player, Entity armorStand, int ammunition);
 
     /**
-     * Returns the Ood namespaced key
+     * Start a following task for a claimed monster
+     *
+     * @param stand  the armour stand that will follow the player
+     * @param player the player that  owns this Judoon
      */
-    public NamespacedKey getOodKey();
-
-    /**
-     * Returns the UUID namespaced key
-     */
-    public NamespacedKey getOwnerUuidKey();
-
-    /**
-     * Returns the UUID PersistentDataType
-     */
-    public PersistentDataType<byte[], UUID> getPersistentDataTypeUUID();
+    public void setFollowing(ArmorStand stand, Player player);
 }

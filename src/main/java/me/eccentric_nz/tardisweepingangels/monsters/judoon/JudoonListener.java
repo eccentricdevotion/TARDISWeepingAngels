@@ -38,7 +38,7 @@ public class JudoonListener implements Listener {
                     return;
                 }
                 UUID judoonId = stand.getPersistentDataContainer().get(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID);
-                if (judoonId.equals(player.getUniqueId())) {
+                if (player.getUniqueId().equals(judoonId)) {
                     int ammo = stand.getPersistentDataContainer().get(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER);
                     if (Tag.SHULKER_BOXES.isTagged(player.getInventory().getItemInMainHand().getType())) {
                         // top up ammo
