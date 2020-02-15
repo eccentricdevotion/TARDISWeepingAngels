@@ -21,6 +21,7 @@ import me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada.VashtaNeradaEq
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.AngelEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.zygons.ZygonEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
@@ -28,6 +29,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import javax.annotation.Nullable;
+import java.util.UUID;
 
 /**
  * @author eccentric_nz
@@ -194,5 +196,30 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             }
         }
         return null;
+    }
+
+    @Override
+    public NamespacedKey getJudoonKey() {
+        return TARDISWeepingAngels.JUDOON;
+    }
+
+    @Override
+    public NamespacedKey getK9Key() {
+        return TARDISWeepingAngels.K9;
+    }
+
+    @Override
+    public NamespacedKey getOodKey() {
+        return TARDISWeepingAngels.OOD;
+    }
+
+    @Override
+    public NamespacedKey getOwnerUuidKey() {
+        return TARDISWeepingAngels.OWNER_UUID;
+    }
+
+    @Override
+    public PersistentDataType<byte[], UUID> getPersistentDataTypeUUID() {
+        return TARDISWeepingAngels.PersistentDataTypeUUID;
     }
 }

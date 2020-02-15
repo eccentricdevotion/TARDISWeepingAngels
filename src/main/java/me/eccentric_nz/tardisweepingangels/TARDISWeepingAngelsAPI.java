@@ -4,11 +4,14 @@
 package me.eccentric_nz.tardisweepingangels;
 
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.persistence.PersistentDataType;
 
 import javax.annotation.Nullable;
+import java.util.UUID;
 
 /**
  * @author eccentric_nz
@@ -167,4 +170,29 @@ public interface TARDISWeepingAngelsAPI {
      * @return the Monster type
      */
     public Monster getWeepingAngelMonsterType(Entity entity);
+
+    /**
+     * Returns the Judoon namespaced key
+     */
+    public NamespacedKey getJudoonKey();
+
+    /**
+     * Returns the K9 namespaced key
+     */
+    public NamespacedKey getK9Key();
+
+    /**
+     * Returns the Ood namespaced key
+     */
+    public NamespacedKey getOodKey();
+
+    /**
+     * Returns the UUID namespaced key
+     */
+    public NamespacedKey getOwnerUuidKey();
+
+    /**
+     * Returns the UUID PersistentDataType
+     */
+    public PersistentDataType<byte[], UUID> getPersistentDataTypeUUID();
 }
