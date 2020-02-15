@@ -34,7 +34,7 @@ public class K9WalkRunnable implements Runnable {
             stand.setHelmet(head);
             BoundingBox asBox = stand.getBoundingBox();
             BoundingBox pBox = player.getBoundingBox().expand(1.0);
-            if (!asBox.overlaps(pBox)) {
+            if (!asBox.overlaps(pBox) && location.getWorld() == player.getWorld()) {
                 Vector target = player.getLocation().toVector();
                 Vector velocity = target.subtract(pos);
                 stand.setVelocity(velocity.normalize().multiply(speed));
