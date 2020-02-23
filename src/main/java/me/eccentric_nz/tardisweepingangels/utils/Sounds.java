@@ -32,7 +32,7 @@ public class Sounds implements Listener {
             return;
         }
         if (ent instanceof Enderman) {
-            if (ent.getPassenger() != null && ent.getPassenger().getType().equals(EntityType.GUARDIAN)) {
+            if (ent.getPassengers() != null && ent.getPassengers().size() > 0 && ent.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
                 tracker.add(uuid);
                 LivingEntity le = event.getTarget();
                 if (le instanceof Player) {

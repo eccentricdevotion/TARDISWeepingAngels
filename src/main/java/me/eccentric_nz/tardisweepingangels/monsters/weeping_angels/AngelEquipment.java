@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -17,10 +18,6 @@ public class AngelEquipment {
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
         ItemStack boots = new ItemStack(Material.IRON_BOOTS, 1);
-        if (disguise) {
-            chestplate.setDurability((short) 235);
-            leggings.setDurability((short) 220);
-        }
         ItemMeta headMeta = head.getItemMeta();
         headMeta.setDisplayName("Weeping Angel Head");
         headMeta.setCustomModelData(4);
@@ -31,9 +28,17 @@ public class AngelEquipment {
         arm.setItemMeta(armMeta);
         ItemMeta chestMeta = chestplate.getItemMeta();
         chestMeta.setDisplayName("Weeping Angel Chest");
+        if (disguise) {
+            Damageable damageable = (Damageable) chestMeta;
+            damageable.setDamage(235);
+        }
         chestplate.setItemMeta(chestMeta);
         ItemMeta legMeta = leggings.getItemMeta();
         legMeta.setDisplayName("Weeping Angel Legs");
+        if (disguise) {
+            Damageable legDamage = (Damageable) legMeta;
+            legDamage.setDamage(220);
+        }
         leggings.setItemMeta(legMeta);
         ItemMeta waeponMeta = boots.getItemMeta();
         waeponMeta.setDisplayName("Weeping Angel Feet");

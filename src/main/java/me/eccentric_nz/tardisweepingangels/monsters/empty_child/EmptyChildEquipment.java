@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
@@ -18,10 +19,6 @@ public class EmptyChildEquipment {
         ItemStack arm = new ItemStack(Material.SUGAR, 1);
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
-        if (disguise) {
-            chestplate.setDurability((short) 235);
-            leggings.setDurability((short) 220);
-        }
         ItemMeta headMeta = helmet.getItemMeta();
         headMeta.setDisplayName("Empty Child Head");
         headMeta.setCustomModelData(3);
@@ -32,9 +29,17 @@ public class EmptyChildEquipment {
         arm.setItemMeta(armMeta);
         ItemMeta chestMeta = chestplate.getItemMeta();
         chestMeta.setDisplayName("Empty Child Chest");
+        if (disguise) {
+            Damageable damageable = (Damageable) chestMeta;
+            damageable.setDamage(235);
+        }
         chestplate.setItemMeta(chestMeta);
         ItemMeta legMeta = leggings.getItemMeta();
         legMeta.setDisplayName("Empty Child Legs");
+        if (disguise) {
+            Damageable legDamage = (Damageable) legMeta;
+            legDamage.setDamage(220);
+        }
         leggings.setItemMeta(legMeta);
 
         EntityEquipment ee = le.getEquipment();

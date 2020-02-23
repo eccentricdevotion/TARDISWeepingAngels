@@ -19,8 +19,11 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionData;
+import org.bukkit.potion.PotionType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,7 +130,10 @@ public class Death implements Listener {
             if (pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
                 event.getDrops().clear();
                 if (TARDISWeepingAngels.random.nextInt(100) < 3) {
-                    stack = new ItemStack(Material.POTION, 1, (short) 8197); //TODO use PotionMeta
+                    stack = new ItemStack(Material.POTION);
+                    PotionMeta potionMeta = (PotionMeta) stack.getItemMeta();
+                    potionMeta.setBasePotionData(new PotionData(PotionType.REGEN));
+                    stack.setItemMeta(potionMeta);
                 } else {
                     stack = new ItemStack(empty_drops.get(TARDISWeepingAngels.random.nextInt(empty_drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
                 }

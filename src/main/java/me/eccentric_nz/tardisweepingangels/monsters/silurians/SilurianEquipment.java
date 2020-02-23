@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -16,10 +17,6 @@ public class SilurianEquipment {
         ItemStack arm = new ItemStack(Material.BOW, 1);
         ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
-        if (disguise) {
-            chestplate.setDurability((short) 235);
-            leggings.setDurability((short) 220);
-        }
         ItemMeta headMeta = helmet.getItemMeta();
         headMeta.setDisplayName("Silurian Head");
         headMeta.setCustomModelData(3);
@@ -30,9 +27,17 @@ public class SilurianEquipment {
         arm.setItemMeta(armMeta);
         ItemMeta chestMeta = chestplate.getItemMeta();
         chestMeta.setDisplayName("Silurian Chest");
+        if (disguise) {
+            Damageable chestDamage = (Damageable) chestMeta;
+            chestDamage.setDamage(235);
+        }
         chestplate.setItemMeta(chestMeta);
         ItemMeta legMeta = leggings.getItemMeta();
         legMeta.setDisplayName("Silurian Legs");
+        if (disguise) {
+            Damageable legDamage = (Damageable) legMeta;
+            legDamage.setDamage(220);
+        }
         leggings.setItemMeta(legMeta);
 
         EntityEquipment ee = le.getEquipment();

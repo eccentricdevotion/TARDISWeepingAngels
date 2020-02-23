@@ -33,7 +33,7 @@ public class K9Equipment {
             armorStand.getPersistentDataContainer().set(TARDISWeepingAngels.K9, PersistentDataType.INTEGER, 0);
             armorStand.getPersistentDataContainer().set(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID, uuid);
             EntityEquipment ee = armorStand.getEquipment();
-            armorStand.setHelmet(head);
+            ee.setHelmet(head);
             ee.setItemInMainHand(null);
             ee.setItemInOffHand(null);
             armorStand.setVisible(false);

@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class StraxEquipment {
@@ -13,10 +14,6 @@ public class StraxEquipment {
         ItemStack arm = new ItemStack(Material.BAKED_POTATO, 1);
         ItemStack chestplate = new ItemStack(Material.CHAINMAIL_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.CHAINMAIL_LEGGINGS, 1);
-        if (disguise) {
-            chestplate.setDurability((short) 235);
-            leggings.setDurability((short) 220);
-        }
         ItemMeta headMeta = helmet.getItemMeta();
         headMeta.setDisplayName("Strax Head");
         headMeta.setCustomModelData(3);
@@ -27,9 +24,17 @@ public class StraxEquipment {
         arm.setItemMeta(armMeta);
         ItemMeta chestMeta = chestplate.getItemMeta();
         chestMeta.setDisplayName("Strax Chest");
+        if (disguise) {
+            Damageable damageable = (Damageable) chestMeta;
+            damageable.setDamage(235);
+        }
         chestplate.setItemMeta(chestMeta);
         ItemMeta legMeta = leggings.getItemMeta();
         legMeta.setDisplayName("Strax Legs");
+        if (disguise) {
+            Damageable legDamage = (Damageable) legMeta;
+            legDamage.setDamage(220);
+        }
         leggings.setItemMeta(legMeta);
 
         EntityEquipment ee = le.getEquipment();

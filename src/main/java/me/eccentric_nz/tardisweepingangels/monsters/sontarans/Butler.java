@@ -93,7 +93,7 @@ public class Butler implements Listener {
                             ItemMeta m = milk.getItemMeta();
                             m.setDisplayName("Sontaran Lactic Fluid");
                             milk.setItemMeta(m);
-                            p.setItemInHand(milk);
+                            p.getEquipment().setItemInMainHand(milk);
                             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                                 milkers.remove(uuid);
                             }, 3000L);

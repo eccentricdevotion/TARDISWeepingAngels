@@ -49,7 +49,7 @@ public class OodEquipment {
             brainMeta.setCustomModelData(4 + colour);
             brain_arm.setItemMeta(brainMeta);
             EntityEquipment ee = armorStand.getEquipment();
-            armorStand.setHelmet(head);
+            ee.setHelmet(head);
             ee.setItemInMainHand(brain_arm);
             armorStand.setRightArmPose(new EulerAngle(-1d, 0, 0.175d));
             ee.setItemInOffHand(arm);

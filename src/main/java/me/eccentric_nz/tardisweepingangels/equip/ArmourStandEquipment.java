@@ -7,6 +7,7 @@ package me.eccentric_nz.tardisweepingangels.equip;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -74,12 +75,13 @@ public class ArmourStandEquipment {
     }
 
     private void setHelmetOnly(ArmorStand as, ItemStack is) {
-        as.setChestplate(null);
-        as.setLeggings(null);
-        as.setBoots(null);
-        as.setHelmet(is);
-        as.getEquipment().setItemInMainHand(null);
-        as.getEquipment().setItemInOffHand(null);
+        EntityEquipment ee = as.getEquipment();
+        ee.setChestplate(null);
+        ee.setLeggings(null);
+        ee.setBoots(null);
+        ee.setHelmet(is);
+        ee.setItemInMainHand(null);
+        ee.setItemInOffHand(null);
         as.setVisible(false);
     }
 }

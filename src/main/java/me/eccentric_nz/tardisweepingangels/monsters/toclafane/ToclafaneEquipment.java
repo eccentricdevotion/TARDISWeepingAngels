@@ -24,7 +24,7 @@ public class ToclafaneEquipment {
             int difficulty = (location.getWorld().getDifficulty().ordinal() * 6) + 1;
             armorStand.getPersistentDataContainer().set(TARDISWeepingAngels.TOCLAFANE, PersistentDataType.INTEGER, difficulty);
             armorStand.getPersistentDataContainer().set(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID, TARDISWeepingAngels.UNCLAIMED);
-            armorStand.setHelmet(head);
+            armorStand.getEquipment().setHelmet(head);
             armorStand.setVisible(false);
             armorStand.setSilent(true);
             armorStand.setCollidable(true);

@@ -43,7 +43,7 @@ public class JudoonEquipment {
             weaponMeta.setCustomModelData(4);
             weapon_arm.setItemMeta(weaponMeta);
             EntityEquipment ee = armorStand.getEquipment();
-            armorStand.setHelmet(head);
+            ee.setHelmet(head);
             ee.setItemInMainHand(weapon_arm);
             ee.setItemInOffHand(arm);
             armorStand.setVisible(false);

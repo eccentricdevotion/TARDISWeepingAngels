@@ -11,6 +11,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -52,18 +53,21 @@ public class ToclafaneListener implements Listener {
                         bee.addPotionEffect(p);
                         bee.addPassenger(stand);
                     }
-                    ItemStack head = stand.getHelmet();
-                    ItemMeta im = head.getItemMeta();
-                    player.playSound(stand.getLocation(), "toclafane", 1.0f, 1.0f);
-                    im.setCustomModelData(2);
-                    head.setItemMeta(im);
-                    stand.setHelmet(head);
-                    bee.setHasStung(false);
-                    bee.setHealth(bee.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-                    bee.setAnger(500);
-                    bee.setTarget(player);
-                    bee.setSilent(true);
-                    stand.getPersistentDataContainer().set(TARDISWeepingAngels.TOCLAFANE, PersistentDataType.INTEGER, maxHealth - 1);
+                    EntityEquipment ee = stand.getEquipment();
+                    if (ee != null) {
+                        ItemStack head = ee.getHelmet();
+                        ItemMeta im = head.getItemMeta();
+                        player.playSound(stand.getLocation(), "toclafane", 1.0f, 1.0f);
+                        im.setCustomModelData(2);
+                        head.setItemMeta(im);
+                        ee.setHelmet(head);
+                        bee.setHasStung(false);
+                        bee.setHealth(bee.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+                        bee.setAnger(500);
+                        bee.setTarget(player);
+                        bee.setSilent(true);
+                        stand.getPersistentDataContainer().set(TARDISWeepingAngels.TOCLAFANE, PersistentDataType.INTEGER, maxHealth - 1);
+                    }
                 } else {
                     player.playSound(stand.getLocation(), "dalek_hit", 1.0f, 1.0f);
                     health--;
