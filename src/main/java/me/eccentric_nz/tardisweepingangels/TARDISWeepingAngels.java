@@ -38,7 +38,6 @@ import me.eccentric_nz.tardisweepingangels.monsters.zygons.ZygonRunnable;
 import me.eccentric_nz.tardisweepingangels.utils.*;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
-import org.bukkit.block.Biome;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -51,7 +50,6 @@ public class TARDISWeepingAngels extends JavaPlugin {
     public static TARDISWeepingAngels plugin;
     private final List<UUID> empty = new ArrayList<>();
     private final List<UUID> timesUp = new ArrayList<>();
-    private final List<Biome> notOnWater = new ArrayList<>();
     public String pluginName;
     public static Random random = new Random();
     private boolean steal;
@@ -130,6 +128,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         pm.registerEvents(new JudoonListener(this), this);
         pm.registerEvents(new ToclafaneListener(this), this);
         pm.registerEvents(new ArmourStandListener(), this);
+        pm.registerEvents(new MonsterTranformListener(this), this);
         if (plugin.getConfig().getInt("ood.spawn_from_villager") > 0) {
             pm.registerEvents(new VillagerSpawnListener(this), this);
         }
@@ -157,16 +156,6 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new ToclafaneRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new ZygonRunnable(this), delay, delay);
         steal = (getConfig().getBoolean("angels.angels_can_steal"));
-        notOnWater.add(Biome.OCEAN);
-        notOnWater.add(Biome.DEEP_OCEAN);
-        notOnWater.add(Biome.COLD_OCEAN);
-        notOnWater.add(Biome.DEEP_COLD_OCEAN);
-        notOnWater.add(Biome.LUKEWARM_OCEAN);
-        notOnWater.add(Biome.DEEP_LUKEWARM_OCEAN);
-        notOnWater.add(Biome.WARM_OCEAN);
-        notOnWater.add(Biome.DEEP_WARM_OCEAN);
-        notOnWater.add(Biome.RIVER);
-        notOnWater.add(Biome.ICE_SPIKES);
         if (getConfig().getBoolean("judoon.guards")) {
             // add recipe
             new JudoonAmmoRecipe(this).addRecipe();
@@ -188,10 +177,6 @@ public class TARDISWeepingAngels extends JavaPlugin {
 
     public List<UUID> getTimesUp() {
         return timesUp;
-    }
-
-    public List<Biome> getNotOnWater() {
-        return notOnWater;
     }
 
     public boolean isCitizensEnabled() {

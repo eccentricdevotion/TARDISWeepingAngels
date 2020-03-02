@@ -6,6 +6,7 @@ package me.eccentric_nz.tardisweepingangels.monsters.silent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
+import me.eccentric_nz.tardisweepingangels.utils.WaterChecker;
 import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
 import me.eccentric_nz.tardisweepingangels.utils.WorldProcessor;
 import org.bukkit.Bukkit;
@@ -66,7 +67,7 @@ public class SilentRunnable implements Runnable {
             int z = c.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
             int y = w.getHighestBlockYAt(x, z);
             Location l = new Location(w, x, y + 1, z);
-            if (!plugin.getNotOnWater().contains(l.getBlock().getBiome())) {
+            if (WaterChecker.isNotWater(l)) {
                 if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(l)) {
                     return;
                 }
