@@ -13,15 +13,14 @@ import me.eccentric_nz.tardisweepingangels.monsters.sontarans.StraxEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada.VashtaNeradaEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.AngelEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.zygons.ZygonEquipment;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.PigZombie;
-import org.bukkit.entity.Skeleton;
-import org.bukkit.entity.Zombie;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.ChunkLoadEvent;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -43,16 +42,22 @@ public class ChunkLoad implements Listener {
                 } else if (pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER) && skeleton.getEquipment().getHelmet() != null && skeleton.getEquipment().getHelmet().getType() == Material.GOLDEN_HELMET) {
                     SilurianEquipment.set(skeleton, false);
                 }
-            }
-            if (d instanceof PigZombie) {
+            } else if (d instanceof PigZombie) {
                 PigZombie pigZombie = (PigZombie) d;
                 if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER) && pigZombie.getEquipment().getHelmet() != null && pigZombie.getEquipment().getHelmet().getType() == Material.IRON_HELMET) {
                     IceWarriorEquipment.set(pigZombie, false);
                 } else if (pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER) && pigZombie.getEquipment().getHelmet() != null && pigZombie.getEquipment().getHelmet().getType() == Material.CHAINMAIL_HELMET) {
                     StraxEquipment.set(pigZombie, false);
                 }
-            }
-            if (d instanceof Zombie) {
+            } else if (d instanceof Drowned) {
+                Drowned drowned = (Drowned) d;
+                if (drowned.getEquipment().getHelmet() != null) {
+                    ItemMeta im = drowned.getEquipment().getHelmet().getItemMeta();
+                    if (im.hasDisplayName() && im.getDisplayName().endsWith(" Head")) {
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(TARDISWeepingAngels.plugin, () -> drowned.remove(), 2L);
+                    }
+                }
+            } else if (d instanceof Zombie) {
                 Zombie zombie = (Zombie) d;
                 if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER) && zombie.getEquipment().getHelmet() != null && zombie.getEquipment().getHelmet().getType() == Material.IRON_HELMET) {
                     CybermanEquipment.set(zombie, false);
