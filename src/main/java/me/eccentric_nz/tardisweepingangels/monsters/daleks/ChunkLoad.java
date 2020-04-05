@@ -53,7 +53,7 @@ public class ChunkLoad implements Listener {
                 Drowned drowned = (Drowned) d;
                 if (drowned.getEquipment().getHelmet() != null) {
                     ItemMeta im = drowned.getEquipment().getHelmet().getItemMeta();
-                    if (im.hasDisplayName() && im.getDisplayName().endsWith(" Head")) {
+                    if (im != null && im.hasDisplayName() && im.getDisplayName().endsWith(" Head")) {
                         Bukkit.getScheduler().scheduleSyncDelayedTask(TARDISWeepingAngels.plugin, () -> drowned.remove(), 2L);
                     }
                 }
