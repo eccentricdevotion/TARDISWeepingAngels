@@ -101,7 +101,9 @@ public class SpawnCommand {
                     ee.setChestplate(new ItemStack(Material.ELYTRA, 1));
                     // teleport them straight up
                     d.teleport(d.getLocation().add(0.0d, 20.0d, 0.0d));
+                    d.setGliding(true);
                     tardisHelper.setFallFlyingTag(d);
+                    ee.setChestplate(new ItemStack(Material.AIR));
                 }
                 break;
             case EMPTY_CHILD:
