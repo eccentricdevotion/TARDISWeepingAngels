@@ -3,12 +3,12 @@ description: Weeping Angel add-on for the TARDIS plugin
 main: me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels
 name: TARDISWeepingAngels
 load: POSTWORLD
-version: 3.2.2
+version: 3.3
 api-version: 1.15
 website: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 dev-url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
-softdepend: [TARDISChunkGenerator,WorldGuard]
+softdepend: [TARDIS,TARDISChunkGenerator,WorldGuard]
 permissions:
   tardisweepingangels.k9:
     description: Allow players to have a K9 companion.
@@ -113,6 +113,11 @@ commands:
       permission-message: You don't have the permission <permission> to use this command
     set:
       description: Set the maximum number of the specified monster allowed to spawn in the specified world.
-      usage: /<command> set [monser type|all] [world] [max number]
+      usage: /<command> set [monster type|all] [world] [max number]
+      permission: tardisweepingangels.admin
+      permission-message: You don't have the permission <permission> to use this command
+    give:
+      description: Give the specified player the specified monster head.
+      usage: /<command> give [player] [monser type]
       permission: tardisweepingangels.admin
       permission-message: You don't have the permission <permission> to use this command

@@ -39,6 +39,8 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
                     return new StayCommand(plugin).stay(sender);
                 case "remove":
                     return new RemoveCommand(plugin).remove(sender);
+                case "give":
+                    return new GiveCommand(plugin).give(sender, args);
                 default:
                     // unknown command
                     sender.sendMessage(plugin.pluginName + "Invalid command! Try using tab completion.");

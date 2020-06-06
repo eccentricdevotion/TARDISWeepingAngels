@@ -38,7 +38,7 @@ public class TabComplete implements TabCompleter {
     private final ImmutableList<String> ONOFF_SUBS = ImmutableList.of("on", "off");
     private final ImmutableList<String> WORLD_SUBS;
     private final ImmutableList<String> MONSTER_SUBS;
-    ImmutableList<String> CMD_SUBS = ImmutableList.of("spawn", "equip", "disguise", "kill", "count", "follow", "stay", "remove", "set");
+    ImmutableList<String> CMD_SUBS = ImmutableList.of("spawn", "equip", "disguise", "kill", "count", "follow", "stay", "remove", "set", "give");
 
     public TabComplete(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
@@ -59,10 +59,16 @@ public class TabComplete implements TabCompleter {
         if (args.length == 1) {
             return partial(args[0], CMD_SUBS);
         } else if (args.length == 2) {
-            return partial(args[1], MONSTER_SUBS);
+            if (args[0].equals("give")) {
+                return null;
+            } else {
+                return partial(args[1], MONSTER_SUBS);
+            }
         } else if (args.length == 3) {
             if (args[0].equals("disguise")) {
                 return partial(args[2], ONOFF_SUBS);
+            } else if (args[0].equals("give")) {
+                return partial(args[2], MONSTER_SUBS);
             } else if (args[0].equals("follow")) {
                 return Collections.singletonList("15");
             } else {
