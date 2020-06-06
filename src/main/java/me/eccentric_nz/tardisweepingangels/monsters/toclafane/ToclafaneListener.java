@@ -121,7 +121,7 @@ public class ToclafaneListener implements Listener {
         Entity entity = event.getEntity();
         if (entity instanceof Bee) {
             Bee bee = (Bee) entity;
-            if (bee.getTarget() instanceof org.bukkit.entity.Player || bee.getAnger() >= 0) {
+            if (bee.getTarget() instanceof Player || bee.getAnger() >= 0) {
                 if (bee.getPassengers().size() > 0) {
                     Entity passenger = bee.getPassengers().get(0);
                     if (passenger instanceof ArmorStand && passenger.getPersistentDataContainer().has(TARDISWeepingAngels.TOCLAFANE, PersistentDataType.INTEGER)) {

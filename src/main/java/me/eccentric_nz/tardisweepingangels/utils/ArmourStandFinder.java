@@ -28,6 +28,6 @@ public class ArmourStandFinder {
                 }
             }
         }
-        return stand;
+        return null;
     }
 }

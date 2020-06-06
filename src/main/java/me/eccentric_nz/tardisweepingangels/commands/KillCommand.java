@@ -69,7 +69,7 @@ public class KillCommand {
                 Collection<Skeleton> daleks = w.getEntitiesByClass(Skeleton.class);
                 for (Skeleton d : daleks) {
                     EntityEquipment ee = d.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.VINE)) {
+                    if (ee.getHelmet().getType().equals(Material.SLIME_BALL)) {
                         ItemStack is = ee.getHelmet();
                         if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek")) {
                             d.remove();
