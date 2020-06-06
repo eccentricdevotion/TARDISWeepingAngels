@@ -72,6 +72,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
     public static NamespacedKey WARRIOR;
     public static NamespacedKey ZYGON;
     public static UUID UNCLAIMED = UUID.fromString("00000000-aaaa-bbbb-cccc-000000000000");
+    public static NamespacedKey MONSTER_HEAD;
     public static PersistentDataType<byte[], UUID> PersistentDataTypeUUID;
     public static MonsterEquipment api;
     private final List<UUID> guards = new ArrayList<>();
@@ -129,6 +130,8 @@ public class TARDISWeepingAngels extends JavaPlugin {
         pm.registerEvents(new ToclafaneListener(this), this);
         pm.registerEvents(new ArmourStandListener(), this);
         pm.registerEvents(new MonsterTranformListener(this), this);
+        pm.registerEvents(new MonsterTargetListener(), this);
+        pm.registerEvents(new MonsterHeadEquipListener(this), this);
         if (plugin.getConfig().getInt("ood.spawn_from_villager") > 0) {
             pm.registerEvents(new VillagerSpawnListener(this), this);
         }
@@ -225,6 +228,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         TOCLAFANE = new NamespacedKey(plugin, "toclafane");
         WARRIOR = new NamespacedKey(plugin, "warrior");
         ZYGON = new NamespacedKey(plugin, "zygon");
+        MONSTER_HEAD = new NamespacedKey(plugin, "monster_head");
         PersistentDataTypeUUID = new UUIDDataType();
     }
 }
