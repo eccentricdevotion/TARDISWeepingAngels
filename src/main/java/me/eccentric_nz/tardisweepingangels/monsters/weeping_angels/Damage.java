@@ -4,6 +4,7 @@
 package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.utils.MonsterTargetListener;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -67,6 +68,11 @@ public class Damage implements Listener {
         }
         if (et.equals(EntityType.PLAYER)) {
             Entity e = event.getDamager();
+            if (e instanceof Monster && MonsterTargetListener.monsterShouldIgnorePlayer(e, (Player) event.getEntity())) {
+                event.setCancelled(true);
+                ((Monster) e).setTarget(null);
+                return;
+            }
             if (e instanceof Skeleton) {
                 if (e.getPersistentDataContainer().has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
                     Entity t = event.getEntity();
