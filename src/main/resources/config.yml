@@ -38,6 +38,12 @@ empty_child:
   drops:
     - COOKED_BEEF
     - SUGAR
+hath:
+  worlds:
+    world: 10
+  drops:
+    - SALMON
+    - STONE_PICKAXE
 ice_warriors:
   worlds:
     world: 20

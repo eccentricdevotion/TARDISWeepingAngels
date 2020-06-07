@@ -9,7 +9,7 @@ import java.io.File;
 public class WorldProcessor implements Runnable {
 
     private final TARDISWeepingAngels plugin;
-    private FileConfiguration config = null;
+    private final FileConfiguration config;
 
     public WorldProcessor(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
@@ -50,6 +50,9 @@ public class WorldProcessor implements Runnable {
             }
             if (!config.contains("empty_child.worlds." + n)) {
                 plugin.getConfig().set("empty_child.worlds." + n, m);
+            }
+            if (!config.contains("hath.worlds." + n)) {
+                plugin.getConfig().set("hath.worlds." + n, m);
             }
             if (!config.contains("ice_warriors.worlds." + n)) {
                 plugin.getConfig().set("ice_warriors.worlds." + n, m);

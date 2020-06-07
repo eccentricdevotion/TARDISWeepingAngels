@@ -61,6 +61,34 @@ public class Sounds implements Listener {
                 }
             }
         }
+        if (ent instanceof PigZombie) {
+            if (ent.getPersistentDataContainer().has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
+                tracker.add(uuid);
+                LivingEntity le = event.getTarget();
+                if (le instanceof Player) {
+                    long delay = 100L;
+                    // schedule delayed task
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                        Player player = (Player) le;
+                        player.playSound(ent.getLocation(), "hath", 1.0f, 1.0f);
+                        tracker.remove(uuid);
+                    }, delay);
+                }
+            }
+            if (ent.getPersistentDataContainer().has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
+                tracker.add(uuid);
+                LivingEntity le = event.getTarget();
+                if (le instanceof Player) {
+                    long delay = 50L;
+                    // schedule delayed task
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                        Player player = (Player) le;
+                        player.playSound(ent.getLocation(), "warrior", 1.0f, 1.0f);
+                        tracker.remove(uuid);
+                    }, delay);
+                }
+            }
+        }
         if (ent instanceof Zombie) {
             Zombie zombie = (Zombie) ent;
             EntityEquipment ee = zombie.getEquipment();
@@ -86,6 +114,10 @@ public class Sounds implements Listener {
                     if (dn.equals("Vashta Nerada Head") && head.getType().equals(Material.BOOK)) {
                         tmp = "vashta";
                         delay = 30L;
+                    }
+                    if (dn.equals("Zygon Head") && head.getType().equals(Material.PAINTING)) {
+                        tmp = "zygon";
+                        delay = 100L;
                     }
                     if (!tmp.isEmpty()) {
                         String sound = tmp;

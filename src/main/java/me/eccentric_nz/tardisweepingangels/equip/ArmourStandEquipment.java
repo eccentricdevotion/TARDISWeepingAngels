@@ -30,6 +30,9 @@ public class ArmourStandEquipment {
             case EMPTY_CHILD:
                 head = new ItemStack(Material.SUGAR, 1);
                 break;
+            case HATH:
+                head = new ItemStack(Material.PUFFERFISH, 1);
+                break;
             case ICE_WARRIOR:
                 head = new ItemStack(Material.SNOWBALL, 1);
                 break;

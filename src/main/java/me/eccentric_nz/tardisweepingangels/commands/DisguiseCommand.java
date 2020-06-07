@@ -5,6 +5,7 @@ import me.eccentric_nz.tardisweepingangels.equip.RemoveEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.cybermen.CybermanEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildEquipment;
+import me.eccentric_nz.tardisweepingangels.monsters.hath.HathEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.ice_warriors.IceWarriorEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.k9.K9Equipment;
@@ -85,6 +86,9 @@ public class DisguiseCommand {
                     break;
                 case EMPTY_CHILD:
                     EmptyChildEquipment.set(player, true);
+                    break;
+                case HATH:
+                    HathEquipment.set(player, true);
                     break;
                 case ICE_WARRIOR:
                     IceWarriorEquipment.set(player, true);

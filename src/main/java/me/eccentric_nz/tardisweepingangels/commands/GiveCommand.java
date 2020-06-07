@@ -49,6 +49,10 @@ public class GiveCommand {
             case EMPTY_CHILD:
                 material = Material.SUGAR;
                 break;
+            case HATH:
+                material = Material.PUFFERFISH;
+                cmd = 4;
+                break;
             case SILENT:
                 material = Material.END_STONE;
                 cmd = 5;

@@ -92,6 +92,20 @@ public class KillCommand {
                     }
                 }
                 break;
+            case HATH:
+                what = "Hath";
+                Collection<PigZombie> fish = w.getEntitiesByClass(PigZombie.class);
+                for (Zombie h : fish) {
+                    EntityEquipment ee = h.getEquipment();
+                    if (ee.getHelmet().getType().equals(Material.PUFFERFISH)) {
+                        ItemStack is = ee.getHelmet();
+                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Hath")) {
+                            h.remove();
+                            count++;
+                        }
+                    }
+                }
+                break;
             case ICE_WARRIOR:
             case STRAX:
                 Collection<PigZombie> warriors = w.getEntitiesByClass(PigZombie.class);

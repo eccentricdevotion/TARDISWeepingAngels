@@ -82,6 +82,15 @@ public class CountCommand {
                         }
                     }
                     break;
+                case HATH:
+                    what = "Hath";
+                    Collection<PigZombie> fish = w.getEntitiesByClass(PigZombie.class);
+                    for (PigZombie h : fish) {
+                        if (h.getPersistentDataContainer().has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
+                            count++;
+                        }
+                    }
+                    break;
                 case ICE_WARRIOR:
                     what = "Ice Warriors";
                     Collection<PigZombie> warriors = w.getEntitiesByClass(PigZombie.class);

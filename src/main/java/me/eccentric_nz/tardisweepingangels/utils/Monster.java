@@ -13,6 +13,7 @@ public enum Monster {
     CYBERMAN("Cyberman", "cyberman", 2, 4),
     DALEK("Dalek", "dalek", 3, 10000005),
     EMPTY_CHILD("Empty Child", "empty", 4, 4),
+    HATH("Hath", "hath", 16, 5),
     ICE_WARRIOR("Ice Warrior", "ice", 5, 5),
     JUDOON("Judoon", "judoon", 14, 10),
     K9("K9", "k9", 15, 1),
@@ -26,10 +27,10 @@ public enum Monster {
     WEEPING_ANGEL("Weeping Angel", "angel", 1, 5),
     ZYGON("Zygon", "zygon", 11, 4);
 
-    public String name;
-    public String permission;
-    public int persist;
-    public int customModelData;
+    private final String name;
+    private final String permission;
+    private final int persist;
+    private final int customModelData;
 
     Monster(String name, String permission, int persist, int customModelData) {
         this.name = name;

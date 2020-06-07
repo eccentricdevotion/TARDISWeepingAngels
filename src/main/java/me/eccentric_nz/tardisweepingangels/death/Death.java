@@ -39,6 +39,7 @@ public class Death implements Listener {
     private final List<Material> cyber_drops = new ArrayList<>();
     private final List<Material> dalek_drops = new ArrayList<>();
     private final List<Material> empty_drops = new ArrayList<>();
+    private final List<Material> hath_drops = new ArrayList<>();
     private final List<Material> silent_drops = new ArrayList<>();
     private final List<Material> ice_drops = new ArrayList<>();
     private final List<Material> silurian_drops = new ArrayList<>();
@@ -52,6 +53,7 @@ public class Death implements Listener {
         plugin.getConfig().getStringList("cybermen.drops").forEach((c) -> cyber_drops.add(Material.valueOf(c)));
         plugin.getConfig().getStringList("daleks.drops").forEach((d) -> dalek_drops.add(Material.valueOf(d)));
         plugin.getConfig().getStringList("empty_child.drops").forEach((e) -> empty_drops.add(Material.valueOf(e)));
+        plugin.getConfig().getStringList("hath.drops").forEach((e) -> hath_drops.add(Material.valueOf(e)));
         plugin.getConfig().getStringList("ice_warriors.drops").forEach((i) -> ice_drops.add(Material.valueOf(i)));
         plugin.getConfig().getStringList("sontarans.drops").forEach((o) -> sontaran_drops.add(Material.valueOf(o)));
         plugin.getConfig().getStringList("silent.drops").forEach((m) -> silent_drops.add(Material.valueOf(m)));
@@ -114,7 +116,7 @@ public class Death implements Listener {
             }
         }
         if (event.getEntityType().equals(EntityType.PIG_ZOMBIE)) {
-            if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
+            if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
                 event.getDrops().clear();
                 ItemStack stack;
                 if (TARDISWeepingAngels.random.nextInt(100) < 3) {
@@ -126,6 +128,22 @@ public class Death implements Listener {
                     stack.setItemMeta(im);
                 } else {
                     stack = new ItemStack(ice_drops.get(TARDISWeepingAngels.random.nextInt(ice_drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
+                }
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                return;
+            }
+            if (pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
+                event.getDrops().clear();
+                ItemStack stack;
+                if (TARDISWeepingAngels.random.nextInt(100) < 3) {
+                    stack = new ItemStack(Material.PUFFERFISH, 1);
+                    ItemMeta im = stack.getItemMeta();
+                    im.getPersistentDataContainer().set(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER, 99);
+                    im.setDisplayName("Hath Head");
+                    im.setCustomModelData(4);
+                    stack.setItemMeta(im);
+                } else {
+                    stack = new ItemStack(hath_drops.get(TARDISWeepingAngels.random.nextInt(hath_drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
                 }
                 event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                 return;

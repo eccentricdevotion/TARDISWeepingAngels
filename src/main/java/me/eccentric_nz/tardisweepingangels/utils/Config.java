@@ -53,6 +53,7 @@ public class Config {
         listOptions.put("cybermen.drops", Arrays.asList("REDSTONE", "STONE_BUTTON"));
         listOptions.put("daleks.drops", Arrays.asList("SLIME_BALL", "ROTTEN_FLESH"));
         listOptions.put("empty_child.drops", Arrays.asList("COOKED_BEEF", "SUGAR"));
+        listOptions.put("hath.drops", Arrays.asList("SALMON", "STONE_PICKAXE"));
         listOptions.put("ice_warriors.drops", Arrays.asList("ICE", "PACKED_ICE", "SNOW_BLOCK"));
         listOptions.put("silent.drops", Arrays.asList("INK_SAC", "FLOWER_POT"));
         listOptions.put("ood.drops", Arrays.asList("NAME_TAG"));

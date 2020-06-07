@@ -92,6 +92,10 @@ public class PlayerDeath implements Listener {
                             event.setDeathMessage(name + " was slain by a very angry Sontaran butler called Strax");
                             return;
                         }
+                        if (pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
+                            event.setDeathMessage(name + " was killed by a Hath blaster rifle");
+                            return;
+                        }
                     }
                     if (attacker instanceof Skeleton) {
                         if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {

@@ -8,6 +8,7 @@ import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelsAPI;
 import me.eccentric_nz.tardisweepingangels.monsters.cybermen.CybermanEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildEquipment;
+import me.eccentric_nz.tardisweepingangels.monsters.hath.HathEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.ice_warriors.IceWarriorEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonWalkRunnable;
@@ -58,6 +59,11 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
     @Override
     public void setEmptyChildEquipment(LivingEntity le, boolean disguise) {
         EmptyChildEquipment.set(le, disguise);
+    }
+
+    @Override
+    public void setHathEquipment(LivingEntity le, boolean disguise) {
+        HathEquipment.set(le, disguise);
     }
 
     @Override

@@ -97,6 +97,10 @@ public class MonsterTargetListener implements Listener {
                 }
                 break;
             case PIG_ZOMBIE:
+                // hath
+                if (pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
+                    ignore = isWearingMonsterHead(player, Material.PUFFERFISH);
+                }
                 // ice warrior
                 if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.SNOWBALL);

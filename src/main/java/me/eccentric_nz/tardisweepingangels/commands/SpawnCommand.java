@@ -6,6 +6,7 @@ import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.monsters.cybermen.CybermanEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildEquipment;
+import me.eccentric_nz.tardisweepingangels.monsters.hath.HathEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.ice_warriors.IceWarriorEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.k9.K9Equipment;
@@ -116,11 +117,19 @@ public class SpawnCommand {
                 player.playSound(e.getLocation(), "empty_child", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.EMPTY_CHILD, eyeLocation));
                 break;
+            case HATH:
+                LivingEntity h = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
+                h.setSilent(true);
+                h.setNoDamageTicks(75);
+                HathEquipment.set(h, false);
+                player.playSound(h.getLocation(), "hath", 1.0f, 1.0f);
+                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(h, EntityType.PIG_ZOMBIE, Monster.HATH, eyeLocation));
+                break;
             case ICE_WARRIOR:
                 LivingEntity i = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
                 i.setSilent(true);
                 IceWarriorEquipment.set(i, false);
-//                player.playSound(i.getLocation(), "ice_warrior", 1.0f, 1.0f);
+                player.playSound(i.getLocation(), "warrior", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(i, EntityType.PIG_ZOMBIE, Monster.ICE_WARRIOR, eyeLocation));
                 PigZombie pigman = (PigZombie) i;
                 pigman.setBaby(false);
@@ -203,7 +212,7 @@ public class SpawnCommand {
                 z.setNoDamageTicks(75);
                 Zombie zygon = (Zombie) z;
                 zygon.setBaby(false);
-//                player.playSound(z.getLocation(), "zygon", 1.0f, 1.0f);
+                player.playSound(z.getLocation(), "zygon", 1.0f, 1.0f);
                 ZygonEquipment.set(z, false);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(z, EntityType.ZOMBIE, Monster.ZYGON, eyeLocation));
                 break;

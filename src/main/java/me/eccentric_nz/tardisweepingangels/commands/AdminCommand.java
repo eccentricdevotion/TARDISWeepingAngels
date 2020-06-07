@@ -17,6 +17,7 @@ public class AdminCommand {
         types.put(Monster.CYBERMAN, "cybermen");
         types.put(Monster.DALEK, "daleks");
         types.put(Monster.EMPTY_CHILD, "empty_child");
+        types.put(Monster.HATH, "hath");
         types.put(Monster.ICE_WARRIOR, "ice_warriors");
         types.put(Monster.JUDOON, "judoon");
         types.put(Monster.K9, "k9");
@@ -57,6 +58,7 @@ public class AdminCommand {
                 plugin.getConfig().set("cybermen.worlds." + args[2], m);
                 plugin.getConfig().set("daleks.worlds." + args[2], m);
                 plugin.getConfig().set("empty_child.worlds." + args[2], m);
+                plugin.getConfig().set("hath.worlds." + args[2], m);
                 plugin.getConfig().set("ice_warriors.worlds." + args[2], m);
                 plugin.getConfig().set("silence.worlds." + args[2], m);
                 plugin.getConfig().set("sontarans.worlds." + args[2], m);
