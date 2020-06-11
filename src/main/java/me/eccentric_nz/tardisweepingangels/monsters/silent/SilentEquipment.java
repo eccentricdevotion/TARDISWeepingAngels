@@ -20,6 +20,7 @@ public class SilentEquipment {
             g.setSilent(true);
             PotionEffect p = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
             g.addPotionEffect(p);
+            g.getPersistentDataContainer().set(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER, Monster.SILENT.getPersist());
             le.addPassenger(g);
             le.getPersistentDataContainer().set(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER, Monster.SILENT.getPersist());
         } else {

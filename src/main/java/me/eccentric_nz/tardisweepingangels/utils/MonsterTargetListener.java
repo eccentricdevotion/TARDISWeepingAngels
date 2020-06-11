@@ -90,6 +90,7 @@ public class MonsterTargetListener implements Listener {
                     ignore = isWearingMonsterHead(player, Material.BRICK);
                 }
                 break;
+            case ENDERMAN:
             case GUARDIAN:
                 // silent
                 if (pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {

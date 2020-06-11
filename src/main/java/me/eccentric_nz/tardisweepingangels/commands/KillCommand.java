@@ -148,6 +148,7 @@ public class KillCommand {
                 Collection<Enderman> silence = w.getEntitiesByClass(Enderman.class);
                 for (Enderman m : silence) {
                     if (!m.getPassengers().isEmpty() && m.getPassengers().get(0) != null && m.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
+                        m.getPassengers().get(0).remove();
                         m.remove();
                         count++;
                     }
