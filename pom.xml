@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.eccentric_nz.tardisweepingangels</groupId>
     <artifactId>TARDISWeepingAngels</artifactId>
-    <version>3.3</version>
+    <version>3.3.0</version>
     <name>TARDISWeepingAngels</name>
     <repositories>
         <repository>

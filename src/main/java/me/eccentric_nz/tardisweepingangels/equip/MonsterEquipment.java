@@ -23,8 +23,12 @@ import me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada.VashtaNeradaEq
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.AngelEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.zygons.ZygonEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.FollowerChecker;
+import me.eccentric_nz.tardisweepingangels.utils.HeadBuilder;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
+import org.bukkit.Material;
 import org.bukkit.entity.*;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -211,5 +215,20 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
     public void setFollowing(ArmorStand stand, Player player) {
         int taskId = TARDISWeepingAngels.plugin.getServer().getScheduler().scheduleSyncRepeatingTask(TARDISWeepingAngels.plugin, new JudoonWalkRunnable(stand, 0.15d, player), 2L, 2L);
         TARDISWeepingAngels.plugin.getFollowTasks().put(player.getUniqueId(), taskId);
+    }
+
+    @Override
+    public ItemStack getHead(Monster monster) {
+        return HeadBuilder.getItemStack(monster);
+    }
+
+    @Override
+    public ItemStack getK9() {
+        ItemStack is = new ItemStack(Material.BONE);
+        ItemMeta im = is.getItemMeta();
+        im.setDisplayName("K9");
+        im.setCustomModelData(1);
+        is.setItemMeta(im);
+        return is;
     }
 }

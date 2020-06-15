@@ -9,6 +9,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -202,7 +203,22 @@ public interface TARDISWeepingAngelsAPI {
      * Start a following task for a claimed monster
      *
      * @param stand  the armour stand that will follow the player
-     * @param player the player that  owns this Judoon
+     * @param player the player that owns this Judoon / Ood / K9
      */
     public void setFollowing(ArmorStand stand, Player player);
+
+    /**
+     * Get a TARDISWeepingAngels monster head
+     *
+     * @param monster the type of monster head to get
+     * @return a monster head itemstack
+     */
+    public ItemStack getHead(Monster monster);
+
+    /**
+     * Get a K9 item
+     *
+     * @return a K9 itemstack
+     */
+    public ItemStack getK9();
 }

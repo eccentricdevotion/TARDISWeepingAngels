@@ -106,6 +106,10 @@ public class MonsterTargetListener implements Listener {
                 if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.SNOWBALL);
                 }
+                // strax
+                if (pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER)) {
+                    ignore = isWearingMonsterHead(player, Material.BAKED_POTATO);
+                }
                 break;
             default:
                 break;
