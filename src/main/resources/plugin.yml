@@ -3,12 +3,12 @@ description: Weeping Angel add-on for the TARDIS plugin
 main: me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels
 name: TARDISWeepingAngels
 load: POSTWORLD
-version: 3.3
+version: 3.3.1
 api-version: 1.15
 website: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 dev-url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
-softdepend: [TARDIS,TARDISChunkGenerator,WorldGuard]
+softdepend: [TARDISChunkGenerator,WorldGuard]
 permissions:
   tardisweepingangels.k9:
     description: Allow players to have a K9 companion.

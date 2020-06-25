@@ -23,7 +23,7 @@ public class HelmetChecker implements Listener {
     private final List<EntityType> heads = new ArrayList<>();
 
     public HelmetChecker() {
-        heads.add(EntityType.PIG_ZOMBIE);
+        heads.add(EntityType.ZOMBIFIED_PIGLIN);
         heads.add(EntityType.SKELETON);
         heads.add(EntityType.ZOMBIE);
     }
@@ -35,7 +35,7 @@ public class HelmetChecker implements Listener {
         EntityEquipment ee;
         if (heads.contains(et)) {
             switch (et) {
-                case PIG_ZOMBIE:
+                case ZOMBIFIED_PIGLIN:
                     PigZombie pz = (PigZombie) e;
                     ee = pz.getEquipment();
                     break;

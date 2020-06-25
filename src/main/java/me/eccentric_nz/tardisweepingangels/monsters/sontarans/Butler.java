@@ -64,7 +64,7 @@ public class Butler implements Listener {
                             // switch the armour to a butler uniform
                             Location l = zom.getLocation();
                             zom.remove();
-                            PigZombie pz = (PigZombie) l.getWorld().spawnEntity(l, EntityType.PIG_ZOMBIE);
+                            PigZombie pz = (PigZombie) l.getWorld().spawnEntity(l, EntityType.ZOMBIFIED_PIGLIN);
                             pz.setSilent(true);
                             pz.setBaby(false);
                             pz.setAngry(false);
@@ -72,7 +72,7 @@ public class Butler implements Listener {
                                 StraxEquipment.set(pz, false);
                                 pz.getPersistentDataContainer().set(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER, Monster.STRAX.getPersist());
                                 pz.getPersistentDataContainer().remove(TARDISWeepingAngels.SONTARAN);
-                                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(pz, EntityType.PIG_ZOMBIE, Monster.STRAX, l));
+                                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(pz, EntityType.ZOMBIFIED_PIGLIN, Monster.STRAX, l));
                             }, 2L);
                         }
                     }

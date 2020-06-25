@@ -73,7 +73,7 @@ public class HathRunnable implements Runnable {
                 if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(l)) {
                     return;
                 }
-                LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.PIG_ZOMBIE);
+                LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIFIED_PIGLIN);
                 e.setSilent(true);
                 Zombie cyber = (Zombie) e;
                 cyber.setBaby(false);
@@ -81,7 +81,7 @@ public class HathRunnable implements Runnable {
                 cyber.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                     HathEquipment.set(e, false);
-                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.PIG_ZOMBIE, Monster.HATH, l));
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIFIED_PIGLIN, Monster.HATH, l));
                 }, 5L);
             }
         }

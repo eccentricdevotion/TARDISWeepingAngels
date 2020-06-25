@@ -92,7 +92,7 @@ public class IceWarriorRunnable implements Runnable {
                 if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(l)) {
                     return;
                 }
-                LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.PIG_ZOMBIE);
+                LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIFIED_PIGLIN);
                 e.setSilent(true);
                 PigZombie warrior = (PigZombie) e;
                 warrior.setAngry(true);
@@ -101,7 +101,7 @@ public class IceWarriorRunnable implements Runnable {
                 warrior.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                     IceWarriorEquipment.set(e, false);
-                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.PIG_ZOMBIE, Monster.ICE_WARRIOR, l));
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIFIED_PIGLIN, Monster.ICE_WARRIOR, l));
                 }, 5L);
             }
         }

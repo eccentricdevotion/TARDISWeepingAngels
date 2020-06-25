@@ -118,19 +118,19 @@ public class SpawnCommand {
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.EMPTY_CHILD, eyeLocation));
                 break;
             case HATH:
-                LivingEntity h = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
+                LivingEntity h = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIFIED_PIGLIN);
                 h.setSilent(true);
                 h.setNoDamageTicks(75);
                 HathEquipment.set(h, false);
                 player.playSound(h.getLocation(), "hath", 1.0f, 1.0f);
-                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(h, EntityType.PIG_ZOMBIE, Monster.HATH, eyeLocation));
+                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(h, EntityType.ZOMBIFIED_PIGLIN, Monster.HATH, eyeLocation));
                 break;
             case ICE_WARRIOR:
-                LivingEntity i = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
+                LivingEntity i = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIFIED_PIGLIN);
                 i.setSilent(true);
                 IceWarriorEquipment.set(i, false);
                 player.playSound(i.getLocation(), "warrior", 1.0f, 1.0f);
-                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(i, EntityType.PIG_ZOMBIE, Monster.ICE_WARRIOR, eyeLocation));
+                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(i, EntityType.ZOMBIFIED_PIGLIN, Monster.ICE_WARRIOR, eyeLocation));
                 PigZombie pigman = (PigZombie) i;
                 pigman.setBaby(false);
                 pigman.setAngry(true);
@@ -180,7 +180,7 @@ public class SpawnCommand {
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(o, EntityType.ZOMBIE, Monster.SONTARAN, eyeLocation));
                 break;
             case STRAX:
-                LivingEntity x = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.PIG_ZOMBIE);
+                LivingEntity x = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIFIED_PIGLIN);
                 x.setSilent(true);
                 x.setNoDamageTicks(75);
                 PigZombie strax = (PigZombie) x;
@@ -188,7 +188,7 @@ public class SpawnCommand {
                 strax.setAngry(false);
                 StraxEquipment.set(x, false);
                 player.playSound(x.getLocation(), "strax", 1.0f, 1.0f);
-                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(x, EntityType.PIG_ZOMBIE, Monster.STRAX, eyeLocation));
+                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(x, EntityType.ZOMBIFIED_PIGLIN, Monster.STRAX, eyeLocation));
                 break;
             case TOCLAFANE:
                 Entity toclafane = world.spawnEntity(eyeLocation, EntityType.ARMOR_STAND);

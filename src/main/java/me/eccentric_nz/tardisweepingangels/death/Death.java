@@ -115,7 +115,7 @@ public class Death implements Listener {
                 return;
             }
         }
-        if (event.getEntityType().equals(EntityType.PIG_ZOMBIE)) {
+        if (event.getEntityType().equals(EntityType.ZOMBIFIED_PIGLIN)) {
             if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
                 event.getDrops().clear();
                 ItemStack stack;
