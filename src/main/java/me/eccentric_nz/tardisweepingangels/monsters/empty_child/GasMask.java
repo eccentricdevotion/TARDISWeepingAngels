@@ -13,6 +13,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.UUID;
 
@@ -47,7 +48,12 @@ public class GasMask implements Listener {
                 }
             }
             // set helmet to pumpkin
-            inv.setHelmet(new ItemStack(Material.CARVED_PUMPKIN, 1));
+            ItemStack gasmask = new ItemStack(Material.CARVED_PUMPKIN, 1);
+            ItemMeta im = gasmask.getItemMeta();
+            im.setDisplayName("Gas Mask");
+            im.setCustomModelData(1);
+            gasmask.setItemMeta(im);
+            inv.setHelmet(gasmask);
             player.updateInventory();
             // schedule delayed task
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
