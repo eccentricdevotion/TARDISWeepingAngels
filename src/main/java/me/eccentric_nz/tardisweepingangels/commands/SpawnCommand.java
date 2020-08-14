@@ -82,8 +82,8 @@ public class SpawnCommand {
                 LivingEntity c = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                 c.setSilent(true);
                 c.setNoDamageTicks(75);
-                Zombie cyber = (Zombie) c;
-                cyber.setBaby(false);
+                Ageable cyber = (Ageable) c;
+                cyber.setAdult();
                 player.playSound(c.getLocation(), "cyberman", 1.0f, 1.0f);
                 CybermanEquipment.set(c, false);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(c, EntityType.ZOMBIE, Monster.CYBERMAN, eyeLocation));
@@ -111,8 +111,8 @@ public class SpawnCommand {
                 LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                 e.setSilent(true);
                 e.setNoDamageTicks(75);
-                Zombie child = (Zombie) e;
-                child.setBaby(true);
+                Ageable child = (Ageable) e;
+                child.setBaby();
                 EmptyChildEquipment.set(e, false);
                 player.playSound(e.getLocation(), "empty_child", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.EMPTY_CHILD, eyeLocation));
@@ -132,9 +132,10 @@ public class SpawnCommand {
                 player.playSound(i.getLocation(), "warrior", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(i, EntityType.ZOMBIFIED_PIGLIN, Monster.ICE_WARRIOR, eyeLocation));
                 PigZombie pigman = (PigZombie) i;
-                pigman.setBaby(false);
                 pigman.setAngry(true);
                 pigman.setAnger(Integer.MAX_VALUE);
+                Ageable ageable = (Ageable) i;
+                ageable.setAdult();
                 break;
             case JUDOON:
                 Entity judoon = world.spawnEntity(eyeLocation, EntityType.ARMOR_STAND);
@@ -173,8 +174,8 @@ public class SpawnCommand {
                 LivingEntity o = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                 o.setSilent(true);
                 o.setNoDamageTicks(75);
-                Zombie sontaran = (Zombie) o;
-                sontaran.setBaby(false);
+                Ageable sontaran = (Ageable) o;
+                sontaran.setAdult();
                 SontaranEquipment.set(o, false);
                 player.playSound(o.getLocation(), "sontaran", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(o, EntityType.ZOMBIE, Monster.SONTARAN, eyeLocation));
@@ -184,9 +185,10 @@ public class SpawnCommand {
                 x.setSilent(true);
                 x.setNoDamageTicks(75);
                 PigZombie strax = (PigZombie) x;
-                strax.setBaby(false);
                 strax.setAngry(false);
                 StraxEquipment.set(x, false);
+                Ageable sageable = (Ageable) x;
+                sageable.setAdult();
                 player.playSound(x.getLocation(), "strax", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(x, EntityType.ZOMBIFIED_PIGLIN, Monster.STRAX, eyeLocation));
                 break;
@@ -200,8 +202,8 @@ public class SpawnCommand {
                 LivingEntity v = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                 v.setSilent(true);
                 v.setNoDamageTicks(75);
-                Zombie vashta = (Zombie) v;
-                vashta.setBaby(false);
+                Ageable vashta = (Ageable) v;
+                vashta.setAdult();
                 VashtaNeradaEquipment.set(v, false);
                 player.playSound(v.getLocation(), "vashta", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(v, EntityType.ZOMBIE, Monster.VASHTA_NERADA, eyeLocation));
@@ -210,8 +212,8 @@ public class SpawnCommand {
                 LivingEntity z = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                 z.setSilent(true);
                 z.setNoDamageTicks(75);
-                Zombie zygon = (Zombie) z;
-                zygon.setBaby(false);
+                Ageable zygon = (Ageable) z;
+                zygon.setAdult();
                 player.playSound(z.getLocation(), "zygon", 1.0f, 1.0f);
                 ZygonEquipment.set(z, false);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(z, EntityType.ZOMBIE, Monster.ZYGON, eyeLocation));

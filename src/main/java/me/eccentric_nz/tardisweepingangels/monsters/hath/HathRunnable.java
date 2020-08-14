@@ -76,7 +76,7 @@ public class HathRunnable implements Runnable {
                 LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIFIED_PIGLIN);
                 e.setSilent(true);
                 Zombie cyber = (Zombie) e;
-                cyber.setBaby(false);
+                cyber.setAdult();
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 cyber.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {

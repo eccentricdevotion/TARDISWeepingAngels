@@ -13,6 +13,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Ageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Zombie;
@@ -80,8 +81,8 @@ public class SontaranRunnable implements Runnable {
                 }
                 LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
                 e.setSilent(true);
-                Zombie sontaran = (Zombie) e;
-                sontaran.setBaby(false);
+                Ageable sontaran = (Ageable) e;
+                sontaran.setAdult();
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 sontaran.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {

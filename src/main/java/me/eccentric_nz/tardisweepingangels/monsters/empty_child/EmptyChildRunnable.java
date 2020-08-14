@@ -13,6 +13,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Ageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Zombie;
@@ -74,8 +75,8 @@ public class EmptyChildRunnable implements Runnable {
                 }
                 LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
                 e.setSilent(true);
-                Zombie child = (Zombie) e;
-                child.setBaby(true);
+                Ageable child = (Ageable) e;
+                child.setBaby();
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                     EmptyChildEquipment.set(e, false);
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.EMPTY_CHILD, l));

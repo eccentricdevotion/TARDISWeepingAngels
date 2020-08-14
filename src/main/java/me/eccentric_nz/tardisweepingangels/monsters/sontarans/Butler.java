@@ -66,8 +66,9 @@ public class Butler implements Listener {
                             zom.remove();
                             PigZombie pz = (PigZombie) l.getWorld().spawnEntity(l, EntityType.ZOMBIFIED_PIGLIN);
                             pz.setSilent(true);
-                            pz.setBaby(false);
                             pz.setAngry(false);
+                            Ageable pzageable = (Ageable) pz;
+                            pzageable.setAdult();
                             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                                 StraxEquipment.set(pz, false);
                                 pz.getPersistentDataContainer().set(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER, Monster.STRAX.getPersist());

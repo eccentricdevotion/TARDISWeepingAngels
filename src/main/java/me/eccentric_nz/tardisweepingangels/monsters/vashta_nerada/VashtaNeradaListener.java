@@ -77,7 +77,7 @@ public class VashtaNeradaListener implements Listener {
         LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
         e.setSilent(true);
         Zombie vashta = (Zombie) e;
-        vashta.setBaby(false);
+        vashta.setAdult();
         PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
         e.addPotionEffect(p);
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
