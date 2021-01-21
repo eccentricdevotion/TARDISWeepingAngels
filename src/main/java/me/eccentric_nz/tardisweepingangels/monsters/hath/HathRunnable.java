@@ -54,14 +54,14 @@ public class HathRunnable implements Runnable {
                 if (hath < plugin.getConfig().getInt("hath.worlds." + name)) {
                     // if less than maximum, spawn some more
                     for (int i = 0; i < spawn_rate; i++) {
-                        spawnCyberman(w);
+                        spawnHath(w);
                     }
                 }
             }
         });
     }
 
-    private void spawnCyberman(World w) {
+    private void spawnHath(World w) {
         Chunk[] chunks = w.getLoadedChunks();
         if (chunks.length > 0) {
             Chunk c = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
