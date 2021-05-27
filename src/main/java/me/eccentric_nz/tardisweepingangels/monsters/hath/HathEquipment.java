@@ -12,54 +12,60 @@ import org.bukkit.persistence.PersistentDataType;
 
 public class HathEquipment {
 
-    public static void set(LivingEntity le, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.PUFFERFISH, 1);
-        ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
-        ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
-        ItemStack arm = new ItemStack(Material.PUFFERFISH, 1);
-        ItemStack weapon = new ItemStack(Material.PUFFERFISH, 1);
-        ItemMeta headMeta = helmet.getItemMeta();
-        headMeta.setDisplayName("Hath Head");
-        headMeta.setCustomModelData(4);
-        helmet.setItemMeta(headMeta);
-        ItemMeta armMeta = arm.getItemMeta();
-        armMeta.setDisplayName("Hath Arm");
-        armMeta.setCustomModelData(2);
-        arm.setItemMeta(armMeta);
-        ItemMeta chestMeta = chestplate.getItemMeta();
-        chestMeta.setDisplayName("Hath Chest");
-        if (disguise) {
-            Damageable damageable = (Damageable) chestMeta;
-            damageable.setDamage(235);
-        }
-        chestplate.setItemMeta(chestMeta);
-        ItemMeta legMeta = leggings.getItemMeta();
-        legMeta.setDisplayName("Hath Legs");
-        if (disguise) {
-            Damageable legDamage = (Damageable) legMeta;
-            legDamage.setDamage(220);
-        }
-        leggings.setItemMeta(legMeta);
+	public static void set(LivingEntity le, boolean disguise) {
+		ItemStack helmet = new ItemStack(Material.PUFFERFISH, 1);
+		ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
+		ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
+		ItemStack arm = new ItemStack(Material.PUFFERFISH, 1);
+		ItemStack weapon = new ItemStack(Material.PUFFERFISH, 1);
+		ItemMeta headMeta = helmet.getItemMeta();
+		assert headMeta != null;
+		headMeta.setDisplayName("Hath Head");
+		headMeta.setCustomModelData(4);
+		helmet.setItemMeta(headMeta);
+		ItemMeta armMeta = arm.getItemMeta();
+		assert armMeta != null;
+		armMeta.setDisplayName("Hath Arm");
+		armMeta.setCustomModelData(2);
+		arm.setItemMeta(armMeta);
+		ItemMeta chestMeta = chestplate.getItemMeta();
+		assert chestMeta != null;
+		chestMeta.setDisplayName("Hath Chest");
+		if (disguise) {
+			Damageable damageable = (Damageable) chestMeta;
+			damageable.setDamage(235);
+		}
+		chestplate.setItemMeta(chestMeta);
+		ItemMeta legMeta = leggings.getItemMeta();
+		assert legMeta != null;
+		legMeta.setDisplayName("Hath Legs");
+		if (disguise) {
+			Damageable legDamage = (Damageable) legMeta;
+			legDamage.setDamage(220);
+		}
+		leggings.setItemMeta(legMeta);
 
-        EntityEquipment ee = le.getEquipment();
-        ee.setHelmet(helmet);
-        ee.setChestplate(chestplate);
-        ee.setLeggings(leggings);
-        ee.setBoots(null);
-        if (!disguise) {
-            ItemMeta sword = weapon.getItemMeta();
-            sword.setDisplayName("Hath Blaster Rifle");
-            sword.setCustomModelData(3);
-            weapon.setItemMeta(sword);
-            ee.setItemInMainHand(weapon);
-            ee.setItemInOffHand(arm);
-            ee.setItemInMainHandDropChance(0F);
-            ee.setItemInOffHandDropChance(0F);
-            ee.setHelmetDropChance(0F);
-            ee.setChestplateDropChance(0F);
-            ee.setLeggingsDropChance(0F);
-            le.setCanPickupItems(false);
-            le.getPersistentDataContainer().set(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER, Monster.HATH.getPersist());
-        }
-    }
+		EntityEquipment ee = le.getEquipment();
+		assert ee != null;
+		ee.setHelmet(helmet);
+		ee.setChestplate(chestplate);
+		ee.setLeggings(leggings);
+		ee.setBoots(null);
+		if (!disguise) {
+			ItemMeta sword = weapon.getItemMeta();
+			assert sword != null;
+			sword.setDisplayName("Hath Blaster Rifle");
+			sword.setCustomModelData(3);
+			weapon.setItemMeta(sword);
+			ee.setItemInMainHand(weapon);
+			ee.setItemInOffHand(arm);
+			ee.setItemInMainHandDropChance(0F);
+			ee.setItemInOffHandDropChance(0F);
+			ee.setHelmetDropChance(0F);
+			ee.setChestplateDropChance(0F);
+			ee.setLeggingsDropChance(0F);
+			le.setCanPickupItems(false);
+			le.getPersistentDataContainer().set(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER, Monster.HATH.getPersist());
+		}
+	}
 }

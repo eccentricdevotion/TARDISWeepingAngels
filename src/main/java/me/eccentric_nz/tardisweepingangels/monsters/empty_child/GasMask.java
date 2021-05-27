@@ -22,60 +22,61 @@ import java.util.UUID;
  */
 public class GasMask implements Listener {
 
-    private final TARDISWeepingAngels plugin;
+	private final TARDISWeepingAngels plugin;
 
-    public GasMask(TARDISWeepingAngels plugin) {
-        this.plugin = plugin;
-    }
+	public GasMask(TARDISWeepingAngels plugin) {
+		this.plugin = plugin;
+	}
 
-    @EventHandler
-    public void onPlayerRespawn(PlayerRespawnEvent event) {
-        Player player = event.getPlayer();
-        UUID uuid = player.getUniqueId();
-        if (!plugin.getEmpty().contains(uuid)) {
-            return;
-        }
-        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            PlayerInventory inv = player.getInventory();
-            ItemStack helmet = inv.getHelmet();
-            if (helmet != null) {
-                // move it to the first free slot
-                int free_slot = inv.firstEmpty();
-                if (free_slot != -1) {
-                    inv.setItem(free_slot, helmet);
-                } else {
-                    player.getWorld().dropItemNaturally(player.getLocation(), helmet);
-                }
-            }
-            // set helmet to pumpkin
-            ItemStack gasmask = new ItemStack(Material.CARVED_PUMPKIN, 1);
-            ItemMeta im = gasmask.getItemMeta();
-            im.setDisplayName("Gas Mask");
-            im.setCustomModelData(1);
-            gasmask.setItemMeta(im);
-            inv.setHelmet(gasmask);
-            player.updateInventory();
-            // schedule delayed task
-            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                plugin.getEmpty().remove(uuid);
-                plugin.getTimesUp().add(uuid);
-            }, 600L);
-        }, 5L);
-    }
+	@EventHandler
+	public void onPlayerRespawn(PlayerRespawnEvent event) {
+		Player player = event.getPlayer();
+		UUID uuid = player.getUniqueId();
+		if (!plugin.getEmpty().contains(uuid)) {
+			return;
+		}
+		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+			PlayerInventory inv = player.getInventory();
+			ItemStack helmet = inv.getHelmet();
+			if (helmet != null) {
+				// move it to the first free slot
+				int free_slot = inv.firstEmpty();
+				if (free_slot != -1) {
+					inv.setItem(free_slot, helmet);
+				} else {
+					player.getWorld().dropItemNaturally(player.getLocation(), helmet);
+				}
+			}
+			// set helmet to pumpkin
+			ItemStack gasmask = new ItemStack(Material.CARVED_PUMPKIN, 1);
+			ItemMeta im = gasmask.getItemMeta();
+			assert im != null;
+			im.setDisplayName("Gas Mask");
+			im.setCustomModelData(1);
+			gasmask.setItemMeta(im);
+			inv.setHelmet(gasmask);
+			player.updateInventory();
+			// schedule delayed task
+			plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+				plugin.getEmpty().remove(uuid);
+				plugin.getTimesUp().add(uuid);
+			}, 600L);
+		}, 5L);
+	}
 
-    @EventHandler
-    public void onHelmetClick(InventoryClickEvent event) {
-        if (event.getInventory().getType().equals(InventoryType.CRAFTING) && event.getRawSlot() == 5) {
-            Player player = (Player) event.getWhoClicked();
-            if (plugin.getEmpty().contains(player.getUniqueId())) {
-                event.setCancelled(true);
-            }
-            if (plugin.getTimesUp().contains(player.getUniqueId())) {
-                event.setCancelled(true);
-                player.getInventory().setHelmet(null);
-                player.updateInventory();
-                plugin.getTimesUp().remove(player.getUniqueId());
-            }
-        }
-    }
+	@EventHandler
+	public void onHelmetClick(InventoryClickEvent event) {
+		if (event.getInventory().getType().equals(InventoryType.CRAFTING) && event.getRawSlot() == 5) {
+			Player player = (Player) event.getWhoClicked();
+			if (plugin.getEmpty().contains(player.getUniqueId())) {
+				event.setCancelled(true);
+			}
+			if (plugin.getTimesUp().contains(player.getUniqueId())) {
+				event.setCancelled(true);
+				player.getInventory().setHelmet(null);
+				player.updateInventory();
+				plugin.getTimesUp().remove(player.getUniqueId());
+			}
+		}
+	}
 }

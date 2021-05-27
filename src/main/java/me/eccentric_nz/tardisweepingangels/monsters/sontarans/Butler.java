@@ -22,6 +22,7 @@ import org.bukkit.potion.PotionType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -32,80 +33,78 @@ import java.util.UUID;
  */
 public class Butler implements Listener {
 
-    private final List<UUID> milkers = new ArrayList<>();
-    private final TARDISWeepingAngels plugin;
+	private final List<UUID> milkers = new ArrayList<>();
+	private final TARDISWeepingAngels plugin;
 
-    public Butler(TARDISWeepingAngels plugin) {
-        this.plugin = plugin;
-    }
+	public Butler(TARDISWeepingAngels plugin) {
+		this.plugin = plugin;
+	}
 
-    @EventHandler
-    public void onSontaranInteract(PlayerInteractEntityEvent event) {
-        Entity ent = event.getRightClicked();
-        if (ent instanceof Zombie) {
-            Zombie zom = (Zombie) ent;
-            EntityEquipment ee = zom.getEquipment();
-            if (ee.getHelmet().getType().equals(Material.POTATO)) {
-                ItemStack h = ee.getHelmet();
-                if (h.hasItemMeta() && h.getItemMeta().hasDisplayName() && h.getItemMeta().getDisplayName().startsWith("Sontaran")) {
-                    Player p = event.getPlayer();
-                    ItemStack is = p.getInventory().getItemInMainHand();
-                    if (is.getType().equals(Material.POTION)) {
-                        PotionMeta potionMeta = (PotionMeta) is.getItemMeta();
-                        if (potionMeta != null && potionMeta.getBasePotionData().getType().equals(PotionType.WEAKNESS)) {
-                            // remove the potion
-                            int a = p.getInventory().getItemInMainHand().getAmount();
-                            int a2 = a - 1;
-                            if (a2 > 0) {
-                                p.getInventory().getItemInMainHand().setAmount(a2);
-                            } else {
-                                p.getInventory().removeItem(is);
-                            }
-                            // switch the armour to a butler uniform
-                            Location l = zom.getLocation();
-                            zom.remove();
-                            PigZombie pz = (PigZombie) l.getWorld().spawnEntity(l, EntityType.ZOMBIFIED_PIGLIN);
-                            pz.setSilent(true);
-                            pz.setAngry(false);
-                            Ageable pzageable = (Ageable) pz;
-                            pzageable.setAdult();
-                            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                                StraxEquipment.set(pz, false);
-                                pz.getPersistentDataContainer().set(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER, Monster.STRAX.getPersist());
-                                pz.getPersistentDataContainer().remove(TARDISWeepingAngels.SONTARAN);
-                                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(pz, EntityType.ZOMBIFIED_PIGLIN, Monster.STRAX, l));
-                            }, 2L);
-                        }
-                    }
-                    return;
-                }
-            }
-            if (ee.getHelmet().getType().equals(Material.BAKED_POTATO)) {
-                ItemStack h = ee.getHelmet();
-                if (h.hasItemMeta() && h.getItemMeta().hasDisplayName() && h.getItemMeta().getDisplayName().startsWith("Strax")) {
-                    Player p = event.getPlayer();
-                    UUID uuid = p.getUniqueId();
-                    ItemStack is = p.getInventory().getItemInMainHand();
-                    if (is.getType().equals(Material.BUCKET)) {
-                        if (!milkers.contains(uuid)) {
-                            milkers.add(uuid);
-                            p.playSound(zom.getLocation(), "milk", 1.0f, 1.0f);
-                            ItemStack milk = new ItemStack(Material.MILK_BUCKET);
-                            ItemMeta m = milk.getItemMeta();
-                            m.setDisplayName("Sontaran Lactic Fluid");
-                            milk.setItemMeta(m);
-                            p.getEquipment().setItemInMainHand(milk);
-                            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                                milkers.remove(uuid);
-                            }, 3000L);
-                        } else {
-                            p.sendMessage(plugin.pluginName + "Strax is not lactating right now, try again later.");
-                        }
-                    } else if (event.getHand().equals(EquipmentSlot.HAND)) {
-                        p.playSound(zom.getLocation(), "strax", 1.0f, 1.0f);
-                    }
-                }
-            }
-        }
-    }
+	@EventHandler
+	public void onSontaranInteract(PlayerInteractEntityEvent event) {
+		Entity ent = event.getRightClicked();
+		if (ent instanceof Zombie zom) {
+			EntityEquipment ee = zom.getEquipment();
+			assert ee != null;
+			if (Objects.requireNonNull(ee.getHelmet()).getType().equals(Material.POTATO)) {
+				ItemStack h = ee.getHelmet();
+				if (h.hasItemMeta() && Objects.requireNonNull(h.getItemMeta()).hasDisplayName() && h.getItemMeta().getDisplayName().startsWith("Sontaran")) {
+					Player p = event.getPlayer();
+					ItemStack is = p.getInventory().getItemInMainHand();
+					if (is.getType().equals(Material.POTION)) {
+						PotionMeta potionMeta = (PotionMeta) is.getItemMeta();
+						if (potionMeta != null && potionMeta.getBasePotionData().getType().equals(PotionType.WEAKNESS)) {
+							// remove the potion
+							int a = p.getInventory().getItemInMainHand().getAmount();
+							int a2 = a - 1;
+							if (a2 > 0) {
+								p.getInventory().getItemInMainHand().setAmount(a2);
+							} else {
+								p.getInventory().removeItem(is);
+							}
+							// switch the armour to a butler uniform
+							Location l = zom.getLocation();
+							zom.remove();
+							PigZombie pz = (PigZombie) Objects.requireNonNull(l.getWorld()).spawnEntity(l, EntityType.ZOMBIFIED_PIGLIN);
+							pz.setSilent(true);
+							pz.setAngry(false);
+							pz.setAdult();
+							plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+								StraxEquipment.set(pz, false);
+								pz.getPersistentDataContainer().set(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER, Monster.STRAX.getPersist());
+								pz.getPersistentDataContainer().remove(TARDISWeepingAngels.SONTARAN);
+								plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(pz, EntityType.ZOMBIFIED_PIGLIN, Monster.STRAX, l));
+							}, 2L);
+						}
+					}
+					return;
+				}
+			}
+			if (ee.getHelmet().getType().equals(Material.BAKED_POTATO)) {
+				ItemStack h = ee.getHelmet();
+				if (h.hasItemMeta() && Objects.requireNonNull(h.getItemMeta()).hasDisplayName() && h.getItemMeta().getDisplayName().startsWith("Strax")) {
+					Player p = event.getPlayer();
+					UUID uuid = p.getUniqueId();
+					ItemStack is = p.getInventory().getItemInMainHand();
+					if (is.getType().equals(Material.BUCKET)) {
+						if (!milkers.contains(uuid)) {
+							milkers.add(uuid);
+							p.playSound(zom.getLocation(), "milk", 1.0f, 1.0f);
+							ItemStack milk = new ItemStack(Material.MILK_BUCKET);
+							ItemMeta m = milk.getItemMeta();
+							assert m != null;
+							m.setDisplayName("Sontaran Lactic Fluid");
+							milk.setItemMeta(m);
+							Objects.requireNonNull(p.getEquipment()).setItemInMainHand(milk);
+							plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> milkers.remove(uuid), 3000L);
+						} else {
+							p.sendMessage(plugin.pluginName + "Strax is not lactating right now, try again later.");
+						}
+					} else if (event.getHand().equals(EquipmentSlot.HAND)) {
+						p.playSound(zom.getLocation(), "strax", 1.0f, 1.0f);
+					}
+				}
+			}
+		}
+	}
 }

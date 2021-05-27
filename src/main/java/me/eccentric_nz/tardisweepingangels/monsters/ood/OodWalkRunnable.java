@@ -11,48 +11,50 @@ import org.bukkit.util.Vector;
 
 public class OodWalkRunnable implements Runnable {
 
-    private final int[] walkCycle = new int[]{2, 5, 6, 5, 2, 7, 8, 7};
-    private final ArmorStand stand;
-    private final double speed;
-    private final Player player;
-    private int i = 0;
+	private final int[] walkCycle = new int[]{2, 5, 6, 5, 2, 7, 8, 7};
+	private final ArmorStand stand;
+	private final double speed;
+	private final Player player;
+	private int i = 0;
 
-    public OodWalkRunnable(ArmorStand stand, double speed, Player player) {
-        this.stand = stand;
-        this.speed = speed;
-        this.player = player;
-    }
+	public OodWalkRunnable(ArmorStand stand, double speed, Player player) {
+		this.stand = stand;
+		this.speed = speed;
+		this.player = player;
+	}
 
-    @Override
-    public void run() {
-        Location location = stand.getLocation();
-        Vector pos = location.toVector();
-        if (player != null) {
-            EntityEquipment ee = stand.getEquipment();
-            if (ee != null) {
-                ItemStack head = ee.getHelmet();
-                ItemMeta im = head.getItemMeta();
-                int colour = im.getCustomModelData() - (im.getCustomModelData() % 10);
-                im.setCustomModelData(walkCycle[i] + colour);
-                head.setItemMeta(im);
-                ee.setHelmet(head);
-                BoundingBox asBox = stand.getBoundingBox();
-                BoundingBox pBox = player.getBoundingBox().expand(1.0);
-                if (!asBox.overlaps(pBox) && location.getWorld() == player.getWorld()) {
-                    Vector target = player.getLocation().toVector();
-                    Vector velocity = target.subtract(pos);
-                    stand.setVelocity(velocity.normalize().multiply(speed));
-                    location.setDirection(velocity);
+	@Override
+	public void run() {
+		Location location = stand.getLocation();
+		Vector pos = location.toVector();
+		if (player != null) {
+			EntityEquipment ee = stand.getEquipment();
+			if (ee != null) {
+				ItemStack head = ee.getHelmet();
+				assert head != null;
+				ItemMeta im = head.getItemMeta();
+				assert im != null;
+				int colour = im.getCustomModelData() - (im.getCustomModelData() % 10);
+				im.setCustomModelData(walkCycle[i] + colour);
+				head.setItemMeta(im);
+				ee.setHelmet(head);
+				BoundingBox asBox = stand.getBoundingBox();
+				BoundingBox pBox = player.getBoundingBox().expand(1.0);
+				if (!asBox.overlaps(pBox) && location.getWorld() == player.getWorld()) {
+					Vector target = player.getLocation().toVector();
+					Vector velocity = target.subtract(pos);
+					stand.setVelocity(velocity.normalize().multiply(speed));
+					location.setDirection(velocity);
 //                    stand.teleport(location);
-                    stand.setRotation(location.getYaw(), location.getPitch());
-                    i++;
-                    if (i == walkCycle.length) {
-                        i = 0;
-                    }
-                } else {
-                    i = 0;
-                }
-            }
-        }
-    }
+					stand.setRotation(location.getYaw(), location.getPitch());
+					i++;
+					if (i == walkCycle.length) {
+						i = 0;
+					}
+				} else {
+					i = 0;
+				}
+			}
+		}
+	}
 }

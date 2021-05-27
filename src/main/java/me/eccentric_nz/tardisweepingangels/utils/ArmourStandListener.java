@@ -8,10 +8,10 @@ import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 
 public class ArmourStandListener implements Listener {
 
-    @EventHandler(priority = EventPriority.NORMAL)
-    public void onManipulateFakeMonster(PlayerArmorStandManipulateEvent event) {
-        if (event.getRightClicked().getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID)) {
-            event.setCancelled(true);
-        }
-    }
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void onManipulateFakeMonster(PlayerArmorStandManipulateEvent event) {
+		if (event.getRightClicked().getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID)) {
+			event.setCancelled(true);
+		}
+	}
 }

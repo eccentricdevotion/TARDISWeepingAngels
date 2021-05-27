@@ -15,26 +15,26 @@ import java.util.Collection;
  */
 public class CleanGuardians implements Runnable {
 
-    private final TARDISWeepingAngels plugin;
+	private final TARDISWeepingAngels plugin;
 
-    public CleanGuardians(TARDISWeepingAngels plugin) {
-        this.plugin = plugin;
-    }
+	public CleanGuardians(TARDISWeepingAngels plugin) {
+		this.plugin = plugin;
+	}
 
-    @Override
-    public void run() {
-        plugin.getServer().getWorlds().forEach((w) -> {
-            // only configured worlds
-            String name = WorldProcessor.sanitiseName(w.getName());
-            if (plugin.getConfig().getInt("silent.worlds." + name) > 0) {
-                Collection<Guardian> guardians = w.getEntitiesByClass(Guardian.class);
-                guardians.forEach((g) -> {
-                    // does it have invisibility but not riding an Enderman
-                    if (g.hasPotionEffect(PotionEffectType.INVISIBILITY) && g.getVehicle() == null) {
-                        g.remove();
-                    }
-                });
-            }
-        });
-    }
+	@Override
+	public void run() {
+		plugin.getServer().getWorlds().forEach((w) -> {
+			// only configured worlds
+			String name = WorldProcessor.sanitiseName(w.getName());
+			if (plugin.getConfig().getInt("silent.worlds." + name) > 0) {
+				Collection<Guardian> guardians = w.getEntitiesByClass(Guardian.class);
+				guardians.forEach((g) -> {
+					// does it have invisibility but not riding an Enderman
+					if (g.hasPotionEffect(PotionEffectType.INVISIBILITY) && g.getVehicle() == null) {
+						g.remove();
+					}
+				});
+			}
+		});
+	}
 }

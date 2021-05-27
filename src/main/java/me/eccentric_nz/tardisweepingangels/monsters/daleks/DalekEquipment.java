@@ -15,37 +15,41 @@ import org.bukkit.potion.PotionEffectType;
 
 public class DalekEquipment {
 
-    private static final WeightedChoice<Integer> weightedChoice = new WeightedChoice<Integer>().add(48, 0).add(3, 1).add(3, 2).add(3, 3).add(3, 4).add(3, 5).add(3, 6).add(3, 7).add(3, 8).add(3, 9).add(3, 10).add(3, 11).add(3, 12).add(3, 13).add(3, 14).add(3, 15).add(3, 16);
+	private static final WeightedChoice<Integer> weightedChoice = new WeightedChoice<Integer>().add(48, 0).add(3, 1).add(3, 2).add(3, 3).add(3, 4).add(3, 5).add(3, 6).add(3, 7).add(3, 8).add(3, 9).add(3, 10).add(3, 11).add(3, 12).add(3, 13).add(3, 14).add(3, 15).add(3, 16);
 
-    public static void set(LivingEntity le, boolean disguise) {
-        le.getPersistentDataContainer().set(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER, Monster.DALEK.getPersist());
-        ItemStack helmet = new ItemStack(Material.SLIME_BALL, 1);
-        ItemMeta headMeta = helmet.getItemMeta();
-        headMeta.setDisplayName("Dalek Head");
-        headMeta.setCustomModelData(10000005 + weightedChoice.next());
-        helmet.setItemMeta(headMeta);
-        EntityEquipment ee = le.getEquipment();
-        ee.setHelmet(helmet);
-        ee.setChestplate(null);
-        ee.setLeggings(null);
-        ee.setBoots(null);
-        PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
-        le.addPotionEffect(invisibility);
-        if (!disguise) {
-            ee.setHelmetDropChance(0F);
-            ItemStack bow = new ItemStack(Material.BOW, 1);
-            ItemMeta bim = bow.getItemMeta();
-            bim.setCustomModelData(1);
-            bow.setItemMeta(bim);
-            ee.setItemInMainHand(bow);
-            ee.setItemInMainHandDropChance(0F);
-            PotionEffect resistance = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 360000, 1, true, false);
-            le.addPotionEffect(resistance);
-            AttributeInstance attribute = le.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-            attribute.setBaseValue(30.0d);
-            le.setHealth(30.0d);
-            le.setCanPickupItems(false);
-            le.setRemoveWhenFarAway(false);
-        }
-    }
+	public static void set(LivingEntity le, boolean disguise) {
+		le.getPersistentDataContainer().set(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER, Monster.DALEK.getPersist());
+		ItemStack helmet = new ItemStack(Material.SLIME_BALL, 1);
+		ItemMeta headMeta = helmet.getItemMeta();
+		assert headMeta != null;
+		headMeta.setDisplayName("Dalek Head");
+		headMeta.setCustomModelData(10000005 + weightedChoice.next());
+		helmet.setItemMeta(headMeta);
+		EntityEquipment ee = le.getEquipment();
+		assert ee != null;
+		ee.setHelmet(helmet);
+		ee.setChestplate(null);
+		ee.setLeggings(null);
+		ee.setBoots(null);
+		PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
+		le.addPotionEffect(invisibility);
+		if (!disguise) {
+			ee.setHelmetDropChance(0F);
+			ItemStack bow = new ItemStack(Material.BOW, 1);
+			ItemMeta bim = bow.getItemMeta();
+			assert bim != null;
+			bim.setCustomModelData(1);
+			bow.setItemMeta(bim);
+			ee.setItemInMainHand(bow);
+			ee.setItemInMainHandDropChance(0F);
+			PotionEffect resistance = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 360000, 1, true, false);
+			le.addPotionEffect(resistance);
+			AttributeInstance attribute = le.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+			assert attribute != null;
+			attribute.setBaseValue(30.0d);
+			le.setHealth(30.0d);
+			le.setCanPickupItems(false);
+			le.setRemoveWhenFarAway(false);
+		}
+	}
 }
