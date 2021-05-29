@@ -100,7 +100,7 @@ public class Sounds implements Listener {
                 if (le instanceof Player) {
                     String tmp = "";
                     long delay = 50L;
-                    if (zombie.isBaby() && dn.equals("Empty Child Head") && head.getType().equals(Material.SUGAR)) {
+                    if (!zombie.isAdult() && dn.equals("Empty Child Head") && head.getType().equals(Material.SUGAR)) {
                         tmp = "empty_child";
                     }
                     if (dn.equals("Cyberman Head") && head.getType().equals(Material.IRON_INGOT)) {
