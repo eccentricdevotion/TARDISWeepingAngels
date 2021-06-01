@@ -18,17 +18,16 @@ public class Config {
 
 	final double min_version = 2.0d;
 	private final TARDISWeepingAngels plugin;
+	private final FileConfiguration config;
 	HashMap<String, List<String>> listOptions = new HashMap<>();
 	HashMap<String, String> strOptions = new HashMap<>();
 	HashMap<String, Integer> intOptions = new HashMap<>();
 	HashMap<String, Double> doubleOptions = new HashMap<>();
 	HashMap<String, Boolean> boolOptions = new HashMap<>();
-	private final FileConfiguration config;
-	private final File configFile;
 
 	public Config(TARDISWeepingAngels plugin) {
 		this.plugin = plugin;
-		configFile = new File(plugin.getDataFolder(), "config.yml");
+		File configFile = new File(plugin.getDataFolder(), "config.yml");
 		config = YamlConfiguration.loadConfiguration(configFile);
 		// integer
 		intOptions.put("angels.freeze_time", 100);
@@ -154,7 +153,8 @@ public class Config {
 		}
 		plugin.saveConfig();
 		if (i > 0) {
-			plugin.getServer().getConsoleSender().sendMessage(plugin.pluginName + "Added " + ChatColor.AQUA + i + ChatColor.RESET + " new items to config");
+			plugin.getServer().getConsoleSender().sendMessage(
+					plugin.pluginName + "Added " + ChatColor.AQUA + i + ChatColor.RESET + " new items to config");
 		}
 	}
 }

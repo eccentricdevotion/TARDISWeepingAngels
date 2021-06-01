@@ -27,7 +27,8 @@ public class AntiTeleport implements Listener {
 	@EventHandler(ignoreCancelled = true)
 	public void onSilentTeleport(EntityTeleportEvent event) {
 		Entity ent = event.getEntity();
-		if (ent.getType().equals(EntityType.ENDERMAN) && !ent.getPassengers().isEmpty() && ent.getPassengers().get(0) != null && ent.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
+		if (ent.getType().equals(EntityType.ENDERMAN) && !ent.getPassengers().isEmpty() &&
+			ent.getPassengers().get(0) != null && ent.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
 			event.setCancelled(true);
 		}
 		if (ent instanceof Wolf) {
@@ -46,7 +47,8 @@ public class AntiTeleport implements Listener {
 	@EventHandler(ignoreCancelled = true)
 	public void onSilentPickup(EntityChangeBlockEvent event) {
 		Entity ent = event.getEntity();
-		if (ent.getType().equals(EntityType.ENDERMAN) && !ent.getPassengers().isEmpty() && ent.getPassengers().get(0) != null && ent.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
+		if (ent.getType().equals(EntityType.ENDERMAN) && !ent.getPassengers().isEmpty() &&
+			ent.getPassengers().get(0) != null && ent.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
 			event.setCancelled(true);
 		}
 	}

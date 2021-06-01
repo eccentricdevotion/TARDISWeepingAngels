@@ -54,14 +54,16 @@ public class DisguiseCommand {
 		if (sender instanceof ConsoleCommandSender) {
 			// check argument length
 			if (args.length < 4) {
-				sender.sendMessage(plugin.pluginName + "You must supply a player UUID when using this command from the console!");
+				sender.sendMessage(
+						plugin.pluginName + "You must supply a player UUID when using this command from the console!");
 				return true;
 			}
 			UUID uuid = UUID.fromString(args[3]);
 			player = plugin.getServer().getPlayer(uuid);
 		}
 		if (player == null) {
-			sender.sendMessage(plugin.pluginName + "Command can only be used by a player, or a player UUID must be supplied!");
+			sender.sendMessage(
+					plugin.pluginName + "Command can only be used by a player, or a player UUID must be supplied!");
 			return true;
 		}
 		if (args.length < 3 || (!args[2].equalsIgnoreCase("on") && !args[2].equalsIgnoreCase("off"))) {
@@ -69,7 +71,9 @@ public class DisguiseCommand {
 			return true;
 		}
 		PlayerInventory inv = player.getInventory();
-		if (args[2].equalsIgnoreCase("on") && (inv.getBoots() != null || inv.getChestplate() != null || inv.getHelmet() != null || inv.getLeggings() != null)) {
+		if (args[2].equalsIgnoreCase("on") &&
+			(inv.getBoots() != null || inv.getChestplate() != null || inv.getHelmet() != null ||
+			 inv.getLeggings() != null)) {
 			player.sendMessage(plugin.pluginName + "Your armour slots must be empty before using this command!");
 			return true;
 		}

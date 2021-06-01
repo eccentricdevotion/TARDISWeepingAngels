@@ -27,7 +27,9 @@ public class MonsterHeadEquipListener implements Listener {
 			InventoryType inventoryType = inv.getType();
 			if (inventoryType == InventoryType.PLAYER && event.getRawSlot() == 5) {
 				ItemStack cursor = event.getCursor();
-				if (cursor != null && cursor.hasItemMeta() && Objects.requireNonNull(cursor.getItemMeta()).getPersistentDataContainer().has(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER) && isNullOrAir(event.getCurrentItem())) {
+				if (cursor != null && cursor.hasItemMeta() &&
+					Objects.requireNonNull(cursor.getItemMeta()).getPersistentDataContainer().has(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER) &&
+					isNullOrAir(event.getCurrentItem())) {
 					event.setCurrentItem(cursor);
 					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> event.setCursor(new ItemStack(Material.AIR)), 1L);
 					event.setCancelled(true);

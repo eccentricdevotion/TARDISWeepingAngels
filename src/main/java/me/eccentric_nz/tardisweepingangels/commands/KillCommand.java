@@ -46,7 +46,8 @@ public class KillCommand {
 				for (Skeleton a : angels) {
 					EntityEquipment ee = a.getEquipment();
 					assert ee != null;
-					if (Objects.requireNonNull(ee.getHelmet()).getType().equals(Material.BRICK) || ee.getHelmet().getType().equals(Material.STONE_BUTTON)) {
+					if (Objects.requireNonNull(ee.getHelmet()).getType().equals(Material.BRICK) ||
+						ee.getHelmet().getType().equals(Material.STONE_BUTTON)) {
 						a.remove();
 						count++;
 					}
@@ -60,7 +61,8 @@ public class KillCommand {
 					assert ee != null;
 					if (Objects.requireNonNull(ee.getHelmet()).getType().equals(Material.IRON_INGOT)) {
 						ItemStack is = ee.getHelmet();
-						if (is.hasItemMeta() && Objects.requireNonNull(is.getItemMeta()).hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
+						if (is.hasItemMeta() && Objects.requireNonNull(is.getItemMeta()).hasDisplayName() &&
+							is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
 							c.remove();
 							count++;
 						}
@@ -75,7 +77,8 @@ public class KillCommand {
 					assert ee != null;
 					if (Objects.requireNonNull(ee.getHelmet()).getType().equals(Material.SLIME_BALL)) {
 						ItemStack is = ee.getHelmet();
-						if (is.hasItemMeta() && Objects.requireNonNull(is.getItemMeta()).hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek")) {
+						if (is.hasItemMeta() && Objects.requireNonNull(is.getItemMeta()).hasDisplayName() &&
+							is.getItemMeta().getDisplayName().startsWith("Dalek")) {
 							d.remove();
 							count++;
 						}
@@ -90,7 +93,8 @@ public class KillCommand {
 					assert ee != null;
 					if (Objects.requireNonNull(ee.getHelmet()).getType().equals(Material.SUGAR)) {
 						ItemStack is = ee.getHelmet();
-						if (is.hasItemMeta() && Objects.requireNonNull(is.getItemMeta()).hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Empty Child")) {
+						if (is.hasItemMeta() && Objects.requireNonNull(is.getItemMeta()).hasDisplayName() &&
+							is.getItemMeta().getDisplayName().startsWith("Empty Child")) {
 							e.remove();
 							count++;
 						}
@@ -105,7 +109,8 @@ public class KillCommand {
 					assert ee != null;
 					if (Objects.requireNonNull(ee.getHelmet()).getType().equals(Material.PUFFERFISH)) {
 						ItemStack is = ee.getHelmet();
-						if (is.hasItemMeta() && Objects.requireNonNull(is.getItemMeta()).hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Hath")) {
+						if (is.hasItemMeta() && Objects.requireNonNull(is.getItemMeta()).hasDisplayName() &&
+							is.getItemMeta().getDisplayName().startsWith("Hath")) {
 							h.remove();
 							count++;
 						}
@@ -145,7 +150,8 @@ public class KillCommand {
 					assert ee != null;
 					if (Objects.requireNonNull(ee.getHelmet()).getType().equals(Material.FEATHER)) {
 						ItemStack is = ee.getHelmet();
-						if (is.hasItemMeta() && Objects.requireNonNull(is.getItemMeta()).hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Silurian")) {
+						if (is.hasItemMeta() && Objects.requireNonNull(is.getItemMeta()).hasDisplayName() &&
+							is.getItemMeta().getDisplayName().startsWith("Silurian")) {
 							s.remove();
 							count++;
 						}
@@ -156,7 +162,8 @@ public class KillCommand {
 				what = "Silence";
 				Collection<Enderman> silence = w.getEntitiesByClass(Enderman.class);
 				for (Enderman m : silence) {
-					if (!m.getPassengers().isEmpty() && m.getPassengers().get(0) != null && m.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
+					if (!m.getPassengers().isEmpty() && m.getPassengers().get(0) != null &&
+						m.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
 						m.getPassengers().get(0).remove();
 						m.remove();
 						count++;
@@ -171,7 +178,8 @@ public class KillCommand {
 					assert ee != null;
 					if (Objects.requireNonNull(ee.getHelmet()).getType().equals(Material.POTATO)) {
 						ItemStack is = ee.getHelmet();
-						if (is.hasItemMeta() && Objects.requireNonNull(is.getItemMeta()).hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Sontaran")) {
+						if (is.hasItemMeta() && Objects.requireNonNull(is.getItemMeta()).hasDisplayName() &&
+							is.getItemMeta().getDisplayName().startsWith("Sontaran")) {
 							o.remove();
 							count++;
 						}
@@ -220,7 +228,8 @@ public class KillCommand {
 					assert ee != null;
 					if (Objects.requireNonNull(ee.getHelmet()).getType().equals(Material.BOOK)) {
 						ItemStack is = ee.getHelmet();
-						if (is.hasItemMeta() && Objects.requireNonNull(is.getItemMeta()).hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Vashta")) {
+						if (is.hasItemMeta() && Objects.requireNonNull(is.getItemMeta()).hasDisplayName() &&
+							is.getItemMeta().getDisplayName().startsWith("Vashta")) {
 							v.remove();
 							count++;
 						}
@@ -235,7 +244,8 @@ public class KillCommand {
 					assert ee != null;
 					if (Objects.requireNonNull(ee.getHelmet()).getType().equals(Material.PAINTING)) {
 						ItemStack is = ee.getHelmet();
-						if (is.hasItemMeta() && Objects.requireNonNull(is.getItemMeta()).hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Zygon")) {
+						if (is.hasItemMeta() && Objects.requireNonNull(is.getItemMeta()).hasDisplayName() &&
+							is.getItemMeta().getDisplayName().startsWith("Zygon")) {
 							z.remove();
 							count++;
 						}

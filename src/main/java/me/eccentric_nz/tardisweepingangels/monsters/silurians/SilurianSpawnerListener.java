@@ -42,7 +42,8 @@ public class SilurianSpawnerListener implements Listener {
 			if (plugin.getConfig().getInt("silurians.worlds." + name) <= 0) {
 				return;
 			}
-			if (plugin.getServer().getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(cave)) {
+			if (plugin.getServer().getPluginManager().getPlugin("WorldGuard") != null &&
+				!WorldGuardChecker.canSpawn(cave)) {
 				return;
 			}
 			// get the current silurian count

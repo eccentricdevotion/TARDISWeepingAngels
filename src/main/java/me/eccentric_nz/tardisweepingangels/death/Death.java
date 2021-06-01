@@ -79,7 +79,8 @@ public class Death implements Listener {
 					im.setCustomModelData(3);
 					stack.setItemMeta(im);
 				} else {
-					stack = new ItemStack(angel_drops.get(TARDISWeepingAngels.random.nextInt(angel_drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
+					stack = new ItemStack(angel_drops.get(TARDISWeepingAngels.random.nextInt(angel_drops.size())),
+							TARDISWeepingAngels.random.nextInt(1) + 1);
 				}
 				event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
 				return;
@@ -96,7 +97,8 @@ public class Death implements Listener {
 					im.setCustomModelData(3);
 					stack.setItemMeta(im);
 				} else {
-					stack = new ItemStack(silurian_drops.get(TARDISWeepingAngels.random.nextInt(silurian_drops.size())), TARDISWeepingAngels.random.nextInt(2) + 1);
+					stack = new ItemStack(silurian_drops.get(TARDISWeepingAngels.random.nextInt(silurian_drops.size())),
+							TARDISWeepingAngels.random.nextInt(2) + 1);
 				}
 				event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
 				return;
@@ -132,7 +134,8 @@ public class Death implements Listener {
 					im.setCustomModelData(4);
 					stack.setItemMeta(im);
 				} else {
-					stack = new ItemStack(ice_drops.get(TARDISWeepingAngels.random.nextInt(ice_drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
+					stack = new ItemStack(ice_drops.get(TARDISWeepingAngels.random.nextInt(ice_drops.size())),
+							TARDISWeepingAngels.random.nextInt(1) + 1);
 				}
 				event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
 				return;
@@ -149,7 +152,8 @@ public class Death implements Listener {
 					im.setCustomModelData(4);
 					stack.setItemMeta(im);
 				} else {
-					stack = new ItemStack(hath_drops.get(TARDISWeepingAngels.random.nextInt(hath_drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
+					stack = new ItemStack(hath_drops.get(TARDISWeepingAngels.random.nextInt(hath_drops.size())),
+							TARDISWeepingAngels.random.nextInt(1) + 1);
 				}
 				event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
 				return;
@@ -192,7 +196,8 @@ public class Death implements Listener {
 					potionMeta.setBasePotionData(new PotionData(PotionType.REGEN));
 					stack.setItemMeta(potionMeta);
 				} else {
-					stack = new ItemStack(empty_drops.get(TARDISWeepingAngels.random.nextInt(empty_drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
+					stack = new ItemStack(empty_drops.get(TARDISWeepingAngels.random.nextInt(empty_drops.size())),
+							TARDISWeepingAngels.random.nextInt(1) + 1);
 				}
 				event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
 				return;
@@ -226,7 +231,8 @@ public class Death implements Listener {
 					im.setCustomModelData(4);
 					stack.setItemMeta(im);
 				} else {
-					stack = new ItemStack(vashta_drops.get(TARDISWeepingAngels.random.nextInt(vashta_drops.size())), TARDISWeepingAngels.random.nextInt(2) + 1);
+					stack = new ItemStack(vashta_drops.get(TARDISWeepingAngels.random.nextInt(vashta_drops.size())),
+							TARDISWeepingAngels.random.nextInt(2) + 1);
 				}
 				event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
 			}
@@ -241,7 +247,8 @@ public class Death implements Listener {
 					im.setCustomModelData(3);
 					stack.setItemMeta(im);
 				} else {
-					stack = new ItemStack(zygon_drops.get(TARDISWeepingAngels.random.nextInt(zygon_drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
+					stack = new ItemStack(zygon_drops.get(TARDISWeepingAngels.random.nextInt(zygon_drops.size())),
+							TARDISWeepingAngels.random.nextInt(1) + 1);
 				}
 				event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
 				return;
@@ -281,7 +288,8 @@ public class Death implements Listener {
 		if (event.getEntityType().equals(EntityType.ENDERMAN)) {
 			if (pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
 				// remove the guardian as well
-				Entity guardian = (event.getEntity().getPassengers().size() > 0) ? event.getEntity().getPassengers().get(0) : null;
+				Entity guardian = (event.getEntity().getPassengers().size() >
+								   0) ? event.getEntity().getPassengers().get(0) : null;
 				if (guardian != null) {
 					guardian.remove();
 				}
@@ -296,7 +304,8 @@ public class Death implements Listener {
 					im.setCustomModelData(3);
 					stack.setItemMeta(im);
 				} else {
-					stack = new ItemStack(silent_drops.get(TARDISWeepingAngels.random.nextInt(silent_drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
+					stack = new ItemStack(silent_drops.get(TARDISWeepingAngels.random.nextInt(silent_drops.size())),
+							TARDISWeepingAngels.random.nextInt(1) + 1);
 				}
 				event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
 			}

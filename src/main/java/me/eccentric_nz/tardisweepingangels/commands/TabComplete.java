@@ -36,7 +36,7 @@ import java.util.List;
 public class TabComplete implements TabCompleter {
 
 	private final TARDISWeepingAngels plugin;
-	private final ImmutableList<String> ONOFF_SUBS = ImmutableList.of("on", "off");
+	private final ImmutableList<String> ON_OFF_SUBS = ImmutableList.of("on", "off");
 	private final ImmutableList<String> WORLD_SUBS;
 	private final ImmutableList<String> MONSTER_SUBS;
 	ImmutableList<String> CMD_SUBS = ImmutableList.of("spawn", "equip", "disguise", "kill", "count", "follow", "stay", "remove", "set", "give");
@@ -65,7 +65,7 @@ public class TabComplete implements TabCompleter {
 			}
 		} else if (args.length == 3) {
 			return switch (args[0]) {
-				case "disguise" -> partial(args[2], ONOFF_SUBS);
+				case "disguise" -> partial(args[2], ON_OFF_SUBS);
 				case "give" -> partial(args[2], MONSTER_SUBS);
 				case "follow" -> Collections.singletonList("15");
 				default -> partial(args[2], WORLD_SUBS);

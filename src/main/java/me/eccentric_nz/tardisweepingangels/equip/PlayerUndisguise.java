@@ -29,9 +29,19 @@ public class PlayerUndisguise implements Listener {
 						ItemMeta im = is.getItemMeta();
 						assert im != null;
 						if (!im.getPersistentDataContainer().has(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER)) {
-							if (im.hasDisplayName() && (im.getDisplayName().startsWith("Weeping Angel") || im.getDisplayName().startsWith("Ice Warrior") || im.getDisplayName().startsWith("Cyberman") || im.getDisplayName().startsWith("Empty Child") || im.getDisplayName().startsWith("Hath") || im.getDisplayName().startsWith("Silurian") || im.getDisplayName().startsWith("Sontaran") || im.getDisplayName().startsWith("Strax") || im.getDisplayName().startsWith("Zygon") || im.getDisplayName().startsWith("Vashta"))) {
+							if (im.hasDisplayName() && (im.getDisplayName().startsWith("Weeping Angel") ||
+														im.getDisplayName().startsWith("Ice Warrior") ||
+														im.getDisplayName().startsWith("Cyberman") ||
+														im.getDisplayName().startsWith("Empty Child") ||
+														im.getDisplayName().startsWith("Hath") ||
+														im.getDisplayName().startsWith("Silurian") ||
+														im.getDisplayName().startsWith("Sontaran") ||
+														im.getDisplayName().startsWith("Strax") ||
+														im.getDisplayName().startsWith("Zygon") ||
+														im.getDisplayName().startsWith("Vashta"))) {
 								event.setCancelled(true);
-								(event.getWhoClicked()).sendMessage(plugin.pluginName + "You must use the '/twad [monster] off' command to remove this armour!");
+								(event.getWhoClicked()).sendMessage(plugin.pluginName +
+																	"You must use the '/twad [monster] off' command to remove this armour!");
 							}
 						}
 					}

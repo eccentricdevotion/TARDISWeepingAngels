@@ -55,7 +55,8 @@ public class HelmetChecker implements Listener {
 			assert c != null;
 			if (c.hasItemMeta() && Objects.requireNonNull(c.getItemMeta()).hasDisplayName()) {
 				String dn = c.getItemMeta().getDisplayName();
-				if (dn.startsWith("Cyberman") || dn.startsWith("Ice") || dn.startsWith("Silurian") || dn.startsWith("Sontaran") || dn.startsWith("Vashta") || dn.startsWith("Zygon")) {
+				if (dn.startsWith("Cyberman") || dn.startsWith("Ice") || dn.startsWith("Silurian") ||
+					dn.startsWith("Sontaran") || dn.startsWith("Vashta") || dn.startsWith("Zygon")) {
 					event.setCancelled(true);
 					// restore head
 					ItemStack helmet;

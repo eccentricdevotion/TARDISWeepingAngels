@@ -48,12 +48,14 @@ public class Butler implements Listener {
 			assert ee != null;
 			if (Objects.requireNonNull(ee.getHelmet()).getType().equals(Material.POTATO)) {
 				ItemStack h = ee.getHelmet();
-				if (h.hasItemMeta() && Objects.requireNonNull(h.getItemMeta()).hasDisplayName() && h.getItemMeta().getDisplayName().startsWith("Sontaran")) {
+				if (h.hasItemMeta() && Objects.requireNonNull(h.getItemMeta()).hasDisplayName() &&
+					h.getItemMeta().getDisplayName().startsWith("Sontaran")) {
 					Player p = event.getPlayer();
 					ItemStack is = p.getInventory().getItemInMainHand();
 					if (is.getType().equals(Material.POTION)) {
 						PotionMeta potionMeta = (PotionMeta) is.getItemMeta();
-						if (potionMeta != null && potionMeta.getBasePotionData().getType().equals(PotionType.WEAKNESS)) {
+						if (potionMeta != null &&
+							potionMeta.getBasePotionData().getType().equals(PotionType.WEAKNESS)) {
 							// remove the potion
 							int a = p.getInventory().getItemInMainHand().getAmount();
 							int a2 = a - 1;
@@ -82,7 +84,8 @@ public class Butler implements Listener {
 			}
 			if (ee.getHelmet().getType().equals(Material.BAKED_POTATO)) {
 				ItemStack h = ee.getHelmet();
-				if (h.hasItemMeta() && Objects.requireNonNull(h.getItemMeta()).hasDisplayName() && h.getItemMeta().getDisplayName().startsWith("Strax")) {
+				if (h.hasItemMeta() && Objects.requireNonNull(h.getItemMeta()).hasDisplayName() &&
+					h.getItemMeta().getDisplayName().startsWith("Strax")) {
 					Player p = event.getPlayer();
 					UUID uuid = p.getUniqueId();
 					ItemStack is = p.getInventory().getItemInMainHand();

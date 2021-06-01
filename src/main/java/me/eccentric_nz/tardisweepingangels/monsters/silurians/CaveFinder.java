@@ -78,14 +78,13 @@ public class CaveFinder {
 				// check there is enough height for the police box
 				if (yy <= y - 2 && w.getBlockAt(x - 1, yy - 1, z - 1).getType().equals(Material.STONE)) {
 					// check there is room for the police box
-					if (w.getBlockAt(x - 1, yy, z - 1).getType().isAir()
-							&& w.getBlockAt(x - 1, yy, z).getType().isAir()
-							&& w.getBlockAt(x - 1, yy, z + 1).getType().isAir()
-							&& w.getBlockAt(x, yy, z - 1).getType().isAir()
-							&& w.getBlockAt(x, yy, z + 1).getType().isAir()
-							&& w.getBlockAt(x + 1, yy, z - 1).getType().isAir()
-							&& w.getBlockAt(x + 1, yy, z).getType().isAir()
-							&& w.getBlockAt(x + 1, yy, z + 1).getType().isAir()) {
+					if (w.getBlockAt(x - 1, yy, z - 1).getType().isAir() &&
+						w.getBlockAt(x - 1, yy, z).getType().isAir() &&
+						w.getBlockAt(x - 1, yy, z + 1).getType().isAir() &&
+						w.getBlockAt(x, yy, z - 1).getType().isAir() && w.getBlockAt(x, yy, z + 1).getType().isAir() &&
+						w.getBlockAt(x + 1, yy, z - 1).getType().isAir() &&
+						w.getBlockAt(x + 1, yy, z).getType().isAir() &&
+						w.getBlockAt(x + 1, yy, z + 1).getType().isAir()) {
 						ret.setSafe(true);
 						ret.setY(yy);
 					}

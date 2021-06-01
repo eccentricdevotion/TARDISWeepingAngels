@@ -47,7 +47,7 @@ public class AdminCommand {
 			sender.sendMessage(plugin.pluginName + "Last argument must be a number!");
 			return false;
 		}
-		String which = args[1].toUpperCase();
+		String which = args[1].toLowerCase();
 		Monster monster;
 		try {
 			monster = Monster.valueOf(which);

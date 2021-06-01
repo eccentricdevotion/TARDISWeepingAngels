@@ -43,7 +43,10 @@ public class K9Builder implements Listener {
 			Block west = below.getRelative(BlockFace.WEST);
 			Block north = below.getRelative(BlockFace.NORTH);
 			Block south = below.getRelative(BlockFace.SOUTH);
-			if ((east.getType().equals(Material.LEVER) && west.getType().equals(Material.TRIPWIRE_HOOK)) || (east.getType().equals(Material.TRIPWIRE_HOOK) && west.getType().equals(Material.LEVER)) || (north.getType().equals(Material.LEVER) && south.getType().equals(Material.TRIPWIRE_HOOK)) || (north.getType().equals(Material.TRIPWIRE_HOOK) && south.getType().equals(Material.LEVER))) {
+			if ((east.getType().equals(Material.LEVER) && west.getType().equals(Material.TRIPWIRE_HOOK)) ||
+				(east.getType().equals(Material.TRIPWIRE_HOOK) && west.getType().equals(Material.LEVER)) ||
+				(north.getType().equals(Material.LEVER) && south.getType().equals(Material.TRIPWIRE_HOOK)) ||
+				(north.getType().equals(Material.TRIPWIRE_HOOK) && south.getType().equals(Material.LEVER))) {
 				if (!event.getPlayer().hasPermission("tardisweepingangels.build.k9")) {
 					event.getPlayer().sendMessage(plugin.pluginName + "You don't have permission to build K9!");
 					return;

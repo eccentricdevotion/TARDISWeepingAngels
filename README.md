@@ -1,15 +1,12 @@
 # TARDISWeepingAngels
 
-Inspired
-by: [TARDIS Ticket #530 - Weeping Angels](http://dev.bukkit.org/bukkit-plugins/tardis/tickets/530-weeping-angels/)
+Inspired by: [TARDIS Ticket #530 - Weeping Angels](http://dev.bukkit.org/bukkit-plugins/tardis/tickets/530-weeping-angels/)
 
-This plugin tranforms skeletons into terrifying Weeping Angels (as seen
-on  [Doctor Who](http://www.bbc.co.uk/programmes/p00wqr12/profiles/weeping-angels)).
+This plugin transforms skeletons into terrifying Weeping Angels (as seen on [Doctor Who](http://www.bbc.co.uk/programmes/p00wqr12/profiles/weeping-angels)).
 
 ![Weeping Angel](https://dl.dropboxusercontent.com/s/iulxdqis25j5fen/weepingangel1.jpg?dl=1)
 
-JAR available
-here: [http://dev.bukkit.org/bukkit-plugins/tardisweepingangels/files/](http://dev.bukkit.org/bukkit-plugins/tardisweepingangels/files/)
+JAR available here: [http://dev.bukkit.org/bukkit-plugins/tardisweepingangels/files/](http://dev.bukkit.org/bukkit-plugins/tardisweepingangels/files/)
 
 ## Features
 
@@ -22,22 +19,17 @@ here: [http://dev.bukkit.org/bukkit-plugins/tardisweepingangels/files/](http://d
 
 ## Information
 
-Weeping Angels only spawn at night in loaded chunks. They spawn with grey leather armour and a water lily helmet (their
-wings).
+Weeping Angels only spawn at night in loaded chunks. They spawn with grey leather armour and a water lily helmet (their wings).
 
-Weeping Angels can only be killed with the configured weapon - by default a DIAMOND_PICKAXE - hitting them with anything
-else has no effect. When they die they drop a random (1-3) amount of STONE.
+Weeping Angels can only be killed with the configured weapon - by default a DIAMOND_PICKAXE - hitting them with anything else has no effect. When they die they drop a random (1-3) amount of STONE.
 
-The angels move pretty fast, but you can freeze them in place by looking at them and quickly pressing the sneak key.
-Better arm yourself or flee quickly though, as they'll be after you again in a snap - and if they touch you, you'll be
-teleported away to a random location. If the TARDIS plugin is also installed (if it isn't WHY NOT?), your TARDIS Key
-will be stolen.
+The angels move pretty fast, but you can freeze them in place by looking at them and quickly pressing the sneak key. Better arm yourself or flee quickly though, as they'll be after you again in a snap - and if they touch you, you'll be teleported away to a random location. If the TARDIS plugin is also installed (if it isn't WHY NOT?), your TARDIS Key will be stolen.
 
 ## Configuration
 
 The default config is shown below:
 
-```
+```yaml
 spawn_rate:
     how_many: 5
     how_often: 400

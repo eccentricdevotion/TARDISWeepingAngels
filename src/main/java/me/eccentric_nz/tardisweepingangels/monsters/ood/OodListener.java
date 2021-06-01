@@ -19,7 +19,8 @@ public class OodListener implements Listener {
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onDamageOod(EntityDamageByEntityEvent event) {
 		if (event.getEntity() instanceof ArmorStand stand && event.getDamager() instanceof Player) {
-			if (stand.getPersistentDataContainer().has(TARDISWeepingAngels.OOD, PersistentDataType.INTEGER) && stand.getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID)) {
+			if (stand.getPersistentDataContainer().has(TARDISWeepingAngels.OOD, PersistentDataType.INTEGER) &&
+				stand.getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID)) {
 				event.setCancelled(true);
 				Player player = (Player) event.getDamager();
 				player.playSound(stand.getLocation(), "ood", 1.0f, 1.0f);

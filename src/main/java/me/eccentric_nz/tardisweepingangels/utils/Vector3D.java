@@ -36,10 +36,6 @@ public class Vector3D {
 
 	/**
 	 * Construct an immutable 3D vector.
-	 *
-	 * @param x
-	 * @param y
-	 * @param z
 	 */
 	public Vector3D(double x, double y, double z) {
 		this.x = x;
@@ -86,9 +82,6 @@ public class Vector3D {
 	/**
 	 * Adds the current vector and a given vector together, producing a result vector.
 	 *
-	 * @param x
-	 * @param y
-	 * @param z
 	 * @return The new result vector.
 	 */
 	public Vector3D add(double x, double y, double z) {

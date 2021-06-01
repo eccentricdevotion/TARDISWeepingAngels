@@ -71,11 +71,13 @@ public class Blink implements Listener {
 			Vector3D minimum = targetPos.add(-0.5, 0, -0.5);
 			Vector3D maximum = targetPos.add(0.5, 1.67, 0.5);
 			if (target != player && hasIntersection(observerStart, observerEnd, minimum, maximum)) {
-				if (skeleton == null || skeleton.getLocation().distanceSquared(observerPos) > target.getLocation().distanceSquared(observerPos)) {
+				if (skeleton == null || skeleton.getLocation().distanceSquared(observerPos) >
+										target.getLocation().distanceSquared(observerPos)) {
 					// is it an angel?
 					EntityEquipment ee = target.getEquipment();
 					assert ee != null;
-					if (Objects.requireNonNull(ee.getHelmet()).getType().equals(Material.BRICK) || ee.getHelmet().getType().equals(Material.STONE_BUTTON)) {
+					if (Objects.requireNonNull(ee.getHelmet()).getType().equals(Material.BRICK) ||
+						ee.getHelmet().getType().equals(Material.STONE_BUTTON)) {
 						skeleton = target;
 					}
 				}

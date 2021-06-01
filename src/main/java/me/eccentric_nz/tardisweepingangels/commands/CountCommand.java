@@ -22,7 +22,7 @@ public class CountCommand {
 		if (args.length < 3) {
 			return false;
 		}
-		String which = args[1].toUpperCase();
+		String which = args[1].toLowerCase();
 		String what = "Angels";
 		int count = 0;
 		World w = plugin.getServer().getWorld(args[2]);

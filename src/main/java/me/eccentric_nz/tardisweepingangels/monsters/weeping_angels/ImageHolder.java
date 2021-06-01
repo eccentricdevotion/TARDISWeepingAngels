@@ -38,7 +38,8 @@ public class ImageHolder implements Listener {
 	@EventHandler(ignoreCancelled = true)
 	public void onChatAboutWeepingAngel(AsyncPlayerChatEvent event) {
 		String message = event.getMessage();
-		if (message.toLowerCase().contains("angel") && TARDISWeepingAngels.random.nextInt(100) < plugin.getConfig().getInt("angels.spawn_from_chat.chance")) {
+		if (message.toLowerCase().contains("angel") &&
+			TARDISWeepingAngels.random.nextInt(100) < plugin.getConfig().getInt("angels.spawn_from_chat.chance")) {
 			int dist = plugin.getConfig().getInt("angels.spawn_from_chat.distance_from_player");
 			Block b = event.getPlayer().getLocation().getBlock().getRelative(faces.get(TARDISWeepingAngels.random.nextInt(4)), dist);
 			// get highest block in a random direction

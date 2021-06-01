@@ -8,7 +8,7 @@ api-version: 1.15
 website: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 dev-url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
-softdepend: [ TARDISChunkGenerator,WorldGuard ]
+softdepend: [TARDISChunkGenerator,WorldGuard]
 permissions:
   tardisweepingangels.k9:
     description: Allow players to have a K9 companion.
@@ -68,7 +68,7 @@ permissions:
     default: op
 commands:
   twa:
-    aliases: [ tardisweepingangels ]
+    aliases: [tardisweepingangels]
     description: Manipulate TARDISWeepingAngels monsters with various arguments (spawn, kill, remove, count, disguise, equip, etc)..
     usage: /<command> [subcommand] <monster type> <world> <max>
     spawn:

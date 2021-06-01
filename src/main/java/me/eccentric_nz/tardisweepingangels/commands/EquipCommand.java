@@ -53,8 +53,10 @@ public class EquipCommand {
 			Vector3D targetPos = new Vector3D(target.getLocation());
 			Vector3D minimum = targetPos.add(-0.5, 0, -0.5);
 			Vector3D maximum = targetPos.add(0.5, 1.67, 0.5);
-			if (target.getType().equals(EntityType.ARMOR_STAND) && Blink.hasIntersection(observerStart, observerEnd, minimum, maximum)) {
-				if (as == null || as.getLocation().distanceSquared(observerPos) > target.getLocation().distanceSquared(observerPos)) {
+			if (target.getType().equals(EntityType.ARMOR_STAND) &&
+				Blink.hasIntersection(observerStart, observerEnd, minimum, maximum)) {
+				if (as == null ||
+					as.getLocation().distanceSquared(observerPos) > target.getLocation().distanceSquared(observerPos)) {
 					as = (ArmorStand) target;
 				}
 			}

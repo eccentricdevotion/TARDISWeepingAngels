@@ -64,7 +64,8 @@ public class K9Listener implements Listener {
 			return;
 		}
 		Entity ent = event.getRightClicked();
-		if (ent.getType().equals(EntityType.ARMOR_STAND) && ent.getPersistentDataContainer().has(TARDISWeepingAngels.K9, PersistentDataType.INTEGER)) {
+		if (ent.getType().equals(EntityType.ARMOR_STAND) &&
+			ent.getPersistentDataContainer().has(TARDISWeepingAngels.K9, PersistentDataType.INTEGER)) {
 			if (ent.getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID)) {
 				UUID uuid = player.getUniqueId();
 				UUID k9Id = ent.getPersistentDataContainer().get(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID);

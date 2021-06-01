@@ -30,7 +30,8 @@ public class JudoonListener implements Listener {
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onDamageJudoon(EntityDamageByEntityEvent event) {
 		if (event.getEntity() instanceof ArmorStand stand && event.getDamager() instanceof Player) {
-			if (stand.getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID) && stand.getPersistentDataContainer().has(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER)) {
+			if (stand.getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID) &&
+				stand.getPersistentDataContainer().has(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER)) {
 				event.setCancelled(true);
 				Player player = (Player) event.getDamager();
 				player.playSound(stand.getLocation(), "judoon", 1.0f, 1.0f);
@@ -65,9 +66,11 @@ public class JudoonListener implements Listener {
 								shulkerBox.update();
 								bsm.setBlockState(shulkerBox);
 								box.setItemMeta(bsm);
-								stand.getPersistentDataContainer().set(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER, (ammo + remove));
+								stand.getPersistentDataContainer().set(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER, (
+										ammo + remove));
 								stand.setCustomName("Ammunition: " + (ammo + remove));
-								player.sendMessage(plugin.pluginName + "You reloaded " + remove + " Judoon ammunition.");
+								player.sendMessage(
+										plugin.pluginName + "You reloaded " + remove + " Judoon ammunition.");
 							}
 						}
 					} else {

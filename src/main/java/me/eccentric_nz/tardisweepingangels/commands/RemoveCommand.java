@@ -32,17 +32,21 @@ public class RemoveCommand {
 			return true;
 		}
 		ArmorStand stand = ArmourStandFinder.getStand(player);
-		if (stand == null || !stand.getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID)) {
+		if (stand == null ||
+			!stand.getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID)) {
 			player.sendMessage(plugin.pluginName + "You are not looking at a TARDISWeepingAngels entity!");
 			return true;
 		} else {
-			if (stand.getPersistentDataContainer().has(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER) && !player.hasPermission("tardisweepingangels.remove.judoon")) {
+			if (stand.getPersistentDataContainer().has(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER) &&
+				!player.hasPermission("tardisweepingangels.remove.judoon")) {
 				player.sendMessage(plugin.pluginName + "You don't have permission to remove a Judoon!");
 				return true;
-			} else if (stand.getPersistentDataContainer().has(TARDISWeepingAngels.K9, PersistentDataType.INTEGER) && !player.hasPermission("tardisweepingangels.remove.k9")) {
+			} else if (stand.getPersistentDataContainer().has(TARDISWeepingAngels.K9, PersistentDataType.INTEGER) &&
+					   !player.hasPermission("tardisweepingangels.remove.k9")) {
 				player.sendMessage(plugin.pluginName + "You don't have permission to remove K9!");
 				return true;
-			} else if (stand.getPersistentDataContainer().has(TARDISWeepingAngels.OOD, PersistentDataType.INTEGER) && !player.hasPermission("tardisweepingangels.remove.ood")) {
+			} else if (stand.getPersistentDataContainer().has(TARDISWeepingAngels.OOD, PersistentDataType.INTEGER) &&
+					   !player.hasPermission("tardisweepingangels.remove.ood")) {
 				player.sendMessage(plugin.pluginName + "You don't have permission to remove an Ood!");
 				return true;
 			}

@@ -59,13 +59,15 @@ public class Damage implements Listener {
 				}
 				return;
 			}
-			if (entity.getPersistentDataContainer().has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER) && (e instanceof Player)) {
+			if (entity.getPersistentDataContainer().has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER) &&
+				(e instanceof Player)) {
 				((Player) e).playSound(entity.getLocation(), "dalek_hit", 0.5f, 1.0f);
 			}
 		}
 		if (et.equals(EntityType.PLAYER)) {
 			Entity e = event.getDamager();
-			if (e instanceof Monster && MonsterTargetListener.monsterShouldIgnorePlayer(e, (Player) event.getEntity())) {
+			if (e instanceof Monster &&
+				MonsterTargetListener.monsterShouldIgnorePlayer(e, (Player) event.getEntity())) {
 				event.setCancelled(true);
 				((Monster) e).setTarget(null);
 				return;

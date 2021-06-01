@@ -49,7 +49,8 @@ public class VashtaNeradaListener implements Listener {
 		Block b = event.getBlock();
 		if (b.getType().equals(Material.BOOKSHELF)) {
 			String name = WorldProcessor.sanitiseName(b.getWorld().getName());
-			if (plugin.getConfig().getInt("vashta_nerada.worlds." + name) > 0 && TARDISWeepingAngels.random.nextInt(100) < plugin.getConfig().getInt("vashta_nerada.worlds." + name)) {
+			if (plugin.getConfig().getInt("vashta_nerada.worlds." + name) > 0 &&
+				TARDISWeepingAngels.random.nextInt(100) < plugin.getConfig().getInt("vashta_nerada.worlds." + name)) {
 				Location l = getClearLocation(event.getPlayer());
 				if (l != null) {
 					// spawn Vashta Nerada at location
