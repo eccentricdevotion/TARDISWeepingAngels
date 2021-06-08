@@ -1,6 +1,6 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
-import me.eccentric_nz.tardishelper.TARDISHelperPlugin;
+import me.eccentric_nz.tardischunkgenerator.TARDISHelperPlugin;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.monsters.cybermen.CybermanEquipment;

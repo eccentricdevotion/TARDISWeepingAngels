@@ -1,13 +1,13 @@
-author: eccentric_nz
-description: Weeping Angel add-on for the TARDIS plugin
+authors: [eccentric_nz]
 main: me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels
 name: TARDISWeepingAngels
-load: POSTWORLD
+description: Weeping Angel add-on for the TARDIS plugin
 version: 3.3.3
-api-version: 1.15
-website: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
-dev-url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
-url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
+api-version: 1.16
+website: http://tardisjenkins.duckdns.org:8080/job/TARDISWeepingAngels/
+dev-url: http://github.com/eccentricdevotion/TARDISWeepingAngels/
+url: http://eccentricdevotion.github.io/TARDIS/
+load: POSTWORLD
 softdepend: [TARDISChunkGenerator,WorldGuard]
 permissions:
   tardisweepingangels.k9:
