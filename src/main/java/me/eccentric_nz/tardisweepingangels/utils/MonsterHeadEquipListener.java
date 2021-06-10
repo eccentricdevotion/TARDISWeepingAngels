@@ -14,31 +14,29 @@ import java.util.Objects;
 
 public class MonsterHeadEquipListener implements Listener {
 
-	private final TARDISWeepingAngels plugin;
+    private final TARDISWeepingAngels plugin;
 
-	public MonsterHeadEquipListener(TARDISWeepingAngels plugin) {
-		this.plugin = plugin;
-	}
+    public MonsterHeadEquipListener(TARDISWeepingAngels plugin) {
+        this.plugin = plugin;
+    }
 
-	@EventHandler
-	public void onHelmetSlotEquip(InventoryClickEvent event) {
-		Inventory inv = event.getClickedInventory();
-		if (inv != null) {
-			InventoryType inventoryType = inv.getType();
-			if (inventoryType == InventoryType.PLAYER && event.getRawSlot() == 5) {
-				ItemStack cursor = event.getCursor();
-				if (cursor != null && cursor.hasItemMeta() &&
-					Objects.requireNonNull(cursor.getItemMeta()).getPersistentDataContainer().has(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER) &&
-					isNullOrAir(event.getCurrentItem())) {
-					event.setCurrentItem(cursor);
-					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> event.setCursor(new ItemStack(Material.AIR)), 1L);
-					event.setCancelled(true);
-				}
-			}
-		}
-	}
+    @EventHandler
+    public void onHelmetSlotEquip(InventoryClickEvent event) {
+        Inventory inv = event.getClickedInventory();
+        if (inv != null) {
+            InventoryType inventoryType = inv.getType();
+            if (inventoryType == InventoryType.PLAYER && event.getRawSlot() == 5) {
+                ItemStack cursor = event.getCursor();
+                if (cursor != null && cursor.hasItemMeta() && Objects.requireNonNull(cursor.getItemMeta()).getPersistentDataContainer().has(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER) && isNullOrAir(event.getCurrentItem())) {
+                    event.setCurrentItem(cursor);
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> event.setCursor(new ItemStack(Material.AIR)), 1L);
+                    event.setCancelled(true);
+                }
+            }
+        }
+    }
 
-	private boolean isNullOrAir(ItemStack item) {
-		return item == null || item.getType().isAir();
-	}
+    private boolean isNullOrAir(ItemStack item) {
+        return item == null || item.getType().isAir();
+    }
 }

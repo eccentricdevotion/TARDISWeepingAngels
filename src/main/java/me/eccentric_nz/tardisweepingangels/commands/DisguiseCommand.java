@@ -28,77 +28,73 @@ import java.util.UUID;
 
 public class DisguiseCommand {
 
-	private final TARDISWeepingAngels plugin;
+    private final TARDISWeepingAngels plugin;
 
-	public DisguiseCommand(TARDISWeepingAngels plugin) {
-		this.plugin = plugin;
-	}
+    public DisguiseCommand(TARDISWeepingAngels plugin) {
+        this.plugin = plugin;
+    }
 
-	public boolean disguise(CommandSender sender, String[] args) {
-		if (args.length < 2) {
-			return false;
-		}
-		// check monster type
-		String upper = args[1].toUpperCase();
-		Monster monster;
-		try {
-			monster = Monster.valueOf(upper);
-		} catch (IllegalArgumentException e) {
-			sender.sendMessage(plugin.pluginName + "Invalid monster type!");
-			return true;
-		}
-		Player player = null;
-		if (sender instanceof Player) {
-			player = (Player) sender;
-		}
-		if (sender instanceof ConsoleCommandSender) {
-			// check argument length
-			if (args.length < 4) {
-				sender.sendMessage(
-						plugin.pluginName + "You must supply a player UUID when using this command from the console!");
-				return true;
-			}
-			UUID uuid = UUID.fromString(args[3]);
-			player = plugin.getServer().getPlayer(uuid);
-		}
-		if (player == null) {
-			sender.sendMessage(
-					plugin.pluginName + "Command can only be used by a player, or a player UUID must be supplied!");
-			return true;
-		}
-		if (args.length < 3 || (!args[2].equalsIgnoreCase("on") && !args[2].equalsIgnoreCase("off"))) {
-			player.sendMessage(plugin.pluginName + "You need to specify if the disguise should be on or off!");
-			return true;
-		}
-		PlayerInventory inv = player.getInventory();
-		if (args[2].equalsIgnoreCase("on") &&
-			(inv.getBoots() != null || inv.getChestplate() != null || inv.getHelmet() != null ||
-			 inv.getLeggings() != null)) {
-			player.sendMessage(plugin.pluginName + "Your armour slots must be empty before using this command!");
-			return true;
-		}
-		if (args[2].equalsIgnoreCase("on")) {
-			switch (monster) {
-				case WEEPING_ANGEL -> AngelEquipment.set(player, true);
-				case CYBERMAN -> CybermanEquipment.set(player, true);
-				case DALEK -> DalekEquipment.set(player, true);
-				case EMPTY_CHILD -> EmptyChildEquipment.set(player, true);
-				case HATH -> HathEquipment.set(player, true);
-				case ICE_WARRIOR -> IceWarriorEquipment.set(player, true);
-				case JUDOON -> JudoonEquipment.set(null, player, true);
-				case K9 -> K9Equipment.set(null, player, true);
-				case OOD -> OodEquipment.set(null, player, true);
-				case SILENT -> SilentEquipment.set(player, true);
-				case SILURIAN -> SilurianEquipment.set(player, true);
-				case SONTARAN -> SontaranEquipment.set(player, true);
-				case STRAX -> StraxEquipment.set(player, true);
-				case TOCLAFANE -> ToclafaneEquipment.set(player, true);
-				case VASHTA_NERADA -> VashtaNeradaEquipment.set(player, true);
-				case ZYGON -> ZygonEquipment.set(player, true);
-			}
-		} else {
-			RemoveEquipment.set(player);
-		}
-		return true;
-	}
+    public boolean disguise(CommandSender sender, String[] args) {
+        if (args.length < 2) {
+            return false;
+        }
+        // check monster type
+        String upper = args[1].toUpperCase();
+        Monster monster;
+        try {
+            monster = Monster.valueOf(upper);
+        } catch (IllegalArgumentException e) {
+            sender.sendMessage(plugin.pluginName + "Invalid monster type!");
+            return true;
+        }
+        Player player = null;
+        if (sender instanceof Player) {
+            player = (Player) sender;
+        }
+        if (sender instanceof ConsoleCommandSender) {
+            // check argument length
+            if (args.length < 4) {
+                sender.sendMessage(plugin.pluginName + "You must supply a player UUID when using this command from the console!");
+                return true;
+            }
+            UUID uuid = UUID.fromString(args[3]);
+            player = plugin.getServer().getPlayer(uuid);
+        }
+        if (player == null) {
+            sender.sendMessage(plugin.pluginName + "Command can only be used by a player, or a player UUID must be supplied!");
+            return true;
+        }
+        if (args.length < 3 || (!args[2].equalsIgnoreCase("on") && !args[2].equalsIgnoreCase("off"))) {
+            player.sendMessage(plugin.pluginName + "You need to specify if the disguise should be on or off!");
+            return true;
+        }
+        PlayerInventory inv = player.getInventory();
+        if (args[2].equalsIgnoreCase("on") && (inv.getBoots() != null || inv.getChestplate() != null || inv.getHelmet() != null || inv.getLeggings() != null)) {
+            player.sendMessage(plugin.pluginName + "Your armour slots must be empty before using this command!");
+            return true;
+        }
+        if (args[2].equalsIgnoreCase("on")) {
+            switch (monster) {
+                case WEEPING_ANGEL -> AngelEquipment.set(player, true);
+                case CYBERMAN -> CybermanEquipment.set(player, true);
+                case DALEK -> DalekEquipment.set(player, true);
+                case EMPTY_CHILD -> EmptyChildEquipment.set(player, true);
+                case HATH -> HathEquipment.set(player, true);
+                case ICE_WARRIOR -> IceWarriorEquipment.set(player, true);
+                case JUDOON -> JudoonEquipment.set(null, player, true);
+                case K9 -> K9Equipment.set(null, player, true);
+                case OOD -> OodEquipment.set(null, player, true);
+                case SILENT -> SilentEquipment.set(player, true);
+                case SILURIAN -> SilurianEquipment.set(player, true);
+                case SONTARAN -> SontaranEquipment.set(player, true);
+                case STRAX -> StraxEquipment.set(player, true);
+                case TOCLAFANE -> ToclafaneEquipment.set(player, true);
+                case VASHTA_NERADA -> VashtaNeradaEquipment.set(player, true);
+                case ZYGON -> ZygonEquipment.set(player, true);
+            }
+        } else {
+            RemoveEquipment.set(player);
+        }
+        return true;
+    }
 }

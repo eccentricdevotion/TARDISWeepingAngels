@@ -16,13 +16,11 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
  */
 public class RainDamage implements Listener {
 
-	@EventHandler(ignoreCancelled = true)
-	public void onRainDamage(EntityDamageEvent event) {
-		Entity e = event.getEntity();
-		if (e instanceof Enderman && !e.getPassengers().isEmpty() && e.getPassengers().get(0) != null &&
-			e.getPassengers().get(0).getType().equals(EntityType.GUARDIAN) &&
-			!event.getCause().equals(DamageCause.ENTITY_ATTACK)) {
-			event.setCancelled(true);
-		}
-	}
+    @EventHandler(ignoreCancelled = true)
+    public void onRainDamage(EntityDamageEvent event) {
+        Entity e = event.getEntity();
+        if (e instanceof Enderman && !e.getPassengers().isEmpty() && e.getPassengers().get(0) != null && e.getPassengers().get(0).getType().equals(EntityType.GUARDIAN) && !event.getCause().equals(DamageCause.ENTITY_ATTACK)) {
+            event.setCancelled(true);
+        }
+    }
 }

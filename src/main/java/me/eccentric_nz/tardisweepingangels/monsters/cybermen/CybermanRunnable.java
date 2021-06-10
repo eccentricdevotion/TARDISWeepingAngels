@@ -29,62 +29,62 @@ import java.util.Collection;
  */
 public class CybermanRunnable implements Runnable {
 
-	private final TARDISWeepingAngels plugin;
-	private final int spawn_rate;
+    private final TARDISWeepingAngels plugin;
+    private final int spawn_rate;
 
-	public CybermanRunnable(TARDISWeepingAngels plugin) {
-		this.plugin = plugin;
-		spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
-	}
+    public CybermanRunnable(TARDISWeepingAngels plugin) {
+        this.plugin = plugin;
+        spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
+    }
 
-	@Override
-	public void run() {
-		plugin.getServer().getWorlds().forEach((w) -> {
-			// only configured worlds
-			String name = WorldProcessor.sanitiseName(w.getName());
-			if (plugin.getConfig().getInt("cybermen.worlds." + name) > 0) {
-				// get the current warriors
-				int cyberarmy = 0;
-				Collection<Zombie> zombies = w.getEntitiesByClass(Zombie.class);
-				for (Zombie c : zombies) {
-					PersistentDataContainer pdc = c.getPersistentDataContainer();
-					if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)) {
-						cyberarmy++;
-					}
-				}
-				if (cyberarmy < plugin.getConfig().getInt("cybermen.worlds." + name)) {
-					// if less than maximum, spawn some more
-					for (int i = 0; i < spawn_rate; i++) {
-						spawnCyberman(w);
-					}
-				}
-			}
-		});
-	}
+    @Override
+    public void run() {
+        plugin.getServer().getWorlds().forEach((w) -> {
+            // only configured worlds
+            String name = WorldProcessor.sanitiseName(w.getName());
+            if (plugin.getConfig().getInt("cybermen.worlds." + name) > 0) {
+                // get the current warriors
+                int cyberarmy = 0;
+                Collection<Zombie> zombies = w.getEntitiesByClass(Zombie.class);
+                for (Zombie c : zombies) {
+                    PersistentDataContainer pdc = c.getPersistentDataContainer();
+                    if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)) {
+                        cyberarmy++;
+                    }
+                }
+                if (cyberarmy < plugin.getConfig().getInt("cybermen.worlds." + name)) {
+                    // if less than maximum, spawn some more
+                    for (int i = 0; i < spawn_rate; i++) {
+                        spawnCyberman(w);
+                    }
+                }
+            }
+        });
+    }
 
-	private void spawnCyberman(World w) {
-		Chunk[] chunks = w.getLoadedChunks();
-		if (chunks.length > 0) {
-			Chunk c = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
-			int x = c.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
-			int z = c.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
-			int y = w.getHighestBlockYAt(x, z);
-			Location l = new Location(w, x, y + 1, z);
-			if (WaterChecker.isNotWater(l)) {
-				if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(l)) {
-					return;
-				}
-				LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
-				e.setSilent(true);
-				Ageable cyber = (Ageable) e;
-				cyber.setAdult();
-				PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
-				cyber.addPotionEffect(p);
-				plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-					CybermanEquipment.set(e, false);
-					plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.CYBERMAN, l));
-				}, 5L);
-			}
-		}
-	}
+    private void spawnCyberman(World w) {
+        Chunk[] chunks = w.getLoadedChunks();
+        if (chunks.length > 0) {
+            Chunk c = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
+            int x = c.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int z = c.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int y = w.getHighestBlockYAt(x, z);
+            Location l = new Location(w, x, y + 1, z);
+            if (WaterChecker.isNotWater(l)) {
+                if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(l)) {
+                    return;
+                }
+                LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
+                e.setSilent(true);
+                Ageable cyber = (Ageable) e;
+                cyber.setAdult();
+                PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
+                cyber.addPotionEffect(p);
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                    CybermanEquipment.set(e, false);
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.CYBERMAN, l));
+                }, 5L);
+            }
+        }
+    }
 }
