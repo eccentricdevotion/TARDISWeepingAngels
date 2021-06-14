@@ -260,9 +260,8 @@ public class Death implements Listener {
                     return;
                 }
                 if (apdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
-                    if (event.getEntity() instanceof Player) {
-                        Player p = (Player) event.getEntity();
-                        plugin.getEmpty().add(p.getUniqueId());
+                    if (event.getEntity() instanceof Player player) {
+                        plugin.getEmpty().add(player.getUniqueId());
                     }
                 }
             }

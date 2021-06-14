@@ -54,23 +54,22 @@ public class Damage implements Listener {
                 if (e instanceof AbstractArrow) {
                     event.setCancelled(true);
                 }
-                if (e instanceof Player) {
-                    Player p = (Player) e;
-                    if (!p.getInventory().getItemInMainHand().getType().equals(mat)) {
+                if (e instanceof Player player) {
+                    if (!player.getInventory().getItemInMainHand().getType().equals(mat)) {
                         event.setCancelled(true);
                     }
                 }
                 return;
             }
-            if (entity.getPersistentDataContainer().has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER) && (e instanceof Player)) {
-                ((Player) e).playSound(entity.getLocation(), "dalek_hit", 0.5f, 1.0f);
+            if (entity.getPersistentDataContainer().has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER) && (e instanceof Player player)) {
+                player.playSound(entity.getLocation(), "dalek_hit", 0.5f, 1.0f);
             }
         }
         if (et.equals(EntityType.PLAYER)) {
             Entity e = event.getDamager();
-            if (e instanceof Monster && MonsterTargetListener.monsterShouldIgnorePlayer(e, (Player) event.getEntity())) {
+            if (e instanceof Monster monster && MonsterTargetListener.monsterShouldIgnorePlayer(e, (Player) event.getEntity())) {
                 event.setCancelled(true);
-                ((Monster) e).setTarget(null);
+                monster.setTarget(null);
                 return;
             }
             if (e instanceof Skeleton) {

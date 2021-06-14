@@ -35,8 +35,7 @@ public class AntiTeleport implements Listener {
             // schedule delayed task
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 for (Entity le : ent.getNearbyEntities(16, 16, 16)) {
-                    if (le instanceof Player) {
-                        Player player = (Player) le;
+                    if (le instanceof Player player) {
                         player.playSound(ent.getLocation(), "k9", 1.0f, 1.0f);
                     }
                 }

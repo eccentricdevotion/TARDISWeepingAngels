@@ -22,23 +22,22 @@ public class K9Equipment {
         headMeta.setDisplayName("K9 Head");
         headMeta.setCustomModelData(1);
         head.setItemMeta(headMeta);
-        if (entity instanceof ArmorStand && player != null) {
+        if (entity instanceof ArmorStand stand && player != null) {
             UUID uuid;
             if (player != null) {
                 uuid = player.getUniqueId();
             } else {
                 uuid = TARDISWeepingAngels.UNCLAIMED;
             }
-            ArmorStand armorStand = (ArmorStand) entity;
-            armorStand.getPersistentDataContainer().set(TARDISWeepingAngels.K9, PersistentDataType.INTEGER, 0);
-            armorStand.getPersistentDataContainer().set(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID, uuid);
-            EntityEquipment ee = armorStand.getEquipment();
+            stand.getPersistentDataContainer().set(TARDISWeepingAngels.K9, PersistentDataType.INTEGER, 0);
+            stand.getPersistentDataContainer().set(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID, uuid);
+            EntityEquipment ee = stand.getEquipment();
             ee.setHelmet(head);
             ee.setItemInMainHand(null);
             ee.setItemInOffHand(null);
-            armorStand.setVisible(false);
-            armorStand.setSilent(true);
-            armorStand.setCollidable(true);
+            stand.setVisible(false);
+            stand.setSilent(true);
+            stand.setCollidable(true);
         } else if (disguise) {
             Player p = (Player) entity;
             p.getInventory().setHelmet(head);

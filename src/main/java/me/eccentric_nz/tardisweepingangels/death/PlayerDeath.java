@@ -30,8 +30,8 @@ public class PlayerDeath implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         EntityDamageEvent damage = event.getEntity().getLastDamageCause();
         if (damage != null) {
-            if (damage instanceof EntityDamageByEntityEvent) {
-                Entity attacker = (((EntityDamageByEntityEvent) damage).getDamager());
+            if (damage instanceof EntityDamageByEntityEvent damageByEntity) {
+                Entity attacker = damageByEntity.getDamager();
                 if (damage.getCause().equals(DamageCause.ENTITY_ATTACK)) {
                     PersistentDataContainer pdc = attacker.getPersistentDataContainer();
                     String name = event.getEntity().getName();
@@ -111,8 +111,7 @@ public class PlayerDeath implements Listener {
                 if (attacker.getType().equals(EntityType.ARROW)) {
                     Projectile arrow = (Arrow) attacker;
                     ProjectileSource source = arrow.getShooter();
-                    if (source instanceof Skeleton) {
-                        Skeleton skeleton = (Skeleton) source;
+                    if (source instanceof Skeleton skeleton) {
                         PersistentDataContainer spdc = skeleton.getPersistentDataContainer();
                         String name = event.getEntity().getName();
                         if (spdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {

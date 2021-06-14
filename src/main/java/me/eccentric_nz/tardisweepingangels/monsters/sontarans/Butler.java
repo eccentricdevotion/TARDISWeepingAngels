@@ -42,9 +42,8 @@ public class Butler implements Listener {
     @EventHandler
     public void onSontaranInteract(PlayerInteractEntityEvent event) {
         Entity ent = event.getRightClicked();
-        if (ent instanceof Zombie) {
-            Zombie zom = (Zombie) ent;
-            EntityEquipment ee = zom.getEquipment();
+        if (ent instanceof Zombie zombie) {
+            EntityEquipment ee = zombie.getEquipment();
             if (ee.getHelmet().getType().equals(Material.POTATO)) {
                 ItemStack h = ee.getHelmet();
                 if (h.hasItemMeta() && h.getItemMeta().hasDisplayName() && h.getItemMeta().getDisplayName().startsWith("Sontaran")) {
@@ -62,8 +61,8 @@ public class Butler implements Listener {
                                 p.getInventory().removeItem(is);
                             }
                             // switch the armour to a butler uniform
-                            Location l = zom.getLocation();
-                            zom.remove();
+                            Location l = zombie.getLocation();
+                            zombie.remove();
                             PigZombie pz = (PigZombie) l.getWorld().spawnEntity(l, EntityType.ZOMBIFIED_PIGLIN);
                             pz.setSilent(true);
                             pz.setAngry(false);
@@ -89,7 +88,7 @@ public class Butler implements Listener {
                     if (is.getType().equals(Material.BUCKET)) {
                         if (!milkers.contains(uuid)) {
                             milkers.add(uuid);
-                            p.playSound(zom.getLocation(), "milk", 1.0f, 1.0f);
+                            p.playSound(zombie.getLocation(), "milk", 1.0f, 1.0f);
                             ItemStack milk = new ItemStack(Material.MILK_BUCKET);
                             ItemMeta m = milk.getItemMeta();
                             m.setDisplayName("Sontaran Lactic Fluid");
@@ -102,7 +101,7 @@ public class Butler implements Listener {
                             p.sendMessage(plugin.pluginName + "Strax is not lactating right now, try again later.");
                         }
                     } else if (event.getHand().equals(EquipmentSlot.HAND)) {
-                        p.playSound(zom.getLocation(), "strax", 1.0f, 1.0f);
+                        p.playSound(zombie.getLocation(), "strax", 1.0f, 1.0f);
                     }
                 }
             }

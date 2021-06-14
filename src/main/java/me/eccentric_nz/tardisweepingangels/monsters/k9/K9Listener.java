@@ -35,8 +35,7 @@ public class K9Listener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onWolfTame(EntityTameEvent event) {
-        if (event.getOwner() instanceof Player) {
-            Player player = (Player) event.getOwner();
+        if (event.getOwner() instanceof Player player) {
             if (!((Player) event.getOwner()).hasPermission("tardisweepingangels.k9")) {
                 return;
             }

@@ -37,9 +37,7 @@ public class ToclafaneListener implements Listener {
     public void onDamageToclafane(EntityDamageByEntityEvent event) {
         Entity entity = event.getEntity();
         Entity damager = event.getDamager();
-        if (entity instanceof ArmorStand && damager instanceof Player) {
-            ArmorStand stand = (ArmorStand) event.getEntity();
-            Player player = (Player) event.getDamager();
+        if (entity instanceof ArmorStand stand && damager instanceof Player player) {
             if (stand.getPersistentDataContainer().has(TARDISWeepingAngels.TOCLAFANE, PersistentDataType.INTEGER)) {
                 event.setCancelled(true);
                 int maxHealth = (stand.getLocation().getWorld().getDifficulty().ordinal() * 6) + 1;
@@ -96,21 +94,20 @@ public class ToclafaneListener implements Listener {
                     }
                 }
             }
-        } else if (entity instanceof Bee) {
+        } else if (entity instanceof Bee bee) {
             if (entity.getPassengers().size() > 0) {
                 Entity passenger = entity.getPassengers().get(0);
                 if (passenger instanceof ArmorStand && passenger.getPersistentDataContainer().has(TARDISWeepingAngels.TOCLAFANE, PersistentDataType.INTEGER)) {
-                    ((Bee) entity).setHasStung(false);
+                    bee.setHasStung(false);
                 }
             }
-        } else if (entity instanceof Player && damager instanceof Bee) {
+        } else if (entity instanceof Player player && damager instanceof Bee bee) {
             if (damager.getPassengers().size() > 0) {
                 Entity passenger = damager.getPassengers().get(0);
                 if (passenger instanceof ArmorStand && passenger.getPersistentDataContainer().has(TARDISWeepingAngels.TOCLAFANE, PersistentDataType.INTEGER)) {
-                    Bee bee = (Bee) damager;
                     bee.setHasStung(false);
                     bee.setHealth(bee.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-                    bee.setTarget((Player) entity);
+                    bee.setTarget(player);
                 }
             }
         }
@@ -119,8 +116,7 @@ public class ToclafaneListener implements Listener {
     @EventHandler
     public void onBeeTargetEvent(EntityTargetEvent event) {
         Entity entity = event.getEntity();
-        if (entity instanceof Bee) {
-            Bee bee = (Bee) entity;
+        if (entity instanceof Bee bee) {
             if (bee.getTarget() instanceof Player || bee.getAnger() >= 0) {
                 if (bee.getPassengers().size() > 0) {
                     Entity passenger = bee.getPassengers().get(0);
