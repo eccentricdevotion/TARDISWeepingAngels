@@ -98,7 +98,7 @@
             </activation>
             <properties>
                 <!-- Get the build number from Jenkins -->
-                <build.number>${env.BUILD_NUMBER}</build.number>
+                <project.build.number>${env.BUILD_NUMBER}</project.build.number>
             </properties>
             <build>
                 <plugins>
@@ -144,6 +144,33 @@
                 <version>3.2.0</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- Insert the version and build numbers into plugin.yml -->
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.3</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <file>target/classes/plugin.yml</file>
+                    <replacements>
+                        <replacement>
+                            <token>maven-version-number</token>
+                            <value>${project.version}-${project.build.number}</value>
+                        </replacement>
+                        <replacement>
+                            <token>maven-build-number</token>
+                            <value>${project.build.number}</value>
+                        </replacement>
+                    </replacements>
                 </configuration>
             </plugin>
         </plugins>

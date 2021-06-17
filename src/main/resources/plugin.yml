@@ -2,7 +2,8 @@ authors: [eccentric_nz]
 main: me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin
 name: TARDISWeepingAngels
 description: Weeping Angel add-on for the TARDIS plugin
-version: 3.3.3
+version: maven-version-number
+build-number: maven-build-number
 api-version: 1.16
 website: http://tardisjenkins.duckdns.org:8080/job/TARDISWeepingAngels/
 dev-url: http://github.com/eccentricdevotion/TARDISWeepingAngels/
