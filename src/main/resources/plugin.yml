@@ -1,5 +1,5 @@
 authors: [eccentric_nz]
-main: me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels
+main: me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin
 name: TARDISWeepingAngels
 description: Weeping Angel add-on for the TARDIS plugin
 version: 3.3.3

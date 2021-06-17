@@ -1,6 +1,22 @@
+/*
+ * Copyright (C) 2021 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.eccentric_nz.tardisweepingangels.utils;
 
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -19,71 +35,71 @@ import java.util.Objects;
 public class MonsterTargetListener implements Listener {
 
     private static boolean isWearingMonsterHead(Player player, Material material) {
-        ItemStack is = player.getInventory().getHelmet();
-        if (is != null && is.getType().equals(material) && is.hasItemMeta()) {
-            return Objects.requireNonNull(is.getItemMeta()).getPersistentDataContainer().has(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER);
+        ItemStack itemStack = player.getInventory().getHelmet();
+        if (itemStack != null && itemStack.getType().equals(material) && itemStack.hasItemMeta()) {
+            return Objects.requireNonNull(itemStack.getItemMeta()).getPersistentDataContainer().has(TardisWeepingAngelsPlugin.MONSTER_HEAD, PersistentDataType.INTEGER);
         }
         return false;
     }
 
     public static boolean monsterShouldIgnorePlayer(Entity entity, Player player) {
-        PersistentDataContainer pdc = entity.getPersistentDataContainer();
+        PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
         boolean ignore = false;
         switch (entity.getType()) {
             case ZOMBIE:
                 // cyberman
-                if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.CYBERMAN, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.IRON_INGOT);
                 }
                 // empty child
-                if (pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.EMPTY, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.SUGAR);
                 }
                 // sontaran
-                if (pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.SONTARAN, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.POTATO);
                 }
                 // vashta nerada
-                if (pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.VASHTA_NERADA, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.BOOK);
                 }
                 // zygon
-                if (pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.ZYGON, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.PAINTING);
                 }
                 break;
             case SKELETON:
                 // dalek
-                if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.DALEK, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.SLIME_BALL);
                 }
                 // silurian
-                if (pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.SILURIAN, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.FEATHER);
                 }
                 // weeping angel
-                if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.WEEPING_ANGEL, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.BRICK);
                 }
                 break;
             case ENDERMAN:
             case GUARDIAN:
                 // silent
-                if (pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.SILENT, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.END_STONE);
                 }
                 break;
             case ZOMBIFIED_PIGLIN:
                 // hath
-                if (pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.HATH, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.PUFFERFISH);
                 }
                 // ice warrior
-                if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.ICE_WARRIOR, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.SNOWBALL);
                 }
                 // strax
-                if (pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.STRAX, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.BAKED_POTATO);
                 }
                 break;
@@ -95,26 +111,26 @@ public class MonsterTargetListener implements Listener {
 
     @EventHandler
     public void onMonsterTargetEvent(EntityTargetLivingEntityEvent event) {
-        Entity entity = event.getEntity();
-        if (entity instanceof Monster) {
-            double range = (entity instanceof Zombie) ? 40.0d : 16.0d;
+        Entity eventEntity = event.getEntity();
+        if (eventEntity instanceof Monster) {
+            double range = (eventEntity instanceof Zombie) ? 40.0d : 16.0d;
             Player closest = null;
             double distance = 1000.0f;
-            Location locEnt = entity.getLocation();
-            for (Entity e : entity.getNearbyEntities(range, range, range)) {
-                if (e instanceof Player) {
+            Location entityLocation = eventEntity.getLocation();
+            for (Entity entity : eventEntity.getNearbyEntities(range, range, range)) {
+                if (entity instanceof Player) {
                     if (closest == null) {
-                        closest = (Player) e;
-                        distance = e.getLocation().distanceSquared(locEnt);
-                    } else if (e.getLocation().distanceSquared(locEnt) < distance) {
-                        closest = (Player) e;
-                        distance = e.getLocation().distanceSquared(locEnt);
+                        closest = (Player) entity;
+                        distance = entity.getLocation().distanceSquared(entityLocation);
+                    } else if (entity.getLocation().distanceSquared(entityLocation) < distance) {
+                        closest = (Player) entity;
+                        distance = entity.getLocation().distanceSquared(entityLocation);
                     }
                 }
             }
-            if (closest != null && monsterShouldIgnorePlayer(entity, closest)) {
+            if (closest != null && monsterShouldIgnorePlayer(eventEntity, closest)) {
                 event.setCancelled(true);
-                ((Monster) entity).setTarget(null);
+                ((Monster) eventEntity).setTarget(null);
             }
         }
     }

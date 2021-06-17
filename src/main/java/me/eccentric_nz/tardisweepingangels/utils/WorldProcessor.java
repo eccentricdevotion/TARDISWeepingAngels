@@ -1,6 +1,22 @@
+/*
+ * Copyright (C) 2021 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.eccentric_nz.tardisweepingangels.utils;
 
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.util.FileUtil;
 
@@ -9,10 +25,10 @@ import java.util.Objects;
 
 public class WorldProcessor implements Runnable {
 
-    private final TARDISWeepingAngels plugin;
+    private final TardisWeepingAngelsPlugin plugin;
     private final FileConfiguration config;
 
-    public WorldProcessor(TARDISWeepingAngels plugin) {
+    public WorldProcessor(TardisWeepingAngelsPlugin plugin) {
         this.plugin = plugin;
         config = this.plugin.getConfig();
     }
@@ -41,53 +57,53 @@ public class WorldProcessor implements Runnable {
         }
         // add new world settings
         plugin.getServer().getWorlds().forEach((w) -> {
-            String n = sanitiseName(w.getName());
+            String name = sanitiseName(w.getName());
             // set TARDIS worlds, nether and end worlds to zero by default
-            int m = (config.contains("spawn_rate.default_max")) ? config.getInt("spawn_rate.default_max") : 0;
-            if (!config.contains("angels.worlds." + n)) {
-                plugin.getConfig().set("angels.worlds." + n, m);
+            int maxSpawnRate = (config.contains("spawn_rate.default_max")) ? config.getInt("spawn_rate.default_max") : 0;
+            if (!config.contains("angels.worlds." + name)) {
+                plugin.getConfig().set("angels.worlds." + name, maxSpawnRate);
             }
-            if (!config.contains("cybermen.worlds." + n)) {
-                plugin.getConfig().set("cybermen.worlds." + n, m);
+            if (!config.contains("cybermen.worlds." + name)) {
+                plugin.getConfig().set("cybermen.worlds." + name, maxSpawnRate);
             }
-            if (!config.contains("daleks.worlds." + n)) {
-                plugin.getConfig().set("daleks.worlds." + n, m);
+            if (!config.contains("daleks.worlds." + name)) {
+                plugin.getConfig().set("daleks.worlds." + name, maxSpawnRate);
             }
-            if (!config.contains("empty_child.worlds." + n)) {
-                plugin.getConfig().set("empty_child.worlds." + n, m);
+            if (!config.contains("empty_child.worlds." + name)) {
+                plugin.getConfig().set("empty_child.worlds." + name, maxSpawnRate);
             }
-            if (!config.contains("hath.worlds." + n)) {
-                plugin.getConfig().set("hath.worlds." + n, m);
+            if (!config.contains("hath.worlds." + name)) {
+                plugin.getConfig().set("hath.worlds." + name, maxSpawnRate);
             }
-            if (!config.contains("ice_warriors.worlds." + n)) {
-                plugin.getConfig().set("ice_warriors.worlds." + n, m);
+            if (!config.contains("ice_warriors.worlds." + name)) {
+                plugin.getConfig().set("ice_warriors.worlds." + name, maxSpawnRate);
             }
-            if (!config.contains("silent.worlds." + n)) {
-                plugin.getConfig().set("silent.worlds." + n, m);
+            if (!config.contains("silent.worlds." + name)) {
+                plugin.getConfig().set("silent.worlds." + name, maxSpawnRate);
             }
-            if (!config.contains("ood.worlds." + n) || (config.contains("ood.worlds." + n) && config.getInt("ood.worlds." + n) == 20)) {
-                plugin.getConfig().set("ood.worlds." + n, true);
+            if (!config.contains("ood.worlds." + name) || (config.contains("ood.worlds." + name) && config.getInt("ood.worlds." + name) == 20)) {
+                plugin.getConfig().set("ood.worlds." + name, true);
             }
-            if (!config.contains("judoon.worlds." + n) || (config.contains("judoon.worlds." + n) && Objects.equals(config.getString("judoon.worlds." + n), "true"))) {
-                plugin.getConfig().set("judoon.worlds." + n, m);
+            if (!config.contains("judoon.worlds." + name) || (config.contains("judoon.worlds." + name) && Objects.equals(config.getString("judoon.worlds." + name), "true"))) {
+                plugin.getConfig().set("judoon.worlds." + name, maxSpawnRate);
             }
-            if (!config.contains("k9.worlds." + n)) {
-                plugin.getConfig().set("k9.worlds." + n, true);
+            if (!config.contains("k9.worlds." + name)) {
+                plugin.getConfig().set("k9.worlds." + name, true);
             }
-            if (!config.contains("toclafane.worlds." + n)) {
-                plugin.getConfig().set("toclafane.worlds." + n, m);
+            if (!config.contains("toclafane.worlds." + name)) {
+                plugin.getConfig().set("toclafane.worlds." + name, maxSpawnRate);
             }
-            if (!config.contains("silurians.worlds." + n)) {
-                plugin.getConfig().set("silurians.worlds." + n, m);
+            if (!config.contains("silurians.worlds." + name)) {
+                plugin.getConfig().set("silurians.worlds." + name, maxSpawnRate);
             }
-            if (!config.contains("sontarans.worlds." + n)) {
-                plugin.getConfig().set("sontarans.worlds." + n, m);
+            if (!config.contains("sontarans.worlds." + name)) {
+                plugin.getConfig().set("sontarans.worlds." + name, maxSpawnRate);
             }
-            if (!config.contains("vashta_nerada.worlds." + n)) {
-                plugin.getConfig().set("vashta_nerada.worlds." + n, m);
+            if (!config.contains("vashta_nerada.worlds." + name)) {
+                plugin.getConfig().set("vashta_nerada.worlds." + name, maxSpawnRate);
             }
-            if (!config.contains("zygons.worlds." + n)) {
-                plugin.getConfig().set("zygons.worlds." + n, m);
+            if (!config.contains("zygons.worlds." + name)) {
+                plugin.getConfig().set("zygons.worlds." + name, maxSpawnRate);
             }
         });
         plugin.saveConfig();

@@ -1,9 +1,22 @@
 /*
- *  Copyright 2014 eccentric_nz.
+ * Copyright (C) 2021 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package me.eccentric_nz.tardisweepingangels.utils;
 
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -16,8 +29,8 @@ import java.util.*;
  */
 public class Config {
 
-    final double min_version = 2.0d;
-    private final TARDISWeepingAngels plugin;
+    final double minVersion = 2.0d;
+    private final TardisWeepingAngelsPlugin plugin;
     private final FileConfiguration config;
     HashMap<String, List<String>> listOptions = new HashMap<>();
     HashMap<String, String> strOptions = new HashMap<>();
@@ -25,7 +38,7 @@ public class Config {
     HashMap<String, Double> doubleOptions = new HashMap<>();
     HashMap<String, Boolean> boolOptions = new HashMap<>();
 
-    public Config(TARDISWeepingAngels plugin) {
+    public Config(TardisWeepingAngelsPlugin plugin) {
         this.plugin = plugin;
         File configFile = new File(plugin.getDataFolder(), "config.yml");
         config = YamlConfiguration.loadConfiguration(configFile);
@@ -70,7 +83,7 @@ public class Config {
         boolOptions.put("k9.by_taming", true);
         boolOptions.put("toclafane.destroy_blocks", true);
         // float
-        doubleOptions.put("config_version", min_version);
+        doubleOptions.put("config_version", minVersion);
     }
 
     public void updateConfig() {
@@ -125,31 +138,31 @@ public class Config {
         }
         // fix wrong config node name
         if (config.contains("angels.angel_tp_worlds")) {
-            List<String> tpws = config.getStringList("angels.angel_tp_worlds");
-            plugin.getConfig().set("angels.teleport_worlds", tpws);
+            List<String> tpWorlds = config.getStringList("angels.angel_tp_worlds");
+            plugin.getConfig().set("angels.teleport_worlds", tpWorlds);
             plugin.getConfig().set("angels.angel_tp_worlds", null);
         }
         // remove milk bucket from Sontaran drops
-        List<String> sontaran_old = config.getStringList("sontarans.drops");
-        if (sontaran_old.contains("MILK_BUCKET")) {
-            sontaran_old.remove("MILK_BUCKET");
-            sontaran_old.add("POISONOUS_POTATO");
-            plugin.getConfig().set("sontarans.drops", sontaran_old);
+        List<String> sontaranOld = config.getStringList("sontarans.drops");
+        if (sontaranOld.contains("MILK_BUCKET")) {
+            sontaranOld.remove("MILK_BUCKET");
+            sontaranOld.add("POISONOUS_POTATO");
+            plugin.getConfig().set("sontarans.drops", sontaranOld);
         }
         // set POTATO_ITEM to POTATO
-        if (sontaran_old.contains("POTATO_ITEM")) {
-            sontaran_old.remove("POTATO_ITEM");
-            sontaran_old.add("POTATO");
-            plugin.getConfig().set("sontarans.drops", sontaran_old);
+        if (sontaranOld.contains("POTATO_ITEM")) {
+            sontaranOld.remove("POTATO_ITEM");
+            sontaranOld.add("POTATO");
+            plugin.getConfig().set("sontarans.drops", sontaranOld);
         }
         // set INK_SACK to INK_SAC, FLOWER_POT_ITEM to FLOWER_POT
-        List<String> silent_old = config.getStringList("silent.drops");
-        if (silent_old.contains("INK_SACK")) {
-            silent_old.remove("INK_SACK");
-            silent_old.add("INK_SAC");
-            silent_old.remove("FLOWER_POT_ITEM");
-            silent_old.add("FLOWER_POT");
-            plugin.getConfig().set("silent.drops", silent_old);
+        List<String> silentOld = config.getStringList("silent.drops");
+        if (silentOld.contains("INK_SACK")) {
+            silentOld.remove("INK_SACK");
+            silentOld.add("INK_SAC");
+            silentOld.remove("FLOWER_POT_ITEM");
+            silentOld.add("FLOWER_POT");
+            plugin.getConfig().set("silent.drops", silentOld);
         }
         plugin.saveConfig();
         if (i > 0) {

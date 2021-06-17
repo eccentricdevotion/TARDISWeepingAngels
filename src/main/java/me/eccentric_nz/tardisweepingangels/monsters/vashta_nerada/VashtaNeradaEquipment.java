@@ -1,6 +1,22 @@
+/*
+ * Copyright (C) 2021 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada;
 
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
@@ -12,7 +28,7 @@ import org.bukkit.persistence.PersistentDataType;
 
 public class VashtaNeradaEquipment {
 
-    public static void set(LivingEntity le, boolean disguise) {
+    public static void set(LivingEntity livingEntity, boolean disguise) {
         ItemStack helmet = new ItemStack(Material.BOOK, 1);
         ItemStack arm = new ItemStack(Material.BOOK, 1);
         ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
@@ -44,22 +60,22 @@ public class VashtaNeradaEquipment {
         }
         leggings.setItemMeta(legMeta);
 
-        EntityEquipment ee = le.getEquipment();
-        assert ee != null;
-        ee.setChestplate(chestplate);
-        ee.setLeggings(leggings);
-        ee.setBoots(null);
-        ee.setHelmet(helmet);
+        EntityEquipment entityEquipment = livingEntity.getEquipment();
+        assert entityEquipment != null;
+        entityEquipment.setChestplate(chestplate);
+        entityEquipment.setLeggings(leggings);
+        entityEquipment.setBoots(null);
+        entityEquipment.setHelmet(helmet);
         if (!disguise) {
-            ee.setItemInMainHand(arm);
-            ee.setItemInOffHand(arm.clone());
-            ee.setItemInMainHandDropChance(0F);
-            ee.setItemInOffHandDropChance(0F);
-            ee.setHelmetDropChance(0F);
-            ee.setChestplateDropChance(0F);
-            ee.setLeggingsDropChance(0F);
-            le.setCanPickupItems(false);
-            le.getPersistentDataContainer().set(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER, Monster.VASHTA_NERADA.getPersist());
+            entityEquipment.setItemInMainHand(arm);
+            entityEquipment.setItemInOffHand(arm.clone());
+            entityEquipment.setItemInMainHandDropChance(0F);
+            entityEquipment.setItemInOffHandDropChance(0F);
+            entityEquipment.setHelmetDropChance(0F);
+            entityEquipment.setChestplateDropChance(0F);
+            entityEquipment.setLeggingsDropChance(0F);
+            livingEntity.setCanPickupItems(false);
+            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.VASHTA_NERADA, PersistentDataType.INTEGER, Monster.VASHTA_NERADA.getPersist());
         }
     }
 }

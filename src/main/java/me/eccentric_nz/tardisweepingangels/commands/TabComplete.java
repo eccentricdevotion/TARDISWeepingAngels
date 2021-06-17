@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 eccentric_nz
+ * Copyright (C) 2021 eccentric_nz
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
 import com.google.common.collect.ImmutableList;
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -35,21 +35,21 @@ import java.util.List;
  */
 public class TabComplete implements TabCompleter {
 
-    private final TARDISWeepingAngels plugin;
+    private final TardisWeepingAngelsPlugin plugin;
     private final ImmutableList<String> ON_OFF_SUBS = ImmutableList.of("on", "off");
     private final ImmutableList<String> WORLD_SUBS;
     private final ImmutableList<String> MONSTER_SUBS;
     ImmutableList<String> CMD_SUBS = ImmutableList.of("spawn", "equip", "disguise", "kill", "count", "follow", "stay", "remove", "set", "give");
 
-    public TabComplete(TARDISWeepingAngels plugin) {
+    public TabComplete(TardisWeepingAngelsPlugin plugin) {
         this.plugin = plugin;
-        List<String> tmp = new ArrayList<>();
-        for (Monster m : Monster.values()) {
-            tmp.add(m.toString());
+        List<String> temp = new ArrayList<>();
+        for (Monster monster : Monster.values()) {
+            temp.add(monster.toString());
         }
-        MONSTER_SUBS = ImmutableList.copyOf(tmp);
+        MONSTER_SUBS = ImmutableList.copyOf(temp);
         List<String> worlds = new ArrayList<>();
-        this.plugin.getServer().getWorlds().forEach((w) -> worlds.add(w.getName()));
+        this.plugin.getServer().getWorlds().forEach((world) -> worlds.add(world.getName()));
         WORLD_SUBS = ImmutableList.copyOf(worlds);
     }
 

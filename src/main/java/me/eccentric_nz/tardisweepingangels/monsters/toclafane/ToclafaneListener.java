@@ -1,6 +1,22 @@
+/*
+ * Copyright (C) 2021 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.eccentric_nz.tardisweepingangels.monsters.toclafane;
 
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -24,10 +40,10 @@ import java.util.Objects;
 
 public class ToclafaneListener implements Listener {
 
-    private final TARDISWeepingAngels plugin;
+    private final TardisWeepingAngelsPlugin plugin;
     private final List<Material> drops = new ArrayList<>();
 
-    public ToclafaneListener(TARDISWeepingAngels plugin) {
+    public ToclafaneListener(TardisWeepingAngelsPlugin plugin) {
         this.plugin = plugin;
         plugin.getConfig().getStringList("toclafane.drops").forEach((d) -> drops.add(Material.valueOf(d)));
     }
@@ -37,77 +53,77 @@ public class ToclafaneListener implements Listener {
         Entity entity = event.getEntity();
         Entity damager = event.getDamager();
         if (entity instanceof ArmorStand && damager instanceof Player) {
-            ArmorStand stand = (ArmorStand) event.getEntity();
+            ArmorStand armorStand = (ArmorStand) event.getEntity();
             Player player = (Player) event.getDamager();
-            if (stand.getPersistentDataContainer().has(TARDISWeepingAngels.TOCLAFANE, PersistentDataType.INTEGER)) {
+            if (armorStand.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.TOCLAFANE, PersistentDataType.INTEGER)) {
                 event.setCancelled(true);
-                int maxHealth = (Objects.requireNonNull(stand.getLocation().getWorld()).getDifficulty().ordinal() * 6) + 1;
-                int health = stand.getPersistentDataContainer().get(TARDISWeepingAngels.TOCLAFANE, PersistentDataType.INTEGER);
+                int maxHealth = (Objects.requireNonNull(armorStand.getLocation().getWorld()).getDifficulty().ordinal() * 6) + 1;
+                int health = armorStand.getPersistentDataContainer().get(TardisWeepingAngelsPlugin.TOCLAFANE, PersistentDataType.INTEGER);
                 if (health == maxHealth) {
                     // get the bee and make it angry
-                    Bee bee = (Bee) stand.getVehicle();
+                    Bee bee = (Bee) armorStand.getVehicle();
                     if (bee == null) {
-                        bee = (Bee) stand.getLocation().getWorld().spawnEntity(stand.getLocation(), EntityType.BEE);
-                        PotionEffect p = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
-                        bee.addPotionEffect(p);
-                        bee.addPassenger(stand);
+                        bee = (Bee) armorStand.getLocation().getWorld().spawnEntity(armorStand.getLocation(), EntityType.BEE);
+                        PotionEffect potionEffect = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
+                        bee.addPotionEffect(potionEffect);
+                        bee.addPassenger(armorStand);
                     }
-                    EntityEquipment ee = stand.getEquipment();
-                    if (ee != null) {
-                        ItemStack head = ee.getHelmet();
+                    EntityEquipment entityEquipment = armorStand.getEquipment();
+                    if (entityEquipment != null) {
+                        ItemStack head = entityEquipment.getHelmet();
                         assert head != null;
-                        ItemMeta im = head.getItemMeta();
-                        player.playSound(stand.getLocation(), "toclafane", 1.0f, 1.0f);
-                        assert im != null;
-                        im.setCustomModelData(2);
-                        head.setItemMeta(im);
-                        ee.setHelmet(head);
+                        ItemMeta itemMeta = head.getItemMeta();
+                        player.playSound(armorStand.getLocation(), "toclafane", 1.0f, 1.0f);
+                        assert itemMeta != null;
+                        itemMeta.setCustomModelData(2);
+                        head.setItemMeta(itemMeta);
+                        entityEquipment.setHelmet(head);
                         bee.setHasStung(false);
                         bee.setHealth(Objects.requireNonNull(bee.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
                         bee.setAnger(500);
                         bee.setTarget(player);
                         bee.setSilent(true);
-                        stand.getPersistentDataContainer().set(TARDISWeepingAngels.TOCLAFANE, PersistentDataType.INTEGER, maxHealth - 1);
+                        armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.TOCLAFANE, PersistentDataType.INTEGER, maxHealth - 1);
                     }
                 } else {
-                    player.playSound(stand.getLocation(), "dalek_hit", 1.0f, 1.0f);
+                    player.playSound(armorStand.getLocation(), "dalek_hit", 1.0f, 1.0f);
                     health--;
                     if (health == 0) {
-                        Location location = stand.getLocation();
+                        Location location = armorStand.getLocation();
                         // kill the toclafane
-                        if (stand.getVehicle() != null) {
-                            Entity bee = stand.getVehicle();
+                        if (armorStand.getVehicle() != null) {
+                            Entity bee = armorStand.getVehicle();
                             if (bee instanceof Bee) {
-                                stand.remove();
+                                armorStand.remove();
                                 bee.remove();
                             }
                         } else {
-                            stand.remove();
+                            armorStand.remove();
                         }
                         boolean destroy = (plugin.getConfig().getBoolean("toclafane.destroy_blocks") && WorldGuardChecker.canExplode(location));
                         // explode
                         location.getWorld().createExplosion(location, 2.0f, false, destroy);
                         // give drops
                         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                            ItemStack stack = new ItemStack(drops.get(TARDISWeepingAngels.random.nextInt(drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
-                            location.getWorld().dropItemNaturally(location, stack);
+                            ItemStack itemStack = new ItemStack(drops.get(TardisWeepingAngelsPlugin.random.nextInt(drops.size())), TardisWeepingAngelsPlugin.random.nextInt(1) + 1);
+                            location.getWorld().dropItemNaturally(location, itemStack);
                         }, 3L);
                     } else {
-                        stand.getPersistentDataContainer().set(TARDISWeepingAngels.TOCLAFANE, PersistentDataType.INTEGER, health);
+                        armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.TOCLAFANE, PersistentDataType.INTEGER, health);
                     }
                 }
             }
         } else if (entity instanceof Bee) {
             if (entity.getPassengers().size() > 0) {
                 Entity passenger = entity.getPassengers().get(0);
-                if (passenger instanceof ArmorStand && passenger.getPersistentDataContainer().has(TARDISWeepingAngels.TOCLAFANE, PersistentDataType.INTEGER)) {
+                if (passenger instanceof ArmorStand && passenger.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.TOCLAFANE, PersistentDataType.INTEGER)) {
                     ((Bee) entity).setHasStung(false);
                 }
             }
         } else if (entity instanceof Player && damager instanceof Bee) {
             if (damager.getPassengers().size() > 0) {
                 Entity passenger = damager.getPassengers().get(0);
-                if (passenger instanceof ArmorStand && passenger.getPersistentDataContainer().has(TARDISWeepingAngels.TOCLAFANE, PersistentDataType.INTEGER)) {
+                if (passenger instanceof ArmorStand && passenger.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.TOCLAFANE, PersistentDataType.INTEGER)) {
                     Bee bee = (Bee) damager;
                     bee.setHasStung(false);
                     bee.setHealth(Objects.requireNonNull(bee.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
@@ -124,7 +140,7 @@ public class ToclafaneListener implements Listener {
             if (bee.getTarget() instanceof Player || bee.getAnger() >= 0) {
                 if (bee.getPassengers().size() > 0) {
                     Entity passenger = bee.getPassengers().get(0);
-                    if (passenger instanceof ArmorStand && passenger.getPersistentDataContainer().has(TARDISWeepingAngels.TOCLAFANE, PersistentDataType.INTEGER)) {
+                    if (passenger instanceof ArmorStand && passenger.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.TOCLAFANE, PersistentDataType.INTEGER)) {
                         bee.setHasStung(false);
                     }
                 }

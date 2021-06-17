@@ -1,6 +1,22 @@
+/*
+ * Copyright (C) 2021 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.eccentric_nz.tardisweepingangels.utils;
 
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -18,114 +34,114 @@ import java.util.UUID;
 
 public class Sounds implements Listener {
 
-    private final TARDISWeepingAngels plugin;
+    private final TardisWeepingAngelsPlugin plugin;
     private final List<UUID> tracker = new ArrayList<>();
 
-    public Sounds(TARDISWeepingAngels plugin) {
+    public Sounds(TardisWeepingAngelsPlugin plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
     public void onTargetPlayer(EntityTargetLivingEntityEvent event) {
-        Entity ent = event.getEntity();
-        UUID uuid = ent.getUniqueId();
+        Entity entity = event.getEntity();
+        UUID uuid = entity.getUniqueId();
         if (tracker.contains(uuid)) {
             return;
         }
-        if (ent instanceof Enderman) {
-            if (ent.getPassengers().size() > 0 && ent.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
+        if (entity instanceof Enderman) {
+            if (entity.getPassengers().size() > 0 && entity.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
                 tracker.add(uuid);
-                LivingEntity le = event.getTarget();
-                if (le instanceof Player) {
+                LivingEntity livingEntity = event.getTarget();
+                if (livingEntity instanceof Player) {
                     long delay = 90L;
                     // schedule delayed task
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        Player player = (Player) le;
-                        player.playSound(ent.getLocation(), "silence", 1.0f, 1.0f);
+                        Player player = (Player) livingEntity;
+                        player.playSound(entity.getLocation(), "silence", 1.0f, 1.0f);
                         tracker.remove(uuid);
                     }, delay);
                 }
             }
         }
-        if (ent instanceof Guardian) {
-            if (ent.getVehicle() != null && ent.getVehicle().getType().equals(EntityType.ENDERMAN)) {
+        if (entity instanceof Guardian) {
+            if (entity.getVehicle() != null && entity.getVehicle().getType().equals(EntityType.ENDERMAN)) {
                 tracker.add(uuid);
-                LivingEntity le = event.getTarget();
-                if (le instanceof Player) {
+                LivingEntity livingEntity = event.getTarget();
+                if (livingEntity instanceof Player) {
                     long delay = 20L;
                     // schedule delayed task
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        Player player = (Player) le;
-                        player.playSound(ent.getLocation(), "silence", 1.0f, 1.0f);
+                        Player player = (Player) livingEntity;
+                        player.playSound(entity.getLocation(), "silence", 1.0f, 1.0f);
                         tracker.remove(uuid);
                     }, delay);
                 }
             }
         }
-        if (ent instanceof PigZombie) {
-            if (ent.getPersistentDataContainer().has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
+        if (entity instanceof PigZombie) {
+            if (entity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.HATH, PersistentDataType.INTEGER)) {
                 tracker.add(uuid);
-                LivingEntity le = event.getTarget();
-                if (le instanceof Player) {
+                LivingEntity livingEntity = event.getTarget();
+                if (livingEntity instanceof Player) {
                     long delay = 100L;
                     // schedule delayed task
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        Player player = (Player) le;
-                        player.playSound(ent.getLocation(), "hath", 1.0f, 1.0f);
+                        Player player = (Player) livingEntity;
+                        player.playSound(entity.getLocation(), "hath", 1.0f, 1.0f);
                         tracker.remove(uuid);
                     }, delay);
                 }
             }
-            if (ent.getPersistentDataContainer().has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
+            if (entity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.ICE_WARRIOR, PersistentDataType.INTEGER)) {
                 tracker.add(uuid);
-                LivingEntity le = event.getTarget();
-                if (le instanceof Player) {
+                LivingEntity livingEntity = event.getTarget();
+                if (livingEntity instanceof Player) {
                     long delay = 50L;
                     // schedule delayed task
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        Player player = (Player) le;
-                        player.playSound(ent.getLocation(), "warrior", 1.0f, 1.0f);
+                        Player player = (Player) livingEntity;
+                        player.playSound(entity.getLocation(), "warrior", 1.0f, 1.0f);
                         tracker.remove(uuid);
                     }, delay);
                 }
             }
         }
-        if (ent instanceof Zombie zombie) {
-            EntityEquipment ee = zombie.getEquipment();
-            assert ee != null;
-            ItemStack head = ee.getHelmet();
+        if (entity instanceof Zombie zombie) {
+            EntityEquipment entityEquipment = zombie.getEquipment();
+            assert entityEquipment != null;
+            ItemStack head = entityEquipment.getHelmet();
             if (head != null && head.hasItemMeta() && Objects.requireNonNull(head.getItemMeta()).hasDisplayName()) {
                 tracker.add(uuid);
-                LivingEntity le = event.getTarget();
-                String dn = head.getItemMeta().getDisplayName();
-                if (le instanceof Player) {
-                    String tmp = "";
+                LivingEntity livingEntity = event.getTarget();
+                String displayName = head.getItemMeta().getDisplayName();
+                if (livingEntity instanceof Player) {
+                    String temp = "";
                     long delay = 50L;
-                    if (!zombie.isAdult() && dn.equals("Empty Child Head") && head.getType().equals(Material.SUGAR)) {
-                        tmp = "empty_child";
+                    if (!zombie.isAdult() && displayName.equals("Empty Child Head") && head.getType().equals(Material.SUGAR)) {
+                        temp = "empty_child";
                     }
-                    if (dn.equals("Cyberman Head") && head.getType().equals(Material.IRON_INGOT)) {
-                        tmp = "cyberman";
+                    if (displayName.equals("Cyberman Head") && head.getType().equals(Material.IRON_INGOT)) {
+                        temp = "cyberman";
                         delay = 80L;
                     }
-                    if (dn.equals("Sontaran Head") && head.getType().equals(Material.POTATO)) {
-                        tmp = "sontaran";
+                    if (displayName.equals("Sontaran Head") && head.getType().equals(Material.POTATO)) {
+                        temp = "sontaran";
                         delay = 55L;
                     }
-                    if (dn.equals("Vashta Nerada Head") && head.getType().equals(Material.BOOK)) {
-                        tmp = "vashta";
+                    if (displayName.equals("Vashta Nerada Head") && head.getType().equals(Material.BOOK)) {
+                        temp = "vashta";
                         delay = 30L;
                     }
-                    if (dn.equals("Zygon Head") && head.getType().equals(Material.PAINTING)) {
-                        tmp = "zygon";
+                    if (displayName.equals("Zygon Head") && head.getType().equals(Material.PAINTING)) {
+                        temp = "zygon";
                         delay = 100L;
                     }
-                    if (!tmp.isEmpty()) {
-                        String sound = tmp;
+                    if (!temp.isEmpty()) {
+                        String sound = temp;
                         // schedule delayed task
                         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                            Player player = (Player) le;
-                            player.playSound(ent.getLocation(), sound, 1.0f, 1.0f);
+                            Player player = (Player) livingEntity;
+                            player.playSound(entity.getLocation(), sound, 1.0f, 1.0f);
                             tracker.remove(uuid);
                         }, delay);
                     }
@@ -133,29 +149,29 @@ public class Sounds implements Listener {
             }
             return;
         }
-        if (ent instanceof Skeleton) {
-            PersistentDataContainer pdc = ent.getPersistentDataContainer();
-            if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
+        if (entity instanceof Skeleton) {
+            PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
+            if (persistentDataContainer.has(TardisWeepingAngelsPlugin.DALEK, PersistentDataType.INTEGER)) {
                 tracker.add(uuid);
-                LivingEntity le = event.getTarget();
-                if (le instanceof Player) {
+                LivingEntity livingEntity = event.getTarget();
+                if (livingEntity instanceof Player) {
                     long delay = 50L;
                     // schedule delayed task
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        Player player = (Player) le;
-                        player.playSound(ent.getLocation(), "dalek", 1.0f, 1.0f);
+                        Player player = (Player) livingEntity;
+                        player.playSound(entity.getLocation(), "dalek", 1.0f, 1.0f);
                         tracker.remove(uuid);
                     }, delay);
                 }
-            } else if (pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)) {
+            } else if (persistentDataContainer.has(TardisWeepingAngelsPlugin.SILURIAN, PersistentDataType.INTEGER)) {
                 tracker.add(uuid);
-                LivingEntity le = event.getTarget();
-                if (le instanceof Player) {
+                LivingEntity livingEntity = event.getTarget();
+                if (livingEntity instanceof Player) {
                     long delay = 50L;
                     // schedule delayed task
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        Player player = (Player) le;
-                        player.playSound(ent.getLocation(), "silurian", 1.0f, 1.0f);
+                        Player player = (Player) livingEntity;
+                        player.playSound(entity.getLocation(), "silurian", 1.0f, 1.0f);
                         tracker.remove(uuid);
                     }, delay);
                 }

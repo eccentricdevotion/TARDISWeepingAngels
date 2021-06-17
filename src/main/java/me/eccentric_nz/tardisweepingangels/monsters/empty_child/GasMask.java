@@ -1,9 +1,22 @@
 /*
- *  Copyright 2014 eccentric_nz.
+ * Copyright (C) 2021 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package me.eccentric_nz.tardisweepingangels.monsters.empty_child;
 
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,9 +35,9 @@ import java.util.UUID;
  */
 public class GasMask implements Listener {
 
-    private final TARDISWeepingAngels plugin;
+    private final TardisWeepingAngelsPlugin plugin;
 
-    public GasMask(TARDISWeepingAngels plugin) {
+    public GasMask(TardisWeepingAngelsPlugin plugin) {
         this.plugin = plugin;
     }
 
@@ -36,25 +49,25 @@ public class GasMask implements Listener {
             return;
         }
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            PlayerInventory inv = player.getInventory();
-            ItemStack helmet = inv.getHelmet();
+            PlayerInventory inventory = player.getInventory();
+            ItemStack helmet = inventory.getHelmet();
             if (helmet != null) {
                 // move it to the first free slot
-                int free_slot = inv.firstEmpty();
+                int free_slot = inventory.firstEmpty();
                 if (free_slot != -1) {
-                    inv.setItem(free_slot, helmet);
+                    inventory.setItem(free_slot, helmet);
                 } else {
                     player.getWorld().dropItemNaturally(player.getLocation(), helmet);
                 }
             }
             // set helmet to pumpkin
-            ItemStack gasmask = new ItemStack(Material.CARVED_PUMPKIN, 1);
-            ItemMeta im = gasmask.getItemMeta();
-            assert im != null;
-            im.setDisplayName("Gas Mask");
-            im.setCustomModelData(1);
-            gasmask.setItemMeta(im);
-            inv.setHelmet(gasmask);
+            ItemStack gasMask = new ItemStack(Material.CARVED_PUMPKIN, 1);
+            ItemMeta itemMeta = gasMask.getItemMeta();
+            assert itemMeta != null;
+            itemMeta.setDisplayName("Gas Mask");
+            itemMeta.setCustomModelData(1);
+            gasMask.setItemMeta(itemMeta);
+            inventory.setHelmet(gasMask);
             player.updateInventory();
             // schedule delayed task
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {

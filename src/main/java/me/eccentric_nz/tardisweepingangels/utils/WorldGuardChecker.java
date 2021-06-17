@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2021 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.eccentric_nz.tardisweepingangels.utils;
 
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
@@ -34,15 +50,15 @@ public class WorldGuardChecker {
     };
 
     public static boolean canSpawn(Location l) {
-        Plugin p = Bukkit.getPluginManager().getPlugin("WorldGuard");
-        if (p != null) {
-            WorldGuardPlatform wg = WorldGuard.getInstance().getPlatform();
+        Plugin plugin = Bukkit.getPluginManager().getPlugin("WorldGuard");
+        if (plugin != null) {
+            WorldGuardPlatform worldGuardPlatform = WorldGuard.getInstance().getPlatform();
             BlockVector3 vector = BukkitAdapter.asBlockVector(l);
-            RegionManager rm = wg.getRegionContainer().get(BukkitAdapter.adapt(Objects.requireNonNull(l.getWorld())));
-            assert rm != null;
-            ApplicableRegionSet rs = rm.getApplicableRegions(vector);
-            if (rs.testState(null, Flags.MOB_SPAWNING)) {
-                return rs.queryValue(null, Flags.DENY_SPAWN) == null;
+            RegionManager regionManager = worldGuardPlatform.getRegionContainer().get(BukkitAdapter.adapt(Objects.requireNonNull(l.getWorld())));
+            assert regionManager != null;
+            ApplicableRegionSet regionSet = regionManager.getApplicableRegions(vector);
+            if (regionSet.testState(null, Flags.MOB_SPAWNING)) {
+                return regionSet.queryValue(null, Flags.DENY_SPAWN) == null;
             } else {
                 return false;
             }
@@ -52,20 +68,20 @@ public class WorldGuardChecker {
     }
 
     public static boolean canExplode(Location l) {
-        Plugin p = Bukkit.getPluginManager().getPlugin("WorldGuard");
-        if (p != null) {
-            WorldGuardPlatform wg = WorldGuard.getInstance().getPlatform();
-            ConfigurationManager cfg = wg.getGlobalStateManager();
-            World bw = BukkitAdapter.adapt(Objects.requireNonNull(l.getWorld()));
-            BukkitWorldConfiguration wcfg = (BukkitWorldConfiguration) cfg.get(bw);
-            if (wcfg.blockCreeperBlockDamage || wcfg.blockTNTBlockDamage) {
+        Plugin plugin = Bukkit.getPluginManager().getPlugin("WorldGuard");
+        if (plugin != null) {
+            WorldGuardPlatform worldGuardPlatform = WorldGuard.getInstance().getPlatform();
+            ConfigurationManager configurationManager = worldGuardPlatform.getGlobalStateManager();
+            World bukkitWorld = BukkitAdapter.adapt(Objects.requireNonNull(l.getWorld()));
+            BukkitWorldConfiguration worldConfig = (BukkitWorldConfiguration) configurationManager.get(bukkitWorld);
+            if (worldConfig.blockCreeperBlockDamage || worldConfig.blockTNTBlockDamage) {
                 return false;
             }
             BlockVector3 vector = BukkitAdapter.asBlockVector(l);
-            RegionManager rm = wg.getRegionContainer().get(bw);
-            assert rm != null;
-            ApplicableRegionSet rs = rm.getApplicableRegions(vector);
-            return rs.testState(null, Flags.OTHER_EXPLOSION, Flags.CREEPER_EXPLOSION, Flags.TNT);
+            RegionManager regionManager = worldGuardPlatform.getRegionContainer().get(bukkitWorld);
+            assert regionManager != null;
+            ApplicableRegionSet regionSet = regionManager.getApplicableRegions(vector);
+            return regionSet.testState(null, Flags.OTHER_EXPLOSION, Flags.CREEPER_EXPLOSION, Flags.TNT);
         } else {
             return true;
         }

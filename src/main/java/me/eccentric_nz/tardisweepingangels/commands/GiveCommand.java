@@ -1,6 +1,22 @@
+/*
+ * Copyright (C) 2021 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.eccentric_nz.tardisweepingangels.commands;
 
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import me.eccentric_nz.tardisweepingangels.utils.HeadBuilder;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.command.CommandSender;
@@ -9,9 +25,9 @@ import org.bukkit.inventory.ItemStack;
 
 public class GiveCommand {
 
-    private final TARDISWeepingAngels plugin;
+    private final TardisWeepingAngelsPlugin plugin;
 
-    public GiveCommand(TARDISWeepingAngels plugin) {
+    public GiveCommand(TardisWeepingAngelsPlugin plugin) {
         this.plugin = plugin;
     }
 
@@ -38,10 +54,10 @@ public class GiveCommand {
             sender.sendMessage(plugin.pluginName + "That monster type can't be equipped as a helmet!");
             return true;
         }
-        ItemStack is = HeadBuilder.getItemStack(monster);
-        player.getInventory().addItem(is);
+        ItemStack itemStack = HeadBuilder.getItemStack(monster);
+        player.getInventory().addItem(itemStack);
         player.updateInventory();
-        sender.sendMessage(plugin.pluginName + "Gave " + player.getName() + " 1 " + monster.getName() + " head");
+        sender.sendMessage(plugin.pluginName + " gave " + player.getName() + " 1 " + monster.getName() + " head");
         String who = "The server";
         if (sender instanceof Player) {
             who = sender.getName();

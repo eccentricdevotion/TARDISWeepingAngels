@@ -1,5 +1,18 @@
 /*
- *  Copyright 2014 eccentric_nz.
+ * Copyright (C) 2021 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package me.eccentric_nz.tardisweepingangels.utils;
 
@@ -31,57 +44,57 @@ public class HelmetChecker implements Listener {
 
     @EventHandler
     public void onLoseHead(EntityCombustEvent event) {
-        Entity e = event.getEntity();
-        EntityType et = e.getType();
-        EntityEquipment ee;
-        if (heads.contains(et)) {
-            switch (et) {
+        Entity entity = event.getEntity();
+        EntityType entityType = entity.getType();
+        EntityEquipment entityEquipment;
+        if (heads.contains(entityType)) {
+            switch (entityType) {
                 case ZOMBIFIED_PIGLIN -> {
-                    PigZombie pz = (PigZombie) e;
-                    ee = pz.getEquipment();
+                    PigZombie pigZombie = (PigZombie) entity;
+                    entityEquipment = pigZombie.getEquipment();
                 }
                 case SKELETON -> {
-                    Skeleton s = (Skeleton) e;
-                    ee = s.getEquipment();
+                    Skeleton skeleton = (Skeleton) entity;
+                    entityEquipment = skeleton.getEquipment();
                 }
                 default -> {
-                    Zombie z = (Zombie) e;
-                    ee = z.getEquipment();
+                    Zombie zombie = (Zombie) entity;
+                    entityEquipment = zombie.getEquipment();
                 }
             }
             // check chestplate
-            assert ee != null;
-            ItemStack c = ee.getChestplate();
-            assert c != null;
-            if (c.hasItemMeta() && Objects.requireNonNull(c.getItemMeta()).hasDisplayName()) {
-                String dn = c.getItemMeta().getDisplayName();
-                if (dn.startsWith("Cyberman") || dn.startsWith("Ice") || dn.startsWith("Silurian") || dn.startsWith("Sontaran") || dn.startsWith("Vashta") || dn.startsWith("Zygon")) {
+            assert entityEquipment != null;
+            ItemStack chestplate = entityEquipment.getChestplate();
+            assert chestplate != null;
+            if (chestplate.hasItemMeta() && Objects.requireNonNull(chestplate.getItemMeta()).hasDisplayName()) {
+                String displayName = chestplate.getItemMeta().getDisplayName();
+                if (displayName.startsWith("Cyberman") || displayName.startsWith("Ice") || displayName.startsWith("Silurian") || displayName.startsWith("Sontaran") || displayName.startsWith("Vashta") || displayName.startsWith("Zygon")) {
                     event.setCancelled(true);
                     // restore head
                     ItemStack helmet;
                     String name;
                     Monster monster;
-                    if (dn.startsWith("Cyberman")) {
+                    if (displayName.startsWith("Cyberman")) {
                         helmet = new ItemStack(Material.IRON_INGOT, 1);
                         name = "Cyberman Head";
                         monster = Monster.CYBERMAN;
-                    } else if (dn.startsWith("Hath")) {
+                    } else if (displayName.startsWith("Hath")) {
                         helmet = new ItemStack(Material.PUFFERFISH, 1);
                         name = "Hath Head";
                         monster = Monster.HATH;
-                    } else if (dn.startsWith("Ice")) {
+                    } else if (displayName.startsWith("Ice")) {
                         helmet = new ItemStack(Material.SNOWBALL, 1);
                         name = "Ice Warrior Head";
                         monster = Monster.ICE_WARRIOR;
-                    } else if (dn.startsWith("Silurian")) {
+                    } else if (displayName.startsWith("Silurian")) {
                         helmet = new ItemStack(Material.FEATHER, 1);
                         name = "Silurian Head";
                         monster = Monster.SILURIAN;
-                    } else if (dn.startsWith("Sontaran")) {
+                    } else if (displayName.startsWith("Sontaran")) {
                         helmet = new ItemStack(Material.POTATO, 1);
                         name = "Sontaran Head";
                         monster = Monster.SONTARAN;
-                    } else if (dn.startsWith("Vashta")) {
+                    } else if (displayName.startsWith("Vashta")) {
                         helmet = new ItemStack(Material.BOOK, 1);
                         name = "Vashta Nerada Head";
                         monster = Monster.VASHTA_NERADA;
@@ -95,8 +108,8 @@ public class HelmetChecker implements Listener {
                     headMeta.setDisplayName(name);
                     headMeta.setCustomModelData(monster.getCustomModelData());
                     helmet.setItemMeta(headMeta);
-                    ee.setHelmet(helmet);
-                    ee.setHelmetDropChance(0F);
+                    entityEquipment.setHelmet(helmet);
+                    entityEquipment.setHelmetDropChance(0F);
                 }
             }
         }

@@ -1,6 +1,22 @@
+/*
+ * Copyright (C) 2021 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.eccentric_nz.tardisweepingangels.commands;
 
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
@@ -9,10 +25,10 @@ import java.util.HashMap;
 
 public class AdminCommand {
 
-    private final TARDISWeepingAngels plugin;
+    private final TardisWeepingAngelsPlugin plugin;
     private final HashMap<Monster, String> types = new HashMap<>();
 
-    public AdminCommand(TARDISWeepingAngels plugin) {
+    public AdminCommand(TardisWeepingAngelsPlugin plugin) {
         this.plugin = plugin;
         types.put(Monster.CYBERMAN, "cybermen");
         types.put(Monster.DALEK, "daleks");
@@ -35,8 +51,8 @@ public class AdminCommand {
         if (args.length < 4) {
             return false;
         }
-        World w = plugin.getServer().getWorld(args[2]);
-        if (w == null) {
+        World world = plugin.getServer().getWorld(args[2]);
+        if (world == null) {
             sender.sendMessage(plugin.pluginName + "Could not find a world with that name!");
             return true;
         }

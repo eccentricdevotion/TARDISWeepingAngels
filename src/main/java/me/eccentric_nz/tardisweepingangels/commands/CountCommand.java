@@ -1,6 +1,22 @@
+/*
+ * Copyright (C) 2021 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.eccentric_nz.tardisweepingangels.commands;
 
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
@@ -12,9 +28,9 @@ import java.util.Collection;
 
 public class CountCommand {
 
-    private final TARDISWeepingAngels plugin;
+    private final TardisWeepingAngelsPlugin plugin;
 
-    public CountCommand(TARDISWeepingAngels plugin) {
+    public CountCommand(TardisWeepingAngelsPlugin plugin) {
         this.plugin = plugin;
     }
 
@@ -23,18 +39,18 @@ public class CountCommand {
             return false;
         }
         String which = args[1].toLowerCase();
-        String what = "Angels";
+        String what = "Weeping Angels";
         int count = 0;
-        World w = plugin.getServer().getWorld(args[2]);
-        if (w == null) {
+        World world = plugin.getServer().getWorld(args[2]);
+        if (world == null) {
             sender.sendMessage(plugin.pluginName + "Could not find a world with that name!");
             return true;
         }
         if (which.equals("g")) {
             what = "Invisible Guardians without Endermen";
-            Collection<Guardian> guardians = w.getEntitiesByClass(Guardian.class);
-            for (Guardian g : guardians) {
-                if (g.hasPotionEffect(PotionEffectType.INVISIBILITY) && g.getVehicle() == null) {
+            Collection<Guardian> guardians = world.getEntitiesByClass(Guardian.class);
+            for (Guardian guardian : guardians) {
+                if (guardian.hasPotionEffect(PotionEffectType.INVISIBILITY) && guardian.getVehicle() == null) {
                     count++;
                 }
             }
@@ -48,126 +64,126 @@ public class CountCommand {
             }
             switch (monster) {
                 case WEEPING_ANGEL:
-                    Collection<Skeleton> angels = w.getEntitiesByClass(Skeleton.class);
-                    for (Skeleton a : angels) {
-                        if (a.getPersistentDataContainer().has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
+                    Collection<Skeleton> angels = world.getEntitiesByClass(Skeleton.class);
+                    for (Skeleton angel : angels) {
+                        if (angel.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.WEEPING_ANGEL, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
                     break;
                 case CYBERMAN:
                     what = "Cybermen";
-                    Collection<Zombie> cybermen = w.getEntitiesByClass(Zombie.class);
-                    for (Zombie c : cybermen) {
-                        if (c.getPersistentDataContainer().has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)) {
+                    Collection<Zombie> cybermen = world.getEntitiesByClass(Zombie.class);
+                    for (Zombie cyberman : cybermen) {
+                        if (cyberman.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.CYBERMAN, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
                     break;
                 case DALEK:
                     what = "Daleks";
-                    Collection<Skeleton> daleks = w.getEntitiesByClass(Skeleton.class);
-                    for (Skeleton d : daleks) {
-                        if (d.getPersistentDataContainer().has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
+                    Collection<Skeleton> daleks = world.getEntitiesByClass(Skeleton.class);
+                    for (Skeleton dalek : daleks) {
+                        if (dalek.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.DALEK, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
                     break;
                 case EMPTY_CHILD:
                     what = "Empty Children";
-                    Collection<Zombie> kids = w.getEntitiesByClass(Zombie.class);
-                    for (Zombie e : kids) {
-                        if (e.getPersistentDataContainer().has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
+                    Collection<Zombie> emptyChildren = world.getEntitiesByClass(Zombie.class);
+                    for (Zombie emptyChild : emptyChildren) {
+                        if (emptyChild.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.EMPTY, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
                     break;
                 case HATH:
                     what = "Hath";
-                    Collection<PigZombie> fish = w.getEntitiesByClass(PigZombie.class);
-                    for (PigZombie h : fish) {
-                        if (h.getPersistentDataContainer().has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
+                    Collection<PigZombie> haths = world.getEntitiesByClass(PigZombie.class);
+                    for (PigZombie hath : haths) {
+                        if (hath.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.HATH, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
                     break;
                 case ICE_WARRIOR:
                     what = "Ice Warriors";
-                    Collection<PigZombie> warriors = w.getEntitiesByClass(PigZombie.class);
-                    for (PigZombie i : warriors) {
-                        if (i.getPersistentDataContainer().has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
+                    Collection<PigZombie> iceWarriors = world.getEntitiesByClass(PigZombie.class);
+                    for (PigZombie iceWarrior : iceWarriors) {
+                        if (iceWarrior.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.ICE_WARRIOR, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
                     break;
                 case JUDOON:
                     what = "Judoon";
-                    Collection<ArmorStand> galactic_police = w.getEntitiesByClass(ArmorStand.class);
-                    for (ArmorStand g : galactic_police) {
-                        if (g.getPersistentDataContainer().has(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER)) {
+                    Collection<ArmorStand> judoons = world.getEntitiesByClass(ArmorStand.class);
+                    for (ArmorStand judoon : judoons) {
+                        if (judoon.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.JUDOON, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
                     break;
                 case K9:
                     what = "K9";
-                    Collection<ArmorStand> companions = w.getEntitiesByClass(ArmorStand.class);
-                    for (ArmorStand k : companions) {
-                        if (k.getPersistentDataContainer().has(TARDISWeepingAngels.K9, PersistentDataType.INTEGER)) {
+                    Collection<ArmorStand> k9s = world.getEntitiesByClass(ArmorStand.class);
+                    for (ArmorStand k9 : k9s) {
+                        if (k9.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.K9, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
                     break;
                 case SILENT:
-                    what = "Silence";
-                    Collection<Enderman> silence = w.getEntitiesByClass(Enderman.class);
-                    for (Enderman m : silence) {
-                        if (m.getPersistentDataContainer().has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
+                    what = "Silents";
+                    Collection<Enderman> silents = world.getEntitiesByClass(Enderman.class);
+                    for (Enderman silent : silents) {
+                        if (silent.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.SILENT, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
                     break;
                 case SONTARAN:
                     what = "Sontarans";
-                    Collection<Zombie> sontarans = w.getEntitiesByClass(Zombie.class);
-                    for (Zombie o : sontarans) {
-                        if (o.getPersistentDataContainer().has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
+                    Collection<Zombie> sontarans = world.getEntitiesByClass(Zombie.class);
+                    for (Zombie sontaran : sontarans) {
+                        if (sontaran.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.SONTARAN, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
                     break;
                 case OOD:
                     what = "Ood";
-                    Collection<ArmorStand> ood = w.getEntitiesByClass(ArmorStand.class);
-                    for (ArmorStand o : ood) {
-                        if (o.getPersistentDataContainer().has(TARDISWeepingAngels.OOD, PersistentDataType.INTEGER)) {
+                    Collection<ArmorStand> oods = world.getEntitiesByClass(ArmorStand.class);
+                    for (ArmorStand ood : oods) {
+                        if (ood.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.OOD, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
                     break;
                 case SILURIAN:
                     what = "Silurians";
-                    Collection<Skeleton> silurians = w.getEntitiesByClass(Skeleton.class);
-                    for (Skeleton s : silurians) {
-                        if (s.getPersistentDataContainer().has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)) {
+                    Collection<Skeleton> silurians = world.getEntitiesByClass(Skeleton.class);
+                    for (Skeleton silurian : silurians) {
+                        if (silurian.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.SILURIAN, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
                     break;
                 case VASHTA_NERADA:
                     what = "Vashta Nerada";
-                    Collection<Zombie> vashta = w.getEntitiesByClass(Zombie.class);
-                    for (Zombie v : vashta) {
-                        if (v.getPersistentDataContainer().has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)) {
+                    Collection<Zombie> vashtaNeradas = world.getEntitiesByClass(Zombie.class);
+                    for (Zombie vashtaNerada : vashtaNeradas) {
+                        if (vashtaNerada.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.VASHTA_NERADA, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
                     break;
                 case ZYGON:
                     what = "Zygons";
-                    Collection<Zombie> zygons = w.getEntitiesByClass(Zombie.class);
-                    for (Zombie z : zygons) {
-                        if (z.getPersistentDataContainer().has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
+                    Collection<Zombie> zygons = world.getEntitiesByClass(Zombie.class);
+                    for (Zombie zygon : zygons) {
+                        if (zygon.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.ZYGON, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
@@ -176,7 +192,7 @@ public class CountCommand {
                     break;
             }
         }
-        sender.sendMessage(plugin.pluginName + "There are " + count + " " + what + " in " + w.getName());
+        sender.sendMessage(plugin.pluginName + "There are " + count + " " + what + " in " + world.getName());
         return true;
     }
 }

@@ -1,6 +1,22 @@
+/*
+ * Copyright (C) 2021 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.eccentric_nz.tardisweepingangels.utils;
 
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,20 +30,20 @@ import java.util.Objects;
 
 public class MonsterHeadEquipListener implements Listener {
 
-    private final TARDISWeepingAngels plugin;
+    private final TardisWeepingAngelsPlugin plugin;
 
-    public MonsterHeadEquipListener(TARDISWeepingAngels plugin) {
+    public MonsterHeadEquipListener(TardisWeepingAngelsPlugin plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
     public void onHelmetSlotEquip(InventoryClickEvent event) {
-        Inventory inv = event.getClickedInventory();
-        if (inv != null) {
-            InventoryType inventoryType = inv.getType();
+        Inventory inventory = event.getClickedInventory();
+        if (inventory != null) {
+            InventoryType inventoryType = inventory.getType();
             if (inventoryType == InventoryType.PLAYER && event.getRawSlot() == 5) {
                 ItemStack cursor = event.getCursor();
-                if (cursor != null && cursor.hasItemMeta() && Objects.requireNonNull(cursor.getItemMeta()).getPersistentDataContainer().has(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER) && isNullOrAir(event.getCurrentItem())) {
+                if (cursor != null && cursor.hasItemMeta() && Objects.requireNonNull(cursor.getItemMeta()).getPersistentDataContainer().has(TardisWeepingAngelsPlugin.MONSTER_HEAD, PersistentDataType.INTEGER) && isNullOrAir(event.getCurrentItem())) {
                     event.setCurrentItem(cursor);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> event.setCursor(new ItemStack(Material.AIR)), 1L);
                     event.setCancelled(true);

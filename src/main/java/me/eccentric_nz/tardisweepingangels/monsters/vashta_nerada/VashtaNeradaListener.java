@@ -1,11 +1,23 @@
 /*
- *  Copyright Error: on line 4, column 30 in Templates/Licenses/license-default.txt
- The string doesn't match the expected date/time format. The string to parse was: "15/07/2014". The expected format was: "MMM d, yyyy". eccentric_nz.
+ * Copyright (C) 2021 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada;
 
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelSpawnEvent;
+import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.WorldProcessor;
 import org.bukkit.Location;
@@ -33,10 +45,10 @@ import java.util.Objects;
  */
 public class VashtaNeradaListener implements Listener {
 
-    private final TARDISWeepingAngels plugin;
+    private final TardisWeepingAngelsPlugin plugin;
     private final List<BlockFace> faces = new ArrayList<>();
 
-    public VashtaNeradaListener(TARDISWeepingAngels plugin) {
+    public VashtaNeradaListener(TardisWeepingAngelsPlugin plugin) {
         this.plugin = plugin;
         faces.add(BlockFace.EAST);
         faces.add(BlockFace.NORTH);
@@ -46,44 +58,44 @@ public class VashtaNeradaListener implements Listener {
 
     @EventHandler
     public void onBookshelfBreak(BlockBreakEvent event) {
-        Block b = event.getBlock();
-        if (b.getType().equals(Material.BOOKSHELF)) {
-            String name = WorldProcessor.sanitiseName(b.getWorld().getName());
-            if (plugin.getConfig().getInt("vashta_nerada.worlds." + name) > 0 && TARDISWeepingAngels.random.nextInt(100) < plugin.getConfig().getInt("vashta_nerada.worlds." + name)) {
-                Location l = getClearLocation(event.getPlayer());
-                if (l != null) {
+        Block block = event.getBlock();
+        if (block.getType().equals(Material.BOOKSHELF)) {
+            String name = WorldProcessor.sanitiseName(block.getWorld().getName());
+            if (plugin.getConfig().getInt("vashta_nerada.worlds." + name) > 0 && TardisWeepingAngelsPlugin.random.nextInt(100) < plugin.getConfig().getInt("vashta_nerada.worlds." + name)) {
+                Location location = getClearLocation(event.getPlayer());
+                if (location != null) {
                     // spawn Vashta Nerada at location
-                    spawnVashtaNerada(l);
+                    spawnVashtaNerada(location);
                 }
             }
         }
     }
 
-    private Location getClearLocation(Player p) {
-        Location ret = null;
-        Block l = p.getLocation().getBlock();
-        World w = l.getWorld();
-        Collections.shuffle(faces, TARDISWeepingAngels.random);
-        for (BlockFace f : faces) {
-            Block b = l.getRelative(f, 3);
-            if (b.getType().equals(Material.AIR) && b.getRelative(BlockFace.UP).getType().equals(Material.AIR)) {
-                ret = new Location(w, b.getX() + 0.5d, b.getY(), b.getZ() + 0.5d);
+    private Location getClearLocation(Player player) {
+        Location location = null;
+        Block locationBlock = player.getLocation().getBlock();
+        World world = locationBlock.getWorld();
+        Collections.shuffle(faces, TardisWeepingAngelsPlugin.random);
+        for (BlockFace blockFace : faces) {
+            Block block = locationBlock.getRelative(blockFace, 3);
+            if (block.getType().equals(Material.AIR) && block.getRelative(BlockFace.UP).getType().equals(Material.AIR)) {
+                location = new Location(world, block.getX() + 0.5d, block.getY(), block.getZ() + 0.5d);
                 break;
             }
         }
-        return ret;
+        return location;
     }
 
-    private void spawnVashtaNerada(Location l) {
-        LivingEntity e = (LivingEntity) Objects.requireNonNull(l.getWorld()).spawnEntity(l, EntityType.ZOMBIE);
-        e.setSilent(true);
-        Zombie vashta = (Zombie) e;
-        vashta.setAdult();
-        PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
-        e.addPotionEffect(p);
+    private void spawnVashtaNerada(Location location) {
+        LivingEntity vashtaNerada = (LivingEntity) Objects.requireNonNull(location.getWorld()).spawnEntity(location, EntityType.ZOMBIE);
+        vashtaNerada.setSilent(true);
+        Zombie zombie = (Zombie) vashtaNerada;
+        zombie.setAdult();
+        PotionEffect potionEffect = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
+        vashtaNerada.addPotionEffect(potionEffect);
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            VashtaNeradaEquipment.set(e, false);
-            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.VASHTA_NERADA, l));
+            VashtaNeradaEquipment.set(vashtaNerada, false);
+            plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(vashtaNerada, EntityType.ZOMBIE, Monster.VASHTA_NERADA, location));
         }, 5L);
     }
 }
