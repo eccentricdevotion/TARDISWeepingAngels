@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package me.eccentric_nz.tardisweepingangels.monsters.empty_child;
+package me.eccentric_nz.tardisweepingangels.monsters.weepingangel;
 
 import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
@@ -25,29 +25,28 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
-public class EmptyChildEquipment {
+public class AngelEquipment {
 
     public static void set(LivingEntity livingEntity, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.SUGAR, 1);
-        ItemStack arm = new ItemStack(Material.SUGAR, 1);
+        ItemStack head = new ItemStack(Material.BRICK, 1);
+        ItemStack arm = new ItemStack(Material.BRICK, 1);
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
-        ItemMeta headMeta = helmet.getItemMeta();
+        ItemStack boots = new ItemStack(Material.IRON_BOOTS, 1);
+        ItemMeta headMeta = head.getItemMeta();
         assert headMeta != null;
-        headMeta.setDisplayName("Empty Child Head");
-        headMeta.setCustomModelData(3);
-        helmet.setItemMeta(headMeta);
+        headMeta.setDisplayName("Weeping Angel Head");
+        headMeta.setCustomModelData(4);
+        head.setItemMeta(headMeta);
         ItemMeta armMeta = arm.getItemMeta();
         assert armMeta != null;
-        armMeta.setDisplayName("Empty Child Arm");
+        armMeta.setDisplayName("Weeping Angel Arm");
         armMeta.setCustomModelData(2);
         arm.setItemMeta(armMeta);
         ItemMeta chestMeta = chestplate.getItemMeta();
         assert chestMeta != null;
-        chestMeta.setDisplayName("Empty Child Chest");
+        chestMeta.setDisplayName("Weeping Angel Chest");
         if (disguise) {
             Damageable damageable = (Damageable) chestMeta;
             damageable.setDamage(235);
@@ -55,24 +54,23 @@ public class EmptyChildEquipment {
         chestplate.setItemMeta(chestMeta);
         ItemMeta legMeta = leggings.getItemMeta();
         assert legMeta != null;
-        legMeta.setDisplayName("Empty Child Legs");
+        legMeta.setDisplayName("Weeping Angel Legs");
         if (disguise) {
             Damageable legDamage = (Damageable) legMeta;
             legDamage.setDamage(220);
         }
         leggings.setItemMeta(legMeta);
-
+        ItemMeta weaponMeta = boots.getItemMeta();
+        assert weaponMeta != null;
+        weaponMeta.setDisplayName("Weeping Angel Feet");
+        boots.setItemMeta(weaponMeta);
         EntityEquipment entityEquipment = livingEntity.getEquipment();
         assert entityEquipment != null;
+        entityEquipment.setHelmet(head);
         entityEquipment.setChestplate(chestplate);
         entityEquipment.setLeggings(leggings);
-        entityEquipment.setBoots(null);
-        entityEquipment.setHelmet(helmet);
+        entityEquipment.setBoots(boots);
         if (!disguise) {
-            PotionEffect potionEffect = new PotionEffect(PotionEffectType.SLOW, 360000, 1, true, false);
-            livingEntity.removePotionEffect(PotionEffectType.SPEED);
-            livingEntity.addPotionEffect(potionEffect);
-            livingEntity.setCanPickupItems(false);
             entityEquipment.setItemInMainHand(arm);
             entityEquipment.setItemInOffHand(arm.clone());
             entityEquipment.setItemInMainHandDropChance(0F);
@@ -80,7 +78,9 @@ public class EmptyChildEquipment {
             entityEquipment.setHelmetDropChance(0F);
             entityEquipment.setChestplateDropChance(0F);
             entityEquipment.setLeggingsDropChance(0F);
-            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.EMPTY, PersistentDataType.INTEGER, Monster.EMPTY_CHILD.getPersist());
+            entityEquipment.setBootsDropChance(0F);
+            livingEntity.setCanPickupItems(false);
+            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.WEEPING_ANGEL, PersistentDataType.INTEGER, Monster.WEEPING_ANGEL.getPersist());
         }
     }
 }

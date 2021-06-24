@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package me.eccentric_nz.tardisweepingangels.monsters.weeping_angel;
+package me.eccentric_nz.tardisweepingangels.monsters.vashtanerada;
 
 import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
@@ -26,27 +26,26 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
-public class AngelEquipment {
+public class VashtaNeradaEquipment {
 
     public static void set(LivingEntity livingEntity, boolean disguise) {
-        ItemStack head = new ItemStack(Material.BRICK, 1);
-        ItemStack arm = new ItemStack(Material.BRICK, 1);
-        ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
-        ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
-        ItemStack boots = new ItemStack(Material.IRON_BOOTS, 1);
-        ItemMeta headMeta = head.getItemMeta();
+        ItemStack helmet = new ItemStack(Material.BOOK, 1);
+        ItemStack arm = new ItemStack(Material.BOOK, 1);
+        ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
+        ItemMeta headMeta = helmet.getItemMeta();
         assert headMeta != null;
-        headMeta.setDisplayName("Weeping Angel Head");
+        headMeta.setDisplayName("Vashta Nerada Head");
         headMeta.setCustomModelData(4);
-        head.setItemMeta(headMeta);
+        helmet.setItemMeta(headMeta);
         ItemMeta armMeta = arm.getItemMeta();
         assert armMeta != null;
-        armMeta.setDisplayName("Weeping Angel Arm");
-        armMeta.setCustomModelData(2);
+        armMeta.setDisplayName("Vashta Nerada Arm");
+        armMeta.setCustomModelData(3);
         arm.setItemMeta(armMeta);
         ItemMeta chestMeta = chestplate.getItemMeta();
         assert chestMeta != null;
-        chestMeta.setDisplayName("Weeping Angel Chest");
+        chestMeta.setDisplayName("Vashta Nerada Chest");
         if (disguise) {
             Damageable damageable = (Damageable) chestMeta;
             damageable.setDamage(235);
@@ -54,22 +53,19 @@ public class AngelEquipment {
         chestplate.setItemMeta(chestMeta);
         ItemMeta legMeta = leggings.getItemMeta();
         assert legMeta != null;
-        legMeta.setDisplayName("Weeping Angel Legs");
+        legMeta.setDisplayName("Vashta Nerada Legs");
         if (disguise) {
             Damageable legDamage = (Damageable) legMeta;
             legDamage.setDamage(220);
         }
         leggings.setItemMeta(legMeta);
-        ItemMeta weaponMeta = boots.getItemMeta();
-        assert weaponMeta != null;
-        weaponMeta.setDisplayName("Weeping Angel Feet");
-        boots.setItemMeta(weaponMeta);
+
         EntityEquipment entityEquipment = livingEntity.getEquipment();
         assert entityEquipment != null;
-        entityEquipment.setHelmet(head);
         entityEquipment.setChestplate(chestplate);
         entityEquipment.setLeggings(leggings);
-        entityEquipment.setBoots(boots);
+        entityEquipment.setBoots(null);
+        entityEquipment.setHelmet(helmet);
         if (!disguise) {
             entityEquipment.setItemInMainHand(arm);
             entityEquipment.setItemInOffHand(arm.clone());
@@ -78,9 +74,8 @@ public class AngelEquipment {
             entityEquipment.setHelmetDropChance(0F);
             entityEquipment.setChestplateDropChance(0F);
             entityEquipment.setLeggingsDropChance(0F);
-            entityEquipment.setBootsDropChance(0F);
             livingEntity.setCanPickupItems(false);
-            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.WEEPING_ANGEL, PersistentDataType.INTEGER, Monster.WEEPING_ANGEL.getPersist());
+            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.VASHTA_NERADA, PersistentDataType.INTEGER, Monster.VASHTA_NERADA.getPersist());
         }
     }
 }

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada;
+package me.eccentric_nz.tardisweepingangels.monsters.vashtanerada;
 
 import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;

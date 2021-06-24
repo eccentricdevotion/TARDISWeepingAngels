@@ -18,13 +18,13 @@ package me.eccentric_nz.tardisweepingangels.monsters.dalek;
 
 import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import me.eccentric_nz.tardisweepingangels.monsters.cyberman.CybermanEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.ice_warrior.IceWarriorEquipment;
+import me.eccentric_nz.tardisweepingangels.monsters.emptychild.EmptyChildEquipment;
+import me.eccentric_nz.tardisweepingangels.monsters.icewarrior.IceWarriorEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.silurian.SilurianEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.sontaran.SontaranEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.sontaran.StraxEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada.VashtaNeradaEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.weeping_angel.AngelEquipment;
+import me.eccentric_nz.tardisweepingangels.monsters.vashtanerada.VashtaNeradaEquipment;
+import me.eccentric_nz.tardisweepingangels.monsters.weepingangel.AngelEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.zygon.ZygonEquipment;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

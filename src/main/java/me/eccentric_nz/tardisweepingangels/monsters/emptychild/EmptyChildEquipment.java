@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada;
+package me.eccentric_nz.tardisweepingangels.monsters.emptychild;
 
 import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
@@ -25,27 +25,29 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
-public class VashtaNeradaEquipment {
+public class EmptyChildEquipment {
 
     public static void set(LivingEntity livingEntity, boolean disguise) {
-        ItemStack helmet = new ItemStack(Material.BOOK, 1);
-        ItemStack arm = new ItemStack(Material.BOOK, 1);
-        ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
-        ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
+        ItemStack helmet = new ItemStack(Material.SUGAR, 1);
+        ItemStack arm = new ItemStack(Material.SUGAR, 1);
+        ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
+        ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
         ItemMeta headMeta = helmet.getItemMeta();
         assert headMeta != null;
-        headMeta.setDisplayName("Vashta Nerada Head");
-        headMeta.setCustomModelData(4);
+        headMeta.setDisplayName("Empty Child Head");
+        headMeta.setCustomModelData(3);
         helmet.setItemMeta(headMeta);
         ItemMeta armMeta = arm.getItemMeta();
         assert armMeta != null;
-        armMeta.setDisplayName("Vashta Nerada Arm");
-        armMeta.setCustomModelData(3);
+        armMeta.setDisplayName("Empty Child Arm");
+        armMeta.setCustomModelData(2);
         arm.setItemMeta(armMeta);
         ItemMeta chestMeta = chestplate.getItemMeta();
         assert chestMeta != null;
-        chestMeta.setDisplayName("Vashta Nerada Chest");
+        chestMeta.setDisplayName("Empty Child Chest");
         if (disguise) {
             Damageable damageable = (Damageable) chestMeta;
             damageable.setDamage(235);
@@ -53,7 +55,7 @@ public class VashtaNeradaEquipment {
         chestplate.setItemMeta(chestMeta);
         ItemMeta legMeta = leggings.getItemMeta();
         assert legMeta != null;
-        legMeta.setDisplayName("Vashta Nerada Legs");
+        legMeta.setDisplayName("Empty Child Legs");
         if (disguise) {
             Damageable legDamage = (Damageable) legMeta;
             legDamage.setDamage(220);
@@ -67,6 +69,10 @@ public class VashtaNeradaEquipment {
         entityEquipment.setBoots(null);
         entityEquipment.setHelmet(helmet);
         if (!disguise) {
+            PotionEffect potionEffect = new PotionEffect(PotionEffectType.SLOW, 360000, 1, true, false);
+            livingEntity.removePotionEffect(PotionEffectType.SPEED);
+            livingEntity.addPotionEffect(potionEffect);
+            livingEntity.setCanPickupItems(false);
             entityEquipment.setItemInMainHand(arm);
             entityEquipment.setItemInOffHand(arm.clone());
             entityEquipment.setItemInMainHandDropChance(0F);
@@ -74,8 +80,7 @@ public class VashtaNeradaEquipment {
             entityEquipment.setHelmetDropChance(0F);
             entityEquipment.setChestplateDropChance(0F);
             entityEquipment.setLeggingsDropChance(0F);
-            livingEntity.setCanPickupItems(false);
-            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.VASHTA_NERADA, PersistentDataType.INTEGER, Monster.VASHTA_NERADA.getPersist());
+            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.EMPTY, PersistentDataType.INTEGER, Monster.EMPTY_CHILD.getPersist());
         }
     }
 }

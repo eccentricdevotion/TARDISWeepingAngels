@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package me.eccentric_nz.tardisweepingangels.monsters.weeping_angel;
+package me.eccentric_nz.tardisweepingangels.monsters.icewarrior;
 
 import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
@@ -26,25 +26,41 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Biome;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.PigZombie;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author eccentric_nz
  */
-public class WeepingAngelsRunnable implements Runnable {
+public class IceWarriorRunnable implements Runnable {
 
     private final TardisWeepingAngelsPlugin plugin;
     private final int spawnRate;
+    private final List<Biome> biomes = new ArrayList<>();
 
-    public WeepingAngelsRunnable(TardisWeepingAngelsPlugin plugin) {
+    public IceWarriorRunnable(TardisWeepingAngelsPlugin plugin) {
         this.plugin = plugin;
         spawnRate = plugin.getConfig().getInt("spawn_rate.how_many");
+        biomes.add(Biome.DEEP_FROZEN_OCEAN);
+        biomes.add(Biome.FROZEN_OCEAN);
+        biomes.add(Biome.FROZEN_RIVER);
+        biomes.add(Biome.ICE_SPIKES);
+        biomes.add(Biome.SNOWY_BEACH);
+        biomes.add(Biome.SNOWY_MOUNTAINS);
+        biomes.add(Biome.SNOWY_TAIGA);
+        biomes.add(Biome.SNOWY_TAIGA_HILLS);
+        biomes.add(Biome.SNOWY_TAIGA_MOUNTAINS);
+        biomes.add(Biome.SNOWY_TUNDRA);
     }
 
     @Override
@@ -52,24 +68,24 @@ public class WeepingAngelsRunnable implements Runnable {
         plugin.getServer().getWorlds().forEach((world) -> {
             // only configured worlds
             String name = WorldProcessor.sanitiseName(world.getName());
-            if (plugin.getConfig().getInt("angels.worlds." + name) > 0) {
+            if (plugin.getConfig().getInt("ice_warriors.worlds." + name) > 0) {
                 long time = world.getTime();
-                // only spawn at night - times according to http://minecraft.gamepedia.com/Day-night_cycle
-                if (time > 13187 && time < 22812) {
-                    // get the current angels
-                    int weepingAngels = 0;
-                    Collection<Skeleton> skeletons = world.getEntitiesByClass(Skeleton.class);
-                    for (Skeleton weepingAngel : skeletons) {
-                        PersistentDataContainer persistentDataContainer = weepingAngel.getPersistentDataContainer();
-                        if (persistentDataContainer.has(TardisWeepingAngelsPlugin.WEEPING_ANGEL, PersistentDataType.INTEGER)) {
-                            weepingAngels++;
+                // only spawn in day - times according to http://minecraft.gamepedia.com/Day-night_cycle
+                if ((time > 0 && time < 13187) || time > 22812) {
+                    // get the current ice warriors
+                    int iceWarriors = 0;
+                    Collection<PigZombie> pigZombies = world.getEntitiesByClass(PigZombie.class);
+                    for (PigZombie iceWarrior : pigZombies) {
+                        PersistentDataContainer persistentDataContainer = iceWarrior.getPersistentDataContainer();
+                        if (persistentDataContainer.has(TardisWeepingAngelsPlugin.ICE_WARRIOR, PersistentDataType.INTEGER)) {
+                            iceWarriors++;
                         }
                     }
-                    // count the current angels
-                    if (weepingAngels < plugin.getConfig().getInt("angels.worlds." + name)) {
+                    // count the current warriors
+                    if (iceWarriors < plugin.getConfig().getInt("ice_warriors.worlds." + name)) {
                         // if less than maximum, spawn some more
                         for (int i = 0; i < spawnRate; i++) {
-                            spawnAngel(world);
+                            spawnIceWarrior(world);
                         }
                     }
                 }
@@ -77,7 +93,7 @@ public class WeepingAngelsRunnable implements Runnable {
         });
     }
 
-    private void spawnAngel(World world) {
+    private void spawnIceWarrior(World world) {
         Chunk[] chunks = world.getLoadedChunks();
         if (chunks.length > 0) {
             Chunk chunk = chunks[TardisWeepingAngelsPlugin.random.nextInt(chunks.length)];
@@ -85,15 +101,20 @@ public class WeepingAngelsRunnable implements Runnable {
             int z = chunk.getZ() * 16 + TardisWeepingAngelsPlugin.random.nextInt(16);
             int y = world.getHighestBlockYAt(x, z);
             Location location = new Location(world, x, y + 1, z);
-            if (WaterChecker.isNotWater(location)) {
+            if (biomes.contains(location.getBlock().getBiome()) && WaterChecker.isNotWater(location)) {
                 if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(location)) {
                     return;
                 }
-                LivingEntity weepingAngel = (LivingEntity) world.spawnEntity(location, EntityType.SKELETON);
-                weepingAngel.setSilent(true);
+                LivingEntity iceWarrior = (LivingEntity) world.spawnEntity(location, EntityType.ZOMBIFIED_PIGLIN);
+                iceWarrior.setSilent(true);
+                PigZombie pigZombie = (PigZombie) iceWarrior;
+                pigZombie.setAngry(true);
+                pigZombie.setAnger(Integer.MAX_VALUE);
+                PotionEffect potionEffect = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
+                pigZombie.addPotionEffect(potionEffect);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    AngelEquipment.set(weepingAngel, false);
-                    plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(weepingAngel, EntityType.SKELETON, Monster.WEEPING_ANGEL, location));
+                    IceWarriorEquipment.set(iceWarrior, false);
+                    plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(iceWarrior, EntityType.ZOMBIFIED_PIGLIN, Monster.ICE_WARRIOR, location));
                 }, 5L);
             }
         }

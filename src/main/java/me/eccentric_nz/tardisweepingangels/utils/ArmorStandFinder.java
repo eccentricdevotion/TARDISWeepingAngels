@@ -16,7 +16,7 @@
  */
 package me.eccentric_nz.tardisweepingangels.utils;
 
-import me.eccentric_nz.tardisweepingangels.monsters.weeping_angel.Blink;
+import me.eccentric_nz.tardisweepingangels.monsters.weepingangel.Blink;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;

@@ -38,8 +38,8 @@ public class JudoonAmmoRecipe {
         itemMeta.setDisplayName("Judoon Ammunition");
         itemMeta.setCustomModelData(13);
         itemStack.setItemMeta(itemMeta);
-        NamespacedKey key = new NamespacedKey(plugin, "judoon_ammunition");
-        ShapelessRecipe recipe = new ShapelessRecipe(key, itemStack);
+        NamespacedKey namespacedKey = new NamespacedKey(plugin, "judoon_ammunition");
+        ShapelessRecipe recipe = new ShapelessRecipe(namespacedKey, itemStack);
         recipe.addIngredient(Material.ARROW);
         recipe.addIngredient(Material.GUNPOWDER);
         plugin.getServer().addRecipe(recipe);
