@@ -43,8 +43,8 @@ import me.eccentric_nz.tardisweepingangels.monsters.silent.AntiTeleport;
 import me.eccentric_nz.tardisweepingangels.monsters.silent.CleanGuardians;
 import me.eccentric_nz.tardisweepingangels.monsters.silent.SilentRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.silurian.SilurianSpawnerListener;
-import me.eccentric_nz.tardisweepingangels.monsters.sontaran.Strax;
 import me.eccentric_nz.tardisweepingangels.monsters.sontaran.SontaranRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.sontaran.Strax;
 import me.eccentric_nz.tardisweepingangels.monsters.toclafane.BeeSpawnListener;
 import me.eccentric_nz.tardisweepingangels.monsters.toclafane.ToclafaneListener;
 import me.eccentric_nz.tardisweepingangels.monsters.toclafane.ToclafaneRunnable;
@@ -206,13 +206,13 @@ public class TardisWeepingAngelsPlugin extends JavaPlugin {
     /**
      * Outputs a message to the console.
      *
-     * @param o the Object to print to the console
+     * @param object the Object to print to the console
      */
-    public void debug(Object o) {
-        getServer().getConsoleSender().sendMessage(pluginName + "Debug: " + o);
+    public void debug(Object object) {
+        getServer().getConsoleSender().sendMessage(pluginName + "Debug: " + object);
     }
 
-    public MonsterEquipment getWeepingAngelsAPI() {
+    public MonsterEquipment getWeepingAngelsApi() {
         return api;
     }
 

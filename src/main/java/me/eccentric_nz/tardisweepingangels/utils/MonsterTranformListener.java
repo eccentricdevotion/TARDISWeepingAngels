@@ -34,7 +34,7 @@ public class MonsterTranformListener implements Listener {
         if (!event.getTransformReason().equals(EntityTransformEvent.TransformReason.DROWNED)) {
             return;
         }
-        if (plugin.getWeepingAngelsAPI().isWeepingAngelMonster(event.getEntity())) {
+        if (plugin.getWeepingAngelsApi().isWeepingAngelMonster(event.getEntity())) {
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> event.getTransformedEntity().remove(), 2L);
         }
     }
