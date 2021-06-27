@@ -1,11 +1,10 @@
 /*
  *  Copyright 2015 eccentric_nz.
  */
-package me.eccentric_nz.tardisweepingangels.monsters.daleks;
+package me.eccentric_nz.tardisweepingangels.monsters.dalek;
 
 import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import me.eccentric_nz.tardisweepingangels.monsters.cyberman.CybermanEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.dalek.DalekEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.emptychild.EmptyChildEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.icewarrior.IceWarriorEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.silurian.SilurianEquipment;

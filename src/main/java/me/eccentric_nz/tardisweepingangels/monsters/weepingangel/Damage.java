@@ -1,9 +1,9 @@
 /*
  *  Copyright 2014 eccentric_nz.
  */
-package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
+package me.eccentric_nz.tardisweepingangels.monsters.weepingangel;
 
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import me.eccentric_nz.tardisweepingangels.utils.MonsterTargetListener;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -29,99 +29,98 @@ import java.util.List;
  */
 public class Damage implements Listener {
 
-    private final TARDISWeepingAngels plugin;
-    private final Material mat;
-    private final List<World> angel_tp_worlds = new ArrayList<>();
+    private final TardisWeepingAngelsPlugin plugin;
+    private final Material material;
+    private final List<World> angelTpWorlds = new ArrayList<>();
 
-    public Damage(TARDISWeepingAngels plugin) {
+    public Damage(TardisWeepingAngelsPlugin plugin) {
         this.plugin = plugin;
-        mat = Material.valueOf(plugin.getConfig().getString("angels.weapon"));
-        plugin.getConfig().getStringList("angels.teleport_worlds").forEach((w) -> {
-            World world = plugin.getServer().getWorld(w);
-            if (w != null) {
-                angel_tp_worlds.add(world);
+        material = Material.valueOf(plugin.getConfig().getString("angels.weapon"));
+        plugin.getConfig().getStringList("angels.teleport_worlds").forEach((worldName) -> {
+            World world = plugin.getServer().getWorld(worldName);
+            if (worldName != null) {
+                angelTpWorlds.add(world);
             }
         });
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onBeatUpAngel(EntityDamageByEntityEvent event) {
-        EntityType et = event.getEntityType();
-        if (et.equals(EntityType.SKELETON)) {
-            LivingEntity entity = (LivingEntity) event.getEntity();
-            Entity e = event.getDamager();
-            if (entity.getPersistentDataContainer().has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
-                if (e instanceof AbstractArrow) {
+        EntityType entityType = event.getEntityType();
+        if (entityType.equals(EntityType.SKELETON)) {
+            LivingEntity livingEntity = (LivingEntity) event.getEntity();
+            Entity entity = event.getDamager();
+            if (livingEntity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.WEEPING_ANGEL, PersistentDataType.INTEGER)) {
+                if (entity instanceof AbstractArrow) {
                     event.setCancelled(true);
                 }
-                if (e instanceof Player player) {
-                    if (!player.getInventory().getItemInMainHand().getType().equals(mat)) {
+                if (entity instanceof Player player) {
+                    if (!player.getInventory().getItemInMainHand().getType().equals(material)) {
                         event.setCancelled(true);
                     }
                 }
                 return;
             }
-            if (entity.getPersistentDataContainer().has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER) && (e instanceof Player player)) {
-                player.playSound(entity.getLocation(), "dalek_hit", 0.5f, 1.0f);
+            if (livingEntity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.DALEK, PersistentDataType.INTEGER) && (entity instanceof Player player)) {
+                player.playSound(livingEntity.getLocation(), "dalek_hit", 0.5f, 1.0f);
             }
         }
-        if (et.equals(EntityType.PLAYER)) {
-            Entity e = event.getDamager();
-            if (e instanceof Monster monster && MonsterTargetListener.monsterShouldIgnorePlayer(e, (Player) event.getEntity())) {
+        if (entityType.equals(EntityType.PLAYER)) {
+            Entity entity = event.getDamager();
+            if (entity instanceof Monster monster && MonsterTargetListener.monsterShouldIgnorePlayer(entity, (Player) event.getEntity())) {
                 event.setCancelled(true);
                 monster.setTarget(null);
                 return;
             }
-            if (e instanceof Skeleton) {
-                if (e.getPersistentDataContainer().has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
-                    Entity t = event.getEntity();
-                    Player p = (Player) t;
-                    Location l = getRandomLocation(t.getWorld());
-                    if (l != null) {
-                        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                            p.teleport(l);
-                        }, 1L);
+            if (entity instanceof Skeleton) {
+                if (entity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.WEEPING_ANGEL, PersistentDataType.INTEGER)) {
+                    Entity target = event.getEntity();
+                    Player player = (Player) target;
+                    Location location = getRandomLocation(target.getWorld());
+                    if (location != null) {
+                        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> player.teleport(location), 1L);
                     }
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 300, 5, true, false));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 300, 5, true, false));
                     if (plugin.angelsCanSteal()) {
-                        stealKey(p);
+                        stealKey(player);
                     }
                 }
             }
         }
     }
 
-    private Location getRandomLocation(World w) {
+    private Location getRandomLocation(World world) {
         // is this world an allowable world? - we don't want Nether or TARDIS worlds
-        if (!angel_tp_worlds.contains(w)) {
+        if (!angelTpWorlds.contains(world)) {
             // get a random teleport world
-            w = angel_tp_worlds.get(TARDISWeepingAngels.random.nextInt(angel_tp_worlds.size()));
+            world = angelTpWorlds.get(TardisWeepingAngelsPlugin.random.nextInt(angelTpWorlds.size()));
         }
-        Chunk[] chunks = w.getLoadedChunks();
-        Chunk c = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
-        int x = c.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
-        int z = c.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
-        int y = w.getHighestBlockYAt(x, z);
-        return new Location(w, x, y + 1, z);
+        Chunk[] chunks = world.getLoadedChunks();
+        Chunk chunk = chunks[TardisWeepingAngelsPlugin.random.nextInt(chunks.length)];
+        int x = chunk.getX() * 16 + TardisWeepingAngelsPlugin.random.nextInt(16);
+        int z = chunk.getZ() * 16 + TardisWeepingAngelsPlugin.random.nextInt(16);
+        int y = world.getHighestBlockYAt(x, z);
+        return new Location(world, x, y + 1, z);
     }
 
-    private void stealKey(Player p) {
+    private void stealKey(Player player) {
         // only works if the item is named "TARDIS Key"
-        PlayerInventory inv = p.getInventory();
-        for (ItemStack stack : inv.getContents()) {
-            if (stack != null) {
-                if (stack.hasItemMeta()) {
-                    ItemMeta im = stack.getItemMeta();
-                    if (im.hasDisplayName() && im.getDisplayName().equals("TARDIS Key")) {
-                        int amount = stack.getAmount();
+        PlayerInventory inventory = player.getInventory();
+        for (ItemStack itemStack : inventory.getContents()) {
+            if (itemStack != null) {
+                if (itemStack.hasItemMeta()) {
+                    ItemMeta itemMeta = itemStack.getItemMeta();
+                    assert itemMeta != null;
+                    if (itemMeta.hasDisplayName() && itemMeta.getDisplayName().equals("TARDIS Key")) {
+                        int amount = itemStack.getAmount();
                         if (amount > 1) {
-                            stack.setAmount(amount - 1);
+                            itemStack.setAmount(amount - 1);
                         } else {
-                            int slot = inv.first(stack);
-                            inv.setItem(slot, new ItemStack(Material.AIR));
+                            int slot = inventory.first(itemStack);
+                            inventory.setItem(slot, new ItemStack(Material.AIR));
                         }
-                        p.updateInventory();
-                        p.sendMessage(plugin.pluginName + "The Weeping Angels stole your TARDIS Key");
+                        player.updateInventory();
+                        player.sendMessage(plugin.pluginName + "The Weeping Angels stole your TARDIS Key");
                         break;
                     }
                 }
