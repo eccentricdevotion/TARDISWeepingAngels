@@ -45,10 +45,9 @@ public class JudoonListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onDamageJudoon(EntityDamageByEntityEvent event) {
-        if (event.getEntity() instanceof ArmorStand armorStand && event.getDamager() instanceof Player) {
+        if (event.getEntity() instanceof ArmorStand armorStand && event.getDamager() instanceof Player player) {
             if (armorStand.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.OWNER_UUID, TardisWeepingAngelsPlugin.PersistentDataTypeUuid) && armorStand.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.JUDOON, PersistentDataType.INTEGER)) {
                 event.setCancelled(true);
-                Player player = (Player) event.getDamager();
                 player.playSound(armorStand.getLocation(), "judoon", 1.0f, 1.0f);
                 if (!player.hasPermission("tardisweepingangels.judoon")) {
                     return;

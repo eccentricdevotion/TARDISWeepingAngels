@@ -52,11 +52,10 @@ public class Sounds implements Listener {
             if (entity.getPassengers().size() > 0 && entity.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
                 tracker.add(uuid);
                 LivingEntity livingEntity = event.getTarget();
-                if (livingEntity instanceof Player) {
+                if (livingEntity instanceof Player player) {
                     long delay = 90L;
                     // schedule delayed task
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        Player player = (Player) livingEntity;
                         player.playSound(entity.getLocation(), "silence", 1.0f, 1.0f);
                         tracker.remove(uuid);
                     }, delay);
@@ -67,11 +66,10 @@ public class Sounds implements Listener {
             if (entity.getVehicle() != null && entity.getVehicle().getType().equals(EntityType.ENDERMAN)) {
                 tracker.add(uuid);
                 LivingEntity livingEntity = event.getTarget();
-                if (livingEntity instanceof Player) {
+                if (livingEntity instanceof Player player) {
                     long delay = 20L;
                     // schedule delayed task
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        Player player = (Player) livingEntity;
                         player.playSound(entity.getLocation(), "silence", 1.0f, 1.0f);
                         tracker.remove(uuid);
                     }, delay);
@@ -82,11 +80,10 @@ public class Sounds implements Listener {
             if (entity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.HATH, PersistentDataType.INTEGER)) {
                 tracker.add(uuid);
                 LivingEntity livingEntity = event.getTarget();
-                if (livingEntity instanceof Player) {
+                if (livingEntity instanceof Player player) {
                     long delay = 100L;
                     // schedule delayed task
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        Player player = (Player) livingEntity;
                         player.playSound(entity.getLocation(), "hath", 1.0f, 1.0f);
                         tracker.remove(uuid);
                     }, delay);
@@ -95,11 +92,10 @@ public class Sounds implements Listener {
             if (entity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.ICE_WARRIOR, PersistentDataType.INTEGER)) {
                 tracker.add(uuid);
                 LivingEntity livingEntity = event.getTarget();
-                if (livingEntity instanceof Player) {
+                if (livingEntity instanceof Player player) {
                     long delay = 50L;
                     // schedule delayed task
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        Player player = (Player) livingEntity;
                         player.playSound(entity.getLocation(), "warrior", 1.0f, 1.0f);
                         tracker.remove(uuid);
                     }, delay);
@@ -114,7 +110,7 @@ public class Sounds implements Listener {
                 tracker.add(uuid);
                 LivingEntity livingEntity = event.getTarget();
                 String displayName = head.getItemMeta().getDisplayName();
-                if (livingEntity instanceof Player) {
+                if (livingEntity instanceof Player player) {
                     String temp = "";
                     long delay = 50L;
                     if (!zombie.isAdult() && displayName.equals("Empty Child Head") && head.getType().equals(Material.SUGAR)) {
@@ -140,7 +136,6 @@ public class Sounds implements Listener {
                         String sound = temp;
                         // schedule delayed task
                         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                            Player player = (Player) livingEntity;
                             player.playSound(entity.getLocation(), sound, 1.0f, 1.0f);
                             tracker.remove(uuid);
                         }, delay);
@@ -154,11 +149,10 @@ public class Sounds implements Listener {
             if (persistentDataContainer.has(TardisWeepingAngelsPlugin.DALEK, PersistentDataType.INTEGER)) {
                 tracker.add(uuid);
                 LivingEntity livingEntity = event.getTarget();
-                if (livingEntity instanceof Player) {
+                if (livingEntity instanceof Player player) {
                     long delay = 50L;
                     // schedule delayed task
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        Player player = (Player) livingEntity;
                         player.playSound(entity.getLocation(), "dalek", 1.0f, 1.0f);
                         tracker.remove(uuid);
                     }, delay);
@@ -166,11 +160,10 @@ public class Sounds implements Listener {
             } else if (persistentDataContainer.has(TardisWeepingAngelsPlugin.SILURIAN, PersistentDataType.INTEGER)) {
                 tracker.add(uuid);
                 LivingEntity livingEntity = event.getTarget();
-                if (livingEntity instanceof Player) {
+                if (livingEntity instanceof Player player) {
                     long delay = 50L;
                     // schedule delayed task
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        Player player = (Player) livingEntity;
                         player.playSound(entity.getLocation(), "silurian", 1.0f, 1.0f);
                         tracker.remove(uuid);
                     }, delay);

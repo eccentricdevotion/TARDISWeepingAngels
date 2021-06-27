@@ -45,8 +45,8 @@ public class PlayerDeath implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         EntityDamageEvent damage = event.getEntity().getLastDamageCause();
         if (damage != null) {
-            if (damage instanceof EntityDamageByEntityEvent) {
-                Entity attacker = (((EntityDamageByEntityEvent) damage).getDamager());
+            if (damage instanceof EntityDamageByEntityEvent damageByEntity) {
+                Entity attacker = damageByEntity.getDamager();
                 if (damage.getCause().equals(DamageCause.ENTITY_ATTACK)) {
                     PersistentDataContainer attackerPersistentDataContainer = attacker.getPersistentDataContainer();
                     String name = event.getEntity().getName();

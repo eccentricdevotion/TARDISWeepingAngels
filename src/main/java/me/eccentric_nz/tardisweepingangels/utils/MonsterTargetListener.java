@@ -112,25 +112,25 @@ public class MonsterTargetListener implements Listener {
     @EventHandler
     public void onMonsterTargetEvent(EntityTargetLivingEntityEvent event) {
         Entity eventEntity = event.getEntity();
-        if (eventEntity instanceof Monster) {
+        if (eventEntity instanceof Monster monster) {
             double range = (eventEntity instanceof Zombie) ? 40.0d : 16.0d;
             Player closest = null;
             double distance = 1000.0f;
             Location entityLocation = eventEntity.getLocation();
             for (Entity entity : eventEntity.getNearbyEntities(range, range, range)) {
-                if (entity instanceof Player) {
+                if (entity instanceof Player player) {
                     if (closest == null) {
-                        closest = (Player) entity;
+                        closest = player;
                         distance = entity.getLocation().distanceSquared(entityLocation);
                     } else if (entity.getLocation().distanceSquared(entityLocation) < distance) {
-                        closest = (Player) entity;
+                        closest = player;
                         distance = entity.getLocation().distanceSquared(entityLocation);
                     }
                 }
             }
             if (closest != null && monsterShouldIgnorePlayer(eventEntity, closest)) {
                 event.setCancelled(true);
-                ((Monster) eventEntity).setTarget(null);
+                monster.setTarget(null);
             }
         }
     }
