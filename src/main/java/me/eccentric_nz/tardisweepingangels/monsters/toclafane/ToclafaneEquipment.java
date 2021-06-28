@@ -41,8 +41,8 @@ public class ToclafaneEquipment {
             ArmorStand armorStand = (ArmorStand) entity;
             Location location = armorStand.getLocation();
             int difficulty = (Objects.requireNonNull(location.getWorld()).getDifficulty().ordinal() * 6) + 1;
-            armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.TOCLAFANE, PersistentDataType.INTEGER, difficulty);
-            armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.OWNER_UUID, TardisWeepingAngelsPlugin.PersistentDataTypeUuid, TardisWeepingAngelsPlugin.UNCLAIMED);
+            armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.toclafane, PersistentDataType.INTEGER, difficulty);
+            armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid, TardisWeepingAngelsPlugin.unclaimed);
             Objects.requireNonNull(armorStand.getEquipment()).setHelmet(head);
             armorStand.setVisible(false);
             armorStand.setSilent(true);

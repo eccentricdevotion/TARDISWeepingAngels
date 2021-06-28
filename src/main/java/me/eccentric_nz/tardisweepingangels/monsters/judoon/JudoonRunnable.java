@@ -56,7 +56,7 @@ public class JudoonRunnable implements Runnable {
                 Collection<ArmorStand> armorStands = world.getEntitiesByClass(ArmorStand.class);
                 for (ArmorStand judoon : armorStands) {
                     PersistentDataContainer persistentDataContainer = judoon.getPersistentDataContainer();
-                    if (persistentDataContainer.has(TardisWeepingAngelsPlugin.JUDOON, PersistentDataType.INTEGER)) {
+                    if (persistentDataContainer.has(TardisWeepingAngelsPlugin.judoon, PersistentDataType.INTEGER)) {
                         judoons++;
                     }
                 }

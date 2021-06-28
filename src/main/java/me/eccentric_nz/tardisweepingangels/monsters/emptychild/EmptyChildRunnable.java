@@ -59,7 +59,7 @@ public class EmptyChildRunnable implements Runnable {
                 Collection<Zombie> zombies = world.getEntitiesByClass(Zombie.class);
                 for (Zombie emptyChild : zombies) {
                     PersistentDataContainer persistentDataContainer = emptyChild.getPersistentDataContainer();
-                    if (persistentDataContainer.has(TardisWeepingAngelsPlugin.EMPTY, PersistentDataType.INTEGER)) {
+                    if (persistentDataContainer.has(TardisWeepingAngelsPlugin.emptyChild, PersistentDataType.INTEGER)) {
                         emptyChildren++;
                     }
                 }

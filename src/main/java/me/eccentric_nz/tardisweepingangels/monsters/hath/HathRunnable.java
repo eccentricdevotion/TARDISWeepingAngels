@@ -60,7 +60,7 @@ public class HathRunnable implements Runnable {
                 Collection<Zombie> zombies = world.getEntitiesByClass(Zombie.class);
                 for (Zombie hath : zombies) {
                     PersistentDataContainer persistentDataContainer = hath.getPersistentDataContainer();
-                    if (persistentDataContainer.has(TardisWeepingAngelsPlugin.HATH, PersistentDataType.INTEGER)) {
+                    if (persistentDataContainer.has(TardisWeepingAngelsPlugin.hath, PersistentDataType.INTEGER)) {
                         haths++;
                     }
                 }

@@ -37,7 +37,7 @@ public class MonsterTargetListener implements Listener {
     private static boolean isWearingMonsterHead(Player player, Material material) {
         ItemStack itemStack = player.getInventory().getHelmet();
         if (itemStack != null && itemStack.getType().equals(material) && itemStack.hasItemMeta()) {
-            return Objects.requireNonNull(itemStack.getItemMeta()).getPersistentDataContainer().has(TardisWeepingAngelsPlugin.MONSTER_HEAD, PersistentDataType.INTEGER);
+            return Objects.requireNonNull(itemStack.getItemMeta()).getPersistentDataContainer().has(TardisWeepingAngelsPlugin.monsterHead, PersistentDataType.INTEGER);
         }
         return false;
     }
@@ -48,58 +48,58 @@ public class MonsterTargetListener implements Listener {
         switch (entity.getType()) {
             case ZOMBIE:
                 // cyberman
-                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.CYBERMAN, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.cyberman, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.IRON_INGOT);
                 }
                 // empty child
-                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.EMPTY, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.emptyChild, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.SUGAR);
                 }
                 // sontaran
-                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.SONTARAN, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.sontaran, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.POTATO);
                 }
                 // vashta nerada
-                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.VASHTA_NERADA, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.vashtaNerada, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.BOOK);
                 }
                 // zygon
-                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.ZYGON, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.zygon, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.PAINTING);
                 }
                 break;
             case SKELETON:
                 // dalek
-                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.DALEK, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.dalek, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.SLIME_BALL);
                 }
                 // silurian
-                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.SILURIAN, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.silurian, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.FEATHER);
                 }
                 // weeping angel
-                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.WEEPING_ANGEL, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.weepingAngel, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.BRICK);
                 }
                 break;
             case ENDERMAN:
             case GUARDIAN:
                 // silent
-                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.SILENT, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.silent, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.END_STONE);
                 }
                 break;
             case ZOMBIFIED_PIGLIN:
                 // hath
-                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.HATH, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.hath, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.PUFFERFISH);
                 }
                 // ice warrior
-                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.ICE_WARRIOR, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.iceWarrior, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.SNOWBALL);
                 }
                 // strax
-                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.STRAX, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.strax, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Material.BAKED_POTATO);
                 }
                 break;

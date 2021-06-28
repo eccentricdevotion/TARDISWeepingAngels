@@ -66,7 +66,7 @@ public class SilurianSpawnerListener implements Listener {
             Collection<Skeleton> skeletons = cave.getWorld().getEntitiesByClass(Skeleton.class);
             skeletons.forEach((silurian) -> {
                 PersistentDataContainer persistentDataContainer = silurian.getPersistentDataContainer();
-                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.SILURIAN, PersistentDataType.INTEGER)) {
+                if (persistentDataContainer.has(TardisWeepingAngelsPlugin.silurian, PersistentDataType.INTEGER)) {
                     silurians.add(silurian);
                 }
             });

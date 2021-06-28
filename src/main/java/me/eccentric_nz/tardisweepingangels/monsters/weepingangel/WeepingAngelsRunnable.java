@@ -61,7 +61,7 @@ public class WeepingAngelsRunnable implements Runnable {
                     Collection<Skeleton> skeletons = world.getEntitiesByClass(Skeleton.class);
                     for (Skeleton weepingAngel : skeletons) {
                         PersistentDataContainer persistentDataContainer = weepingAngel.getPersistentDataContainer();
-                        if (persistentDataContainer.has(TardisWeepingAngelsPlugin.WEEPING_ANGEL, PersistentDataType.INTEGER)) {
+                        if (persistentDataContainer.has(TardisWeepingAngelsPlugin.weepingAngel, PersistentDataType.INTEGER)) {
                             weepingAngels++;
                         }
                     }

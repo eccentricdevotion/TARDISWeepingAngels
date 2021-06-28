@@ -60,7 +60,7 @@ public class DalekRunnable implements Runnable {
                 Collection<Skeleton> skeletons = world.getEntitiesByClass(Skeleton.class);
                 for (Skeleton dalek : skeletons) {
                     PersistentDataContainer persistentDataContainer = dalek.getPersistentDataContainer();
-                    if (persistentDataContainer.has(TardisWeepingAngelsPlugin.DALEK, PersistentDataType.INTEGER)) {
+                    if (persistentDataContainer.has(TardisWeepingAngelsPlugin.dalek, PersistentDataType.INTEGER)) {
                         daleks++;
                     }
                 }

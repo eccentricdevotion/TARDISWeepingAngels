@@ -75,7 +75,7 @@ public class VashtaNeradaEquipment {
             entityEquipment.setChestplateDropChance(0F);
             entityEquipment.setLeggingsDropChance(0F);
             livingEntity.setCanPickupItems(false);
-            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.VASHTA_NERADA, PersistentDataType.INTEGER, Monster.VASHTA_NERADA.getPersist());
+            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.vashtaNerada, PersistentDataType.INTEGER, Monster.VASHTA_NERADA.getPersist());
         }
     }
 }

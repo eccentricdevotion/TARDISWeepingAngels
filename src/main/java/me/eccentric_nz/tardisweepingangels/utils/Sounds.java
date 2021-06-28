@@ -77,7 +77,7 @@ public class Sounds implements Listener {
             }
         }
         if (entity instanceof PigZombie) {
-            if (entity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.HATH, PersistentDataType.INTEGER)) {
+            if (entity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.hath, PersistentDataType.INTEGER)) {
                 tracker.add(uuid);
                 LivingEntity livingEntity = event.getTarget();
                 if (livingEntity instanceof Player player) {
@@ -89,7 +89,7 @@ public class Sounds implements Listener {
                     }, delay);
                 }
             }
-            if (entity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.ICE_WARRIOR, PersistentDataType.INTEGER)) {
+            if (entity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.iceWarrior, PersistentDataType.INTEGER)) {
                 tracker.add(uuid);
                 LivingEntity livingEntity = event.getTarget();
                 if (livingEntity instanceof Player player) {
@@ -146,7 +146,7 @@ public class Sounds implements Listener {
         }
         if (entity instanceof Skeleton) {
             PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
-            if (persistentDataContainer.has(TardisWeepingAngelsPlugin.DALEK, PersistentDataType.INTEGER)) {
+            if (persistentDataContainer.has(TardisWeepingAngelsPlugin.dalek, PersistentDataType.INTEGER)) {
                 tracker.add(uuid);
                 LivingEntity livingEntity = event.getTarget();
                 if (livingEntity instanceof Player player) {
@@ -157,7 +157,7 @@ public class Sounds implements Listener {
                         tracker.remove(uuid);
                     }, delay);
                 }
-            } else if (persistentDataContainer.has(TardisWeepingAngelsPlugin.SILURIAN, PersistentDataType.INTEGER)) {
+            } else if (persistentDataContainer.has(TardisWeepingAngelsPlugin.silurian, PersistentDataType.INTEGER)) {
                 tracker.add(uuid);
                 LivingEntity livingEntity = event.getTarget();
                 if (livingEntity instanceof Player player) {

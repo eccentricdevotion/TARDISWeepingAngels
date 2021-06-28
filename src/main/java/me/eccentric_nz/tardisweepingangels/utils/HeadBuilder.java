@@ -37,7 +37,7 @@ public class HeadBuilder {
         ItemStack itemStack = new ItemStack(material, 1);
         ItemMeta itemMeta = itemStack.getItemMeta();
         assert itemMeta != null;
-        itemMeta.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.MONSTER_HEAD, PersistentDataType.INTEGER, 99);
+        itemMeta.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.monsterHead, PersistentDataType.INTEGER, 99);
         itemMeta.setDisplayName(monster.getName() + " Head");
         itemMeta.setCustomModelData(customModelData);
         itemStack.setItemMeta(itemMeta);

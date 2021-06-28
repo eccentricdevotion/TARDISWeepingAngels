@@ -61,7 +61,7 @@ public class ZygonRunnable implements Runnable {
                 Collection<Zombie> zombies = world.getEntitiesByClass(Zombie.class);
                 for (Zombie zygon : zombies) {
                     PersistentDataContainer persistentDataContainer = zygon.getPersistentDataContainer();
-                    if (persistentDataContainer.has(TardisWeepingAngelsPlugin.ZYGON, PersistentDataType.INTEGER)) {
+                    if (persistentDataContainer.has(TardisWeepingAngelsPlugin.zygon, PersistentDataType.INTEGER)) {
                         zygons++;
                     }
                 }

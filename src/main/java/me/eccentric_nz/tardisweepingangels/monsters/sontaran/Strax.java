@@ -71,8 +71,8 @@ public class Strax implements Listener {
                             pigZombie.setAdult();
                             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                                 StraxEquipment.set(pigZombie, false);
-                                pigZombie.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.STRAX, PersistentDataType.INTEGER, Monster.STRAX.getPersist());
-                                pigZombie.getPersistentDataContainer().remove(TardisWeepingAngelsPlugin.SONTARAN);
+                                pigZombie.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.strax, PersistentDataType.INTEGER, Monster.STRAX.getPersist());
+                                pigZombie.getPersistentDataContainer().remove(TardisWeepingAngelsPlugin.sontaran);
                                 plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(pigZombie, EntityType.ZOMBIFIED_PIGLIN, Monster.STRAX, location));
                             }, 2L);
                         }

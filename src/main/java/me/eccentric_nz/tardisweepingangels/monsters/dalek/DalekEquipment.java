@@ -34,7 +34,7 @@ public class DalekEquipment {
     private static final WeightedChoice<Integer> WEIGHTED_CHOICE = new WeightedChoice<Integer>().add(48, 0).add(3, 1).add(3, 2).add(3, 3).add(3, 4).add(3, 5).add(3, 6).add(3, 7).add(3, 8).add(3, 9).add(3, 10).add(3, 11).add(3, 12).add(3, 13).add(3, 14).add(3, 15).add(3, 16);
 
     public static void set(LivingEntity livingEntity, boolean disguise) {
-        livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.DALEK, PersistentDataType.INTEGER, Monster.DALEK.getPersist());
+        livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.dalek, PersistentDataType.INTEGER, Monster.DALEK.getPersist());
         ItemStack helmet = new ItemStack(Material.SLIME_BALL, 1);
         ItemMeta headMeta = helmet.getItemMeta();
         assert headMeta != null;

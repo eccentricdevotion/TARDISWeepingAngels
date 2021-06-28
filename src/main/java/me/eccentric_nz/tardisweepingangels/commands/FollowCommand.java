@@ -55,11 +55,11 @@ public class FollowCommand {
             return true;
         }
         PersistentDataContainer persistentDataContainer = armorStand.getPersistentDataContainer();
-        if (persistentDataContainer.has(TardisWeepingAngelsPlugin.OOD, PersistentDataType.INTEGER)) {
+        if (persistentDataContainer.has(TardisWeepingAngelsPlugin.ood, PersistentDataType.INTEGER)) {
             OodFollow.run(plugin, player, armorStand, args);
-        } else if (persistentDataContainer.has(TardisWeepingAngelsPlugin.JUDOON, PersistentDataType.INTEGER)) {
+        } else if (persistentDataContainer.has(TardisWeepingAngelsPlugin.judoon, PersistentDataType.INTEGER)) {
             JudoonFollow.run(plugin, player, armorStand, args);
-        } else if (persistentDataContainer.has(TardisWeepingAngelsPlugin.K9, PersistentDataType.INTEGER)) {
+        } else if (persistentDataContainer.has(TardisWeepingAngelsPlugin.k9, PersistentDataType.INTEGER)) {
             K9Follow.run(plugin, player, armorStand, args);
         } else {
             player.sendMessage(plugin.pluginName + "You are not looking at an entity that can follow you!");

@@ -44,11 +44,11 @@ public class JudoonEquipment {
             if (player != null) {
                 uuid = player.getUniqueId();
             } else {
-                uuid = TardisWeepingAngelsPlugin.UNCLAIMED;
+                uuid = TardisWeepingAngelsPlugin.unclaimed;
             }
             ArmorStand armorStand = (ArmorStand) entity;
-            armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.JUDOON, PersistentDataType.INTEGER, 0);
-            armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.OWNER_UUID, TardisWeepingAngelsPlugin.PersistentDataTypeUuid, uuid);
+            armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.judoon, PersistentDataType.INTEGER, 0);
+            armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid, uuid);
             ItemStack arm = new ItemStack(Material.YELLOW_DYE);
             ItemMeta armMeta = arm.getItemMeta();
             assert armMeta != null;

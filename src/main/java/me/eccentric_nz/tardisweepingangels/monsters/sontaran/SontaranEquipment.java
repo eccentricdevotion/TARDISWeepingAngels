@@ -81,7 +81,7 @@ public class SontaranEquipment {
             entityEquipment.setChestplateDropChance(0F);
             entityEquipment.setLeggingsDropChance(0F);
             livingEntity.setCanPickupItems(false);
-            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.SONTARAN, PersistentDataType.INTEGER, Monster.SONTARAN.getPersist());
+            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.sontaran, PersistentDataType.INTEGER, Monster.SONTARAN.getPersist());
         }
     }
 }

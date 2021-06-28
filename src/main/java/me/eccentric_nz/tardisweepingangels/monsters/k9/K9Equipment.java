@@ -44,10 +44,10 @@ public class K9Equipment {
             if (player != null) {
                 uuid = player.getUniqueId();
             } else {
-                uuid = TardisWeepingAngelsPlugin.UNCLAIMED;
+                uuid = TardisWeepingAngelsPlugin.unclaimed;
             }
-            armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.K9, PersistentDataType.INTEGER, 0);
-            armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.OWNER_UUID, TardisWeepingAngelsPlugin.PersistentDataTypeUuid, uuid);
+            armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.k9, PersistentDataType.INTEGER, 0);
+            armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid, uuid);
             EntityEquipment entityEquipment = armorStand.getEquipment();
             assert entityEquipment != null;
             entityEquipment.setHelmet(head);

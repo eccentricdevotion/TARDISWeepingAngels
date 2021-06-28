@@ -74,7 +74,7 @@ public class CybermanEquipment {
             entityEquipment.setChestplateDropChance(0F);
             entityEquipment.setLeggingsDropChance(0F);
             livingEntity.setCanPickupItems(false);
-            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.CYBERMAN, PersistentDataType.INTEGER, Monster.CYBERMAN.getPersist());
+            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.cyberman, PersistentDataType.INTEGER, Monster.CYBERMAN.getPersist());
         }
     }
 }

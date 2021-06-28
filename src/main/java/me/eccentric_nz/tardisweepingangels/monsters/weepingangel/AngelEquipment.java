@@ -80,7 +80,7 @@ public class AngelEquipment {
             entityEquipment.setLeggingsDropChance(0F);
             entityEquipment.setBootsDropChance(0F);
             livingEntity.setCanPickupItems(false);
-            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.WEEPING_ANGEL, PersistentDataType.INTEGER, Monster.WEEPING_ANGEL.getPersist());
+            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.weepingAngel, PersistentDataType.INTEGER, Monster.WEEPING_ANGEL.getPersist());
         }
     }
 }

@@ -66,7 +66,7 @@ public class SilurianRunnable implements Runnable {
                     Collection<Skeleton> skeletons = world.getEntitiesByClass(Skeleton.class);
                     for (Skeleton silurian : skeletons) {
                         PersistentDataContainer persistentDataContainer = silurian.getPersistentDataContainer();
-                        if (persistentDataContainer.has(TardisWeepingAngelsPlugin.SILURIAN, PersistentDataType.INTEGER)) {
+                        if (persistentDataContainer.has(TardisWeepingAngelsPlugin.silurian, PersistentDataType.INTEGER)) {
                             silurians++;
                         }
                     }

@@ -81,7 +81,7 @@ public class HathEquipment {
             entityEquipment.setChestplateDropChance(0F);
             entityEquipment.setLeggingsDropChance(0F);
             livingEntity.setCanPickupItems(false);
-            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.HATH, PersistentDataType.INTEGER, Monster.HATH.getPersist());
+            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.hath, PersistentDataType.INTEGER, Monster.HATH.getPersist());
         }
     }
 }

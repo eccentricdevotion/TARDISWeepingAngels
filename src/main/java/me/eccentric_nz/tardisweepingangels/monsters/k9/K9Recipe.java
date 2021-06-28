@@ -37,7 +37,7 @@ public class K9Recipe {
         itemMeta.setDisplayName("K9");
         itemMeta.setCustomModelData(1);
         itemStack.setItemMeta(itemMeta);
-        ShapedRecipe recipe = new ShapedRecipe(TardisWeepingAngelsPlugin.K9, itemStack);
+        ShapedRecipe recipe = new ShapedRecipe(TardisWeepingAngelsPlugin.k9, itemStack);
         recipe.shape("III", "RRR", "BBB");
         // set ingredients
         recipe.setIngredient('I', Material.IRON_INGOT);

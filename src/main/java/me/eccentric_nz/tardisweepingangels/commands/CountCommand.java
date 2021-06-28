@@ -66,7 +66,7 @@ public class CountCommand {
                 case WEEPING_ANGEL:
                     Collection<Skeleton> angels = world.getEntitiesByClass(Skeleton.class);
                     for (Skeleton angel : angels) {
-                        if (angel.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.WEEPING_ANGEL, PersistentDataType.INTEGER)) {
+                        if (angel.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.weepingAngel, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
@@ -75,7 +75,7 @@ public class CountCommand {
                     what = "Cybermen";
                     Collection<Zombie> cybermen = world.getEntitiesByClass(Zombie.class);
                     for (Zombie cyberman : cybermen) {
-                        if (cyberman.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.CYBERMAN, PersistentDataType.INTEGER)) {
+                        if (cyberman.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.cyberman, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
@@ -84,7 +84,7 @@ public class CountCommand {
                     what = "Daleks";
                     Collection<Skeleton> daleks = world.getEntitiesByClass(Skeleton.class);
                     for (Skeleton dalek : daleks) {
-                        if (dalek.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.DALEK, PersistentDataType.INTEGER)) {
+                        if (dalek.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.dalek, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
@@ -93,7 +93,7 @@ public class CountCommand {
                     what = "Empty Children";
                     Collection<Zombie> emptyChildren = world.getEntitiesByClass(Zombie.class);
                     for (Zombie emptyChild : emptyChildren) {
-                        if (emptyChild.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.EMPTY, PersistentDataType.INTEGER)) {
+                        if (emptyChild.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.emptyChild, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
@@ -102,7 +102,7 @@ public class CountCommand {
                     what = "Hath";
                     Collection<PigZombie> haths = world.getEntitiesByClass(PigZombie.class);
                     for (PigZombie hath : haths) {
-                        if (hath.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.HATH, PersistentDataType.INTEGER)) {
+                        if (hath.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.hath, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
@@ -111,7 +111,7 @@ public class CountCommand {
                     what = "Ice Warriors";
                     Collection<PigZombie> iceWarriors = world.getEntitiesByClass(PigZombie.class);
                     for (PigZombie iceWarrior : iceWarriors) {
-                        if (iceWarrior.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.ICE_WARRIOR, PersistentDataType.INTEGER)) {
+                        if (iceWarrior.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.iceWarrior, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
@@ -120,7 +120,7 @@ public class CountCommand {
                     what = "Judoon";
                     Collection<ArmorStand> judoons = world.getEntitiesByClass(ArmorStand.class);
                     for (ArmorStand judoon : judoons) {
-                        if (judoon.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.JUDOON, PersistentDataType.INTEGER)) {
+                        if (judoon.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.judoon, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
@@ -129,7 +129,7 @@ public class CountCommand {
                     what = "K9";
                     Collection<ArmorStand> k9s = world.getEntitiesByClass(ArmorStand.class);
                     for (ArmorStand k9 : k9s) {
-                        if (k9.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.K9, PersistentDataType.INTEGER)) {
+                        if (k9.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.k9, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
@@ -138,7 +138,7 @@ public class CountCommand {
                     what = "Silents";
                     Collection<Enderman> silents = world.getEntitiesByClass(Enderman.class);
                     for (Enderman silent : silents) {
-                        if (silent.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.SILENT, PersistentDataType.INTEGER)) {
+                        if (silent.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.silent, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
@@ -147,7 +147,7 @@ public class CountCommand {
                     what = "Sontarans";
                     Collection<Zombie> sontarans = world.getEntitiesByClass(Zombie.class);
                     for (Zombie sontaran : sontarans) {
-                        if (sontaran.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.SONTARAN, PersistentDataType.INTEGER)) {
+                        if (sontaran.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.sontaran, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
@@ -156,7 +156,7 @@ public class CountCommand {
                     what = "Ood";
                     Collection<ArmorStand> oods = world.getEntitiesByClass(ArmorStand.class);
                     for (ArmorStand ood : oods) {
-                        if (ood.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.OOD, PersistentDataType.INTEGER)) {
+                        if (ood.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.ood, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
@@ -165,7 +165,7 @@ public class CountCommand {
                     what = "Silurians";
                     Collection<Skeleton> silurians = world.getEntitiesByClass(Skeleton.class);
                     for (Skeleton silurian : silurians) {
-                        if (silurian.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.SILURIAN, PersistentDataType.INTEGER)) {
+                        if (silurian.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.silurian, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
@@ -174,7 +174,7 @@ public class CountCommand {
                     what = "Vashta Nerada";
                     Collection<Zombie> vashtaNeradas = world.getEntitiesByClass(Zombie.class);
                     for (Zombie vashtaNerada : vashtaNeradas) {
-                        if (vashtaNerada.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.VASHTA_NERADA, PersistentDataType.INTEGER)) {
+                        if (vashtaNerada.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.vashtaNerada, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
@@ -183,7 +183,7 @@ public class CountCommand {
                     what = "Zygons";
                     Collection<Zombie> zygons = world.getEntitiesByClass(Zombie.class);
                     for (Zombie zygon : zygons) {
-                        if (zygon.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.ZYGON, PersistentDataType.INTEGER)) {
+                        if (zygon.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.zygon, PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }

@@ -64,7 +64,7 @@ public class SontaranRunnable implements Runnable {
                     Collection<Zombie> zombies = world.getEntitiesByClass(Zombie.class);
                     for (Zombie sontaran : zombies) {
                         PersistentDataContainer persistentDataContainer = sontaran.getPersistentDataContainer();
-                        if (persistentDataContainer.has(TardisWeepingAngelsPlugin.SONTARAN, PersistentDataType.INTEGER)) {
+                        if (persistentDataContainer.has(TardisWeepingAngelsPlugin.sontaran, PersistentDataType.INTEGER)) {
                             sontarans++;
                         }
                     }

@@ -81,7 +81,7 @@ public class SilurianEquipment {
             entityEquipment.setChestplateDropChance(0F);
             entityEquipment.setLeggingsDropChance(0F);
             livingEntity.setCanPickupItems(false);
-            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.SILURIAN, PersistentDataType.INTEGER, Monster.SILURIAN.getPersist());
+            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.silurian, PersistentDataType.INTEGER, Monster.SILURIAN.getPersist());
         }
     }
 }

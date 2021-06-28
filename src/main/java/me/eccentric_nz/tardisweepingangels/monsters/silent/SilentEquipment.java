@@ -38,9 +38,9 @@ public class SilentEquipment {
             guardian.setSilent(true);
             PotionEffect potionEffect = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
             guardian.addPotionEffect(potionEffect);
-            guardian.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.SILENT, PersistentDataType.INTEGER, Monster.SILENT.getPersist());
+            guardian.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.silent, PersistentDataType.INTEGER, Monster.SILENT.getPersist());
             livingEntity.addPassenger(guardian);
-            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.SILENT, PersistentDataType.INTEGER, Monster.SILENT.getPersist());
+            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.silent, PersistentDataType.INTEGER, Monster.SILENT.getPersist());
         } else {
             ItemStack head = new ItemStack(Material.END_STONE);
             ItemMeta headMeta = head.getItemMeta();

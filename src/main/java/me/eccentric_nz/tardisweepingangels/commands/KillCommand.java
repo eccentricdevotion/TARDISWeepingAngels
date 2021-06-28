@@ -200,19 +200,19 @@ public class KillCommand {
             case TOCLAFANE:
                 Collection<ArmorStand> oods = world.getEntitiesByClass(ArmorStand.class);
                 for (ArmorStand ood : oods) {
-                    if (ood.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.OOD, PersistentDataType.INTEGER)) {
+                    if (ood.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.ood, PersistentDataType.INTEGER)) {
                         what = "Ood";
                         ood.remove();
                         count++;
-                    } else if (ood.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.JUDOON, PersistentDataType.INTEGER)) {
+                    } else if (ood.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.judoon, PersistentDataType.INTEGER)) {
                         what = "Judoon";
                         ood.remove();
                         count++;
-                    } else if (ood.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.K9, PersistentDataType.INTEGER)) {
+                    } else if (ood.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.k9, PersistentDataType.INTEGER)) {
                         what = "K9s";
                         ood.remove();
                         count++;
-                    } else if (ood.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.TOCLAFANE, PersistentDataType.INTEGER)) {
+                    } else if (ood.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.toclafane, PersistentDataType.INTEGER)) {
                         what = "Toclafane";
                         // also remove the bee
                         if (ood.getVehicle() != null) {

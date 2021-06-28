@@ -42,8 +42,8 @@ public class JudoonGuardRunnable implements Runnable {
                         if (entity instanceof Monster) {
                             Damageable damageable = (Damageable) entity;
                             double health = damageable.getHealth();
-                            if (uuidEntity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.JUDOON, PersistentDataType.INTEGER)) {
-                                int ammo = uuidEntity.getPersistentDataContainer().get(TardisWeepingAngelsPlugin.JUDOON, PersistentDataType.INTEGER);
+                            if (uuidEntity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.judoon, PersistentDataType.INTEGER)) {
+                                int ammo = uuidEntity.getPersistentDataContainer().get(TardisWeepingAngelsPlugin.judoon, PersistentDataType.INTEGER);
                                 if (ammo > 0 && health > 0) {
                                     damageable.damage(plugin.getConfig().getDouble("judoon.damage"), uuidEntity);
                                     uuidEntity.getWorld().playSound(uuidEntity.getLocation(), "judoon_fire", 1.0f, 1.0f);
@@ -57,7 +57,7 @@ public class JudoonGuardRunnable implements Runnable {
                                         ArmorStand stand = (ArmorStand) uuidEntity;
                                         stand.setCustomName("Ammunition: " + ammo);
                                         stand.setCustomNameVisible(true);
-                                        uuidEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.JUDOON, PersistentDataType.INTEGER, ammo);
+                                        uuidEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.judoon, PersistentDataType.INTEGER, ammo);
                                     }
                                 }
                             }

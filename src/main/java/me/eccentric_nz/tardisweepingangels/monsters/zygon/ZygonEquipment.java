@@ -75,7 +75,7 @@ public class ZygonEquipment {
             entityEquipment.setChestplateDropChance(0F);
             entityEquipment.setLeggingsDropChance(0F);
             livingEntity.setCanPickupItems(false);
-            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.ZYGON, PersistentDataType.INTEGER, Monster.ZYGON.getPersist());
+            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.zygon, PersistentDataType.INTEGER, Monster.ZYGON.getPersist());
         }
     }
 }

@@ -77,7 +77,7 @@ public class IceWarriorRunnable implements Runnable {
                     Collection<PigZombie> pigZombies = world.getEntitiesByClass(PigZombie.class);
                     for (PigZombie iceWarrior : pigZombies) {
                         PersistentDataContainer persistentDataContainer = iceWarrior.getPersistentDataContainer();
-                        if (persistentDataContainer.has(TardisWeepingAngelsPlugin.ICE_WARRIOR, PersistentDataType.INTEGER)) {
+                        if (persistentDataContainer.has(TardisWeepingAngelsPlugin.iceWarrior, PersistentDataType.INTEGER)) {
                             iceWarriors++;
                         }
                     }

@@ -50,7 +50,7 @@ public class Damage implements Listener {
         if (entityType.equals(EntityType.SKELETON)) {
             LivingEntity livingEntity = (LivingEntity) event.getEntity();
             Entity entity = event.getDamager();
-            if (livingEntity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.WEEPING_ANGEL, PersistentDataType.INTEGER)) {
+            if (livingEntity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.weepingAngel, PersistentDataType.INTEGER)) {
                 if (entity instanceof AbstractArrow) {
                     event.setCancelled(true);
                 }
@@ -61,7 +61,7 @@ public class Damage implements Listener {
                 }
                 return;
             }
-            if (livingEntity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.DALEK, PersistentDataType.INTEGER) && (entity instanceof Player player)) {
+            if (livingEntity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.dalek, PersistentDataType.INTEGER) && (entity instanceof Player player)) {
                 player.playSound(livingEntity.getLocation(), "dalek_hit", 0.5f, 1.0f);
             }
         }
@@ -73,7 +73,7 @@ public class Damage implements Listener {
                 return;
             }
             if (entity instanceof Skeleton) {
-                if (entity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.WEEPING_ANGEL, PersistentDataType.INTEGER)) {
+                if (entity.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.weepingAngel, PersistentDataType.INTEGER)) {
                     Entity target = event.getEntity();
                     Player player = (Player) target;
                     Location location = getRandomLocation(target.getWorld());

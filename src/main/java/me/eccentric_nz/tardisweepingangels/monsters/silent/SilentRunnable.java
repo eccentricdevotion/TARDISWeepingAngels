@@ -58,7 +58,7 @@ public class SilentRunnable implements Runnable {
                 Collection<Enderman> endermen = world.getEntitiesByClass(Enderman.class);
                 for (Enderman silent : endermen) {
                     PersistentDataContainer persistentDataContainer = silent.getPersistentDataContainer();
-                    if (persistentDataContainer.has(TardisWeepingAngelsPlugin.SILENT, PersistentDataType.INTEGER)) {
+                    if (persistentDataContainer.has(TardisWeepingAngelsPlugin.silent, PersistentDataType.INTEGER)) {
                         silents++;
                     }
                 }

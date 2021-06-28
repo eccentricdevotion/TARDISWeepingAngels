@@ -51,24 +51,24 @@ public class PlayerDeath implements Listener {
                     PersistentDataContainer attackerPersistentDataContainer = attacker.getPersistentDataContainer();
                     String name = event.getEntity().getName();
                     if (attacker instanceof Zombie) {
-                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.CYBERMAN, PersistentDataType.INTEGER)) {
+                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.cyberman, PersistentDataType.INTEGER)) {
                             String whatHappened = (plugin.getConfig().getBoolean("cybermen.can_upgrade")) ? "upgraded" : "slain";
                             event.setDeathMessage(name + " was " + whatHappened + " by a Cyberman");
                             return;
                         }
-                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.EMPTY, PersistentDataType.INTEGER)) {
+                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.emptyChild, PersistentDataType.INTEGER)) {
                             event.setDeathMessage(name + " was slain by an Empty Child");
                             return;
                         }
-                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.ZYGON, PersistentDataType.INTEGER)) {
+                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.zygon, PersistentDataType.INTEGER)) {
                             event.setDeathMessage(name + " was slain by a Zygon");
                             return;
                         }
-                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.SONTARAN, PersistentDataType.INTEGER)) {
+                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.sontaran, PersistentDataType.INTEGER)) {
                             event.setDeathMessage(name + " was slain by a Sontaran");
                             return;
                         }
-                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.VASHTA_NERADA, PersistentDataType.INTEGER)) {
+                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.vashtaNerada, PersistentDataType.INTEGER)) {
                             event.setDeathMessage(name + " was eaten by a Vashta Nerada");
                             return;
                         }
@@ -99,25 +99,25 @@ public class PlayerDeath implements Listener {
                         }
                     }
                     if (attacker instanceof PigZombie) {
-                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.ICE_WARRIOR, PersistentDataType.INTEGER)) {
+                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.iceWarrior, PersistentDataType.INTEGER)) {
                             event.setDeathMessage(name + " was slain by an Ice Warrior");
                             return;
                         }
-                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.STRAX, PersistentDataType.INTEGER)) {
+                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.strax, PersistentDataType.INTEGER)) {
                             event.setDeathMessage(name + " was slain by a very angry Sontaran butler called Strax");
                             return;
                         }
-                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.HATH, PersistentDataType.INTEGER)) {
+                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.hath, PersistentDataType.INTEGER)) {
                             event.setDeathMessage(name + " was killed by a Hath blaster rifle");
                             return;
                         }
                     }
                     if (attacker instanceof Skeleton) {
-                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.WEEPING_ANGEL, PersistentDataType.INTEGER)) {
+                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.weepingAngel, PersistentDataType.INTEGER)) {
                             event.setDeathMessage(name + " was slain by a Weeping Angel");
                             return;
                         }
-                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.SILURIAN, PersistentDataType.INTEGER)) {
+                        if (attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.silurian, PersistentDataType.INTEGER)) {
                             event.setDeathMessage(name + " was slain by a Silurian");
                             return;
                         }
@@ -129,11 +129,11 @@ public class PlayerDeath implements Listener {
                     if (source instanceof Skeleton skeleton) {
                         PersistentDataContainer spdc = skeleton.getPersistentDataContainer();
                         String name = event.getEntity().getName();
-                        if (spdc.has(TardisWeepingAngelsPlugin.DALEK, PersistentDataType.INTEGER)) {
+                        if (spdc.has(TardisWeepingAngelsPlugin.dalek, PersistentDataType.INTEGER)) {
                             event.setDeathMessage(name + " was slain by a Dalek");
                             return;
                         }
-                        if (spdc.has(TardisWeepingAngelsPlugin.SILURIAN, PersistentDataType.INTEGER)) {
+                        if (spdc.has(TardisWeepingAngelsPlugin.silurian, PersistentDataType.INTEGER)) {
                             event.setDeathMessage(name + " was slain by a Silurian");
                         }
                     }

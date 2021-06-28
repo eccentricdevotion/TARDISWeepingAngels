@@ -81,7 +81,7 @@ public class IceWarriorEquipment {
             entityEquipment.setChestplateDropChance(0F);
             entityEquipment.setLeggingsDropChance(0F);
             livingEntity.setCanPickupItems(false);
-            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.ICE_WARRIOR, PersistentDataType.INTEGER, Monster.ICE_WARRIOR.getPersist());
+            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.iceWarrior, PersistentDataType.INTEGER, Monster.ICE_WARRIOR.getPersist());
         }
     }
 }

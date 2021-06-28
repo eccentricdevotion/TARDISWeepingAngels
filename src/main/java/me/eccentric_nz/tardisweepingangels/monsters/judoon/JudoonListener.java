@@ -46,15 +46,15 @@ public class JudoonListener implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onDamageJudoon(EntityDamageByEntityEvent event) {
         if (event.getEntity() instanceof ArmorStand armorStand && event.getDamager() instanceof Player player) {
-            if (armorStand.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.OWNER_UUID, TardisWeepingAngelsPlugin.PersistentDataTypeUuid) && armorStand.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.JUDOON, PersistentDataType.INTEGER)) {
+            if (armorStand.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid) && armorStand.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.judoon, PersistentDataType.INTEGER)) {
                 event.setCancelled(true);
                 player.playSound(armorStand.getLocation(), "judoon", 1.0f, 1.0f);
                 if (!player.hasPermission("tardisweepingangels.judoon")) {
                     return;
                 }
-                UUID judoonId = armorStand.getPersistentDataContainer().get(TardisWeepingAngelsPlugin.OWNER_UUID, TardisWeepingAngelsPlugin.PersistentDataTypeUuid);
+                UUID judoonId = armorStand.getPersistentDataContainer().get(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid);
                 if (player.getUniqueId().equals(judoonId)) {
-                    int ammo = armorStand.getPersistentDataContainer().get(TardisWeepingAngelsPlugin.JUDOON, PersistentDataType.INTEGER);
+                    int ammo = armorStand.getPersistentDataContainer().get(TardisWeepingAngelsPlugin.judoon, PersistentDataType.INTEGER);
                     if (Tag.SHULKER_BOXES.isTagged(player.getInventory().getItemInMainHand().getType())) {
                         // top up ammo
                         ItemStack box = player.getInventory().getItemInMainHand();
@@ -80,7 +80,7 @@ public class JudoonListener implements Listener {
                                 shulkerBox.update();
                                 boxItemMeta.setBlockState(shulkerBox);
                                 box.setItemMeta(boxItemMeta);
-                                armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.JUDOON, PersistentDataType.INTEGER, (ammo + remove));
+                                armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.judoon, PersistentDataType.INTEGER, (ammo + remove));
                                 armorStand.setCustomName("Ammunition: " + (ammo + remove));
                                 player.sendMessage(plugin.pluginName + "You reloaded " + remove + " Judoon ammunition.");
                             }
@@ -118,9 +118,9 @@ public class JudoonListener implements Listener {
                     }
                 } else {
                     assert judoonId != null;
-                    if (judoonId.equals(TardisWeepingAngelsPlugin.UNCLAIMED)) {
+                    if (judoonId.equals(TardisWeepingAngelsPlugin.unclaimed)) {
                         // claim the Judoon
-                        armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.OWNER_UUID, TardisWeepingAngelsPlugin.PersistentDataTypeUuid, player.getUniqueId());
+                        armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid, player.getUniqueId());
                         player.sendMessage(TardisWeepingAngelsPlugin.plugin.pluginName + "You have claimed this Judoon!");
                     }
                 }

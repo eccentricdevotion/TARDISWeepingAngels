@@ -80,7 +80,7 @@ public class EmptyChildEquipment {
             entityEquipment.setHelmetDropChance(0F);
             entityEquipment.setChestplateDropChance(0F);
             entityEquipment.setLeggingsDropChance(0F);
-            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.EMPTY, PersistentDataType.INTEGER, Monster.EMPTY_CHILD.getPersist());
+            livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.emptyChild, PersistentDataType.INTEGER, Monster.EMPTY_CHILD.getPersist());
         }
     }
 }

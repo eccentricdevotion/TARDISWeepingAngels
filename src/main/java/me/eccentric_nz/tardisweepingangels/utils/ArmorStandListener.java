@@ -26,7 +26,7 @@ public class ArmorStandListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onManipulateFakeMonster(PlayerArmorStandManipulateEvent event) {
-        if (event.getRightClicked().getPersistentDataContainer().has(TardisWeepingAngelsPlugin.OWNER_UUID, TardisWeepingAngelsPlugin.PersistentDataTypeUuid)) {
+        if (event.getRightClicked().getPersistentDataContainer().has(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid)) {
             event.setCancelled(true);
         }
     }
