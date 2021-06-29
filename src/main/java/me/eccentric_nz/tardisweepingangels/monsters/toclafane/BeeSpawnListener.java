@@ -41,7 +41,7 @@ public class BeeSpawnListener implements Listener {
             return;
         }
         World world = entity.getWorld();
-        if (plugin.getConfig().getInt("tocalane.worlds." + world.getName()) < 1) {
+        if (plugin.getConfig().getInt("toclafane.worlds." + world.getName()) < 1) {
             return;
         }
         if (TardisWeepingAngelsPlugin.random.nextInt(100) < plugin.getConfig().getInt("toclafane.spawn_from_bee")) {
