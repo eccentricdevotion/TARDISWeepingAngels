@@ -155,7 +155,7 @@
             <!-- TARDISChunkGenerator -->
             <groupId>me.eccentric_nz.tardischunkgenerator</groupId>
             <artifactId>TARDISChunkGenerator</artifactId>
-            <version>4.7.2-SNAPSHOT</version>
+            <version>4.7.3-SNAPSHOT</version>
             <type>jar</type>
             <scope>compile</scope>
             <optional>true</optional>
