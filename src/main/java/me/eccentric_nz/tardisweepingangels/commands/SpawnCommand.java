@@ -16,7 +16,7 @@
  */
 package me.eccentric_nz.tardisweepingangels.commands;
 
-import me.eccentric_nz.tardischunkgenerator.TardisHelperPlugin;
+import me.eccentric_nz.tardischunkgenerator.TARDISHelper;
 import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import me.eccentric_nz.tardisweepingangels.monsters.cyberman.CybermanEquipment;
@@ -115,7 +115,7 @@ public class SpawnCommand {
                 player.playSound(dalek.getLocation(), "dalek", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(dalek, EntityType.SKELETON, Monster.DALEK, eyeLocation));
                 if (args.length > 1 && args[1].equalsIgnoreCase("flying") && plugin.getServer().getPluginManager().isPluginEnabled("TARDISChunkGenerator")) {
-                    TardisHelperPlugin tardisHelper = (TardisHelperPlugin) plugin.getServer().getPluginManager().getPlugin("TARDISChunkGenerator");
+                    TARDISHelper tardisHelper = (TARDISHelper) plugin.getServer().getPluginManager().getPlugin("TARDISChunkGenerator");
                     // make the Dalek fly
                     EntityEquipment entityEquipment = dalek.getEquipment();
                     assert entityEquipment != null;
