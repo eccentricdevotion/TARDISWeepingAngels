@@ -24,10 +24,10 @@ import java.util.UUID;
 
 public class OodFollow {
 
-    public static boolean run(TardisWeepingAngelsPlugin plugin, Player player, ArmorStand stand, String[] args) {
+    public static void run(TardisWeepingAngelsPlugin plugin, Player player, ArmorStand stand, String[] args) {
         if (!player.hasPermission("tardisweepingangels.follow.ood")) {
             player.sendMessage(plugin.pluginName + "You don't have permission to make an Ood follow you!");
-            return true;
+            return;
         }
         if (stand.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid)) {
             UUID uuid = player.getUniqueId();
@@ -43,6 +43,5 @@ public class OodFollow {
         } else {
             player.sendMessage(plugin.pluginName + "That is a broken Ood :(");
         }
-        return true;
     }
 }

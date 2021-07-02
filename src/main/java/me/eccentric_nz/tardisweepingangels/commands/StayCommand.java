@@ -30,14 +30,14 @@ public class StayCommand {
         this.plugin = plugin;
     }
 
-    public boolean stay(CommandSender sender) {
+    public void stay(CommandSender sender) {
         Player player = null;
         if (sender instanceof Player) {
             player = (Player) sender;
         }
         if (player == null) {
             sender.sendMessage(plugin.pluginName + "Command can only be used by a player!");
-            return true;
+            return;
         }
         UUID uuid = player.getUniqueId();
         if (plugin.getFollowTasks().containsKey(uuid)) {
@@ -46,6 +46,5 @@ public class StayCommand {
         } else {
             player.sendMessage(plugin.pluginName + "An entity is not following you!");
         }
-        return true;
     }
 }

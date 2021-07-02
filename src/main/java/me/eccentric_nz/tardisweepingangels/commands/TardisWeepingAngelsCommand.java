@@ -51,11 +51,14 @@ public class TardisWeepingAngelsCommand implements CommandExecutor {
                 case "set":
                     return new AdminCommand(plugin).set(sender, args);
                 case "follow":
-                    return new FollowCommand(plugin).follow(sender, args);
+                    new FollowCommand(plugin).follow(sender, args);
+                    return true;
                 case "stay":
-                    return new StayCommand(plugin).stay(sender);
+                    new StayCommand(plugin).stay(sender);
+                    return true;
                 case "remove":
-                    return new RemoveCommand(plugin).remove(sender);
+                    new RemoveCommand(plugin).remove(sender);
+                    return true;
                 case "give":
                     return new GiveCommand(plugin).give(sender, args);
                 default:

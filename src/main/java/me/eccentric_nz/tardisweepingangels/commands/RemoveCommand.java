@@ -33,34 +33,33 @@ public class RemoveCommand {
         this.plugin = plugin;
     }
 
-    public boolean remove(CommandSender sender) {
+    public void remove(CommandSender sender) {
         Player player = null;
         if (sender instanceof Player) {
             player = (Player) sender;
         }
         if (player == null) {
             sender.sendMessage(plugin.pluginName + "Command can only be used by a player!");
-            return true;
+            return;
         }
         UUID uuid = player.getUniqueId();
         if (plugin.getFollowTasks().containsKey(uuid)) {
             player.sendMessage(plugin.pluginName + "Please tell your follower to stay before removing it! /twa stay");
-            return true;
+            return;
         }
         ArmorStand armorStand = ArmorStandFinder.getStand(player);
         if (armorStand == null || !armorStand.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid)) {
             player.sendMessage(plugin.pluginName + "You are not looking at a TARDISWeepingAngels entity!");
-            return true;
         } else {
             if (armorStand.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.judoon, PersistentDataType.INTEGER) && !player.hasPermission("tardisweepingangels.remove.judoon")) {
                 player.sendMessage(plugin.pluginName + "You don't have permission to remove a Judoon!");
-                return true;
+                return;
             } else if (armorStand.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.k9, PersistentDataType.INTEGER) && !player.hasPermission("tardisweepingangels.remove.k9")) {
                 player.sendMessage(plugin.pluginName + "You don't have permission to remove K9!");
-                return true;
+                return;
             } else if (armorStand.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.ood, PersistentDataType.INTEGER) && !player.hasPermission("tardisweepingangels.remove.ood")) {
                 player.sendMessage(plugin.pluginName + "You don't have permission to remove an Ood!");
-                return true;
+                return;
             }
             UUID storedUuid = armorStand.getPersistentDataContainer().get(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid);
             if (storedUuid != null && storedUuid.equals(uuid)) {
@@ -69,6 +68,5 @@ public class RemoveCommand {
                 player.sendMessage(plugin.pluginName + "That is not your TARDISWeepingAngels entity!");
             }
         }
-        return true;
     }
 }
