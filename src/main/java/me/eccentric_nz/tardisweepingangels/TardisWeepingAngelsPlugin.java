@@ -159,9 +159,9 @@ public class TardisWeepingAngelsPlugin extends JavaPlugin {
             pluginManager.registerEvents(new BeeSpawnListener(this), this);
         }
         // register command
-        Objects.requireNonNull(getCommand("twa")).setExecutor(new TardisWeepingAngelsCommand(this));
+        getCommand("twa").setExecutor(new TardisWeepingAngelsCommand(this));
         // set tab completion
-        Objects.requireNonNull(getCommand("twa")).setTabCompleter(new TabComplete(this));
+        getCommand("twa").setTabCompleter(new TabComplete(this));
         // remove invisible Guardians not riding an Enderman
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new CleanGuardians(this), 100L, 6000L);
         // start repeating spawn tasks

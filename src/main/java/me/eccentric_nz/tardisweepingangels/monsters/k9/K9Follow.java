@@ -32,7 +32,6 @@ public class K9Follow {
         if (armorStand.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid)) {
             UUID uuid = player.getUniqueId();
             UUID k9Id = armorStand.getPersistentDataContainer().get(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid);
-            assert k9Id != null;
             if (k9Id.equals(uuid)) {
                 double speed = (args.length == 2) ? Math.min(Double.parseDouble(args[1]) / 100.0d, 0.5d) : 0.15d;
                 int taskId = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new K9WalkRunnable(armorStand, speed, player), 2L, 2L);

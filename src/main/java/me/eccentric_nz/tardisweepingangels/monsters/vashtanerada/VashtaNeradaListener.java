@@ -87,7 +87,7 @@ public class VashtaNeradaListener implements Listener {
     }
 
     private void spawnVashtaNerada(Location location) {
-        LivingEntity vashtaNerada = (LivingEntity) Objects.requireNonNull(location.getWorld()).spawnEntity(location, EntityType.ZOMBIE);
+        LivingEntity vashtaNerada = (LivingEntity) location.getWorld().spawnEntity(location, EntityType.ZOMBIE);
         vashtaNerada.setSilent(true);
         Zombie zombie = (Zombie) vashtaNerada;
         zombie.setAdult();

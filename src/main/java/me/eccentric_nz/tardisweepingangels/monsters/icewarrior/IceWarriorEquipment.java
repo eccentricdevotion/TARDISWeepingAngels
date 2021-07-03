@@ -35,17 +35,14 @@ public class IceWarriorEquipment {
         ItemStack arm = new ItemStack(Material.SNOWBALL, 1);
         ItemStack weapon = new ItemStack(Material.SNOWBALL, 1);
         ItemMeta headMeta = helmet.getItemMeta();
-        assert headMeta != null;
         headMeta.setDisplayName("Ice Warrior Head");
         headMeta.setCustomModelData(4);
         helmet.setItemMeta(headMeta);
         ItemMeta armMeta = arm.getItemMeta();
-        assert armMeta != null;
         armMeta.setDisplayName("Ice Warrior Arm");
         armMeta.setCustomModelData(2);
         arm.setItemMeta(armMeta);
         ItemMeta chestMeta = chestplate.getItemMeta();
-        assert chestMeta != null;
         chestMeta.setDisplayName("Ice Warrior Chest");
         if (disguise) {
             Damageable damageable = (Damageable) chestMeta;
@@ -53,7 +50,6 @@ public class IceWarriorEquipment {
         }
         chestplate.setItemMeta(chestMeta);
         ItemMeta legMeta = leggings.getItemMeta();
-        assert legMeta != null;
         legMeta.setDisplayName("Ice Warrior Legs");
         if (disguise) {
             Damageable legDamage = (Damageable) legMeta;
@@ -62,14 +58,12 @@ public class IceWarriorEquipment {
         leggings.setItemMeta(legMeta);
 
         EntityEquipment entityEquipment = livingEntity.getEquipment();
-        assert entityEquipment != null;
         entityEquipment.setHelmet(helmet);
         entityEquipment.setChestplate(chestplate);
         entityEquipment.setLeggings(leggings);
         entityEquipment.setBoots(null);
         if (!disguise) {
             ItemMeta sword = weapon.getItemMeta();
-            assert sword != null;
             sword.setDisplayName("Ice Warrior Dagger");
             sword.setCustomModelData(3);
             weapon.setItemMeta(sword);

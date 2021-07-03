@@ -51,7 +51,6 @@ public class ArmourStandEquipment {
                     new ItemStack(Material.PAINTING, 1);
         };
         ItemMeta headMeta = head.getItemMeta();
-        assert headMeta != null;
         headMeta.setDisplayName(monster.getName() + " Head");
         headMeta.setCustomModelData(monster.getCustomModelData());
         head.setItemMeta(headMeta);
@@ -60,7 +59,6 @@ public class ArmourStandEquipment {
 
     private void setHelmetOnly(ArmorStand armorStand, ItemStack itemStack) {
         EntityEquipment entityEquipment = armorStand.getEquipment();
-        assert entityEquipment != null;
         entityEquipment.setChestplate(null);
         entityEquipment.setLeggings(null);
         entityEquipment.setBoots(null);

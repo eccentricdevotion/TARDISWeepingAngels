@@ -59,7 +59,7 @@ public class ImageHolder implements Listener {
             Location location = highest.add(0, 1, 0);
             // spawn an angel
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                LivingEntity weepingAngel = (LivingEntity) Objects.requireNonNull(location.getWorld()).spawnEntity(location, EntityType.SKELETON);
+                LivingEntity weepingAngel = (LivingEntity) location.getWorld().spawnEntity(location, EntityType.SKELETON);
                 weepingAngel.setSilent(true);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                     AngelEquipment.set(weepingAngel, false);

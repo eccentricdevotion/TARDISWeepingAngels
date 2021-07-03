@@ -45,10 +45,9 @@ public class Strax implements Listener {
         Entity entity = event.getRightClicked();
         if (entity instanceof Zombie zombie) {
             EntityEquipment entityEquipment = zombie.getEquipment();
-            assert entityEquipment != null;
-            if (Objects.requireNonNull(entityEquipment.getHelmet()).getType().equals(Material.POTATO)) {
+            if (entityEquipment.getHelmet().getType().equals(Material.POTATO)) {
                 ItemStack helmet = entityEquipment.getHelmet();
-                if (helmet.hasItemMeta() && Objects.requireNonNull(helmet.getItemMeta()).hasDisplayName() && helmet.getItemMeta().getDisplayName().startsWith("Sontaran")) {
+                if (helmet.hasItemMeta() && helmet.getItemMeta().hasDisplayName() && helmet.getItemMeta().getDisplayName().startsWith("Sontaran")) {
                     Player player = event.getPlayer();
                     ItemStack itemStack = player.getInventory().getItemInMainHand();
                     if (itemStack.getType().equals(Material.POTION)) {
@@ -65,7 +64,7 @@ public class Strax implements Listener {
                             // switch the armour to a butler uniform
                             Location location = zombie.getLocation();
                             zombie.remove();
-                            PigZombie pigZombie = (PigZombie) Objects.requireNonNull(location.getWorld()).spawnEntity(location, EntityType.ZOMBIFIED_PIGLIN);
+                            PigZombie pigZombie = (PigZombie) location.getWorld().spawnEntity(location, EntityType.ZOMBIFIED_PIGLIN);
                             pigZombie.setSilent(true);
                             pigZombie.setAngry(false);
                             pigZombie.setAdult();
@@ -82,7 +81,7 @@ public class Strax implements Listener {
             }
             if (entityEquipment.getHelmet().getType().equals(Material.BAKED_POTATO)) {
                 ItemStack helmet = entityEquipment.getHelmet();
-                if (helmet.hasItemMeta() && Objects.requireNonNull(helmet.getItemMeta()).hasDisplayName() && helmet.getItemMeta().getDisplayName().startsWith("Strax")) {
+                if (helmet.hasItemMeta() && helmet.getItemMeta().hasDisplayName() && helmet.getItemMeta().getDisplayName().startsWith("Strax")) {
                     Player player = event.getPlayer();
                     UUID uuid = player.getUniqueId();
                     ItemStack itemStack = player.getInventory().getItemInMainHand();
@@ -92,10 +91,9 @@ public class Strax implements Listener {
                             player.playSound(zombie.getLocation(), "milk", 1.0f, 1.0f);
                             ItemStack milk = new ItemStack(Material.MILK_BUCKET);
                             ItemMeta milkMeta = milk.getItemMeta();
-                            assert milkMeta != null;
                             milkMeta.setDisplayName("Sontaran Lactic Fluid");
                             milk.setItemMeta(milkMeta);
-                            Objects.requireNonNull(player.getEquipment()).setItemInMainHand(milk);
+                            player.getEquipment().setItemInMainHand(milk);
                             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> milkers.remove(uuid), 3000L);
                         } else {
                             player.sendMessage(plugin.pluginName + "Strax is not lactating right now, try again later.");

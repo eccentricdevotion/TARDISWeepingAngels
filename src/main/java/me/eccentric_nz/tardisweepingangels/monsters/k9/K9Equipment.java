@@ -35,7 +35,6 @@ public class K9Equipment {
     public static void set(Player player, Entity entity, boolean disguise) {
         ItemStack head = new ItemStack(Material.BONE);
         ItemMeta headMeta = head.getItemMeta();
-        assert headMeta != null;
         headMeta.setDisplayName("K9 Head");
         headMeta.setCustomModelData(1);
         head.setItemMeta(headMeta);
@@ -49,7 +48,6 @@ public class K9Equipment {
             armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.k9, PersistentDataType.INTEGER, 0);
             armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid, uuid);
             EntityEquipment entityEquipment = armorStand.getEquipment();
-            assert entityEquipment != null;
             entityEquipment.setHelmet(head);
             entityEquipment.setItemInMainHand(null);
             entityEquipment.setItemInOffHand(null);

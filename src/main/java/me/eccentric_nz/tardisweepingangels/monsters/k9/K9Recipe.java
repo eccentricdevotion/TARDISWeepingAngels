@@ -33,7 +33,6 @@ public class K9Recipe {
     public void addRecipe() {
         ItemStack itemStack = new ItemStack(Material.BONE);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        assert itemMeta != null;
         itemMeta.setDisplayName("K9");
         itemMeta.setCustomModelData(1);
         itemStack.setItemMeta(itemMeta);

@@ -77,7 +77,7 @@ public class AngelBuilder implements Listener {
                         south.setType(Material.AIR);
                     }
                     Location location = bottom.getLocation();
-                    LivingEntity weepingAngel = (LivingEntity) Objects.requireNonNull(location.getWorld()).spawnEntity(location, EntityType.SKELETON);
+                    LivingEntity weepingAngel = (LivingEntity) location.getWorld().spawnEntity(location, EntityType.SKELETON);
                     weepingAngel.setSilent(true);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                         AngelEquipment.set(weepingAngel, false);

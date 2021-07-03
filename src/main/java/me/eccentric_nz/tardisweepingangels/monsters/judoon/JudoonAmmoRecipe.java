@@ -34,7 +34,6 @@ public class JudoonAmmoRecipe {
     public void addRecipe() {
         ItemStack itemStack = new ItemStack(Material.ARROW, 2);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        assert itemMeta != null;
         itemMeta.setDisplayName("Judoon Ammunition");
         itemMeta.setCustomModelData(13);
         itemStack.setItemMeta(itemMeta);

@@ -231,7 +231,6 @@ public class MonsterEquipment implements TardisWeepingAngelsApi {
     public ItemStack getK9() {
         ItemStack is = new ItemStack(Material.BONE);
         ItemMeta im = is.getItemMeta();
-        assert im != null;
         im.setDisplayName("K9");
         im.setCustomModelData(1);
         is.setItemMeta(im);

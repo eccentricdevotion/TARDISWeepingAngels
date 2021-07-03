@@ -87,7 +87,6 @@ public class SpawnCommand {
         World world = eyeLocation.getWorld();
         switch (monster) {
             case WEEPING_ANGEL -> {
-                assert world != null;
                 LivingEntity weepingAngel = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                 weepingAngel.setSilent(true);
                 weepingAngel.setNoDamageTicks(75);
@@ -96,7 +95,6 @@ public class SpawnCommand {
                 plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(weepingAngel, EntityType.SKELETON, Monster.WEEPING_ANGEL, eyeLocation));
             }
             case CYBERMAN -> {
-                assert world != null;
                 LivingEntity cyberman = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                 cyberman.setSilent(true);
                 cyberman.setNoDamageTicks(75);
@@ -107,7 +105,6 @@ public class SpawnCommand {
                 plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(cyberman, EntityType.ZOMBIE, Monster.CYBERMAN, eyeLocation));
             }
             case DALEK -> {
-                assert world != null;
                 LivingEntity dalek = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                 dalek.setSilent(true);
                 dalek.setNoDamageTicks(75);
@@ -118,18 +115,15 @@ public class SpawnCommand {
                     TARDISHelper tardisHelper = (TARDISHelper) plugin.getServer().getPluginManager().getPlugin("TARDISChunkGenerator");
                     // make the Dalek fly
                     EntityEquipment entityEquipment = dalek.getEquipment();
-                    assert entityEquipment != null;
                     entityEquipment.setChestplate(new ItemStack(Material.ELYTRA, 1));
                     // teleport them straight up
                     dalek.teleport(dalek.getLocation().add(0.0d, 20.0d, 0.0d));
                     dalek.setGliding(true);
-                    assert tardisHelper != null;
                     tardisHelper.setFallFlyingTag(dalek);
                     entityEquipment.setChestplate(new ItemStack(Material.AIR));
                 }
             }
             case EMPTY_CHILD -> {
-                assert world != null;
                 LivingEntity emptyChild = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                 emptyChild.setSilent(true);
                 emptyChild.setNoDamageTicks(75);
@@ -140,7 +134,6 @@ public class SpawnCommand {
                 plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(emptyChild, EntityType.ZOMBIE, Monster.EMPTY_CHILD, eyeLocation));
             }
             case HATH -> {
-                assert world != null;
                 LivingEntity hath = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIFIED_PIGLIN);
                 hath.setSilent(true);
                 hath.setNoDamageTicks(75);
@@ -149,7 +142,6 @@ public class SpawnCommand {
                 plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(hath, EntityType.ZOMBIFIED_PIGLIN, Monster.HATH, eyeLocation));
             }
             case ICE_WARRIOR -> {
-                assert world != null;
                 LivingEntity iceWarrior = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIFIED_PIGLIN);
                 iceWarrior.setSilent(true);
                 IceWarriorEquipment.set(iceWarrior, false);
@@ -162,28 +154,24 @@ public class SpawnCommand {
                 ageable.setAdult();
             }
             case JUDOON -> {
-                assert world != null;
                 Entity judoon = world.spawnEntity(eyeLocation, EntityType.ARMOR_STAND);
                 JudoonEquipment.set(null, judoon, false);
                 player.playSound(judoon.getLocation(), "judoon", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(judoon, EntityType.ARMOR_STAND, Monster.JUDOON, eyeLocation));
             }
             case K9 -> {
-                assert world != null;
                 Entity k9 = world.spawnEntity(eyeLocation, EntityType.ARMOR_STAND);
                 K9Equipment.set(player, k9, false);
                 player.playSound(k9.getLocation(), "k9", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(k9, EntityType.ARMOR_STAND, Monster.K9, eyeLocation));
             }
             case OOD -> {
-                assert world != null;
                 Entity ood = world.spawnEntity(eyeLocation, EntityType.ARMOR_STAND);
                 OodEquipment.set(null, ood, false);
                 player.playSound(ood.getLocation(), "ood", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(ood, EntityType.ARMOR_STAND, Monster.OOD, eyeLocation));
             }
             case SILENT -> {
-                assert world != null;
                 LivingEntity silent = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ENDERMAN);
                 silent.setSilent(true);
                 SilentEquipment.set(silent, false);
@@ -191,7 +179,6 @@ public class SpawnCommand {
                 plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(silent, EntityType.ENDERMAN, Monster.SILENT, eyeLocation));
             }
             case SILURIAN -> {
-                assert world != null;
                 LivingEntity silurian = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                 silurian.setSilent(true);
                 silurian.setNoDamageTicks(75);
@@ -200,7 +187,6 @@ public class SpawnCommand {
                 plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(silurian, EntityType.SKELETON, Monster.SILURIAN, eyeLocation));
             }
             case SONTARAN -> {
-                assert world != null;
                 LivingEntity sontaran = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                 sontaran.setSilent(true);
                 sontaran.setNoDamageTicks(75);
@@ -211,7 +197,6 @@ public class SpawnCommand {
                 plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(sontaran, EntityType.ZOMBIE, Monster.SONTARAN, eyeLocation));
             }
             case STRAX -> {
-                assert world != null;
                 LivingEntity strax = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIFIED_PIGLIN);
                 strax.setSilent(true);
                 strax.setNoDamageTicks(75);
@@ -224,14 +209,12 @@ public class SpawnCommand {
                 plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(strax, EntityType.ZOMBIFIED_PIGLIN, Monster.STRAX, eyeLocation));
             }
             case TOCLAFANE -> {
-                assert world != null;
                 Entity toclafane = world.spawnEntity(eyeLocation, EntityType.ARMOR_STAND);
                 ToclafaneEquipment.set(toclafane, false);
                 player.playSound(toclafane.getLocation(), "toclafane", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(toclafane, EntityType.ARMOR_STAND, Monster.TOCLAFANE, eyeLocation));
             }
             case VASHTA_NERADA -> {
-                assert world != null;
                 LivingEntity vashtaNerada = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                 vashtaNerada.setSilent(true);
                 vashtaNerada.setNoDamageTicks(75);
@@ -242,7 +225,6 @@ public class SpawnCommand {
                 plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(vashtaNerada, EntityType.ZOMBIE, Monster.VASHTA_NERADA, eyeLocation));
             }
             case ZYGON -> {
-                assert world != null;
                 LivingEntity zygon = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                 zygon.setSilent(true);
                 zygon.setNoDamageTicks(75);

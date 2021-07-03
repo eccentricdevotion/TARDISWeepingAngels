@@ -35,7 +35,6 @@ public class JudoonEquipment {
     public static void set(Player player, Entity entity, boolean disguise) {
         ItemStack head = new ItemStack(Material.YELLOW_DYE);
         ItemMeta headMeta = head.getItemMeta();
-        assert headMeta != null;
         headMeta.setDisplayName("Judoon Head");
         headMeta.setCustomModelData((disguise) ? 10 : 2);
         head.setItemMeta(headMeta);
@@ -51,18 +50,15 @@ public class JudoonEquipment {
             armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid, uuid);
             ItemStack arm = new ItemStack(Material.YELLOW_DYE);
             ItemMeta armMeta = arm.getItemMeta();
-            assert armMeta != null;
             armMeta.setDisplayName("Judoon Arm");
             armMeta.setCustomModelData(3);
             arm.setItemMeta(armMeta);
             ItemStack weaponArm = new ItemStack(Material.YELLOW_DYE);
             ItemMeta weaponMeta = weaponArm.getItemMeta();
-            assert weaponMeta != null;
             weaponMeta.setDisplayName("Judoon Weapon Arm");
             weaponMeta.setCustomModelData(4);
             weaponArm.setItemMeta(weaponMeta);
             EntityEquipment entityEquipment = armorStand.getEquipment();
-            assert entityEquipment != null;
             entityEquipment.setHelmet(head);
             entityEquipment.setItemInMainHand(weaponArm);
             entityEquipment.setItemInOffHand(arm);

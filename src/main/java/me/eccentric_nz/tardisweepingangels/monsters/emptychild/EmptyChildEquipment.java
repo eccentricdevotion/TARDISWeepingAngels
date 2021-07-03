@@ -36,17 +36,14 @@ public class EmptyChildEquipment {
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
         ItemMeta headMeta = helmet.getItemMeta();
-        assert headMeta != null;
         headMeta.setDisplayName("Empty Child Head");
         headMeta.setCustomModelData(3);
         helmet.setItemMeta(headMeta);
         ItemMeta armMeta = arm.getItemMeta();
-        assert armMeta != null;
         armMeta.setDisplayName("Empty Child Arm");
         armMeta.setCustomModelData(2);
         arm.setItemMeta(armMeta);
         ItemMeta chestMeta = chestplate.getItemMeta();
-        assert chestMeta != null;
         chestMeta.setDisplayName("Empty Child Chest");
         if (disguise) {
             Damageable damageable = (Damageable) chestMeta;
@@ -54,7 +51,6 @@ public class EmptyChildEquipment {
         }
         chestplate.setItemMeta(chestMeta);
         ItemMeta legMeta = leggings.getItemMeta();
-        assert legMeta != null;
         legMeta.setDisplayName("Empty Child Legs");
         if (disguise) {
             Damageable legDamage = (Damageable) legMeta;
@@ -63,7 +59,6 @@ public class EmptyChildEquipment {
         leggings.setItemMeta(legMeta);
 
         EntityEquipment entityEquipment = livingEntity.getEquipment();
-        assert entityEquipment != null;
         entityEquipment.setChestplate(chestplate);
         entityEquipment.setLeggings(leggings);
         entityEquipment.setBoots(null);

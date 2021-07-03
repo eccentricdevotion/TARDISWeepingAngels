@@ -55,7 +55,7 @@ public class ToclafaneListener implements Listener {
         if (entity instanceof ArmorStand armorStand && damager instanceof Player player) {
             if (armorStand.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.toclafane, PersistentDataType.INTEGER)) {
                 event.setCancelled(true);
-                int maxHealth = (Objects.requireNonNull(armorStand.getLocation().getWorld()).getDifficulty().ordinal() * 6) + 1;
+                int maxHealth = (armorStand.getLocation().getWorld().getDifficulty().ordinal() * 6) + 1;
                 int health = armorStand.getPersistentDataContainer().get(TardisWeepingAngelsPlugin.toclafane, PersistentDataType.INTEGER);
                 if (health == maxHealth) {
                     // get the bee and make it angry
@@ -69,15 +69,13 @@ public class ToclafaneListener implements Listener {
                     EntityEquipment entityEquipment = armorStand.getEquipment();
                     if (entityEquipment != null) {
                         ItemStack head = entityEquipment.getHelmet();
-                        assert head != null;
                         ItemMeta itemMeta = head.getItemMeta();
                         player.playSound(armorStand.getLocation(), "toclafane", 1.0f, 1.0f);
-                        assert itemMeta != null;
                         itemMeta.setCustomModelData(2);
                         head.setItemMeta(itemMeta);
                         entityEquipment.setHelmet(head);
                         bee.setHasStung(false);
-                        bee.setHealth(Objects.requireNonNull(bee.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
+                        bee.setHealth(bee.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
                         bee.setAnger(500);
                         bee.setTarget(player);
                         bee.setSilent(true);
@@ -123,7 +121,7 @@ public class ToclafaneListener implements Listener {
                 Entity passenger = damager.getPassengers().get(0);
                 if (passenger instanceof ArmorStand && passenger.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.toclafane, PersistentDataType.INTEGER)) {
                     bee.setHasStung(false);
-                    bee.setHealth(Objects.requireNonNull(bee.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
+                    bee.setHealth(bee.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
                     bee.setTarget(player);
                 }
             }

@@ -57,7 +57,6 @@ public class K9Listener implements Listener {
             if (livingEntity.getType().equals(EntityType.WOLF) && plugin.getConfig().getBoolean("k9.by_taming")) {
                 Location location = livingEntity.getLocation();
                 World world = location.getWorld();
-                assert world != null;
                 if (!plugin.getConfig().getBoolean("k9.worlds." + world.getName())) {
                     return;
                 }
@@ -81,7 +80,6 @@ public class K9Listener implements Listener {
             if (ent.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid)) {
                 UUID uuid = player.getUniqueId();
                 UUID k9Id = ent.getPersistentDataContainer().get(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid);
-                assert k9Id != null;
                 if (k9Id.equals(uuid)) {
                     player.playSound(ent.getLocation(), "k9", 1.0f, 1.0f);
                     if (plugin.getFollowTasks().containsKey(uuid)) {
@@ -108,13 +106,11 @@ public class K9Listener implements Listener {
             ItemStack is = event.getItem();
             if (is != null && is.getType().equals(Material.BONE) && is.hasItemMeta()) {
                 ItemMeta im = is.getItemMeta();
-                assert im != null;
                 if (im.hasDisplayName() && im.getDisplayName().equals("K9") && im.hasCustomModelData()) {
                     event.setCancelled(true);
                     Player player = event.getPlayer();
-                    Location location = Objects.requireNonNull(event.getClickedBlock()).getLocation().add(0.5d, 1.0d, 0.5d);
+                    Location location = event.getClickedBlock().getLocation().add(0.5d, 1.0d, 0.5d);
                     World world = location.getWorld();
-                    assert world != null;
                     if (!plugin.getConfig().getBoolean("k9.worlds." + world.getName())) {
                         player.sendMessage(plugin.pluginName + "You cannot spawn a K9 in this world!");
                         return;

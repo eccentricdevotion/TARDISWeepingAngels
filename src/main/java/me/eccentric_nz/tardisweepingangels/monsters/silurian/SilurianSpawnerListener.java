@@ -54,7 +54,7 @@ public class SilurianSpawnerListener implements Listener {
         CreatureSpawner spawner = event.getSpawner();
         if (spawner.getSpawnedType().equals(EntityType.CAVE_SPIDER)) {
             Location cave = event.getLocation();
-            String name = WorldProcessor.sanitiseName(Objects.requireNonNull(cave.getWorld()).getName());
+            String name = WorldProcessor.sanitiseName(cave.getWorld().getName());
             if (plugin.getConfig().getInt("silurians.worlds." + name) <= 0) {
                 return;
             }

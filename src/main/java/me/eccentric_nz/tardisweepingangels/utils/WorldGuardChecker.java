@@ -54,8 +54,7 @@ public class WorldGuardChecker {
         if (plugin != null) {
             WorldGuardPlatform worldGuardPlatform = WorldGuard.getInstance().getPlatform();
             BlockVector3 vector = BukkitAdapter.asBlockVector(l);
-            RegionManager regionManager = worldGuardPlatform.getRegionContainer().get(BukkitAdapter.adapt(Objects.requireNonNull(l.getWorld())));
-            assert regionManager != null;
+            RegionManager regionManager = worldGuardPlatform.getRegionContainer().get(BukkitAdapter.adapt(l.getWorld()));
             ApplicableRegionSet regionSet = regionManager.getApplicableRegions(vector);
             if (regionSet.testState(null, Flags.MOB_SPAWNING)) {
                 return regionSet.queryValue(null, Flags.DENY_SPAWN) == null;
@@ -72,14 +71,13 @@ public class WorldGuardChecker {
         if (plugin != null) {
             WorldGuardPlatform worldGuardPlatform = WorldGuard.getInstance().getPlatform();
             ConfigurationManager configurationManager = worldGuardPlatform.getGlobalStateManager();
-            World bukkitWorld = BukkitAdapter.adapt(Objects.requireNonNull(l.getWorld()));
+            World bukkitWorld = BukkitAdapter.adapt(l.getWorld());
             BukkitWorldConfiguration worldConfig = (BukkitWorldConfiguration) configurationManager.get(bukkitWorld);
             if (worldConfig.blockCreeperBlockDamage || worldConfig.blockTNTBlockDamage) {
                 return false;
             }
             BlockVector3 vector = BukkitAdapter.asBlockVector(l);
             RegionManager regionManager = worldGuardPlatform.getRegionContainer().get(bukkitWorld);
-            assert regionManager != null;
             ApplicableRegionSet regionSet = regionManager.getApplicableRegions(vector);
             return regionSet.testState(null, Flags.OTHER_EXPLOSION, Flags.CREEPER_EXPLOSION, Flags.TNT);
         } else {

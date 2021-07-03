@@ -43,7 +43,6 @@ public class PlayerUndisguise implements Listener {
                 if (itemStack != null) {
                     if (itemStack.hasItemMeta()) {
                         ItemMeta itemMeta = itemStack.getItemMeta();
-                        assert itemMeta != null;
                         if (!itemMeta.getPersistentDataContainer().has(TardisWeepingAngelsPlugin.monsterHead, PersistentDataType.INTEGER)) {
                             if (itemMeta.hasDisplayName() && (itemMeta.getDisplayName().startsWith("Weeping Angel") || itemMeta.getDisplayName().startsWith("Ice Warrior") || itemMeta.getDisplayName().startsWith("Cyberman") || itemMeta.getDisplayName().startsWith("Empty Child") || itemMeta.getDisplayName().startsWith("Hath") || itemMeta.getDisplayName().startsWith("Silurian") || itemMeta.getDisplayName().startsWith("Sontaran") || itemMeta.getDisplayName().startsWith("Strax") || itemMeta.getDisplayName().startsWith("Zygon") || itemMeta.getDisplayName().startsWith("Vashta"))) {
                                 event.setCancelled(true);

@@ -63,7 +63,6 @@ public class GasMask implements Listener {
             // set helmet to pumpkin
             ItemStack gasMask = new ItemStack(Material.CARVED_PUMPKIN, 1);
             ItemMeta itemMeta = gasMask.getItemMeta();
-            assert itemMeta != null;
             itemMeta.setDisplayName("Gas Mask");
             itemMeta.setCustomModelData(1);
             gasMask.setItemMeta(itemMeta);

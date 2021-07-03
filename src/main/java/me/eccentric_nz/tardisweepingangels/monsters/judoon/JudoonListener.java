@@ -59,15 +59,12 @@ public class JudoonListener implements Listener {
                         // top up ammo
                         ItemStack box = player.getInventory().getItemInMainHand();
                         BlockStateMeta boxItemMeta = (BlockStateMeta) box.getItemMeta();
-                        assert boxItemMeta != null;
                         ShulkerBox shulkerBox = (ShulkerBox) boxItemMeta.getBlockState();
                         Inventory inventory = shulkerBox.getInventory();
                         if (inventory.contains(Material.ARROW)) {
                             int arrow = inventory.first(Material.ARROW);
                             ItemStack arrows = inventory.getItem(arrow);
-                            assert arrows != null;
                             ItemMeta arrowsItemMeta = arrows.getItemMeta();
-                            assert arrowsItemMeta != null;
                             if (arrowsItemMeta.hasCustomModelData() && arrowsItemMeta.getCustomModelData() == 13) {
                                 int remove = plugin.getConfig().getInt("judoon.ammunition") - ammo;
                                 if (arrows.getAmount() > remove) {
@@ -86,9 +83,8 @@ public class JudoonListener implements Listener {
                             }
                         }
                     } else {
-                        ItemStack arm = Objects.requireNonNull(armorStand.getEquipment()).getItemInMainHand();
+                        ItemStack arm = armorStand.getEquipment().getItemInMainHand();
                         ItemMeta itemMeta = arm.getItemMeta();
-                        assert itemMeta != null;
                         int customModelData = itemMeta.getCustomModelData();
                         if (customModelData == 4 && ammo > 0) {
                             if (!plugin.getPlayersWithGuards().contains(player.getUniqueId())) {
@@ -117,7 +113,6 @@ public class JudoonListener implements Listener {
                         armorStand.getEquipment().setItemInMainHand(arm);
                     }
                 } else {
-                    assert judoonId != null;
                     if (judoonId.equals(TardisWeepingAngelsPlugin.unclaimed)) {
                         // claim the Judoon
                         armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid, player.getUniqueId());

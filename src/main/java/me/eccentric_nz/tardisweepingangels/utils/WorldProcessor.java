@@ -84,7 +84,7 @@ public class WorldProcessor implements Runnable {
             if (!config.contains("ood.worlds." + name) || (config.contains("ood.worlds." + name) && config.getInt("ood.worlds." + name) == 20)) {
                 plugin.getConfig().set("ood.worlds." + name, true);
             }
-            if (!config.contains("judoon.worlds." + name) || (config.contains("judoon.worlds." + name) && Objects.equals(config.getString("judoon.worlds." + name), "true"))) {
+            if (!config.contains("judoon.worlds." + name) || (config.contains("judoon.worlds." + name) && config.getString("judoon.worlds." + name).equals("true"))) {
                 plugin.getConfig().set("judoon.worlds." + name, maxSpawnRate);
             }
             if (!config.contains("k9.worlds." + name)) {

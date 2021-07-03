@@ -104,9 +104,8 @@ public class Sounds implements Listener {
         }
         if (entity instanceof Zombie zombie) {
             EntityEquipment entityEquipment = zombie.getEquipment();
-            assert entityEquipment != null;
             ItemStack head = entityEquipment.getHelmet();
-            if (head != null && head.hasItemMeta() && Objects.requireNonNull(head.getItemMeta()).hasDisplayName()) {
+            if (head != null && head.hasItemMeta() && head.getItemMeta().hasDisplayName()) {
                 tracker.add(uuid);
                 LivingEntity livingEntity = event.getTarget();
                 String displayName = head.getItemMeta().getDisplayName();

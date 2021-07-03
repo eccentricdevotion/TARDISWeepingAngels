@@ -63,10 +63,8 @@ public class HelmetChecker implements Listener {
                 }
             }
             // check chestplate
-            assert entityEquipment != null;
             ItemStack chestplate = entityEquipment.getChestplate();
-            assert chestplate != null;
-            if (chestplate.hasItemMeta() && Objects.requireNonNull(chestplate.getItemMeta()).hasDisplayName()) {
+            if (chestplate.hasItemMeta() && chestplate.getItemMeta().hasDisplayName()) {
                 String displayName = chestplate.getItemMeta().getDisplayName();
                 if (displayName.startsWith("Cyberman") || displayName.startsWith("Ice") || displayName.startsWith("Silurian") || displayName.startsWith("Sontaran") || displayName.startsWith("Vashta") || displayName.startsWith("Zygon")) {
                     event.setCancelled(true);
@@ -104,7 +102,6 @@ public class HelmetChecker implements Listener {
                         monster = Monster.ZYGON;
                     }
                     ItemMeta headMeta = helmet.getItemMeta();
-                    assert headMeta != null;
                     headMeta.setDisplayName(name);
                     headMeta.setCustomModelData(monster.getCustomModelData());
                     helmet.setItemMeta(headMeta);

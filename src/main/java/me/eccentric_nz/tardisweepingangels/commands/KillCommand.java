@@ -61,8 +61,7 @@ public class KillCommand {
                 Collection<Skeleton> weepingAngels = world.getEntitiesByClass(Skeleton.class);
                 for (Skeleton weepingAngel : weepingAngels) {
                     EntityEquipment entityEquipment = weepingAngel.getEquipment();
-                    assert entityEquipment != null;
-                    if (Objects.requireNonNull(entityEquipment.getHelmet()).getType().equals(Material.BRICK) || entityEquipment.getHelmet().getType().equals(Material.STONE_BUTTON)) {
+                    if (entityEquipment.getHelmet().getType().equals(Material.BRICK) || entityEquipment.getHelmet().getType().equals(Material.STONE_BUTTON)) {
                         weepingAngel.remove();
                         count++;
                     }
@@ -73,10 +72,9 @@ public class KillCommand {
                 Collection<Zombie> cybermen = world.getEntitiesByClass(Zombie.class);
                 for (Zombie cyberman : cybermen) {
                     EntityEquipment entityEquipment = cyberman.getEquipment();
-                    assert entityEquipment != null;
-                    if (Objects.requireNonNull(entityEquipment.getHelmet()).getType().equals(Material.IRON_INGOT)) {
+                    if (entityEquipment.getHelmet().getType().equals(Material.IRON_INGOT)) {
                         ItemStack itemStack = entityEquipment.getHelmet();
-                        if (itemStack.hasItemMeta() && Objects.requireNonNull(itemStack.getItemMeta()).hasDisplayName() && itemStack.getItemMeta().getDisplayName().startsWith("Cyberman")) {
+                        if (itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName() && itemStack.getItemMeta().getDisplayName().startsWith("Cyberman")) {
                             cyberman.remove();
                             count++;
                         }
@@ -88,10 +86,9 @@ public class KillCommand {
                 Collection<Skeleton> daleks = world.getEntitiesByClass(Skeleton.class);
                 for (Skeleton dalek : daleks) {
                     EntityEquipment entityEquipment = dalek.getEquipment();
-                    assert entityEquipment != null;
-                    if (Objects.requireNonNull(entityEquipment.getHelmet()).getType().equals(Material.SLIME_BALL)) {
+                    if (entityEquipment.getHelmet().getType().equals(Material.SLIME_BALL)) {
                         ItemStack itemStack = entityEquipment.getHelmet();
-                        if (itemStack.hasItemMeta() && Objects.requireNonNull(itemStack.getItemMeta()).hasDisplayName() && itemStack.getItemMeta().getDisplayName().startsWith("Dalek")) {
+                        if (itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName() && itemStack.getItemMeta().getDisplayName().startsWith("Dalek")) {
                             dalek.remove();
                             count++;
                         }
@@ -103,10 +100,9 @@ public class KillCommand {
                 Collection<Zombie> emptyChildren = world.getEntitiesByClass(Zombie.class);
                 for (Zombie emptyChild : emptyChildren) {
                     EntityEquipment entityEquipment = emptyChild.getEquipment();
-                    assert entityEquipment != null;
-                    if (Objects.requireNonNull(entityEquipment.getHelmet()).getType().equals(Material.SUGAR)) {
+                    if (entityEquipment.getHelmet().getType().equals(Material.SUGAR)) {
                         ItemStack itemStack = entityEquipment.getHelmet();
-                        if (itemStack.hasItemMeta() && Objects.requireNonNull(itemStack.getItemMeta()).hasDisplayName() && itemStack.getItemMeta().getDisplayName().startsWith("Empty Child")) {
+                        if (itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName() && itemStack.getItemMeta().getDisplayName().startsWith("Empty Child")) {
                             emptyChild.remove();
                             count++;
                         }
@@ -118,10 +114,9 @@ public class KillCommand {
                 Collection<PigZombie> haths = world.getEntitiesByClass(PigZombie.class);
                 for (Zombie hath : haths) {
                     EntityEquipment entityEquipment = hath.getEquipment();
-                    assert entityEquipment != null;
-                    if (Objects.requireNonNull(entityEquipment.getHelmet()).getType().equals(Material.PUFFERFISH)) {
+                    if (entityEquipment.getHelmet().getType().equals(Material.PUFFERFISH)) {
                         ItemStack itemStack = entityEquipment.getHelmet();
-                        if (itemStack.hasItemMeta() && Objects.requireNonNull(itemStack.getItemMeta()).hasDisplayName() && itemStack.getItemMeta().getDisplayName().startsWith("Hath")) {
+                        if (itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName() && itemStack.getItemMeta().getDisplayName().startsWith("Hath")) {
                             hath.remove();
                             count++;
                         }
@@ -133,10 +128,8 @@ public class KillCommand {
                 Collection<PigZombie> warriors = world.getEntitiesByClass(PigZombie.class);
                 for (PigZombie warrior : warriors) {
                     EntityEquipment entityEquipment = warrior.getEquipment();
-                    assert entityEquipment != null;
                     ItemStack itemStack = entityEquipment.getHelmet();
-                    assert itemStack != null;
-                    if (itemStack.hasItemMeta() && Objects.requireNonNull(itemStack.getItemMeta()).hasDisplayName()) {
+                    if (itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName()) {
                         if (entityEquipment.getHelmet().getType().equals(Material.SNOWBALL)) {
                             if (itemStack.getItemMeta().getDisplayName().startsWith("Ice Warrior")) {
                                 what = "Ice Warriors";
@@ -158,10 +151,9 @@ public class KillCommand {
                 Collection<Skeleton> silurians = world.getEntitiesByClass(Skeleton.class);
                 for (Skeleton silurian : silurians) {
                     EntityEquipment entityEquipment = silurian.getEquipment();
-                    assert entityEquipment != null;
-                    if (Objects.requireNonNull(entityEquipment.getHelmet()).getType().equals(Material.FEATHER)) {
+                    if (entityEquipment.getHelmet().getType().equals(Material.FEATHER)) {
                         ItemStack itemStack = entityEquipment.getHelmet();
-                        if (itemStack.hasItemMeta() && Objects.requireNonNull(itemStack.getItemMeta()).hasDisplayName() && itemStack.getItemMeta().getDisplayName().startsWith("Silurian")) {
+                        if (itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName() && itemStack.getItemMeta().getDisplayName().startsWith("Silurian")) {
                             silurian.remove();
                             count++;
                         }
@@ -184,10 +176,9 @@ public class KillCommand {
                 Collection<Zombie> sontarans = world.getEntitiesByClass(Zombie.class);
                 for (Zombie sontaran : sontarans) {
                     EntityEquipment entityEquipment = sontaran.getEquipment();
-                    assert entityEquipment != null;
-                    if (Objects.requireNonNull(entityEquipment.getHelmet()).getType().equals(Material.POTATO)) {
+                    if (entityEquipment.getHelmet().getType().equals(Material.POTATO)) {
                         ItemStack itemStack = entityEquipment.getHelmet();
-                        if (itemStack.hasItemMeta() && Objects.requireNonNull(itemStack.getItemMeta()).hasDisplayName() && itemStack.getItemMeta().getDisplayName().startsWith("Sontaran")) {
+                        if (itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName() && itemStack.getItemMeta().getDisplayName().startsWith("Sontaran")) {
                             sontaran.remove();
                             count++;
                         }
@@ -233,10 +224,9 @@ public class KillCommand {
                 Collection<Zombie> vashtaNeradas = world.getEntitiesByClass(Zombie.class);
                 for (Zombie vashtaNerada : vashtaNeradas) {
                     EntityEquipment entityEquipment = vashtaNerada.getEquipment();
-                    assert entityEquipment != null;
-                    if (Objects.requireNonNull(entityEquipment.getHelmet()).getType().equals(Material.BOOK)) {
+                    if (entityEquipment.getHelmet().getType().equals(Material.BOOK)) {
                         ItemStack itemStack = entityEquipment.getHelmet();
-                        if (itemStack.hasItemMeta() && Objects.requireNonNull(itemStack.getItemMeta()).hasDisplayName() && itemStack.getItemMeta().getDisplayName().startsWith("Vashta")) {
+                        if (itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName() && itemStack.getItemMeta().getDisplayName().startsWith("Vashta")) {
                             vashtaNerada.remove();
                             count++;
                         }
@@ -248,10 +238,9 @@ public class KillCommand {
                 Collection<Zombie> zygons = world.getEntitiesByClass(Zombie.class);
                 for (Zombie zygon : zygons) {
                     EntityEquipment entityEquipment = zygon.getEquipment();
-                    assert entityEquipment != null;
-                    if (Objects.requireNonNull(entityEquipment.getHelmet()).getType().equals(Material.PAINTING)) {
+                    if (entityEquipment.getHelmet().getType().equals(Material.PAINTING)) {
                         ItemStack itemStack = entityEquipment.getHelmet();
-                        if (itemStack.hasItemMeta() && Objects.requireNonNull(itemStack.getItemMeta()).hasDisplayName() && itemStack.getItemMeta().getDisplayName().startsWith("Zygon")) {
+                        if (itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName() && itemStack.getItemMeta().getDisplayName().startsWith("Zygon")) {
                             zygon.remove();
                             count++;
                         }

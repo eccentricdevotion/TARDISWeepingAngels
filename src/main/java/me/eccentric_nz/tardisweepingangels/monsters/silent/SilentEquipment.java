@@ -34,7 +34,7 @@ public class SilentEquipment {
 
     public static void set(LivingEntity livingEntity, boolean disguise) {
         if (!disguise) {
-            LivingEntity guardian = (LivingEntity) Objects.requireNonNull(livingEntity.getLocation().getWorld()).spawnEntity(livingEntity.getLocation(), EntityType.GUARDIAN);
+            LivingEntity guardian = (LivingEntity) livingEntity.getLocation().getWorld().spawnEntity(livingEntity.getLocation(), EntityType.GUARDIAN);
             guardian.setSilent(true);
             PotionEffect potionEffect = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
             guardian.addPotionEffect(potionEffect);
@@ -44,7 +44,6 @@ public class SilentEquipment {
         } else {
             ItemStack head = new ItemStack(Material.END_STONE);
             ItemMeta headMeta = head.getItemMeta();
-            assert headMeta != null;
             headMeta.setDisplayName("Silent Head");
             headMeta.setCustomModelData((TardisWeepingAngelsPlugin.random.nextBoolean()) ? 3 : 2);
             head.setItemMeta(headMeta);

@@ -86,7 +86,6 @@ public class Death implements Listener {
                 if (TardisWeepingAngelsPlugin.random.nextInt(100) < 3) {
                     itemStack = new ItemStack(Material.BRICK, 1);
                     ItemMeta itemMeta = itemStack.getItemMeta();
-                    assert itemMeta != null;
                     itemMeta.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.monsterHead, PersistentDataType.INTEGER, 99);
                     itemMeta.setDisplayName("Weeping Angel Head");
                     itemMeta.setCustomModelData(3);
@@ -103,7 +102,6 @@ public class Death implements Listener {
                 if (TardisWeepingAngelsPlugin.random.nextInt(100) < 3) {
                     itemStack = new ItemStack(Material.FEATHER, 1);
                     ItemMeta itemMeta = itemStack.getItemMeta();
-                    assert itemMeta != null;
                     itemMeta.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.monsterHead, PersistentDataType.INTEGER, 99);
                     itemMeta.setDisplayName("Silurian Head");
                     itemMeta.setCustomModelData(3);
@@ -120,7 +118,6 @@ public class Death implements Listener {
                 if (TardisWeepingAngelsPlugin.random.nextInt(100) < 3) {
                     itemStack = new ItemStack(Material.SLIME_BALL, 1);
                     ItemMeta itemMeta = itemStack.getItemMeta();
-                    assert itemMeta != null;
                     itemMeta.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.monsterHead, PersistentDataType.INTEGER, 99);
                     itemMeta.setDisplayName("Dalek Head");
                     itemMeta.setCustomModelData(10000004);
@@ -139,7 +136,6 @@ public class Death implements Listener {
                 if (TardisWeepingAngelsPlugin.random.nextInt(100) < 3) {
                     itemStack = new ItemStack(Material.SNOWBALL, 1);
                     ItemMeta itemMeta = itemStack.getItemMeta();
-                    assert itemMeta != null;
                     itemMeta.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.monsterHead, PersistentDataType.INTEGER, 99);
                     itemMeta.setDisplayName("Ice Warrior Head");
                     itemMeta.setCustomModelData(4);
@@ -156,7 +152,6 @@ public class Death implements Listener {
                 if (TardisWeepingAngelsPlugin.random.nextInt(100) < 3) {
                     itemStack = new ItemStack(Material.PUFFERFISH, 1);
                     ItemMeta itemMeta = itemStack.getItemMeta();
-                    assert itemMeta != null;
                     itemMeta.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.monsterHead, PersistentDataType.INTEGER, 99);
                     itemMeta.setDisplayName("Hath Head");
                     itemMeta.setCustomModelData(4);
@@ -175,7 +170,6 @@ public class Death implements Listener {
                 if (TardisWeepingAngelsPlugin.random.nextInt(100) < 3) {
                     itemStack = new ItemStack(Material.IRON_INGOT, 1);
                     ItemMeta itemMeta = itemStack.getItemMeta();
-                    assert itemMeta != null;
                     itemMeta.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.monsterHead, PersistentDataType.INTEGER, 99);
                     itemMeta.setDisplayName("Cyberman Head");
                     itemMeta.setCustomModelData(3);
@@ -193,7 +187,6 @@ public class Death implements Listener {
                 if (TardisWeepingAngelsPlugin.random.nextInt(100) < 3) {
                     itemStack = new ItemStack(Material.SUGAR, 1);
                     ItemMeta itemMeta = itemStack.getItemMeta();
-                    assert itemMeta != null;
                     itemMeta.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.monsterHead, PersistentDataType.INTEGER, 99);
                     itemMeta.setDisplayName("Empty Child Head");
                     itemMeta.setCustomModelData(3);
@@ -201,7 +194,6 @@ public class Death implements Listener {
                 } else if (TardisWeepingAngelsPlugin.random.nextInt(100) < 6) {
                     itemStack = new ItemStack(Material.POTION);
                     PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
-                    assert potionMeta != null;
                     potionMeta.setBasePotionData(new PotionData(PotionType.REGEN));
                     itemStack.setItemMeta(potionMeta);
                 } else {
@@ -215,7 +207,6 @@ public class Death implements Listener {
                 if (TardisWeepingAngelsPlugin.random.nextInt(100) < 3) {
                     itemStack = new ItemStack(Material.POTATO, 1);
                     ItemMeta itemMeta = itemStack.getItemMeta();
-                    assert itemMeta != null;
                     itemMeta.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.monsterHead, PersistentDataType.INTEGER, 99);
                     itemMeta.setDisplayName("Sontaran Head");
                     itemMeta.setCustomModelData(4);
@@ -233,7 +224,6 @@ public class Death implements Listener {
                 if (TardisWeepingAngelsPlugin.random.nextInt(100) < 3) {
                     itemStack = new ItemStack(Material.BOOK, 1);
                     ItemMeta itemMeta = itemStack.getItemMeta();
-                    assert itemMeta != null;
                     itemMeta.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.monsterHead, PersistentDataType.INTEGER, 99);
                     itemMeta.setDisplayName("Vashta Nerada Head");
                     itemMeta.setCustomModelData(4);
@@ -248,7 +238,6 @@ public class Death implements Listener {
                 if (TardisWeepingAngelsPlugin.random.nextInt(100) < 3) {
                     itemStack = new ItemStack(Material.PAINTING, 1);
                     ItemMeta itemMeta = itemStack.getItemMeta();
-                    assert itemMeta != null;
                     itemMeta.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.monsterHead, PersistentDataType.INTEGER, 99);
                     itemMeta.setDisplayName("Zygon Head");
                     itemMeta.setCustomModelData(3);
@@ -273,7 +262,7 @@ public class Death implements Listener {
                 PersistentDataContainer attackerPersistentDataContainer = attacker.getPersistentDataContainer();
                 if (attacker instanceof Zombie && attackerPersistentDataContainer.has(TardisWeepingAngelsPlugin.cyberman, PersistentDataType.INTEGER)) {
                     Location loc = event.getEntity().getLocation();
-                    LivingEntity livingEntity = (LivingEntity) Objects.requireNonNull(loc.getWorld()).spawnEntity(loc, EntityType.ZOMBIE);
+                    LivingEntity livingEntity = (LivingEntity) loc.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
                     livingEntity.setSilent(true);
                     CybermanEquipment.set(livingEntity, false);
                     plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(livingEntity, EntityType.ZOMBIE, Monster.CYBERMAN, loc));
@@ -303,7 +292,6 @@ public class Death implements Listener {
                 if (TardisWeepingAngelsPlugin.random.nextInt(100) < 3) {
                     itemStack = new ItemStack(Material.END_STONE, 1);
                     ItemMeta itemMeta = itemStack.getItemMeta();
-                    assert itemMeta != null;
                     itemMeta.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.monsterHead, PersistentDataType.INTEGER, 99);
                     itemMeta.setDisplayName("Silent Head");
                     itemMeta.setCustomModelData(3);

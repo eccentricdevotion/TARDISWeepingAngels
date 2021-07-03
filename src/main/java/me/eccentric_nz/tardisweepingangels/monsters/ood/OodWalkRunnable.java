@@ -47,9 +47,7 @@ public class OodWalkRunnable implements Runnable {
             EntityEquipment entityEquipment = armorStand.getEquipment();
             if (entityEquipment != null) {
                 ItemStack head = entityEquipment.getHelmet();
-                assert head != null;
                 ItemMeta itemMeta = head.getItemMeta();
-                assert itemMeta != null;
                 int colour = itemMeta.getCustomModelData() - (itemMeta.getCustomModelData() % 10);
                 itemMeta.setCustomModelData(walkCycle[i] + colour);
                 head.setItemMeta(itemMeta);

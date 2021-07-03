@@ -41,7 +41,6 @@ public class OodEquipment {
         }
         ItemStack head = new ItemStack(Material.ROTTEN_FLESH);
         ItemMeta headMeta = head.getItemMeta();
-        assert headMeta != null;
         headMeta.setDisplayName("Ood Head");
         headMeta.setCustomModelData((disguise) ? 29 : 2 + colour);
         head.setItemMeta(headMeta);
@@ -57,18 +56,15 @@ public class OodEquipment {
             armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid, uuid);
             ItemStack arm = new ItemStack(Material.ROTTEN_FLESH);
             ItemMeta armMeta = arm.getItemMeta();
-            assert armMeta != null;
             armMeta.setDisplayName("Ood Arm");
             armMeta.setCustomModelData(3 + colour);
             arm.setItemMeta(armMeta);
             ItemStack brainArm = new ItemStack(Material.ROTTEN_FLESH);
             ItemMeta brainMeta = brainArm.getItemMeta();
-            assert brainMeta != null;
             brainMeta.setDisplayName("Ood Brain Arm");
             brainMeta.setCustomModelData(4 + colour);
             brainArm.setItemMeta(brainMeta);
             EntityEquipment entityEquipment = armorStand.getEquipment();
-            assert entityEquipment != null;
             entityEquipment.setHelmet(head);
             entityEquipment.setItemInMainHand(brainArm);
             armorStand.setRightArmPose(new EulerAngle(-1d, 0, 0.175d));

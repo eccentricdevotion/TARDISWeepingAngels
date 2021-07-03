@@ -139,7 +139,7 @@ public class PlayerDeath implements Listener {
                     }
                 }
             } else if (damage.getCause().equals(DamageCause.BLOCK_EXPLOSION)) {
-                if (Objects.requireNonNull(event.getDeathMessage()).contains("Bee")) {
+                if (event.getDeathMessage().contains("Bee")) {
                     event.setDeathMessage(event.getEntity().getName() + " was slain by a Toclafane");
                 }
             }

@@ -42,15 +42,12 @@ public class OodListener implements Listener {
                     return;
                 }
                 UUID oodId = armorStand.getPersistentDataContainer().get(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid);
-                assert oodId != null;
                 if (oodId.equals(player.getUniqueId())) {
                     EntityEquipment entityEquipment = armorStand.getEquipment();
                     if (entityEquipment != null) {
                         ItemStack head = entityEquipment.getHelmet();
-                        assert head != null;
                         ItemMeta itemMeta = head.getItemMeta();
                         int rage = armorStand.getPersistentDataContainer().get(TardisWeepingAngelsPlugin.ood, PersistentDataType.INTEGER);
-                        assert itemMeta != null;
                         int customModelData = itemMeta.getCustomModelData();
                         if (rage == 1) {
                             customModelData -= 100;

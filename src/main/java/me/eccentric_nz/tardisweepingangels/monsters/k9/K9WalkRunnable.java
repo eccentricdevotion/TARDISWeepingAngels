@@ -47,9 +47,7 @@ public class K9WalkRunnable implements Runnable {
             EntityEquipment entityEquipment = armorStand.getEquipment();
             if (entityEquipment != null) {
                 ItemStack head = entityEquipment.getHelmet();
-                assert head != null;
                 ItemMeta itemMeta = head.getItemMeta();
-                assert itemMeta != null;
                 itemMeta.setCustomModelData(walkCycle[i]);
                 head.setItemMeta(itemMeta);
                 entityEquipment.setHelmet(head);

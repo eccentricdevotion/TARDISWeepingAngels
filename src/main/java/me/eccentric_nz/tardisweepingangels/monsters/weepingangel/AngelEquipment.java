@@ -35,17 +35,14 @@ public class AngelEquipment {
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
         ItemStack boots = new ItemStack(Material.IRON_BOOTS, 1);
         ItemMeta headMeta = head.getItemMeta();
-        assert headMeta != null;
         headMeta.setDisplayName("Weeping Angel Head");
         headMeta.setCustomModelData(4);
         head.setItemMeta(headMeta);
         ItemMeta armMeta = arm.getItemMeta();
-        assert armMeta != null;
         armMeta.setDisplayName("Weeping Angel Arm");
         armMeta.setCustomModelData(2);
         arm.setItemMeta(armMeta);
         ItemMeta chestMeta = chestplate.getItemMeta();
-        assert chestMeta != null;
         chestMeta.setDisplayName("Weeping Angel Chest");
         if (disguise) {
             Damageable damageable = (Damageable) chestMeta;
@@ -53,7 +50,6 @@ public class AngelEquipment {
         }
         chestplate.setItemMeta(chestMeta);
         ItemMeta legMeta = leggings.getItemMeta();
-        assert legMeta != null;
         legMeta.setDisplayName("Weeping Angel Legs");
         if (disguise) {
             Damageable legDamage = (Damageable) legMeta;
@@ -61,11 +57,9 @@ public class AngelEquipment {
         }
         leggings.setItemMeta(legMeta);
         ItemMeta weaponMeta = boots.getItemMeta();
-        assert weaponMeta != null;
         weaponMeta.setDisplayName("Weeping Angel Feet");
         boots.setItemMeta(weaponMeta);
         EntityEquipment entityEquipment = livingEntity.getEquipment();
-        assert entityEquipment != null;
         entityEquipment.setHelmet(head);
         entityEquipment.setChestplate(chestplate);
         entityEquipment.setLeggings(leggings);

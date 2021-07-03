@@ -34,17 +34,14 @@ public class VashtaNeradaEquipment {
         ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
         ItemMeta headMeta = helmet.getItemMeta();
-        assert headMeta != null;
         headMeta.setDisplayName("Vashta Nerada Head");
         headMeta.setCustomModelData(4);
         helmet.setItemMeta(headMeta);
         ItemMeta armMeta = arm.getItemMeta();
-        assert armMeta != null;
         armMeta.setDisplayName("Vashta Nerada Arm");
         armMeta.setCustomModelData(3);
         arm.setItemMeta(armMeta);
         ItemMeta chestMeta = chestplate.getItemMeta();
-        assert chestMeta != null;
         chestMeta.setDisplayName("Vashta Nerada Chest");
         if (disguise) {
             Damageable damageable = (Damageable) chestMeta;
@@ -52,7 +49,6 @@ public class VashtaNeradaEquipment {
         }
         chestplate.setItemMeta(chestMeta);
         ItemMeta legMeta = leggings.getItemMeta();
-        assert legMeta != null;
         legMeta.setDisplayName("Vashta Nerada Legs");
         if (disguise) {
             Damageable legDamage = (Damageable) legMeta;
@@ -61,7 +57,6 @@ public class VashtaNeradaEquipment {
         leggings.setItemMeta(legMeta);
 
         EntityEquipment entityEquipment = livingEntity.getEquipment();
-        assert entityEquipment != null;
         entityEquipment.setChestplate(chestplate);
         entityEquipment.setLeggings(leggings);
         entityEquipment.setBoots(null);

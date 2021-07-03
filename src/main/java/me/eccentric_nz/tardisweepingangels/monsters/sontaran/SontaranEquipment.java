@@ -34,17 +34,14 @@ public class SontaranEquipment {
         ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
         ItemMeta headMeta = helmet.getItemMeta();
-        assert headMeta != null;
         headMeta.setDisplayName("Sontaran Head");
         headMeta.setCustomModelData(4);
         helmet.setItemMeta(headMeta);
         ItemMeta armMeta = arm.getItemMeta();
-        assert armMeta != null;
         armMeta.setDisplayName("Sontaran Arm");
         armMeta.setCustomModelData(2);
         arm.setItemMeta(armMeta);
         ItemMeta chestMeta = chestplate.getItemMeta();
-        assert chestMeta != null;
         chestMeta.setDisplayName("Sontaran Chest");
         if (disguise) {
             Damageable damageable = (Damageable) chestMeta;
@@ -52,7 +49,6 @@ public class SontaranEquipment {
         }
         chestplate.setItemMeta(chestMeta);
         ItemMeta legMeta = leggings.getItemMeta();
-        assert legMeta != null;
         legMeta.setDisplayName("Sontaran Legs");
         if (disguise) {
             Damageable legDamage = (Damageable) legMeta;
@@ -61,7 +57,6 @@ public class SontaranEquipment {
         leggings.setItemMeta(legMeta);
 
         EntityEquipment entityEquipment = livingEntity.getEquipment();
-        assert entityEquipment != null;
         entityEquipment.setChestplate(chestplate);
         entityEquipment.setLeggings(leggings);
         entityEquipment.setBoots(null);
@@ -69,7 +64,6 @@ public class SontaranEquipment {
         if (!disguise) {
             ItemStack sword = new ItemStack(Material.POTATO, 1);
             ItemMeta weaponMeta = sword.getItemMeta();
-            assert weaponMeta != null;
             weaponMeta.setDisplayName("Sontaran Weapon");
             weaponMeta.setCustomModelData(3);
             sword.setItemMeta(weaponMeta);

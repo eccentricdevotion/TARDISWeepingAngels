@@ -31,17 +31,14 @@ public class StraxEquipment {
         ItemStack chestplate = new ItemStack(Material.CHAINMAIL_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.CHAINMAIL_LEGGINGS, 1);
         ItemMeta headMeta = helmet.getItemMeta();
-        assert headMeta != null;
         headMeta.setDisplayName("Strax Head");
         headMeta.setCustomModelData(3);
         helmet.setItemMeta(headMeta);
         ItemMeta armMeta = arm.getItemMeta();
-        assert armMeta != null;
         armMeta.setDisplayName("Strax Arm");
         armMeta.setCustomModelData(2);
         arm.setItemMeta(armMeta);
         ItemMeta chestMeta = chestplate.getItemMeta();
-        assert chestMeta != null;
         chestMeta.setDisplayName("Strax Chest");
         if (disguise) {
             Damageable damageable = (Damageable) chestMeta;
@@ -49,7 +46,6 @@ public class StraxEquipment {
         }
         chestplate.setItemMeta(chestMeta);
         ItemMeta legMeta = leggings.getItemMeta();
-        assert legMeta != null;
         legMeta.setDisplayName("Strax Legs");
         if (disguise) {
             Damageable legDamage = (Damageable) legMeta;
@@ -58,7 +54,6 @@ public class StraxEquipment {
         leggings.setItemMeta(legMeta);
 
         EntityEquipment entityEquipment = livingEntity.getEquipment();
-        assert entityEquipment != null;
         entityEquipment.setChestplate(chestplate);
         entityEquipment.setLeggings(leggings);
         entityEquipment.setBoots(null);

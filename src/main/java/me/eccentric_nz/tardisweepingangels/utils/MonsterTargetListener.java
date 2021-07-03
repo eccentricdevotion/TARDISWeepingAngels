@@ -37,7 +37,7 @@ public class MonsterTargetListener implements Listener {
     private static boolean isWearingMonsterHead(Player player, Material material) {
         ItemStack itemStack = player.getInventory().getHelmet();
         if (itemStack != null && itemStack.getType().equals(material) && itemStack.hasItemMeta()) {
-            return Objects.requireNonNull(itemStack.getItemMeta()).getPersistentDataContainer().has(TardisWeepingAngelsPlugin.monsterHead, PersistentDataType.INTEGER);
+            return itemStack.getItemMeta().getPersistentDataContainer().has(TardisWeepingAngelsPlugin.monsterHead, PersistentDataType.INTEGER);
         }
         return false;
     }

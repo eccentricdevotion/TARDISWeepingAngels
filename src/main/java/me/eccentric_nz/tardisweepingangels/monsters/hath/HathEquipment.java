@@ -35,17 +35,14 @@ public class HathEquipment {
         ItemStack arm = new ItemStack(Material.PUFFERFISH, 1);
         ItemStack weapon = new ItemStack(Material.PUFFERFISH, 1);
         ItemMeta headMeta = helmet.getItemMeta();
-        assert headMeta != null;
         headMeta.setDisplayName("Hath Head");
         headMeta.setCustomModelData(4);
         helmet.setItemMeta(headMeta);
         ItemMeta armMeta = arm.getItemMeta();
-        assert armMeta != null;
         armMeta.setDisplayName("Hath Arm");
         armMeta.setCustomModelData(2);
         arm.setItemMeta(armMeta);
         ItemMeta chestMeta = chestplate.getItemMeta();
-        assert chestMeta != null;
         chestMeta.setDisplayName("Hath Chest");
         if (disguise) {
             Damageable damageable = (Damageable) chestMeta;
@@ -53,7 +50,6 @@ public class HathEquipment {
         }
         chestplate.setItemMeta(chestMeta);
         ItemMeta legMeta = leggings.getItemMeta();
-        assert legMeta != null;
         legMeta.setDisplayName("Hath Legs");
         if (disguise) {
             Damageable legDamage = (Damageable) legMeta;
@@ -62,14 +58,12 @@ public class HathEquipment {
         leggings.setItemMeta(legMeta);
 
         EntityEquipment entityEquipment = livingEntity.getEquipment();
-        assert entityEquipment != null;
         entityEquipment.setHelmet(helmet);
         entityEquipment.setChestplate(chestplate);
         entityEquipment.setLeggings(leggings);
         entityEquipment.setBoots(null);
         if (!disguise) {
             ItemMeta sword = weapon.getItemMeta();
-            assert sword != null;
             sword.setDisplayName("Hath Blaster Rifle");
             sword.setCustomModelData(3);
             weapon.setItemMeta(sword);

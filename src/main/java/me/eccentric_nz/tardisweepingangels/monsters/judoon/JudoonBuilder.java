@@ -77,7 +77,7 @@ public class JudoonBuilder implements Listener {
                         south.setType(Material.AIR);
                     }
                     Location location = bottom.getLocation().add(0.5d, 0, 0.5d);
-                    Entity entity = Objects.requireNonNull(location.getWorld()).spawnEntity(location, EntityType.ARMOR_STAND);
+                    Entity entity = location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                         JudoonEquipment.set(event.getPlayer(), entity, false);
                         plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(entity, EntityType.ARMOR_STAND, Monster.JUDOON, location));

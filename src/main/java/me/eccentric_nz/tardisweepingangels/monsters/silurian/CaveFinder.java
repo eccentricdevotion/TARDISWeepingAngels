@@ -31,7 +31,6 @@ public class CaveFinder {
         World world = random.getWorld();
         int startX = random.getBlockX();
         int startZ = random.getBlockZ();
-        assert world != null;
         if (worldCheck(world)) {
             int plusX = startX + 2000;
             int plusZ = startZ + 2000;

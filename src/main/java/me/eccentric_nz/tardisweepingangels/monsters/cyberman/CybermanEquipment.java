@@ -34,17 +34,14 @@ public class CybermanEquipment {
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
         ItemMeta headMeta = helmet.getItemMeta();
-        assert headMeta != null;
         headMeta.setDisplayName("Cyberman Head");
         headMeta.setCustomModelData(3);
         helmet.setItemMeta(headMeta);
         ItemMeta armMeta = arm.getItemMeta();
-        assert armMeta != null;
         armMeta.setDisplayName("Cyberman Arm");
         armMeta.setCustomModelData(2);
         arm.setItemMeta(armMeta);
         ItemMeta chestMeta = chestplate.getItemMeta();
-        assert chestMeta != null;
         chestMeta.setDisplayName("Cyberman Chest");
         if (disguise) {
             Damageable damageable = (Damageable) chestMeta;
@@ -52,7 +49,6 @@ public class CybermanEquipment {
         }
         chestplate.setItemMeta(chestMeta);
         ItemMeta legMeta = leggings.getItemMeta();
-        assert legMeta != null;
         legMeta.setDisplayName("Cyberman Legs");
         if (disguise) {
             Damageable legDamage = (Damageable) legMeta;
@@ -60,7 +56,6 @@ public class CybermanEquipment {
         }
         leggings.setItemMeta(legMeta);
         EntityEquipment entityEquipment = livingEntity.getEquipment();
-        assert entityEquipment != null;
         entityEquipment.setHelmet(helmet);
         entityEquipment.setChestplate(chestplate);
         entityEquipment.setLeggings(leggings);

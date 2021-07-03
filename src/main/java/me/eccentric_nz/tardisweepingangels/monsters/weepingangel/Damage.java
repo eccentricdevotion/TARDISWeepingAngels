@@ -110,7 +110,6 @@ public class Damage implements Listener {
             if (itemStack != null) {
                 if (itemStack.hasItemMeta()) {
                     ItemMeta itemMeta = itemStack.getItemMeta();
-                    assert itemMeta != null;
                     if (itemMeta.hasDisplayName() && itemMeta.getDisplayName().equals("TARDIS Key")) {
                         int amount = itemStack.getAmount();
                         if (amount > 1) {

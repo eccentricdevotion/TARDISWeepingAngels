@@ -37,12 +37,10 @@ public class DalekEquipment {
         livingEntity.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.dalek, PersistentDataType.INTEGER, Monster.DALEK.getPersist());
         ItemStack helmet = new ItemStack(Material.SLIME_BALL, 1);
         ItemMeta headMeta = helmet.getItemMeta();
-        assert headMeta != null;
         headMeta.setDisplayName("Dalek Head");
         headMeta.setCustomModelData(10000005 + WEIGHTED_CHOICE.next());
         helmet.setItemMeta(headMeta);
         EntityEquipment entityEquipment = livingEntity.getEquipment();
-        assert entityEquipment != null;
         entityEquipment.setHelmet(helmet);
         entityEquipment.setChestplate(null);
         entityEquipment.setLeggings(null);
@@ -53,7 +51,6 @@ public class DalekEquipment {
             entityEquipment.setHelmetDropChance(0F);
             ItemStack bow = new ItemStack(Material.BOW, 1);
             ItemMeta bowItemMeta = bow.getItemMeta();
-            assert bowItemMeta != null;
             bowItemMeta.setCustomModelData(1);
             bow.setItemMeta(bowItemMeta);
             entityEquipment.setItemInMainHand(bow);
@@ -61,7 +58,6 @@ public class DalekEquipment {
             PotionEffect resistance = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 360000, 1, true, false);
             livingEntity.addPotionEffect(resistance);
             AttributeInstance attribute = livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-            assert attribute != null;
             attribute.setBaseValue(30.0d);
             livingEntity.setHealth(30.0d);
             livingEntity.setCanPickupItems(false);

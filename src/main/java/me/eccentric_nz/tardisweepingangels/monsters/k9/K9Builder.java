@@ -78,7 +78,7 @@ public class K9Builder implements Listener {
                         south.setType(Material.AIR);
                     }
                     Location location = below.getLocation().add(0.5d, 0, 0.5d);
-                    Entity entity = Objects.requireNonNull(location.getWorld()).spawnEntity(location, EntityType.ARMOR_STAND);
+                    Entity entity = location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                         K9Equipment.set(player, entity, false);
                         plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(entity, EntityType.ARMOR_STAND, Monster.K9, location));

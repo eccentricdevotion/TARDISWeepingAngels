@@ -33,17 +33,16 @@ public class ToclafaneEquipment {
     public static void set(Entity entity, boolean disguise) {
         ItemStack head = new ItemStack(Material.GUNPOWDER);
         ItemMeta headMeta = head.getItemMeta();
-        assert headMeta != null;
         headMeta.setDisplayName("Toclafane");
         headMeta.setCustomModelData((disguise) ? 3 : 2);
         head.setItemMeta(headMeta);
         if (!disguise) {
             ArmorStand armorStand = (ArmorStand) entity;
             Location location = armorStand.getLocation();
-            int difficulty = (Objects.requireNonNull(location.getWorld()).getDifficulty().ordinal() * 6) + 1;
+            int difficulty = (location.getWorld().getDifficulty().ordinal() * 6) + 1;
             armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.toclafane, PersistentDataType.INTEGER, difficulty);
             armorStand.getPersistentDataContainer().set(TardisWeepingAngelsPlugin.ownerUuid, TardisWeepingAngelsPlugin.persistentDataTypeUuid, TardisWeepingAngelsPlugin.unclaimed);
-            Objects.requireNonNull(armorStand.getEquipment()).setHelmet(head);
+            armorStand.getEquipment().setHelmet(head);
             armorStand.setVisible(false);
             armorStand.setSilent(true);
             armorStand.setCollidable(true);
