@@ -54,12 +54,12 @@ import java.util.UUID;
 public class MonsterEquipment implements TardisWeepingAngelsApi {
 
     @Override
-    public void setAngelEquipment(LivingEntity livingEntity, boolean disguise) {
+    public void setWeepingAngelEquipment(LivingEntity livingEntity, boolean disguise) {
         AngelEquipment.set(livingEntity, disguise);
     }
 
     @Override
-    public void setWarriorEquipment(LivingEntity livingEntity, boolean disguise) {
+    public void setIceWarriorEquipment(LivingEntity livingEntity, boolean disguise) {
         IceWarriorEquipment.set(livingEntity, disguise);
     }
 

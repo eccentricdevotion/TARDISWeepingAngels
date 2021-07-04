@@ -38,7 +38,7 @@ public interface TardisWeepingAngelsApi {
      * @param livingEntity The LivingEntity to disguise
      * @param disguise     A boolean to determine if this is a player disguise
      */
-    void setAngelEquipment(LivingEntity livingEntity, boolean disguise);
+    void setWeepingAngelEquipment(LivingEntity livingEntity, boolean disguise);
 
     /**
      * Sets an entity as an Ice Warrior.
@@ -46,7 +46,7 @@ public interface TardisWeepingAngelsApi {
      * @param livingEntity The LivingEntity to disguise
      * @param disguise     A boolean to determine if this is a player disguise
      */
-    void setWarriorEquipment(LivingEntity livingEntity, boolean disguise);
+    void setIceWarriorEquipment(LivingEntity livingEntity, boolean disguise);
 
     /**
      * Sets an entity as a Cyberman.
