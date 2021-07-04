@@ -58,8 +58,8 @@ public class CountCommand {
             Monster monster;
             try {
                 monster = Monster.valueOf(which);
-            } catch (IllegalArgumentException e) {
-                sender.sendMessage(plugin.pluginName + "Invalid monster type!");
+            } catch (IllegalArgumentException illegalArgumentException) {
+                sender.sendMessage(plugin.pluginName + "Invalid monster type \"" + which + "\"! " + illegalArgumentException.getMessage());
                 return true;
             }
             switch (monster) {
