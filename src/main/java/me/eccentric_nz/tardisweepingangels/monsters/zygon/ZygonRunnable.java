@@ -89,10 +89,9 @@ public class ZygonRunnable implements Runnable {
                 }
                 LivingEntity zygon = (LivingEntity) world.spawnEntity(location, EntityType.ZOMBIE);
                 zygon.setSilent(true);
-                Ageable ageable = (Ageable) zygon;
-                ageable.setAdult();
+                ((Ageable) zygon).setAdult();
                 PotionEffect potionEffect = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
-                ageable.addPotionEffect(potionEffect);
+                zygon.addPotionEffect(potionEffect);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                     ZygonEquipment.set(zygon, false);
                     plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(zygon, EntityType.ZOMBIE, Monster.ZYGON, location));

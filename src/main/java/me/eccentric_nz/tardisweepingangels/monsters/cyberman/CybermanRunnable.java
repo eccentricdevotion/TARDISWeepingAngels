@@ -90,10 +90,9 @@ public class CybermanRunnable implements Runnable {
                 }
                 LivingEntity cyberman = (LivingEntity) world.spawnEntity(location, EntityType.ZOMBIE);
                 cyberman.setSilent(true);
-                Ageable ageable = (Ageable) cyberman;
-                ageable.setAdult();
+                ((Ageable) cyberman).setAdult();
                 PotionEffect potionEffect = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
-                ageable.addPotionEffect(potionEffect);
+                cyberman.addPotionEffect(potionEffect);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                     CybermanEquipment.set(cyberman, false);
                     plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(cyberman, EntityType.ZOMBIE, Monster.CYBERMAN, location));

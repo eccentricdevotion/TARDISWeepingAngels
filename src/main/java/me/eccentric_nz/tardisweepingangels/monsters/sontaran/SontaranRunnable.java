@@ -94,10 +94,9 @@ public class SontaranRunnable implements Runnable {
                 }
                 LivingEntity sontaran = (LivingEntity) world.spawnEntity(location, EntityType.ZOMBIE);
                 sontaran.setSilent(true);
-                Ageable ageable = (Ageable) sontaran;
-                ageable.setAdult();
+                ((Ageable) sontaran).setAdult();
                 PotionEffect potionEffect = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
-                ageable.addPotionEffect(potionEffect);
+                sontaran.addPotionEffect(potionEffect);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                     SontaranEquipment.set(sontaran, false);
                     plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(sontaran, EntityType.ZOMBIE, Monster.SONTARAN, location));

@@ -88,8 +88,7 @@ public class EmptyChildRunnable implements Runnable {
                 }
                 LivingEntity emptyChild = (LivingEntity) world.spawnEntity(location, EntityType.ZOMBIE);
                 emptyChild.setSilent(true);
-                Ageable ageable = (Ageable) emptyChild;
-                ageable.setBaby();
+                ((Ageable) emptyChild).setBaby();
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                     EmptyChildEquipment.set(emptyChild, false);
                     plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(emptyChild, EntityType.ZOMBIE, Monster.EMPTY_CHILD, location));
