@@ -18,7 +18,7 @@ package me.eccentric_nz.tardisweepingangels.commands;
 
 import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
 import me.eccentric_nz.tardisweepingangels.equip.ArmourStandEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.weepingangel.Blink;
+import me.eccentric_nz.tardisweepingangels.monsters.weeping_angel.Blink;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.Vector3d;
 import org.bukkit.Location;

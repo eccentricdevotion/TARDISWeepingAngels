@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package me.eccentric_nz.tardisweepingangels.monsters.weepingangel;
+package me.eccentric_nz.tardisweepingangels.monsters.empty_child;
 
 import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TardisWeepingAngelsPlugin;
@@ -26,9 +26,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Ageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.Zombie;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -37,12 +38,12 @@ import java.util.Collection;
 /**
  * @author eccentric_nz
  */
-public class WeepingAngelsRunnable implements Runnable {
+public class EmptyChildRunnable implements Runnable {
 
     private final TardisWeepingAngelsPlugin plugin;
     private final int spawnRate;
 
-    public WeepingAngelsRunnable(TardisWeepingAngelsPlugin plugin) {
+    public EmptyChildRunnable(TardisWeepingAngelsPlugin plugin) {
         this.plugin = plugin;
         spawnRate = plugin.getConfig().getInt("spawn_rate.how_many");
     }
@@ -52,32 +53,28 @@ public class WeepingAngelsRunnable implements Runnable {
         plugin.getServer().getWorlds().forEach((world) -> {
             // only configured worlds
             String name = WorldProcessor.sanitiseName(world.getName());
-            if (plugin.getConfig().getInt("angels.worlds." + name) > 0) {
-                long time = world.getTime();
-                // only spawn at night - times according to http://minecraft.gamepedia.com/Day-night_cycle
-                if (time > 13187 && time < 22812) {
-                    // get the current angels
-                    int weepingAngels = 0;
-                    Collection<Skeleton> skeletons = world.getEntitiesByClass(Skeleton.class);
-                    for (Skeleton weepingAngel : skeletons) {
-                        PersistentDataContainer persistentDataContainer = weepingAngel.getPersistentDataContainer();
-                        if (persistentDataContainer.has(TardisWeepingAngelsPlugin.weepingAngel, PersistentDataType.INTEGER)) {
-                            weepingAngels++;
-                        }
+            if (plugin.getConfig().getInt("empty_child.worlds." + name) > 0) {
+                // get the current empty children
+                int emptyChildren = 0;
+                Collection<Zombie> zombies = world.getEntitiesByClass(Zombie.class);
+                for (Zombie emptyChild : zombies) {
+                    PersistentDataContainer persistentDataContainer = emptyChild.getPersistentDataContainer();
+                    if (persistentDataContainer.has(TardisWeepingAngelsPlugin.emptyChild, PersistentDataType.INTEGER)) {
+                        emptyChildren++;
                     }
-                    // count the current angels
-                    if (weepingAngels < plugin.getConfig().getInt("angels.worlds." + name)) {
-                        // if less than maximum, spawn some more
-                        for (int i = 0; i < spawnRate; i++) {
-                            spawnAngel(world);
-                        }
+                }
+                // count the current empty children
+                if (emptyChildren < plugin.getConfig().getInt("empty_child.worlds." + name)) {
+                    // if less than maximum, spawn some more
+                    for (int i = 0; i < spawnRate; i++) {
+                        spawnEmptyChild(world);
                     }
                 }
             }
         });
     }
 
-    private void spawnAngel(World world) {
+    private void spawnEmptyChild(World world) {
         Chunk[] chunks = world.getLoadedChunks();
         if (chunks.length > 0) {
             Chunk chunk = chunks[TardisWeepingAngelsPlugin.random.nextInt(chunks.length)];
@@ -89,11 +86,12 @@ public class WeepingAngelsRunnable implements Runnable {
                 if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(location)) {
                     return;
                 }
-                LivingEntity weepingAngel = (LivingEntity) world.spawnEntity(location, EntityType.SKELETON);
-                weepingAngel.setSilent(true);
+                LivingEntity emptyChild = (LivingEntity) world.spawnEntity(location, EntityType.ZOMBIE);
+                emptyChild.setSilent(true);
+                ((Ageable) emptyChild).setBaby();
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    AngelEquipment.set(weepingAngel, false);
-                    plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(weepingAngel, EntityType.SKELETON, Monster.WEEPING_ANGEL, location));
+                    EmptyChildEquipment.set(emptyChild, false);
+                    plugin.getServer().getPluginManager().callEvent(new TardisWeepingAngelSpawnEvent(emptyChild, EntityType.ZOMBIE, Monster.EMPTY_CHILD, location));
                 }, 5L);
             }
         }
