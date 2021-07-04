@@ -59,11 +59,7 @@
         </repository>
     </repositories>
     <build>
-        <directory>${project.basedir}/target</directory>
         <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-        <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
-        <outputDirectory>${project.basedir}/target/classes</outputDirectory>
-        <testOutputDirectory>${project.basedir}/target/test-classes</testOutputDirectory>
         <resources>
             <resource>
                 <!-- Use POM properties in plugin.yml -->
@@ -74,11 +70,6 @@
                 </includes>
             </resource>
         </resources>
-        <testResources>
-            <testResource>
-                <directory>${project.basedir}/src/test/resources</directory>
-            </testResource>
-        </testResources>
         <finalName>${project.artifactId}-${project.version}</finalName>
         <defaultGoal>clean package install</defaultGoal>
         <plugins>
