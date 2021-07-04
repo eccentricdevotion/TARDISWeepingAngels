@@ -27,7 +27,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Collection;
-import java.util.Objects;
 
 public class KillCommand {
 

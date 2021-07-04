@@ -32,7 +32,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.Plugin;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 public class WorldGuardChecker {

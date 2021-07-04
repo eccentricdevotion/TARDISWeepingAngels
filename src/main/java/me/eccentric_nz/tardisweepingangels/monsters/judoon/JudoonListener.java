@@ -32,7 +32,6 @@ import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.Objects;
 import java.util.UUID;
 
 public class JudoonListener implements Listener {

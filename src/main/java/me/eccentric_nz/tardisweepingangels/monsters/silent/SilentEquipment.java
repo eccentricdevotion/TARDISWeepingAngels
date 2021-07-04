@@ -28,8 +28,6 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.Objects;
-
 public class SilentEquipment {
 
     public static void set(LivingEntity livingEntity, boolean disguise) {

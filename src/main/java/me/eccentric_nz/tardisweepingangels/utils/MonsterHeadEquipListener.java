@@ -26,8 +26,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.Objects;
-
 public class MonsterHeadEquipListener implements Listener {
 
     private final TardisWeepingAngelsPlugin plugin;

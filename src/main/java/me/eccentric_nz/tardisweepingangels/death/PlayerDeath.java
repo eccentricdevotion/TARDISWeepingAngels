@@ -28,8 +28,6 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.projectiles.ProjectileSource;
 
-import java.util.Objects;
-
 /**
  * @author eccentric_nz
  */

@@ -21,7 +21,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.util.FileUtil;
 
 import java.io.File;
-import java.util.Objects;
 
 public class WorldProcessor implements Runnable {
 

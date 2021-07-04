@@ -30,8 +30,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.Objects;
-
 public class MonsterTargetListener implements Listener {
 
     private static boolean isWearingMonsterHead(Player player, Material material) {

@@ -26,8 +26,6 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.Objects;
-
 public class ToclafaneEquipment {
 
     public static void set(Entity entity, boolean disguise) {
