@@ -72,6 +72,9 @@
                 <!-- Include all other resources -->
                 <directory>${project.basedir}/src/main/resources</directory>
                 <filtering>false</filtering>
+                <includes>
+                    <include>*</include>
+                </includes>
             </resource>
         </resources>
         <finalName>${project.artifactId}-${project.version}</finalName>
