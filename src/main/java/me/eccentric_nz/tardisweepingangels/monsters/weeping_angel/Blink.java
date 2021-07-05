@@ -70,6 +70,7 @@ public class Blink implements Listener {
         return Math.abs(d.x * c.y - d.y * c.x) <= e.x * ad.y + e.y * ad.x + epsilon;
     }
 
+    // TODO Make Weeping Angels freeze whilst being watched, regardless of whether a player is sneaking.
     @EventHandler(priority = EventPriority.NORMAL)
     public void onToggleSneak(PlayerToggleSneakEvent event) {
         Player player = event.getPlayer();
@@ -85,7 +86,7 @@ public class Blink implements Listener {
             Vector3d targetPose = new Vector3d(target.getLocation());
             Vector3d minimum = targetPose.add(-0.5, 0, -0.5);
             Vector3d maximum = targetPose.add(0.5, 1.67, 0.5);
-            if (target != player && hasIntersection(observerStart, observerEnd, minimum, maximum)) {
+            if (hasIntersection(observerStart, observerEnd, minimum, maximum)) {
                 if (skeleton == null || skeleton.getLocation().distanceSquared(observerPose) > target.getLocation().distanceSquared(observerPose)) {
                     // is it an angel?
                     EntityEquipment entityEquipment = target.getEquipment();
