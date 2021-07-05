@@ -59,7 +59,7 @@ public class AdminCommand {
         int m;
         try {
             m = Integer.parseInt(args[3]);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException numberFormatException) {
             sender.sendMessage(plugin.pluginName + "Last argument must be a number!");
             return false;
         }
@@ -68,7 +68,7 @@ public class AdminCommand {
         try {
             monster = Monster.valueOf(which);
             plugin.getConfig().set(types.get(monster) + ".worlds." + args[2], m);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException illegalArgumentException) {
             if (which.equals("all")) {
                 plugin.getConfig().set("angels.worlds." + args[2], m);
                 plugin.getConfig().set("cybermen.worlds." + args[2], m);
