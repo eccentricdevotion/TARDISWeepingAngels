@@ -67,9 +67,9 @@ permissions:
     description: Allow players to alter plugin settings.
     default: op
 commands:
-  twa:
-    aliases: [ tardisweepingangels ]
-    description: Manipulate TARDISWeepingAngels monsters with various arguments (spawn, kill, remove, count, disguise, equip, etc)..
+  tardisweepingangels:
+    aliases: [ twa ]
+    description: Manipulate TARDISWeepingAngels monsters with various arguments (spawn, kill, remove, count, disguise, equip, etc.).
     usage: /<command> [subcommand] <monster type> <world> <max>
     spawn:
       description: Spawns a monster on the block you are targeting.
@@ -118,6 +118,6 @@ commands:
       permission-message: You don't have the permission <permission> to use this command
     give:
       description: Give the specified player the specified monster head.
-      usage: /<command> give [player] [monser type]
+      usage: /<command> give [player] [monster type]
       permission: tardisweepingangels.admin
       permission-message: You don't have the permission <permission> to use this command
