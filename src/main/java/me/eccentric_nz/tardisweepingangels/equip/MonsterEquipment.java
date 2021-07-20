@@ -32,7 +32,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-import javax.annotation.Nullable;
 import java.util.UUID;
 
 /**
@@ -71,17 +70,17 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
     }
 
     @Override
-    public void setJudoonEquipment(@Nullable Player player, Entity armorStand, boolean disguise) {
+    public void setJudoonEquipment(Player player, Entity armorStand, boolean disguise) {
         JudoonEquipment.set(player, armorStand, disguise);
     }
 
     @Override
-    public void setK9Equipment(@Nullable Player player, Entity armorStand, boolean disguise) {
+    public void setK9Equipment(Player player, Entity armorStand, boolean disguise) {
         K9Equipment.set(player, armorStand, disguise);
     }
 
     @Override
-    public void setOodEquipment(@Nullable Player player, Entity armorStand, boolean disguise) {
+    public void setOodEquipment(Player player, Entity armorStand, boolean disguise) {
         OodEquipment.set(player, armorStand, disguise);
     }
 

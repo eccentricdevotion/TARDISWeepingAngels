@@ -11,7 +11,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nullable;
 import java.util.UUID;
 
 /**
@@ -74,7 +73,7 @@ public interface TARDISWeepingAngelsAPI {
      * @param armorStand The armour stand or player to disguise
      * @param disguise   A boolean to determine if this is a player disguise
      */
-    public void setJudoonEquipment(@Nullable Player player, Entity armorStand, boolean disguise);
+    public void setJudoonEquipment(Player player, Entity armorStand, boolean disguise);
 
     /**
      * Sets an armour stand, or disguises a player as K9.
@@ -83,7 +82,7 @@ public interface TARDISWeepingAngelsAPI {
      * @param armorStand The armour stand or player to disguise
      * @param disguise   A boolean to determine if this is a player disguise
      */
-    public void setK9Equipment(@Nullable Player player, Entity armorStand, boolean disguise);
+    public void setK9Equipment(Player player, Entity armorStand, boolean disguise);
 
     /**
      * Sets an armour stand, or disguises a player as an Ood.
@@ -92,7 +91,7 @@ public interface TARDISWeepingAngelsAPI {
      * @param armorStand The armour stand or player to disguise
      * @param disguise   A boolean to determine if this is a player disguise
      */
-    public void setOodEquipment(@Nullable Player player, Entity armorStand, boolean disguise);
+    public void setOodEquipment(Player player, Entity armorStand, boolean disguise);
 
     /**
      * Sets an entity as a Silent.
