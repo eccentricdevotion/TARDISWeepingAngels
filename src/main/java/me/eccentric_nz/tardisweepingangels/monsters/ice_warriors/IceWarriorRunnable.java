@@ -40,14 +40,13 @@ public class IceWarriorRunnable implements Runnable {
         spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
         biomes.add(Biome.DEEP_FROZEN_OCEAN);
         biomes.add(Biome.FROZEN_OCEAN);
+        biomes.add(Biome.FROZEN_PEAKS);
         biomes.add(Biome.FROZEN_RIVER);
         biomes.add(Biome.ICE_SPIKES);
         biomes.add(Biome.SNOWY_BEACH);
-        biomes.add(Biome.SNOWY_MOUNTAINS);
+        biomes.add(Biome.SNOWY_PLAINS);
+        biomes.add(Biome.SNOWY_SLOPES);
         biomes.add(Biome.SNOWY_TAIGA);
-        biomes.add(Biome.SNOWY_TAIGA_HILLS);
-        biomes.add(Biome.SNOWY_TAIGA_MOUNTAINS);
-        biomes.add(Biome.SNOWY_TUNDRA);
     }
 
     @Override
