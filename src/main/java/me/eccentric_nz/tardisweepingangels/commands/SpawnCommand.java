@@ -95,16 +95,17 @@ public class SpawnCommand {
                 DalekEquipment.set(d, false);
                 player.playSound(d.getLocation(), "dalek", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(d, EntityType.SKELETON, Monster.DALEK, eyeLocation));
-                if (args.length > 1 && args[1].equalsIgnoreCase("flying") && plugin.getServer().getPluginManager().isPluginEnabled("TARDISChunkGenerator")) {
+                if (args.length > 2 && args[2].equalsIgnoreCase("flying") && plugin.getServer().getPluginManager().isPluginEnabled("TARDISChunkGenerator")) {
                     TARDISHelper tardisHelper = (TARDISHelper) plugin.getServer().getPluginManager().getPlugin("TARDISChunkGenerator");
                     // make the Dalek fly
                     EntityEquipment ee = d.getEquipment();
                     ee.setChestplate(new ItemStack(Material.ELYTRA, 1));
                     // teleport them straight up
-                    d.teleport(d.getLocation().add(0.0d, 20.0d, 0.0d));
-                    d.setGliding(true);
-                    tardisHelper.setFallFlyingTag(d);
-                    ee.setChestplate(new ItemStack(Material.AIR));
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                        d.teleport(d.getLocation().add(0.0d, 20.0d, 0.0d));
+                        d.setGliding(true);
+                        tardisHelper.setFallFlyingTag(d);
+                    }, 2L);
                 }
                 break;
             case EMPTY_CHILD:

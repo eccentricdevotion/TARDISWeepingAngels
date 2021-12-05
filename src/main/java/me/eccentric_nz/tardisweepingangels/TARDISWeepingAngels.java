@@ -9,6 +9,7 @@ import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.equip.PlayerUndisguise;
 import me.eccentric_nz.tardisweepingangels.monsters.cybermen.CybermanRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.ChunkLoad;
+import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekGlideListener;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.GasMask;
@@ -48,13 +49,7 @@ import java.util.*;
 public class TARDISWeepingAngels extends JavaPlugin {
 
     public static TARDISWeepingAngels plugin;
-    private final List<UUID> empty = new ArrayList<>();
-    private final List<UUID> timesUp = new ArrayList<>();
-    public String pluginName;
     public static Random random = new Random();
-    private boolean steal;
-    private PluginManager pm;
-    private boolean citizensEnabled = false;
     public static NamespacedKey ANGEL;
     public static NamespacedKey CYBERMAN;
     public static NamespacedKey DALEK;
@@ -76,9 +71,15 @@ public class TARDISWeepingAngels extends JavaPlugin {
     public static NamespacedKey MONSTER_HEAD;
     public static PersistentDataType<byte[], UUID> PersistentDataTypeUUID;
     public static MonsterEquipment api;
+    private final List<UUID> empty = new ArrayList<>();
+    private final List<UUID> timesUp = new ArrayList<>();
     private final List<UUID> guards = new ArrayList<>();
     private final List<UUID> playersWithGuards = new ArrayList<>();
     private final HashMap<UUID, Integer> followTasks = new HashMap<>();
+    public String pluginName;
+    private boolean steal;
+    private PluginManager pm;
+    private boolean citizensEnabled = false;
 
     @Override
     public void onDisable() {
@@ -112,6 +113,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         if (getConfig().getBoolean("k9.can_build")) {
             pm.registerEvents(new K9Builder(this), this);
         }
+        pm.registerEvents(new DalekGlideListener(this), this);
         pm.registerEvents(new Damage(this), this);
         pm.registerEvents(new VashtaNeradaListener(this), this);
         pm.registerEvents(new Death(this), this);
