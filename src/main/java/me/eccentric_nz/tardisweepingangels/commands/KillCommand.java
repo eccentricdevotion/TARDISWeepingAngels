@@ -36,7 +36,20 @@ public class KillCommand {
         try {
             monster = Monster.valueOf(which);
         } catch (IllegalArgumentException e) {
-            sender.sendMessage(plugin.pluginName + "Invalid monster type!");
+            // kill old silent
+            if (which.equals("OLD_SILENT")) {
+                Collection<Enderman> silence = w.getEntitiesByClass(Enderman.class);
+                for (Enderman m : silence) {
+                    if (!m.getPassengers().isEmpty() && m.getPassengers().get(0) != null && m.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
+                        m.getPassengers().get(0).remove();
+                        m.remove();
+                        count++;
+                    }
+                }
+                sender.sendMessage(plugin.pluginName + "Removed " + count + " Silent Endermen in " + w.getName());
+            } else {
+                sender.sendMessage(plugin.pluginName + "Invalid monster type!");
+            }
             return true;
         }
         switch (monster) {
@@ -145,8 +158,8 @@ public class KillCommand {
                 break;
             case SILENT:
                 what = "Silence";
-                Collection<Enderman> silence = w.getEntitiesByClass(Enderman.class);
-                for (Enderman m : silence) {
+                Collection<Skeleton> silence = w.getEntitiesByClass(Skeleton.class);
+                for (Skeleton m : silence) {
                     if (!m.getPassengers().isEmpty() && m.getPassengers().get(0) != null && m.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
                         m.getPassengers().get(0).remove();
                         m.remove();

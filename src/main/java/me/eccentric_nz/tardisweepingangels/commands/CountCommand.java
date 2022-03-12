@@ -120,8 +120,8 @@ public class CountCommand {
                     break;
                 case SILENT:
                     what = "Silence";
-                    Collection<Enderman> silence = w.getEntitiesByClass(Enderman.class);
-                    for (Enderman m : silence) {
+                    Collection<Skeleton> silence = w.getEntitiesByClass(Skeleton.class);
+                    for (Skeleton m : silence) {
                         if (m.getPersistentDataContainer().has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
                             count++;
                         }

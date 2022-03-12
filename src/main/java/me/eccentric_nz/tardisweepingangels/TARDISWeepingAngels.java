@@ -4,7 +4,6 @@ import me.eccentric_nz.tardisweepingangels.commands.TARDISWeepingAngelsCommand;
 import me.eccentric_nz.tardisweepingangels.commands.TabComplete;
 import me.eccentric_nz.tardisweepingangels.death.Death;
 import me.eccentric_nz.tardisweepingangels.death.PlayerDeath;
-import me.eccentric_nz.tardisweepingangels.death.RainDamage;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.equip.PlayerUndisguise;
 import me.eccentric_nz.tardisweepingangels.monsters.cybermen.CybermanRunnable;
@@ -24,9 +23,9 @@ import me.eccentric_nz.tardisweepingangels.monsters.k9.K9Recipe;
 import me.eccentric_nz.tardisweepingangels.monsters.ood.OodListener;
 import me.eccentric_nz.tardisweepingangels.monsters.ood.VillagerCuredListener;
 import me.eccentric_nz.tardisweepingangels.monsters.ood.VillagerSpawnListener;
-import me.eccentric_nz.tardisweepingangels.monsters.silent.AntiTeleport;
 import me.eccentric_nz.tardisweepingangels.monsters.silent.CleanGuardians;
 import me.eccentric_nz.tardisweepingangels.monsters.silent.SilentRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.silent.SilentTarget;
 import me.eccentric_nz.tardisweepingangels.monsters.silurians.SilurianSpawnerListener;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.Butler;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.SontaranRunnable;
@@ -123,9 +122,8 @@ public class TARDISWeepingAngels extends JavaPlugin {
         pm.registerEvents(new GasMask(this), this);
         pm.registerEvents(new Butler(this), this);
         pm.registerEvents(new HelmetChecker(), this);
-        pm.registerEvents(new AntiTeleport(this), this);
+        pm.registerEvents(new SilentTarget(this), this);
         pm.registerEvents(new K9Listener(this), this);
-        pm.registerEvents(new RainDamage(), this);
         pm.registerEvents(new ChunkLoad(), this);
         pm.registerEvents(new SilurianSpawnerListener(this), this);
         pm.registerEvents(new OodListener(), this);
@@ -148,7 +146,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getCommand("twa").setExecutor(new TARDISWeepingAngelsCommand(this));
         // set tab completion
         getCommand("twa").setTabCompleter(new TabComplete(this));
-        // remove invisible Guardians not riding an Enderman
+        // remove invisible Guardians not riding a Skeleton
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new CleanGuardians(this), 100L, 6000L);
         // start repeating spawn tasks
         long delay = getConfig().getLong("spawn_rate.how_often");

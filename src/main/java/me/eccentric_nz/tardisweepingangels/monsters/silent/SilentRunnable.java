@@ -13,9 +13,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.Enderman;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Skeleton;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -42,8 +42,8 @@ public class SilentRunnable implements Runnable {
             if (plugin.getConfig().getInt("silent.worlds." + name) > 0) {
                 // get the current silents
                 int papal = 0;
-                Collection<Enderman> mainframe = w.getEntitiesByClass(Enderman.class);
-                for (Enderman s : mainframe) {
+                Collection<Skeleton> mainframe = w.getEntitiesByClass(Skeleton.class);
+                for (Skeleton s : mainframe) {
                     PersistentDataContainer pdc = s.getPersistentDataContainer();
                     if (pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
                         papal++;
@@ -71,12 +71,12 @@ public class SilentRunnable implements Runnable {
                 if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(l)) {
                     return;
                 }
-                LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ENDERMAN);
+                LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.SKELETON);
                 e.setSilent(true);
                 e.setCanPickupItems(false);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                     SilentEquipment.set(e, false);
-                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ENDERMAN, Monster.SILENT, l));
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.SILENT, l));
                 }, 5L);
             }
         }

@@ -157,11 +157,11 @@ public class SpawnCommand {
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(ood, EntityType.ARMOR_STAND, Monster.OOD, eyeLocation));
                 break;
             case SILENT:
-                LivingEntity l = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ENDERMAN);
+                LivingEntity l = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                 l.setSilent(true);
                 SilentEquipment.set(l, false);
                 player.playSound(l.getLocation(), "silence", 1.0f, 1.0f);
-                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(l, EntityType.ENDERMAN, Monster.SILENT, eyeLocation));
+                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(l, EntityType.SKELETON, Monster.SILENT, eyeLocation));
                 break;
             case SILURIAN:
                 LivingEntity s = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);

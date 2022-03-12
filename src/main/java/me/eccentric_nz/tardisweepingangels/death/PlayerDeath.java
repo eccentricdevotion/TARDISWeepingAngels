@@ -58,18 +58,9 @@ public class PlayerDeath implements Listener {
                             return;
                         }
                     }
-                    if (attacker instanceof Enderman) {
-                        if (!attacker.getPassengers().isEmpty()) {
-                            Entity passenger = attacker.getPassengers().get(0);
-                            if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
-                                event.setDeathMessage(name + " was slain by a Silent");
-                                return;
-                            }
-                        }
-                    }
                     if (attacker instanceof Guardian) {
                         Entity silent = attacker.getVehicle();
-                        if (silent != null && silent.getType().equals(EntityType.ENDERMAN)) {
+                        if (silent != null && silent.getType().equals(EntityType.SKELETON)) {
                             event.setDeathMessage(name + " was slain by a Silent");
                             return;
                         }
@@ -105,6 +96,13 @@ public class PlayerDeath implements Listener {
                         if (pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)) {
                             event.setDeathMessage(name + " was slain by a Silurian");
                             return;
+                        }
+                        if (!attacker.getPassengers().isEmpty()) {
+                            Entity passenger = attacker.getPassengers().get(0);
+                            if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
+                                event.setDeathMessage(name + " was slain by a Silent");
+                                return;
+                            }
                         }
                     }
                 }

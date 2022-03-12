@@ -31,22 +31,8 @@ public class Sounds implements Listener {
         if (tracker.contains(uuid)) {
             return;
         }
-        if (ent instanceof Enderman) {
-            if (ent.getPassengers() != null && ent.getPassengers().size() > 0 && ent.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
-                tracker.add(uuid);
-                LivingEntity le = event.getTarget();
-                if (le instanceof Player player) {
-                    long delay = 90L;
-                    // schedule delayed task
-                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        player.playSound(ent.getLocation(), "silence", 1.0f, 1.0f);
-                        tracker.remove(uuid);
-                    }, delay);
-                }
-            }
-        }
         if (ent instanceof Guardian) {
-            if (ent.getVehicle() != null && ent.getVehicle().getType().equals(EntityType.ENDERMAN)) {
+            if (ent.getVehicle() != null && ent.getVehicle().getType().equals(EntityType.SKELETON)) {
                 tracker.add(uuid);
                 LivingEntity le = event.getTarget();
                 if (le instanceof Player player) {
@@ -147,6 +133,17 @@ public class Sounds implements Listener {
                     // schedule delayed task
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                         player.playSound(ent.getLocation(), "silurian", 1.0f, 1.0f);
+                        tracker.remove(uuid);
+                    }, delay);
+                }
+            } else if (ent.getPassengers() != null && ent.getPassengers().size() > 0 && ent.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
+                tracker.add(uuid);
+                LivingEntity le = event.getTarget();
+                if (le instanceof Player player) {
+                    long delay = 90L;
+                    // schedule delayed task
+                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                        player.playSound(ent.getLocation(), "silence", 1.0f, 1.0f);
                         tracker.remove(uuid);
                     }, delay);
                 }

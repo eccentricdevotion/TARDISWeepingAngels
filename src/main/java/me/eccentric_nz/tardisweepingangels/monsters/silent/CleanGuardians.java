@@ -29,7 +29,7 @@ public class CleanGuardians implements Runnable {
             if (plugin.getConfig().getInt("silent.worlds." + name) > 0) {
                 Collection<Guardian> guardians = w.getEntitiesByClass(Guardian.class);
                 guardians.forEach((g) -> {
-                    // does it have invisibility but not riding an Enderman
+                    // does it have invisibility but not riding a Skeleton
                     if (g.hasPotionEffect(PotionEffectType.INVISIBILITY) && g.getVehicle() == null) {
                         g.remove();
                     }

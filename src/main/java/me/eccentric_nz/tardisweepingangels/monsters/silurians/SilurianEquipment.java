@@ -14,17 +14,17 @@ public class SilurianEquipment {
 
     public static void set(LivingEntity le, boolean disguise) {
         ItemStack helmet = new ItemStack(Material.FEATHER, 1);
-        ItemStack arm = new ItemStack(Material.BOW, 1);
+        ItemStack bow = new ItemStack(Material.BOW, 1);
         ItemStack chestplate = new ItemStack(Material.GOLDEN_CHESTPLATE, 1);
         ItemStack leggings = new ItemStack(Material.GOLDEN_LEGGINGS, 1);
         ItemMeta headMeta = helmet.getItemMeta();
         headMeta.setDisplayName("Silurian Head");
         headMeta.setCustomModelData(3);
         helmet.setItemMeta(headMeta);
-        ItemMeta armMeta = arm.getItemMeta();
+        ItemMeta armMeta = bow.getItemMeta();
         armMeta.setDisplayName("Silurian Arm");
         armMeta.setCustomModelData(2);
-        arm.setItemMeta(armMeta);
+        bow.setItemMeta(armMeta);
         ItemMeta chestMeta = chestplate.getItemMeta();
         chestMeta.setDisplayName("Silurian Chest");
         if (disguise) {
@@ -39,20 +39,20 @@ public class SilurianEquipment {
             legDamage.setDamage(220);
         }
         leggings.setItemMeta(legMeta);
-
+        // set equipment
         EntityEquipment ee = le.getEquipment();
         ee.setChestplate(chestplate);
         ee.setLeggings(leggings);
         ee.setBoots(null);
         ee.setHelmet(helmet);
         if (!disguise) {
-            ItemStack bow = new ItemStack(Material.BOW, 1);
-            ItemMeta waeponMeta = bow.getItemMeta();
-            waeponMeta.setDisplayName("Silurian Weapon");
-            waeponMeta.setCustomModelData(3);
-            bow.setItemMeta(waeponMeta);
-            ee.setItemInMainHand(bow);
-            ee.setItemInOffHand(arm);
+            ItemStack arm = new ItemStack(Material.FEATHER, 2);
+            ItemMeta weaponMeta = arm.getItemMeta();
+            weaponMeta.setDisplayName("Silurian Weapon");
+            weaponMeta.setCustomModelData(3);
+            arm.setItemMeta(weaponMeta);
+            ee.setItemInMainHand(arm);
+            ee.setItemInOffHand(bow);
             ee.setItemInMainHandDropChance(0F);
             ee.setItemInOffHandDropChance(0F);
             ee.setHelmetDropChance(0F);

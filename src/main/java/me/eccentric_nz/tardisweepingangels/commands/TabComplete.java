@@ -46,6 +46,7 @@ public class TabComplete implements TabCompleter {
         for (Monster m : Monster.values()) {
             tmp.add(m.toString());
         }
+        tmp.add("OLD_SILENT");
         MONSTER_SUBS = ImmutableList.copyOf(tmp);
         List<String> worlds = new ArrayList<>();
         this.plugin.getServer().getWorlds().forEach((w) -> {

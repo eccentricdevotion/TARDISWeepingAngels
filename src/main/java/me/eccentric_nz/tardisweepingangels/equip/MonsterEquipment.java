@@ -136,12 +136,10 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
                 return true;
             }
-        } else if (entity instanceof Enderman) {
-            if (!entity.getPassengers().isEmpty()) {
-                Entity passenger = entity.getPassengers().get(0);
-                if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
-                    return true;
-                }
+        } else if (entity instanceof Skeleton && !entity.getPassengers().isEmpty()) {
+            Entity passenger = entity.getPassengers().get(0);
+            if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
+                return true;
             }
         } else if (entity instanceof Bee) {
             if (!entity.getPassengers().isEmpty()) {
@@ -160,7 +158,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public Monster getWeepingAngelMonsterType(Entity entity) {
-        if (entity instanceof Zombie || entity instanceof PigZombie || entity instanceof Skeleton || entity instanceof Enderman) {
+        if (entity instanceof Zombie || entity instanceof PigZombie || entity instanceof Skeleton || entity instanceof Skeleton) {
             PersistentDataContainer pdc = entity.getPersistentDataContainer();
             if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)) {
                 return Monster.CYBERMAN;

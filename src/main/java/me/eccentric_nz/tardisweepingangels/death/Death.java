@@ -114,6 +114,26 @@ public class Death implements Listener {
                 event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                 return;
             }
+            if (pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
+                // remove the guardian as well
+                Entity guardian = (event.getEntity().getPassengers().size() > 0) ? event.getEntity().getPassengers().get(0) : null;
+                if (guardian != null) {
+                    guardian.remove();
+                }
+                event.getDrops().clear();
+                ItemStack stack;
+                if (TARDISWeepingAngels.random.nextInt(100) < 3) {
+                    stack = new ItemStack(Material.END_STONE, 1);
+                    ItemMeta im = stack.getItemMeta();
+                    im.getPersistentDataContainer().set(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER, 99);
+                    im.setDisplayName("Silent Head");
+                    im.setCustomModelData(3);
+                    stack.setItemMeta(im);
+                } else {
+                    stack = new ItemStack(silent_drops.get(TARDISWeepingAngels.random.nextInt(silent_drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
+                }
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+            }
         }
         if (event.getEntityType().equals(EntityType.ZOMBIFIED_PIGLIN)) {
             if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
@@ -264,28 +284,6 @@ public class Death implements Listener {
                         plugin.getEmpty().add(player.getUniqueId());
                     }
                 }
-            }
-        }
-        if (event.getEntityType().equals(EntityType.ENDERMAN)) {
-            if (pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
-                // remove the guardian as well
-                Entity guardian = (event.getEntity().getPassengers().size() > 0) ? event.getEntity().getPassengers().get(0) : null;
-                if (guardian != null) {
-                    guardian.remove();
-                }
-                event.getDrops().clear();
-                ItemStack stack;
-                if (TARDISWeepingAngels.random.nextInt(100) < 3) {
-                    stack = new ItemStack(Material.END_STONE, 1);
-                    ItemMeta im = stack.getItemMeta();
-                    im.getPersistentDataContainer().set(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER, 99);
-                    im.setDisplayName("Silent Head");
-                    im.setCustomModelData(3);
-                    stack.setItemMeta(im);
-                } else {
-                    stack = new ItemStack(silent_drops.get(TARDISWeepingAngels.random.nextInt(silent_drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
-                }
-                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
             }
         }
     }

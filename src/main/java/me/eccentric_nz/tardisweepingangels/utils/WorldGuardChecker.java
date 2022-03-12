@@ -24,9 +24,8 @@ public class WorldGuardChecker {
         {
             add(EntityType.ARMOR_STAND); // OOD, JUDOON, K9
             add(EntityType.BEE); // TOCLAFANE
-            add(EntityType.ENDERMAN); // SILENT
             add(EntityType.GUARDIAN); // SILENT
-            add(EntityType.SKELETON); // WEEPING ANGEL, SILURIAN, DALEK
+            add(EntityType.SKELETON); // SILENT, WEEPING ANGEL, SILURIAN, DALEK
             add(EntityType.ZOMBIE); // CYBERMAN, EMPTY CHILD, SONTARAN, VASHTA, ZYGON
             add(EntityType.ZOMBIFIED_PIGLIN); // HATH, ICE_WARRIOR, STRAX,
         }
