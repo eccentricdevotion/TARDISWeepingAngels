@@ -2,6 +2,7 @@ package me.eccentric_nz.tardisweepingangels.monsters.daleks;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -12,6 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
 
 public class DalekEquipment {
 
@@ -29,8 +31,10 @@ public class DalekEquipment {
         ee.setChestplate(null);
         ee.setLeggings(null);
         ee.setBoots(null);
-        PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
-        le.addPotionEffect(invisibility);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(TARDISWeepingAngels.plugin, () -> {
+            PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
+            le.addPotionEffect(invisibility);
+        });
         if (!disguise) {
             ee.setHelmetDropChance(0F);
             ItemStack bow = new ItemStack(Material.BOW, 1);
@@ -39,13 +43,15 @@ public class DalekEquipment {
             bow.setItemMeta(bim);
             ee.setItemInMainHand(bow);
             ee.setItemInMainHandDropChance(0F);
-            PotionEffect resistance = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 360000, 1, true, false);
-            le.addPotionEffect(resistance);
-            AttributeInstance attribute = le.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-            attribute.setBaseValue(30.0d);
-            le.setHealth(30.0d);
-            le.setCanPickupItems(false);
-            le.setRemoveWhenFarAway(false);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(TARDISWeepingAngels.plugin, () -> {
+                PotionEffect resistance = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 360000, 1, true, false);
+                le.addPotionEffect(resistance);
+                AttributeInstance attribute = le.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+                attribute.setBaseValue(30.0d);
+                le.setHealth(30.0d);
+                le.setCanPickupItems(false);
+                le.setRemoveWhenFarAway(false);
+            });
         }
     }
 }
