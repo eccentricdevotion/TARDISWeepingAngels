@@ -81,7 +81,12 @@ public class ToclafaneListener implements Listener {
                         } else {
                             stand.remove();
                         }
-                        boolean destroy = (plugin.getConfig().getBoolean("toclafane.destroy_blocks") && WorldGuardChecker.canExplode(location));
+                        boolean destroy;
+                        if (plugin.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
+                            destroy = (plugin.getConfig().getBoolean("toclafane.destroy_blocks")) && WorldGuardChecker.canExplode(location);
+                        } else {
+                            destroy = (plugin.getConfig().getBoolean("toclafane.destroy_blocks"));
+                        }
                         // explode
                         location.getWorld().createExplosion(location, 2.0f, false, destroy);
                         // give drops
