@@ -3,9 +3,21 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.eccentric_nz.tardisweepingangels</groupId>
     <artifactId>TARDISWeepingAngels</artifactId>
-    <version>3.6.2</version>
+    <version>3.6.3</version>
     <name>TARDISWeepingAngels</name>
     <repositories>
+        <repository>
+            <id>Bromley Massive</id>
+            <url>http://tardisjenkins.duckdns.org:8080/plugin/repository/everything/</url>
+        </repository>
+        <repository>
+            <id>worldedit_worldguard</id>
+            <url>https://maven.enginehub.org/repo/</url>
+        </repository>
+        <repository>
+            <id>everything</id>
+            <url>https://repo.citizensnpcs.co/</url>
+        </repository>
         <repository>
             <id>Spigot</id>
             <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
@@ -23,10 +35,6 @@
                 <project.build.number>${env.BUILD_NUMBER}</project.build.number>
             </properties>
             <repositories>
-                <repository>
-                    <id>macgeek</id>
-                    <url>http://tardisjenkins.duckdns.org:8888</url>
-                </repository>
                 <repository>
                     <id>Bromley Massive</id>
                     <url>http://tardisjenkins.duckdns.org:8080/plugin/repository/everything/</url>
@@ -65,22 +73,21 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.18.2-R0.1-SNAPSHOT</version>
+            <version>1.19.2-R0.1-SNAPSHOT</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>net.citizensnpcs</groupId>
             <artifactId>citizensapi</artifactId>
-            <version>2.0.29-SNAPSHOT</version>
+            <version>2.0.30-SNAPSHOT</version>
             <type>jar</type>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/CitizensAPI.jar</systemPath>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>me.eccentric_nz.tardischunkgenerator</groupId>
             <artifactId>TARDISChunkGenerator</artifactId>
-            <version>4.9.0</version>
+            <version>4.11.0</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
