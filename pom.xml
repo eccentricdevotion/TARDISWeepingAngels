@@ -23,29 +23,6 @@
             <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
         </repository>
     </repositories>
-    <profiles>
-        <profile>
-            <id>jenkins</id>
-            <activation>
-                <property>
-                    <name>env.BUILD_NUMBER</name>
-                </property>
-            </activation>
-            <properties>
-                <project.build.number>${env.BUILD_NUMBER}</project.build.number>
-            </properties>
-            <repositories>
-                <repository>
-                    <id>Bromley Massive</id>
-                    <url>http://tardisjenkins.duckdns.org:8080/plugin/repository/everything/</url>
-                </repository>
-                <repository>
-                    <id>worldedit_worldguard</id>
-                    <url>https://maven.enginehub.org/repo/</url>
-                </repository>
-            </repositories>
-        </profile>
-    </profiles>
     <build>
         <finalName>TARDISWeepingAngels</finalName>
         <plugins>
