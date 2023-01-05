@@ -53,11 +53,11 @@ public class SilurianEquipment {
             arm.setItemMeta(weaponMeta);
             ee.setItemInMainHand(arm);
             ee.setItemInOffHand(bow);
-            ee.setItemInMainHandDropChance(0F);
-            ee.setItemInOffHandDropChance(0F);
-            ee.setHelmetDropChance(0F);
-            ee.setChestplateDropChance(0F);
-            ee.setLeggingsDropChance(0F);
+            ee.setItemInMainHandDropChance(0);
+            ee.setItemInOffHandDropChance(0);
+            ee.setHelmetDropChance(0);
+            ee.setChestplateDropChance(0);
+            ee.setLeggingsDropChance(0);
             le.setCanPickupItems(false);
             le.getPersistentDataContainer().set(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER, Monster.SILURIAN.getPersist());
         }

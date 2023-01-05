@@ -92,7 +92,7 @@ public class HelmetChecker implements Listener {
                     headMeta.setCustomModelData(monster.getCustomModelData());
                     helmet.setItemMeta(headMeta);
                     ee.setHelmet(helmet);
-                    ee.setHelmetDropChance(0F);
+                    ee.setHelmetDropChance(0);
                 }
             }
         }

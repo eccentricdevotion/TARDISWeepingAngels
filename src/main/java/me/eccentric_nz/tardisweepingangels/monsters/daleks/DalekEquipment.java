@@ -36,13 +36,13 @@ public class DalekEquipment {
             le.addPotionEffect(invisibility);
         });
         if (!disguise) {
-            ee.setHelmetDropChance(0F);
+            ee.setHelmetDropChance(0);
             ItemStack bow = new ItemStack(Material.BOW, 1);
             ItemMeta bim = bow.getItemMeta();
             bim.setCustomModelData(1);
             bow.setItemMeta(bim);
             ee.setItemInMainHand(bow);
-            ee.setItemInMainHandDropChance(0F);
+            ee.setItemInMainHandDropChance(0);
             Bukkit.getScheduler().scheduleSyncDelayedTask(TARDISWeepingAngels.plugin, () -> {
                 PotionEffect resistance = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 360000, 1, true, false);
                 le.addPotionEffect(resistance);

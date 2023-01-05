@@ -53,11 +53,11 @@ public class SontaranEquipment {
             sword.setItemMeta(waeponMeta);
             ee.setItemInMainHand(sword);
             ee.setItemInOffHand(arm);
-            ee.setItemInMainHandDropChance(0F);
-            ee.setItemInOffHandDropChance(0F);
-            ee.setHelmetDropChance(0F);
-            ee.setChestplateDropChance(0F);
-            ee.setLeggingsDropChance(0F);
+            ee.setItemInMainHandDropChance(0);
+            ee.setItemInOffHandDropChance(0);
+            ee.setHelmetDropChance(0);
+            ee.setChestplateDropChance(0);
+            ee.setLeggingsDropChance(0);
             le.setCanPickupItems(false);
             le.getPersistentDataContainer().set(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER, Monster.SONTARAN.getPersist());
         }
