@@ -4,8 +4,12 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.Equipper;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.WorldProcessor;
 import org.bukkit.Location;
@@ -22,10 +26,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author eccentric_nz
@@ -74,15 +74,15 @@ public class VashtaNeradaListener implements Listener {
     }
 
     private void spawnVashtaNerada(Location l) {
-        LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
-        e.setSilent(true);
-        Zombie vashta = (Zombie) e;
+        LivingEntity v = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
+        v.setSilent(true);
+        Zombie vashta = (Zombie) v;
         vashta.setAdult();
         PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
-        e.addPotionEffect(p);
+        v.addPotionEffect(p);
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            VashtaNeradaEquipment.set(e, false);
-            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.VASHTA_NERADA, l));
+            new Equipper(Monster.VASHTA_NERADA, v, false, false).setHelmetAndInvisibilty();
+            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(v, EntityType.ZOMBIE, Monster.VASHTA_NERADA, l));
         }, 5L);
     }
 }

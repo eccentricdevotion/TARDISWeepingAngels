@@ -3,6 +3,7 @@
  */
 package me.eccentric_nz.tardisweepingangels;
 
+import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.utils.FollowerChecker;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.entity.ArmorStand;
@@ -10,8 +11,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.UUID;
 
 /**
  * @author eccentric_nz
@@ -92,13 +91,6 @@ public interface TARDISWeepingAngelsAPI {
      * @param disguise   A boolean to determine if this is a player disguise
      */
     public void setOodEquipment(Player player, Entity armorStand, boolean disguise);
-
-    /**
-     * Sets an entity as a Silent.
-     *
-     * @param le The LivingEntity to disguise
-     */
-    public void setSilentEquipment(LivingEntity le);
 
     /**
      * Sets an entity as a Silent.

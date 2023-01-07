@@ -1,30 +1,19 @@
 package me.eccentric_nz.tardisweepingangels.commands;
 
+import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.Equipper;
 import me.eccentric_nz.tardisweepingangels.equip.RemoveEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.cybermen.CybermanEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.hath.HathEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.ice_warriors.IceWarriorEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.k9.K9Equipment;
 import me.eccentric_nz.tardisweepingangels.monsters.ood.OodEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.silent.SilentEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.silurians.SilurianEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.sontarans.SontaranEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.sontarans.StraxEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.toclafane.ToclafaneEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada.VashtaNeradaEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.AngelEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.zygons.ZygonEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
-
-import java.util.UUID;
 
 public class DisguiseCommand {
 
@@ -75,54 +64,22 @@ public class DisguiseCommand {
         }
         if (args[2].equalsIgnoreCase("on")) {
             switch (monster) {
-                case WEEPING_ANGEL:
-                    AngelEquipment.set(player, true);
-                    break;
-                case CYBERMAN:
-                    CybermanEquipment.set(player, true);
-                    break;
-                case DALEK:
-                    DalekEquipment.set(player, true);
-                    break;
-                case EMPTY_CHILD:
-                    EmptyChildEquipment.set(player, true);
-                    break;
-                case HATH:
-                    HathEquipment.set(player, true);
-                    break;
-                case ICE_WARRIOR:
-                    IceWarriorEquipment.set(player, true);
-                    break;
-                case JUDOON:
-                    JudoonEquipment.set(null, player, true);
-                    break;
-                case K9:
-                    K9Equipment.set(null, player, true);
-                    break;
-                case OOD:
-                    OodEquipment.set(null, player, true);
-                    break;
-                case SILENT:
-                    SilentEquipment.set(player, true);
-                    break;
-                case SILURIAN:
-                    SilurianEquipment.set(player, true);
-                    break;
-                case SONTARAN:
-                    SontaranEquipment.set(player, true);
-                    break;
-                case STRAX:
-                    StraxEquipment.set(player, true);
-                    break;
-                case TOCLAFANE:
-                    ToclafaneEquipment.set(player, true);
-                    break;
-                case VASHTA_NERADA:
-                    VashtaNeradaEquipment.set(player, true);
-                    break;
-                case ZYGON:
-                    ZygonEquipment.set(player, true);
-                    break;
+                case WEEPING_ANGEL -> new Equipper(Monster.WEEPING_ANGEL, player, true, false).setHelmetAndInvisibilty();
+                case CYBERMAN -> new Equipper(Monster.CYBERMAN, player, true, false).setHelmetAndInvisibilty();
+                case DALEK -> DalekEquipment.set(player, true);
+                case EMPTY_CHILD -> new Equipper(Monster.EMPTY_CHILD, player, true, false).setHelmetAndInvisibilty();
+                case HATH -> new Equipper(Monster.HATH, player, true, false).setHelmetAndInvisibilty();
+                case ICE_WARRIOR -> new Equipper(Monster.ICE_WARRIOR, player, true, false).setHelmetAndInvisibilty();
+                case JUDOON -> JudoonEquipment.set(null, player, true);
+                case K9 -> K9Equipment.set(null, player, true);
+                case OOD -> OodEquipment.set(null, player, true);
+                case SILENT -> new Equipper(Monster.SILENT, player, true, false).setHelmetAndInvisibilty();
+                case SILURIAN -> new Equipper(Monster.SILURIAN, player, true, false).setHelmetAndInvisibilty();
+                case SONTARAN -> new Equipper(Monster.SONTARAN, player, true, false).setHelmetAndInvisibilty();
+                case STRAX -> new Equipper(Monster.STRAX, player, true, false).setHelmetAndInvisibilty();
+                case TOCLAFANE -> ToclafaneEquipment.set(player, true);
+                case VASHTA_NERADA -> new Equipper(Monster.VASHTA_NERADA, player, true, false).setHelmetAndInvisibilty();
+                case ZYGON -> new Equipper(Monster.ZYGON, player, true, false).setHelmetAndInvisibilty();
             }
         } else {
             RemoveEquipment.set(player);

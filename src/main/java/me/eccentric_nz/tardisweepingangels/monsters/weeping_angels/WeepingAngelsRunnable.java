@@ -3,8 +3,10 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 
+import java.util.Collection;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.Equipper;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.WaterChecker;
 import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
@@ -18,8 +20,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
-
-import java.util.Collection;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 /**
  * @author eccentric_nz
@@ -64,23 +66,25 @@ public class WeepingAngelsRunnable implements Runnable {
         });
     }
 
-    private void spawnAngel(World w) {
-        Chunk[] chunks = w.getLoadedChunks();
+    private void spawnAngel(World world) {
+        Chunk[] chunks = world.getLoadedChunks();
         if (chunks.length > 0) {
-            Chunk c = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
-            int x = c.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
-            int z = c.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
-            int y = w.getHighestBlockYAt(x, z);
-            Location l = new Location(w, x, y + 1, z);
+            Chunk chunk = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
+            int x = chunk.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int z = chunk.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int y = world.getHighestBlockYAt(x, z);
+            Location l = new Location(world, x, y + 1, z);
             if (WaterChecker.isNotWater(l)) {
                 if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(l)) {
                     return;
                 }
-                LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.SKELETON);
-                e.setSilent(true);
+                LivingEntity a = (LivingEntity) world.spawnEntity(l, EntityType.SKELETON);
+                a.setSilent(true);
+                PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
+                a.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    AngelEquipment.set(e, false);
-                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.WEEPING_ANGEL, l));
+                    new Equipper(Monster.WEEPING_ANGEL, a, false, false).setHelmetAndInvisibilty();
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(a, EntityType.SKELETON, Monster.WEEPING_ANGEL, l));
                 }, 5L);
             }
         }

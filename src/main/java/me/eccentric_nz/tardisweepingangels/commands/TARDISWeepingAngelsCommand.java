@@ -21,30 +21,41 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
             }
             String sub = args[0].toLowerCase();
             switch (sub) {
-                case "spawn":
+                case "spawn" -> {
                     return new SpawnCommand(plugin).spawn(sender, args);
-                case "disguise":
+                }
+                case "disguise" -> {
                     return new DisguiseCommand(plugin).disguise(sender, args);
-                case "equip":
+                }
+                case "equip" -> {
                     return new EquipCommand(plugin).equip(sender, args);
-                case "count":
+                }
+                case "count" -> {
                     return new CountCommand(plugin).count(sender, args);
-                case "kill":
+                }
+                case "kill" -> {
                     return new KillCommand(plugin).kill(sender, args);
-                case "set":
+                }
+                case "set" -> {
                     return new AdminCommand(plugin).set(sender, args);
-                case "follow":
+                }
+                case "follow" -> {
                     return new FollowCommand(plugin).follow(sender, args);
-                case "stay":
+                }
+                case "stay" -> {
                     return new StayCommand(plugin).stay(sender);
-                case "remove":
+                }
+                case "remove" -> {
                     return new RemoveCommand(plugin).remove(sender);
-                case "give":
+                }
+                case "give" -> {
                     return new GiveCommand(plugin).give(sender, args);
-                default:
+                }
+                default -> {
                     // unknown command
                     sender.sendMessage(plugin.pluginName + "Invalid command! Try using tab completion.");
                     return true;
+                }
             }
         }
         return true;

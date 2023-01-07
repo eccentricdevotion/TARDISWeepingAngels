@@ -3,6 +3,9 @@
  */
 package me.eccentric_nz.tardisweepingangels.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -11,9 +14,6 @@ import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author eccentric_nz
@@ -35,18 +35,18 @@ public class HelmetChecker implements Listener {
         EntityEquipment ee;
         if (heads.contains(et)) {
             switch (et) {
-                case ZOMBIFIED_PIGLIN:
+                case ZOMBIFIED_PIGLIN -> {
                     PigZombie pz = (PigZombie) e;
                     ee = pz.getEquipment();
-                    break;
-                case SKELETON:
+                }
+                case SKELETON -> {
                     Skeleton s = (Skeleton) e;
                     ee = s.getEquipment();
-                    break;
-                default:
+                }
+                default -> {
                     Zombie z = (Zombie) e;
                     ee = z.getEquipment();
-                    break;
+                }
             }
             // check chestplate
             ItemStack c = ee.getChestplate();

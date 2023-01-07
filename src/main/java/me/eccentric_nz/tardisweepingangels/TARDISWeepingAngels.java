@@ -1,5 +1,6 @@
 package me.eccentric_nz.tardisweepingangels;
 
+import java.util.*;
 import me.eccentric_nz.tardisweepingangels.commands.TARDISWeepingAngelsCommand;
 import me.eccentric_nz.tardisweepingangels.commands.TabComplete;
 import me.eccentric_nz.tardisweepingangels.death.Death;
@@ -35,6 +36,7 @@ import me.eccentric_nz.tardisweepingangels.monsters.toclafane.ToclafaneRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada.VashtaNeradaListener;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.*;
 import me.eccentric_nz.tardisweepingangels.monsters.zygons.ZygonRunnable;
+import me.eccentric_nz.tardisweepingangels.move.MonsterMoveListener;
 import me.eccentric_nz.tardisweepingangels.utils.*;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
@@ -42,8 +44,6 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.*;
 
 public class TARDISWeepingAngels extends JavaPlugin {
 
@@ -112,6 +112,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         if (getConfig().getBoolean("k9.can_build")) {
             pm.registerEvents(new K9Builder(this), this);
         }
+        pm.registerEvents(new MonsterMoveListener(), this);
         pm.registerEvents(new DalekGlideListener(this), this);
         pm.registerEvents(new Damage(this), this);
         pm.registerEvents(new VashtaNeradaListener(this), this);
@@ -221,7 +222,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         JUDOON = new NamespacedKey(plugin, "judoon");
         K9 = new NamespacedKey(plugin, "k9");
         OOD = new NamespacedKey(plugin, "ood");
-        OWNER_UUID = new NamespacedKey(plugin, "ood_uuid");
+        OWNER_UUID = new NamespacedKey(plugin, "owner_uuid");
         SILENT = new NamespacedKey(plugin, "silent");
         SILURIAN = new NamespacedKey(plugin, "silurian");
         SONTARAN = new NamespacedKey(plugin, "sontaran");

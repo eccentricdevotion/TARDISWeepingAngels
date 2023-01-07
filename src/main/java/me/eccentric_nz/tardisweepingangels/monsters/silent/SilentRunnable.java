@@ -3,8 +3,10 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters.silent;
 
+import java.util.Collection;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.Equipper;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.WaterChecker;
 import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
@@ -18,8 +20,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
-
-import java.util.Collection;
 
 /**
  * @author eccentric_nz
@@ -59,24 +59,25 @@ public class SilentRunnable implements Runnable {
         });
     }
 
-    private void spawnSilent(World w) {
-        Chunk[] chunks = w.getLoadedChunks();
+    private void spawnSilent(World world) {
+        Chunk[] chunks = world.getLoadedChunks();
         if (chunks.length > 0) {
-            Chunk c = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
-            int x = c.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
-            int z = c.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
-            int y = w.getHighestBlockYAt(x, z);
-            Location l = new Location(w, x, y + 1, z);
+            Chunk chunk = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
+            int x = chunk.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int z = chunk.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int y = world.getHighestBlockYAt(x, z);
+            Location l = new Location(world, x, y + 1, z);
             if (WaterChecker.isNotWater(l)) {
                 if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(l)) {
                     return;
                 }
-                LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.SKELETON);
-                e.setSilent(true);
-                e.setCanPickupItems(false);
+                LivingEntity s = (LivingEntity) world.spawnEntity(l, EntityType.SKELETON);
+                s.setSilent(true);
+                s.setCanPickupItems(false);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    SilentEquipment.set(e, false);
-                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.SILENT, l));
+                    new Equipper(Monster.SILENT, s, false, false).setHelmetAndInvisibilty();
+                    SilentEquipment.setGuardian(s);
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(s, EntityType.SKELETON, Monster.SILENT, l));
                 }, 5L);
             }
         }

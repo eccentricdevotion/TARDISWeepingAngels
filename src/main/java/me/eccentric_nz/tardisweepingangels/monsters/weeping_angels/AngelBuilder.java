@@ -5,6 +5,7 @@ package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.Equipper;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -65,7 +66,7 @@ public class AngelBuilder implements Listener {
                     LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.SKELETON);
                     e.setSilent(true);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        AngelEquipment.set(e, false);
+                        new Equipper(Monster.WEEPING_ANGEL, e, false, false).setHelmetAndInvisibilty();
                         plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.WEEPING_ANGEL, l));
                     }, 5L);
                 }, 20L);

@@ -14,7 +14,6 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-
 public class DalekEquipment {
 
     private static final WeightedChoice<Integer> weightedChoice = new WeightedChoice<Integer>().add(48, 0).add(3, 1).add(3, 2).add(3, 3).add(3, 4).add(3, 5).add(3, 6).add(3, 7).add(3, 8).add(3, 9).add(3, 10).add(3, 11).add(3, 12).add(3, 13).add(3, 14).add(3, 15).add(3, 16);

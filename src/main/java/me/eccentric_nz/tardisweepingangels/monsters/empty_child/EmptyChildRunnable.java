@@ -3,8 +3,10 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters.empty_child;
 
+import java.util.Collection;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.Equipper;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.WaterChecker;
 import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
@@ -19,8 +21,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Zombie;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
-
-import java.util.Collection;
 
 /**
  * @author eccentric_nz
@@ -61,24 +61,25 @@ public class EmptyChildRunnable implements Runnable {
         });
     }
 
-    private void spawnEmptyChild(World w) {
-        Chunk[] chunks = w.getLoadedChunks();
+    private void spawnEmptyChild(World world) {
+        Chunk[] chunks = world.getLoadedChunks();
         if (chunks.length > 0) {
-            Chunk c = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
-            int x = c.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
-            int z = c.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
-            int y = w.getHighestBlockYAt(x, z);
-            Location l = new Location(w, x, y + 1, z);
+            Chunk chunk = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
+            int x = chunk.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int z = chunk.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int y = world.getHighestBlockYAt(x, z);
+            Location l = new Location(world, x, y + 1, z);
             if (WaterChecker.isNotWater(l)) {
                 if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(l)) {
                     return;
                 }
-                LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIE);
+                LivingEntity e = (LivingEntity) world.spawnEntity(l, EntityType.ZOMBIE);
                 e.setSilent(true);
                 Ageable child = (Ageable) e;
                 child.setBaby();
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    EmptyChildEquipment.set(e, false);
+                    new Equipper(Monster.EMPTY_CHILD, e, false, false).setHelmetAndInvisibilty();
+                    EmptyChildEquipment.setSpeed(e);
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.EMPTY_CHILD, l));
                 }, 5L);
             }

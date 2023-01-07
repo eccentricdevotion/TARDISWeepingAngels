@@ -17,10 +17,16 @@
 package me.eccentric_nz.tardisweepingangels.move;
 
 import io.papermc.paper.event.entity.EntityMoveEvent;
+import java.util.HashMap;
+import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -30,28 +36,70 @@ import org.bukkit.persistence.PersistentDataType;
  */
 public class MonsterMoveListener implements Listener {
 
+    private final HashMap<UUID, MoveSession> moveSessions = new HashMap<>();
+
     @EventHandler
     public void onMonsterMove(EntityMoveEvent event) {
         Entity entity = event.getEntity();
         PersistentDataContainer pdc = entity.getPersistentDataContainer();
-        if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)
-                || pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)
+        if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)
                 || pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)
-                || pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)
                 || pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)
                 || pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)
                 || pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER)
                 || pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)
-                || pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)
                 || pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
-            if (!event.hasChangedBlock()) {
-                // get taskID of runnable from entity's PDC
-                // cancel runnable
-                // show static model
-            } else {
-                // start an animation runnable
-                // store the taskID in the entity's PDC
+
+            MoveSession tms = getMoveSession(entity);
+            tms.setStaleLocation(entity.getLocation());
+
+            EntityEquipment ee = ((LivingEntity) entity).getEquipment();
+            ItemStack helmet = ee.getHelmet();
+            if (helmet != null) {
+                ItemMeta meta = helmet.getItemMeta();
+                if (meta != null && meta.hasCustomModelData()) {
+                    boolean hasChanged = false;
+                    int cmd = meta.getCustomModelData();
+                    // if the location is stale, ie: the entity isn't actually moving xyz coords, they're looking around
+                    if (tms.isStaleLocation() || !event.hasChangedPosition()) {
+                        // show static model
+                        if (cmd != 9) {
+                            meta.setCustomModelData(9);
+                            hasChanged = true;
+                        }
+                    } else {
+                        // show animated model
+                        if (cmd != 10) {
+                            meta.setCustomModelData(10);
+                            hasChanged = true;
+                        }
+                    }
+                    if (hasChanged) {
+                        helmet.setItemMeta(meta);
+                        ee.setHelmet(helmet);
+                    }
+                }
             }
         }
+    }
+
+    /**
+     * Gets the Move Session for a player, this is used to see if they have
+     * actually moved
+     *
+     * @param entity the player to track
+     * @return the session for the player
+     */
+    public MoveSession getMoveSession(Entity entity) {
+        if (moveSessions.containsKey(entity.getUniqueId())) {
+            return moveSessions.get(entity.getUniqueId());
+        }
+        MoveSession session = new MoveSession(entity);
+        moveSessions.put(entity.getUniqueId(), session);
+        return session;
     }
 }

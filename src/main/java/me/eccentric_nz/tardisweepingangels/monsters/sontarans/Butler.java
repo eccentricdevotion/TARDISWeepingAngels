@@ -3,8 +3,12 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters.sontarans;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.Equipper;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -20,13 +24,10 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionType;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 /**
- * The seemingly male Sontarans could be genespliced to produce milk. Strax was very proud that he could produce
- * "magnificent quantities" of lactic fluid and offered to nurse Melody Pond.
+ * The seemingly male Sontarans could be genespliced to produce milk. Strax was
+ * very proud that he could produce "magnificent quantities" of lactic fluid and
+ * offered to nurse Melody Pond.
  *
  * @author eccentric_nz
  */
@@ -69,7 +70,8 @@ public class Butler implements Listener {
                             Ageable pzageable = (Ageable) pz;
                             pzageable.setAdult();
                             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                                StraxEquipment.set(pz, false);
+                                new Equipper(Monster.STRAX, pz, false, false).setHelmetAndInvisibilty();
+                                pz.setCustomName("Strax");
                                 pz.getPersistentDataContainer().set(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER, Monster.STRAX.getPersist());
                                 pz.getPersistentDataContainer().remove(TARDISWeepingAngels.SONTARAN);
                                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(pz, EntityType.ZOMBIFIED_PIGLIN, Monster.STRAX, l));

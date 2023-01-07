@@ -1,9 +1,11 @@
 package me.eccentric_nz.tardisweepingangels.monsters.weeping_angels;
 
+import java.util.ArrayList;
+import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.Vector3D;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.event.EventHandler;
@@ -13,9 +15,6 @@ import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Blink implements Listener {
 
@@ -73,7 +72,7 @@ public class Blink implements Listener {
                 if (skeleton == null || skeleton.getLocation().distanceSquared(observerPos) > target.getLocation().distanceSquared(observerPos)) {
                     // is it an angel?
                     EntityEquipment ee = target.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.BRICK) || ee.getHelmet().getType().equals(Material.STONE_BUTTON)) {
+                    if (ee.getHelmet().getType().equals(Monster.WEEPING_ANGEL.getMaterial())) {
                         skeleton = target;
                     }
                 }

@@ -3,8 +3,11 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters.silurians;
 
+import java.util.Collection;
+import java.util.logging.Level;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.Equipper;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
 import me.eccentric_nz.tardisweepingangels.utils.WorldProcessor;
@@ -19,9 +22,6 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import java.util.Collection;
-import java.util.logging.Level;
 
 /**
  * @author eccentric_nz
@@ -68,26 +68,26 @@ public class SilurianRunnable implements Runnable {
         });
     }
 
-    private void spawnSilurian(World w) {
-        Chunk[] chunks = w.getLoadedChunks();
+    private void spawnSilurian(World world) {
+        Chunk[] chunks = world.getLoadedChunks();
         if (chunks.length > 0) {
-            Chunk c = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
-            int x = c.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
-            int z = c.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
-            int y = w.getHighestBlockYAt(x, z);
-            Location l = new Location(w, x, y + 1, z);
+            Chunk chunk = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
+            int x = chunk.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int z = chunk.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int y = world.getHighestBlockYAt(x, z);
+            Location l = new Location(world, x, y + 1, z);
             Location search = CaveFinder.searchCave(l);
             Location cave = ((search == null)) ? l : search;
             if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(cave)) {
                 return;
             }
-            LivingEntity e = (LivingEntity) w.spawnEntity(cave, EntityType.SKELETON);
-            e.setSilent(true);
+            LivingEntity s = (LivingEntity) world.spawnEntity(cave, EntityType.SKELETON);
+            s.setSilent(true);
             PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
-            e.addPotionEffect(p);
+            s.addPotionEffect(p);
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                SilurianEquipment.set(e, false);
-                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.SILURIAN, cave));
+                new Equipper(Monster.SILURIAN, s, false, true).setHelmetAndInvisibilty();
+                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(s, EntityType.SKELETON, Monster.SILURIAN, cave));
             }, 5L);
         }
     }

@@ -3,25 +3,17 @@
  */
 package me.eccentric_nz.tardisweepingangels.equip;
 
+import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelsAPI;
-import me.eccentric_nz.tardisweepingangels.monsters.cybermen.CybermanEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.hath.HathEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.ice_warriors.IceWarriorEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonWalkRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.k9.K9Equipment;
 import me.eccentric_nz.tardisweepingangels.monsters.ood.OodEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.silent.SilentEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.silurians.SilurianEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.sontarans.SontaranEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.sontarans.StraxEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.toclafane.ToclafaneEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada.VashtaNeradaEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.AngelEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.zygons.ZygonEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.FollowerChecker;
 import me.eccentric_nz.tardisweepingangels.utils.HeadBuilder;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
@@ -32,8 +24,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.UUID;
-
 /**
  * @author eccentric_nz
  */
@@ -41,17 +31,17 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setAngelEquipment(LivingEntity le, boolean disguise) {
-        AngelEquipment.set(le, disguise);
+        new Equipper(Monster.WEEPING_ANGEL, le, disguise, false).setHelmetAndInvisibilty();
     }
 
     @Override
     public void setWarriorEquipment(LivingEntity le, boolean disguise) {
-        IceWarriorEquipment.set(le, disguise);
+        new Equipper(Monster.ICE_WARRIOR, le, disguise, false).setHelmetAndInvisibilty();
     }
 
     @Override
     public void setCyberEquipment(LivingEntity le, boolean disguise) {
-        CybermanEquipment.set(le, disguise);
+        new Equipper(Monster.CYBERMAN, le, disguise, false).setHelmetAndInvisibilty();
     }
 
     @Override
@@ -61,12 +51,15 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setEmptyChildEquipment(LivingEntity le, boolean disguise) {
-        EmptyChildEquipment.set(le, disguise);
+        new Equipper(Monster.EMPTY_CHILD, le, disguise, false).setHelmetAndInvisibilty();
+        if (!disguise) {
+            EmptyChildEquipment.setSpeed(le);
+        }
     }
 
     @Override
     public void setHathEquipment(LivingEntity le, boolean disguise) {
-        HathEquipment.set(le, disguise);
+        new Equipper(Monster.HATH, le, disguise, false).setHelmetAndInvisibilty();
     }
 
     @Override
@@ -85,28 +78,27 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
     }
 
     @Override
-    public void setSilentEquipment(LivingEntity le) {
-        SilentEquipment.set(le, false);
-    }
-
-    @Override
     public void setSilentEquipment(LivingEntity le, boolean disguise) {
-        SilentEquipment.set(le, disguise);
+        new Equipper(Monster.SILENT, le, disguise, false).setHelmetAndInvisibilty();
+        SilentEquipment.setGuardian(le);
     }
 
     @Override
     public void setSilurianEquipment(LivingEntity le, boolean disguise) {
-        SilurianEquipment.set(le, disguise);
+        new Equipper(Monster.SILURIAN, le, disguise, true).setHelmetAndInvisibilty();
     }
 
     @Override
     public void setSontaranEquipment(LivingEntity le, boolean disguise) {
-        SontaranEquipment.set(le, disguise);
+        new Equipper(Monster.SONTARAN, le, disguise, false).setHelmetAndInvisibilty();
     }
 
     @Override
     public void setStraxEquipment(LivingEntity le, boolean disguise) {
-        StraxEquipment.set(le, disguise);
+        new Equipper(Monster.STRAX, le, disguise, false).setHelmetAndInvisibilty();
+        if(!disguise) {
+            le.setCustomName("Strax");
+        }
     }
 
     @Override
@@ -116,12 +108,12 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public void setVashtaNeradaEquipment(LivingEntity le, boolean disguise) {
-        VashtaNeradaEquipment.set(le, disguise);
+        new Equipper(Monster.VASHTA_NERADA, le, disguise, false).setHelmetAndInvisibilty();
     }
 
     @Override
     public void setZygonEquipment(LivingEntity le, boolean disguise) {
-        ZygonEquipment.set(le, disguise);
+        new Equipper(Monster.ZYGON, le, disguise, false).setHelmetAndInvisibilty();
     }
 
     @Override

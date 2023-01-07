@@ -1,7 +1,11 @@
 package me.eccentric_nz.tardisweepingangels.monsters.silurians;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.Equipper;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
 import me.eccentric_nz.tardisweepingangels.utils.WorldProcessor;
@@ -17,10 +21,6 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class SilurianSpawnerListener implements Listener {
 
@@ -61,7 +61,7 @@ public class SilurianSpawnerListener implements Listener {
                     PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                     e.addPotionEffect(p);
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        SilurianEquipment.set(e, false);
+                        new Equipper(Monster.SILURIAN, e, false, true).setHelmetAndInvisibilty();
                         plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.SILURIAN, cave));
                     }, 5L);
                 }
