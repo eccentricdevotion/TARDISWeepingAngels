@@ -21,7 +21,9 @@ import java.util.HashMap;
 import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Guardian;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Monster;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.EntityEquipment;
@@ -66,16 +68,35 @@ public class MonsterMoveListener implements Listener {
                     int cmd = meta.getCustomModelData();
                     // if the location is stale, ie: the entity isn't actually moving xyz coords, they're looking around
                     if (tms.isStaleLocation() || !event.hasChangedPosition()) {
-                        // show static model
-                        if (cmd != 9) {
-                            meta.setCustomModelData(9);
-                            hasChanged = true;
+                        if (!entity.getPassengers().isEmpty()) {
+                            Guardian guardian = (Guardian) entity.getPassengers().get(0);
+                            // show animated ATTACKING model - silent doesn't move when beaming
+                            if (guardian.hasLaser() && cmd != 11) {
+                                meta.setCustomModelData(11);
+                                hasChanged = true;
+                            }
+                        } else {
+                            // show static model
+                            if (cmd != 9) {
+                                meta.setCustomModelData(9);
+                                hasChanged = true;
+                            }
                         }
+
                     } else {
-                        // show animated model
-                        if (cmd != 10) {
-                            meta.setCustomModelData(10);
-                            hasChanged = true;
+                        Monster monster = (Monster) entity;
+                        if (monster.getTarget() != null) {
+                            // show animated ATTACKING model
+                            if (cmd != 11) {
+                                meta.setCustomModelData(11);
+                                hasChanged = true;
+                            }
+                        } else {
+                            // show animated WALKING model
+                            if (cmd != 10) {
+                                meta.setCustomModelData(10);
+                                hasChanged = true;
+                            }
                         }
                     }
                     if (hasChanged) {
