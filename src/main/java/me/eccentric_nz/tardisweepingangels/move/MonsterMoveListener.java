@@ -109,11 +109,11 @@ public class MonsterMoveListener implements Listener {
     }
 
     /**
-     * Gets the Move Session for a player, this is used to see if they have
+     * Gets the Move Session for a monster, this is used to see if they have
      * actually moved
      *
-     * @param entity the player to track
-     * @return the session for the player
+     * @param entity the monster to track
+     * @return the session for the monster
      */
     public MoveSession getMoveSession(Entity entity) {
         if (moveSessions.containsKey(entity.getUniqueId())) {
