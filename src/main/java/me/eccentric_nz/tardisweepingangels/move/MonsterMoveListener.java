@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 eccentric_nz
+ * Copyright (C) 2023 eccentric_nz
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ package me.eccentric_nz.tardisweepingangels.move;
 import io.papermc.paper.event.entity.EntityMoveEvent;
 import java.util.HashMap;
 import java.util.UUID;
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Guardian;
 import org.bukkit.entity.LivingEntity;
@@ -29,8 +29,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
 
 /**
  *
@@ -43,22 +41,11 @@ public class MonsterMoveListener implements Listener {
     @EventHandler
     public void onMonsterMove(EntityMoveEvent event) {
         Entity entity = event.getEntity();
-        PersistentDataContainer pdc = entity.getPersistentDataContainer();
-        if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)
-                || pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)
-                || pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)
-                || pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)
-                || pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)
-                || pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)
-                || pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)
-                || pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER)
-                || pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)
-                || pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)
-                || pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
-
+        if (MonsterEquipment.isMonster(entity)) {
+            // get or create a move session
             MoveSession tms = getMoveSession(entity);
             tms.setStaleLocation(entity.getLocation());
-
+            // get the entity's equipment
             EntityEquipment ee = ((LivingEntity) entity).getEquipment();
             ItemStack helmet = ee.getHelmet();
             if (helmet != null) {
@@ -82,7 +69,7 @@ public class MonsterMoveListener implements Listener {
                                 hasChanged = true;
                             }
                         }
-
+                    // the entity is actually moving
                     } else {
                         Monster monster = (Monster) entity;
                         if (monster.getTarget() != null) {
