@@ -54,6 +54,9 @@ public class WorldProcessor implements Runnable {
             if (!config.contains("hath.worlds." + n)) {
                 plugin.getConfig().set("hath.worlds." + n, m);
             }
+            if (!config.contains("headless_monks.worlds." + n)) {
+                plugin.getConfig().set("headless_monks.worlds." + n, m);
+            }
             if (!config.contains("ice_warriors.worlds." + n)) {
                 plugin.getConfig().set("ice_warriors.worlds." + n, m);
             }

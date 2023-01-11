@@ -44,6 +44,14 @@ hath:
   drops:
     - SALMON
     - STONE_PICKAXE
+headless_monks:
+  worlds:
+    world: 10
+  drops:
+    - BOOK
+    - RED_CANDLE
+  projectile: SMALL_FIREBALL
+  particles: true
 ice_warriors:
   worlds:
     world: 20

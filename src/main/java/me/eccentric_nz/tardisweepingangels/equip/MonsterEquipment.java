@@ -3,11 +3,11 @@
  */
 package me.eccentric_nz.tardisweepingangels.equip;
 
-import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelsAPI;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildEquipment;
+import me.eccentric_nz.tardisweepingangels.monsters.headless_monks.HeadlessMonkEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonWalkRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.k9.K9Equipment;
@@ -24,10 +24,88 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.UUID;
+
 /**
  * @author eccentric_nz
  */
 public class MonsterEquipment implements TARDISWeepingAngelsAPI {
+
+    public static boolean isMonster(Entity entity) {
+        if (entity instanceof Zombie || entity instanceof PigZombie || entity instanceof Skeleton) {
+            PersistentDataContainer pdc = entity.getPersistentDataContainer();
+            if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
+                return true;
+            }
+        } else if (entity instanceof Skeleton && !entity.getPassengers().isEmpty()) {
+            Entity passenger = entity.getPassengers().get(0);
+            if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
+                return true;
+            }
+        } else if (entity instanceof Bee) {
+            if (!entity.getPassengers().isEmpty()) {
+                Entity passenger = entity.getPassengers().get(0);
+                if (passenger != null && passenger.getType().equals(EntityType.ARMOR_STAND)) {
+                    return true;
+                }
+            }
+        } else if (entity instanceof ArmorStand) {
+            if (entity.getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID)) {
+                return true;
+            }
+        } else if (entity instanceof Guardian) {
+            if (entity.getVehicle() != null && entity.getVehicle() instanceof Skeleton skeleton) {
+                return skeleton.getPersistentDataContainer().has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER);
+            }
+        }
+        return false;
+    }
+
+    public static Monster getMonsterType(Entity entity) {
+        if (entity instanceof Zombie || entity instanceof PigZombie || entity instanceof Skeleton) {
+            PersistentDataContainer pdc = entity.getPersistentDataContainer();
+            if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)) {
+                return Monster.CYBERMAN;
+            }
+            if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
+                return Monster.DALEK;
+            }
+            if (pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
+                return Monster.EMPTY_CHILD;
+            }
+            if (pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
+                return Monster.HATH;
+            }
+            if (pdc.has(TARDISWeepingAngels.MONK, PersistentDataType.INTEGER)) {
+                return Monster.HEADLESS_MONK;
+            }
+            if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
+                return Monster.ICE_WARRIOR;
+            }
+            if (pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)) {
+                return Monster.SILURIAN;
+            }
+            if (pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
+                return Monster.SONTARAN;
+            }
+            if (pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER)) {
+                return Monster.STRAX;
+            }
+            if (pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)) {
+                return Monster.VASHTA_NERADA;
+            }
+            if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
+                return Monster.WEEPING_ANGEL;
+            }
+            if (pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
+                return Monster.ZYGON;
+            }
+            if (pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
+                return Monster.SILENT;
+            }
+        }
+        return null;
+    }
 
     @Override
     public void setAngelEquipment(LivingEntity le, boolean disguise) {
@@ -63,8 +141,20 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
     }
 
     @Override
+    public void setHeadlessMonkEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.HEADLESS_MONK, le, disguise, false).setHelmetAndInvisibilty();
+        HeadlessMonkEquipment.setTasks(le);
+    }
+
+    @Override
     public void setJudoonEquipment(Player player, Entity armorStand, boolean disguise) {
         JudoonEquipment.set(player, armorStand, disguise);
+    }
+
+    @Override
+    public void setJudoonEquipment(Player player, Entity armorStand, int ammunition) {
+        setJudoonEquipment(player, armorStand, false);
+        armorStand.getPersistentDataContainer().set(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER, ammunition);
     }
 
     @Override
@@ -96,7 +186,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
     @Override
     public void setStraxEquipment(LivingEntity le, boolean disguise) {
         new Equipper(Monster.STRAX, le, disguise, false).setHelmetAndInvisibilty();
-        if(!disguise) {
+        if (!disguise) {
             le.setCustomName("Strax");
         }
     }
@@ -123,81 +213,17 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     @Override
     public boolean isWeepingAngelMonster(Entity entity) {
-        if (entity instanceof Zombie || entity instanceof PigZombie || entity instanceof Skeleton) {
-            PersistentDataContainer pdc = entity.getPersistentDataContainer();
-            if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
-                return true;
-            }
-        } else if (entity instanceof Skeleton && !entity.getPassengers().isEmpty()) {
-            Entity passenger = entity.getPassengers().get(0);
-            if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
-                return true;
-            }
-        } else if (entity instanceof Bee) {
-            if (!entity.getPassengers().isEmpty()) {
-                Entity passenger = entity.getPassengers().get(0);
-                if (passenger != null && passenger.getType().equals(EntityType.ARMOR_STAND)) {
-                    return true;
-                }
-            }
-        } else if (entity instanceof ArmorStand) {
-            if (entity.getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID)) {
-                return true;
-            }
-        }
-        return false;
+        return isMonster(entity);
     }
 
     @Override
     public Monster getWeepingAngelMonsterType(Entity entity) {
-        if (entity instanceof Zombie || entity instanceof PigZombie || entity instanceof Skeleton || entity instanceof Skeleton) {
-            PersistentDataContainer pdc = entity.getPersistentDataContainer();
-            if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)) {
-                return Monster.CYBERMAN;
-            }
-            if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
-                return Monster.DALEK;
-            }
-            if (pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
-                return Monster.EMPTY_CHILD;
-            }
-            if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
-                return Monster.ICE_WARRIOR;
-            }
-            if (pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)) {
-                return Monster.SILURIAN;
-            }
-            if (pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
-                return Monster.SONTARAN;
-            }
-            if (pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER)) {
-                return Monster.STRAX;
-            }
-            if (pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)) {
-                return Monster.VASHTA_NERADA;
-            }
-            if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
-                return Monster.WEEPING_ANGEL;
-            }
-            if (pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
-                return Monster.ZYGON;
-            }
-            if (pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
-                return Monster.SILENT;
-            }
-        }
-        return null;
+        return getMonsterType(entity);
     }
 
     @Override
     public FollowerChecker isClaimedMonster(Entity entity, UUID uuid) {
         return new FollowerChecker(entity, uuid);
-    }
-
-    @Override
-    public void setJudoonEquipment(Player player, Entity armorStand, int ammunition) {
-        setJudoonEquipment(player, armorStand, false);
-        armorStand.getPersistentDataContainer().set(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER, ammunition);
     }
 
     @Override

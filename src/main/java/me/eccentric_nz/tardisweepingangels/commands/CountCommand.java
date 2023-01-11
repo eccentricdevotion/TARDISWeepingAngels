@@ -46,127 +46,43 @@ public class CountCommand {
                 return true;
             }
             switch (monster) {
-                case WEEPING_ANGEL -> {
+                case WEEPING_ANGEL, DALEK, SILURIAN, SILENT, HEADLESS_MONK -> {
+                    what = (monster.equals(Monster.SILENT))? "Silence" : monster.getName() + "s";
                     Collection<Skeleton> angels = w.getEntitiesByClass(Skeleton.class);
                     for (Skeleton a : angels) {
-                        if (a.getPersistentDataContainer().has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
+                        if (a.getPersistentDataContainer().has(monster.getKey(), PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
                 }
-                case CYBERMAN -> {
-                    what = "Cybermen";
+                case CYBERMAN, EMPTY_CHILD, SONTARAN, VASHTA_NERADA, ZYGON -> {
+                    switch (monster) {
+                        case CYBERMAN -> what = "Cybermen";
+                        case EMPTY_CHILD -> what = "Empty Children";
+                        case VASHTA_NERADA -> what = "Vashta Nerada";
+                        default -> what = monster.getName() + "s";
+                    }
                     Collection<Zombie> cybermen = w.getEntitiesByClass(Zombie.class);
                     for (Zombie c : cybermen) {
-                        if (c.getPersistentDataContainer().has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)) {
+                        if (c.getPersistentDataContainer().has(monster.getKey(), PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
                 }
-                case DALEK -> {
-                    what = "Daleks";
-                    Collection<Skeleton> daleks = w.getEntitiesByClass(Skeleton.class);
-                    for (Skeleton d : daleks) {
-                        if (d.getPersistentDataContainer().has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
-                            count++;
-                        }
-                    }
-                }
-                case EMPTY_CHILD -> {
-                    what = "Empty Children";
-                    Collection<Zombie> kids = w.getEntitiesByClass(Zombie.class);
-                    for (Zombie e : kids) {
-                        if (e.getPersistentDataContainer().has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
-                            count++;
-                        }
-                    }
-                }
-                case HATH -> {
-                    what = "Hath";
+                case HATH, ICE_WARRIOR, STRAX -> {
+                    what = (monster.equals(Monster.ICE_WARRIOR))? "Ice Warriors" : monster.getName();
                     Collection<PigZombie> fish = w.getEntitiesByClass(PigZombie.class);
                     for (PigZombie h : fish) {
-                        if (h.getPersistentDataContainer().has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
+                        if (h.getPersistentDataContainer().has(monster.getKey(), PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }
                 }
-                case ICE_WARRIOR -> {
-                    what = "Ice Warriors";
-                    Collection<PigZombie> warriors = w.getEntitiesByClass(PigZombie.class);
-                    for (PigZombie i : warriors) {
-                        if (i.getPersistentDataContainer().has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
-                            count++;
-                        }
-                    }
-                }
-                case JUDOON -> {
-                    what = "Judoon";
+                case JUDOON, K9, OOD -> {
+                    what = (monster.equals(Monster.K9))? "K9s" : monster.getName();
                     Collection<ArmorStand> galactic_police = w.getEntitiesByClass(ArmorStand.class);
                     for (ArmorStand g : galactic_police) {
-                        if (g.getPersistentDataContainer().has(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER)) {
-                            count++;
-                        }
-                    }
-                }
-                case K9 -> {
-                    what = "K9";
-                    Collection<ArmorStand> companions = w.getEntitiesByClass(ArmorStand.class);
-                    for (ArmorStand k : companions) {
-                        if (k.getPersistentDataContainer().has(TARDISWeepingAngels.K9, PersistentDataType.INTEGER)) {
-                            count++;
-                        }
-                    }
-                }
-                case SILENT -> {
-                    what = "Silence";
-                    Collection<Skeleton> silence = w.getEntitiesByClass(Skeleton.class);
-                    for (Skeleton m : silence) {
-                        if (m.getPersistentDataContainer().has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
-                            count++;
-                        }
-                    }
-                }
-                case SONTARAN -> {
-                    what = "Sontarans";
-                    Collection<Zombie> sontarans = w.getEntitiesByClass(Zombie.class);
-                    for (Zombie o : sontarans) {
-                        if (o.getPersistentDataContainer().has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
-                            count++;
-                        }
-                    }
-                }
-                case OOD -> {
-                    what = "Ood";
-                    Collection<ArmorStand> ood = w.getEntitiesByClass(ArmorStand.class);
-                    for (ArmorStand o : ood) {
-                        if (o.getPersistentDataContainer().has(TARDISWeepingAngels.OOD, PersistentDataType.INTEGER)) {
-                            count++;
-                        }
-                    }
-                }
-                case SILURIAN -> {
-                    what = "Silurians";
-                    Collection<Skeleton> silurians = w.getEntitiesByClass(Skeleton.class);
-                    for (Skeleton s : silurians) {
-                        if (s.getPersistentDataContainer().has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)) {
-                            count++;
-                        }
-                    }
-                }
-                case VASHTA_NERADA -> {
-                    what = "Vashta Nerada";
-                    Collection<Zombie> vashta = w.getEntitiesByClass(Zombie.class);
-                    for (Zombie v : vashta) {
-                        if (v.getPersistentDataContainer().has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)) {
-                            count++;
-                        }
-                    }
-                }
-                case ZYGON -> {
-                    what = "Zygons";
-                    Collection<Zombie> zygons = w.getEntitiesByClass(Zombie.class);
-                    for (Zombie z : zygons) {
-                        if (z.getPersistentDataContainer().has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
+                        if (g.getPersistentDataContainer().has(monster.getKey(), PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }

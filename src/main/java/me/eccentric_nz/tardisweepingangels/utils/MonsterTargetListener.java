@@ -54,6 +54,10 @@ public class MonsterTargetListener implements Listener {
                 if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Monster.DALEK.getMaterial());
                 }
+                // headless monk
+                if (pdc.has(TARDISWeepingAngels.MONK, PersistentDataType.INTEGER)) {
+                    ignore = isWearingMonsterHead(player, Monster.HEADLESS_MONK.getMaterial());
+                }
                 // silent
                 if (pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Monster.SILENT.getMaterial());

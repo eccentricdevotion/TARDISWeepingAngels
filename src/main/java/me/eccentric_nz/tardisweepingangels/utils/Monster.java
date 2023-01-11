@@ -16,6 +16,7 @@ public enum Monster {
     DALEK("Dalek", "dalek", 3, 10000005, Material.SLIME_BALL, TARDISWeepingAngels.DALEK, 10000004),
     EMPTY_CHILD("Empty Child", "empty", 4, 4, Material.SUGAR, TARDISWeepingAngels.EMPTY),
     HATH("Hath", "hath", 16, 5, Material.PUFFERFISH, TARDISWeepingAngels.HATH, 4),
+    HEADLESS_MONK("Headless Monk", "monk", 17, 4, Material.RED_CANDLE, TARDISWeepingAngels.MONK),
     ICE_WARRIOR("Ice Warrior", "ice", 5, 5, Material.SNOWBALL, TARDISWeepingAngels.WARRIOR, 4),
     JUDOON("Judoon", "judoon", 14, 10, Material.YELLOW_DYE, TARDISWeepingAngels.JUDOON, 11),
     K9("K9", "k9", 15, 1, Material.BONE, TARDISWeepingAngels.K9),

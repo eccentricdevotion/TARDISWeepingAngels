@@ -20,17 +20,6 @@ import java.util.Set;
 
 public class WorldGuardChecker {
 
-    private static final Set<EntityType> MONSTER_TYPES = new HashSet<EntityType>() {
-        {
-            add(EntityType.ARMOR_STAND); // OOD, JUDOON, K9
-            add(EntityType.BEE); // TOCLAFANE
-            add(EntityType.GUARDIAN); // SILENT
-            add(EntityType.SKELETON); // SILENT, WEEPING ANGEL, SILURIAN, DALEK
-            add(EntityType.ZOMBIE); // CYBERMAN, EMPTY CHILD, SONTARAN, VASHTA, ZYGON
-            add(EntityType.ZOMBIFIED_PIGLIN); // HATH, ICE_WARRIOR, STRAX,
-        }
-    };
-
     public static boolean canSpawn(Location l) {
         Plugin p = Bukkit.getPluginManager().getPlugin("WorldGuard");
         if (p != null) {

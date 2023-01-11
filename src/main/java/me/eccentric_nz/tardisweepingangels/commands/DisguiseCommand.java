@@ -69,6 +69,7 @@ public class DisguiseCommand {
                 case DALEK -> DalekEquipment.set(player, true);
                 case EMPTY_CHILD -> new Equipper(Monster.EMPTY_CHILD, player, true, false).setHelmetAndInvisibilty();
                 case HATH -> new Equipper(Monster.HATH, player, true, false).setHelmetAndInvisibilty();
+                case HEADLESS_MONK -> new Equipper(Monster.HEADLESS_MONK, player, true, false).setHelmetAndInvisibilty();
                 case ICE_WARRIOR -> new Equipper(Monster.ICE_WARRIOR, player, true, false).setHelmetAndInvisibilty();
                 case JUDOON -> JudoonEquipment.set(null, player, true);
                 case K9 -> K9Equipment.set(null, player, true);

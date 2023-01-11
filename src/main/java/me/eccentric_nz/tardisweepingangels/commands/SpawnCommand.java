@@ -7,6 +7,7 @@ import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.Equipper;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildEquipment;
+import me.eccentric_nz.tardisweepingangels.monsters.headless_monks.HeadlessMonkEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.k9.K9Equipment;
 import me.eccentric_nz.tardisweepingangels.monsters.ood.OodEquipment;
@@ -119,6 +120,14 @@ public class SpawnCommand {
                 new Equipper(Monster.HATH, h, false, false).setHelmetAndInvisibilty();
                 player.playSound(h.getLocation(), "hath", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(h, EntityType.ZOMBIFIED_PIGLIN, Monster.HATH, eyeLocation));
+            }
+            case HEADLESS_MONK -> {
+                LivingEntity h = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
+                h.setSilent(true);
+                new Equipper(Monster.HEADLESS_MONK, h, false, false).setHelmetAndInvisibilty();
+                HeadlessMonkEquipment.setTasks(h);
+                player.playSound(h.getLocation(), "headliess_monk", 1.0f, 1.0f);
+                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(h, EntityType.SKELETON, Monster.HEADLESS_MONK, eyeLocation));
             }
             case ICE_WARRIOR -> {
                 LivingEntity i = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIFIED_PIGLIN);

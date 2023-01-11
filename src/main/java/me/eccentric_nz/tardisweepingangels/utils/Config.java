@@ -47,6 +47,7 @@ public class Config {
         intOptions.put("toclafane.spawn_from_bee", 5);
         // string
         strOptions.put("angels.weapon", "DIAMOND_PICKAXE");
+        strOptions.put("headless_monks.projectile", "SMALL_FIREBALL");
         // list
         listOptions.put("angels.drops", Arrays.asList("STONE", "COBBLESTONE"));
         listOptions.put("angels.teleport_worlds", Arrays.asList("world"));
@@ -54,6 +55,7 @@ public class Config {
         listOptions.put("daleks.drops", Arrays.asList("SLIME_BALL", "ROTTEN_FLESH"));
         listOptions.put("empty_child.drops", Arrays.asList("COOKED_BEEF", "SUGAR"));
         listOptions.put("hath.drops", Arrays.asList("SALMON", "STONE_PICKAXE"));
+        listOptions.put("headless_monks.drops", Arrays.asList("BOOK", "RED_CANDLE"));
         listOptions.put("ice_warriors.drops", Arrays.asList("ICE", "PACKED_ICE", "SNOW_BLOCK"));
         listOptions.put("silent.drops", Arrays.asList("INK_SAC", "FLOWER_POT"));
         listOptions.put("ood.drops", Arrays.asList("NAME_TAG"));
@@ -67,6 +69,7 @@ public class Config {
         boolOptions.put("angels.can_build", true);
         boolOptions.put("angels.spawn_from_chat.enabled", true);
         boolOptions.put("cybermen.can_upgrade", true);
+        boolOptions.put("headless_monks.particles", true);
         boolOptions.put("sontarans.can_tame", true);
         boolOptions.put("judoon.guards", true);
         boolOptions.put("judoon.can_build", true);
