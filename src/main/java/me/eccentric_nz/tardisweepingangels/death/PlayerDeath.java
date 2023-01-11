@@ -107,6 +107,10 @@ public class PlayerDeath implements Listener {
                             event.setDeathMessage(name + " was slain by a Silurian");
                             return;
                         }
+                        if (pdc.has(TARDISWeepingAngels.MONK, PersistentDataType.INTEGER)) {
+                            event.setDeathMessage(name + " was slain by a Headless Monk");
+                            return;
+                        }
                         if (!attacker.getPassengers().isEmpty()) {
                             Entity passenger = attacker.getPassengers().get(0);
                             if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
