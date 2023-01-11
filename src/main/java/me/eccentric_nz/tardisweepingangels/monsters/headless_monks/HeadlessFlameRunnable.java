@@ -65,7 +65,7 @@ public class HeadlessFlameRunnable implements Runnable {
             Vector direction = end.toVector().subtract(start.toVector()).normalize();
             Vector v = direction.multiply(i * d);
             l.add(v.getX(), v.getY(), v.getZ());
-            start.getWorld().spawnParticle(Particle.FLAME, l, 1, 0, 0, 0, 0.1, null, false);
+            start.getWorld().spawnParticle(Particle.FLAME, l, 1, 0, 0, 0, 0.01, null, false);
         }
     }
 }
