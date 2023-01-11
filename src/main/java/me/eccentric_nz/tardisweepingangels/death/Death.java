@@ -1,5 +1,18 @@
 /*
- *  Copyright 2014 eccentric_nz.
+ * Copyright (C) 2023 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package me.eccentric_nz.tardisweepingangels.death;
 
@@ -8,6 +21,7 @@ import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.Equipper;
+import me.eccentric_nz.tardisweepingangels.utils.HeadBuilder;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import net.citizensnpcs.api.CitizensAPI;
 import org.bukkit.Location;
@@ -21,16 +35,12 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
 
-/**
- * @author eccentric_nz
- */
 public class Death implements Listener {
 
     private final TARDISWeepingAngels plugin;
@@ -39,6 +49,7 @@ public class Death implements Listener {
     private final List<Material> dalek_drops = new ArrayList<>();
     private final List<Material> empty_drops = new ArrayList<>();
     private final List<Material> hath_drops = new ArrayList<>();
+    private final List<Material> headless_drops = new ArrayList<>();
     private final List<Material> silent_drops = new ArrayList<>();
     private final List<Material> ice_drops = new ArrayList<>();
     private final List<Material> silurian_drops = new ArrayList<>();
@@ -53,6 +64,7 @@ public class Death implements Listener {
         plugin.getConfig().getStringList("daleks.drops").forEach((d) -> dalek_drops.add(Material.valueOf(d)));
         plugin.getConfig().getStringList("empty_child.drops").forEach((e) -> empty_drops.add(Material.valueOf(e)));
         plugin.getConfig().getStringList("hath.drops").forEach((e) -> hath_drops.add(Material.valueOf(e)));
+        plugin.getConfig().getStringList("headless_monks.drops").forEach((e) -> headless_drops.add(Material.valueOf(e)));
         plugin.getConfig().getStringList("ice_warriors.drops").forEach((i) -> ice_drops.add(Material.valueOf(i)));
         plugin.getConfig().getStringList("sontarans.drops").forEach((o) -> sontaran_drops.add(Material.valueOf(o)));
         plugin.getConfig().getStringList("silent.drops").forEach((m) -> silent_drops.add(Material.valueOf(m)));
@@ -69,12 +81,7 @@ public class Death implements Listener {
                 event.getDrops().clear();
                 ItemStack stack;
                 if (TARDISWeepingAngels.random.nextInt(100) < 3) {
-                    stack = new ItemStack(Monster.WEEPING_ANGEL.getMaterial(), 1);
-                    ItemMeta im = stack.getItemMeta();
-                    im.getPersistentDataContainer().set(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER, 99);
-                    im.setDisplayName("Weeping Angel Head");
-                    im.setCustomModelData(3);
-                    stack.setItemMeta(im);
+                    stack = HeadBuilder.getItemStack(Monster.WEEPING_ANGEL);
                 } else {
                     stack = new ItemStack(angel_drops.get(TARDISWeepingAngels.random.nextInt(angel_drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
                 }
@@ -85,14 +92,22 @@ public class Death implements Listener {
                 event.getDrops().clear();
                 ItemStack stack;
                 if (TARDISWeepingAngels.random.nextInt(100) < 3) {
-                    stack = new ItemStack(Monster.SILURIAN.getMaterial(), 1);
-                    ItemMeta im = stack.getItemMeta();
-                    im.getPersistentDataContainer().set(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER, 99);
-                    im.setDisplayName("Silurian Head");
-                    im.setCustomModelData(3);
-                    stack.setItemMeta(im);
+                    stack = HeadBuilder.getItemStack(Monster.SILURIAN);
                 } else {
                     stack = new ItemStack(silurian_drops.get(TARDISWeepingAngels.random.nextInt(silurian_drops.size())), TARDISWeepingAngels.random.nextInt(2) + 1);
+                }
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                return;
+            }
+            if (pdc.has(TARDISWeepingAngels.MONK, PersistentDataType.INTEGER)) {
+                event.getDrops().clear();
+                ItemStack stack;
+                if (TARDISWeepingAngels.random.nextInt(100) < 3) {
+                    stack = HeadBuilder.getItemStack(Monster.HEADLESS_MONK);
+                } else if (TARDISWeepingAngels.random.nextInt(100) < 6) {
+                    stack = new ItemStack(Material.IRON_SWORD, 1);
+                } else {
+                    stack = new ItemStack(headless_drops.get(TARDISWeepingAngels.random.nextInt(headless_drops.size())), TARDISWeepingAngels.random.nextInt(2) + 1);
                 }
                 event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                 return;
@@ -101,12 +116,7 @@ public class Death implements Listener {
                 event.getDrops().clear();
                 ItemStack stack;
                 if (TARDISWeepingAngels.random.nextInt(100) < 3) {
-                    stack = new ItemStack(Monster.DALEK.getMaterial(), 1);
-                    ItemMeta im = stack.getItemMeta();
-                    im.getPersistentDataContainer().set(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER, 99);
-                    im.setDisplayName("Dalek Head");
-                    im.setCustomModelData(10000004);
-                    stack.setItemMeta(im);
+                    stack = HeadBuilder.getItemStack(Monster.DALEK);
                 } else {
                     stack = new ItemStack(dalek_drops.get(TARDISWeepingAngels.random.nextInt(dalek_drops.size())), 1);
                 }
@@ -122,12 +132,7 @@ public class Death implements Listener {
                 event.getDrops().clear();
                 ItemStack stack;
                 if (TARDISWeepingAngels.random.nextInt(100) < 3) {
-                    stack = new ItemStack(Monster.SILENT.getMaterial(), 1);
-                    ItemMeta im = stack.getItemMeta();
-                    im.getPersistentDataContainer().set(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER, 99);
-                    im.setDisplayName("Silent Head");
-                    im.setCustomModelData(3);
-                    stack.setItemMeta(im);
+                    stack = HeadBuilder.getItemStack(Monster.SILENT);
                 } else {
                     stack = new ItemStack(silent_drops.get(TARDISWeepingAngels.random.nextInt(silent_drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
                 }
@@ -139,12 +144,7 @@ public class Death implements Listener {
                 event.getDrops().clear();
                 ItemStack stack;
                 if (TARDISWeepingAngels.random.nextInt(100) < 3) {
-                    stack = new ItemStack(Monster.ICE_WARRIOR.getMaterial(), 1);
-                    ItemMeta im = stack.getItemMeta();
-                    im.getPersistentDataContainer().set(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER, 99);
-                    im.setDisplayName("Ice Warrior Head");
-                    im.setCustomModelData(4);
-                    stack.setItemMeta(im);
+                    stack = HeadBuilder.getItemStack(Monster.ICE_WARRIOR);
                 } else {
                     stack = new ItemStack(ice_drops.get(TARDISWeepingAngels.random.nextInt(ice_drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
                 }
@@ -155,12 +155,7 @@ public class Death implements Listener {
                 event.getDrops().clear();
                 ItemStack stack;
                 if (TARDISWeepingAngels.random.nextInt(100) < 3) {
-                    stack = new ItemStack(Monster.HATH.getMaterial(), 1);
-                    ItemMeta im = stack.getItemMeta();
-                    im.getPersistentDataContainer().set(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER, 99);
-                    im.setDisplayName("Hath Head");
-                    im.setCustomModelData(4);
-                    stack.setItemMeta(im);
+                    stack = HeadBuilder.getItemStack(Monster.HATH);
                 } else {
                     stack = new ItemStack(hath_drops.get(TARDISWeepingAngels.random.nextInt(hath_drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
                 }
@@ -173,12 +168,7 @@ public class Death implements Listener {
             if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)) {
                 event.getDrops().clear();
                 if (TARDISWeepingAngels.random.nextInt(100) < 3) {
-                    stack = new ItemStack(Monster.CYBERMAN.getMaterial(), 1);
-                    ItemMeta im = stack.getItemMeta();
-                    im.getPersistentDataContainer().set(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER, 99);
-                    im.setDisplayName("Cyberman Head");
-                    im.setCustomModelData(3);
-                    stack.setItemMeta(im);
+                    stack = HeadBuilder.getItemStack(Monster.CYBERMAN);
                 } else if (TARDISWeepingAngels.random.nextInt(100) < 6) {
                     stack = new ItemStack(Material.IRON_INGOT, 1);
                 } else {
@@ -190,12 +180,7 @@ public class Death implements Listener {
             if (pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
                 event.getDrops().clear();
                 if (TARDISWeepingAngels.random.nextInt(100) < 3) {
-                    stack = new ItemStack(Material.SUGAR, 1);
-                    ItemMeta im = stack.getItemMeta();
-                    im.getPersistentDataContainer().set(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER, 99);
-                    im.setDisplayName("Empty Child Head");
-                    im.setCustomModelData(3);
-                    stack.setItemMeta(im);
+                    stack = HeadBuilder.getItemStack(Monster.EMPTY_CHILD);
                 } else if (TARDISWeepingAngels.random.nextInt(100) < 6) {
                     stack = new ItemStack(Material.POTION);
                     PotionMeta potionMeta = (PotionMeta) stack.getItemMeta();
@@ -210,12 +195,7 @@ public class Death implements Listener {
             if (pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
                 event.getDrops().clear();
                 if (TARDISWeepingAngels.random.nextInt(100) < 3) {
-                    stack = new ItemStack(Monster.SONTARAN.getMaterial(), 1);
-                    ItemMeta im = stack.getItemMeta();
-                    im.getPersistentDataContainer().set(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER, 99);
-                    im.setDisplayName("Sontaran Head");
-                    im.setCustomModelData(4);
-                    stack.setItemMeta(im);
+                    stack = HeadBuilder.getItemStack(Monster.SONTARAN);
                 } else if (TARDISWeepingAngels.random.nextInt(100) < 6) {
                     stack = new ItemStack(Material.MILK_BUCKET, 1);
                 } else {
@@ -227,12 +207,7 @@ public class Death implements Listener {
             if (pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)) {
                 event.getDrops().clear();
                 if (TARDISWeepingAngels.random.nextInt(100) < 3) {
-                    stack = new ItemStack(Monster.VASHTA_NERADA.getMaterial(), 1);
-                    ItemMeta im = stack.getItemMeta();
-                    im.getPersistentDataContainer().set(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER, 99);
-                    im.setDisplayName("Vashta Nerada Head");
-                    im.setCustomModelData(4);
-                    stack.setItemMeta(im);
+                    stack = HeadBuilder.getItemStack(Monster.VASHTA_NERADA);
                 } else {
                     stack = new ItemStack(vashta_drops.get(TARDISWeepingAngels.random.nextInt(vashta_drops.size())), TARDISWeepingAngels.random.nextInt(2) + 1);
                 }
@@ -241,12 +216,7 @@ public class Death implements Listener {
             if (pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
                 event.getDrops().clear();
                 if (TARDISWeepingAngels.random.nextInt(100) < 3) {
-                    stack = new ItemStack(Monster.ZYGON.getMaterial(), 1);
-                    ItemMeta im = stack.getItemMeta();
-                    im.getPersistentDataContainer().set(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER, 99);
-                    im.setDisplayName("Zygon Head");
-                    im.setCustomModelData(3);
-                    stack.setItemMeta(im);
+                    stack = HeadBuilder.getItemStack(Monster.ZYGON);
                 } else {
                     stack = new ItemStack(zygon_drops.get(TARDISWeepingAngels.random.nextInt(zygon_drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
                 }
