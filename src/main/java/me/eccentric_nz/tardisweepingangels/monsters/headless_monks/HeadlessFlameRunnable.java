@@ -16,10 +16,13 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters.headless_monks;
 
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.Vector;
 
 public class HeadlessFlameRunnable implements Runnable {
@@ -32,6 +35,11 @@ public class HeadlessFlameRunnable implements Runnable {
 
     @Override
     public void run() {
+        if (monk.isDead()) {
+            Bukkit.getScheduler().cancelTask(monk.getPersistentDataContainer().get(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER));
+            monk.getPersistentDataContainer().set(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER, -1);
+            return;
+        }
         // get centre location of entity
         Location location = monk.getLocation().clone().add(0.5, 0, 0.5);
         // get the direction of the entity
@@ -57,7 +65,7 @@ public class HeadlessFlameRunnable implements Runnable {
             Vector direction = end.toVector().subtract(start.toVector()).normalize();
             Vector v = direction.multiply(i * d);
             l.add(v.getX(), v.getY(), v.getZ());
-                start.getWorld().spawnParticle(Particle.FLAME, l, 1, 0, 0, 0, 0.1, null, false);
+            start.getWorld().spawnParticle(Particle.FLAME, l, 1, 0, 0, 0, 0.1, null, false);
         }
     }
 }

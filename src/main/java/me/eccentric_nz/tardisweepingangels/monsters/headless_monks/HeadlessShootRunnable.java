@@ -16,9 +16,11 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters.headless_monks;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.SmallFireball;
 import org.bukkit.entity.Snowball;
 import org.bukkit.inventory.ItemStack;
@@ -29,6 +31,7 @@ public class HeadlessShootRunnable implements Runnable {
     private final Entity monk;
     private final Entity target;
     private final boolean fireball;
+    private int taskID;
 
     public HeadlessShootRunnable(Entity monk, Entity target, boolean fireball) {
         this.monk = monk;
@@ -38,14 +41,22 @@ public class HeadlessShootRunnable implements Runnable {
 
     @Override
     public void run() {
+        if (monk.isDead() || ((Monster) monk).getTarget() == null) {
+            // cancel task
+            Bukkit.getScheduler().cancelTask(taskID);
+        }
         Vector direction = target.getLocation().toVector().subtract(monk.getLocation().toVector());
         direction.normalize();
-        Vector bulletVelocity = direction.multiply(3.0d);
+        Vector bulletVelocity = direction.multiply(2.0);
         if (fireball) {
             ((LivingEntity) monk).launchProjectile(SmallFireball.class, bulletVelocity);
         } else {
             Snowball snowball = ((LivingEntity) monk).launchProjectile(Snowball.class, bulletVelocity);
-            snowball.setItem(new ItemStack(Material.FIRE, 1));
+            snowball.setItem(new ItemStack(Material.FIRE_CHARGE, 1));
         }
+    }
+
+    public void setTaskID(int taskID) {
+        this.taskID = taskID;
     }
 }
