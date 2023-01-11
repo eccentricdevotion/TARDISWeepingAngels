@@ -31,6 +31,7 @@ import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildRunnab
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.GasMask;
 import me.eccentric_nz.tardisweepingangels.monsters.hath.HathRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.headless_monks.HeadlessMonkRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.headless_monks.HeadlessProjectileListener;
 import me.eccentric_nz.tardisweepingangels.monsters.headless_monks.HeadlessTarget;
 import me.eccentric_nz.tardisweepingangels.monsters.ice_warriors.IceWarriorRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonAmmoRecipe;
@@ -145,6 +146,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         pm.registerEvents(new Butler(this), this);
         pm.registerEvents(new HelmetChecker(), this);
         pm.registerEvents(new HeadlessTarget(this), this);
+        pm.registerEvents(new HeadlessProjectileListener(), this);
         pm.registerEvents(new K9Listener(this), this);
         pm.registerEvents(new ChunkLoad(), this);
         pm.registerEvents(new SilurianSpawnerListener(this), this);
