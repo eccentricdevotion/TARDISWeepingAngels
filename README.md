@@ -2,9 +2,8 @@
 
 Inspired by: [TARDIS Ticket #530 - Weeping Angels](http://dev.bukkit.org/bukkit-plugins/tardis/tickets/530-weeping-angels/)
 
-This plugin tranforms skeletons into terrifying Weeping Angels (as seen on  [Doctor Who](http://www.bbc.co.uk/programmes/p00wqr12/profiles/weeping-angels)).
+This plugin tranforms Minecraft mobs into terrifying Whovian monsters (as seen on  [Doctor Who](https://www.bbc.co.uk/programmes/articles/4tDN85fyxYXTtVPrCql8jB/monsters)).
 
-![Weeping Angel](https://dl.dropboxusercontent.com/s/iulxdqis25j5fen/weepingangel1.jpg?dl=1)
 
 JAR available here: [http://tardisjenkins.duckdns.org:8080/job/TARDISWeepingAngels/](http://tardisjenkins.duckdns.org:8080/job/TARDISWeepingAngels/)
 
@@ -59,23 +58,39 @@ Weeping Angels only spawn at night in loaded chunks. They spawn with grey leathe
 
 Weeping Angels can only be killed with the configured weapon - by default a DIAMOND_PICKAXE - hitting them with anything else has no effect. When they die they drop a random (1-3) amount of STONE.
 
-The angels move pretty fast, but you can freeze them in place by looking at them and quickly pressing the sneak key. Better arm yourself or flee quickly though, as they'll be after you again in a snap - and if they touch you, you'll be teleported away to a random location. If the TARDIS plugin is also installed (if it isn't WHY NOT?), your TARDIS Key will be stolen.
+The angels move pretty fast, but you can freeze them in place by looking at them and quickly pressing the sneak key. Better arm yourself or flee quickly though, as they'll be after you again in a snap - and if they touch you, you'll be teleported away to a random location. If the TARDIS plugin is also installed, your TARDIS Key will be stolen.
 
-### Cybermen Information
+![Weeping Angel](https://eccentricdevotion.github.io/TARDIS/images/docs/weepingangel1.jpg)
+
+### Cybermen
 
 Cybermen can spawn at anytime. If configured, Cybermen will upgrade villagers and players when they have killed them (a new Cyberman) spawns in their place. If the upgraded entity was a player, the new Cyberman displays the player's name above its head.
 
-### Ice Warrior Information
+![Cyberman](https://eccentricdevotion.github.io/TARDIS/images/docs/cyberman.jpg)
+
+### Ice Warriors
 
 Ice Warriors are really angry. They can spawn at anytime, but only spawn in snowy, icy or cold biomes. They carry an ice dagger. Did I mention they're angry!
 
-### Dalek Information
+![Ice Warrior](https://eccentricdevotion.github.io/TARDIS/images/docs/ice_warrior2.jpg)
+
+### Daleks
 
 Daleks come in different colours, but mostly spawn in their typical bronze colour. Exterminate!
+
+![Dalek](https://eccentricdevotion.github.io/TARDIS/images/docs/dalek.jpg)
 
 ### Empty Children
 
 Empty Children spawn anytime, and are of course child size. If you are killed by an Empty Child you get a gas mask applied to your head when you respawn that you can't remove for 30 seconds.
+
+![Empty child](https://eccentricdevotion.github.io/TARDIS/images/docs/empty_child.jpg)
+
+### Hath
+
+Hath don't do much yet, but they look pretty cool.
+
+![Hath](https://eccentricdevotion.github.io/TARDIS/images/docs/hath.jpg)
 
 ### Judoon
 
@@ -84,6 +99,8 @@ Judoon are the police force of the Whoniverse. Click an Judoon to claim it as yo
 ### Ood
 
 Ood spawn randomly around villagers. Click an Ood to claim it as your own. Use the /twa follow command to make the Ood follow you around.
+
+![Ood](https://eccentricdevotion.github.io/TARDIS/images/docs/ood.jpg)
 
 ### K-9
 
@@ -95,25 +112,53 @@ RRR
 BBB
 ```
 
+![K9](https://eccentricdevotion.github.io/TARDIS/images/docs/k9.jpg)
+
 ### Silurians
 
 Only spawn underground in caves. Watch out for their Silurian guns!
+
+![Silurian](https://eccentricdevotion.github.io/TARDIS/images/docs/silurian.png)
 
 ### Sontarans
 
 Sontarans will try to kill you (as any good Sontaran should). If you manage to right-click a Sontaran with a Weakness Potion before he kills you, he will transform into Strax.
 
+![Sontaran](https://eccentricdevotion.github.io/TARDIS/images/docs/sontaran.jpg)
+
 ### Strax
 
 If you right-click Strax he'll talk to you, and if you right-click him with an empty bucket, you'll be able to milk him. Yum, yum Sontaran lactic fluid :) Be careful not to anger him though as he'll go rabid on you and let his killer Sontaran instincts get the better of him!
+
+![Strax](https://eccentricdevotion.github.io/TARDIS/images/docs/strax.jpg)
 
 ### Vashta Nerada
 
 Vashta Nerada have a random (configurable) chance of spawning when a bookshelf is broken, say "Hey who turned out the lights?" and of course try to eat you!
 
+![Daleks](https://eccentricdevotion.github.io/TARDIS/images/docs/vashta_nerada.jpg)
+
 ### Zygons
 
-Zygons don't do much yet (except try to kill you), but they look pretty cool. Watch this space...
+Zygons don't do much yet (except try to kill you), but they look pretty cool.
+
+![Zygon](https://eccentricdevotion.github.io/TARDIS/images/docs/zygon.jpg)
+
+## Commands
+
+| Command | Arguments                             | Description                                                                 |
+|---------|---------------------------------------|-----------------------------------------------------------------------------|
+| `/twa`  | `spawn [monster type]`                | Spawn a monster on the block you are looking at                             |  
+| `       | `disguise [monster type] [on:off]`    | Disguise yourself as a TWA monster                                          |
+|         | `equip [monster type]`                | Equip an armor stand with a TWA monster                                     |
+| `       | `count [monster type] [world]`        | Reports the current number of monsters in the specified world               |
+|         | `kill [monster type] [world]`         | Kills all of the monsters in the specified world                            |
+|         | `set [monster type] [world] [amount]` | Sets the maximum number of the monsters that are allowed to spawn the world |
+|         | `follow`                              | Makes the Ood/Judoon/K9 you are targeting follow you                        |
+|         | `stay`                                | Makes the Ood/Judoon/K9 you are targeting _stop_ following you              |
+|         | `remove`                              | Removes the Ood/Judoon/K9 you are targeting                                 |
+|         | `give [player] [monster type]`        | Gives a player a monster head to display in an item frame                   |
+
 
 ## Videos
 
@@ -122,17 +167,3 @@ Zygons don't do much yet (except try to kill you), but they look pretty cool. Wa
 [![Judoon](https://res.cloudinary.com/marcomontalbano/image/upload/v1673152114/video_to_markdown/images/youtube--NOYn-u8JWTs-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/NOYn-u8JWTs "Judoon")
 
 [![Ood](https://res.cloudinary.com/marcomontalbano/image/upload/v1673152441/video_to_markdown/images/youtube--pZcl76iZwNk-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/pZcl76iZwNk "Ood")
-
-## Images
-
-![Cyberman](https://media.forgecdn.net/attachments/219/659/cyberman2.jpg)
-![Ice Warrior](https://media.forgecdn.net/attachments/219/660/ice_warrior2.jpg)
-![Silurian](https://media.forgecdn.net/attachments/219/662/silurian_skeleton.png)
-![Zygon](https://media.forgecdn.net/attachments/219/661/zygon1.jpg)
-![Vashta Nerada](https://media.forgecdn.net/attachments/219/663/vashta_nerada.jpg)
-![Daleks](https://media.forgecdn.net/attachments/219/664/dalek_invasion.jpg)
-![Empty Child](https://media.forgecdn.net/attachments/219/667/empty_child.jpg)
-![Sontaran](https://media.forgecdn.net/attachments/219/665/potato_head.jpg)
-![Strax](https://media.forgecdn.net/attachments/219/666/strax.jpg)
-![Silent](https://media.forgecdn.net/attachments/219/668/silent.jpg)
-![K-9](https://media.forgecdn.net/attachments/219/669/new_k9_cem.jpg)
