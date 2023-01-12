@@ -85,7 +85,7 @@ public class EquipCommand {
             if (args.length > 2 && monster == Monster.HEADLESS_MONK) {
                 ArmorStand monk = as;
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    int flameID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new HeadlessFlameRunnable(monk), 1, 10);
+                    int flameID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new HeadlessFlameRunnable(monk), 1, 20);
                     monk.getPersistentDataContainer().set(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER, flameID);
                     // set helmet to sword version
                     EntityEquipment ee = monk.getEquipment();

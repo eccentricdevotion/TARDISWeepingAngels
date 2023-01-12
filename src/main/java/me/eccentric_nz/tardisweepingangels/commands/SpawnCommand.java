@@ -147,7 +147,7 @@ public class SpawnCommand {
                 player.playSound(h.getLocation(), "headliess_monk", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(h, EntityType.SKELETON, Monster.HEADLESS_MONK, eyeLocation));
                 // start flame runnable
-                int flameID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new HeadlessFlameRunnable(h), 1, 10);
+                int flameID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new HeadlessFlameRunnable(h), 1, 20);
                 h.getPersistentDataContainer().set(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER, flameID);
             }
             case ICE_WARRIOR -> {

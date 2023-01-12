@@ -69,7 +69,7 @@ public class HeadlessTarget implements Listener {
             }
             if (plugin.getConfig().getBoolean("headless_monks.particles") && flameID == -1) {
                 // start flame runnable
-                flameID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new HeadlessFlameRunnable((LivingEntity) attacker), 1, 10);
+                flameID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new HeadlessFlameRunnable((LivingEntity) attacker), 1, 20);
                 skeleton.getPersistentDataContainer().set(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER, flameID);
             }
         }
