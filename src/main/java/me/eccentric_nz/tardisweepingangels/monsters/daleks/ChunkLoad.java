@@ -19,6 +19,7 @@ package me.eccentric_nz.tardisweepingangels.monsters.daleks;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.Equipper;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildEquipment;
+import me.eccentric_nz.tardisweepingangels.monsters.headless_monks.HeadlessFlameRunnable;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.*;
@@ -26,11 +27,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.ChunkLoadEvent;
+import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 public class ChunkLoad implements Listener {
+
+    private final TARDISWeepingAngels plugin;
+
+    public ChunkLoad(TARDISWeepingAngels plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onChunkLoad(ChunkLoadEvent event) {
@@ -43,6 +51,11 @@ public class ChunkLoad implements Listener {
                     new Equipper(Monster.WEEPING_ANGEL, skeleton, false, false).setHelmetAndInvisibilty();
                 } else if (pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER) && skeleton.getEquipment().getHelmet() != null && skeleton.getEquipment().getHelmet().getType() == Monster.SILURIAN.getMaterial()) {
                     new Equipper(Monster.SILURIAN, skeleton, false, false).setHelmetAndInvisibilty();
+                } else if (pdc.has(TARDISWeepingAngels.MONK, PersistentDataType.INTEGER) && skeleton.getEquipment().getHelmet() != null && skeleton.getEquipment().getHelmet().getType() == Monster.HEADLESS_MONK.getMaterial()) {
+                    new Equipper(Monster.HEADLESS_MONK, skeleton, false, false).setHelmetAndInvisibilty();
+                    // restart flame runnable?
+                    int flameID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new HeadlessFlameRunnable(skeleton), 1, 20);
+                    pdc.set(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER, flameID);
                 }
             } else if (d instanceof PigZombie pigZombie) {
                 if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER) && pigZombie.getEquipment().getHelmet() != null && pigZombie.getEquipment().getHelmet().getType() == Monster.ICE_WARRIOR.getMaterial()) {
@@ -50,7 +63,7 @@ public class ChunkLoad implements Listener {
                 } else if (pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER) && pigZombie.getEquipment().getHelmet() != null && pigZombie.getEquipment().getHelmet().getType() == Monster.STRAX.getMaterial()) {
                     new Equipper(Monster.STRAX, pigZombie, false, false).setHelmetAndInvisibilty();
                 } else if (pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER) && pigZombie.getEquipment().getHelmet() != null && pigZombie.getEquipment().getHelmet().getType() == Monster.HATH.getMaterial()) {
-                    new Equipper(Monster.STRAX, pigZombie, false, false).setHelmetAndInvisibilty();
+                    new Equipper(Monster.HATH, pigZombie, false, false).setHelmetAndInvisibilty();
                 }
             } else if (d instanceof Drowned drowned) {
                 if (drowned.getEquipment().getHelmet() != null) {
@@ -72,6 +85,28 @@ public class ChunkLoad implements Listener {
                         new Equipper(Monster.SONTARAN, zombie, false, false).setHelmetAndInvisibilty();
                     } else if (pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)) {
                         new Equipper(Monster.VASHTA_NERADA, zombie, false, false).setHelmetAndInvisibilty();
+                    }
+                }
+            } else if (d instanceof ArmorStand stand) {
+                if (stand.getPersistentDataContainer().has(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER)) {
+                    // restart flame runnable?
+                    int flameID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new HeadlessFlameRunnable(stand), 1, 20);
+                    pdc.set(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER, flameID);
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onChunkUnload(ChunkUnloadEvent event) {
+        for (Entity monk : event.getChunk().getEntities()) {
+            if (monk instanceof Skeleton || monk instanceof ArmorStand) {
+                PersistentDataContainer pdc = monk.getPersistentDataContainer();
+                if (pdc.has(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER)) {
+                    // stop flame runnable?
+                    int f = pdc.get(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER);
+                    if (f != -1) {
+                        plugin.getServer().getScheduler().cancelTask(f);
                     }
                 }
             }

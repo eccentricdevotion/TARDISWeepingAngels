@@ -148,7 +148,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         pm.registerEvents(new HeadlessTarget(this), this);
         pm.registerEvents(new HeadlessProjectileListener(), this);
         pm.registerEvents(new K9Listener(this), this);
-        pm.registerEvents(new ChunkLoad(), this);
+        pm.registerEvents(new ChunkLoad(this), this);
         pm.registerEvents(new SilurianSpawnerListener(this), this);
         pm.registerEvents(new OodListener(), this);
         pm.registerEvents(new JudoonListener(this), this);
