@@ -20,10 +20,7 @@ import io.papermc.paper.event.entity.EntityMoveEvent;
 import java.util.HashMap;
 import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Guardian;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Monster;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.EntityEquipment;
@@ -41,7 +38,7 @@ public class MonsterMoveListener implements Listener {
     @EventHandler
     public void onMonsterMove(EntityMoveEvent event) {
         Entity entity = event.getEntity();
-        if (MonsterEquipment.isMonster(entity)) {
+        if (MonsterEquipment.isMonster(entity) && entity.getType() != EntityType.ARMOR_STAND) {
             // get or create a move session
             MoveSession tms = getMoveSession(entity);
             tms.setStaleLocation(entity.getLocation());
