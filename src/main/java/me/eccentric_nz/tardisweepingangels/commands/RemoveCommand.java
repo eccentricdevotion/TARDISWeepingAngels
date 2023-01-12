@@ -47,7 +47,7 @@ public class RemoveCommand {
             return true;
         }
         ArmorStand stand = ArmourStandFinder.getStand(player);
-        if (stand == null || !stand.getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID)) {
+        if (stand == null || (!stand.getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID) && !stand.getPersistentDataContainer().has(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER))) {
             player.sendMessage(plugin.pluginName + "You are not looking at a TARDISWeepingAngels entity!");
             return true;
         } else {
@@ -62,7 +62,7 @@ public class RemoveCommand {
                 return true;
             }
             UUID storedUuid = stand.getPersistentDataContainer().get(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID);
-            if (storedUuid != null && storedUuid.equals(uuid)) {
+            if ((storedUuid != null && storedUuid.equals(uuid)) || stand.getPersistentDataContainer().has(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER)) {
                 stand.remove();
             } else {
                 player.sendMessage(plugin.pluginName + "That is not your TARDISWeepingAngels entity!");

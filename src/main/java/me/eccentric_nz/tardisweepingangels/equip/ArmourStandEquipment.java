@@ -16,17 +16,20 @@
  */
 package me.eccentric_nz.tardisweepingangels.equip;
 
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 public class ArmourStandEquipment {
 
     public void setStandEquipment(ArmorStand as, Monster monster, boolean small) {
         as.setSmall(small);
         as.setArms(false);
+        as.getPersistentDataContainer().set(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER, 1);
         ItemStack head = new ItemStack(monster.getMaterial(), 1);
         ItemMeta headMeta = head.getItemMeta();
         headMeta.setDisplayName(monster.getName() + " Head");
