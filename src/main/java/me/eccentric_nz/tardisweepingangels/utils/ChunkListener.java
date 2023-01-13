@@ -14,10 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package me.eccentric_nz.tardisweepingangels.monsters.daleks;
+package me.eccentric_nz.tardisweepingangels.utils;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.Equipper;
+import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.headless_monks.HeadlessFlameRunnable;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
@@ -32,11 +33,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-public class ChunkLoad implements Listener {
+public class ChunkListener implements Listener {
 
     private final TARDISWeepingAngels plugin;
 
-    public ChunkLoad(TARDISWeepingAngels plugin) {
+    public ChunkListener(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
     }
 
