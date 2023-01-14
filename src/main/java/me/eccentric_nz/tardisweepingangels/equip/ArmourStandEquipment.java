@@ -1,75 +1,36 @@
+/*
+ * Copyright (C) 2023 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.eccentric_nz.tardisweepingangels.equip;
 
-/*
- *  Copyright 2014 eccentric_nz.
- */
-
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
-import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
-/**
- * @author eccentric_nz
- */
 public class ArmourStandEquipment {
 
     public void setStandEquipment(ArmorStand as, Monster monster, boolean small) {
         as.setSmall(small);
         as.setArms(false);
-        ItemStack head;
-        switch (monster) {
-            case CYBERMAN:
-                head = new ItemStack(Material.IRON_INGOT, 1);
-                break;
-            case DALEK:
-                head = new ItemStack(Material.SLIME_BALL, 1);
-                break;
-            case EMPTY_CHILD:
-                head = new ItemStack(Material.SUGAR, 1);
-                break;
-            case HATH:
-                head = new ItemStack(Material.PUFFERFISH, 1);
-                break;
-            case ICE_WARRIOR:
-                head = new ItemStack(Material.SNOWBALL, 1);
-                break;
-            case JUDOON:
-                head = new ItemStack(Material.YELLOW_DYE, 1);
-                break;
-            case K9:
-                head = new ItemStack(Material.BONE, 1);
-                break;
-            case OOD:
-                head = new ItemStack(Material.ROTTEN_FLESH, 1);
-                break;
-            case SILENT:
-                head = new ItemStack(Material.END_STONE, 1);
-                break;
-            case SILURIAN:
-                head = new ItemStack(Material.FEATHER, 1);
-                break;
-            case SONTARAN:
-                head = new ItemStack(Material.POTATO, 1);
-                break;
-            case STRAX:
-                head = new ItemStack(Material.BAKED_POTATO, 1);
-                break;
-            case TOCLAFANE:
-                head = new ItemStack(Material.GUNPOWDER, 1);
-                break;
-            case VASHTA_NERADA:
-                head = new ItemStack(Material.BOOK, 1);
-                break;
-            case WEEPING_ANGEL:
-                head = new ItemStack(Material.BRICK, 1);
-                break;
-            default: // ZYGON
-                head = new ItemStack(Material.PAINTING, 1);
-                break;
-        }
+        as.getPersistentDataContainer().set(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER, 1);
+        ItemStack head = new ItemStack(monster.getMaterial(), 1);
         ItemMeta headMeta = head.getItemMeta();
         headMeta.setDisplayName(monster.getName() + " Head");
         headMeta.setCustomModelData(monster.getCustomModelData());

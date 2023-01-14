@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2023 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.eccentric_nz.tardisweepingangels.commands;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
@@ -21,30 +37,41 @@ public class TARDISWeepingAngelsCommand implements CommandExecutor {
             }
             String sub = args[0].toLowerCase();
             switch (sub) {
-                case "spawn":
+                case "spawn" -> {
                     return new SpawnCommand(plugin).spawn(sender, args);
-                case "disguise":
+                }
+                case "disguise" -> {
                     return new DisguiseCommand(plugin).disguise(sender, args);
-                case "equip":
+                }
+                case "equip" -> {
                     return new EquipCommand(plugin).equip(sender, args);
-                case "count":
+                }
+                case "count" -> {
                     return new CountCommand(plugin).count(sender, args);
-                case "kill":
+                }
+                case "kill" -> {
                     return new KillCommand(plugin).kill(sender, args);
-                case "set":
+                }
+                case "set" -> {
                     return new AdminCommand(plugin).set(sender, args);
-                case "follow":
+                }
+                case "follow" -> {
                     return new FollowCommand(plugin).follow(sender, args);
-                case "stay":
+                }
+                case "stay" -> {
                     return new StayCommand(plugin).stay(sender);
-                case "remove":
+                }
+                case "remove" -> {
                     return new RemoveCommand(plugin).remove(sender);
-                case "give":
+                }
+                case "give" -> {
                     return new GiveCommand(plugin).give(sender, args);
-                default:
+                }
+                default -> {
                     // unknown command
                     sender.sendMessage(plugin.pluginName + "Invalid command! Try using tab completion.");
                     return true;
+                }
             }
         }
         return true;

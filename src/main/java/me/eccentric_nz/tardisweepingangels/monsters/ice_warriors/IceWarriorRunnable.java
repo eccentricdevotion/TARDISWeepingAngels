@@ -1,10 +1,27 @@
 /*
- *  Copyright 2014 eccentric_nz.
+ * Copyright (C) 2023 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package me.eccentric_nz.tardisweepingangels.monsters.ice_warriors;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.Equipper;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.WaterChecker;
 import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
@@ -22,13 +39,6 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-/**
- * @author eccentric_nz
- */
 public class IceWarriorRunnable implements Runnable {
 
     private final TARDISWeepingAngels plugin;
@@ -79,28 +89,28 @@ public class IceWarriorRunnable implements Runnable {
         });
     }
 
-    private void spawnIceWarrior(World w) {
-        Chunk[] chunks = w.getLoadedChunks();
+    private void spawnIceWarrior(World world) {
+        Chunk[] chunks = world.getLoadedChunks();
         if (chunks.length > 0) {
-            Chunk c = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
-            int x = c.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
-            int z = c.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
-            int y = w.getHighestBlockYAt(x, z);
-            Location l = new Location(w, x, y + 1, z);
+            Chunk chunk = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
+            int x = chunk.getX() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int z = chunk.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
+            int y = world.getHighestBlockYAt(x, z);
+            Location l = new Location(world, x, y + 1, z);
             if (biomes.contains(l.getBlock().getBiome()) && WaterChecker.isNotWater(l)) {
                 if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(l)) {
                     return;
                 }
-                LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.ZOMBIFIED_PIGLIN);
-                e.setSilent(true);
-                PigZombie warrior = (PigZombie) e;
+                LivingEntity i = (LivingEntity) world.spawnEntity(l, EntityType.ZOMBIFIED_PIGLIN);
+                i.setSilent(true);
+                PigZombie warrior = (PigZombie) i;
                 warrior.setAngry(true);
                 warrior.setAnger(Integer.MAX_VALUE);
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 warrior.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    IceWarriorEquipment.set(e, false);
-                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIFIED_PIGLIN, Monster.ICE_WARRIOR, l));
+                    new Equipper(Monster.ICE_WARRIOR, i, false, false).setHelmetAndInvisibilty();
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(i, EntityType.ZOMBIFIED_PIGLIN, Monster.ICE_WARRIOR, l));
                 }, 5L);
             }
         }

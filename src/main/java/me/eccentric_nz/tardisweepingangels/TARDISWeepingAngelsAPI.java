@@ -1,5 +1,18 @@
 /*
- *  Copyright 2016 eccentric_nz.
+ * Copyright (C) 2023 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package me.eccentric_nz.tardisweepingangels;
 
@@ -13,9 +26,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.UUID;
 
-/**
- * @author eccentric_nz
- */
 public interface TARDISWeepingAngelsAPI {
 
     /**
@@ -67,6 +77,14 @@ public interface TARDISWeepingAngelsAPI {
     public void setHathEquipment(LivingEntity le, boolean disguise);
 
     /**
+     * Sets an entity as a Headless Monk.
+     *
+     * @param le       The LivingEntity to disguise
+     * @param disguise A boolean to determine if this is a player disguise
+     */
+    public void setHeadlessMonkEquipment(LivingEntity le, boolean disguise);
+
+    /**
      * Sets an armour stand, or disguises a player as a Judoon.
      *
      * @param player     The player that will own this Judoon - may be null
@@ -92,13 +110,6 @@ public interface TARDISWeepingAngelsAPI {
      * @param disguise   A boolean to determine if this is a player disguise
      */
     public void setOodEquipment(Player player, Entity armorStand, boolean disguise);
-
-    /**
-     * Sets an entity as a Silent.
-     *
-     * @param le The LivingEntity to disguise
-     */
-    public void setSilentEquipment(LivingEntity le);
 
     /**
      * Sets an entity as a Silent.

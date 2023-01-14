@@ -1,5 +1,18 @@
 /*
- *  Copyright 2014 eccentric_nz.
+ * Copyright (C) 2023 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package me.eccentric_nz.tardisweepingangels.utils;
 
@@ -14,9 +27,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author eccentric_nz
- */
 public class Config {
 
     final double min_version = 2.0d;
@@ -47,6 +57,7 @@ public class Config {
         intOptions.put("toclafane.spawn_from_bee", 5);
         // string
         strOptions.put("angels.weapon", "DIAMOND_PICKAXE");
+        strOptions.put("headless_monks.projectile", "SMALL_FIREBALL");
         // list
         listOptions.put("angels.drops", Arrays.asList("STONE", "COBBLESTONE"));
         listOptions.put("angels.teleport_worlds", Arrays.asList("world"));
@@ -54,6 +65,7 @@ public class Config {
         listOptions.put("daleks.drops", Arrays.asList("SLIME_BALL", "ROTTEN_FLESH"));
         listOptions.put("empty_child.drops", Arrays.asList("COOKED_BEEF", "SUGAR"));
         listOptions.put("hath.drops", Arrays.asList("SALMON", "STONE_PICKAXE"));
+        listOptions.put("headless_monks.drops", Arrays.asList("BOOK", "RED_CANDLE"));
         listOptions.put("ice_warriors.drops", Arrays.asList("ICE", "PACKED_ICE", "SNOW_BLOCK"));
         listOptions.put("silent.drops", Arrays.asList("INK_SAC", "FLOWER_POT"));
         listOptions.put("ood.drops", Arrays.asList("NAME_TAG"));
@@ -67,6 +79,7 @@ public class Config {
         boolOptions.put("angels.can_build", true);
         boolOptions.put("angels.spawn_from_chat.enabled", true);
         boolOptions.put("cybermen.can_upgrade", true);
+        boolOptions.put("headless_monks.particles", true);
         boolOptions.put("sontarans.can_tame", true);
         boolOptions.put("judoon.guards", true);
         boolOptions.put("judoon.can_build", true);

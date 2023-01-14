@@ -1,27 +1,33 @@
 /*
- *  Copyright 2014 eccentric_nz.
+ * Copyright (C) 2023 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package me.eccentric_nz.tardisweepingangels.equip;
 
+import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelsAPI;
-import me.eccentric_nz.tardisweepingangels.monsters.cybermen.CybermanEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.hath.HathEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.ice_warriors.IceWarriorEquipment;
+import me.eccentric_nz.tardisweepingangels.monsters.headless_monks.HeadlessMonkEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonWalkRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.k9.K9Equipment;
 import me.eccentric_nz.tardisweepingangels.monsters.ood.OodEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.silent.SilentEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.silurians.SilurianEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.sontarans.SontaranEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.sontarans.StraxEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.toclafane.ToclafaneEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada.VashtaNeradaEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.AngelEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.zygons.ZygonEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.FollowerChecker;
 import me.eccentric_nz.tardisweepingangels.utils.HeadBuilder;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
@@ -32,108 +38,24 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.UUID;
-
-/**
- * @author eccentric_nz
- */
 public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
-    @Override
-    public void setAngelEquipment(LivingEntity le, boolean disguise) {
-        AngelEquipment.set(le, disguise);
-    }
-
-    @Override
-    public void setWarriorEquipment(LivingEntity le, boolean disguise) {
-        IceWarriorEquipment.set(le, disguise);
-    }
-
-    @Override
-    public void setCyberEquipment(LivingEntity le, boolean disguise) {
-        CybermanEquipment.set(le, disguise);
-    }
-
-    @Override
-    public void setDalekEquipment(LivingEntity le, boolean disguise) {
-        DalekEquipment.set(le, disguise);
-    }
-
-    @Override
-    public void setEmptyChildEquipment(LivingEntity le, boolean disguise) {
-        EmptyChildEquipment.set(le, disguise);
-    }
-
-    @Override
-    public void setHathEquipment(LivingEntity le, boolean disguise) {
-        HathEquipment.set(le, disguise);
-    }
-
-    @Override
-    public void setJudoonEquipment(Player player, Entity armorStand, boolean disguise) {
-        JudoonEquipment.set(player, armorStand, disguise);
-    }
-
-    @Override
-    public void setK9Equipment(Player player, Entity armorStand, boolean disguise) {
-        K9Equipment.set(player, armorStand, disguise);
-    }
-
-    @Override
-    public void setOodEquipment(Player player, Entity armorStand, boolean disguise) {
-        OodEquipment.set(player, armorStand, disguise);
-    }
-
-    @Override
-    public void setSilentEquipment(LivingEntity le) {
-        SilentEquipment.set(le, false);
-    }
-
-    @Override
-    public void setSilentEquipment(LivingEntity le, boolean disguise) {
-        SilentEquipment.set(le, disguise);
-    }
-
-    @Override
-    public void setSilurianEquipment(LivingEntity le, boolean disguise) {
-        SilurianEquipment.set(le, disguise);
-    }
-
-    @Override
-    public void setSontaranEquipment(LivingEntity le, boolean disguise) {
-        SontaranEquipment.set(le, disguise);
-    }
-
-    @Override
-    public void setStraxEquipment(LivingEntity le, boolean disguise) {
-        StraxEquipment.set(le, disguise);
-    }
-
-    @Override
-    public void setToclafaneEquipment(Entity armorStand, boolean disguise) {
-        ToclafaneEquipment.set(armorStand, disguise);
-    }
-
-    @Override
-    public void setVashtaNeradaEquipment(LivingEntity le, boolean disguise) {
-        VashtaNeradaEquipment.set(le, disguise);
-    }
-
-    @Override
-    public void setZygonEquipment(LivingEntity le, boolean disguise) {
-        ZygonEquipment.set(le, disguise);
-    }
-
-    @Override
-    public void removeEquipment(Player p) {
-        RemoveEquipment.set(p);
-    }
-
-    @Override
-    public boolean isWeepingAngelMonster(Entity entity) {
+    public static boolean isMonster(Entity entity) {
         if (entity instanceof Zombie || entity instanceof PigZombie || entity instanceof Skeleton) {
             PersistentDataContainer pdc = entity.getPersistentDataContainer();
-            if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER) || pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
+            if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)
+                    || pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)
+                    || pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)
+                    || pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)
+                    || pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)
+                    || pdc.has(TARDISWeepingAngels.MONK, PersistentDataType.INTEGER)
+                    || pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)
+                    || pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)
+                    || pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)
+                    || pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER)
+                    || pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)
+                    || pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)
+                    || pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
                 return true;
             }
         } else if (entity instanceof Skeleton && !entity.getPassengers().isEmpty()) {
@@ -152,13 +74,16 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             if (entity.getPersistentDataContainer().has(TARDISWeepingAngels.OWNER_UUID, TARDISWeepingAngels.PersistentDataTypeUUID)) {
                 return true;
             }
+        } else if (entity instanceof Guardian) {
+            if (entity.getVehicle() != null && entity.getVehicle() instanceof Skeleton skeleton) {
+                return skeleton.getPersistentDataContainer().has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER);
+            }
         }
         return false;
     }
 
-    @Override
-    public Monster getWeepingAngelMonsterType(Entity entity) {
-        if (entity instanceof Zombie || entity instanceof PigZombie || entity instanceof Skeleton || entity instanceof Skeleton) {
+    public static Monster getMonsterType(Entity entity) {
+        if (entity instanceof Zombie || entity instanceof PigZombie || entity instanceof Skeleton) {
             PersistentDataContainer pdc = entity.getPersistentDataContainer();
             if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)) {
                 return Monster.CYBERMAN;
@@ -169,8 +94,17 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             if (pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
                 return Monster.EMPTY_CHILD;
             }
+            if (pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
+                return Monster.HATH;
+            }
+            if (pdc.has(TARDISWeepingAngels.MONK, PersistentDataType.INTEGER)) {
+                return Monster.HEADLESS_MONK;
+            }
             if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
                 return Monster.ICE_WARRIOR;
+            }
+            if (pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
+                return Monster.SILENT;
             }
             if (pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)) {
                 return Monster.SILURIAN;
@@ -190,22 +124,127 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             if (pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
                 return Monster.ZYGON;
             }
-            if (pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
-                return Monster.SILENT;
-            }
         }
         return null;
     }
 
     @Override
-    public FollowerChecker isClaimedMonster(Entity entity, UUID uuid) {
-        return new FollowerChecker(entity, uuid);
+    public void setAngelEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.WEEPING_ANGEL, le, disguise, false).setHelmetAndInvisibilty();
+    }
+
+    @Override
+    public void setWarriorEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.ICE_WARRIOR, le, disguise, false).setHelmetAndInvisibilty();
+    }
+
+    @Override
+    public void setCyberEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.CYBERMAN, le, disguise, false).setHelmetAndInvisibilty();
+    }
+
+    @Override
+    public void setDalekEquipment(LivingEntity le, boolean disguise) {
+        DalekEquipment.set(le, disguise);
+    }
+
+    @Override
+    public void setEmptyChildEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.EMPTY_CHILD, le, disguise, false).setHelmetAndInvisibilty();
+        if (!disguise) {
+            EmptyChildEquipment.setSpeed(le);
+        }
+    }
+
+    @Override
+    public void setHathEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.HATH, le, disguise, false).setHelmetAndInvisibilty();
+    }
+
+    @Override
+    public void setHeadlessMonkEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.HEADLESS_MONK, le, disguise, false).setHelmetAndInvisibilty();
+        HeadlessMonkEquipment.setTasks(le);
+    }
+
+    @Override
+    public void setJudoonEquipment(Player player, Entity armorStand, boolean disguise) {
+        JudoonEquipment.set(player, armorStand, disguise);
     }
 
     @Override
     public void setJudoonEquipment(Player player, Entity armorStand, int ammunition) {
         setJudoonEquipment(player, armorStand, false);
         armorStand.getPersistentDataContainer().set(TARDISWeepingAngels.JUDOON, PersistentDataType.INTEGER, ammunition);
+    }
+
+    @Override
+    public void setK9Equipment(Player player, Entity armorStand, boolean disguise) {
+        K9Equipment.set(player, armorStand, disguise);
+    }
+
+    @Override
+    public void setOodEquipment(Player player, Entity armorStand, boolean disguise) {
+        OodEquipment.set(player, armorStand, disguise);
+    }
+
+    @Override
+    public void setSilentEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.SILENT, le, disguise, false).setHelmetAndInvisibilty();
+        SilentEquipment.setGuardian(le);
+    }
+
+    @Override
+    public void setSilurianEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.SILURIAN, le, disguise, true).setHelmetAndInvisibilty();
+    }
+
+    @Override
+    public void setSontaranEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.SONTARAN, le, disguise, false).setHelmetAndInvisibilty();
+    }
+
+    @Override
+    public void setStraxEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.STRAX, le, disguise, false).setHelmetAndInvisibilty();
+        if (!disguise) {
+            le.setCustomName("Strax");
+        }
+    }
+
+    @Override
+    public void setToclafaneEquipment(Entity armorStand, boolean disguise) {
+        ToclafaneEquipment.set(armorStand, disguise);
+    }
+
+    @Override
+    public void setVashtaNeradaEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.VASHTA_NERADA, le, disguise, false).setHelmetAndInvisibilty();
+    }
+
+    @Override
+    public void setZygonEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.ZYGON, le, disguise, false).setHelmetAndInvisibilty();
+    }
+
+    @Override
+    public void removeEquipment(Player p) {
+        RemoveEquipment.set(p);
+    }
+
+    @Override
+    public boolean isWeepingAngelMonster(Entity entity) {
+        return isMonster(entity);
+    }
+
+    @Override
+    public Monster getWeepingAngelMonsterType(Entity entity) {
+        return getMonsterType(entity);
+    }
+
+    @Override
+    public FollowerChecker isClaimedMonster(Entity entity, UUID uuid) {
+        return new FollowerChecker(entity, uuid);
     }
 
     @Override

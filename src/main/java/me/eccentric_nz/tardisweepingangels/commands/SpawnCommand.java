@@ -1,24 +1,35 @@
+/*
+ * Copyright (C) 2023 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.eccentric_nz.tardisweepingangels.commands;
 
+import java.util.Set;
 import me.eccentric_nz.tardischunkgenerator.TARDISHelper;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import me.eccentric_nz.tardisweepingangels.monsters.cybermen.CybermanEquipment;
+import me.eccentric_nz.tardisweepingangels.equip.Equipper;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.hath.HathEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.ice_warriors.IceWarriorEquipment;
+import me.eccentric_nz.tardisweepingangels.monsters.headless_monks.HeadlessFlameRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.headless_monks.HeadlessMonkEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.k9.K9Equipment;
 import me.eccentric_nz.tardisweepingangels.monsters.ood.OodEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.silent.SilentEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.silurians.SilurianEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.sontarans.SontaranEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.sontarans.StraxEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.toclafane.ToclafaneEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada.VashtaNeradaEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.AngelEquipment;
-import me.eccentric_nz.tardisweepingangels.monsters.zygons.ZygonEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -27,8 +38,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.Set;
+import org.bukkit.persistence.PersistentDataType;
 
 public class SpawnCommand {
 
@@ -70,25 +80,25 @@ public class SpawnCommand {
         eyeLocation.setYaw(player.getLocation().getYaw() - 180.0f);
         World world = eyeLocation.getWorld();
         switch (monster) {
-            case WEEPING_ANGEL:
+            case WEEPING_ANGEL -> {
                 LivingEntity a = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                 a.setSilent(true);
                 a.setNoDamageTicks(75);
-                AngelEquipment.set(a, false);
+                new Equipper(Monster.WEEPING_ANGEL, a, false, false).setHelmetAndInvisibilty();
                 player.playSound(a.getLocation(), "blink", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(a, EntityType.SKELETON, Monster.WEEPING_ANGEL, eyeLocation));
-                break;
-            case CYBERMAN:
+            }
+            case CYBERMAN -> {
                 LivingEntity c = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                 c.setSilent(true);
                 c.setNoDamageTicks(75);
                 Ageable cyber = (Ageable) c;
                 cyber.setAdult();
                 player.playSound(c.getLocation(), "cyberman", 1.0f, 1.0f);
-                CybermanEquipment.set(c, false);
+                new Equipper(Monster.CYBERMAN, c, false, false).setHelmetAndInvisibilty();
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(c, EntityType.ZOMBIE, Monster.CYBERMAN, eyeLocation));
-                break;
-            case DALEK:
+            }
+            case DALEK -> {
                 LivingEntity d = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                 d.setSilent(true);
                 d.setNoDamageTicks(75);
@@ -107,29 +117,43 @@ public class SpawnCommand {
                         tardisHelper.setFallFlyingTag(d);
                     }, 2L);
                 }
-                break;
-            case EMPTY_CHILD:
+            }
+            case EMPTY_CHILD -> {
                 LivingEntity e = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                 e.setSilent(true);
                 e.setNoDamageTicks(75);
                 Ageable child = (Ageable) e;
                 child.setBaby();
-                EmptyChildEquipment.set(e, false);
+                new Equipper(Monster.EMPTY_CHILD, e, false, false).setHelmetAndInvisibilty();
+                EmptyChildEquipment.setSpeed(e);
                 player.playSound(e.getLocation(), "empty_child", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.EMPTY_CHILD, eyeLocation));
-                break;
-            case HATH:
+            }
+            case HATH -> {
                 LivingEntity h = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIFIED_PIGLIN);
                 h.setSilent(true);
                 h.setNoDamageTicks(75);
-                HathEquipment.set(h, false);
+                Ageable hath = (Ageable) h;
+                hath.setAdult();
+                new Equipper(Monster.HATH, h, false, false).setHelmetAndInvisibilty();
                 player.playSound(h.getLocation(), "hath", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(h, EntityType.ZOMBIFIED_PIGLIN, Monster.HATH, eyeLocation));
-                break;
-            case ICE_WARRIOR:
+            }
+            case HEADLESS_MONK -> {
+                LivingEntity h = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
+                h.setSilent(true);
+                new Equipper(Monster.HEADLESS_MONK, h, false, false).setHelmetAndInvisibilty();
+                HeadlessMonkEquipment.setTasks(h);
+                player.playSound(h.getLocation(), "headliess_monk", 1.0f, 1.0f);
+                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(h, EntityType.SKELETON, Monster.HEADLESS_MONK, eyeLocation));
+                // start flame runnable
+                int flameID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new HeadlessFlameRunnable(h), 1, 20);
+                h.getPersistentDataContainer().set(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER, flameID);
+            }
+            case ICE_WARRIOR -> {
                 LivingEntity i = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIFIED_PIGLIN);
                 i.setSilent(true);
-                IceWarriorEquipment.set(i, false);
+                new Equipper(Monster.ICE_WARRIOR, i, false, false).setHelmetAndInvisibilty();
                 player.playSound(i.getLocation(), "warrior", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(i, EntityType.ZOMBIFIED_PIGLIN, Monster.ICE_WARRIOR, eyeLocation));
                 PigZombie pigman = (PigZombie) i;
@@ -137,88 +161,90 @@ public class SpawnCommand {
                 pigman.setAnger(Integer.MAX_VALUE);
                 Ageable ageable = (Ageable) i;
                 ageable.setAdult();
-                break;
-            case JUDOON:
+            }
+            case JUDOON -> {
                 Entity judoon = world.spawnEntity(eyeLocation, EntityType.ARMOR_STAND);
                 JudoonEquipment.set(null, judoon, false);
                 player.playSound(judoon.getLocation(), "judoon", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(judoon, EntityType.ARMOR_STAND, Monster.JUDOON, eyeLocation));
-                break;
-            case K9:
+            }
+            case K9 -> {
                 Entity k9 = world.spawnEntity(eyeLocation, EntityType.ARMOR_STAND);
                 K9Equipment.set(player, k9, false);
                 player.playSound(k9.getLocation(), "k9", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(k9, EntityType.ARMOR_STAND, Monster.K9, eyeLocation));
-                break;
-            case OOD:
+            }
+            case OOD -> {
                 Entity ood = world.spawnEntity(eyeLocation, EntityType.ARMOR_STAND);
                 OodEquipment.set(null, ood, false);
                 player.playSound(ood.getLocation(), "ood", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(ood, EntityType.ARMOR_STAND, Monster.OOD, eyeLocation));
-                break;
-            case SILENT:
+            }
+            case SILENT -> {
                 LivingEntity l = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                 l.setSilent(true);
-                SilentEquipment.set(l, false);
+                new Equipper(Monster.SILENT, l, false, false).setHelmetAndInvisibilty();
+                SilentEquipment.setGuardian(l);
                 player.playSound(l.getLocation(), "silence", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(l, EntityType.SKELETON, Monster.SILENT, eyeLocation));
-                break;
-            case SILURIAN:
+            }
+            case SILURIAN -> {
                 LivingEntity s = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.SKELETON);
                 s.setSilent(true);
                 s.setNoDamageTicks(75);
-                SilurianEquipment.set(s, false);
+                new Equipper(Monster.SILURIAN, s, false, true).setHelmetAndInvisibilty();
                 player.playSound(s.getLocation(), "silurian", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(s, EntityType.SKELETON, Monster.SILURIAN, eyeLocation));
-                break;
-            case SONTARAN:
+            }
+            case SONTARAN -> {
                 LivingEntity o = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                 o.setSilent(true);
                 o.setNoDamageTicks(75);
                 Ageable sontaran = (Ageable) o;
                 sontaran.setAdult();
-                SontaranEquipment.set(o, false);
+                new Equipper(Monster.SONTARAN, o, false, false).setHelmetAndInvisibilty();
                 player.playSound(o.getLocation(), "sontaran", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(o, EntityType.ZOMBIE, Monster.SONTARAN, eyeLocation));
-                break;
-            case STRAX:
+            }
+            case STRAX -> {
                 LivingEntity x = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIFIED_PIGLIN);
                 x.setSilent(true);
                 x.setNoDamageTicks(75);
                 PigZombie strax = (PigZombie) x;
                 strax.setAngry(false);
-                StraxEquipment.set(x, false);
+                new Equipper(Monster.STRAX, x, false, false).setHelmetAndInvisibilty();
+                x.setCustomName("Strax");
                 Ageable sageable = (Ageable) x;
                 sageable.setAdult();
                 player.playSound(x.getLocation(), "strax", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(x, EntityType.ZOMBIFIED_PIGLIN, Monster.STRAX, eyeLocation));
-                break;
-            case TOCLAFANE:
+            }
+            case TOCLAFANE -> {
                 Entity toclafane = world.spawnEntity(eyeLocation, EntityType.ARMOR_STAND);
                 ToclafaneEquipment.set(toclafane, false);
                 player.playSound(toclafane.getLocation(), "toclafane", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(toclafane, EntityType.ARMOR_STAND, Monster.TOCLAFANE, eyeLocation));
-                break;
-            case VASHTA_NERADA:
+            }
+            case VASHTA_NERADA -> {
                 LivingEntity v = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                 v.setSilent(true);
                 v.setNoDamageTicks(75);
                 Ageable vashta = (Ageable) v;
                 vashta.setAdult();
-                VashtaNeradaEquipment.set(v, false);
+                new Equipper(Monster.VASHTA_NERADA, v, false, false).setHelmetAndInvisibilty();
                 player.playSound(v.getLocation(), "vashta", 1.0f, 1.0f);
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(v, EntityType.ZOMBIE, Monster.VASHTA_NERADA, eyeLocation));
-                break;
-            case ZYGON:
+            }
+            case ZYGON -> {
                 LivingEntity z = (LivingEntity) world.spawnEntity(eyeLocation, EntityType.ZOMBIE);
                 z.setSilent(true);
                 z.setNoDamageTicks(75);
                 Ageable zygon = (Ageable) z;
                 zygon.setAdult();
                 player.playSound(z.getLocation(), "zygon", 1.0f, 1.0f);
-                ZygonEquipment.set(z, false);
+                new Equipper(Monster.ZYGON, z, false, false).setHelmetAndInvisibilty();
                 plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(z, EntityType.ZOMBIE, Monster.ZYGON, eyeLocation));
-                break;
+            }
         }
         return true;
     }

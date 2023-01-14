@@ -1,16 +1,30 @@
+/*
+ * Copyright (C) 2023 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.eccentric_nz.tardisweepingangels.commands;
 
+import java.util.Collection;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
-
-import java.util.Collection;
 
 public class KillCommand {
 
@@ -53,110 +67,54 @@ public class KillCommand {
             return true;
         }
         switch (monster) {
-            case WEEPING_ANGEL:
-                Collection<Skeleton> angels = w.getEntitiesByClass(Skeleton.class);
-                for (Skeleton a : angels) {
-                    EntityEquipment ee = a.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.BRICK) || ee.getHelmet().getType().equals(Material.STONE_BUTTON)) {
-                        a.remove();
-                        count++;
-                    }
+            case CYBERMAN, EMPTY_CHILD, SONTARAN, VASHTA_NERADA, ZYGON -> {
+                switch (monster) {
+                    case CYBERMAN -> what = "Cybermen";
+                    case EMPTY_CHILD -> what = "Empty Children";
+                    case VASHTA_NERADA -> what = "Vashta Nerada";
+                    default -> what = monster.getName() + "s";
                 }
-                break;
-            case CYBERMAN:
-                what = "Cybermen";
-                Collection<Zombie> cybermen = w.getEntitiesByClass(Zombie.class);
-                for (Zombie c : cybermen) {
-                    EntityEquipment ee = c.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.IRON_INGOT)) {
+                Collection<Zombie> zombies = w.getEntitiesByClass(Zombie.class);
+                for (Zombie z : zombies) {
+                    EntityEquipment ee = z.getEquipment();
+                    if (ee.getHelmet().getType().equals(monster.getMaterial())) {
                         ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Cyberman")) {
-                            c.remove();
+                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith(monster.getName())) {
+                            z.remove();
                             count++;
                         }
                     }
                 }
-                break;
-            case DALEK:
-                what = "Daleks";
-                Collection<Skeleton> daleks = w.getEntitiesByClass(Skeleton.class);
-                for (Skeleton d : daleks) {
-                    EntityEquipment ee = d.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.SLIME_BALL)) {
-                        ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Dalek")) {
-                            d.remove();
-                            count++;
-                        }
-                    }
-                }
-                break;
-            case EMPTY_CHILD:
-                what = "Empty Children";
-                Collection<Zombie> kids = w.getEntitiesByClass(Zombie.class);
-                for (Zombie e : kids) {
-                    EntityEquipment ee = e.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.SUGAR)) {
-                        ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Empty Child")) {
-                            e.remove();
-                            count++;
-                        }
-                    }
-                }
-                break;
-            case HATH:
-                what = "Hath";
-                Collection<PigZombie> fish = w.getEntitiesByClass(PigZombie.class);
-                for (Zombie h : fish) {
-                    EntityEquipment ee = h.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.PUFFERFISH)) {
-                        ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Hath")) {
-                            h.remove();
-                            count++;
-                        }
-                    }
-                }
-                break;
-            case ICE_WARRIOR:
-            case STRAX:
-                Collection<PigZombie> warriors = w.getEntitiesByClass(PigZombie.class);
-                for (PigZombie i : warriors) {
-                    EntityEquipment ee = i.getEquipment();
-                    ItemStack is = ee.getHelmet();
-                    if (is.hasItemMeta() && is.getItemMeta().hasDisplayName()) {
-                        if (ee.getHelmet().getType().equals(Material.SNOWBALL)) {
-                            if (is.getItemMeta().getDisplayName().startsWith("Ice Warrior")) {
-                                what = "Ice Warriors";
-                                i.remove();
-                                count++;
-                            }
-                        } else if (ee.getHelmet().getType().equals(Material.BAKED_POTATO)) {
-                            if (is.getItemMeta().getDisplayName().startsWith("Strax")) {
-                                what = "Strax";
-                                i.remove();
-                                count++;
-                            }
-                        }
-                    }
-                }
-                break;
-            case SILURIAN:
-                what = "Silurians";
-                Collection<Skeleton> silurians = w.getEntitiesByClass(Skeleton.class);
-                for (Skeleton s : silurians) {
+            }
+            case WEEPING_ANGEL, DALEK, HEADLESS_MONK, SILURIAN -> {
+                what = monster.getName() + "s";
+                Collection<Skeleton> skeletons = w.getEntitiesByClass(Skeleton.class);
+                for (Skeleton s : skeletons) {
                     EntityEquipment ee = s.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.FEATHER)) {
+                    if (ee.getHelmet().getType().equals(monster.getMaterial())) {
                         ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Silurian")) {
+                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith(monster.getName())) {
                             s.remove();
                             count++;
                         }
                     }
                 }
-                break;
-            case SILENT:
+            }
+            case HATH, ICE_WARRIOR, STRAX -> {
+                what = (monster.equals(Monster.ICE_WARRIOR)) ? "Ice Warriors" : monster.getName();
+                Collection<PigZombie> pigZombies = w.getEntitiesByClass(PigZombie.class);
+                for (PigZombie p : pigZombies) {
+                    EntityEquipment ee = p.getEquipment();
+                    if (ee.getHelmet().getType().equals(monster.getMaterial())) {
+                        ItemStack is = ee.getHelmet();
+                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith(monster.getName())) {
+                            p.remove();
+                            count++;
+                        }
+                    }
+                }
+            }
+            case SILENT -> {
                 what = "Silence";
                 Collection<Skeleton> silence = w.getEntitiesByClass(Skeleton.class);
                 for (Skeleton m : silence) {
@@ -166,25 +124,8 @@ public class KillCommand {
                         count++;
                     }
                 }
-                break;
-            case SONTARAN:
-                what = "Sontarans";
-                Collection<Zombie> sontarans = w.getEntitiesByClass(Zombie.class);
-                for (Zombie o : sontarans) {
-                    EntityEquipment ee = o.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.POTATO)) {
-                        ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Sontaran")) {
-                            o.remove();
-                            count++;
-                        }
-                    }
-                }
-                break;
-            case OOD:
-            case JUDOON:
-            case K9:
-            case TOCLAFANE:
+            }
+            case OOD, JUDOON, K9, TOCLAFANE -> {
                 Collection<ArmorStand> ood = w.getEntitiesByClass(ArmorStand.class);
                 for (ArmorStand o : ood) {
                     if (o.getPersistentDataContainer().has(TARDISWeepingAngels.OOD, PersistentDataType.INTEGER)) {
@@ -214,37 +155,9 @@ public class KillCommand {
                         count++;
                     }
                 }
-                break;
-            case VASHTA_NERADA:
-                what = "Vashta Nerada";
-                Collection<Zombie> vashta = w.getEntitiesByClass(Zombie.class);
-                for (Zombie v : vashta) {
-                    EntityEquipment ee = v.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.BOOK)) {
-                        ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Vashta")) {
-                            v.remove();
-                            count++;
-                        }
-                    }
-                }
-                break;
-            case ZYGON:
-                what = "Zygons";
-                Collection<Zombie> zygons = w.getEntitiesByClass(Zombie.class);
-                for (Zombie z : zygons) {
-                    EntityEquipment ee = z.getEquipment();
-                    if (ee.getHelmet().getType().equals(Material.PAINTING)) {
-                        ItemStack is = ee.getHelmet();
-                        if (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().startsWith("Zygon")) {
-                            z.remove();
-                            count++;
-                        }
-                    }
-                }
-                break;
-            default:
-                break;
+            }
+            default -> {
+            }
         }
         sender.sendMessage(plugin.pluginName + "Removed " + count + " " + what + " in " + w.getName());
         return true;

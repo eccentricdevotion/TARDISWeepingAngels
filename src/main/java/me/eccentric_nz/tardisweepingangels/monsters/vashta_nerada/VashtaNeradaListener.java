@@ -1,11 +1,27 @@
 /*
- *  Copyright Error: on line 4, column 30 in Templates/Licenses/license-default.txt
- The string doesn't match the expected date/time format. The string to parse was: "15/07/2014". The expected format was: "MMM d, yyyy". eccentric_nz.
+ * Copyright (C) 2023 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.Equipper;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.WorldProcessor;
 import org.bukkit.Location;
@@ -23,13 +39,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-/**
- * @author eccentric_nz
- */
 public class VashtaNeradaListener implements Listener {
 
     private final TARDISWeepingAngels plugin;
@@ -74,15 +83,15 @@ public class VashtaNeradaListener implements Listener {
     }
 
     private void spawnVashtaNerada(Location l) {
-        LivingEntity e = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
-        e.setSilent(true);
-        Zombie vashta = (Zombie) e;
+        LivingEntity v = (LivingEntity) l.getWorld().spawnEntity(l, EntityType.ZOMBIE);
+        v.setSilent(true);
+        Zombie vashta = (Zombie) v;
         vashta.setAdult();
         PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
-        e.addPotionEffect(p);
+        v.addPotionEffect(p);
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            VashtaNeradaEquipment.set(e, false);
-            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.ZOMBIE, Monster.VASHTA_NERADA, l));
+            new Equipper(Monster.VASHTA_NERADA, v, false, false).setHelmetAndInvisibilty();
+            plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(v, EntityType.ZOMBIE, Monster.VASHTA_NERADA, l));
         }, 5L);
     }
 }

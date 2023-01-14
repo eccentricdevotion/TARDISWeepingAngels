@@ -1,7 +1,24 @@
+/*
+ * Copyright (C) 2023 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.eccentric_nz.tardisweepingangels.commands;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.ArmourStandEquipment;
+import me.eccentric_nz.tardisweepingangels.monsters.headless_monks.HeadlessFlameRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.Blink;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.Vector3D;
@@ -11,6 +28,10 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 public class EquipCommand {
 
@@ -61,6 +82,20 @@ public class EquipCommand {
         }
         if (as != null) {
             new ArmourStandEquipment().setStandEquipment(as, monster, (monster == Monster.EMPTY_CHILD));
+            if (args.length > 2 && monster == Monster.HEADLESS_MONK) {
+                ArmorStand monk = as;
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                    int flameID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new HeadlessFlameRunnable(monk), 1, 20);
+                    monk.getPersistentDataContainer().set(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER, flameID);
+                    // set helmet to sword version
+                    EntityEquipment ee = monk.getEquipment();
+                    ItemStack head = ee.getHelmet();
+                    ItemMeta meta = head.getItemMeta();
+                    meta.setCustomModelData(9);
+                    head.setItemMeta(meta);
+                    ee.setHelmet(head);
+                }, 2L);
+            }
         } else {
             sender.sendMessage(plugin.pluginName + "You are not looking at an armour stand within 8 blocks!");
             return true;

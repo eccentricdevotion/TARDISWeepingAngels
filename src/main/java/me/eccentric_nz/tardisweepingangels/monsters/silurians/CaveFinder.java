@@ -1,12 +1,27 @@
+/*
+ * Copyright (C) 2023 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.eccentric_nz.tardisweepingangels.monsters.silurians;
 
+import java.util.Arrays;
+import java.util.Collections;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.BlockFace;
-
-import java.util.Arrays;
-import java.util.Collections;
 
 public class CaveFinder {
 
@@ -26,7 +41,7 @@ public class CaveFinder {
             Collections.shuffle(Arrays.asList(directions));
             for (int i = 0; i < 4; i++) {
                 switch (directions[i]) {
-                    case 0:
+                    case 0 -> {
                         // east
                         for (int east = startX; east < plusX; east += step) {
                             Check chk = isThereRoom(w, east, startZ);
@@ -34,8 +49,8 @@ public class CaveFinder {
                                 return new Location(w, east, chk.getY(), startZ);
                             }
                         }
-                        break;
-                    case 1:
+                    }
+                    case 1 -> {
                         // south
                         for (int south = startZ; south < plusZ; south += step) {
                             Check chk = isThereRoom(w, startX, south);
@@ -43,8 +58,8 @@ public class CaveFinder {
                                 return new Location(w, startX, chk.getY(), south);
                             }
                         }
-                        break;
-                    case 2:
+                    }
+                    case 2 -> {
                         // west
                         for (int west = startX; west > minusX; west -= step) {
                             Check chk = isThereRoom(w, west, startZ);
@@ -52,8 +67,8 @@ public class CaveFinder {
                                 return new Location(w, west, chk.getY(), startZ);
                             }
                         }
-                        break;
-                    case 3:
+                    }
+                    case 3 -> {
                         // north
                         for (int north = startZ; north > minusZ; north -= step) {
                             Check chk = isThereRoom(w, startX, north);
@@ -61,7 +76,7 @@ public class CaveFinder {
                                 return new Location(w, startX, chk.getY(), north);
                             }
                         }
-                        break;
+                    }
                 }
             }
         }

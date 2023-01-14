@@ -1,5 +1,22 @@
+/*
+ * Copyright (C) 2023 eccentric_nz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.eccentric_nz.tardisweepingangels;
 
+import java.util.*;
 import me.eccentric_nz.tardisweepingangels.commands.TARDISWeepingAngelsCommand;
 import me.eccentric_nz.tardisweepingangels.commands.TabComplete;
 import me.eccentric_nz.tardisweepingangels.death.Death;
@@ -7,11 +24,15 @@ import me.eccentric_nz.tardisweepingangels.death.PlayerDeath;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import me.eccentric_nz.tardisweepingangels.equip.PlayerUndisguise;
 import me.eccentric_nz.tardisweepingangels.monsters.cybermen.CybermanRunnable;
-import me.eccentric_nz.tardisweepingangels.monsters.daleks.ChunkLoad;
+import me.eccentric_nz.tardisweepingangels.utils.ChunkListener;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekGlideListener;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.GasMask;
+import me.eccentric_nz.tardisweepingangels.monsters.hath.HathRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.headless_monks.HeadlessMonkRunnable;
+import me.eccentric_nz.tardisweepingangels.monsters.headless_monks.HeadlessProjectileListener;
+import me.eccentric_nz.tardisweepingangels.monsters.headless_monks.HeadlessTarget;
 import me.eccentric_nz.tardisweepingangels.monsters.ice_warriors.IceWarriorRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonAmmoRecipe;
 import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonBuilder;
@@ -25,7 +46,6 @@ import me.eccentric_nz.tardisweepingangels.monsters.ood.VillagerCuredListener;
 import me.eccentric_nz.tardisweepingangels.monsters.ood.VillagerSpawnListener;
 import me.eccentric_nz.tardisweepingangels.monsters.silent.CleanGuardians;
 import me.eccentric_nz.tardisweepingangels.monsters.silent.SilentRunnable;
-import me.eccentric_nz.tardisweepingangels.monsters.silent.SilentTarget;
 import me.eccentric_nz.tardisweepingangels.monsters.silurians.SilurianSpawnerListener;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.Butler;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.SontaranRunnable;
@@ -35,6 +55,7 @@ import me.eccentric_nz.tardisweepingangels.monsters.toclafane.ToclafaneRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.vashta_nerada.VashtaNeradaListener;
 import me.eccentric_nz.tardisweepingangels.monsters.weeping_angels.*;
 import me.eccentric_nz.tardisweepingangels.monsters.zygons.ZygonRunnable;
+import me.eccentric_nz.tardisweepingangels.move.MonsterMoveListener;
 import me.eccentric_nz.tardisweepingangels.utils.*;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
@@ -42,8 +63,6 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.*;
 
 public class TARDISWeepingAngels extends JavaPlugin {
 
@@ -56,6 +75,9 @@ public class TARDISWeepingAngels extends JavaPlugin {
     public static NamespacedKey HATH;
     public static NamespacedKey JUDOON;
     public static NamespacedKey K9;
+    public static NamespacedKey HEADLESS_TASK;
+    public static NamespacedKey FLAME_TASK;
+    public static NamespacedKey MONK;
     public static NamespacedKey OOD;
     public static NamespacedKey OWNER_UUID;
     public static NamespacedKey SILENT;
@@ -112,6 +134,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         if (getConfig().getBoolean("k9.can_build")) {
             pm.registerEvents(new K9Builder(this), this);
         }
+        pm.registerEvents(new MonsterMoveListener(), this);
         pm.registerEvents(new DalekGlideListener(this), this);
         pm.registerEvents(new Damage(this), this);
         pm.registerEvents(new VashtaNeradaListener(this), this);
@@ -122,9 +145,10 @@ public class TARDISWeepingAngels extends JavaPlugin {
         pm.registerEvents(new GasMask(this), this);
         pm.registerEvents(new Butler(this), this);
         pm.registerEvents(new HelmetChecker(), this);
-        pm.registerEvents(new SilentTarget(this), this);
+        pm.registerEvents(new HeadlessTarget(this), this);
+        pm.registerEvents(new HeadlessProjectileListener(), this);
         pm.registerEvents(new K9Listener(this), this);
-        pm.registerEvents(new ChunkLoad(), this);
+        pm.registerEvents(new ChunkListener(this), this);
         pm.registerEvents(new SilurianSpawnerListener(this), this);
         pm.registerEvents(new OodListener(), this);
         pm.registerEvents(new JudoonListener(this), this);
@@ -155,6 +179,8 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new DalekRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new EmptyChildRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new IceWarriorRunnable(this), delay, delay);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new HathRunnable(this), delay, delay);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new HeadlessMonkRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new SilentRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new SontaranRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new ToclafaneRunnable(this), delay, delay);
@@ -220,8 +246,11 @@ public class TARDISWeepingAngels extends JavaPlugin {
         HATH = new NamespacedKey(plugin, "hath");
         JUDOON = new NamespacedKey(plugin, "judoon");
         K9 = new NamespacedKey(plugin, "k9");
+        HEADLESS_TASK = new NamespacedKey(plugin, "headless_task");
+        FLAME_TASK = new NamespacedKey(plugin, "flame_task");
+        MONK = new NamespacedKey(plugin, "monk");
         OOD = new NamespacedKey(plugin, "ood");
-        OWNER_UUID = new NamespacedKey(plugin, "ood_uuid");
+        OWNER_UUID = new NamespacedKey(plugin, "owner_uuid");
         SILENT = new NamespacedKey(plugin, "silent");
         SILURIAN = new NamespacedKey(plugin, "silurian");
         SONTARAN = new NamespacedKey(plugin, "sontaran");
