@@ -16,7 +16,6 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters.hath;
 
-import java.util.Collection;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.Equipper;
@@ -31,11 +30,12 @@ import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.PigZombie;
-import org.bukkit.entity.Zombie;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import java.util.Collection;
 
 public class HathRunnable implements Runnable {
 
@@ -55,8 +55,8 @@ public class HathRunnable implements Runnable {
             if (plugin.getConfig().getInt("hath.worlds." + name) > 0) {
                 // get the current warriors
                 int hath = 0;
-                Collection<Zombie> zombies = w.getEntitiesByClass(Zombie.class);
-                for (Zombie c : zombies) {
+                Collection<PigZombie> zombies = w.getEntitiesByClass(PigZombie.class);
+                for (PigZombie c : zombies) {
                     PersistentDataContainer pdc = c.getPersistentDataContainer();
                     if (pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
                         hath++;
@@ -86,10 +86,9 @@ public class HathRunnable implements Runnable {
                 }
                 LivingEntity h = (LivingEntity) world.spawnEntity(l, EntityType.ZOMBIFIED_PIGLIN);
                 h.setSilent(true);
-                PigZombie hath = (PigZombie) h;
-                hath.setAdult();
+                ((PigZombie) h).setAdult();
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
-                hath.addPotionEffect(p);
+                h.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                     new Equipper(Monster.HATH, h, false, false).setHelmetAndInvisibilty();
                     plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(h, EntityType.ZOMBIFIED_PIGLIN, Monster.HATH, l));
