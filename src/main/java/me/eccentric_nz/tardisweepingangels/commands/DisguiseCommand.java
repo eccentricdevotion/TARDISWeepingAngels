@@ -85,7 +85,8 @@ public class DisguiseCommand {
                 case K9 -> K9Equipment.set(null, player, true);
                 case OOD -> OodEquipment.set(null, player, true);
                 case TOCLAFANE -> ToclafaneEquipment.set(player, true);
-                // CYBERMAN, EMPTY_CHILD, HATH, HEADLESS_MONK, ICE_WARRIOR, SILENT, SILURIAN, SONTARAN, STRAX, THE_MIRE, VASHTA_NERADA, WEEPING_ANGEL, ZYGON
+                // CYBERMAN, EMPTY_CHILD, HATH, HEADLESS_MONK, ICE_WARRIOR, SEA_DEVIL, SILENT,
+                // SILURIAN, SLITHEEN, SONTARAN, STRAX, MIRE, VASHTA_NERADA, WEEPING_ANGEL, ZYGON
                 default -> new Equipper(monster, player, true, false).setHelmetAndInvisibilty();
             }
         } else {

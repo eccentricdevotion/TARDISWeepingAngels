@@ -35,7 +35,7 @@ public class AdminCommand {
         types.put(Monster.EMPTY_CHILD, "empty_child");
         types.put(Monster.HATH, "hath");
         types.put(Monster.HEADLESS_MONK, "headless_monks");
-        types.put(Monster.THE_MIRE, "the_mire");
+        types.put(Monster.MIRE, "the_mire");
         types.put(Monster.ICE_WARRIOR, "ice_warriors");
         types.put(Monster.JUDOON, "judoon");
         types.put(Monster.K9, "k9");

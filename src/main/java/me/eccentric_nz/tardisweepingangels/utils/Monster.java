@@ -31,6 +31,7 @@ public enum Monster {
     ICE_WARRIOR("Ice Warrior", EntityType.ZOMBIFIED_PIGLIN, "ice", 5, 5, Material.SNOWBALL, TARDISWeepingAngels.WARRIOR, 4),
     JUDOON("Judoon", EntityType.ARMOR_STAND, "judoon", 14, 10, Material.YELLOW_DYE, TARDISWeepingAngels.JUDOON, 11),
     K9("K9", EntityType.ARMOR_STAND, "k9", 15, 1, Material.BONE, TARDISWeepingAngels.K9),
+    MIRE("Mire", EntityType.SKELETON, "mire", 18, 4, Material.NETHERITE_SCRAP, TARDISWeepingAngels.MIRE),
     OOD("Ood", EntityType.ARMOR_STAND, "ood", 12, 29, Material.ROTTEN_FLESH, TARDISWeepingAngels.OOD, 30),
     SEA_DEVIL("Sea Devil", EntityType.DROWNED, "devil", 19, 5, Material.KELP_PLANT, TARDISWeepingAngels.DEVIL),
     SILENT("Silent", EntityType.SKELETON, "silent", 6, 11, Material.END_STONE, TARDISWeepingAngels.SILENT, 5),
@@ -39,7 +40,6 @@ public enum Monster {
     SONTARAN("Sontaran", EntityType.ZOMBIE, "sontaran", 8, 5, Material.POTATO, TARDISWeepingAngels.SONTARAN, 4),
     STRAX("Strax", EntityType.ZOMBIFIED_PIGLIN, "strax", 9, 4, Material.BAKED_POTATO, TARDISWeepingAngels.STRAX),
     TOCLAFANE("Toclafane", EntityType.ZOMBIE, "toclafane", 13, 2, Material.GUNPOWDER, TARDISWeepingAngels.TOCLAFANE),
-    THE_MIRE("The Mire", EntityType.SKELETON, "mire", 18, 4, Material.NETHERITE_SCRAP, TARDISWeepingAngels.MIRE),
     VASHTA_NERADA("Vashta Nerada", EntityType.ZOMBIE, "vashta", 10, 5, Material.BOOK, TARDISWeepingAngels.VASHTA, 4),
     WEEPING_ANGEL("Weeping Angel", EntityType.SKELETON, "angel", 1, 5, Material.BRICK, TARDISWeepingAngels.ANGEL),
     ZYGON("Zygon", EntityType.ZOMBIE, "zygon", 11, 4, Material.PAINTING, TARDISWeepingAngels.ZYGON);

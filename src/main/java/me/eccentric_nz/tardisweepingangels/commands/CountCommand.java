@@ -62,10 +62,10 @@ public class CountCommand {
                 return true;
             }
             switch (monster) {
-                case WEEPING_ANGEL, DALEK, SILURIAN, SILENT, HEADLESS_MONK, THE_MIRE -> {
+                case WEEPING_ANGEL, DALEK, SILURIAN, SILENT, HEADLESS_MONK, MIRE -> {
                     what = switch (monster) {
                         case SILENT -> "Silence";
-                        case THE_MIRE -> "Mire";
+                        case MIRE -> "Mire";
                         default -> monster.getName() + "s";
                     };
                     Collection<Skeleton> angels = w.getEntitiesByClass(Skeleton.class);
