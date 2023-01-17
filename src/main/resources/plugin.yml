@@ -3,7 +3,7 @@ description: Weeping Angel add-on for the TARDIS plugin
 main: me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels
 name: TARDISWeepingAngels
 load: POSTWORLD
-version: 4.0.0
+version: 4.0.1
 api-version: 1.19
 website: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
 dev-url: http://dev.bukkit.org/bukkit-plugins/tardisweepingangels
@@ -24,6 +24,7 @@ permissions:
       tardisweepingangels.spawn.ice: true
       tardisweepingangels.spawn.judoon: true
       tardisweepingangels.spawn.k9: true
+      tardisweepingangels.spawn.mire: true
       tardisweepingangels.spawn.monk: true
       tardisweepingangels.spawn.ood: true
       tardisweepingangels.spawn.silent: true

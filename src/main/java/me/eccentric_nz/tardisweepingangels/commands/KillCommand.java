@@ -86,7 +86,7 @@ public class KillCommand {
                     }
                 }
             }
-            case WEEPING_ANGEL, DALEK, HEADLESS_MONK, SILURIAN -> {
+            case WEEPING_ANGEL, DALEK, HEADLESS_MONK, SILURIAN, THE_MIRE -> {
                 what = monster.getName() + "s";
                 Collection<Skeleton> skeletons = w.getEntitiesByClass(Skeleton.class);
                 for (Skeleton s : skeletons) {

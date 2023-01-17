@@ -19,28 +19,33 @@ package me.eccentric_nz.tardisweepingangels.utils;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.EntityType;
 
 public enum Monster {
 
-    CYBERMAN("Cyberman", "cyberman", 2, 4, Material.IRON_INGOT, TARDISWeepingAngels.CYBERMAN),
-    DALEK("Dalek", "dalek", 3, 10000005, Material.SLIME_BALL, TARDISWeepingAngels.DALEK, 10000004),
-    EMPTY_CHILD("Empty Child", "empty", 4, 4, Material.SUGAR, TARDISWeepingAngels.EMPTY),
-    HATH("Hath", "hath", 16, 5, Material.PUFFERFISH, TARDISWeepingAngels.HATH, 4),
-    HEADLESS_MONK("Headless Monk", "monk", 17, 4, Material.RED_CANDLE, TARDISWeepingAngels.MONK),
-    ICE_WARRIOR("Ice Warrior", "ice", 5, 5, Material.SNOWBALL, TARDISWeepingAngels.WARRIOR, 4),
-    JUDOON("Judoon", "judoon", 14, 10, Material.YELLOW_DYE, TARDISWeepingAngels.JUDOON, 11),
-    K9("K9", "k9", 15, 1, Material.BONE, TARDISWeepingAngels.K9),
-    OOD("Ood", "ood", 12, 29, Material.ROTTEN_FLESH, TARDISWeepingAngels.OOD, 30),
-    SILENT("Silent", "silent", 6, 11, Material.END_STONE, TARDISWeepingAngels.SILENT, 5),
-    SILURIAN("Silurian", "silurian", 7, 4, Material.FEATHER, TARDISWeepingAngels.SILURIAN),
-    SONTARAN("Sontaran", "sontaran", 8, 5, Material.POTATO, TARDISWeepingAngels.SONTARAN, 4),
-    STRAX("Strax", "strax", 9, 4, Material.BAKED_POTATO, TARDISWeepingAngels.STRAX),
-    TOCLAFANE("Toclafane", "toclafane", 13, 2, Material.GUNPOWDER, TARDISWeepingAngels.TOCLAFANE),
-    VASHTA_NERADA("Vashta Nerada", "vashta", 10, 5, Material.BOOK, TARDISWeepingAngels.VASHTA, 4),
-    WEEPING_ANGEL("Weeping Angel", "angel", 1, 5, Material.BRICK, TARDISWeepingAngels.ANGEL),
-    ZYGON("Zygon", "zygon", 11, 4, Material.PAINTING, TARDISWeepingAngels.ZYGON);
+    CYBERMAN("Cyberman", EntityType.ZOMBIE, "cyberman", 2, 4, Material.IRON_INGOT, TARDISWeepingAngels.CYBERMAN),
+    DALEK("Dalek", EntityType.SKELETON, "dalek", 3, 10000005, Material.SLIME_BALL, TARDISWeepingAngels.DALEK, 10000004),
+    EMPTY_CHILD("Empty Child", EntityType.ZOMBIE, "empty", 4, 4, Material.SUGAR, TARDISWeepingAngels.EMPTY),
+    HATH("Hath", EntityType.ZOMBIFIED_PIGLIN, "hath", 16, 5, Material.PUFFERFISH, TARDISWeepingAngels.HATH, 4),
+    HEADLESS_MONK("Headless Monk", EntityType.SKELETON, "monk", 17, 4, Material.RED_CANDLE, TARDISWeepingAngels.MONK),
+    ICE_WARRIOR("Ice Warrior", EntityType.ZOMBIFIED_PIGLIN, "ice", 5, 5, Material.SNOWBALL, TARDISWeepingAngels.WARRIOR, 4),
+    JUDOON("Judoon", EntityType.ARMOR_STAND, "judoon", 14, 10, Material.YELLOW_DYE, TARDISWeepingAngels.JUDOON, 11),
+    K9("K9", EntityType.ARMOR_STAND, "k9", 15, 1, Material.BONE, TARDISWeepingAngels.K9),
+    OOD("Ood", EntityType.ARMOR_STAND, "ood", 12, 29, Material.ROTTEN_FLESH, TARDISWeepingAngels.OOD, 30),
+    SEA_DEVIL("Sea Devil", EntityType.DROWNED, "devil", 19, 5, Material.KELP_PLANT, TARDISWeepingAngels.DEVIL),
+    SILENT("Silent", EntityType.SKELETON, "silent", 6, 11, Material.END_STONE, TARDISWeepingAngels.SILENT, 5),
+    SILURIAN("Silurian", EntityType.SKELETON, "silurian", 7, 4, Material.FEATHER, TARDISWeepingAngels.SILURIAN),
+    SLITHEEN("Slitheen", EntityType.WITCH, "slitheen", 20, 5, Material.TURTLE_EGG, TARDISWeepingAngels.SLITHEEN),
+    SONTARAN("Sontaran", EntityType.ZOMBIE, "sontaran", 8, 5, Material.POTATO, TARDISWeepingAngels.SONTARAN, 4),
+    STRAX("Strax", EntityType.ZOMBIFIED_PIGLIN, "strax", 9, 4, Material.BAKED_POTATO, TARDISWeepingAngels.STRAX),
+    TOCLAFANE("Toclafane", EntityType.ZOMBIE, "toclafane", 13, 2, Material.GUNPOWDER, TARDISWeepingAngels.TOCLAFANE),
+    THE_MIRE("The Mire", EntityType.SKELETON, "mire", 18, 4, Material.NETHERITE_SCRAP, TARDISWeepingAngels.MIRE),
+    VASHTA_NERADA("Vashta Nerada", EntityType.ZOMBIE, "vashta", 10, 5, Material.BOOK, TARDISWeepingAngels.VASHTA, 4),
+    WEEPING_ANGEL("Weeping Angel", EntityType.SKELETON, "angel", 1, 5, Material.BRICK, TARDISWeepingAngels.ANGEL),
+    ZYGON("Zygon", EntityType.ZOMBIE, "zygon", 11, 4, Material.PAINTING, TARDISWeepingAngels.ZYGON);
 
     private final String name;
+    private final EntityType entityType;
     private final String permission;
     private final int persist;
     private final int customModelData;
@@ -48,8 +53,9 @@ public enum Monster {
     private final NamespacedKey key;
     private final int headModelData;
 
-    Monster(String name, String permission, int persist, int customModelData, Material material, NamespacedKey key) {
+    Monster(String name, EntityType entityType, String permission, int persist, int customModelData, Material material, NamespacedKey key) {
         this.name = name;
+        this.entityType = entityType;
         this.permission = permission;
         this.persist = persist;
         this.customModelData = customModelData;
@@ -58,8 +64,9 @@ public enum Monster {
         this.headModelData = 3;
     }
 
-    Monster(String name, String permission, int persist, int customModelData, Material material, NamespacedKey key, int headModelData) {
+    Monster(String name, EntityType entityType, String permission, int persist, int customModelData, Material material, NamespacedKey key, int headModelData) {
         this.name = name;
+        this.entityType = entityType;
         this.permission = permission;
         this.persist = persist;
         this.customModelData = customModelData;
@@ -70,6 +77,10 @@ public enum Monster {
     
     public String getName() {
         return name;
+    }
+
+    public EntityType getEntityType() {
+        return entityType;
     }
 
     public String getPermission() {

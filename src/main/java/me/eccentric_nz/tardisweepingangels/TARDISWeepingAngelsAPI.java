@@ -85,6 +85,14 @@ public interface TARDISWeepingAngelsAPI {
     public void setHeadlessMonkEquipment(LivingEntity le, boolean disguise);
 
     /**
+     * Sets an entity as a Mire.
+     *
+     * @param le       The LivingEntity to disguise
+     * @param disguise A boolean to determine if this is a player disguise
+     */
+    public void setTheMireEquipment(LivingEntity le, boolean disguise);
+
+    /**
      * Sets an armour stand, or disguises a player as a Judoon.
      *
      * @param player     The player that will own this Judoon - may be null

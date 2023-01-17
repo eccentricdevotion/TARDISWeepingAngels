@@ -48,6 +48,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
                     || pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)
+                    || pdc.has(TARDISWeepingAngels.MIRE, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.MONK, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)
@@ -96,6 +97,9 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             }
             if (pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
                 return Monster.HATH;
+            }
+            if (pdc.has(TARDISWeepingAngels.MIRE, PersistentDataType.INTEGER)) {
+                return Monster.THE_MIRE;
             }
             if (pdc.has(TARDISWeepingAngels.MONK, PersistentDataType.INTEGER)) {
                 return Monster.HEADLESS_MONK;
@@ -165,6 +169,11 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
     public void setHeadlessMonkEquipment(LivingEntity le, boolean disguise) {
         new Equipper(Monster.HEADLESS_MONK, le, disguise, false).setHelmetAndInvisibilty();
         HeadlessMonkEquipment.setTasks(le);
+    }
+
+    @Override
+    public void setTheMireEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.THE_MIRE, le, disguise, true).setHelmetAndInvisibilty();
     }
 
     @Override

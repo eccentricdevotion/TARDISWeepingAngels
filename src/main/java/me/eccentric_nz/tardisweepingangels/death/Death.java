@@ -50,6 +50,7 @@ public class Death implements Listener {
     private final List<Material> empty_drops = new ArrayList<>();
     private final List<Material> hath_drops = new ArrayList<>();
     private final List<Material> headless_drops = new ArrayList<>();
+    private final List<Material> mire_drops = new ArrayList<>();
     private final List<Material> silent_drops = new ArrayList<>();
     private final List<Material> ice_drops = new ArrayList<>();
     private final List<Material> silurian_drops = new ArrayList<>();
@@ -65,6 +66,7 @@ public class Death implements Listener {
         plugin.getConfig().getStringList("empty_child.drops").forEach((e) -> empty_drops.add(Material.valueOf(e)));
         plugin.getConfig().getStringList("hath.drops").forEach((e) -> hath_drops.add(Material.valueOf(e)));
         plugin.getConfig().getStringList("headless_monks.drops").forEach((e) -> headless_drops.add(Material.valueOf(e)));
+        plugin.getConfig().getStringList("the_mire.drops").forEach((e) -> mire_drops.add(Material.valueOf(e)));
         plugin.getConfig().getStringList("ice_warriors.drops").forEach((i) -> ice_drops.add(Material.valueOf(i)));
         plugin.getConfig().getStringList("sontarans.drops").forEach((o) -> sontaran_drops.add(Material.valueOf(o)));
         plugin.getConfig().getStringList("silent.drops").forEach((m) -> silent_drops.add(Material.valueOf(m)));
@@ -108,6 +110,19 @@ public class Death implements Listener {
                     stack = new ItemStack(Material.IRON_SWORD, 1);
                 } else {
                     stack = new ItemStack(headless_drops.get(TARDISWeepingAngels.random.nextInt(headless_drops.size())), TARDISWeepingAngels.random.nextInt(2) + 1);
+                }
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                return;
+            }
+            if (pdc.has(TARDISWeepingAngels.MIRE, PersistentDataType.INTEGER)) {
+                event.getDrops().clear();
+                ItemStack stack;
+                if (TARDISWeepingAngels.random.nextInt(100) < 3) {
+                    stack = HeadBuilder.getItemStack(Monster.THE_MIRE);
+                } else if (TARDISWeepingAngels.random.nextInt(100) < 6) {
+                    stack = new ItemStack(Material.NETHERITE_SCRAP, 2);
+                } else {
+                    stack = new ItemStack(mire_drops.get(TARDISWeepingAngels.random.nextInt(mire_drops.size())), TARDISWeepingAngels.random.nextInt(2) + 1);
                 }
                 event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                 return;

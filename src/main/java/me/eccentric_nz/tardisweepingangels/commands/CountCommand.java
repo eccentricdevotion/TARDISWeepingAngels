@@ -62,8 +62,12 @@ public class CountCommand {
                 return true;
             }
             switch (monster) {
-                case WEEPING_ANGEL, DALEK, SILURIAN, SILENT, HEADLESS_MONK -> {
-                    what = (monster.equals(Monster.SILENT))? "Silence" : monster.getName() + "s";
+                case WEEPING_ANGEL, DALEK, SILURIAN, SILENT, HEADLESS_MONK, THE_MIRE -> {
+                    what = switch (monster) {
+                        case SILENT -> "Silence";
+                        case THE_MIRE -> "Mire";
+                        default -> monster.getName() + "s";
+                    };
                     Collection<Skeleton> angels = w.getEntitiesByClass(Skeleton.class);
                     for (Skeleton a : angels) {
                         if (a.getPersistentDataContainer().has(monster.getKey(), PersistentDataType.INTEGER)) {
@@ -72,12 +76,12 @@ public class CountCommand {
                     }
                 }
                 case CYBERMAN, EMPTY_CHILD, SONTARAN, VASHTA_NERADA, ZYGON -> {
-                    switch (monster) {
-                        case CYBERMAN -> what = "Cybermen";
-                        case EMPTY_CHILD -> what = "Empty Children";
-                        case VASHTA_NERADA -> what = "Vashta Nerada";
-                        default -> what = monster.getName() + "s";
-                    }
+                    what = switch (monster) {
+                        case CYBERMAN -> "Cybermen";
+                        case EMPTY_CHILD -> "Empty Children";
+                        case VASHTA_NERADA -> "Vashta Nerada";
+                        default -> monster.getName() + "s";
+                    };
                     Collection<Zombie> cybermen = w.getEntitiesByClass(Zombie.class);
                     for (Zombie c : cybermen) {
                         if (c.getPersistentDataContainer().has(monster.getKey(), PersistentDataType.INTEGER)) {
@@ -86,7 +90,7 @@ public class CountCommand {
                     }
                 }
                 case HATH, ICE_WARRIOR, STRAX -> {
-                    what = (monster.equals(Monster.ICE_WARRIOR))? "Ice Warriors" : monster.getName();
+                    what = (monster.equals(Monster.ICE_WARRIOR)) ? "Ice Warriors" : monster.getName();
                     Collection<PigZombie> fish = w.getEntitiesByClass(PigZombie.class);
                     for (PigZombie h : fish) {
                         if (h.getPersistentDataContainer().has(monster.getKey(), PersistentDataType.INTEGER)) {
@@ -95,10 +99,28 @@ public class CountCommand {
                     }
                 }
                 case JUDOON, K9, OOD -> {
-                    what = (monster.equals(Monster.K9))? "K9s" : monster.getName();
+                    what = (monster.equals(Monster.K9)) ? "K9s" : monster.getName();
                     Collection<ArmorStand> galactic_police = w.getEntitiesByClass(ArmorStand.class);
                     for (ArmorStand g : galactic_police) {
                         if (g.getPersistentDataContainer().has(monster.getKey(), PersistentDataType.INTEGER)) {
+                            count++;
+                        }
+                    }
+                }
+                case SLITHEEN -> {
+                    what = monster.getName();
+                    Collection<Witch> slitheen = w.getEntitiesByClass(Witch.class);
+                    for (Witch s : slitheen) {
+                        if (s.getPersistentDataContainer().has(monster.getKey(), PersistentDataType.INTEGER)) {
+                            count++;
+                        }
+                    }
+                }
+                case SEA_DEVIL -> {
+                    what = monster.getName() + "s";
+                    Collection<Drowned> drowned = w.getEntitiesByClass(Drowned.class);
+                    for (Drowned d : drowned) {
+                        if (d.getPersistentDataContainer().has(monster.getKey(), PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }

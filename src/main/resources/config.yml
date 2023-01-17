@@ -5,7 +5,7 @@ spawn_rate:
   default_max: 0
 angels:
   worlds:
-    world: 20
+    world: 10
   teleport_worlds:
     - world
   freeze_time: 100
@@ -28,7 +28,7 @@ cybermen:
   can_upgrade: true
 daleks:
   worlds:
-    world: 20
+    world: 10
   drops:
     - SLIME_BALL
     - ROTTEN_FLESH
@@ -54,7 +54,7 @@ headless_monks:
   particles: true
 ice_warriors:
   worlds:
-    world: 20
+    world: 10
   drops:
     - ICE
     - PACKED_ICE
@@ -66,7 +66,7 @@ k9:
     world: true
 silurians:
   worlds:
-    world: 20
+    world: 10
   drops:
     - GOLD_NUGGET
     - FEATHER
@@ -78,24 +78,30 @@ ood:
   spawn_from_villager: 20
   spawn_from_cured: 5
 judoon:
+  worlds:
+    world: 10
   guards: true
   can_build: true
   ammunition: 25
   damage: 4
-  worlds:
-    world: 20
 sontarans:
   worlds:
-    world: 20
+    world: 10
   drops:
     - POTATO
-    - MILK_BUCKET
+    - POISONOUS_POTATO
   can_tame: true
+the_mire:
+  worlds:
+    world: 10
+  drops:
+    - POTION
+    - HONEY_BOTTLE
 toclafane:
+  worlds:
+    world: 10
   spawn_from_bee: 5
   destroy_blocks: true
-  worlds:
-    world: 20
   drops:
     - GUNPOWDER
     - HONEYCOMB
