@@ -84,6 +84,12 @@ judoon:
   can_build: true
   ammunition: 25
   damage: 4
+sea_devils:
+  worlds:
+    world: 10
+  drops:
+    - COD
+    - KELP
 sontarans:
   worlds:
     world: 10
@@ -91,6 +97,12 @@ sontarans:
     - POTATO
     - POISONOUS_POTATO
   can_tame: true
+slitheen:
+  worlds:
+    world: 10
+  drops:
+    - RABBIT_HIDE
+    - PHANTOM_MEMBRANE
 the_mire:
   worlds:
     world: 10

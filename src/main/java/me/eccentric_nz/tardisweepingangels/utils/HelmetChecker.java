@@ -37,6 +37,7 @@ public class HelmetChecker implements Listener {
             // restore head
             switch (monster) {
                 case DALEK -> DalekEquipment.set((LivingEntity) e, false);
+                case SEA_DEVIL -> new Equipper(monster, (LivingEntity) e, false, false, true);
                 default -> new Equipper(monster, (LivingEntity) e, false, (monster.equals(Monster.SILURIAN)));
             }
         }

@@ -75,26 +75,35 @@ public class WorldProcessor implements Runnable {
             if (!config.contains("ice_warriors.worlds." + n)) {
                 plugin.getConfig().set("ice_warriors.worlds." + n, m);
             }
-            if (!config.contains("silent.worlds." + n)) {
-                plugin.getConfig().set("silent.worlds." + n, m);
-            }
-            if (!config.contains("ood.worlds." + n) || (config.contains("ood.worlds." + n) && config.getInt("ood.worlds." + n) == 20)) {
-                plugin.getConfig().set("ood.worlds." + n, true);
-            }
             if (!config.contains("judoon.worlds." + n) || (config.contains("judoon.worlds." + n) && config.getString("judoon.worlds." + n).equals("true"))) {
                 plugin.getConfig().set("judoon.worlds." + n, m);
             }
             if (!config.contains("k9.worlds." + n)) {
                 plugin.getConfig().set("k9.worlds." + n, true);
             }
-            if (!config.contains("toclafane.worlds." + n)) {
-                plugin.getConfig().set("toclafane.worlds." + n, m);
+            if (!config.contains("ood.worlds." + n) || (config.contains("ood.worlds." + n) && config.getInt("ood.worlds." + n) == 20)) {
+                plugin.getConfig().set("ood.worlds." + n, true);
+            }
+            if (!config.contains("sea_devils.worlds." + n)) {
+                plugin.getConfig().set("sea_devils.worlds." + n, m);
+            }
+            if (!config.contains("silent.worlds." + n)) {
+                plugin.getConfig().set("silent.worlds." + n, m);
             }
             if (!config.contains("silurians.worlds." + n)) {
                 plugin.getConfig().set("silurians.worlds." + n, m);
             }
+            if (!config.contains("slitheen.worlds." + n)) {
+                plugin.getConfig().set("slitheen.worlds." + n, m);
+            }
             if (!config.contains("sontarans.worlds." + n)) {
                 plugin.getConfig().set("sontarans.worlds." + n, m);
+            }
+            if (!config.contains("the_mire.worlds." + n)) {
+                plugin.getConfig().set("the_mire.worlds." + n, m);
+            }
+            if (!config.contains("toclafane.worlds." + n)) {
+                plugin.getConfig().set("toclafane.worlds." + n, m);
             }
             if (!config.contains("vashta_nerada.worlds." + n)) {
                 plugin.getConfig().set("vashta_nerada.worlds." + n, m);

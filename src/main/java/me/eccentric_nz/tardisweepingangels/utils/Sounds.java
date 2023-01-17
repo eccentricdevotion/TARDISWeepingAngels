@@ -85,12 +85,22 @@ public class Sounds implements Listener {
             if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
                 which = "dalek";
             }
+            if (pdc.has(TARDISWeepingAngels.MIRE, PersistentDataType.INTEGER)) {
+                delay = 180L;
+                which = "item.trident.thunder";
+            }
             if (pdc.has(TARDISWeepingAngels.MONK, PersistentDataType.INTEGER)) {
                 delay = 180L;
                 which = "headless_monk";
             }
+            if (pdc.has(TARDISWeepingAngels.DEVIL, PersistentDataType.INTEGER)) {
+                which = "devil";
+            }
             if (pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)) {
                 which = "silurian";
+            }
+            if (pdc.has(TARDISWeepingAngels.SLITHEEN, PersistentDataType.INTEGER)) {
+                which = "slitheen";
             }
             if (!entity.getPassengers().isEmpty() && entity.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
                 delay = 90L;

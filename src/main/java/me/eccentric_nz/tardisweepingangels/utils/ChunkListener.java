@@ -69,7 +69,11 @@ public class ChunkListener implements Listener {
                 if (drowned.getEquipment().getHelmet() != null) {
                     ItemMeta im = drowned.getEquipment().getHelmet().getItemMeta();
                     if (im != null && im.hasDisplayName() && im.getDisplayName().endsWith(" Head")) {
-                        Bukkit.getScheduler().scheduleSyncDelayedTask(TARDISWeepingAngels.plugin, () -> drowned.remove(), 2L);
+                        if (pdc.has(TARDISWeepingAngels.DEVIL, PersistentDataType.INTEGER)) {
+                            new Equipper(Monster.SEA_DEVIL, drowned, false, false, true).setHelmetAndInvisibilty();
+                        } else {
+                            Bukkit.getScheduler().scheduleSyncDelayedTask(TARDISWeepingAngels.plugin, () -> drowned.remove(), 2L);
+                        }
                     }
                 }
             } else if (d instanceof Zombie zombie) {
@@ -85,12 +89,12 @@ public class ChunkListener implements Listener {
                 } else if (pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)) {
                     new Equipper(Monster.VASHTA_NERADA, zombie, false, false).setHelmetAndInvisibilty();
                 }
-            } else if (d instanceof ArmorStand stand) {
-                if (stand.getPersistentDataContainer().has(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER)) {
-                    // restart flame runnable?
-                    int flameID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new HeadlessFlameRunnable(stand), 1, 20);
-                    pdc.set(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER, flameID);
-                }
+            } else if (d instanceof ArmorStand stand && stand.getPersistentDataContainer().has(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER)) {
+                // restart flame runnable?
+                int flameID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new HeadlessFlameRunnable(stand), 1, 20);
+                pdc.set(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER, flameID);
+            } else if (d instanceof Witch witch && witch.getPersistentDataContainer().has(TARDISWeepingAngels.SLITHEEN, PersistentDataType.INTEGER)) {
+                new Equipper(Monster.SLITHEEN, witch, false).setHelmetAndInvisibilty();
             }
         }
     }

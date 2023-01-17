@@ -16,7 +16,6 @@
  */
 package me.eccentric_nz.tardisweepingangels.commands;
 
-import java.util.Set;
 import me.eccentric_nz.tardischunkgenerator.TARDISHelper;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
@@ -31,7 +30,6 @@ import me.eccentric_nz.tardisweepingangels.monsters.ood.OodEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.silent.SilentEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.toclafane.ToclafaneEquipment;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
-import static me.eccentric_nz.tardisweepingangels.utils.Monster.HEADLESS_MONK;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -40,6 +38,8 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
+
+import java.util.Set;
 
 public class SpawnCommand {
 
@@ -77,8 +77,6 @@ public class SpawnCommand {
             a.setSilent(true);
             a.setNoDamageTicks(75);
             switch (monster) {
-                case WEEPING_ANGEL ->  new Equipper(Monster.WEEPING_ANGEL, a, false, false).setHelmetAndInvisibilty();
-                case CYBERMAN ->  new Equipper(Monster.CYBERMAN, a, false, false).setHelmetAndInvisibilty();
                 case DALEK -> {
                     DalekEquipment.set(a, false);
                     if (args.length > 2 && args[2].equalsIgnoreCase("flying") && plugin.getServer().getPluginManager().isPluginEnabled("TARDISChunkGenerator")) {
@@ -97,47 +95,48 @@ public class SpawnCommand {
                 case EMPTY_CHILD -> {
                     Ageable child = (Ageable) a;
                     child.setBaby();
-                    new Equipper(monster, a, false, false).setHelmetAndInvisibilty();
+                    new Equipper(monster, a, false).setHelmetAndInvisibilty();
                     EmptyChildEquipment.setSpeed(a);
                 }
-                case HATH -> new Equipper(monster, a, false, false).setHelmetAndInvisibilty();
                 case HEADLESS_MONK -> {
-                    new Equipper(monster, a, false, false).setHelmetAndInvisibilty();
+                    new Equipper(monster, a, false).setHelmetAndInvisibilty();
                     HeadlessMonkEquipment.setTasks(a);
                     // start flame runnable
                     int flameID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new HeadlessFlameRunnable(a), 1, 20);
                     a.getPersistentDataContainer().set(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER, flameID);
                 }
                 case ICE_WARRIOR -> {
-                    new Equipper(monster, a, false, false).setHelmetAndInvisibilty();
+                    new Equipper(monster, a, false).setHelmetAndInvisibilty();
                     PigZombie pigman = (PigZombie) a;
                     pigman.setAngry(true);
                     pigman.setAnger(Integer.MAX_VALUE);
                 }
                 case JUDOON -> JudoonEquipment.set(null, a, false);
                 case K9 -> K9Equipment.set(player, a, false);
+                case MIRE -> {
+                    new Equipper(monster, a, false, true).setHelmetAndInvisibilty();
+//                    player.playSound(a.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_IMPACT, 1.0f, 1.0f);
+                }
                 case OOD -> OodEquipment.set(null, a, false);
+                case SEA_DEVIL -> {
+                    new Equipper(monster, a, false, false, true).setHelmetAndInvisibilty();
+                }
                 case SILENT -> {
                     new Equipper(monster, a, false, false).setHelmetAndInvisibilty();
                     SilentEquipment.setGuardian(a);
                 }
                 case SILURIAN -> new Equipper(monster, a, false, true).setHelmetAndInvisibilty();
-                case SONTARAN -> new Equipper(monster, a, false, false).setHelmetAndInvisibilty();
                 case STRAX -> {
                     PigZombie strax = (PigZombie) a;
                     strax.setAngry(false);
                     new Equipper(monster, a, false, false).setHelmetAndInvisibilty();
                     a.setCustomName("Strax");
                 }
-                case THE_MIRE -> {
-                    new Equipper(monster, a, false, true).setHelmetAndInvisibilty();
-//                    player.playSound(a.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_IMPACT, 1.0f, 1.0f);
-                }
                 case TOCLAFANE -> ToclafaneEquipment.set(a, false);
-                case VASHTA_NERADA -> new Equipper(monster, a, false, false).setHelmetAndInvisibilty();
-                case ZYGON -> new Equipper(monster, a, false, false).setHelmetAndInvisibilty();
+                // WEEPING_ANGEL, CYBERMAN, HATH, SLITHEEN, SONTARAN, VASHTA_NERADA, ZYGON
+                default -> new Equipper(monster, a, false).setHelmetAndInvisibilty();
             }
-            if ((monster.getEntityType() == EntityType.ZOMBIE || monster.getEntityType() == EntityType.ZOMBIFIED_PIGLIN) && monster != Monster.EMPTY_CHILD) {
+            if ((monster.getEntityType() == EntityType.ZOMBIE || monster.getEntityType() == EntityType.ZOMBIFIED_PIGLIN || monster.getEntityType() == EntityType.DROWNED) && monster != Monster.EMPTY_CHILD) {
                 Ageable ageable = (Ageable) a;
                 ageable.setAdult();
             }
@@ -146,9 +145,9 @@ public class SpawnCommand {
                 case HEADLESS_MONK -> "headliess_monk";
                 case ICE_WARRIOR -> "warrior";
                 case SILENT -> "silence";
-                case THE_MIRE -> "item.trident.thunder";
+                case MIRE -> "item.trident.thunder";
                 case WEEPING_ANGEL -> "blink";
-                default ->  monster.getPermission();
+                default -> monster.getPermission();
             };
             player.playSound(a.getLocation(), sound, 1.0f, 1.0f);
             plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(a, monster.getEntityType(), monster, eyeLocation));

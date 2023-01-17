@@ -40,12 +40,15 @@ import me.eccentric_nz.tardisweepingangels.monsters.judoon.JudoonListener;
 import me.eccentric_nz.tardisweepingangels.monsters.k9.K9Builder;
 import me.eccentric_nz.tardisweepingangels.monsters.k9.K9Listener;
 import me.eccentric_nz.tardisweepingangels.monsters.k9.K9Recipe;
+import me.eccentric_nz.tardisweepingangels.monsters.mire.MireRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.ood.OodListener;
 import me.eccentric_nz.tardisweepingangels.monsters.ood.VillagerCuredListener;
 import me.eccentric_nz.tardisweepingangels.monsters.ood.VillagerSpawnListener;
+import me.eccentric_nz.tardisweepingangels.monsters.sea_devils.SeaDevilRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.silent.CleanGuardians;
 import me.eccentric_nz.tardisweepingangels.monsters.silent.SilentRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.silurians.SilurianSpawnerListener;
+import me.eccentric_nz.tardisweepingangels.monsters.slitheen.SlitheenRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.Butler;
 import me.eccentric_nz.tardisweepingangels.monsters.sontarans.SontaranRunnable;
 import me.eccentric_nz.tardisweepingangels.monsters.toclafane.BeeSpawnListener;
@@ -176,16 +179,19 @@ public class TARDISWeepingAngels extends JavaPlugin {
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new CleanGuardians(this), 100L, 6000L);
         // start repeating spawn tasks
         long delay = getConfig().getLong("spawn_rate.how_often");
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, new WeepingAngelsRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new CybermanRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new DalekRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new EmptyChildRunnable(this), delay, delay);
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, new IceWarriorRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new HathRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new HeadlessMonkRunnable(this), delay, delay);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new IceWarriorRunnable(this), delay, delay);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new MireRunnable(this), delay, delay);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new SeaDevilRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new SilentRunnable(this), delay, delay);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new SlitheenRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new SontaranRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new ToclafaneRunnable(this), delay, delay);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new WeepingAngelsRunnable(this), delay, delay);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new ZygonRunnable(this), delay, delay);
         steal = (getConfig().getBoolean("angels.angels_can_steal"));
         if (getConfig().getBoolean("judoon.guards")) {

@@ -16,7 +16,6 @@
  */
 package me.eccentric_nz.tardisweepingangels.equip;
 
-import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelsAPI;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekEquipment;
@@ -38,6 +37,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.UUID;
+
 public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     public static boolean isMonster(Entity entity) {
@@ -46,12 +47,14 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)
+                    || pdc.has(TARDISWeepingAngels.DEVIL, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.MIRE, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.MONK, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)
+                    || pdc.has(TARDISWeepingAngels.SLITHEEN, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)
@@ -84,28 +87,44 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
     }
 
     public static Monster getMonsterType(Entity entity) {
-        if (entity instanceof Zombie || entity instanceof PigZombie || entity instanceof Skeleton) {
-            PersistentDataContainer pdc = entity.getPersistentDataContainer();
+        PersistentDataContainer pdc = entity.getPersistentDataContainer();
+        if (entity instanceof Zombie) {
             if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)) {
                 return Monster.CYBERMAN;
-            }
-            if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
-                return Monster.DALEK;
             }
             if (pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
                 return Monster.EMPTY_CHILD;
             }
+            if (pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
+                return Monster.SONTARAN;
+            }
+            if (pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)) {
+                return Monster.VASHTA_NERADA;
+            }
+            if (pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
+                return Monster.ZYGON;
+            }
+        }
+        if (entity instanceof PigZombie) {
             if (pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
                 return Monster.HATH;
             }
-            if (pdc.has(TARDISWeepingAngels.MIRE, PersistentDataType.INTEGER)) {
-                return Monster.THE_MIRE;
+            if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
+                return Monster.ICE_WARRIOR;
+            }
+            if (pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER)) {
+                return Monster.STRAX;
+            }
+        }
+        if (entity instanceof Skeleton) {
+            if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
+                return Monster.DALEK;
             }
             if (pdc.has(TARDISWeepingAngels.MONK, PersistentDataType.INTEGER)) {
                 return Monster.HEADLESS_MONK;
             }
-            if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
-                return Monster.ICE_WARRIOR;
+            if (pdc.has(TARDISWeepingAngels.MIRE, PersistentDataType.INTEGER)) {
+                return Monster.MIRE;
             }
             if (pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
                 return Monster.SILENT;
@@ -113,21 +132,15 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             if (pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)) {
                 return Monster.SILURIAN;
             }
-            if (pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
-                return Monster.SONTARAN;
-            }
-            if (pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER)) {
-                return Monster.STRAX;
-            }
-            if (pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)) {
-                return Monster.VASHTA_NERADA;
-            }
             if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
                 return Monster.WEEPING_ANGEL;
             }
-            if (pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
-                return Monster.ZYGON;
-            }
+        }
+        if (entity instanceof Drowned && pdc.has(TARDISWeepingAngels.DEVIL, PersistentDataType.INTEGER)) {
+            return Monster.SEA_DEVIL;
+        }
+        if (entity instanceof Witch && pdc.has(TARDISWeepingAngels.SLITHEEN, PersistentDataType.INTEGER)) {
+            return Monster.SLITHEEN;
         }
         return null;
     }
@@ -172,8 +185,18 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
     }
 
     @Override
-    public void setTheMireEquipment(LivingEntity le, boolean disguise) {
-        new Equipper(Monster.THE_MIRE, le, disguise, true).setHelmetAndInvisibilty();
+    public void setMireEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.MIRE, le, disguise, true).setHelmetAndInvisibilty();
+    }
+
+    @Override
+    public void setSeaDevilEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.SEA_DEVIL, le, disguise, true).setHelmetAndInvisibilty();
+    }
+
+    @Override
+    public void setSlitheenEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.SLITHEEN, le, disguise, true).setHelmetAndInvisibilty();
     }
 
     @Override

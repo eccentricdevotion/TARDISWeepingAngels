@@ -90,7 +90,23 @@ public interface TARDISWeepingAngelsAPI {
      * @param le       The LivingEntity to disguise
      * @param disguise A boolean to determine if this is a player disguise
      */
-    public void setTheMireEquipment(LivingEntity le, boolean disguise);
+    public void setMireEquipment(LivingEntity le, boolean disguise);
+
+    /**
+     * Sets an entity as a Sea Devil.
+     *
+     * @param le       The LivingEntity to disguise
+     * @param disguise A boolean to determine if this is a player disguise
+     */
+    public void setSeaDevilEquipment(LivingEntity le, boolean disguise);
+
+    /**
+     * Sets an entity as a Slitheen.
+     *
+     * @param le       The LivingEntity to disguise
+     * @param disguise A boolean to determine if this is a player disguise
+     */
+    public void setSlitheenEquipment(LivingEntity le, boolean disguise);
 
     /**
      * Sets an armour stand, or disguises a player as a Judoon.

@@ -35,8 +35,8 @@ public class Config {
     HashMap<String, Integer> intOptions = new HashMap<>();
     HashMap<String, Double> doubleOptions = new HashMap<>();
     HashMap<String, Boolean> boolOptions = new HashMap<>();
-    private FileConfiguration config = null;
-    private File configFile = null;
+    private FileConfiguration config;
+    private File configFile;
 
     public Config(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
@@ -68,7 +68,9 @@ public class Config {
         listOptions.put("ice_warriors.drops", Arrays.asList("ICE", "PACKED_ICE", "SNOW_BLOCK"));
         listOptions.put("silent.drops", Arrays.asList("INK_SAC", "FLOWER_POT"));
         listOptions.put("ood.drops", Arrays.asList("NAME_TAG"));
+        listOptions.put("sea_devils.drops", Arrays.asList("COD", "KELP"));
         listOptions.put("silurians.drops", Arrays.asList("GOLD_NUGGET", "FEATHER"));
+        listOptions.put("slitheen.drops", Arrays.asList("RABBIT_HIDE", "PHANTOM_MEMBRANE"));
         listOptions.put("sontarans.drops", Arrays.asList("POTATO", "POISONOUS_POTATO"));
         listOptions.put("the_mire.drops", Arrays.asList("HONEY_BOTTLE", "POTION"));
         listOptions.put("toclafane.drops", Arrays.asList("GUNPOWDER", "HONEYCOMB"));
