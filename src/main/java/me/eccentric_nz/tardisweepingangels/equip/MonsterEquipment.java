@@ -95,6 +95,9 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             if (pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
                 return Monster.EMPTY_CHILD;
             }
+            if (pdc.has(TARDISWeepingAngels.SLITHEEN, PersistentDataType.INTEGER)) {
+                return Monster.SLITHEEN;
+            }
             if (pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
                 return Monster.SONTARAN;
             }
@@ -138,9 +141,6 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         }
         if (entity instanceof Drowned && pdc.has(TARDISWeepingAngels.DEVIL, PersistentDataType.INTEGER)) {
             return Monster.SEA_DEVIL;
-        }
-        if (entity instanceof Witch && pdc.has(TARDISWeepingAngels.SLITHEEN, PersistentDataType.INTEGER)) {
-            return Monster.SLITHEEN;
         }
         return null;
     }

@@ -16,7 +16,6 @@
  */
 package me.eccentric_nz.tardisweepingangels.commands;
 
-import java.util.Collection;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.World;
@@ -24,6 +23,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffectType;
+
+import java.util.Collection;
 
 public class CountCommand {
 
@@ -75,10 +76,11 @@ public class CountCommand {
                         }
                     }
                 }
-                case CYBERMAN, EMPTY_CHILD, SONTARAN, VASHTA_NERADA, ZYGON -> {
+                case CYBERMAN, EMPTY_CHILD, SLITHEEN, SONTARAN, VASHTA_NERADA, ZYGON -> {
                     what = switch (monster) {
                         case CYBERMAN -> "Cybermen";
                         case EMPTY_CHILD -> "Empty Children";
+                        case SLITHEEN -> "Slitheen";
                         case VASHTA_NERADA -> "Vashta Nerada";
                         default -> monster.getName() + "s";
                     };
@@ -103,15 +105,6 @@ public class CountCommand {
                     Collection<ArmorStand> galactic_police = w.getEntitiesByClass(ArmorStand.class);
                     for (ArmorStand g : galactic_police) {
                         if (g.getPersistentDataContainer().has(monster.getKey(), PersistentDataType.INTEGER)) {
-                            count++;
-                        }
-                    }
-                }
-                case SLITHEEN -> {
-                    what = monster.getName();
-                    Collection<Witch> slitheen = w.getEntitiesByClass(Witch.class);
-                    for (Witch s : slitheen) {
-                        if (s.getPersistentDataContainer().has(monster.getKey(), PersistentDataType.INTEGER)) {
                             count++;
                         }
                     }

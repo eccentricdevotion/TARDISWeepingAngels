@@ -29,7 +29,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Witch;
+import org.bukkit.entity.Zombie;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -53,8 +53,8 @@ public class SlitheenRunnable implements Runnable {
             if (plugin.getConfig().getInt("slitheen.worlds." + name) > 0) {
                 // get the current warriors
                 int slitheen = 0;
-                Collection<Witch> witches = w.getEntitiesByClass(Witch.class);
-                for (Witch i : witches) {
+                Collection<Zombie> zombies = w.getEntitiesByClass(Zombie.class);
+                for (Zombie i : zombies) {
                     PersistentDataContainer pdc = i.getPersistentDataContainer();
                     if (pdc.has(TARDISWeepingAngels.SLITHEEN, PersistentDataType.INTEGER)) {
                         slitheen++;
@@ -82,11 +82,11 @@ public class SlitheenRunnable implements Runnable {
                 if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(l)) {
                     return;
                 }
-                LivingEntity slitheen = (LivingEntity) world.spawnEntity(l, EntityType.WITCH);
+                LivingEntity slitheen = (LivingEntity) world.spawnEntity(l, EntityType.ZOMBIE);
                 slitheen.setSilent(true);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                     new Equipper(Monster.SLITHEEN, slitheen, false).setHelmetAndInvisibilty();
-                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(slitheen, EntityType.WITCH, Monster.SLITHEEN, l));
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(slitheen, EntityType.ZOMBIE, Monster.SLITHEEN, l));
                 }, 5L);
             }
         }
