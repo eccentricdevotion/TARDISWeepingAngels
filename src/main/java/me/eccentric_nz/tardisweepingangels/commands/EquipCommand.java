@@ -82,16 +82,22 @@ public class EquipCommand {
         }
         if (as != null) {
             new ArmourStandEquipment().setStandEquipment(as, monster, (monster == Monster.EMPTY_CHILD));
-            if (args.length > 2 && monster == Monster.HEADLESS_MONK) {
-                ArmorStand monk = as;
+            if (args.length > 2) {
+                ArmorStand stand = as;
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    int flameID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new HeadlessFlameRunnable(monk), 1, 20);
-                    monk.getPersistentDataContainer().set(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER, flameID);
-                    // set helmet to sword version
-                    EntityEquipment ee = monk.getEquipment();
+                    EntityEquipment ee = stand.getEquipment();
                     ItemStack head = ee.getHelmet();
                     ItemMeta meta = head.getItemMeta();
-                    meta.setCustomModelData(9);
+                    if (monster == Monster.HEADLESS_MONK) {
+                        int flameID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new HeadlessFlameRunnable(stand), 1, 20);
+                        stand.getPersistentDataContainer().set(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER, flameID);
+                        // set helmet to sword version
+                        meta.setCustomModelData(9);
+                    }
+                    if (monster == Monster.MIRE || monster == Monster.SLITHEEN) {
+                        // set no helmet!
+                        meta.setCustomModelData(5);
+                    }
                     head.setItemMeta(meta);
                     ee.setHelmet(head);
                 }, 2L);
