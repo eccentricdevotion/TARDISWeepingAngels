@@ -101,7 +101,6 @@ public class Equipper {
                 ItemMeta tim = t.getItemMeta();
                 tim.setCustomModelData(1);
                 t.setItemMeta(tim);
-                t.addEnchantment(Enchantment.LOYALTY, 3);
                 ee.setItemInMainHand(t);
             } else {
                 ee.setItemInMainHand(null);
