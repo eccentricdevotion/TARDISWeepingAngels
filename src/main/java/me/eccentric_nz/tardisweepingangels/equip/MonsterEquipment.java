@@ -82,6 +82,8 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             if (entity.getVehicle() != null && entity.getVehicle() instanceof Skeleton skeleton) {
                 return skeleton.getPersistentDataContainer().has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER);
             }
+        } else if (entity instanceof Drowned && entity.getPersistentDataContainer().has(TARDISWeepingAngels.DEVIL, PersistentDataType.INTEGER)) {
+            return true;
         }
         return false;
     }
