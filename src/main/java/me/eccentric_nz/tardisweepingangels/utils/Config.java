@@ -68,6 +68,7 @@ public class Config {
         listOptions.put("ice_warriors.drops", Arrays.asList("ICE", "PACKED_ICE", "SNOW_BLOCK"));
         listOptions.put("silent.drops", Arrays.asList("INK_SAC", "FLOWER_POT"));
         listOptions.put("ood.drops", Arrays.asList("NAME_TAG"));
+        listOptions.put("racnoss.drops", Arrays.asList("NETHERITE_INGOT", "ECHO_SHARD"));
         listOptions.put("sea_devils.drops", Arrays.asList("COD", "KELP"));
         listOptions.put("silurians.drops", Arrays.asList("GOLD_NUGGET", "FEATHER"));
         listOptions.put("slitheen.drops", Arrays.asList("RABBIT_HIDE", "PHANTOM_MEMBRANE"));
