@@ -59,24 +59,6 @@ ice_warriors:
     - ICE
     - PACKED_ICE
     - SNOW_BLOCK
-k9:
-  by_taming: true
-  can_build: true
-  worlds:
-    world: true
-silurians:
-  worlds:
-    world: 10
-  drops:
-    - GOLD_NUGGET
-    - FEATHER
-ood:
-  worlds:
-    world: true
-  drops:
-    - NAME_TAG
-  spawn_from_villager: 20
-  spawn_from_cured: 5
 judoon:
   worlds:
     world: 10
@@ -84,18 +66,48 @@ judoon:
   can_build: true
   ammunition: 25
   damage: 4
-sea_devils:
+k9:
+  by_taming: true
+  can_build: true
   worlds:
-    world: 10
+    world: true
+ood:
+  worlds:
+    world: true
   drops:
-    - COD
-    - KELP
+    - NAME_TAG
+  spawn_from_villager: 20
+  spawn_from_cured: 5
 racnoss:
   worlds:
     world_nether: 5
   drops:
     - NETHERITE_INGOT
     - ECHO_SHARD
+sea_devils:
+  worlds:
+    world: 10
+  drops:
+    - COD
+    - KELP
+silent:
+  worlds:
+    world: 10
+  drops:
+    - INK_SAC
+    - FLOWER_POT
+silurians:
+  worlds:
+    world: 10
+  drops:
+    - GOLD_NUGGET
+    - FEATHER
+slitheen:
+  worlds:
+    world: 10
+  drops:
+    - RABBIT_HIDE
+    - PHANTOM_MEMBRANE
 sontarans:
   worlds:
     world: 10
@@ -103,12 +115,6 @@ sontarans:
     - POTATO
     - POISONOUS_POTATO
   can_tame: true
-slitheen:
-  worlds:
-    world: 10
-  drops:
-    - RABBIT_HIDE
-    - PHANTOM_MEMBRANE
 the_mire:
   worlds:
     world: 10
@@ -135,9 +141,3 @@ zygons:
   drops:
     - PAINTING
     - SAND
-silent:
-  worlds:
-    world: 10
-  drops:
-    - INK_SAC
-    - FLOWER_POT
