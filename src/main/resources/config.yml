@@ -90,6 +90,12 @@ sea_devils:
   drops:
     - COD
     - KELP
+racnoss:
+  worlds:
+    world_nether: 5
+  drops:
+    - NETHERITE_INGOT
+    - ECHO_SHARD
 sontarans:
   worlds:
     world: 10

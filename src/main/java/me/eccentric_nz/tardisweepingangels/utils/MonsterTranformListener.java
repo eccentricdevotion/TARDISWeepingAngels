@@ -18,9 +18,15 @@ package me.eccentric_nz.tardisweepingangels.utils;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.PigZombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityTransformEvent;
+import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class MonsterTranformListener implements Listener {
 
@@ -32,11 +38,19 @@ public class MonsterTranformListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onMonsterDrowned(EntityTransformEvent event) {
-        if (!event.getTransformReason().equals(EntityTransformEvent.TransformReason.DROWNED)) {
-            return;
-        }
-        if (MonsterEquipment.isMonster(event.getEntity())) {
+        if (event.getTransformReason().equals(EntityTransformEvent.TransformReason.DROWNED) && MonsterEquipment.isMonster(event.getEntity())) {
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> event.getTransformedEntity().remove(), 2L);
+        } else if (event.getTransformReason().equals(EntityTransformEvent.TransformReason.PIGLIN_ZOMBIFIED) && event.getEntity().getPersistentDataContainer().has(TARDISWeepingAngels.RACNOSS, PersistentDataType.INTEGER)) {
+            Entity zombified = event.getTransformedEntity();
+            if (zombified instanceof PigZombie piglin) {
+                // make the entity invisible
+                Bukkit.getScheduler().scheduleSyncDelayedTask(TARDISWeepingAngels.plugin, () -> {
+                    PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, true, false);
+                    piglin.addPotionEffect(invisibility);
+                    piglin.setAngry(true);
+                    piglin.setAnger(Integer.MAX_VALUE);
+                });
+            }
         }
     }
 }

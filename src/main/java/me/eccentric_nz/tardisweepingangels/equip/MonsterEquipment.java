@@ -16,6 +16,7 @@
  */
 package me.eccentric_nz.tardisweepingangels.equip;
 
+import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelsAPI;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekEquipment;
@@ -37,8 +38,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.UUID;
-
 public class MonsterEquipment implements TARDISWeepingAngelsAPI {
 
     public static boolean isMonster(Entity entity) {
@@ -52,6 +51,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
                     || pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.MIRE, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.MONK, PersistentDataType.INTEGER)
+                    || pdc.has(TARDISWeepingAngels.RACNOSS, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.SLITHEEN, PersistentDataType.INTEGER)
@@ -83,6 +83,8 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
                 return skeleton.getPersistentDataContainer().has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER);
             }
         } else if (entity instanceof Drowned && entity.getPersistentDataContainer().has(TARDISWeepingAngels.DEVIL, PersistentDataType.INTEGER)) {
+            return true;
+        } else if (entity instanceof PiglinBrute && entity.getPersistentDataContainer().has(TARDISWeepingAngels.RACNOSS, PersistentDataType.INTEGER)) {
             return true;
         }
         return false;
@@ -120,6 +122,9 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             if (pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER)) {
                 return Monster.STRAX;
             }
+            if (pdc.has(TARDISWeepingAngels.RACNOSS, PersistentDataType.INTEGER)) {
+                return Monster.RACNOSS;
+            }
         }
         if (entity instanceof Skeleton) {
             if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
@@ -143,6 +148,9 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
         }
         if (entity instanceof Drowned && pdc.has(TARDISWeepingAngels.DEVIL, PersistentDataType.INTEGER)) {
             return Monster.SEA_DEVIL;
+        }
+        if (entity instanceof PiglinBrute && pdc.has(TARDISWeepingAngels.RACNOSS, PersistentDataType.INTEGER)) {
+            return Monster.RACNOSS;
         }
         return null;
     }
@@ -220,6 +228,11 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
     @Override
     public void setOodEquipment(Player player, Entity armorStand, boolean disguise) {
         OodEquipment.set(player, armorStand, disguise);
+    }
+
+    @Override
+    public void setRacnossEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.RACNOSS, le, disguise, true).setHelmetAndInvisibilty();
     }
 
     @Override
