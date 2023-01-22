@@ -85,7 +85,7 @@ public class WorldProcessor implements Runnable {
             if (!config.contains("ood.worlds." + n, true) || (config.contains("ood.worlds." + n, true) && config.getInt("ood.worlds." + n) == 20)) {
                 plugin.getConfig().set("ood.worlds." + n, true);
             }
-            if (!config.contains("racnoss.worlds." + n, true) && environment == Environment.NETHER) {
+            if (!config.contains("racnoss.worlds." + n, true) && w.getEnvironment() == Environment.NETHER) {
                     plugin.getConfig().set("racnoss.worlds." + n, m);
             }
             if (!config.contains("sea_devils.worlds." + n, true)) {
