@@ -34,7 +34,7 @@ public class WorldProcessor implements Runnable {
 
     @Override
     public void run() {
-        if (!config.contains("config_version")) {
+        if (!config.contains("config_version", true)) {
             // back up the old config
             File oldFile = new File(plugin.getDataFolder() + File.separator + "config.yml");
             File newFile = new File(plugin.getDataFolder() + File.separator + "config_" + System.currentTimeMillis() + ".yml");
@@ -54,65 +54,65 @@ public class WorldProcessor implements Runnable {
         plugin.getServer().getWorlds().forEach((w) -> {
             String n = sanitiseName(w.getName());
             // set TARDIS worlds, nether and end worlds to zero by default
-            int m = (config.contains("spawn_rate.default_max")) ? config.getInt("spawn_rate.default_max") : 0;
-            if (!config.contains("angels.worlds." + n)) {
+            int m = (config.contains("spawn_rate.default_max", true)) ? config.getInt("spawn_rate.default_max") : 0;
+            if (!config.contains("angels.worlds." + n, true)) {
                 plugin.getConfig().set("angels.worlds." + n, m);
             }
-            if (!config.contains("cybermen.worlds." + n)) {
+            if (!config.contains("cybermen.worlds." + n, true)) {
                 plugin.getConfig().set("cybermen.worlds." + n, m);
             }
-            if (!config.contains("daleks.worlds." + n)) {
+            if (!config.contains("daleks.worlds." + n, true)) {
                 plugin.getConfig().set("daleks.worlds." + n, m);
             }
-            if (!config.contains("empty_child.worlds." + n)) {
+            if (!config.contains("empty_child.worlds." + n, true)) {
                 plugin.getConfig().set("empty_child.worlds." + n, m);
             }
-            if (!config.contains("hath.worlds." + n)) {
+            if (!config.contains("hath.worlds." + n, true)) {
                 plugin.getConfig().set("hath.worlds." + n, m);
             }
-            if (!config.contains("headless_monks.worlds." + n)) {
+            if (!config.contains("headless_monks.worlds." + n, true)) {
                 plugin.getConfig().set("headless_monks.worlds." + n, m);
             }
-            if (!config.contains("ice_warriors.worlds." + n)) {
+            if (!config.contains("ice_warriors.worlds." + n, true)) {
                 plugin.getConfig().set("ice_warriors.worlds." + n, m);
             }
-            if (!config.contains("judoon.worlds." + n) || (config.contains("judoon.worlds." + n) && config.getString("judoon.worlds." + n).equals("true"))) {
+            if (!config.contains("judoon.worlds." + n, true) || (config.contains("judoon.worlds." + n, true) && config.getString("judoon.worlds." + n).equals("true"))) {
                 plugin.getConfig().set("judoon.worlds." + n, m);
             }
-            if (!config.contains("k9.worlds." + n)) {
+            if (!config.contains("k9.worlds." + n, true)) {
                 plugin.getConfig().set("k9.worlds." + n, true);
             }
-            if (!config.contains("ood.worlds." + n) || (config.contains("ood.worlds." + n) && config.getInt("ood.worlds." + n) == 20)) {
+            if (!config.contains("ood.worlds." + n, true) || (config.contains("ood.worlds." + n, true) && config.getInt("ood.worlds." + n) == 20)) {
                 plugin.getConfig().set("ood.worlds." + n, true);
             }
-            if (!config.contains("racnoss.worlds." + n) && w.getEnvironment() == Environment.NETHER) {
+            if (!config.contains("racnoss.worlds." + n, true) && environment == Environment.NETHER) {
+                    plugin.getConfig().set("racnoss.worlds." + n, m);
+            }
+            if (!config.contains("sea_devils.worlds." + n, true)) {
                 plugin.getConfig().set("sea_devils.worlds." + n, m);
             }
-            if (!config.contains("sea_devils.worlds." + n)) {
-                plugin.getConfig().set("sea_devils.worlds." + n, m);
-            }
-            if (!config.contains("silent.worlds." + n)) {
+            if (!config.contains("silent.worlds." + n, true)) {
                 plugin.getConfig().set("silent.worlds." + n, m);
             }
-            if (!config.contains("silurians.worlds." + n)) {
+            if (!config.contains("silurians.worlds." + n, true)) {
                 plugin.getConfig().set("silurians.worlds." + n, m);
             }
-            if (!config.contains("slitheen.worlds." + n)) {
+            if (!config.contains("slitheen.worlds." + n, true)) {
                 plugin.getConfig().set("slitheen.worlds." + n, m);
             }
-            if (!config.contains("sontarans.worlds." + n)) {
+            if (!config.contains("sontarans.worlds." + n, true)) {
                 plugin.getConfig().set("sontarans.worlds." + n, m);
             }
-            if (!config.contains("the_mire.worlds." + n)) {
+            if (!config.contains("the_mire.worlds." + n, true)) {
                 plugin.getConfig().set("the_mire.worlds." + n, m);
             }
-            if (!config.contains("toclafane.worlds." + n)) {
+            if (!config.contains("toclafane.worlds." + n, true)) {
                 plugin.getConfig().set("toclafane.worlds." + n, m);
             }
-            if (!config.contains("vashta_nerada.worlds." + n)) {
+            if (!config.contains("vashta_nerada.worlds." + n, true)) {
                 plugin.getConfig().set("vashta_nerada.worlds." + n, m);
             }
-            if (!config.contains("zygons.worlds." + n)) {
+            if (!config.contains("zygons.worlds." + n, true)) {
                 plugin.getConfig().set("zygons.worlds." + n, m);
             }
         });
