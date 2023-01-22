@@ -52,13 +52,13 @@ public class RacnossRunnable implements Runnable {
     @Override
     public void run() {
         plugin.getServer().getWorlds().forEach((w) -> {
-            if (w.getEnvironment() != Environment.NETHER) {
-                plugin.debug("Tried to spawn Racnoss in non-Nether world, please remove " + w.getName() + " from the racnoss worlds configuration!");
-                return;
-            }
             // only configured worlds
             String name = WorldProcessor.sanitiseName(w.getName());
             if (plugin.getConfig().getInt("racnoss.worlds." + name) > 0) {
+                if (w.getEnvironment() != Environment.NETHER) {
+                    plugin.debug("Tried to spawn Racnoss in non-Nether world, please remove " + w.getName() + " from the racnoss worlds configuration!");
+                    return;
+                }
                 // get the current warriors
                 int racnoss = 0;
                 Collection<PiglinBrute> brutes = w.getEntitiesByClass(PiglinBrute.class);
