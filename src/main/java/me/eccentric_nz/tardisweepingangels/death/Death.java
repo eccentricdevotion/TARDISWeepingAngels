@@ -47,12 +47,15 @@ public class Death implements Listener {
     private final List<Material> angel_drops = new ArrayList<>();
     private final List<Material> cyber_drops = new ArrayList<>();
     private final List<Material> dalek_drops = new ArrayList<>();
+    private final List<Material> devil_drops = new ArrayList<>();
     private final List<Material> empty_drops = new ArrayList<>();
     private final List<Material> hath_drops = new ArrayList<>();
     private final List<Material> headless_drops = new ArrayList<>();
-    private final List<Material> silent_drops = new ArrayList<>();
     private final List<Material> ice_drops = new ArrayList<>();
+    private final List<Material> mire_drops = new ArrayList<>();
+    private final List<Material> silent_drops = new ArrayList<>();
     private final List<Material> silurian_drops = new ArrayList<>();
+    private final List<Material> slitheen_drops = new ArrayList<>();
     private final List<Material> sontaran_drops = new ArrayList<>();
     private final List<Material> vashta_drops = new ArrayList<>();
     private final List<Material> zygon_drops = new ArrayList<>();
@@ -62,13 +65,16 @@ public class Death implements Listener {
         plugin.getConfig().getStringList("angels.drops").forEach((a) -> angel_drops.add(Material.valueOf(a)));
         plugin.getConfig().getStringList("cybermen.drops").forEach((c) -> cyber_drops.add(Material.valueOf(c)));
         plugin.getConfig().getStringList("daleks.drops").forEach((d) -> dalek_drops.add(Material.valueOf(d)));
+        plugin.getConfig().getStringList("sea_devils.drops").forEach((d) -> devil_drops.add(Material.valueOf(d)));
         plugin.getConfig().getStringList("empty_child.drops").forEach((e) -> empty_drops.add(Material.valueOf(e)));
         plugin.getConfig().getStringList("hath.drops").forEach((e) -> hath_drops.add(Material.valueOf(e)));
         plugin.getConfig().getStringList("headless_monks.drops").forEach((e) -> headless_drops.add(Material.valueOf(e)));
         plugin.getConfig().getStringList("ice_warriors.drops").forEach((i) -> ice_drops.add(Material.valueOf(i)));
-        plugin.getConfig().getStringList("sontarans.drops").forEach((o) -> sontaran_drops.add(Material.valueOf(o)));
         plugin.getConfig().getStringList("silent.drops").forEach((m) -> silent_drops.add(Material.valueOf(m)));
         plugin.getConfig().getStringList("silurians.drops").forEach((s) -> silurian_drops.add(Material.valueOf(s)));
+        plugin.getConfig().getStringList("slitheen.drops").forEach((s) -> slitheen_drops.add(Material.valueOf(s)));
+        plugin.getConfig().getStringList("sontarans.drops").forEach((o) -> sontaran_drops.add(Material.valueOf(o)));
+        plugin.getConfig().getStringList("the_mire.drops").forEach((e) -> mire_drops.add(Material.valueOf(e)));
         plugin.getConfig().getStringList("vashta_nerada.drops").forEach((v) -> vashta_drops.add(Material.valueOf(v)));
         plugin.getConfig().getStringList("zygons.drops").forEach((z) -> zygon_drops.add(Material.valueOf(z)));
     }
@@ -112,6 +118,25 @@ public class Death implements Listener {
                 event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                 return;
             }
+            if (pdc.has(TARDISWeepingAngels.MIRE, PersistentDataType.INTEGER)) {
+                event.getDrops().clear();
+                ItemStack stack;
+                if (TARDISWeepingAngels.random.nextInt(100) < 3) {
+                    stack = HeadBuilder.getItemStack(Monster.MIRE);
+                } else if (TARDISWeepingAngels.random.nextInt(100) < 6) {
+                    stack = new ItemStack(Material.NETHERITE_SCRAP, 2);
+                } else {
+                    stack = new ItemStack(mire_drops.get(TARDISWeepingAngels.random.nextInt(mire_drops.size())), TARDISWeepingAngels.random.nextInt(2) + 1);
+                    if (stack.getType() == Material.POTION) {
+                        // make it a strength potion
+                        PotionMeta potionMeta = (PotionMeta)stack.getItemMeta();
+                        potionMeta.setBasePotionData(new PotionData(PotionType.STRENGTH));
+                        stack.setItemMeta(potionMeta);
+                    }
+                }
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                return;
+            }
             if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
                 event.getDrops().clear();
                 ItemStack stack;
@@ -119,6 +144,30 @@ public class Death implements Listener {
                     stack = HeadBuilder.getItemStack(Monster.DALEK);
                 } else {
                     stack = new ItemStack(dalek_drops.get(TARDISWeepingAngels.random.nextInt(dalek_drops.size())), 1);
+                }
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                return;
+            }
+            if (pdc.has(TARDISWeepingAngels.DEVIL, PersistentDataType.INTEGER)) {
+                event.getDrops().clear();
+                ItemStack stack;
+                if (TARDISWeepingAngels.random.nextInt(100) < 3) {
+                    stack = HeadBuilder.getItemStack(Monster.SEA_DEVIL);
+                } else if (TARDISWeepingAngels.random.nextInt(100) < 6) {
+                    stack = new ItemStack(Material.TRIDENT, 1);
+                } else {
+                    stack = new ItemStack(devil_drops.get(TARDISWeepingAngels.random.nextInt(devil_drops.size())), 1);
+                }
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                return;
+            }
+            if (pdc.has(TARDISWeepingAngels.SLITHEEN, PersistentDataType.INTEGER)) {
+                event.getDrops().clear();
+                ItemStack stack;
+                if (TARDISWeepingAngels.random.nextInt(100) < 3) {
+                    stack = HeadBuilder.getItemStack(Monster.SLITHEEN);
+                } else {
+                    stack = new ItemStack(slitheen_drops.get(TARDISWeepingAngels.random.nextInt(slitheen_drops.size())), 1);
                 }
                 event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                 return;

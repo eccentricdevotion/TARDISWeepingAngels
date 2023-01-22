@@ -69,17 +69,25 @@ public class MonsterMoveListener implements Listener {
                     // the entity is actually moving
                     } else {
                         Monster monster = (Monster) entity;
-                        if (monster.getTarget() != null) {
-                            // show animated ATTACKING model
-                            if (cmd != 11) {
-                                meta.setCustomModelData(11);
+                        // is the entity in water
+                        if (monster instanceof Drowned && monster.getEyeLocation().getBlock().isLiquid()) {
+                            if (cmd != 12) {
+                                meta.setCustomModelData(12);
                                 hasChanged = true;
                             }
                         } else {
-                            // show animated WALKING model
-                            if (cmd != 10) {
-                                meta.setCustomModelData(10);
-                                hasChanged = true;
+                            if (monster.getTarget() != null) {
+                                // show animated ATTACKING model
+                                if (cmd != 11) {
+                                    meta.setCustomModelData(11);
+                                    hasChanged = true;
+                                }
+                            } else {
+                                // show animated WALKING model
+                                if (cmd != 10) {
+                                    meta.setCustomModelData(10);
+                                    hasChanged = true;
+                                }
                             }
                         }
                     }

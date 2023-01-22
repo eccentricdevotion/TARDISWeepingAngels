@@ -37,7 +37,11 @@ public class HeadBuilder {
         ItemStack is = new ItemStack(material, 1);
         ItemMeta im = is.getItemMeta();
         im.getPersistentDataContainer().set(TARDISWeepingAngels.MONSTER_HEAD, PersistentDataType.INTEGER, 99);
-        String head = (monster.equals(Monster.HEADLESS_MONK)) ? "Headless Monk Hood" : monster.getName() + " Head";
+        String head = switch (monster) {
+            case HEADLESS_MONK -> "Headless Monk Hood";
+            case MIRE -> "Mire Helmet";
+            default -> monster.getName() + " Head";
+        };
         im.setDisplayName(head);
         im.setCustomModelData(cmd);
         is.setItemMeta(im);

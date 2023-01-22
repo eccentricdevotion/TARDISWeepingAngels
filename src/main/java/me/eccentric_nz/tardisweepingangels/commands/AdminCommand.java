@@ -31,15 +31,18 @@ public class AdminCommand {
         this.plugin = plugin;
         types.put(Monster.CYBERMAN, "cybermen");
         types.put(Monster.DALEK, "daleks");
+        types.put(Monster.SEA_DEVIL, "sea_devils");
         types.put(Monster.EMPTY_CHILD, "empty_child");
         types.put(Monster.HATH, "hath");
         types.put(Monster.HEADLESS_MONK, "headless_monks");
+        types.put(Monster.MIRE, "the_mire");
         types.put(Monster.ICE_WARRIOR, "ice_warriors");
         types.put(Monster.JUDOON, "judoon");
         types.put(Monster.K9, "k9");
         types.put(Monster.OOD, "ood");
         types.put(Monster.SILENT, "silence");
         types.put(Monster.SILURIAN, "silurians");
+        types.put(Monster.SLITHEEN, "slitheen");
         types.put(Monster.SONTARAN, "sontarans");
         types.put(Monster.TOCLAFANE, "toclafane");
         types.put(Monster.VASHTA_NERADA, "vashta_nerada");
@@ -76,6 +79,9 @@ public class AdminCommand {
                 plugin.getConfig().set("empty_child.worlds." + args[2], m);
                 plugin.getConfig().set("hath.worlds." + args[2], m);
                 plugin.getConfig().set("headless_monks.worlds." + args[2], m);
+                plugin.getConfig().set("the_mire.worlds." + args[2], m);
+                plugin.getConfig().set("slitheen.worlds." + args[2], m);
+                plugin.getConfig().set("sea_devils.worlds." + args[2], m);
                 plugin.getConfig().set("ice_warriors.worlds." + args[2], m);
                 plugin.getConfig().set("silence.worlds." + args[2], m);
                 plugin.getConfig().set("sontarans.worlds." + args[2], m);

@@ -14,22 +14,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package me.eccentric_nz.tardisweepingangels.monsters.hath;
+package me.eccentric_nz.tardisweepingangels.monsters.mire;
 
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.Equipper;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
-import me.eccentric_nz.tardisweepingangels.utils.WaterChecker;
 import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
 import me.eccentric_nz.tardisweepingangels.utils.WorldProcessor;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.PigZombie;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
@@ -37,12 +36,12 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.Collection;
 
-public class HathRunnable implements Runnable {
+public class MireRunnable implements Runnable {
 
     private final TARDISWeepingAngels plugin;
     private final int spawn_rate;
 
-    public HathRunnable(TARDISWeepingAngels plugin) {
+    public MireRunnable(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
         spawn_rate = plugin.getConfig().getInt("spawn_rate.how_many");
     }
@@ -52,27 +51,27 @@ public class HathRunnable implements Runnable {
         plugin.getServer().getWorlds().forEach((w) -> {
             // only configured worlds
             String name = WorldProcessor.sanitiseName(w.getName());
-            if (plugin.getConfig().getInt("hath.worlds." + name) > 0) {
+            if (plugin.getConfig().getInt("the_mire.worlds." + name) > 0) {
                 // get the current warriors
-                int hath = 0;
-                Collection<PigZombie> zombies = w.getEntitiesByClass(PigZombie.class);
-                for (PigZombie c : zombies) {
-                    PersistentDataContainer pdc = c.getPersistentDataContainer();
-                    if (pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
-                        hath++;
+                int mire = 0;
+                Collection<Skeleton> skeletons = w.getEntitiesByClass(Skeleton.class);
+                for (Skeleton s : skeletons) {
+                    PersistentDataContainer pdc = s.getPersistentDataContainer();
+                    if (pdc.has(TARDISWeepingAngels.MIRE, PersistentDataType.INTEGER)) {
+                        mire++;
                     }
                 }
-                if (hath < plugin.getConfig().getInt("hath.worlds." + name)) {
+                if (mire < plugin.getConfig().getInt("the_mire.worlds." + name)) {
                     // if less than maximum, spawn some more
                     for (int i = 0; i < spawn_rate; i++) {
-                        spawnHath(w);
+                        spawnMire(w);
                     }
                 }
             }
         });
     }
 
-    private void spawnHath(World world) {
+    private void spawnMire(World world) {
         Chunk[] chunks = world.getLoadedChunks();
         if (chunks.length > 0) {
             Chunk chunk = chunks[TARDISWeepingAngels.random.nextInt(chunks.length)];
@@ -80,20 +79,17 @@ public class HathRunnable implements Runnable {
             int z = chunk.getZ() * 16 + TARDISWeepingAngels.random.nextInt(16);
             int y = world.getHighestBlockYAt(x, z);
             Location l = new Location(world, x, y + 1, z);
-            if (WaterChecker.isNotWater(l)) {
-                if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(l)) {
-                    return;
-                }
-                LivingEntity h = (LivingEntity) world.spawnEntity(l, EntityType.ZOMBIFIED_PIGLIN);
-                h.setSilent(true);
-                ((PigZombie) h).setAdult();
-                PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
-                h.addPotionEffect(p);
-                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    new Equipper(Monster.HATH, h, false, false).setHelmetAndInvisibilty();
-                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(h, EntityType.ZOMBIFIED_PIGLIN, Monster.HATH, l));
-                }, 5L);
+            if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(l)) {
+                return;
             }
+            LivingEntity mire = (LivingEntity) world.spawnEntity(l, EntityType.SKELETON);
+            mire.setSilent(true);
+            PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
+            mire.addPotionEffect(p);
+            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                new Equipper(Monster.MIRE, mire, false, false).setHelmetAndInvisibilty();
+                plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(mire, EntityType.SKELETON, Monster.MIRE, l));
+            }, 5L);
         }
     }
 }

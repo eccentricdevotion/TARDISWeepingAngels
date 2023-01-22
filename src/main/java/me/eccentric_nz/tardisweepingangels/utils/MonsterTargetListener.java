@@ -52,6 +52,10 @@ public class MonsterTargetListener implements Listener {
                 if (pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Monster.EMPTY_CHILD.getMaterial());
                 }
+                // slitheen
+                if (pdc.has(TARDISWeepingAngels.SLITHEEN, PersistentDataType.INTEGER)) {
+                    ignore = isWearingMonsterHead(player, Monster.SLITHEEN.getMaterial());
+                }
                 // sontaran
                 if (pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Monster.SONTARAN.getMaterial());
@@ -73,6 +77,10 @@ public class MonsterTargetListener implements Listener {
                 // headless monk
                 if (pdc.has(TARDISWeepingAngels.MONK, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Monster.HEADLESS_MONK.getMaterial());
+                }
+                // mire
+                if (pdc.has(TARDISWeepingAngels.MIRE, PersistentDataType.INTEGER)) {
+                    ignore = isWearingMonsterHead(player, Monster.MIRE.getMaterial());
                 }
                 // silent
                 if (pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)) {
@@ -105,6 +113,12 @@ public class MonsterTargetListener implements Listener {
                 // strax
                 if (pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Monster.STRAX.getMaterial());
+                }
+            }
+            case DROWNED -> {
+                // sea devil
+                if (pdc.has(TARDISWeepingAngels.DEVIL, PersistentDataType.INTEGER)) {
+                    ignore = isWearingMonsterHead(player, Monster.SEA_DEVIL.getMaterial());
                 }
             }
             default -> {

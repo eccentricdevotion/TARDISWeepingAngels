@@ -16,16 +16,15 @@
  */
 package me.eccentric_nz.tardisweepingangels.utils;
 
-import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
-import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-
 import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 public class Config {
 
@@ -36,8 +35,8 @@ public class Config {
     HashMap<String, Integer> intOptions = new HashMap<>();
     HashMap<String, Double> doubleOptions = new HashMap<>();
     HashMap<String, Boolean> boolOptions = new HashMap<>();
-    private FileConfiguration config = null;
-    private File configFile = null;
+    private FileConfiguration config;
+    private File configFile;
 
     public Config(TARDISWeepingAngels plugin) {
         this.plugin = plugin;
@@ -69,8 +68,12 @@ public class Config {
         listOptions.put("ice_warriors.drops", Arrays.asList("ICE", "PACKED_ICE", "SNOW_BLOCK"));
         listOptions.put("silent.drops", Arrays.asList("INK_SAC", "FLOWER_POT"));
         listOptions.put("ood.drops", Arrays.asList("NAME_TAG"));
+        listOptions.put("racnoss.drops", Arrays.asList("NETHERITE_INGOT", "ECHO_SHARD"));
+        listOptions.put("sea_devils.drops", Arrays.asList("COD", "KELP"));
         listOptions.put("silurians.drops", Arrays.asList("GOLD_NUGGET", "FEATHER"));
+        listOptions.put("slitheen.drops", Arrays.asList("RABBIT_HIDE", "PHANTOM_MEMBRANE"));
         listOptions.put("sontarans.drops", Arrays.asList("POTATO", "POISONOUS_POTATO"));
+        listOptions.put("the_mire.drops", Arrays.asList("HONEY_BOTTLE", "POTION"));
         listOptions.put("toclafane.drops", Arrays.asList("GUNPOWDER", "HONEYCOMB"));
         listOptions.put("vashta_nerada.drops", Arrays.asList("BONE", "LEATHER"));
         listOptions.put("zygons.drops", Arrays.asList("PAINTING", "SAND"));

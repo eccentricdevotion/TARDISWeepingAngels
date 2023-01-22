@@ -59,6 +59,10 @@ public class PlayerDeath implements Listener {
                             event.setDeathMessage(name + " was slain by a Zygon");
                             return;
                         }
+                        if (pdc.has(TARDISWeepingAngels.SLITHEEN, PersistentDataType.INTEGER)) {
+                            event.setDeathMessage(name + " was slain by a Slitheen");
+                            return;
+                        }
                         if (pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
                             event.setDeathMessage(name + " was slain by a Sontaran");
                             return;
@@ -111,6 +115,10 @@ public class PlayerDeath implements Listener {
                             event.setDeathMessage(name + " was slain by a Headless Monk");
                             return;
                         }
+                        if (pdc.has(TARDISWeepingAngels.MIRE, PersistentDataType.INTEGER)) {
+                            event.setDeathMessage(name + " was slain by the Mire");
+                            return;
+                        }
                         if (!attacker.getPassengers().isEmpty()) {
                             Entity passenger = attacker.getPassengers().get(0);
                             if (passenger != null && passenger.getType().equals(EntityType.GUARDIAN)) {
@@ -118,6 +126,10 @@ public class PlayerDeath implements Listener {
                                 return;
                             }
                         }
+                    }
+                    if (attacker instanceof Drowned && pdc.has(TARDISWeepingAngels.SLITHEEN, PersistentDataType.INTEGER)) {
+                        event.setDeathMessage(name + " was slain by a Sea Devil");
+                        return;
                     }
                 }
                 if (attacker.getType().equals(EntityType.ARROW)) {

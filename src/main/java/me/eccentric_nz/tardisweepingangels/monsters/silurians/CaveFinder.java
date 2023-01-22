@@ -86,7 +86,7 @@ public class CaveFinder {
     private static Check isThereRoom(World w, int x, int z) {
         Check ret = new Check();
         ret.setSafe(false);
-        for (int y = 35; y > -50; y--) {
+        for (int y = 35; y > w.getMinHeight() + 10; y--) {
             if (w.getBlockAt(x, y, z).getType().isAir()) {
                 int yy = getLowestAirBlock(w, x, y, z);
                 // check there is enough height for the police box
