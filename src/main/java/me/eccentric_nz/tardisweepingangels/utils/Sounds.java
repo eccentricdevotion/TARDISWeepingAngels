@@ -93,6 +93,10 @@ public class Sounds implements Listener {
                 delay = 180L;
                 which = "headless_monk";
             }
+            if (pdc.has(TARDISWeepingAngels.RACNOSS, PersistentDataType.INTEGER)) {
+                delay = 180L;
+                which = "racnoss";
+            }
             if (pdc.has(TARDISWeepingAngels.DEVIL, PersistentDataType.INTEGER)) {
                 which = "devil";
             }

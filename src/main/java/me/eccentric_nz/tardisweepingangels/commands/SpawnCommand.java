@@ -113,10 +113,7 @@ public class SpawnCommand {
                 }
                 case JUDOON -> JudoonEquipment.set(null, a, false);
                 case K9 -> K9Equipment.set(player, a, false);
-                case MIRE -> {
-                    new Equipper(monster, a, false, true).setHelmetAndInvisibilty();
-//                    player.playSound(a.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_IMPACT, 1.0f, 1.0f);
-                }
+                case MIRE, SILURIAN -> new Equipper(monster, a, false, true).setHelmetAndInvisibilty();
                 case OOD -> OodEquipment.set(null, a, false);
                 case SEA_DEVIL -> {
                     new Equipper(monster, a, false, false, true).setHelmetAndInvisibilty();
@@ -125,7 +122,6 @@ public class SpawnCommand {
                     new Equipper(monster, a, false, false).setHelmetAndInvisibilty();
                     SilentEquipment.setGuardian(a);
                 }
-                case SILURIAN -> new Equipper(monster, a, false, true).setHelmetAndInvisibilty();
                 case STRAX -> {
                     PigZombie strax = (PigZombie) a;
                     strax.setAngry(false);
@@ -144,8 +140,9 @@ public class SpawnCommand {
                 case EMPTY_CHILD -> "empty";
                 case HEADLESS_MONK -> "headliess_monk";
                 case ICE_WARRIOR -> "warrior";
-                case SILENT -> "silence";
                 case MIRE -> "item.trident.thunder";
+                case SEA_DEVIL -> "sea_devil";
+                case SILENT -> "silence";
                 case WEEPING_ANGEL -> "blink";
                 default -> monster.getPermission();
             };

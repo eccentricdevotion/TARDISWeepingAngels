@@ -101,6 +101,10 @@ public class PlayerDeath implements Listener {
                             event.setDeathMessage(name + " was killed by a Hath blaster rifle");
                             return;
                         }
+                        if (pdc.has(TARDISWeepingAngels.RACNOSS, PersistentDataType.INTEGER)) {
+                            event.setDeathMessage(name + " was killed by a Racnoss");
+                            return;
+                        }
                     }
                     if (attacker instanceof Skeleton) {
                         if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)) {
@@ -129,6 +133,10 @@ public class PlayerDeath implements Listener {
                     }
                     if (attacker instanceof Drowned && pdc.has(TARDISWeepingAngels.SLITHEEN, PersistentDataType.INTEGER)) {
                         event.setDeathMessage(name + " was slain by a Sea Devil");
+                        return;
+                    }
+                    if (attacker instanceof PiglinBrute && pdc.has(TARDISWeepingAngels.RACNOSS, PersistentDataType.INTEGER)) {
+                        event.setDeathMessage(name + " was slain by a Racnoss");
                         return;
                     }
                 }
