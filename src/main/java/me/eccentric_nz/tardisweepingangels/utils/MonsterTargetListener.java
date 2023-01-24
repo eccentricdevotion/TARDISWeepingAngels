@@ -102,6 +102,10 @@ public class MonsterTargetListener implements Listener {
                 }
             }
             case ZOMBIFIED_PIGLIN -> {
+                // dalek sec
+                if (pdc.has(TARDISWeepingAngels.DALEK_SEC, PersistentDataType.INTEGER)) {
+                    ignore = isWearingMonsterHead(player, Monster.DALEK_SEC.getMaterial());
+                }
                 // hath
                 if (pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Monster.HATH.getMaterial());

@@ -46,6 +46,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             if (pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)
+                    || pdc.has(TARDISWeepingAngels.DALEK_SEC, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.DEVIL, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)
                     || pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)
@@ -113,6 +114,9 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
             }
         }
         if (entity instanceof PigZombie) {
+            if (pdc.has(TARDISWeepingAngels.DALEK_SEC, PersistentDataType.INTEGER)) {
+                return Monster.DALEK_SEC;
+            }
             if (pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
                 return Monster.HATH;
             }
@@ -174,6 +178,12 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
     public void setDalekEquipment(LivingEntity le, boolean disguise) {
         DalekEquipment.set(le, disguise);
     }
+    
+    @Override
+    public void setDalekSecEquipment(LivingEntity le, boolean disguise) {
+        new Equipper(Monster.DALEK_SEC, le, disguise, false).setHelmetAndInvisibilty();
+    }
+
 
     @Override
     public void setEmptyChildEquipment(LivingEntity le, boolean disguise) {

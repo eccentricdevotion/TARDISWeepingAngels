@@ -16,8 +16,10 @@
  */
 package me.eccentric_nz.tardisweepingangels.monsters.daleks;
 
+import java.util.Collection;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
+import me.eccentric_nz.tardisweepingangels.equip.Equipper;
 import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import me.eccentric_nz.tardisweepingangels.utils.WaterChecker;
 import me.eccentric_nz.tardisweepingangels.utils.WorldGuardChecker;
@@ -33,8 +35,6 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import java.util.Collection;
 
 public class DalekRunnable implements Runnable {
 
@@ -84,13 +84,27 @@ public class DalekRunnable implements Runnable {
                 if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && !WorldGuardChecker.canSpawn(l)) {
                     return;
                 }
-                LivingEntity e = (LivingEntity) w.spawnEntity(l, EntityType.SKELETON);
+                EntityType dalek;
+                Monster monster;
+                boolean sec = TARDISWeepingAngels.random.nextInt(100) < plugin.getConfig().getInt("daleks.daleck_sec_chance");
+                if (sec) {
+                    dalek = EntityType.ZOMBIFIED_PIGLIN;
+                    monster = Monster.DALEK_SEC;
+                } else {
+                    dalek = EntityType.SKELETON;
+                    monster = Monster.DALEK;
+                }
+                LivingEntity e = (LivingEntity) w.spawnEntity(l, dalek);
                 e.setSilent(true);
                 PotionEffect p = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 360000, 3, true, false);
                 e.addPotionEffect(p);
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                    DalekEquipment.set(e, false);
-                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, EntityType.SKELETON, Monster.DALEK, l));
+                    if (sec) {
+                        new Equipper(monster, e, false).setHelmetAndInvisibilty();
+                    } else {
+                        DalekEquipment.set(e, false);
+                    }
+                    plugin.getServer().getPluginManager().callEvent(new TARDISWeepingAngelSpawnEvent(e, dalek, monster, l));
                 }, 5L);
             }
         }

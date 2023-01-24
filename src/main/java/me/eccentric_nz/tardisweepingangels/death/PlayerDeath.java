@@ -89,6 +89,10 @@ public class PlayerDeath implements Listener {
                         }
                     }
                     if (attacker instanceof PigZombie) {
+                        if (pdc.has(TARDISWeepingAngels.DALEK_SEC, PersistentDataType.INTEGER)) {
+                            event.setDeathMessage(name + " was slain by Dalek Sec");
+                            return;
+                        }
                         if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
                             event.setDeathMessage(name + " was slain by an Ice Warrior");
                             return;
@@ -102,7 +106,7 @@ public class PlayerDeath implements Listener {
                             return;
                         }
                         if (pdc.has(TARDISWeepingAngels.RACNOSS, PersistentDataType.INTEGER)) {
-                            event.setDeathMessage(name + " was killed by a Racnoss");
+                            event.setDeathMessage(name + " was slain by a Racnoss");
                             return;
                         }
                     }

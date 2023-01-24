@@ -32,6 +32,10 @@ daleks:
   drops:
     - SLIME_BALL
     - ROTTEN_FLESH
+  dalek_sec_chance: 5
+  dalek_sec_drops:
+    - SLIME_BALL
+    - ROTTEN_FLESH
 empty_child:
   worlds:
     world: 10

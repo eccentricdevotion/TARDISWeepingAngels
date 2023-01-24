@@ -52,38 +52,26 @@ public class Sounds implements Listener {
             PersistentDataContainer pdc = entity.getPersistentDataContainer();
             String which = "";
             long delay = 50L;
-            if (entity instanceof Guardian && entity.getVehicle() != null && entity.getVehicle().getType().equals(EntityType.SKELETON)) {
-                delay = 90L;
-                which = "silence";
-            }
-            if (pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
-                delay = 100L;
-                which = "hath";
-            }
-            if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
-                which = "warrior";
-            }
-            if (pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
-                which = "empty_child";
-            }
             if (pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)) {
                 which = "cyberman";
                 delay = 80L;
             }
-            if (pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
-                which = "sontaran";
-                delay = 55L;
-            }
-            if (pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)) {
-                which = "vashta";
-                delay = 30L;
-            }
-            if (pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
-                which = "zygon";
-                delay = 100L;
-            }
             if (pdc.has(TARDISWeepingAngels.DALEK, PersistentDataType.INTEGER)) {
                 which = "dalek";
+                delay = 180L;
+            }
+            if (pdc.has(TARDISWeepingAngels.DALEK_SEC, PersistentDataType.INTEGER)) {
+                which = "dalek_sec";
+            }
+            if (pdc.has(TARDISWeepingAngels.DEVIL, PersistentDataType.INTEGER)) {
+                which = "devil";
+            }
+            if (pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)) {
+                which = "empty_child";
+            }
+            if (pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
+                delay = 100L;
+                which = "hath";
             }
             if (pdc.has(TARDISWeepingAngels.MIRE, PersistentDataType.INTEGER)) {
                 delay = 180L;
@@ -97,16 +85,32 @@ public class Sounds implements Listener {
                 delay = 180L;
                 which = "racnoss";
             }
-            if (pdc.has(TARDISWeepingAngels.DEVIL, PersistentDataType.INTEGER)) {
-                which = "devil";
-            }
             if (pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)) {
                 which = "silurian";
             }
             if (pdc.has(TARDISWeepingAngels.SLITHEEN, PersistentDataType.INTEGER)) {
                 which = "slitheen";
             }
+            if (pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)) {
+                which = "sontaran";
+                delay = 55L;
+            }
+            if (pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)) {
+                which = "vashta";
+                delay = 30L;
+            }
+            if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
+                which = "warrior";
+            }
+            if (pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER)) {
+                which = "zygon";
+                delay = 100L;
+            }
             if (!entity.getPassengers().isEmpty() && entity.getPassengers().get(0).getType().equals(EntityType.GUARDIAN)) {
+                delay = 90L;
+                which = "silence";
+            }
+            if (entity instanceof Guardian && entity.getVehicle() != null && entity.getVehicle().getType().equals(EntityType.SKELETON)) {
                 delay = 90L;
                 which = "silence";
             }

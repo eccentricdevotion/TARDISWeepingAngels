@@ -44,6 +44,7 @@ public class Config {
         config = YamlConfiguration.loadConfiguration(configFile);
         // integer
         intOptions.put("angels.freeze_time", 100);
+        intOptions.put("daleks.dalek_sec_chance", 5);
         intOptions.put("spawn_rate.how_many", 2);
         intOptions.put("spawn_rate.how_often", 400);
         intOptions.put("spawn_rate.default_max", 0);

@@ -21,6 +21,7 @@ import me.eccentric_nz.tardisweepingangels.equip.Equipper;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.empty_child.EmptyChildEquipment;
 import me.eccentric_nz.tardisweepingangels.monsters.headless_monks.HeadlessFlameRunnable;
+import me.eccentric_nz.tardisweepingangels.utils.Monster;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -64,6 +65,8 @@ public class ChunkListener implements Listener {
                     new Equipper(Monster.STRAX, pigZombie, false, false).setHelmetAndInvisibilty();
                 } else if (pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
                     new Equipper(Monster.HATH, pigZombie, false, false).setHelmetAndInvisibilty();
+                } else if (pdc.has(TARDISWeepingAngels.DALEK_SEC, PersistentDataType.INTEGER)) {
+                    new Equipper(Monster.DALEK_SEC, pigZombie, false, false).setHelmetAndInvisibilty();
                 }
             } else if (d instanceof Drowned drowned) {
                 if (drowned.getEquipment().getHelmet() != null) {
@@ -92,7 +95,7 @@ public class ChunkListener implements Listener {
                     new Equipper(Monster.ZYGON, zombie, false, false).setHelmetAndInvisibilty();
                 }
             } else if (d instanceof ArmorStand stand && stand.getPersistentDataContainer().has(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER)) {
-                // restart flame runnable?
+                // restart flame runnable
                 int flameID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new HeadlessFlameRunnable(stand), 1, 20);
                 pdc.set(TARDISWeepingAngels.FLAME_TASK, PersistentDataType.INTEGER, flameID);
             }

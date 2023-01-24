@@ -75,6 +75,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
     public static NamespacedKey ANGEL;
     public static NamespacedKey CYBERMAN;
     public static NamespacedKey DALEK;
+    public static NamespacedKey DALEK_SEC;
     public static NamespacedKey DEVIL;
     public static NamespacedKey EMPTY;
     public static NamespacedKey HATH;
@@ -255,6 +256,7 @@ public class TARDISWeepingAngels extends JavaPlugin {
         ANGEL = new NamespacedKey(plugin, "angel");
         CYBERMAN = new NamespacedKey(plugin, "cyberman");
         DALEK = new NamespacedKey(plugin, "dalek");
+        DALEK_SEC = new NamespacedKey(plugin, "dalek_sec");
         DEVIL = new NamespacedKey(plugin, "devil");
         EMPTY = new NamespacedKey(plugin, "empty");
         HATH = new NamespacedKey(plugin, "hath");

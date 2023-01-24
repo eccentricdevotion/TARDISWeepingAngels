@@ -60,6 +60,14 @@ public interface TARDISWeepingAngelsAPI {
     public void setDalekEquipment(LivingEntity le, boolean disguise);
 
     /**
+     * Sets an entity as Dalek Sec.
+     *
+     * @param le       The LivingEntity to disguise
+     * @param disguise A boolean to determine if this is a player disguise
+     */
+    public void setDalekSecEquipment(LivingEntity le, boolean disguise);
+
+    /**
      * Sets an entity as a Empty Child.
      *
      * @param le       The LivingEntity to disguise
