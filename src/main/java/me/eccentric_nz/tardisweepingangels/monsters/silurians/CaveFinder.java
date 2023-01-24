@@ -19,7 +19,7 @@ package me.eccentric_nz.tardisweepingangels.monsters.silurians;
 import java.util.Arrays;
 import java.util.Collections;
 import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 
@@ -86,12 +86,12 @@ public class CaveFinder {
     private static Check isThereRoom(World w, int x, int z) {
         Check ret = new Check();
         ret.setSafe(false);
-        for (int y = 35; y > w.getMinHeight() + 10; y--) {
+        for (int y = 35; y > w.getMinHeight() + 14; y--) {
             if (w.getBlockAt(x, y, z).getType().isAir()) {
                 int yy = getLowestAirBlock(w, x, y, z);
-                // check there is enough height for the police box
-                if (yy <= y - 2 && w.getBlockAt(x - 1, yy - 1, z - 1).getType().equals(Material.STONE)) {
-                    // check there is room for the police box
+                // check there is enough height for the Silurian
+                if (yy <= y - 2 && Tag.BASE_STONE_OVERWORLD.isTagged(w.getBlockAt(x - 1, yy - 1, z - 1).getType())) {
+                    // check there is room for the Silurian
                     if (w.getBlockAt(x - 1, yy, z - 1).getType().isAir()
                             && w.getBlockAt(x - 1, yy, z).getType().isAir()
                             && w.getBlockAt(x - 1, yy, z + 1).getType().isAir()
@@ -118,6 +118,10 @@ public class CaveFinder {
     }
 
     private static boolean worldCheck(World w) {
+        if (w.getGenerator() != null && !w.getGenerator().shouldGenerateCaves()) {
+            // caves not generated
+            return false;
+        }
         Location spawn = w.getSpawnLocation();
         int y = w.getHighestBlockYAt(spawn);
         if (y < 15) {
