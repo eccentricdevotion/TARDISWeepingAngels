@@ -67,6 +67,8 @@ public class ChunkListener implements Listener {
                     new Equipper(Monster.HATH, pigZombie, false, false).setHelmetAndInvisibilty();
                 } else if (pdc.has(TARDISWeepingAngels.DALEK_SEC, PersistentDataType.INTEGER)) {
                     new Equipper(Monster.DALEK_SEC, pigZombie, false, false).setHelmetAndInvisibilty();
+                } else if (pdc.has(TARDISWeepingAngels.DAVROS, PersistentDataType.INTEGER)) {
+                    new Equipper(Monster.DAVROS, pigZombie, false, false).setHelmetAndInvisibilty();
                 }
             } else if (d instanceof Drowned drowned) {
                 if (drowned.getEquipment().getHelmet() != null) {

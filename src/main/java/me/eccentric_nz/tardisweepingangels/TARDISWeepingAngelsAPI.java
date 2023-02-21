@@ -68,6 +68,14 @@ public interface TARDISWeepingAngelsAPI {
     public void setDalekSecEquipment(LivingEntity le, boolean disguise);
 
     /**
+     * Sets an entity as Davros.
+     *
+     * @param le       The LivingEntity to disguise
+     * @param disguise A boolean to determine if this is a player disguise
+     */
+    public void setDavrosEquipment(LivingEntity le, boolean disguise);
+
+    /**
      * Sets an entity as a Empty Child.
      *
      * @param le       The LivingEntity to disguise

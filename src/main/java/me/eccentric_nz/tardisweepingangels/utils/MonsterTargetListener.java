@@ -106,6 +106,10 @@ public class MonsterTargetListener implements Listener {
                 if (pdc.has(TARDISWeepingAngels.DALEK_SEC, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Monster.DALEK_SEC.getMaterial());
                 }
+                // davros
+                if (pdc.has(TARDISWeepingAngels.DAVROS, PersistentDataType.INTEGER)) {
+                    ignore = isWearingMonsterHead(player, Monster.DAVROS.getMaterial());
+                }
                 // hath
                 if (pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)) {
                     ignore = isWearingMonsterHead(player, Monster.HATH.getMaterial());

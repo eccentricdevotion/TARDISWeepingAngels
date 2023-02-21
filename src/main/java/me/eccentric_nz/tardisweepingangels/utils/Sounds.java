@@ -63,6 +63,9 @@ public class Sounds implements Listener {
             if (pdc.has(TARDISWeepingAngels.DALEK_SEC, PersistentDataType.INTEGER)) {
                 which = "dalek_sec";
             }
+            if (pdc.has(TARDISWeepingAngels.DAVROS, PersistentDataType.INTEGER)) {
+                which = "davros";
+            }
             if (pdc.has(TARDISWeepingAngels.DEVIL, PersistentDataType.INTEGER)) {
                 which = "devil";
             }

@@ -93,6 +93,10 @@ public class PlayerDeath implements Listener {
                             event.setDeathMessage(name + " was slain by Dalek Sec");
                             return;
                         }
+                        if (pdc.has(TARDISWeepingAngels.DAVROS, PersistentDataType.INTEGER)) {
+                            event.setDeathMessage(name + " was exterminated by Davros");
+                            return;
+                        }
                         if (pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)) {
                             event.setDeathMessage(name + " was slain by an Ice Warrior");
                             return;

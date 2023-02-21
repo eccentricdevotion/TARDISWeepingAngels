@@ -86,10 +86,15 @@ public class DalekRunnable implements Runnable {
                 }
                 EntityType dalek;
                 Monster monster;
-                boolean sec = TARDISWeepingAngels.random.nextInt(100) < plugin.getConfig().getInt("daleks.daleck_sec_chance");
+                int chance = TARDISWeepingAngels.random.nextInt(100);
+                boolean sec = chance < plugin.getConfig().getInt("daleks.daleck_sec_chance");
+                boolean dav = chance > (100 - plugin.getConfig().getInt("daleks.davros_chance"));
                 if (sec) {
                     dalek = EntityType.ZOMBIFIED_PIGLIN;
                     monster = Monster.DALEK_SEC;
+                } else if (dav) {
+                    dalek = EntityType.ZOMBIFIED_PIGLIN;
+                    monster = Monster.DAVROS;
                 } else {
                     dalek = EntityType.SKELETON;
                     monster = Monster.DALEK;

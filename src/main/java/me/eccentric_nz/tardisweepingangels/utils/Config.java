@@ -45,6 +45,7 @@ public class Config {
         // integer
         intOptions.put("angels.freeze_time", 100);
         intOptions.put("daleks.dalek_sec_chance", 5);
+        intOptions.put("daleks.davros_chance", 5);
         intOptions.put("spawn_rate.how_many", 2);
         intOptions.put("spawn_rate.how_often", 400);
         intOptions.put("spawn_rate.default_max", 0);
@@ -63,6 +64,8 @@ public class Config {
         listOptions.put("angels.teleport_worlds", Arrays.asList("world"));
         listOptions.put("cybermen.drops", Arrays.asList("REDSTONE", "STONE_BUTTON"));
         listOptions.put("daleks.drops", Arrays.asList("SLIME_BALL", "ROTTEN_FLESH"));
+        listOptions.put("daleks.dalek_sec_drops", Arrays.asList("VERDANT_FROGLIGHT", "LEATHER_CHESTPLATE"));
+        listOptions.put("daleks.davros_drops", Arrays.asList("CHAIN", "CRIMSON_BUTTON"));
         listOptions.put("empty_child.drops", Arrays.asList("COOKED_BEEF", "SUGAR"));
         listOptions.put("hath.drops", Arrays.asList("SALMON", "STONE_PICKAXE"));
         listOptions.put("headless_monks.drops", Arrays.asList("BOOK", "RED_CANDLE"));

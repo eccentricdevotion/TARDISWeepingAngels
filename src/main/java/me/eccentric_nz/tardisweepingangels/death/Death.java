@@ -48,6 +48,7 @@ public class Death implements Listener {
     private final List<Material> cyber_drops = new ArrayList<>();
     private final List<Material> dalek_drops = new ArrayList<>();
     private final List<Material> dalek_sec_drops = new ArrayList<>();
+    private final List<Material> davros_drops = new ArrayList<>();
     private final List<Material> devil_drops = new ArrayList<>();
     private final List<Material> empty_drops = new ArrayList<>();
     private final List<Material> hath_drops = new ArrayList<>();
@@ -67,6 +68,7 @@ public class Death implements Listener {
         plugin.getConfig().getStringList("cybermen.drops").forEach((c) -> cyber_drops.add(Material.valueOf(c)));
         plugin.getConfig().getStringList("daleks.drops").forEach((d) -> dalek_drops.add(Material.valueOf(d)));
         plugin.getConfig().getStringList("daleks.dalek_sec_drops").forEach((d) -> dalek_sec_drops.add(Material.valueOf(d)));
+        plugin.getConfig().getStringList("daleks.davros_drops").forEach((d) -> davros_drops.add(Material.valueOf(d)));
         plugin.getConfig().getStringList("sea_devils.drops").forEach((d) -> devil_drops.add(Material.valueOf(d)));
         plugin.getConfig().getStringList("empty_child.drops").forEach((e) -> empty_drops.add(Material.valueOf(e)));
         plugin.getConfig().getStringList("hath.drops").forEach((e) -> hath_drops.add(Material.valueOf(e)));
@@ -157,6 +159,17 @@ public class Death implements Listener {
                     stack = HeadBuilder.getItemStack(Monster.DALEK_SEC);
                 } else {
                     stack = new ItemStack(dalek_sec_drops.get(TARDISWeepingAngels.random.nextInt(dalek_sec_drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
+                }
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
+                return;
+            }
+            if (pdc.has(TARDISWeepingAngels.DAVROS, PersistentDataType.INTEGER)) {
+                event.getDrops().clear();
+                ItemStack stack;
+                if (TARDISWeepingAngels.random.nextInt(100) < 3) {
+                    stack = HeadBuilder.getItemStack(Monster.DAVROS);
+                } else {
+                    stack = new ItemStack(davros_drops.get(TARDISWeepingAngels.random.nextInt(davros_drops.size())), TARDISWeepingAngels.random.nextInt(1) + 1);
                 }
                 event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), stack);
                 return;
