@@ -16,7 +16,6 @@
  */
 package me.eccentric_nz.tardisweepingangels.equip;
 
-import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelsAPI;
 import me.eccentric_nz.tardisweepingangels.monsters.daleks.DalekEquipment;
@@ -38,7 +37,30 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.UUID;
+
 public class MonsterEquipment implements TARDISWeepingAngelsAPI {
+
+    public static boolean isAnimatedMonster(Entity entity) {
+        PersistentDataContainer pdc = entity.getPersistentDataContainer();
+        return pdc.has(TARDISWeepingAngels.ANGEL, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.CYBERMAN, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.DALEK_SEC, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.DEVIL, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.EMPTY, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.HATH, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.MIRE, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.MONK, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.RACNOSS, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.SILENT, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.SILURIAN, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.SLITHEEN, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.SONTARAN, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.STRAX, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.VASHTA, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.WARRIOR, PersistentDataType.INTEGER)
+                || pdc.has(TARDISWeepingAngels.ZYGON, PersistentDataType.INTEGER);
+    }
 
     public static boolean isMonster(Entity entity) {
         if (entity instanceof Zombie || entity instanceof PigZombie || entity instanceof Skeleton) {
@@ -182,7 +204,7 @@ public class MonsterEquipment implements TARDISWeepingAngelsAPI {
     public void setDalekEquipment(LivingEntity le, boolean disguise) {
         DalekEquipment.set(le, disguise);
     }
-    
+
     @Override
     public void setDalekSecEquipment(LivingEntity le, boolean disguise) {
         new Equipper(Monster.DALEK_SEC, le, disguise, false).setHelmetAndInvisibilty();

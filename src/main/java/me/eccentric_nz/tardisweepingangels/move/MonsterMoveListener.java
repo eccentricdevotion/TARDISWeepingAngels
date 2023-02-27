@@ -17,8 +17,6 @@
 package me.eccentric_nz.tardisweepingangels.move;
 
 import io.papermc.paper.event.entity.EntityMoveEvent;
-import java.util.HashMap;
-import java.util.UUID;
 import me.eccentric_nz.tardisweepingangels.equip.MonsterEquipment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -27,8 +25,10 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.HashMap;
+import java.util.UUID;
+
 /**
- *
  * @author macgeek
  */
 public class MonsterMoveListener implements Listener {
@@ -38,7 +38,7 @@ public class MonsterMoveListener implements Listener {
     @EventHandler
     public void onMonsterMove(EntityMoveEvent event) {
         Entity entity = event.getEntity();
-        if (MonsterEquipment.isMonster(entity) && entity.getType() != EntityType.ARMOR_STAND) {
+        if (MonsterEquipment.isAnimatedMonster(entity)) {
             // get or create a move session
             MoveSession tms = getMoveSession(entity);
             tms.setStaleLocation(entity.getLocation());
@@ -66,7 +66,7 @@ public class MonsterMoveListener implements Listener {
                                 hasChanged = true;
                             }
                         }
-                    // the entity is actually moving
+                        // the entity is actually moving
                     } else {
                         Monster monster = (Monster) entity;
                         // is the entity in water
@@ -101,8 +101,7 @@ public class MonsterMoveListener implements Listener {
     }
 
     /**
-     * Gets the Move Session for a monster, this is used to see if they have
-     * actually moved
+     * Gets the Move Session for a monster, this is used to see if they have actually moved
      *
      * @param entity the monster to track
      * @return the session for the monster
