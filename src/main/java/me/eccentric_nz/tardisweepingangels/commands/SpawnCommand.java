@@ -16,7 +16,7 @@
  */
 package me.eccentric_nz.tardisweepingangels.commands;
 
-import me.eccentric_nz.tardischunkgenerator.TARDISHelper;
+import java.util.Set;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngelSpawnEvent;
 import me.eccentric_nz.tardisweepingangels.TARDISWeepingAngels;
 import me.eccentric_nz.tardisweepingangels.equip.Equipper;
@@ -38,8 +38,6 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
-
-import java.util.Set;
 
 public class SpawnCommand {
 
@@ -79,8 +77,7 @@ public class SpawnCommand {
             switch (monster) {
                 case DALEK -> {
                     DalekEquipment.set(a, false);
-                    if (args.length > 2 && args[2].equalsIgnoreCase("flying") && plugin.getServer().getPluginManager().isPluginEnabled("TARDISChunkGenerator")) {
-                        TARDISHelper tardisHelper = (TARDISHelper) plugin.getServer().getPluginManager().getPlugin("TARDISChunkGenerator");
+                    if (args.length > 2 && args[2].equalsIgnoreCase("flying")) {
                         // make the Dalek fly
                         EntityEquipment ee = a.getEquipment();
                         ee.setChestplate(new ItemStack(Material.ELYTRA, 1));
@@ -88,7 +85,6 @@ public class SpawnCommand {
                         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                             a.teleport(a.getLocation().add(0.0d, 20.0d, 0.0d));
                             a.setGliding(true);
-                            tardisHelper.setFallFlyingTag(a);
                         }, 2L);
                     }
                 }
